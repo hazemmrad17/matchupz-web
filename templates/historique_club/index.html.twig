@@ -11,21 +11,9 @@
         <div class="container-xxl flex-grow-1 container-p-y">
             {% block widgets %}
                 {# You can create a specific widgets file for HistoriqueClub if needed #}
-                {# {% include 'historique_club/historique_widgets.html.twig' %} #}
+                {% include 'historique_club/widgets.html.twig' %}
             {% endblock %}
             
-            {# Statistics Section - Optional #}
-            <div class="row mb-4">
-                {# Club Distribution Chart - Example #}
-                <div class="col-md-12 mb-4">
-                    <div class="card">
-                        <h5 class="card-header">Répartition des Joueurs par Club</h5>
-                        <div class="card-body">
-                            <canvas id="clubDistributionChart" height="100"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
             {# Historique Table #}
             <div class="card">

@@ -16,7 +16,6 @@ class HistoriqueClubRepository extends ServiceEntityRepository
         parent::__construct($registry, HistoriqueClub::class);
     }
 
-    // Find club history for a specific player
     public function findByJoueur(int $joueurId): array
     {
         return $this->createQueryBuilder('h')
@@ -27,19 +26,17 @@ class HistoriqueClubRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    // Find players currently in a club (no end date)
-    public function findCurrentPlayersByClub(int $clubId): array
+    public function findCurrentPlayersByClub(string $clubName): array
     {
         return $this->createQueryBuilder('h')
-            ->where('h.club = :clubId')
+            ->where('h.nomClub = :clubName')
             ->andWhere('h.saisonFin IS NULL')
-            ->setParameter('clubId', $clubId)
+            ->setParameter('clubName', $clubName)
             ->orderBy('h.saisonDebut', 'ASC')
             ->getQuery()
             ->getResult();
     }
 
-    // Count distinct players in the history
     public function countDistinctPlayers(): int
     {
         return $this->createQueryBuilder('h')
@@ -48,7 +45,6 @@ class HistoriqueClubRepository extends ServiceEntityRepository
             ->getSingleScalarResult();
     }
 
-    // Count new players this month
     public function countNewPlayersThisMonth(): int
     {
         $startOfMonth = new \DateTime('first day of this month');
@@ -61,11 +57,10 @@ class HistoriqueClubRepository extends ServiceEntityRepository
             ->getSingleScalarResult();
     }
 
-    // Update other methods that reference 'club' or 'nomClub'
     public function countActiveClubs(): int
     {
         return $this->createQueryBuilder('h')
-            ->select('COUNT(DISTINCT h.club)')
+            ->select('COUNT(DISTINCT h.nomClub)')
             ->where('h.saisonFin IS NULL')
             ->getQuery()
             ->getSingleScalarResult();
@@ -74,43 +69,43 @@ class HistoriqueClubRepository extends ServiceEntityRepository
     public function countClubsWithPlayers(): int
     {
         return $this->createQueryBuilder('h')
-            ->select('COUNT(DISTINCT h.club)')
+            ->select('COUNT(DISTINCT h.nomClub)')
             ->getQuery()
             ->getSingleScalarResult();
     }
 
-    // Get average duration in days
     public function getAverageDuration(): float
     {
-        return $this->createQueryBuilder('h')
-            ->select('AVG(TIMESTAMPDIFF(DAY, h.saisonDebut, COALESCE(h.saisonFin, CURRENT_TIMESTAMP())))')
-            ->getQuery()
-            ->getSingleScalarResult();
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = 'SELECT AVG(TIMESTAMPDIFF(DAY, saison_debut, COALESCE(saison_fin, CURRENT_TIMESTAMP))) 
+                FROM historiqueclub';
+        $stmt = $conn->prepare($sql);
+        $result = $stmt->execute()->fetch();
+        return (float) ($result[0] ?? 0);
     }
 
-    // Get maximum duration in days
     public function getMaxDuration(): int
     {
-        return $this->createQueryBuilder('h')
-            ->select('MAX(TIMESTAMPDIFF(DAY, h.saisonDebut, COALESCE(h.saisonFin, CURRENT_TIMESTAMP())))')
-            ->getQuery()
-            ->getSingleScalarResult();
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = 'SELECT MAX(TIMESTAMPDIFF(DAY, saison_debut, COALESCE(saison_fin, CURRENT_TIMESTAMP))) 
+                FROM historiqueclub';
+        $stmt = $conn->prepare($sql);
+        $result = $stmt->execute()->fetch();
+        return (int) ($result[0] ?? 0);
     }
 
-    // Count recent updates (last 7 days)
     public function countRecentUpdates(): int
     {
+        $conn = $this->getEntityManager()->getConnection();
         $lastWeek = new \DateTime('-7 days');
-        
-        return $this->createQueryBuilder('h')
-            ->select('COUNT(h.idHistorique)')
-            ->where('h.updatedAt >= :lastWeek OR h.createdAt >= :lastWeek')
-            ->setParameter('lastWeek', $lastWeek)
-            ->getQuery()
-            ->getSingleScalarResult();
+        $sql = 'SELECT COUNT(id_historique) 
+                FROM historiqueclub 
+                WHERE saison_debut >= :lastWeek';
+        $stmt = $conn->prepare($sql);
+        $result = $stmt->execute(['lastWeek' => $lastWeek->format('Y-m-d H:i:s')])->fetch();
+        return (int) ($result[0] ?? 0);
     }
 
-    // Get club distribution data
     public function getClubDistribution(): array
     {
         return $this->createQueryBuilder('h')

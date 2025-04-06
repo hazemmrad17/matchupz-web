@@ -131,35 +131,21 @@ class __TwigTemplate_e6e0635676f176e67185411cdf346dcd extends Template
         yield from $this->unwrap()->yieldBlock('widgets', $context, $blocks);
         // line 16
         yield "            
-            ";
-        // line 18
-        yield "            <div class=\"row mb-4\">
-                ";
-        // line 20
-        yield "                <div class=\"col-md-12 mb-4\">
-                    <div class=\"card\">
-                        <h5 class=\"card-header\">Répartition des Joueurs par Club</h5>
-                        <div class=\"card-body\">
-                            <canvas id=\"clubDistributionChart\" height=\"100\"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
             ";
-        // line 31
+        // line 19
         yield "            <div class=\"card\">
                 <h5 class=\"card-header d-flex justify-content-between align-items-center\">
                     Historique des Clubs
                     <div>
                         <a href=\"";
-        // line 35
+        // line 23
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_historique_club_stats");
         yield "\" class=\"btn btn-info me-2\">
                             <i class=\"bx bx-stats\"></i> Statistiques
                         </a>
                         <a href=\"";
-        // line 38
+        // line 26
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_historique_club_new");
         yield "\" class=\"btn btn-primary\">
                             <i class=\"bx bx-plus\"></i> Nouvel Historique
@@ -180,51 +166,51 @@ class __TwigTemplate_e6e0635676f176e67185411cdf346dcd extends Template
                         </thead>
                         <tbody class=\"table-border-bottom-0\">
                             ";
-        // line 56
+        // line 44
         $context['_parent'] = $context;
-        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["historique_clubs"]) || array_key_exists("historique_clubs", $context) ? $context["historique_clubs"] : (function () { throw new RuntimeError('Variable "historique_clubs" does not exist.', 56, $this->source); })()));
+        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["historique_clubs"]) || array_key_exists("historique_clubs", $context) ? $context["historique_clubs"] : (function () { throw new RuntimeError('Variable "historique_clubs" does not exist.', 44, $this->source); })()));
         $context['_iterated'] = false;
         foreach ($context['_seq'] as $context["_key"] => $context["historique"]) {
-            // line 57
+            // line 45
             yield "                                <tr>
                                     <td>
                                         <i class=\"fab fa-sketch fa-lg text-warning me-3\"></i>
                                         <strong>";
-            // line 60
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["historique"], "joueur", [], "any", false, false, false, 60), "nom", [], "any", false, false, false, 60), "html", null, true);
+            // line 48
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["historique"], "joueur", [], "any", false, false, false, 48), "nom", [], "any", false, false, false, 48), "html", null, true);
             yield " ";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["historique"], "joueur", [], "any", false, false, false, 60), "prenom", [], "any", false, false, false, 60), "html", null, true);
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["historique"], "joueur", [], "any", false, false, false, 48), "prenom", [], "any", false, false, false, 48), "html", null, true);
             yield "</strong>
                                     </td>
                                     <td>";
-            // line 62
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["historique"], "nomClub", [], "any", false, false, false, 62), "html", null, true);
+            // line 50
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["historique"], "nomClub", [], "any", false, false, false, 50), "html", null, true);
             yield "</td>
                                     <td>";
-            // line 63
-            yield ((CoreExtension::getAttribute($this->env, $this->source, $context["historique"], "saisonDebut", [], "any", false, false, false, 63)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["historique"], "saisonDebut", [], "any", false, false, false, 63), "m/Y"), "html", null, true)) : ("N/A"));
+            // line 51
+            yield ((CoreExtension::getAttribute($this->env, $this->source, $context["historique"], "saisonDebut", [], "any", false, false, false, 51)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["historique"], "saisonDebut", [], "any", false, false, false, 51), "m/Y"), "html", null, true)) : ("N/A"));
             yield "</td>
                                     <td>";
-            // line 64
-            yield ((CoreExtension::getAttribute($this->env, $this->source, $context["historique"], "saisonFin", [], "any", false, false, false, 64)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["historique"], "saisonFin", [], "any", false, false, false, 64), "m/Y"), "html", null, true)) : ("Actuel"));
+            // line 52
+            yield ((CoreExtension::getAttribute($this->env, $this->source, $context["historique"], "saisonFin", [], "any", false, false, false, 52)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["historique"], "saisonFin", [], "any", false, false, false, 52), "m/Y"), "html", null, true)) : ("Actuel"));
             yield "</td>
                                     <td>
                                         ";
-            // line 66
-            if (CoreExtension::getAttribute($this->env, $this->source, $context["historique"], "saisonFin", [], "any", false, false, false, 66)) {
-                // line 67
+            // line 54
+            if (CoreExtension::getAttribute($this->env, $this->source, $context["historique"], "saisonFin", [], "any", false, false, false, 54)) {
+                // line 55
                 yield "                                            ";
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["historique"], "saisonDebut", [], "any", false, false, false, 67), "diff", [CoreExtension::getAttribute($this->env, $this->source, $context["historique"], "saisonFin", [], "any", false, false, false, 67)], "method", false, false, false, 67), "%y ans, %m mois"), "html", null, true);
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["historique"], "saisonDebut", [], "any", false, false, false, 55), "diff", [CoreExtension::getAttribute($this->env, $this->source, $context["historique"], "saisonFin", [], "any", false, false, false, 55)], "method", false, false, false, 55), "%y ans, %m mois"), "html", null, true);
                 yield "
                                         ";
             } else {
-                // line 69
+                // line 57
                 yield "                                            En cours (";
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["historique"], "saisonDebut", [], "any", false, false, false, 69), "diff", [$this->extensions['Twig\Extension\CoreExtension']->convertDate()], "method", false, false, false, 69), "%y ans, %m mois"), "html", null, true);
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["historique"], "saisonDebut", [], "any", false, false, false, 57), "diff", [$this->extensions['Twig\Extension\CoreExtension']->convertDate()], "method", false, false, false, 57), "%y ans, %m mois"), "html", null, true);
                 yield ")
                                         ";
             }
-            // line 71
+            // line 59
             yield "                                    </td>
                                     <td>
                                         <div class=\"dropdown\">
@@ -233,24 +219,24 @@ class __TwigTemplate_e6e0635676f176e67185411cdf346dcd extends Template
                                             </button>
                                             <div class=\"dropdown-menu\">
                                                 <a class=\"dropdown-item\" href=\"";
-            // line 78
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_historique_club_show", ["idHistorique" => CoreExtension::getAttribute($this->env, $this->source, $context["historique"], "idHistorique", [], "any", false, false, false, 78)]), "html", null, true);
+            // line 66
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_historique_club_show", ["idHistorique" => CoreExtension::getAttribute($this->env, $this->source, $context["historique"], "idHistorique", [], "any", false, false, false, 66)]), "html", null, true);
             yield "\">
                                                     <i class=\"bx bx-show me-1\"></i> Voir
                                                 </a>
                                                 <a class=\"dropdown-item\" href=\"";
-            // line 81
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_historique_club_edit", ["idHistorique" => CoreExtension::getAttribute($this->env, $this->source, $context["historique"], "idHistorique", [], "any", false, false, false, 81)]), "html", null, true);
+            // line 69
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_historique_club_edit", ["idHistorique" => CoreExtension::getAttribute($this->env, $this->source, $context["historique"], "idHistorique", [], "any", false, false, false, 69)]), "html", null, true);
             yield "\">
                                                     <i class=\"bx bx-edit-alt me-1\"></i> Modifier
                                                 </a>
                                                 <form method=\"post\" action=\"";
-            // line 84
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_historique_club_delete", ["idHistorique" => CoreExtension::getAttribute($this->env, $this->source, $context["historique"], "idHistorique", [], "any", false, false, false, 84)]), "html", null, true);
+            // line 72
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_historique_club_delete", ["idHistorique" => CoreExtension::getAttribute($this->env, $this->source, $context["historique"], "idHistorique", [], "any", false, false, false, 72)]), "html", null, true);
             yield "\" style=\"display:inline;\" onsubmit=\"return confirm('Confirmer la suppression?');\">
                                                     <input type=\"hidden\" name=\"_token\" value=\"";
-            // line 85
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderCsrfToken(("delete" . CoreExtension::getAttribute($this->env, $this->source, $context["historique"], "idHistorique", [], "any", false, false, false, 85))), "html", null, true);
+            // line 73
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderCsrfToken(("delete" . CoreExtension::getAttribute($this->env, $this->source, $context["historique"], "idHistorique", [], "any", false, false, false, 73))), "html", null, true);
             yield "\">
                                                     <button class=\"dropdown-item\" type=\"submit\">
                                                         <i class=\"bx bx-trash me-1\"></i> Supprimer
@@ -263,9 +249,9 @@ class __TwigTemplate_e6e0635676f176e67185411cdf346dcd extends Template
                             ";
             $context['_iterated'] = true;
         }
-        // line 94
+        // line 82
         if (!$context['_iterated']) {
-            // line 95
+            // line 83
             yield "                                <tr>
                                     <td colspan=\"6\" class=\"text-center\">Aucun historique trouvé</td>
                                 </tr>
@@ -274,7 +260,7 @@ class __TwigTemplate_e6e0635676f176e67185411cdf346dcd extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_key'], $context['historique'], $context['_parent'], $context['_iterated']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 99
+        // line 87
         yield "                        </tbody>
                     </table>
                 </div>
@@ -283,7 +269,7 @@ class __TwigTemplate_e6e0635676f176e67185411cdf346dcd extends Template
     </div>
 
     ";
-        // line 107
+        // line 95
         yield "    <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Club Distribution Chart - Example
@@ -292,13 +278,13 @@ class __TwigTemplate_e6e0635676f176e67185411cdf346dcd extends Template
             // You would need to pass these variables from your controller
             const clubData = {
                 labels: ";
-        // line 114
-        yield json_encode(((array_key_exists("clubNames", $context)) ? (Twig\Extension\CoreExtension::default((isset($context["clubNames"]) || array_key_exists("clubNames", $context) ? $context["clubNames"] : (function () { throw new RuntimeError('Variable "clubNames" does not exist.', 114, $this->source); })()), [])) : ([])));
+        // line 102
+        yield json_encode(((array_key_exists("clubNames", $context)) ? (Twig\Extension\CoreExtension::default((isset($context["clubNames"]) || array_key_exists("clubNames", $context) ? $context["clubNames"] : (function () { throw new RuntimeError('Variable "clubNames" does not exist.', 102, $this->source); })()), [])) : ([])));
         yield ",
                 datasets: [{
                     data: ";
-        // line 116
-        yield json_encode(((array_key_exists("playerCounts", $context)) ? (Twig\Extension\CoreExtension::default((isset($context["playerCounts"]) || array_key_exists("playerCounts", $context) ? $context["playerCounts"] : (function () { throw new RuntimeError('Variable "playerCounts" does not exist.', 116, $this->source); })()), [])) : ([])));
+        // line 104
+        yield json_encode(((array_key_exists("playerCounts", $context)) ? (Twig\Extension\CoreExtension::default((isset($context["playerCounts"]) || array_key_exists("playerCounts", $context) ? $context["playerCounts"] : (function () { throw new RuntimeError('Variable "playerCounts" does not exist.', 104, $this->source); })()), [])) : ([])));
         yield ",
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.7)',
@@ -351,6 +337,7 @@ class __TwigTemplate_e6e0635676f176e67185411cdf346dcd extends Template
         yield "                ";
         // line 14
         yield "                ";
+        yield from $this->loadTemplate("historique_club/widgets.html.twig", "historique_club/index.html.twig", 14)->unwrap()->yield($context);
         // line 15
         yield "            ";
         
@@ -383,7 +370,7 @@ class __TwigTemplate_e6e0635676f176e67185411cdf346dcd extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  355 => 15,  353 => 14,  351 => 13,  338 => 12,  301 => 116,  296 => 114,  287 => 107,  278 => 99,  269 => 95,  267 => 94,  253 => 85,  249 => 84,  243 => 81,  237 => 78,  228 => 71,  222 => 69,  216 => 67,  214 => 66,  209 => 64,  205 => 63,  201 => 62,  194 => 60,  189 => 57,  184 => 56,  163 => 38,  157 => 35,  151 => 31,  139 => 20,  136 => 18,  133 => 16,  131 => 12,  127 => 10,  114 => 9,  91 => 7,  79 => 4,  66 => 3,  43 => 1,);
+        return array (  342 => 15,  339 => 14,  337 => 13,  324 => 12,  287 => 104,  282 => 102,  273 => 95,  264 => 87,  255 => 83,  253 => 82,  239 => 73,  235 => 72,  229 => 69,  223 => 66,  214 => 59,  208 => 57,  202 => 55,  200 => 54,  195 => 52,  191 => 51,  187 => 50,  180 => 48,  175 => 45,  170 => 44,  149 => 26,  143 => 23,  137 => 19,  133 => 16,  131 => 12,  127 => 10,  114 => 9,  91 => 7,  79 => 4,  66 => 3,  43 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -401,21 +388,9 @@ class __TwigTemplate_e6e0635676f176e67185411cdf346dcd extends Template
         <div class=\"container-xxl flex-grow-1 container-p-y\">
             {% block widgets %}
                 {# You can create a specific widgets file for HistoriqueClub if needed #}
-                {# {% include 'historique_club/historique_widgets.html.twig' %} #}
+                {% include 'historique_club/widgets.html.twig' %}
             {% endblock %}
             
-            {# Statistics Section - Optional #}
-            <div class=\"row mb-4\">
-                {# Club Distribution Chart - Example #}
-                <div class=\"col-md-12 mb-4\">
-                    <div class=\"card\">
-                        <h5 class=\"card-header\">Répartition des Joueurs par Club</h5>
-                        <div class=\"card-body\">
-                            <canvas id=\"clubDistributionChart\" height=\"100\"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
             {# Historique Table #}
             <div class=\"card\">

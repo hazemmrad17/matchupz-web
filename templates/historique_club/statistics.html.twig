@@ -13,7 +13,7 @@
                 <h5 class="card-header">Statistiques des Historiques Club</h5>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-6 col-lg-4">
                             <div class="card mb-4">
                                 <div class="card-body">
                                     <h5 class="card-title">Total des Entrées</h5>
@@ -21,11 +21,79 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-6 col-lg-4">
                             <div class="card mb-4">
                                 <div class="card-body">
                                     <h5 class="card-title">Joueurs Actuels</h5>
                                     <p class="display-4">{{ stats.current_players }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <h5 class="card-title">Joueurs Distincts</h5>
+                                    <p class="display-4">{{ stats.distinct_players }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <h5 class="card-title">Nouveaux Joueurs ce Mois</h5>
+                                    <p class="display-4">{{ stats.new_players_this_month }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <h5 class="card-title">Clubs Actifs</h5>
+                                    <p class="display-4">{{ stats.active_clubs }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <h5 class="card-title">Clubs avec Joueurs</h5>
+                                    <p class="display-4">{{ stats.clubs_with_players }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <h5 class="card-title">Durée Moyenne (jours)</h5>
+                                    <p class="display-4">{{ stats.average_duration|round(0, 'floor') }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <h5 class="card-title">Durée Maximale (jours)</h5>
+                                    <p class="display-4">{{ stats.max_duration }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <h5 class="card-title">Mises à jour Récentes (7 jours)</h5>
+                                    <p class="display-4">{{ stats.recent_updates }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {# Club Distribution Chart #}
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <h5 class="card-header">Répartition des Joueurs par Club</h5>
+                                <div class="card-body">
+                                    <canvas id="clubDistributionChart" height="100"></canvas>
                                 </div>
                             </div>
                         </div>
@@ -34,4 +102,45 @@
             </div>
         </div>
     </div>
+
+    {# ChartJS Script #}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const clubCtx = document.getElementById('clubDistributionChart').getContext('2d');
+            
+            const clubData = {
+                labels: [{% for club in stats.club_distribution %}'{{ club.club }}',{% endfor %}],
+                datasets: [{
+                    data: [{% for club in stats.club_distribution %}{{ club.playerCount }},{% endfor %}],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.7)',
+                        'rgba(54, 162, 235, 0.7)',
+                        'rgba(255, 206, 86, 0.7)',
+                        'rgba(75, 192, 192, 0.7)',
+                        'rgba(153, 102, 255, 0.7)',
+                        'rgba(255, 159, 64, 0.7)',
+                        // Add more colors if needed
+                    ]
+                }]
+            };
+            
+            new Chart(clubCtx, {
+                type: 'pie',
+                data: clubData,
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'right',
+                        },
+                        title: {
+                            display: true,
+                            text: 'Répartition des Joueurs par Club'
+                        }
+                    }
+                }
+            });
+        });
+    </script>
 {% endblock %}

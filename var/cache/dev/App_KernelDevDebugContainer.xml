@@ -393,6 +393,9 @@
       </call>
     </service>
     <service id="App\Doctrine\DBAL\Types\EnumType" class="App\Doctrine\DBAL\Types\EnumType" autowire="true" autoconfigure="true"/>
+    <service id="App\Doctrine\TimestampDiffFunction" class="App\Doctrine\TimestampDiffFunction" autowire="true" autoconfigure="true">
+      <tag name="container.error" message="Cannot autowire service &quot;App\Doctrine\TimestampDiffFunction&quot;: argument &quot;$name&quot; of method &quot;Doctrine\ORM\Query\AST\Functions\FunctionNode::__construct()&quot; is type-hinted &quot;string&quot;, you should configure its value explicitly."/>
+    </service>
     <service id="App\Form\ClubType" class="App\Form\ClubType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>

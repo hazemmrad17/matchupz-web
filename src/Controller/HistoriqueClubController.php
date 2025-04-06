@@ -17,15 +17,26 @@ class HistoriqueClubController extends AbstractController
     #[Route('/', name: 'app_historique_club_index', methods: ['GET'])]
     public function index(HistoriqueClubRepository $historiqueClubRepository): Response
     {
+        $stats = [
+            'total_players' => $historiqueClubRepository->countDistinctPlayers(),
+            'new_players_this_month' => $historiqueClubRepository->countNewPlayersThisMonth(),
+            'active_clubs' => $historiqueClubRepository->countActiveClubs(),
+            'clubs_with_players' => $historiqueClubRepository->countClubsWithPlayers(),
+            'avg_duration' => $historiqueClubRepository->getAverageDuration() / 30, // Convert days to months
+            'max_duration' => $historiqueClubRepository->getMaxDuration() / 30, // Convert days to months
+            'recent_updates' => $historiqueClubRepository->countRecentUpdates(),
+        ];
+
         return $this->render('historique_club/index.html.twig', [
             'historique_clubs' => $historiqueClubRepository->findAll(),
+            'stats' => $stats,
         ]);
     }
+
 
     #[Route('/statistics', name: 'app_historique_club_stats', methods: ['GET'])]
     public function stats(HistoriqueClubRepository $historiqueClubRepository): Response
     {
-        // Example statistics - customize with your actual data needs
         $stats = [
             'total_entries' => $historiqueClubRepository->count([]),
             'current_players' => $historiqueClubRepository->createQueryBuilder('h')
@@ -33,10 +44,17 @@ class HistoriqueClubController extends AbstractController
                 ->where('h.saisonFin IS NULL')
                 ->getQuery()
                 ->getSingleScalarResult(),
-            // Add more statistics as needed
-    ];
+            'distinct_players' => $historiqueClubRepository->countDistinctPlayers(),
+            'new_players_this_month' => $historiqueClubRepository->countNewPlayersThisMonth(),
+            'active_clubs' => $historiqueClubRepository->countActiveClubs(),
+            'clubs_with_players' => $historiqueClubRepository->countClubsWithPlayers(),
+            'average_duration' => $historiqueClubRepository->getAverageDuration(),
+            'max_duration' => $historiqueClubRepository->getMaxDuration(),
+            'recent_updates' => $historiqueClubRepository->countRecentUpdates(),
+            'club_distribution' => $historiqueClubRepository->getClubDistribution(), // For chart
+        ];
 
-    return $this->render('historique_club/stats.html.twig', [
+    return $this->render('historique_club/statistics.html.twig', [
         'stats' => $stats,
     ]);
 }
@@ -109,14 +127,14 @@ class HistoriqueClubController extends AbstractController
         ]);
     }
     
-    #[Route('/club/{clubId}/current', name: 'app_historique_club_current_by_club', methods: ['GET'])]
-    public function findCurrentPlayersByClub(int $clubId, HistoriqueClubRepository $historiqueClubRepository): Response
+    #[Route('/club/{clubName}/current', name: 'app_historique_club_current_by_club', methods: ['GET'])]
+    public function findCurrentPlayersByClub(string $clubName, HistoriqueClubRepository $historiqueClubRepository): Response
     {
-        $currentPlayers = $historiqueClubRepository->findCurrentPlayersByClub($clubId);
+        $currentPlayers = $historiqueClubRepository->findCurrentPlayersByClub($clubName);
         
         return $this->render('historique_club/current_by_club.html.twig', [
             'currentPlayers' => $currentPlayers,
-            'clubId' => $clubId
+            'clubName' => $clubName
         ]);
     }
 }
