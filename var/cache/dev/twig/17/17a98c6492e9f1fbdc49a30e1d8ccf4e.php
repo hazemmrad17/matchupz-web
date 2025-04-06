@@ -183,6 +183,6 @@ class __TwigTemplate_6f3f6809b64bc2955bc4eb00a70835a8 extends Template
         <a href=\"{{ path('club_index') }}\" class=\"btn btn-outline-secondary mt-3\">Back to List</a>
         <a href=\"{{ path('club_edit', {'idClub': club.idClub}) }}\" class=\"btn btn-primary mt-3\">Edit</a>
     </div>
-{% endblock %}", "club/show.html.twig", "C:\\Users\\Hazem Mrad\\Desktop\\matchupz\\templates\\club\\show.html.twig");
+{% endblock %}", "club/show.html.twig", "C:\\Users\\Hazem Mrad\\Desktop\\MatchupZ-Web-joueur-espace\\templates\\club\\show.html.twig");
     }
 }

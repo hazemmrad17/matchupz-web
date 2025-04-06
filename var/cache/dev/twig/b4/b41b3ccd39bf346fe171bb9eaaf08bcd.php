@@ -308,7 +308,7 @@ class __TwigTemplate_0073bd7091878f93c23833961806b00e extends Template
 
         // line 13
         yield "                ";
-        yield from $this->loadTemplate("widgets.html.twig", "joueur/main.html.twig", 13)->unwrap()->yield($context);
+        yield from $this->loadTemplate("joueur/widgets.html.twig", "joueur/main.html.twig", 13)->unwrap()->yield($context);
         // line 14
         yield "            ";
         
@@ -358,7 +358,7 @@ class __TwigTemplate_0073bd7091878f93c23833961806b00e extends Template
     <div class=\"content-wrapper\">
         <div class=\"container-xxl flex-grow-1 container-p-y\">
             {% block widgets %}
-                {% include 'widgets.html.twig' %}
+                {% include 'joueur/widgets.html.twig' %}
             {% endblock %}
                 <div class=\"card\">
                     <h5 class=\"card-header d-flex justify-content-between align-items-center\">

@@ -1,10 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Club List{% endblock %}
-
 {% block body %}
-    <div class="container-xxl flex-grow-1 container-p-y">
-        <h4 class="fw-bold py-3 mb-4">Club List</h4>
 
         {% for message in app.flashes('success') %}
             <div class="alert alert-success">{{ message }}</div>

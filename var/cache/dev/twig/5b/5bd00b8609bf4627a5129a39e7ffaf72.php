@@ -369,6 +369,6 @@ class __TwigTemplate_c4b0edf35ab60fb0c2dbcc04782f9071 extends Template
             </div>
         </div>
     </div>
-{% endblock %}", "joueur/edit.html.twig", "C:\\Users\\Hazem Mrad\\Desktop\\matchupz\\templates\\joueur\\edit.html.twig");
+{% endblock %}", "joueur/edit.html.twig", "C:\\Users\\Hazem Mrad\\Desktop\\MatchupZ-Web-joueur-espace\\templates\\joueur\\edit.html.twig");
     }
 }

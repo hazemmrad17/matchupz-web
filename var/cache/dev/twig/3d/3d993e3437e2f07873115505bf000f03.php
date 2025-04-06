@@ -71,6 +71,6 @@ class __TwigTemplate_07fdaaad94958dff776ac84658334882 extends Template
 
     public function getSourceContext(): Source
     {
-        return new Source("", "dashboard.html.twig", "C:\\Users\\Hazem Mrad\\Desktop\\matchupz\\templates\\dashboard.html.twig");
+        return new Source("", "dashboard.html.twig", "C:\\Users\\Hazem Mrad\\Desktop\\MatchupZ-Web-joueur-espace\\templates\\dashboard.html.twig");
     }
 }

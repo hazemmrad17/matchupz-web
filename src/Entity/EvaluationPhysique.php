@@ -4,32 +4,32 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity]
+#[ORM\Entity(repositoryClass: "App\Repository\EvaluationPhysiqueRepository")]
 #[ORM\Table(name: "evaluationphysique")]
 class EvaluationPhysique
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column(type: "integer")]
+    #[ORM\Column(name: "id_evaluation", type: "integer")]
     private ?int $idEvaluation = null;
 
-    #[ORM\ManyToOne(targetEntity: Joueur::class)]
-    #[ORM\JoinColumn(name: "id_joueur", referencedColumnName: "id_joueur", nullable: false)]
+    #[ORM\ManyToOne(targetEntity: "App\Entity\Joueur")]
+    #[ORM\JoinColumn(name: "id_joueur", referencedColumnName: "id_joueur")]
     private ?Joueur $joueur = null;
 
-    #[ORM\Column(type: "date")]
+    #[ORM\Column(name: "date_evaluation", type: "date")]
     private ?\DateTimeInterface $dateEvaluation = null;
 
-    #[ORM\Column(type: "float", nullable: true)]
+    #[ORM\Column(name: "niveau_endurance", type: "float")]
     private ?float $niveauEndurance = null;
 
-    #[ORM\Column(type: "float", nullable: true)]
+    #[ORM\Column(name: "force_physique", type: "float")]
     private ?float $forcePhysique = null;
 
-    #[ORM\Column(type: "float", nullable: true)]
+    #[ORM\Column(name: "vitesse", type: "float")]
     private ?float $vitesse = null;
 
-    #[ORM\Column(type: "string", length: 100, nullable: true)]
+    #[ORM\Column(name: "etat_blessure", type: "string", length: 255, nullable: true)]
     private ?string $etatBlessure = null;
 
     // Getters and Setters

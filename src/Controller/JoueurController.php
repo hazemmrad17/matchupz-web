@@ -22,7 +22,7 @@ class JoueurController extends AbstractController
         $this->entityManager = $entityManager;
     }
 
-    #[Route('/main', name: 'joueur_main', methods: ['GET'])]
+    #[Route('/', name: 'joueur_main', methods: ['GET'])]
     public function index(JoueurRepository $joueurRepository): Response
     {
         $joueurs = $joueurRepository->findAll();
@@ -73,7 +73,7 @@ class JoueurController extends AbstractController
         ]);
     }
 
-    #[Route('/stats', name: 'joueur_statistics', methods: ['GET'])]
+    #[Route('/statistics', name: 'joueur_statistics', methods: ['GET'])]
     public function statistics(): Response
     {
         // Total number of players

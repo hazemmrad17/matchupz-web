@@ -65,7 +65,7 @@ class __TwigTemplate_333af35d01502999b8b63a68b145aff2 extends Template
         yield "\" class=\"btn btn-sm btn-outline-primary\">Add New Club</a>
                         <a href=\"";
         // line 13
-        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("club_index");
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("club_statistics");
         yield "\" class=\"btn btn-sm btn-primary ms-2\">View All</a>
                     </div>
                 </div>
@@ -120,7 +120,7 @@ class __TwigTemplate_333af35d01502999b8b63a68b145aff2 extends Template
                                     <a class=\"dropdown-item\" href=\"";
         // line 58
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("club_index");
-        yield "\">View All Clubs</a>
+        yield "\">View More Statistics</a>
                                 </div>
                             </div>
                         </div>
@@ -164,7 +164,7 @@ class __TwigTemplate_333af35d01502999b8b63a68b145aff2 extends Template
                                     <a class=\"dropdown-item\" href=\"";
         // line 93
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("club_index");
-        yield "\">View Clubs</a>
+        yield "\">View Statistics</a>
                                 </div>
                             </div>
                         </div>
@@ -257,7 +257,7 @@ class __TwigTemplate_333af35d01502999b8b63a68b145aff2 extends Template
                             You have <span class=\"fw-bold\">{{ clubs|length }}</span> clubs registered in the system.
                         </p>
                         <a href=\"{{ path('club_new') }}\" class=\"btn btn-sm btn-outline-primary\">Add New Club</a>
-                        <a href=\"{{ path('club_index') }}\" class=\"btn btn-sm btn-primary ms-2\">View All</a>
+                        <a href=\"{{ path('club_statistics') }}\" class=\"btn btn-sm btn-primary ms-2\">View All</a>
                     </div>
                 </div>
                 <div class=\"col-sm-5 text-center text-sm-left\">
@@ -302,7 +302,7 @@ class __TwigTemplate_333af35d01502999b8b63a68b145aff2 extends Template
                                     <i class=\"bx bx-dots-vertical-rounded\"></i>
                                 </button>
                                 <div class=\"dropdown-menu dropdown-menu-end\" aria-labelledby=\"cardOptClubTotal\">
-                                    <a class=\"dropdown-item\" href=\"{{ path('club_index') }}\">View All Clubs</a>
+                                    <a class=\"dropdown-item\" href=\"{{ path('club_index') }}\">View More Statistics</a>
                                 </div>
                             </div>
                         </div>
@@ -337,7 +337,7 @@ class __TwigTemplate_333af35d01502999b8b63a68b145aff2 extends Template
                                     <i class=\"bx bx-dots-vertical-rounded\"></i>
                                 </button>
                                 <div class=\"dropdown-menu dropdown-menu-end\" aria-labelledby=\"cardOptClubPhotos\">
-                                    <a class=\"dropdown-item\" href=\"{{ path('club_index') }}\">View Clubs</a>
+                                    <a class=\"dropdown-item\" href=\"{{ path('club_index') }}\">View Statistics</a>
                                 </div>
                             </div>
                         </div>

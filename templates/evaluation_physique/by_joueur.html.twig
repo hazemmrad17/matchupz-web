@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+{% block searchbar %}
+    {% include 'searchbar.html.twig' %}
+{% endblock %}
+
+{% block title %}Évaluations du Joueur{% endblock %}
+
+{% block content %}
+    <div class="content-wrapper">
+        <div class="container-xxl flex-grow-1 container-p-y">
+            <div class="card">
+                <h5 class="card-header d-flex justify-content-between align-items-center">
+                    Évaluations Physiques du Joueur
+                    <a href="{{ path('app_evaluation_physique_new') }}" class="btn btn-primary">Nouvelle Évaluation</a>
+                </h5>
+                <div class="card-body">
+                    {% if evaluations|length > 0 %}
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Endurance</th>
+                                        <th>Force</th>
+                                        <th>Vitesse</th>
+                                        <th>Blessure</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for evaluation in evaluations %}
+                                        <tr>
+                                            <td>{{ evaluation.dateEvaluation|date('d/m/Y') }}</td>
+                                            <td>{{ evaluation.niveauEndurance ?? 'N/A' }}</td>
+                                            <td>{{ evaluation.forcePhysique ?? 'N/A' }}</td>
+                                            <td>{{ evaluation.vitesse ?? 'N/A' }}</td>
+                                            <td>{{ evaluation.etatBlessure ?? 'Aucune' }}</td>
+                                            <td>
+                                                <div class="dropdown">
+                                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                                        <i class="bx bx-dots-vertical-rounded"></i>
+                                                    </button>
+                                                    <div class="dropdown-menu">
+                                                        <a class="dropdown-item" href="{{ path('app_evaluation_physique_show', {'idEvaluation': evaluation.idEvaluation}) }}">
+                                                            <i class="bx bx-show me-1"></i> Voir
+                                                        </a>
+                                                        <a class="dropdown-item" href="{{ path('app_evaluation_physique_edit', {'idEvaluation': evaluation.idEvaluation}) }}">
+                                                            <i class="bx bx-edit-alt me-1"></i> Modifier
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% else %}
+                        <div class="alert alert-info">Aucune évaluation trouvée pour ce joueur.</div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

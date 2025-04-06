@@ -31,7 +31,7 @@ class __TwigTemplate_0746b8fd7af50deb204dddc8293769d4 extends Template
 
         $this->blocks = [
             'title' => [$this, 'block_title'],
-            'body' => [$this, 'block_body'],
+            'content' => [$this, 'block_content'],
         ];
     }
 
@@ -87,36 +87,74 @@ class __TwigTemplate_0746b8fd7af50deb204dddc8293769d4 extends Template
     /**
      * @return iterable<null|scalar|\Stringable>
      */
-    public function block_body(array $context, array $blocks = []): iterable
+    public function block_content(array $context, array $blocks = []): iterable
     {
         $macros = $this->macros;
         $__internal_5a27a8ba21ca79b61932376b2fa922d2 = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
-        $__internal_5a27a8ba21ca79b61932376b2fa922d2->enter($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->enter($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "content"));
 
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
-        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "content"));
 
         // line 6
-        yield "    <div class=\"container-xxl flex-grow-1 container-p-y\">
-        <h4 class=\"fw-bold py-3 mb-4\">Add New Club</h4>
+        yield "    <div class=\"content-wrapper\">
+        <div class=\"container-xxl flex-grow-1 container-p-y\">
+            <h4 class=\"fw-bold py-3 mb-4\">
+                <span class=\"text-muted fw-light\">Clubs /</span> Add New Club
+            </h4>
 
-        ";
-        // line 9
-        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 9, $this->source); })()), 'form_start');
+            <div class=\"col-xl\">
+                <div class=\"card mb-4\">
+                    <div class=\"card-header d-flex justify-content-between align-items-center\">
+                        <h5 class=\"mb-0\">Create New Club</h5>
+                        <small class=\"text-muted float-end\">Enter club details</small>
+                    </div>
+                    <div class=\"card-body\">
+                        ";
+        // line 19
+        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 19, $this->source); })()), 'form_start', ["method" => "POST", "attr" => ["novalidate" => "novalidate", "class" => "needs-validation"]]);
+        // line 25
         yield "
-            ";
-        // line 10
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 10, $this->source); })()), 'widget');
-        yield "
-        ";
-        // line 11
-        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 11, $this->source); })()), 'form_end');
-        yield "
-
-        <a href=\"";
-        // line 13
+                        
+                        ";
+        // line 28
+        yield "                        ";
+        $context['_parent'] = $context;
+        $context['_seq'] = CoreExtension::ensureTraversable(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 28, $this->source); })()), "children", [], "any", false, false, false, 28));
+        foreach ($context['_seq'] as $context["_key"] => $context["child"]) {
+            // line 29
+            yield "                            ";
+            if (((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["child"], "vars", [], "any", false, false, false, 29), "name", [], "any", false, false, false, 29) != "submit") && (CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["child"], "vars", [], "any", false, false, false, 29), "name", [], "any", false, false, false, 29) != "_token"))) {
+                // line 30
+                yield "                                ";
+                yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock($context["child"], 'row');
+                yield "
+                            ";
+            }
+            // line 32
+            yield "                        ";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_key'], $context['child'], $context['_parent']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 33
+        yield "                        
+                        <div class=\"mt-3\">
+                            <button type=\"submit\" class=\"btn btn-primary\">Create</button>
+                            <a href=\"";
+        // line 36
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("club_index");
-        yield "\" class=\"btn btn-outline-secondary mt-3\">Back to List</a>
+        yield "\" class=\"btn btn-outline-secondary\">Back to List</a>
+                        </div>
+                        
+                        ";
+        // line 39
+        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 39, $this->source); })()), 'form_end', ["render_rest" => false]);
+        yield "
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 ";
         
@@ -149,7 +187,7 @@ class __TwigTemplate_0746b8fd7af50deb204dddc8293769d4 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  118 => 13,  113 => 11,  109 => 10,  105 => 9,  100 => 6,  87 => 5,  64 => 3,  41 => 1,);
+        return array (  152 => 39,  146 => 36,  141 => 33,  135 => 32,  129 => 30,  126 => 29,  121 => 28,  117 => 25,  115 => 19,  100 => 6,  87 => 5,  64 => 3,  41 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -158,16 +196,46 @@ class __TwigTemplate_0746b8fd7af50deb204dddc8293769d4 extends Template
 
 {% block title %}New Club{% endblock %}
 
-{% block body %}
-    <div class=\"container-xxl flex-grow-1 container-p-y\">
-        <h4 class=\"fw-bold py-3 mb-4\">Add New Club</h4>
+{% block content %}
+    <div class=\"content-wrapper\">
+        <div class=\"container-xxl flex-grow-1 container-p-y\">
+            <h4 class=\"fw-bold py-3 mb-4\">
+                <span class=\"text-muted fw-light\">Clubs /</span> Add New Club
+            </h4>
 
-        {{ form_start(form) }}
-            {{ form_widget(form) }}
-        {{ form_end(form) }}
-
-        <a href=\"{{ path('club_index') }}\" class=\"btn btn-outline-secondary mt-3\">Back to List</a>
+            <div class=\"col-xl\">
+                <div class=\"card mb-4\">
+                    <div class=\"card-header d-flex justify-content-between align-items-center\">
+                        <h5 class=\"mb-0\">Create New Club</h5>
+                        <small class=\"text-muted float-end\">Enter club details</small>
+                    </div>
+                    <div class=\"card-body\">
+                        {{ form_start(form, {
+                            'method': 'POST',
+                            'attr': {
+                                'novalidate': 'novalidate',
+                                'class': 'needs-validation'
+                            }
+                        }) }}
+                        
+                        {# Render all fields EXCEPT the submit button #}
+                        {% for child in form.children %}
+                            {% if child.vars.name != 'submit' and child.vars.name != '_token' %}
+                                {{ form_row(child) }}
+                            {% endif %}
+                        {% endfor %}
+                        
+                        <div class=\"mt-3\">
+                            <button type=\"submit\" class=\"btn btn-primary\">Create</button>
+                            <a href=\"{{ path('club_index') }}\" class=\"btn btn-outline-secondary\">Back to List</a>
+                        </div>
+                        
+                        {{ form_end(form, {'render_rest': false}) }}
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-{% endblock %}", "club/new.html.twig", "C:\\Users\\Hazem Mrad\\Desktop\\matchupz\\templates\\club\\new.html.twig");
+{% endblock %}", "club/new.html.twig", "C:\\Users\\Hazem Mrad\\Desktop\\MatchupZ-Web-joueur-espace\\templates\\club\\new.html.twig");
     }
 }

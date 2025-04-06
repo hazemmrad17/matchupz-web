@@ -10,21 +10,20 @@ class HistoriqueClub
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column(type: "integer")]
+    #[ORM\Column(name: "id_historique", type: "integer")]
     private ?int $idHistorique = null;
 
     #[ORM\ManyToOne(targetEntity: Joueur::class)]
     #[ORM\JoinColumn(name: "id_joueur", referencedColumnName: "id_joueur", nullable: false)]
     private ?Joueur $joueur = null;
 
-    #[ORM\ManyToOne(targetEntity: Club::class)]
-    #[ORM\JoinColumn(name: "id_club", referencedColumnName: "id_club", nullable: false)]
-    private ?Club $club = null;
+    #[ORM\Column(name: "nom_club", type: "string", length: 100)]
+    private ?string $nomClub = null;
 
-    #[ORM\Column(type: "date")]
+    #[ORM\Column(name: "saison_debut", type: "date")]
     private ?\DateTimeInterface $saisonDebut = null;
 
-    #[ORM\Column(type: "date", nullable: true)]
+    #[ORM\Column(name: "saison_fin", type: "date", nullable: true)]
     private ?\DateTimeInterface $saisonFin = null;
 
     // Getters and Setters
@@ -38,20 +37,20 @@ class HistoriqueClub
         return $this->joueur;
     }
 
-    public function setJoueur(Joueur $joueur): self
+    public function setJoueur(?Joueur $joueur): self
     {
         $this->joueur = $joueur;
         return $this;
     }
 
-    public function getClub(): ?Club
+    public function getNomClub(): ?string
     {
-        return $this->club;
+        return $this->nomClub;
     }
 
-    public function setClub(Club $club): self
+    public function setNomClub(string $nomClub): self
     {
-        $this->club = $club;
+        $this->nomClub = $nomClub;
         return $this;
     }
 

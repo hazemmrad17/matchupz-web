@@ -203,6 +203,7 @@ class __TwigTemplate_f1ea3fca252e144799feb2f29fe79221 extends Template
         yield "
     <!-- GitHub Buttons -->
     <script async defer src=\"https://buttons.github.io/buttons.js\"></script>
+    <script src=\"https://cdn.jsdelivr.net/npm/chart.js\"></script>
   </body>
 </html>";
         
@@ -370,7 +371,7 @@ class __TwigTemplate_f1ea3fca252e144799feb2f29fe79221 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  339 => 98,  326 => 97,  304 => 66,  291 => 67,  289 => 66,  285 => 64,  272 => 63,  261 => 60,  258 => 59,  245 => 58,  234 => 53,  231 => 52,  218 => 51,  203 => 100,  201 => 97,  195 => 94,  189 => 91,  183 => 88,  179 => 87,  175 => 86,  171 => 85,  167 => 84,  151 => 70,  149 => 63,  145 => 61,  143 => 58,  137 => 54,  135 => 51,  124 => 43,  120 => 42,  114 => 39,  110 => 38,  104 => 35,  100 => 34,  96 => 33,  90 => 30,  76 => 19,  61 => 7,  53 => 1,);
+        return array (  340 => 98,  327 => 97,  305 => 66,  292 => 67,  290 => 66,  286 => 64,  273 => 63,  262 => 60,  259 => 59,  246 => 58,  235 => 53,  232 => 52,  219 => 51,  203 => 100,  201 => 97,  195 => 94,  189 => 91,  183 => 88,  179 => 87,  175 => 86,  171 => 85,  167 => 84,  151 => 70,  149 => 63,  145 => 61,  143 => 58,  137 => 54,  135 => 51,  124 => 43,  120 => 42,  114 => 39,  110 => 38,  104 => 35,  100 => 34,  96 => 33,  90 => 30,  76 => 19,  61 => 7,  53 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -477,6 +478,7 @@ class __TwigTemplate_f1ea3fca252e144799feb2f29fe79221 extends Template
 
     <!-- GitHub Buttons -->
     <script async defer src=\"https://buttons.github.io/buttons.js\"></script>
+    <script src=\"https://cdn.jsdelivr.net/npm/chart.js\"></script>
   </body>
 </html>", "base.html.twig", "C:\\Users\\Hazem Mrad\\Desktop\\MatchupZ-Web-joueur-espace\\templates\\base.html.twig");
     }

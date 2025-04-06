@@ -154,7 +154,11 @@
       <parameter key="default">doctrine.orm.default_entity_manager</parameter>
     </parameter>
     <parameter key="doctrine.default_entity_manager">default</parameter>
-    <parameter key="doctrine.dbal.connection_factory.types" type="collection"/>
+    <parameter key="doctrine.dbal.connection_factory.types" type="collection">
+      <parameter key="enum" type="collection">
+        <parameter key="class">App\Doctrine\DBAL\Types\EnumType</parameter>
+      </parameter>
+    </parameter>
     <parameter key="doctrine.connections" type="collection">
       <parameter key="default">doctrine.dbal.default_connection</parameter>
     </parameter>
@@ -359,6 +363,20 @@
         <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\ClubController"/>
       </call>
     </service>
+    <service id="App\Controller\EvaluationPhysiqueController" class="App\Controller\EvaluationPhysiqueController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="container.service_subscriber"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\EvaluationPhysiqueController"/>
+      </call>
+    </service>
+    <service id="App\Controller\HistoriqueClubController" class="App\Controller\HistoriqueClubController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="container.service_subscriber"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\HistoriqueClubController"/>
+      </call>
+    </service>
     <service id="App\Controller\JoueurController" class="App\Controller\JoueurController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
@@ -374,7 +392,14 @@
         <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\SportController"/>
       </call>
     </service>
+    <service id="App\Doctrine\DBAL\Types\EnumType" class="App\Doctrine\DBAL\Types\EnumType" autowire="true" autoconfigure="true"/>
     <service id="App\Form\ClubType" class="App\Form\ClubType" autowire="true" autoconfigure="true">
+      <tag name="form.type"/>
+    </service>
+    <service id="App\Form\EvaluationPhysiqueType" class="App\Form\EvaluationPhysiqueType" autowire="true" autoconfigure="true">
+      <tag name="form.type"/>
+    </service>
+    <service id="App\Form\HistoriqueClubType" class="App\Form\HistoriqueClubType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
     <service id="App\Form\JoueurType" class="App\Form\JoueurType" autowire="true" autoconfigure="true">
@@ -478,7 +503,7 @@
     </service>
     <service id="argument_resolver.service" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
       <tag priority="-50" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">controller.argument_value_resolver</tag>
-      <argument type="service" id=".service_locator.RZr1da2"/>
+      <argument type="service" id=".service_locator.KnhbmVD"/>
     </service>
     <service id="argument_resolver.default" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">
       <tag priority="-100" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">controller.argument_value_resolver</tag>
@@ -1400,6 +1425,8 @@
       </argument>
       <argument type="collection">
         <argument>App\Form\ClubType</argument>
+        <argument>App\Form\EvaluationPhysiqueType</argument>
+        <argument>App\Form\HistoriqueClubType</argument>
         <argument>App\Form\JoueurType</argument>
         <argument>App\Form\SportType</argument>
         <argument>Symfony\Component\Form\Extension\Core\Type\FormType</argument>
@@ -3370,7 +3397,7 @@
     </service>
     <service id="argument_resolver.not_tagged_controller" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
       <tag name="controller.argument_value_resolver" priority="-200"/>
-      <argument type="service" id=".service_locator.RZr1da2"/>
+      <argument type="service" id=".service_locator.KnhbmVD"/>
     </service>
     <service id="debug.log_processor" class="Symfony\Bridge\Monolog\Processor\DebugProcessor">
       <tag name="kernel.reset" method="reset"/>
@@ -3859,7 +3886,7 @@
       <argument type="service" id="form.registry"/>
     </service>
     <service id="form.extension" class="Symfony\Component\Form\Extension\DependencyInjection\DependencyInjectionExtension">
-      <argument type="service" id=".service_locator.5W6zXQk"/>
+      <argument type="service" id=".service_locator.qLHQyHj"/>
       <argument type="collection">
         <argument key="Symfony\Component\Form\Extension\Core\Type\FormType" type="iterator">
           <argument type="service" id="form.type_extension.form.transformation_failure_handling"/>
@@ -4873,7 +4900,7 @@
       <argument type="service" id="doctrine.debug_data_holder" on-invalid="null"/>
     </service>
     <service id="doctrine.dbal.connection_factory" class="Doctrine\Bundle\DoctrineBundle\ConnectionFactory">
-      <argument type="collection"/>
+      <argument>%doctrine.dbal.connection_factory.types%</argument>
       <argument type="service" id="doctrine.dbal.connection_factory.dsn_parser"/>
     </service>
     <service id="doctrine.dbal.connection_factory.dsn_parser" class="Doctrine\DBAL\Tools\DsnParser">
@@ -5039,7 +5066,9 @@
       </argument>
       <argument type="service" id="doctrine.dbal.default_connection.configuration"/>
       <argument type="service" id="doctrine.dbal.default_connection.event_manager"/>
-      <argument type="collection"/>
+      <argument type="collection">
+        <argument key="enum">string</argument>
+      </argument>
       <call method="setNestTransactionsWithSavepoints">
         <argument>true</argument>
       </call>
@@ -7112,6 +7141,12 @@
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\ClubController" class="App\Controller\ClubController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\ClubController" class="App\Controller\ClubController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\ClubController" class="App\Controller\ClubController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\EvaluationPhysiqueController" class="App\Controller\EvaluationPhysiqueController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\EvaluationPhysiqueController" class="App\Controller\EvaluationPhysiqueController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\EvaluationPhysiqueController" class="App\Controller\EvaluationPhysiqueController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\HistoriqueClubController" class="App\Controller\HistoriqueClubController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\HistoriqueClubController" class="App\Controller\HistoriqueClubController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\HistoriqueClubController" class="App\Controller\HistoriqueClubController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\JoueurController" class="App\Controller\JoueurController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\JoueurController" class="App\Controller\JoueurController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\JoueurController" class="App\Controller\JoueurController" autowire="true" autoconfigure="true" abstract="true"/>
@@ -7120,6 +7155,10 @@
     <service id=".abstract.instanceof.App\Controller\SportController" class="App\Controller\SportController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\ClubType" class="App\Form\ClubType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\ClubType" class="App\Form\ClubType" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\EvaluationPhysiqueType" class="App\Form\EvaluationPhysiqueType" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Form\EvaluationPhysiqueType" class="App\Form\EvaluationPhysiqueType" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\HistoriqueClubType" class="App\Form\HistoriqueClubType" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Form\HistoriqueClubType" class="App\Form\HistoriqueClubType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\JoueurType" class="App\Form\JoueurType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\JoueurType" class="App\Form\JoueurType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\SportType" class="App\Form\SportType" autowire="true" abstract="true"/>
@@ -7603,6 +7642,54 @@
         <argument key="entityManager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
       </argument>
     </service>
+    <service id=".service_locator.CbdBTI6" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="evaluationRepository" type="service_closure" id="App\Repository\EvaluationPhysiqueRepository"/>
+        <argument key="joueurRepository" type="service_closure" id="App\Repository\JoueurRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.Nm9r6bo" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="evaluationPhysique" type="service_closure" id=".errored..service_locator.Nm9r6bo.App\Entity\EvaluationPhysique"/>
+      </argument>
+    </service>
+    <service id=".service_locator.n8st8m4" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="entityManager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
+        <argument key="evaluationPhysique" type="service_closure" id=".errored..service_locator.n8st8m4.App\Entity\EvaluationPhysique"/>
+      </argument>
+    </service>
+    <service id=".errored.QUm_12n" class="App\Controller\HistoriqueClubRepository">
+      <tag name="container.error" message="Cannot determine controller argument for &quot;App\Controller\EvaluationPhysiqueController::findCurrentPlayersByClub()&quot;: the $historiqueClubRepository argument is type-hinted with the non-existent class or interface: &quot;App\Controller\HistoriqueClubRepository&quot;. Did you forget to add a use statement?"/>
+    </service>
+    <service id=".service_locator.zPKYcSn" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="historiqueClubRepository" type="service_closure" id=".errored.QUm_12n"/>
+      </argument>
+    </service>
+    <service id=".service_locator.ZE9R63e" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="historiqueClubRepository" type="service_closure" id="App\Repository\HistoriqueClubRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.4E2JJj5" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="historiqueClub" type="service_closure" id=".errored..service_locator.4E2JJj5.App\Entity\HistoriqueClub"/>
+      </argument>
+    </service>
+    <service id=".service_locator.0AreAVX" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="entityManager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
+        <argument key="historiqueClub" type="service_closure" id=".errored..service_locator.0AreAVX.App\Entity\HistoriqueClub"/>
+      </argument>
+    </service>
     <service id=".service_locator.i0N9PQM" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -7636,7 +7723,7 @@
         <argument key="entityManager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
       </argument>
     </service>
-    <service id=".service_locator.RZr1da2" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.KnhbmVD" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\ClubController::delete" type="service_closure" id=".service_locator.GbJZUn8"/>
@@ -7644,6 +7731,21 @@
         <argument key="App\Controller\ClubController::index" type="service_closure" id=".service_locator.eOJlB0r"/>
         <argument key="App\Controller\ClubController::new" type="service_closure" id=".service_locator.CsMkqUa"/>
         <argument key="App\Controller\ClubController::statistics" type="service_closure" id=".service_locator.eOJlB0r"/>
+        <argument key="App\Controller\EvaluationPhysiqueController::delete" type="service_closure" id=".service_locator.n8st8m4"/>
+        <argument key="App\Controller\EvaluationPhysiqueController::edit" type="service_closure" id=".service_locator.n8st8m4"/>
+        <argument key="App\Controller\EvaluationPhysiqueController::findCurrentPlayersByClub" type="service_closure" id=".service_locator.zPKYcSn"/>
+        <argument key="App\Controller\EvaluationPhysiqueController::index" type="service_closure" id=".service_locator.CbdBTI6"/>
+        <argument key="App\Controller\EvaluationPhysiqueController::new" type="service_closure" id=".service_locator.CsMkqUa"/>
+        <argument key="App\Controller\EvaluationPhysiqueController::show" type="service_closure" id=".service_locator.Nm9r6bo"/>
+        <argument key="App\Controller\EvaluationPhysiqueController::statistics" type="service_closure" id=".service_locator.CbdBTI6"/>
+        <argument key="App\Controller\HistoriqueClubController::delete" type="service_closure" id=".service_locator.0AreAVX"/>
+        <argument key="App\Controller\HistoriqueClubController::edit" type="service_closure" id=".service_locator.0AreAVX"/>
+        <argument key="App\Controller\HistoriqueClubController::findByJoueur" type="service_closure" id=".service_locator.ZE9R63e"/>
+        <argument key="App\Controller\HistoriqueClubController::findCurrentPlayersByClub" type="service_closure" id=".service_locator.ZE9R63e"/>
+        <argument key="App\Controller\HistoriqueClubController::index" type="service_closure" id=".service_locator.ZE9R63e"/>
+        <argument key="App\Controller\HistoriqueClubController::new" type="service_closure" id=".service_locator.CsMkqUa"/>
+        <argument key="App\Controller\HistoriqueClubController::show" type="service_closure" id=".service_locator.4E2JJj5"/>
+        <argument key="App\Controller\HistoriqueClubController::stats" type="service_closure" id=".service_locator.ZE9R63e"/>
         <argument key="App\Controller\JoueurController::index" type="service_closure" id=".service_locator.i0N9PQM"/>
         <argument key="App\Controller\SportController::delete" type="service_closure" id=".service_locator.geVFa8t"/>
         <argument key="App\Controller\SportController::edit" type="service_closure" id=".service_locator.geVFa8t"/>
@@ -7659,6 +7761,21 @@
         <argument key="App\Controller\ClubController:index" type="service_closure" id=".service_locator.eOJlB0r"/>
         <argument key="App\Controller\ClubController:new" type="service_closure" id=".service_locator.CsMkqUa"/>
         <argument key="App\Controller\ClubController:statistics" type="service_closure" id=".service_locator.eOJlB0r"/>
+        <argument key="App\Controller\EvaluationPhysiqueController:delete" type="service_closure" id=".service_locator.n8st8m4"/>
+        <argument key="App\Controller\EvaluationPhysiqueController:edit" type="service_closure" id=".service_locator.n8st8m4"/>
+        <argument key="App\Controller\EvaluationPhysiqueController:findCurrentPlayersByClub" type="service_closure" id=".service_locator.zPKYcSn"/>
+        <argument key="App\Controller\EvaluationPhysiqueController:index" type="service_closure" id=".service_locator.CbdBTI6"/>
+        <argument key="App\Controller\EvaluationPhysiqueController:new" type="service_closure" id=".service_locator.CsMkqUa"/>
+        <argument key="App\Controller\EvaluationPhysiqueController:show" type="service_closure" id=".service_locator.Nm9r6bo"/>
+        <argument key="App\Controller\EvaluationPhysiqueController:statistics" type="service_closure" id=".service_locator.CbdBTI6"/>
+        <argument key="App\Controller\HistoriqueClubController:delete" type="service_closure" id=".service_locator.0AreAVX"/>
+        <argument key="App\Controller\HistoriqueClubController:edit" type="service_closure" id=".service_locator.0AreAVX"/>
+        <argument key="App\Controller\HistoriqueClubController:findByJoueur" type="service_closure" id=".service_locator.ZE9R63e"/>
+        <argument key="App\Controller\HistoriqueClubController:findCurrentPlayersByClub" type="service_closure" id=".service_locator.ZE9R63e"/>
+        <argument key="App\Controller\HistoriqueClubController:index" type="service_closure" id=".service_locator.ZE9R63e"/>
+        <argument key="App\Controller\HistoriqueClubController:new" type="service_closure" id=".service_locator.CsMkqUa"/>
+        <argument key="App\Controller\HistoriqueClubController:show" type="service_closure" id=".service_locator.4E2JJj5"/>
+        <argument key="App\Controller\HistoriqueClubController:stats" type="service_closure" id=".service_locator.ZE9R63e"/>
         <argument key="App\Controller\JoueurController:index" type="service_closure" id=".service_locator.i0N9PQM"/>
         <argument key="App\Controller\SportController:delete" type="service_closure" id=".service_locator.geVFa8t"/>
         <argument key="App\Controller\SportController:edit" type="service_closure" id=".service_locator.geVFa8t"/>
@@ -7826,10 +7943,12 @@
       <argument type="service" id="argument_resolver.query_parameter_value_resolver"/>
       <argument type="service" id="debug.stopwatch"/>
     </service>
-    <service id=".service_locator.5W6zXQk" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.qLHQyHj" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Form\ClubType" type="service_closure" id="App\Form\ClubType"/>
+        <argument key="App\Form\EvaluationPhysiqueType" type="service_closure" id="App\Form\EvaluationPhysiqueType"/>
+        <argument key="App\Form\HistoriqueClubType" type="service_closure" id="App\Form\HistoriqueClubType"/>
         <argument key="App\Form\JoueurType" type="service_closure" id="App\Form\JoueurType"/>
         <argument key="App\Form\SportType" type="service_closure" id="App\Form\SportType"/>
         <argument key="Symfony\Bridge\Doctrine\Form\Type\EntityType" type="service_closure" id="form.type.entity"/>
@@ -8300,6 +8419,18 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.O2p6Lk7" method="withContext"/>
     </service>
+    <service id=".service_locator.O2p6Lk7.App\Controller\EvaluationPhysiqueController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\EvaluationPhysiqueController"/>
+      <argument>App\Controller\EvaluationPhysiqueController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.O2p6Lk7" method="withContext"/>
+    </service>
+    <service id=".service_locator.O2p6Lk7.App\Controller\HistoriqueClubController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\HistoriqueClubController"/>
+      <argument>App\Controller\HistoriqueClubController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.O2p6Lk7" method="withContext"/>
+    </service>
     <service id=".service_locator.O2p6Lk7.App\Controller\JoueurController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\JoueurController"/>
       <argument>App\Controller\JoueurController</argument>
@@ -8487,6 +8618,8 @@
         <argument type="collection">
           <argument>App\Kernel</argument>
           <argument>App\Controller\ClubController</argument>
+          <argument>App\Controller\EvaluationPhysiqueController</argument>
+          <argument>App\Controller\HistoriqueClubController</argument>
           <argument>App\Controller\JoueurController</argument>
           <argument>App\Controller\SportController</argument>
           <argument>Doctrine\Bundle\DoctrineBundle\Controller\ProfilerController</argument>
@@ -8689,6 +8822,18 @@
     <service id="debug.security.event_dispatcher.main.inner" class="Symfony\Component\EventDispatcher\EventDispatcher"/>
     <service id=".errored..service_locator.y4_Zrx..Symfony\Component\Config\Loader\LoaderInterface" class="Symfony\Component\Config\Loader\LoaderInterface">
       <tag name="container.error" message="Cannot autowire service &quot;.service_locator.y4_Zrx.&quot;: it needs an instance of &quot;Symfony\Component\Config\Loader\LoaderInterface&quot; but this type has been excluded from autowiring."/>
+    </service>
+    <service id=".errored..service_locator.Nm9r6bo.App\Entity\EvaluationPhysique" class="App\Entity\EvaluationPhysique">
+      <tag name="container.error" message="Cannot autowire service &quot;.service_locator.Nm9r6bo&quot;: it needs an instance of &quot;App\Entity\EvaluationPhysique&quot; but this type has been excluded in &quot;config/services.yaml&quot;."/>
+    </service>
+    <service id=".errored..service_locator.n8st8m4.App\Entity\EvaluationPhysique" class="App\Entity\EvaluationPhysique">
+      <tag name="container.error" message="Cannot autowire service &quot;.service_locator.n8st8m4&quot;: it needs an instance of &quot;App\Entity\EvaluationPhysique&quot; but this type has been excluded in &quot;config/services.yaml&quot;."/>
+    </service>
+    <service id=".errored..service_locator.4E2JJj5.App\Entity\HistoriqueClub" class="App\Entity\HistoriqueClub">
+      <tag name="container.error" message="Cannot autowire service &quot;.service_locator.4E2JJj5&quot;: it needs an instance of &quot;App\Entity\HistoriqueClub&quot; but this type has been excluded in &quot;config/services.yaml&quot;."/>
+    </service>
+    <service id=".errored..service_locator.0AreAVX.App\Entity\HistoriqueClub" class="App\Entity\HistoriqueClub">
+      <tag name="container.error" message="Cannot autowire service &quot;.service_locator.0AreAVX&quot;: it needs an instance of &quot;App\Entity\HistoriqueClub&quot; but this type has been excluded in &quot;config/services.yaml&quot;."/>
     </service>
     <service id=".console.command.about.lazy" class="Symfony\Component\Console\Command\LazyCommand">
       <argument>about</argument>
@@ -9875,7 +10020,7 @@
     <service id="Psr\Log\LoggerInterface" alias="monolog.logger"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.w7.f4fT" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.RZr1da2"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.KnhbmVD"/>
     <service id="doctrine.id_generator_locator" alias=".service_locator.KLVvNIq"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface $requestLogger" alias="monolog.logger.request"/>
@@ -9899,11 +10044,13 @@
     <service id=".service_locator.80edgLI" alias="messenger.receiver_locator"/>
     <service id=".service_locator.h8Jkkd2" alias="messenger.retry_strategy_locator"/>
     <service id=".service_locator.bJ.4HC5" alias=".service_locator.w7.f4fT"/>
+    <service id=".service_locator.Naq5WmR" alias=".service_locator.n8st8m4"/>
+    <service id=".service_locator._kIBHZW" alias=".service_locator.0AreAVX"/>
     <service id=".service_locator.vYOHL0D" alias=".service_locator.jpL5_4q"/>
     <service id=".service_locator.X9gG0Wi" alias=".service_locator.geVFa8t"/>
-    <service id=".service_locator.zv9sO_I" alias=".service_locator.RZr1da2"/>
+    <service id=".service_locator.36yodi8" alias=".service_locator.KnhbmVD"/>
     <service id=".service_locator.BFrsqsn" alias=".service_locator.F9PKc.7"/>
-    <service id=".service_locator.6FL0z5H" alias=".service_locator.5W6zXQk"/>
+    <service id=".service_locator.rbVlzUp" alias=".service_locator.qLHQyHj"/>
     <service id=".service_locator.XtmiKbi" alias=".service_locator.MfxSDRP"/>
     <service id=".service_locator.O24_MAy" alias=".service_locator.yY.p4P7"/>
     <service id=".service_locator.jUv.zyj" alias=".service_locator.O2p6Lk7"/>
@@ -9930,6 +10077,12 @@
     <service id=".service_locator.zb_P8ny" alias=".service_locator.eOJlB0r"/>
     <service id=".service_locator.9e2t_lq" alias=".service_locator.CsMkqUa"/>
     <service id=".service_locator.0rL9syw" alias=".service_locator.GbJZUn8"/>
+    <service id=".service_locator.o4u8GOZ" alias=".service_locator.CbdBTI6"/>
+    <service id=".service_locator.KFl_Jdo" alias=".service_locator.Nm9r6bo"/>
+    <service id=".service_locator.s5W9BFG" alias=".service_locator.n8st8m4"/>
+    <service id=".service_locator.WL1gjZt" alias=".service_locator.ZE9R63e"/>
+    <service id=".service_locator.MB8hsSd" alias=".service_locator.4E2JJj5"/>
+    <service id=".service_locator.jV9c70C" alias=".service_locator.0AreAVX"/>
     <service id=".service_locator.m9dk8kD" alias=".service_locator.i0N9PQM"/>
     <service id=".service_locator.W_TcJ7V" alias=".service_locator.jpL5_4q"/>
     <service id=".service_locator.vtj.h5i" alias=".service_locator.cX9LP_Y"/>
