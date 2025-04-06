@@ -74,10 +74,8 @@ class __TwigTemplate_3c4b8560215d745296125a6b5c6708fd extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "searchbar"));
 
         // line 3
-        yield "        ";
-        yield from $this->loadTemplate("searchbar.html.twig", "joueur/new.html.twig", 3)->unwrap()->yield($context);
-        // line 4
         yield "    ";
+        yield from $this->loadTemplate("searchbar.html.twig", "joueur/new.html.twig", 3)->unwrap()->yield($context);
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
 
@@ -114,131 +112,282 @@ class __TwigTemplate_3c4b8560215d745296125a6b5c6708fd extends Template
                         <small class=\"text-muted float-end\">Remplir les détails</small>
                     </div>
                     <div class=\"card-body\">
+                        <!-- Toast container (positioned at top-right) -->
+                        <div class=\"position-fixed top-0 end-0 p-3\" style=\"z-index: 1050;\" id=\"toast-container\"></div>
+
                         ";
-        // line 19
-        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 19, $this->source); })()), 'form_start', ["attr" => ["enctype" => "multipart/form-data"]]);
+        // line 22
+        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 22, $this->source); })()), 'form_start', ["attr" => ["enctype" => "multipart/form-data", "id" => "playerForm", "novalidate" => "novalidate"]]);
         yield "
                             <div class=\"mb-3\">
-                                <label class=\"form-label\" for=\"nom\">Nom</label>
+                                <label class=\"form-label\" for=\"joueur_nom\">Nom</label>
                                 <div class=\"input-group input-group-merge\">
                                     <span class=\"input-group-text\"><i class=\"bx bx-user\"></i></span>
                                     ";
-        // line 24
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 24, $this->source); })()), "nom", [], "any", false, false, false, 24), 'widget', ["attr" => ["class" => "form-control", "placeholder" => "Nom du joueur"]]);
+        // line 27
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 27, $this->source); })()), "nom", [], "any", false, false, false, 27), 'widget', ["attr" => ["class" => "form-control", "placeholder" => "Nom du joueur"]]);
         yield "
                                 </div>
                             </div>
                             <div class=\"mb-3\">
-                                <label class=\"form-label\" for=\"prenom\">Prénom</label>
+                                <label class=\"form-label\" for=\"joueur_prenom\">Prénom</label>
                                 <div class=\"input-group input-group-merge\">
                                     <span class=\"input-group-text\"><i class=\"bx bx-user\"></i></span>
                                     ";
-        // line 31
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 31, $this->source); })()), "prenom", [], "any", false, false, false, 31), 'widget', ["attr" => ["class" => "form-control", "placeholder" => "Prénom du joueur"]]);
+        // line 34
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 34, $this->source); })()), "prenom", [], "any", false, false, false, 34), 'widget', ["attr" => ["class" => "form-control", "placeholder" => "Prénom du joueur"]]);
         yield "
                                 </div>
                             </div>
                             <div class=\"mb-3\">
-                                <label class=\"form-label\" for=\"dateNaissance\">Date de Naissance</label>
+                                <label class=\"form-label\" for=\"joueur_dateNaissance\">Date de Naissance</label>
                                 <div class=\"input-group input-group-merge\">
                                     <span class=\"input-group-text\"><i class=\"bx bx-calendar\"></i></span>
                                     ";
-        // line 38
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 38, $this->source); })()), "dateNaissance", [], "any", false, false, false, 38), 'widget', ["attr" => ["class" => "form-control"]]);
+        // line 41
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 41, $this->source); })()), "dateNaissance", [], "any", false, false, false, 41), 'widget', ["attr" => ["class" => "form-control"]]);
         yield "
                                 </div>
                             </div>
                             <div class=\"mb-3\">
-                                <label class=\"form-label\" for=\"sport\">Sport</label>
+                                <label class=\"form-label\" for=\"joueur_sport\">Sport</label>
                                 <div class=\"input-group input-group-merge\">
                                     <span class=\"input-group-text\"><i class=\"bx bx-run\"></i></span>
                                     ";
-        // line 45
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 45, $this->source); })()), "sport", [], "any", false, false, false, 45), 'widget', ["attr" => ["class" => "form-control"]]);
+        // line 48
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 48, $this->source); })()), "sport", [], "any", false, false, false, 48), 'widget', ["attr" => ["class" => "form-control"]]);
         yield "
                                 </div>
                             </div>
                             <div class=\"mb-3\">
-                                <label class=\"form-label\" for=\"poste\">Poste</label>
+                                <label class=\"form-label\" for=\"joueur_poste\">Poste</label>
                                 <div class=\"input-group input-group-merge\">
                                     <span class=\"input-group-text\"><i class=\"bx bx-target-lock\"></i></span>
                                     ";
-        // line 52
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 52, $this->source); })()), "poste", [], "any", false, false, false, 52), 'widget', ["attr" => ["class" => "form-control", "placeholder" => "Poste du joueur"]]);
+        // line 55
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 55, $this->source); })()), "poste", [], "any", false, false, false, 55), 'widget', ["attr" => ["class" => "form-control"]]);
         yield "
                                 </div>
                             </div>
                             <div class=\"mb-3\">
-                                <label class=\"form-label\" for=\"taille\">Taille (m)</label>
+                                <label class=\"form-label\" for=\"joueur_taille\">Taille (m)</label>
                                 <div class=\"input-group input-group-merge\">
                                     <span class=\"input-group-text\"><i class=\"bx bx-ruler\"></i></span>
                                     ";
-        // line 59
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 59, $this->source); })()), "taille", [], "any", false, false, false, 59), 'widget', ["attr" => ["class" => "form-control", "placeholder" => "ex: 1.85"]]);
+        // line 62
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 62, $this->source); })()), "taille", [], "any", false, false, false, 62), 'widget', ["attr" => ["class" => "form-control", "placeholder" => "ex: 1.85"]]);
         yield "
                                 </div>
                             </div>
                             <div class=\"mb-3\">
-                                <label class=\"form-label\" for=\"poids\">Poids (kg)</label>
+                                <label class=\"form-label\" for=\"joueur_poids\">Poids (kg)</label>
                                 <div class=\"input-group input-group-merge\">
                                     <span class=\"input-group-text\"><i class=\"bx bx-scale\"></i></span>
                                     ";
-        // line 66
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 66, $this->source); })()), "poids", [], "any", false, false, false, 66), 'widget', ["attr" => ["class" => "form-control", "placeholder" => "ex: 75"]]);
+        // line 69
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 69, $this->source); })()), "poids", [], "any", false, false, false, 69), 'widget', ["attr" => ["class" => "form-control", "placeholder" => "ex: 75"]]);
         yield "
                                 </div>
                             </div>
                             <div class=\"mb-3\">
-                                <label class=\"form-label\" for=\"email\">Email</label>
+                                <label class=\"form-label\" for=\"joueur_email\">Email</label>
                                 <div class=\"input-group input-group-merge\">
                                     <span class=\"input-group-text\"><i class=\"bx bx-envelope\"></i></span>
                                     ";
-        // line 73
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 73, $this->source); })()), "email", [], "any", false, false, false, 73), 'widget', ["attr" => ["class" => "form-control", "placeholder" => "email@exemple.com"]]);
+        // line 76
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 76, $this->source); })()), "email", [], "any", false, false, false, 76), 'widget', ["attr" => ["class" => "form-control", "placeholder" => "email@exemple.com"]]);
         yield "
                                 </div>
                             </div>
                             <div class=\"mb-3\">
-                                <label class=\"form-label\" for=\"telephone\">Téléphone</label>
+                                <label class=\"form-label\" for=\"joueur_telephone\">Téléphone</label>
                                 <div class=\"input-group input-group-merge\">
                                     <span class=\"input-group-text\"><i class=\"bx bx-phone\"></i></span>
                                     ";
-        // line 80
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 80, $this->source); })()), "telephone", [], "any", false, false, false, 80), 'widget', ["attr" => ["class" => "form-control phone-mask", "placeholder" => "Numéro de téléphone"]]);
+        // line 83
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 83, $this->source); })()), "telephone", [], "any", false, false, false, 83), 'widget', ["attr" => ["class" => "form-control phone-mask", "placeholder" => "Numéro de téléphone"]]);
         yield "
                                 </div>
                             </div>
                             <div class=\"mb-3\">
-                                <label class=\"form-label\" for=\"statut\">Statut</label>
+                                <label class=\"form-label\" for=\"joueur_statut\">Statut</label>
                                 <div class=\"input-group input-group-merge\">
                                     <span class=\"input-group-text\"><i class=\"bx bx-id-card\"></i></span>
                                     ";
-        // line 87
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 87, $this->source); })()), "statut", [], "any", false, false, false, 87), 'widget', ["attr" => ["class" => "form-control", "placeholder" => "ex: Actif"]]);
+        // line 90
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 90, $this->source); })()), "statut", [], "any", false, false, false, 90), 'widget', ["attr" => ["class" => "form-control"]]);
         yield "
                                 </div>
                             </div>
                             <div class=\"mb-3\">
-                                <label class=\"form-label\" for=\"profilePicture\">Photo de Profil</label>
+                                <label class=\"form-label\" for=\"joueur_profilePicture\">Photo de Profil</label>
                                 ";
-        // line 92
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 92, $this->source); })()), "profilePicture", [], "any", false, false, false, 92), 'widget', ["attr" => ["class" => "form-control"]]);
+        // line 95
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 95, $this->source); })()), "profilePicture", [], "any", false, false, false, 95), 'widget', ["attr" => ["class" => "form-control"]]);
         yield "
                             </div>
                             <button type=\"submit\" class=\"btn btn-primary\">Créer</button>
                             <a href=\"";
-        // line 95
+        // line 98
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("joueur_main");
         yield "\" class=\"btn btn-secondary\">Annuler</a>
                         ";
-        // line 96
-        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 96, $this->source); })()), 'form_end');
+        // line 99
+        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 99, $this->source); })()), 'form_end');
         yield "
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <script>
+        document.getElementById('playerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const toastContainer = document.getElementById('toast-container');
+            toastContainer.innerHTML = ''; // Clear previous toasts
+
+            // Get form field values with error handling
+            const nom = document.getElementById('joueur_nom')?.value.trim() || '';
+            const prenom = document.getElementById('joueur_prenom')?.value.trim() || '';
+            const dateNaissance = document.getElementById('joueur_dateNaissance')?.value || '';
+            const sport = document.getElementById('joueur_sport')?.value || '';
+            const poste = document.getElementById('joueur_poste')?.value || '';
+            const taille = document.getElementById('joueur_taille')?.value.trim() || '';
+            const poids = document.getElementById('joueur_poids')?.value.trim() || '';
+            const email = document.getElementById('joueur_email')?.value.trim() || '';
+            const telephone = document.getElementById('joueur_telephone')?.value.trim() || '';
+            const statut = document.getElementById('joueur_statut')?.value || '';
+            const profilePicture = document.getElementById('joueur_profilePicture')?.files[0];
+
+            // Validation with custom toast messages - All fields are now required
+            if (!nom) {
+                addToast('Erreur Nom', 'Veuillez entrer le nom du joueur.');
+            } else if (nom.length > 50) {
+                addToast('Erreur Nom', 'Le nom ne doit pas dépasser 50 caractères.');
+            }
+
+            if (!prenom) {
+                addToast('Erreur Prénom', 'Veuillez entrer le prénom du joueur.');
+            } else if (prenom.length > 50) {
+                addToast('Erreur Prénom', 'Le prénom ne doit pas dépasser 50 caractères.');
+            }
+
+            if (!dateNaissance) {
+                addToast('Erreur Date', 'Veuillez sélectionner une date de naissance.');
+            } else {
+                const birthDate = new Date(dateNaissance);
+                const today = new Date();
+                if (birthDate > today) {
+                    addToast('Erreur Date', 'La date de naissance ne peut pas être dans le futur.');
+                }
+            }
+
+            if (!sport) {
+                addToast('Erreur Sport', 'Veuillez sélectionner un sport.');
+            }
+
+            if (!poste) {
+                addToast('Erreur Poste', 'Veuillez sélectionner un poste.');
+            } else if (!['GK','RB','LB','RWB','LWB','SW','DM','CM','AM','RM','LM','RW','LW','CF','ST','SS'].includes(poste)) {
+                addToast('Erreur Poste', 'Veuillez sélectionner un poste valide.');
+            }
+
+            if (!taille) {
+                addToast('Erreur Taille', 'Veuillez entrer la taille du joueur.');
+            } else {
+                const tailleNum = parseFloat(taille);
+                if (isNaN(tailleNum) || tailleNum <= 0) {
+                    addToast('Erreur Taille', 'La taille doit être un nombre positif.');
+                } else if (tailleNum > 3) {
+                    addToast('Erreur Taille', 'La taille semble irréaliste (max 3m).');
+                }
+            }
+
+            if (!poids) {
+                addToast('Erreur Poids', 'Veuillez entrer le poids du joueur.');
+            } else {
+                const poidsNum = parseFloat(poids);
+                if (isNaN(poidsNum) || poidsNum <= 0) {
+                    addToast('Erreur Poids', 'Le poids doit être un nombre positif.');
+                } else if (poidsNum > 500) {
+                    addToast('Erreur Poids', 'Le poids semble irréaliste (max 500kg).');
+                }
+            }
+
+            if (!email) {
+                addToast('Erreur Email', 'Veuillez entrer l\\'email du joueur.');
+            } else if (!isValidEmail(email)) {
+                addToast('Erreur Email', 'Veuillez entrer un email valide.');
+            } else if (email.length > 100) {
+                addToast('Erreur Email', 'L\\'email ne doit pas dépasser 100 caractères.');
+            }
+
+            if (!telephone) {
+                addToast('Erreur Téléphone', 'Veuillez entrer le numéro de téléphone du joueur.');
+            } else if (!isValidPhone(telephone)) {
+                addToast('Erreur Téléphone', 'Veuillez entrer un numéro de téléphone valide.');
+            } else if (telephone.length > 20) {
+                addToast('Erreur Téléphone', 'Le numéro ne doit pas dépasser 20 caractères.');
+            }
+
+            if (!statut) {
+                addToast('Erreur Statut', 'Veuillez sélectionner un statut.');
+            } else if (!['Actif','Blessé','Suspendu',''].includes(statut)) {
+                addToast('Erreur Statut', 'Veuillez sélectionner un statut valide.');
+            }
+
+            if (!profilePicture) {
+                addToast('Erreur Photo', 'Veuillez sélectionner une photo de profil.');
+            } else {
+                const validTypes = ['image/jpeg', 'image/png'];
+                if (!validTypes.includes(profilePicture.type)) {
+                    addToast('Erreur Photo', 'La photo doit être au format JPEG ou PNG.');
+                }
+                if (profilePicture.size > 2 * 1024 * 1024) {
+                    addToast('Erreur Photo', 'La photo ne doit pas dépasser 2Mo.');
+                }
+            }
+
+            // If no toasts, submit the form
+            if (toastContainer.children.length === 0) {
+                this.submit();
+            } else {
+                // Initialize Bootstrap toasts
+                const toastElements = toastContainer.querySelectorAll('.toast');
+                toastElements.forEach(toast => new bootstrap.Toast(toast, { autohide: true, delay: 5000 }).show());
+            }
+        });
+
+        function addToast(title, message) {
+            const toastContainer = document.getElementById('toast-container');
+            const toastId = 'toast-' + Date.now(); // Unique ID for each toast
+            const toastHTML = `
+                <div id=\"\${toastId}\" class=\"bs-toast toast fade bg-danger\" role=\"alert\" aria-live=\"assertive\" aria-atomic=\"true\">
+                    <div class=\"toast-header\">
+                        <i class=\"bx bx-bell me-2\"></i>
+                        <div class=\"me-auto fw-semibold\">\${title}</div>
+                        <small>Maintenant</small>
+                        <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"toast\" aria-label=\"Close\"></button>
+                    </div>
+                    <div class=\"toast-body\">
+                        \${message}
+                    </div>
+                </div>
+            `;
+            toastContainer.innerHTML += toastHTML;
+        }
+
+        function isValidEmail(email) {
+            const re = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+\$/;
+            return re.test(email);
+        }
+
+        function isValidPhone(phone) {
+            const re = /^\\+?[\\d\\s-]{9,}\$/;
+            return re.test(phone);
+        }
+    </script>
 ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -270,15 +419,15 @@ class __TwigTemplate_3c4b8560215d745296125a6b5c6708fd extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  235 => 96,  231 => 95,  225 => 92,  217 => 87,  207 => 80,  197 => 73,  187 => 66,  177 => 59,  167 => 52,  157 => 45,  147 => 38,  137 => 31,  127 => 24,  119 => 19,  104 => 6,  91 => 5,  80 => 4,  77 => 3,  64 => 2,  41 => 1,);
+        return array (  236 => 99,  232 => 98,  226 => 95,  218 => 90,  208 => 83,  198 => 76,  188 => 69,  178 => 62,  168 => 55,  158 => 48,  148 => 41,  138 => 34,  128 => 27,  120 => 22,  102 => 6,  89 => 5,  77 => 3,  64 => 2,  41 => 1,);
     }
 
     public function getSourceContext(): Source
     {
         return new Source("{% extends 'base.html.twig' %}
-    {% block searchbar %}
-        {% include 'searchbar.html.twig' %}
-    {% endblock %}
+{% block searchbar %}
+    {% include 'searchbar.html.twig' %}
+{% endblock %}
 {% block content %}
     <div class=\"content-wrapper\">
         <div class=\"container-xxl flex-grow-1 container-p-y\">
@@ -293,79 +442,82 @@ class __TwigTemplate_3c4b8560215d745296125a6b5c6708fd extends Template
                         <small class=\"text-muted float-end\">Remplir les détails</small>
                     </div>
                     <div class=\"card-body\">
-                        {{ form_start(form, {'attr': {'enctype': 'multipart/form-data'}}) }}
+                        <!-- Toast container (positioned at top-right) -->
+                        <div class=\"position-fixed top-0 end-0 p-3\" style=\"z-index: 1050;\" id=\"toast-container\"></div>
+
+                        {{ form_start(form, {'attr': {'enctype': 'multipart/form-data', 'id': 'playerForm', 'novalidate': 'novalidate'}}) }}
                             <div class=\"mb-3\">
-                                <label class=\"form-label\" for=\"nom\">Nom</label>
+                                <label class=\"form-label\" for=\"joueur_nom\">Nom</label>
                                 <div class=\"input-group input-group-merge\">
                                     <span class=\"input-group-text\"><i class=\"bx bx-user\"></i></span>
                                     {{ form_widget(form.nom, {'attr': {'class': 'form-control', 'placeholder': 'Nom du joueur'}}) }}
                                 </div>
                             </div>
                             <div class=\"mb-3\">
-                                <label class=\"form-label\" for=\"prenom\">Prénom</label>
+                                <label class=\"form-label\" for=\"joueur_prenom\">Prénom</label>
                                 <div class=\"input-group input-group-merge\">
                                     <span class=\"input-group-text\"><i class=\"bx bx-user\"></i></span>
                                     {{ form_widget(form.prenom, {'attr': {'class': 'form-control', 'placeholder': 'Prénom du joueur'}}) }}
                                 </div>
                             </div>
                             <div class=\"mb-3\">
-                                <label class=\"form-label\" for=\"dateNaissance\">Date de Naissance</label>
+                                <label class=\"form-label\" for=\"joueur_dateNaissance\">Date de Naissance</label>
                                 <div class=\"input-group input-group-merge\">
                                     <span class=\"input-group-text\"><i class=\"bx bx-calendar\"></i></span>
                                     {{ form_widget(form.dateNaissance, {'attr': {'class': 'form-control'}}) }}
                                 </div>
                             </div>
                             <div class=\"mb-3\">
-                                <label class=\"form-label\" for=\"sport\">Sport</label>
+                                <label class=\"form-label\" for=\"joueur_sport\">Sport</label>
                                 <div class=\"input-group input-group-merge\">
                                     <span class=\"input-group-text\"><i class=\"bx bx-run\"></i></span>
                                     {{ form_widget(form.sport, {'attr': {'class': 'form-control'}}) }}
                                 </div>
                             </div>
                             <div class=\"mb-3\">
-                                <label class=\"form-label\" for=\"poste\">Poste</label>
+                                <label class=\"form-label\" for=\"joueur_poste\">Poste</label>
                                 <div class=\"input-group input-group-merge\">
                                     <span class=\"input-group-text\"><i class=\"bx bx-target-lock\"></i></span>
-                                    {{ form_widget(form.poste, {'attr': {'class': 'form-control', 'placeholder': 'Poste du joueur'}}) }}
+                                    {{ form_widget(form.poste, {'attr': {'class': 'form-control'}}) }}
                                 </div>
                             </div>
                             <div class=\"mb-3\">
-                                <label class=\"form-label\" for=\"taille\">Taille (m)</label>
+                                <label class=\"form-label\" for=\"joueur_taille\">Taille (m)</label>
                                 <div class=\"input-group input-group-merge\">
                                     <span class=\"input-group-text\"><i class=\"bx bx-ruler\"></i></span>
                                     {{ form_widget(form.taille, {'attr': {'class': 'form-control', 'placeholder': 'ex: 1.85'}}) }}
                                 </div>
                             </div>
                             <div class=\"mb-3\">
-                                <label class=\"form-label\" for=\"poids\">Poids (kg)</label>
+                                <label class=\"form-label\" for=\"joueur_poids\">Poids (kg)</label>
                                 <div class=\"input-group input-group-merge\">
                                     <span class=\"input-group-text\"><i class=\"bx bx-scale\"></i></span>
                                     {{ form_widget(form.poids, {'attr': {'class': 'form-control', 'placeholder': 'ex: 75'}}) }}
                                 </div>
                             </div>
                             <div class=\"mb-3\">
-                                <label class=\"form-label\" for=\"email\">Email</label>
+                                <label class=\"form-label\" for=\"joueur_email\">Email</label>
                                 <div class=\"input-group input-group-merge\">
                                     <span class=\"input-group-text\"><i class=\"bx bx-envelope\"></i></span>
                                     {{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder': 'email@exemple.com'}}) }}
                                 </div>
                             </div>
                             <div class=\"mb-3\">
-                                <label class=\"form-label\" for=\"telephone\">Téléphone</label>
+                                <label class=\"form-label\" for=\"joueur_telephone\">Téléphone</label>
                                 <div class=\"input-group input-group-merge\">
                                     <span class=\"input-group-text\"><i class=\"bx bx-phone\"></i></span>
                                     {{ form_widget(form.telephone, {'attr': {'class': 'form-control phone-mask', 'placeholder': 'Numéro de téléphone'}}) }}
                                 </div>
                             </div>
                             <div class=\"mb-3\">
-                                <label class=\"form-label\" for=\"statut\">Statut</label>
+                                <label class=\"form-label\" for=\"joueur_statut\">Statut</label>
                                 <div class=\"input-group input-group-merge\">
                                     <span class=\"input-group-text\"><i class=\"bx bx-id-card\"></i></span>
-                                    {{ form_widget(form.statut, {'attr': {'class': 'form-control', 'placeholder': 'ex: Actif'}}) }}
+                                    {{ form_widget(form.statut, {'attr': {'class': 'form-control'}}) }}
                                 </div>
                             </div>
                             <div class=\"mb-3\">
-                                <label class=\"form-label\" for=\"profilePicture\">Photo de Profil</label>
+                                <label class=\"form-label\" for=\"joueur_profilePicture\">Photo de Profil</label>
                                 {{ form_widget(form.profilePicture, {'attr': {'class': 'form-control'}}) }}
                             </div>
                             <button type=\"submit\" class=\"btn btn-primary\">Créer</button>
@@ -376,6 +528,154 @@ class __TwigTemplate_3c4b8560215d745296125a6b5c6708fd extends Template
             </div>
         </div>
     </div>
+
+    <script>
+        document.getElementById('playerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const toastContainer = document.getElementById('toast-container');
+            toastContainer.innerHTML = ''; // Clear previous toasts
+
+            // Get form field values with error handling
+            const nom = document.getElementById('joueur_nom')?.value.trim() || '';
+            const prenom = document.getElementById('joueur_prenom')?.value.trim() || '';
+            const dateNaissance = document.getElementById('joueur_dateNaissance')?.value || '';
+            const sport = document.getElementById('joueur_sport')?.value || '';
+            const poste = document.getElementById('joueur_poste')?.value || '';
+            const taille = document.getElementById('joueur_taille')?.value.trim() || '';
+            const poids = document.getElementById('joueur_poids')?.value.trim() || '';
+            const email = document.getElementById('joueur_email')?.value.trim() || '';
+            const telephone = document.getElementById('joueur_telephone')?.value.trim() || '';
+            const statut = document.getElementById('joueur_statut')?.value || '';
+            const profilePicture = document.getElementById('joueur_profilePicture')?.files[0];
+
+            // Validation with custom toast messages - All fields are now required
+            if (!nom) {
+                addToast('Erreur Nom', 'Veuillez entrer le nom du joueur.');
+            } else if (nom.length > 50) {
+                addToast('Erreur Nom', 'Le nom ne doit pas dépasser 50 caractères.');
+            }
+
+            if (!prenom) {
+                addToast('Erreur Prénom', 'Veuillez entrer le prénom du joueur.');
+            } else if (prenom.length > 50) {
+                addToast('Erreur Prénom', 'Le prénom ne doit pas dépasser 50 caractères.');
+            }
+
+            if (!dateNaissance) {
+                addToast('Erreur Date', 'Veuillez sélectionner une date de naissance.');
+            } else {
+                const birthDate = new Date(dateNaissance);
+                const today = new Date();
+                if (birthDate > today) {
+                    addToast('Erreur Date', 'La date de naissance ne peut pas être dans le futur.');
+                }
+            }
+
+            if (!sport) {
+                addToast('Erreur Sport', 'Veuillez sélectionner un sport.');
+            }
+
+            if (!poste) {
+                addToast('Erreur Poste', 'Veuillez sélectionner un poste.');
+            } else if (!['GK','RB','LB','RWB','LWB','SW','DM','CM','AM','RM','LM','RW','LW','CF','ST','SS'].includes(poste)) {
+                addToast('Erreur Poste', 'Veuillez sélectionner un poste valide.');
+            }
+
+            if (!taille) {
+                addToast('Erreur Taille', 'Veuillez entrer la taille du joueur.');
+            } else {
+                const tailleNum = parseFloat(taille);
+                if (isNaN(tailleNum) || tailleNum <= 0) {
+                    addToast('Erreur Taille', 'La taille doit être un nombre positif.');
+                } else if (tailleNum > 3) {
+                    addToast('Erreur Taille', 'La taille semble irréaliste (max 3m).');
+                }
+            }
+
+            if (!poids) {
+                addToast('Erreur Poids', 'Veuillez entrer le poids du joueur.');
+            } else {
+                const poidsNum = parseFloat(poids);
+                if (isNaN(poidsNum) || poidsNum <= 0) {
+                    addToast('Erreur Poids', 'Le poids doit être un nombre positif.');
+                } else if (poidsNum > 500) {
+                    addToast('Erreur Poids', 'Le poids semble irréaliste (max 500kg).');
+                }
+            }
+
+            if (!email) {
+                addToast('Erreur Email', 'Veuillez entrer l\\'email du joueur.');
+            } else if (!isValidEmail(email)) {
+                addToast('Erreur Email', 'Veuillez entrer un email valide.');
+            } else if (email.length > 100) {
+                addToast('Erreur Email', 'L\\'email ne doit pas dépasser 100 caractères.');
+            }
+
+            if (!telephone) {
+                addToast('Erreur Téléphone', 'Veuillez entrer le numéro de téléphone du joueur.');
+            } else if (!isValidPhone(telephone)) {
+                addToast('Erreur Téléphone', 'Veuillez entrer un numéro de téléphone valide.');
+            } else if (telephone.length > 20) {
+                addToast('Erreur Téléphone', 'Le numéro ne doit pas dépasser 20 caractères.');
+            }
+
+            if (!statut) {
+                addToast('Erreur Statut', 'Veuillez sélectionner un statut.');
+            } else if (!['Actif','Blessé','Suspendu',''].includes(statut)) {
+                addToast('Erreur Statut', 'Veuillez sélectionner un statut valide.');
+            }
+
+            if (!profilePicture) {
+                addToast('Erreur Photo', 'Veuillez sélectionner une photo de profil.');
+            } else {
+                const validTypes = ['image/jpeg', 'image/png'];
+                if (!validTypes.includes(profilePicture.type)) {
+                    addToast('Erreur Photo', 'La photo doit être au format JPEG ou PNG.');
+                }
+                if (profilePicture.size > 2 * 1024 * 1024) {
+                    addToast('Erreur Photo', 'La photo ne doit pas dépasser 2Mo.');
+                }
+            }
+
+            // If no toasts, submit the form
+            if (toastContainer.children.length === 0) {
+                this.submit();
+            } else {
+                // Initialize Bootstrap toasts
+                const toastElements = toastContainer.querySelectorAll('.toast');
+                toastElements.forEach(toast => new bootstrap.Toast(toast, { autohide: true, delay: 5000 }).show());
+            }
+        });
+
+        function addToast(title, message) {
+            const toastContainer = document.getElementById('toast-container');
+            const toastId = 'toast-' + Date.now(); // Unique ID for each toast
+            const toastHTML = `
+                <div id=\"\${toastId}\" class=\"bs-toast toast fade bg-danger\" role=\"alert\" aria-live=\"assertive\" aria-atomic=\"true\">
+                    <div class=\"toast-header\">
+                        <i class=\"bx bx-bell me-2\"></i>
+                        <div class=\"me-auto fw-semibold\">\${title}</div>
+                        <small>Maintenant</small>
+                        <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"toast\" aria-label=\"Close\"></button>
+                    </div>
+                    <div class=\"toast-body\">
+                        \${message}
+                    </div>
+                </div>
+            `;
+            toastContainer.innerHTML += toastHTML;
+        }
+
+        function isValidEmail(email) {
+            const re = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+\$/;
+            return re.test(email);
+        }
+
+        function isValidPhone(phone) {
+            const re = /^\\+?[\\d\\s-]{9,}\$/;
+            return re.test(phone);
+        }
+    </script>
 {% endblock %}", "joueur/new.html.twig", "C:\\Users\\Hazem Mrad\\Desktop\\MatchupZ-Web-joueur-espace\\templates\\joueur\\new.html.twig");
     }
 }

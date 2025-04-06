@@ -16,7 +16,7 @@
     <title>Matchupz Dashboard</title>
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="{{ asset('/img/favicon/favicon.ico') }}" />
+    <link rel="icon" type="image/x-icon" href="{{ asset('/img/favicon/icon.svg') }}" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -41,6 +41,24 @@
     <!-- Helpers -->
     <script src="{{ asset('/vendor/js/helpers.js') }}"></script>
     <script src="{{ asset('/js/config.js') }}"></script>
+    <style>
+      /* Ensure proper footer placement */
+      html, body {
+        height: 100%;
+      }
+      .layout-wrapper {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+      .content-wrapper {
+        flex: 1;
+      }
+      /* Your original footer styles */
+      .footer {
+        background-color: #f8f9fa !important;
+      }
+    </style>
   </head>
 
   <body>
@@ -70,6 +88,29 @@
         </div>
       </div>
 
+      <!-- Your exact footer code -->
+      <footer class="footer bg-light">
+        <div class="container-fluid d-flex flex-md-row flex-column justify-content-between align-items-md-center gap-1 container-p-x py-3">
+          <div>
+            <a href="https://themeselection.com/demo/sneat-bootstrap-html-admin-template/landing/" target="_blank" class="footer-text fw-bolder">Sneat</a>
+            ©
+          </div>
+          <div>
+            <div class="dropdown dropup footer-link me-3">
+              <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Language
+              </button>
+              <div class="dropdown-menu dropdown-menu-end">
+                <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-dollar"></i> Francais</a>
+                <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-euro"></i> English</a>
+                <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-pound"></i> Espanol</a>
+              </div>
+            </div>
+            <a href="javascript:void(0)" class="btn btn-sm btn-outline-danger"><i class="bx bx-log-out-circle"></i> Logout</a>
+          </div>
+        </div>
+      </footer>
+
       <!-- Buy Now Button -->
       <div class="buy-now">
         <a
@@ -79,7 +120,7 @@
         >Upgrade to Pro</a>
       </div>
     </div>
-
+    
     <!-- Core JS -->
     <script src="{{ asset('/vendor/libs/jquery/jquery.js') }}"></script>
     <script src="{{ asset('/vendor/libs/popper/popper.js') }}"></script>

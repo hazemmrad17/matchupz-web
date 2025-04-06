@@ -93,6 +93,12 @@
                                             <strong>{{ player.nom }} {{ player.prenom }}</strong>
                                         </td>
                                         <td>{{ player.score|round(1) }}</td>
+                                        <td>
+                                            <a href="{{ path('app_evaluation_physique_by_joueur', {'joueurId': player.id}) }}"
+                                            class="btn btn-sm btn-outline-primary">
+                                                Voir
+                                            </a>
+                                        </td>
                                     </tr>
                                 {% endfor %}
                             </tbody>

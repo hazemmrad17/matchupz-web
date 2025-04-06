@@ -217,13 +217,22 @@ class __TwigTemplate_1270b0198753b7c289de62e7f591190d extends Template
             // line 95
             yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::round(CoreExtension::getAttribute($this->env, $this->source, $context["player"], "score", [], "any", false, false, false, 95), 1), "html", null, true);
             yield "</td>
+                                        <td>
+                                            <a href=\"";
+            // line 97
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_evaluation_physique_by_joueur", ["joueurId" => CoreExtension::getAttribute($this->env, $this->source, $context["player"], "id", [], "any", false, false, false, 97)]), "html", null, true);
+            yield "\"
+                                            class=\"btn btn-sm btn-outline-primary\">
+                                                Voir
+                                            </a>
+                                        </td>
                                     </tr>
                                 ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_key'], $context['player'], $context['_parent']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 98
+        // line 104
         yield "                            </tbody>
                         </table>
                     </div>
@@ -245,29 +254,29 @@ class __TwigTemplate_1270b0198753b7c289de62e7f591190d extends Template
                             </thead>
                             <tbody>
                                 ";
-        // line 118
+        // line 124
         $context['_parent'] = $context;
-        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["recent_evaluations"]) || array_key_exists("recent_evaluations", $context) ? $context["recent_evaluations"] : (function () { throw new RuntimeError('Variable "recent_evaluations" does not exist.', 118, $this->source); })()));
+        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["recent_evaluations"]) || array_key_exists("recent_evaluations", $context) ? $context["recent_evaluations"] : (function () { throw new RuntimeError('Variable "recent_evaluations" does not exist.', 124, $this->source); })()));
         foreach ($context['_seq'] as $context["_key"] => $context["eval"]) {
-            // line 119
+            // line 125
             yield "                                <tr>
                                     <td>";
-            // line 120
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["eval"], "joueur", [], "any", false, false, false, 120), "nom", [], "any", false, false, false, 120), "html", null, true);
+            // line 126
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["eval"], "joueur", [], "any", false, false, false, 126), "nom", [], "any", false, false, false, 126), "html", null, true);
             yield " ";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["eval"], "joueur", [], "any", false, false, false, 120), "prenom", [], "any", false, false, false, 120), "html", null, true);
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["eval"], "joueur", [], "any", false, false, false, 126), "prenom", [], "any", false, false, false, 126), "html", null, true);
             yield "</td>
                                     <td>";
-            // line 121
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["eval"], "dateEvaluation", [], "any", false, false, false, 121), "d/m/Y"), "html", null, true);
+            // line 127
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["eval"], "dateEvaluation", [], "any", false, false, false, 127), "d/m/Y"), "html", null, true);
             yield "</td>
                                     <td>
                                         ";
-            // line 123
-            $context["score"] = (((CoreExtension::getAttribute($this->env, $this->source, $context["eval"], "niveauEndurance", [], "any", false, false, false, 123) + CoreExtension::getAttribute($this->env, $this->source, $context["eval"], "forcePhysique", [], "any", false, false, false, 123)) + CoreExtension::getAttribute($this->env, $this->source, $context["eval"], "vitesse", [], "any", false, false, false, 123)) / 3);
-            // line 124
+            // line 129
+            $context["score"] = (((CoreExtension::getAttribute($this->env, $this->source, $context["eval"], "niveauEndurance", [], "any", false, false, false, 129) + CoreExtension::getAttribute($this->env, $this->source, $context["eval"], "forcePhysique", [], "any", false, false, false, 129)) + CoreExtension::getAttribute($this->env, $this->source, $context["eval"], "vitesse", [], "any", false, false, false, 129)) / 3);
+            // line 130
             yield "                                        ";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::round((isset($context["score"]) || array_key_exists("score", $context) ? $context["score"] : (function () { throw new RuntimeError('Variable "score" does not exist.', 124, $this->source); })()), 1), "html", null, true);
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::round((isset($context["score"]) || array_key_exists("score", $context) ? $context["score"] : (function () { throw new RuntimeError('Variable "score" does not exist.', 130, $this->source); })()), 1), "html", null, true);
             yield "
                                     </td>
                                 </tr>
@@ -276,7 +285,7 @@ class __TwigTemplate_1270b0198753b7c289de62e7f591190d extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_key'], $context['eval'], $context['_parent']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 128
+        // line 134
         yield "                            </tbody>
                         </table>
                     </div>
@@ -294,15 +303,15 @@ document.addEventListener('DOMContentLoaded', function() {
         type: 'line',
         data: {
             labels: ";
-        // line 144
-        yield json_encode(CoreExtension::getAttribute($this->env, $this->source, (isset($context["performance_trends"]) || array_key_exists("performance_trends", $context) ? $context["performance_trends"] : (function () { throw new RuntimeError('Variable "performance_trends" does not exist.', 144, $this->source); })()), "dates", [], "any", false, false, false, 144));
+        // line 150
+        yield json_encode(CoreExtension::getAttribute($this->env, $this->source, (isset($context["performance_trends"]) || array_key_exists("performance_trends", $context) ? $context["performance_trends"] : (function () { throw new RuntimeError('Variable "performance_trends" does not exist.', 150, $this->source); })()), "dates", [], "any", false, false, false, 150));
         yield ",
             datasets: [
                 {
                     label: 'Endurance',
                     data: ";
-        // line 148
-        yield json_encode(CoreExtension::getAttribute($this->env, $this->source, (isset($context["performance_trends"]) || array_key_exists("performance_trends", $context) ? $context["performance_trends"] : (function () { throw new RuntimeError('Variable "performance_trends" does not exist.', 148, $this->source); })()), "endurance", [], "any", false, false, false, 148));
+        // line 154
+        yield json_encode(CoreExtension::getAttribute($this->env, $this->source, (isset($context["performance_trends"]) || array_key_exists("performance_trends", $context) ? $context["performance_trends"] : (function () { throw new RuntimeError('Variable "performance_trends" does not exist.', 154, $this->source); })()), "endurance", [], "any", false, false, false, 154));
         yield ",
                     borderColor: 'rgba(54, 162, 235, 1)',
                     backgroundColor: 'rgba(54, 162, 235, 0.1)',
@@ -311,8 +320,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 {
                     label: 'Force',
                     data: ";
-        // line 155
-        yield json_encode(CoreExtension::getAttribute($this->env, $this->source, (isset($context["performance_trends"]) || array_key_exists("performance_trends", $context) ? $context["performance_trends"] : (function () { throw new RuntimeError('Variable "performance_trends" does not exist.', 155, $this->source); })()), "force", [], "any", false, false, false, 155));
+        // line 161
+        yield json_encode(CoreExtension::getAttribute($this->env, $this->source, (isset($context["performance_trends"]) || array_key_exists("performance_trends", $context) ? $context["performance_trends"] : (function () { throw new RuntimeError('Variable "performance_trends" does not exist.', 161, $this->source); })()), "force", [], "any", false, false, false, 161));
         yield ",
                     borderColor: 'rgba(255, 99, 132, 1)',
                     backgroundColor: 'rgba(255, 99, 132, 0.1)',
@@ -321,8 +330,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 {
                     label: 'Vitesse',
                     data: ";
-        // line 162
-        yield json_encode(CoreExtension::getAttribute($this->env, $this->source, (isset($context["performance_trends"]) || array_key_exists("performance_trends", $context) ? $context["performance_trends"] : (function () { throw new RuntimeError('Variable "performance_trends" does not exist.', 162, $this->source); })()), "vitesse", [], "any", false, false, false, 162));
+        // line 168
+        yield json_encode(CoreExtension::getAttribute($this->env, $this->source, (isset($context["performance_trends"]) || array_key_exists("performance_trends", $context) ? $context["performance_trends"] : (function () { throw new RuntimeError('Variable "performance_trends" does not exist.', 168, $this->source); })()), "vitesse", [], "any", false, false, false, 168));
         yield ",
                     borderColor: 'rgba(75, 192, 192, 1)',
                     backgroundColor: 'rgba(75, 192, 192, 0.1)',
@@ -373,7 +382,7 @@ document.addEventListener('DOMContentLoaded', function() {
      */
     public function getDebugInfo(): array
     {
-        return array (  325 => 162,  315 => 155,  305 => 148,  298 => 144,  280 => 128,  269 => 124,  267 => 123,  262 => 121,  256 => 120,  253 => 119,  249 => 118,  227 => 98,  218 => 95,  211 => 93,  207 => 91,  203 => 90,  166 => 56,  151 => 44,  136 => 32,  121 => 20,  115 => 19,  100 => 6,  87 => 5,  64 => 3,  41 => 1,);
+        return array (  334 => 168,  324 => 161,  314 => 154,  307 => 150,  289 => 134,  278 => 130,  276 => 129,  271 => 127,  265 => 126,  262 => 125,  258 => 124,  236 => 104,  223 => 97,  218 => 95,  211 => 93,  207 => 91,  203 => 90,  166 => 56,  151 => 44,  136 => 32,  121 => 20,  115 => 19,  100 => 6,  87 => 5,  64 => 3,  41 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -473,6 +482,12 @@ document.addEventListener('DOMContentLoaded', function() {
                                             <strong>{{ player.nom }} {{ player.prenom }}</strong>
                                         </td>
                                         <td>{{ player.score|round(1) }}</td>
+                                        <td>
+                                            <a href=\"{{ path('app_evaluation_physique_by_joueur', {'joueurId': player.id}) }}\"
+                                            class=\"btn btn-sm btn-outline-primary\">
+                                                Voir
+                                            </a>
+                                        </td>
                                     </tr>
                                 {% endfor %}
                             </tbody>

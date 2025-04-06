@@ -9,8 +9,8 @@
     <parameter key="kernel.runtime_mode.cli">%env(not:default:kernel.runtime_mode.web:)%</parameter>
     <parameter key="kernel.runtime_mode.worker">%env(bool:default::key:worker:default:kernel.runtime_mode:)%</parameter>
     <parameter key="kernel.debug">true</parameter>
-    <parameter key="kernel.build_dir">C:\Users\Hazem Mrad\Desktop\MatchupZ-Web-joueur-espace\var\cache\dev</parameter>
-    <parameter key="kernel.cache_dir">C:\Users\Hazem Mrad\Desktop\MatchupZ-Web-joueur-espace\var\cache\dev</parameter>
+    <parameter key="kernel.build_dir">C:/Users/Hazem Mrad/Desktop/MatchupZ-Web-joueur-espace/var/cache/dev</parameter>
+    <parameter key="kernel.cache_dir">C:/Users/Hazem Mrad/Desktop/MatchupZ-Web-joueur-espace/var/cache/dev</parameter>
     <parameter key="kernel.logs_dir">C:\Users\Hazem Mrad\Desktop\MatchupZ-Web-joueur-espace\var\log</parameter>
     <parameter key="kernel.bundles" type="collection">
       <parameter key="FrameworkBundle">Symfony\Bundle\FrameworkBundle\FrameworkBundle</parameter>
@@ -79,6 +79,8 @@
     <parameter key="kernel.charset">UTF-8</parameter>
     <parameter key="kernel.container_class">App_KernelDevDebugContainer</parameter>
     <parameter key="profile_pictures_directory">C:\Users\Hazem Mrad\Desktop\MatchupZ-Web-joueur-espace/public/uploads/profile_pictures</parameter>
+    <parameter key="club_photos_directory">C:\Users\Hazem Mrad\Desktop\MatchupZ-Web-joueur-espace/public/uploads/club_photos</parameter>
+    <parameter key="photos_directory">C:\Users\Hazem Mrad\Desktop\MatchupZ-Web-joueur-espace/public/uploads/photos</parameter>
     <parameter key="event_dispatcher.event_aliases" type="collection">
       <parameter key="Symfony\Component\Console\Event\ConsoleCommandEvent">console.command</parameter>
       <parameter key="Symfony\Component\Console\Event\ConsoleErrorEvent">console.error</parameter>
@@ -116,15 +118,15 @@
     <parameter key="translator.logging">false</parameter>
     <parameter key="translator.default_path">C:\Users\Hazem Mrad\Desktop\MatchupZ-Web-joueur-espace/translations</parameter>
     <parameter key="debug.error_handler.throw_at">-1</parameter>
-    <parameter key="debug.container.dump">C:\Users\Hazem Mrad\Desktop\MatchupZ-Web-joueur-espace\var\cache\dev/App_KernelDevDebugContainer.xml</parameter>
+    <parameter key="debug.container.dump">C:/Users/Hazem Mrad/Desktop/MatchupZ-Web-joueur-espace/var/cache/dev/App_KernelDevDebugContainer.xml</parameter>
     <parameter key="router.request_context.host">localhost</parameter>
     <parameter key="router.request_context.scheme">http</parameter>
     <parameter key="router.request_context.base_url"></parameter>
     <parameter key="router.resource">kernel::loadRoutes</parameter>
-    <parameter key="router.cache_dir">C:\Users\Hazem Mrad\Desktop\MatchupZ-Web-joueur-espace\var\cache\dev</parameter>
+    <parameter key="router.cache_dir">C:/Users/Hazem Mrad/Desktop/MatchupZ-Web-joueur-espace/var/cache/dev</parameter>
     <parameter key="request_listener.http_port">80</parameter>
     <parameter key="request_listener.https_port">443</parameter>
-    <parameter key="serializer.mapping.cache.file">C:\Users\Hazem Mrad\Desktop\MatchupZ-Web-joueur-espace\var\cache\dev/serialization.php</parameter>
+    <parameter key="serializer.mapping.cache.file">C:/Users/Hazem Mrad/Desktop/MatchupZ-Web-joueur-espace/var/cache/dev/serialization.php</parameter>
     <parameter key="cache.prefix.seed">_C:\Users\Hazem Mrad\Desktop\MatchupZ-Web-joueur-espace.App_KernelDevDebugContainer</parameter>
     <parameter key="session.metadata.storage_key">_sf2_meta</parameter>
     <parameter key="session.storage.options" type="collection">
@@ -138,11 +140,11 @@
     <parameter key="session.metadata.update_threshold">0</parameter>
     <parameter key="form.type_extension.csrf.enabled">true</parameter>
     <parameter key="form.type_extension.csrf.field_name">_token</parameter>
-    <parameter key="validator.mapping.cache.file">C:\Users\Hazem Mrad\Desktop\MatchupZ-Web-joueur-espace\var\cache\dev/validation.php</parameter>
+    <parameter key="validator.mapping.cache.file">C:/Users/Hazem Mrad/Desktop/MatchupZ-Web-joueur-espace/var/cache/dev/validation.php</parameter>
     <parameter key="validator.translation_domain">validators</parameter>
     <parameter key="profiler_listener.only_exceptions">false</parameter>
     <parameter key="profiler_listener.only_main_requests">false</parameter>
-    <parameter key="profiler.storage.dsn">file:C:\Users\Hazem Mrad\Desktop\MatchupZ-Web-joueur-espace\var\cache\dev/profiler</parameter>
+    <parameter key="profiler.storage.dsn">file:C:/Users/Hazem Mrad/Desktop/MatchupZ-Web-joueur-espace/var/cache/dev/profiler</parameter>
     <parameter key="doctrine.dbal.configuration.class">Doctrine\DBAL\Configuration</parameter>
     <parameter key="doctrine.data_collector.class">Doctrine\Bundle\DoctrineBundle\DataCollector\DoctrineDataCollector</parameter>
     <parameter key="doctrine.dbal.connection.event_manager.class">Symfony\Bridge\Doctrine\ContainerAwareEventManager</parameter>
@@ -212,7 +214,7 @@
     <parameter key="doctrine.orm.second_level_cache.regions_configuration.class">Doctrine\ORM\Cache\RegionsConfiguration</parameter>
     <parameter key="doctrine.orm.auto_generate_proxy_classes">true</parameter>
     <parameter key="doctrine.orm.enable_lazy_ghost_objects">true</parameter>
-    <parameter key="doctrine.orm.proxy_dir">C:\Users\Hazem Mrad\Desktop\MatchupZ-Web-joueur-espace\var\cache\dev/doctrine/orm/Proxies</parameter>
+    <parameter key="doctrine.orm.proxy_dir">C:/Users/Hazem Mrad/Desktop/MatchupZ-Web-joueur-espace/var/cache/dev/doctrine/orm/Proxies</parameter>
     <parameter key="doctrine.orm.proxy_namespace">Proxies</parameter>
     <parameter key="doctrine.migrations.preferred_em">null</parameter>
     <parameter key="doctrine.migrations.preferred_connection">null</parameter>
@@ -385,6 +387,13 @@
         <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\JoueurController"/>
       </call>
     </service>
+    <service id="App\Controller\PerformanceJoueurController" class="App\Controller\PerformanceJoueurController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="container.service_subscriber"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\PerformanceJoueurController"/>
+      </call>
+    </service>
     <service id="App\Controller\SportController" class="App\Controller\SportController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
@@ -406,6 +415,9 @@
       <tag name="form.type"/>
     </service>
     <service id="App\Form\JoueurType" class="App\Form\JoueurType" autowire="true" autoconfigure="true">
+      <tag name="form.type"/>
+    </service>
+    <service id="App\Form\PerformanceJoueurType" class="App\Form\PerformanceJoueurType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
     <service id="App\Form\SportType" class="App\Form\SportType" autowire="true" autoconfigure="true">
@@ -506,7 +518,7 @@
     </service>
     <service id="argument_resolver.service" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
       <tag priority="-50" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">controller.argument_value_resolver</tag>
-      <argument type="service" id=".service_locator.KnhbmVD"/>
+      <argument type="service" id=".service_locator.7TogeXC"/>
     </service>
     <service id="argument_resolver.default" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">
       <tag priority="-100" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">controller.argument_value_resolver</tag>
@@ -589,7 +601,7 @@
       </argument>
     </service>
     <service id="http_cache.store" class="Symfony\Component\HttpKernel\HttpCache\Store">
-      <argument>C:\Users\Hazem Mrad\Desktop\MatchupZ-Web-joueur-espace\var\cache\dev/http_cache</argument>
+      <argument>C:/Users/Hazem Mrad/Desktop/MatchupZ-Web-joueur-espace/var/cache/dev/http_cache</argument>
     </service>
     <service id="url_helper" class="Symfony\Component\HttpFoundation\UrlHelper">
       <argument type="service" id="request_stack"/>
@@ -599,7 +611,7 @@
       <tag name="container.no_preload"/>
       <argument type="tagged_iterator" tag="kernel.cache_warmer"/>
       <argument>true</argument>
-      <argument>C:\Users\Hazem Mrad\Desktop\MatchupZ-Web-joueur-espace\var\cache\dev/App_KernelDevDebugContainerDeprecations.log</argument>
+      <argument>C:/Users/Hazem Mrad/Desktop/MatchupZ-Web-joueur-espace/var/cache/dev/App_KernelDevDebugContainerDeprecations.log</argument>
     </service>
     <service id="cache_clearer" class="Symfony\Component\HttpKernel\CacheClearer\ChainCacheClearer">
       <argument type="tagged_iterator" tag="kernel.cache_clearer"/>
@@ -1431,6 +1443,7 @@
         <argument>App\Form\EvaluationPhysiqueType</argument>
         <argument>App\Form\HistoriqueClubType</argument>
         <argument>App\Form\JoueurType</argument>
+        <argument>App\Form\PerformanceJoueurType</argument>
         <argument>App\Form\SportType</argument>
         <argument>Symfony\Component\Form\Extension\Core\Type\FormType</argument>
         <argument>Symfony\Component\Form\Extension\Core\Type\ChoiceType</argument>
@@ -1594,7 +1607,7 @@
       <argument></argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>C:\Users\Hazem Mrad\Desktop\MatchupZ-Web-joueur-espace\var\cache\dev/pools/system</argument>
+      <argument>C:/Users/Hazem Mrad/Desktop/MatchupZ-Web-joueur-espace/var/cache/dev/pools/system</argument>
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
@@ -1613,7 +1626,7 @@
       <tag name="monolog.logger" channel="cache"/>
       <argument></argument>
       <argument>0</argument>
-      <argument>C:\Users\Hazem Mrad\Desktop\MatchupZ-Web-joueur-espace\var\cache\dev/pools/app</argument>
+      <argument>C:/Users/Hazem Mrad/Desktop/MatchupZ-Web-joueur-espace/var/cache/dev/pools/app</argument>
       <argument type="service" id="cache.default_marshaller" on-invalid="ignore"/>
       <call method="setLogger">
         <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
@@ -1782,7 +1795,7 @@
     <service id="asset_mapper.cached_mapped_asset_factory" class="Symfony\Component\AssetMapper\Factory\CachedMappedAssetFactory">
       <tag name="container.decorator" id="asset_mapper.mapped_asset_factory" inner="asset_mapper.cached_mapped_asset_factory.inner"/>
       <argument type="service" id="asset_mapper.cached_mapped_asset_factory.inner"/>
-      <argument>C:\Users\Hazem Mrad\Desktop\MatchupZ-Web-joueur-espace\var\cache\dev/asset_mapper</argument>
+      <argument>C:/Users/Hazem Mrad/Desktop/MatchupZ-Web-joueur-espace/var/cache/dev/asset_mapper</argument>
       <argument>true</argument>
     </service>
     <service id="asset_mapper.repository" class="Symfony\Component\AssetMapper\AssetMapperRepository">
@@ -2146,7 +2159,7 @@
         </argument>
       </argument>
       <argument type="collection">
-        <argument key="cache_dir">C:\Users\Hazem Mrad\Desktop\MatchupZ-Web-joueur-espace\var\cache\dev/translations</argument>
+        <argument key="cache_dir">C:/Users/Hazem Mrad/Desktop/MatchupZ-Web-joueur-espace/var/cache/dev/translations</argument>
         <argument key="debug">true</argument>
         <argument key="resource_files" type="collection">
           <argument key="af" type="collection">
@@ -3400,7 +3413,7 @@
     </service>
     <service id="argument_resolver.not_tagged_controller" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
       <tag name="controller.argument_value_resolver" priority="-200"/>
-      <argument type="service" id=".service_locator.KnhbmVD"/>
+      <argument type="service" id=".service_locator.7TogeXC"/>
     </service>
     <service id="debug.log_processor" class="Symfony\Bridge\Monolog\Processor\DebugProcessor">
       <tag name="kernel.reset" method="reset"/>
@@ -3503,7 +3516,7 @@
       <argument type="service" id=".service_locator.bN.V_Nq.router.default"/>
       <argument>kernel::loadRoutes</argument>
       <argument type="collection">
-        <argument key="cache_dir">C:\Users\Hazem Mrad\Desktop\MatchupZ-Web-joueur-espace\var\cache\dev</argument>
+        <argument key="cache_dir">C:/Users/Hazem Mrad/Desktop/MatchupZ-Web-joueur-espace/var/cache/dev</argument>
         <argument key="debug">true</argument>
         <argument key="generator_class">Symfony\Component\Routing\Generator\CompiledUrlGenerator</argument>
         <argument key="generator_dumper_class">Symfony\Component\Routing\Generator\Dumper\CompiledUrlGeneratorDumper</argument>
@@ -3682,10 +3695,10 @@
           </service>
         </argument>
       </argument>
-      <argument>C:\Users\Hazem Mrad\Desktop\MatchupZ-Web-joueur-espace\var\cache\dev/serialization.php</argument>
+      <argument>C:/Users/Hazem Mrad/Desktop/MatchupZ-Web-joueur-espace/var/cache/dev/serialization.php</argument>
     </service>
     <service id="serializer.mapping.cache.symfony" class="Psr\Cache\CacheItemPoolInterface">
-      <argument>C:\Users\Hazem Mrad\Desktop\MatchupZ-Web-joueur-espace\var\cache\dev/serialization.php</argument>
+      <argument>C:/Users/Hazem Mrad/Desktop/MatchupZ-Web-joueur-espace/var/cache/dev/serialization.php</argument>
       <argument type="service" id="cache.serializer"/>
       <factory class="Symfony\Component\Cache\Adapter\PhpArrayAdapter" method="create"/>
     </service>
@@ -3821,7 +3834,7 @@
       <argument>true</argument>
     </service>
     <service id="session.storage.factory.mock_file" class="Symfony\Component\HttpFoundation\Session\Storage\MockFileSessionStorageFactory">
-      <argument>C:\Users\Hazem Mrad\Desktop\MatchupZ-Web-joueur-espace\var\cache\dev/sessions</argument>
+      <argument>C:/Users/Hazem Mrad/Desktop/MatchupZ-Web-joueur-espace/var/cache/dev/sessions</argument>
       <argument>MOCKSESSID</argument>
       <argument type="service">
         <service class="Symfony\Component\HttpFoundation\Session\Storage\MetadataBag">
@@ -3889,7 +3902,7 @@
       <argument type="service" id="form.registry"/>
     </service>
     <service id="form.extension" class="Symfony\Component\Form\Extension\DependencyInjection\DependencyInjectionExtension">
-      <argument type="service" id=".service_locator.qLHQyHj"/>
+      <argument type="service" id=".service_locator.PVA9TQH"/>
       <argument type="collection">
         <argument key="Symfony\Component\Form\Extension\Core\Type\FormType" type="iterator">
           <argument type="service" id="form.type_extension.form.transformation_failure_handling"/>
@@ -4026,10 +4039,10 @@
     <service id="validator.mapping.cache_warmer" class="Symfony\Bundle\FrameworkBundle\CacheWarmer\ValidatorCacheWarmer">
       <tag name="kernel.cache_warmer"/>
       <argument type="service" id="validator.builder"/>
-      <argument>C:\Users\Hazem Mrad\Desktop\MatchupZ-Web-joueur-espace\var\cache\dev/validation.php</argument>
+      <argument>C:/Users/Hazem Mrad/Desktop/MatchupZ-Web-joueur-espace/var/cache/dev/validation.php</argument>
     </service>
     <service id="validator.mapping.cache.adapter" class="Symfony\Component\Cache\Adapter\PhpArrayAdapter" constructor="create">
-      <argument>C:\Users\Hazem Mrad\Desktop\MatchupZ-Web-joueur-espace\var\cache\dev/validation.php</argument>
+      <argument>C:/Users/Hazem Mrad/Desktop/MatchupZ-Web-joueur-espace/var/cache/dev/validation.php</argument>
       <argument type="service" id="cache.validator"/>
     </service>
     <service id="validator.validator_factory" class="Symfony\Component\Validator\ContainerConstraintValidatorFactory">
@@ -4689,7 +4702,7 @@
       </call>
     </service>
     <service id="profiler.storage" class="Symfony\Component\HttpKernel\Profiler\FileProfilerStorage">
-      <argument>file:C:\Users\Hazem Mrad\Desktop\MatchupZ-Web-joueur-espace\var\cache\dev/profiler</argument>
+      <argument>file:C:/Users/Hazem Mrad/Desktop/MatchupZ-Web-joueur-espace/var/cache/dev/profiler</argument>
     </service>
     <service id="profiler_listener" class="Symfony\Component\HttpKernel\EventListener\ProfilerListener">
       <tag name="kernel.event_subscriber"/>
@@ -4754,7 +4767,7 @@
       <tag name="monolog.logger" channel="profiler"/>
       <tag name="data_collector" template="@WebProfiler/Collector/logger.html.twig" id="logger" priority="300"/>
       <argument type="service" id="monolog.logger.profiler" on-invalid="ignore"/>
-      <argument>C:\Users\Hazem Mrad\Desktop\MatchupZ-Web-joueur-espace\var\cache\dev/App_KernelDevDebugContainer</argument>
+      <argument>C:/Users/Hazem Mrad/Desktop/MatchupZ-Web-joueur-espace/var/cache/dev/App_KernelDevDebugContainer</argument>
       <argument type="service" id=".virtual_request_stack" on-invalid="ignore"/>
     </service>
     <service id="data_collector.time" class="Symfony\Component\HttpKernel\DataCollector\TimeDataCollector">
@@ -5328,7 +5341,7 @@
         <argument type="service" id=".doctrine.orm.default_metadata_driver"/>
       </call>
       <call method="setProxyDir">
-        <argument>C:\Users\Hazem Mrad\Desktop\MatchupZ-Web-joueur-espace\var\cache\dev/doctrine/orm/Proxies</argument>
+        <argument>C:/Users/Hazem Mrad/Desktop/MatchupZ-Web-joueur-espace/var/cache/dev/doctrine/orm/Proxies</argument>
       </call>
       <call method="setProxyNamespace">
         <argument>Proxies</argument>
@@ -5746,7 +5759,7 @@
       <argument type="service" id="twig.loader.native_filesystem"/>
       <argument type="collection">
         <argument key="autoescape">name</argument>
-        <argument key="cache">C:\Users\Hazem Mrad\Desktop\MatchupZ-Web-joueur-espace\var\cache\dev/twig</argument>
+        <argument key="cache">C:/Users/Hazem Mrad/Desktop/MatchupZ-Web-joueur-espace/var/cache/dev/twig</argument>
         <argument key="charset">UTF-8</argument>
         <argument key="debug">true</argument>
         <argument key="strict_variables">true</argument>
@@ -7153,6 +7166,9 @@
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\JoueurController" class="App\Controller\JoueurController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\JoueurController" class="App\Controller\JoueurController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\JoueurController" class="App\Controller\JoueurController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\PerformanceJoueurController" class="App\Controller\PerformanceJoueurController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\PerformanceJoueurController" class="App\Controller\PerformanceJoueurController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\PerformanceJoueurController" class="App\Controller\PerformanceJoueurController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\SportController" class="App\Controller\SportController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\SportController" class="App\Controller\SportController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\SportController" class="App\Controller\SportController" autowire="true" autoconfigure="true" abstract="true"/>
@@ -7164,6 +7180,8 @@
     <service id=".abstract.instanceof.App\Form\HistoriqueClubType" class="App\Form\HistoriqueClubType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\JoueurType" class="App\Form\JoueurType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\JoueurType" class="App\Form\JoueurType" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\PerformanceJoueurType" class="App\Form\PerformanceJoueurType" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Form\PerformanceJoueurType" class="App\Form\PerformanceJoueurType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\SportType" class="App\Form\SportType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\SportType" class="App\Form\SportType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\AbonnementRepository" class="App\Repository\AbonnementRepository" autowire="true" abstract="true"/>
@@ -7703,6 +7721,25 @@
       <tag name="container.service_locator"/>
       <argument type="collection"/>
     </service>
+    <service id=".service_locator.CrEgygo" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="repository" type="service_closure" id="App\Repository\PerformanceJoueurRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.z4JrMru" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="performanceJoueur" type="service_closure" id=".errored..service_locator.z4JrMru.App\Entity\PerformanceJoueur"/>
+      </argument>
+    </service>
+    <service id=".service_locator.PNlbJGO" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="entityManager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
+        <argument key="performanceJoueur" type="service_closure" id=".errored..service_locator.PNlbJGO.App\Entity\PerformanceJoueur"/>
+      </argument>
+    </service>
     <service id=".service_locator.jpL5_4q" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -7726,7 +7763,7 @@
         <argument key="entityManager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
       </argument>
     </service>
-    <service id=".service_locator.KnhbmVD" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.7TogeXC" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\ClubController::delete" type="service_closure" id=".service_locator.GbJZUn8"/>
@@ -7750,6 +7787,12 @@
         <argument key="App\Controller\HistoriqueClubController::show" type="service_closure" id=".service_locator.4E2JJj5"/>
         <argument key="App\Controller\HistoriqueClubController::stats" type="service_closure" id=".service_locator.ZE9R63e"/>
         <argument key="App\Controller\JoueurController::index" type="service_closure" id=".service_locator.i0N9PQM"/>
+        <argument key="App\Controller\PerformanceJoueurController::delete" type="service_closure" id=".service_locator.PNlbJGO"/>
+        <argument key="App\Controller\PerformanceJoueurController::edit" type="service_closure" id=".service_locator.PNlbJGO"/>
+        <argument key="App\Controller\PerformanceJoueurController::index" type="service_closure" id=".service_locator.CrEgygo"/>
+        <argument key="App\Controller\PerformanceJoueurController::new" type="service_closure" id=".service_locator.CsMkqUa"/>
+        <argument key="App\Controller\PerformanceJoueurController::show" type="service_closure" id=".service_locator.z4JrMru"/>
+        <argument key="App\Controller\PerformanceJoueurController::stats" type="service_closure" id=".service_locator.CrEgygo"/>
         <argument key="App\Controller\SportController::delete" type="service_closure" id=".service_locator.geVFa8t"/>
         <argument key="App\Controller\SportController::edit" type="service_closure" id=".service_locator.geVFa8t"/>
         <argument key="App\Controller\SportController::index" type="service_closure" id=".service_locator.jpL5_4q"/>
@@ -7780,6 +7823,12 @@
         <argument key="App\Controller\HistoriqueClubController:show" type="service_closure" id=".service_locator.4E2JJj5"/>
         <argument key="App\Controller\HistoriqueClubController:stats" type="service_closure" id=".service_locator.ZE9R63e"/>
         <argument key="App\Controller\JoueurController:index" type="service_closure" id=".service_locator.i0N9PQM"/>
+        <argument key="App\Controller\PerformanceJoueurController:delete" type="service_closure" id=".service_locator.PNlbJGO"/>
+        <argument key="App\Controller\PerformanceJoueurController:edit" type="service_closure" id=".service_locator.PNlbJGO"/>
+        <argument key="App\Controller\PerformanceJoueurController:index" type="service_closure" id=".service_locator.CrEgygo"/>
+        <argument key="App\Controller\PerformanceJoueurController:new" type="service_closure" id=".service_locator.CsMkqUa"/>
+        <argument key="App\Controller\PerformanceJoueurController:show" type="service_closure" id=".service_locator.z4JrMru"/>
+        <argument key="App\Controller\PerformanceJoueurController:stats" type="service_closure" id=".service_locator.CrEgygo"/>
         <argument key="App\Controller\SportController:delete" type="service_closure" id=".service_locator.geVFa8t"/>
         <argument key="App\Controller\SportController:edit" type="service_closure" id=".service_locator.geVFa8t"/>
         <argument key="App\Controller\SportController:index" type="service_closure" id=".service_locator.jpL5_4q"/>
@@ -7946,13 +7995,14 @@
       <argument type="service" id="argument_resolver.query_parameter_value_resolver"/>
       <argument type="service" id="debug.stopwatch"/>
     </service>
-    <service id=".service_locator.qLHQyHj" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.PVA9TQH" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Form\ClubType" type="service_closure" id="App\Form\ClubType"/>
         <argument key="App\Form\EvaluationPhysiqueType" type="service_closure" id="App\Form\EvaluationPhysiqueType"/>
         <argument key="App\Form\HistoriqueClubType" type="service_closure" id="App\Form\HistoriqueClubType"/>
         <argument key="App\Form\JoueurType" type="service_closure" id="App\Form\JoueurType"/>
+        <argument key="App\Form\PerformanceJoueurType" type="service_closure" id="App\Form\PerformanceJoueurType"/>
         <argument key="App\Form\SportType" type="service_closure" id="App\Form\SportType"/>
         <argument key="Symfony\Bridge\Doctrine\Form\Type\EntityType" type="service_closure" id="form.type.entity"/>
         <argument key="Symfony\Component\Form\Extension\Core\Type\ChoiceType" type="service_closure" id="form.type.choice"/>
@@ -8440,6 +8490,12 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.O2p6Lk7" method="withContext"/>
     </service>
+    <service id=".service_locator.O2p6Lk7.App\Controller\PerformanceJoueurController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\PerformanceJoueurController"/>
+      <argument>App\Controller\PerformanceJoueurController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.O2p6Lk7" method="withContext"/>
+    </service>
     <service id=".service_locator.O2p6Lk7.App\Controller\SportController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\SportController"/>
       <argument>App\Controller\SportController</argument>
@@ -8624,6 +8680,7 @@
           <argument>App\Controller\EvaluationPhysiqueController</argument>
           <argument>App\Controller\HistoriqueClubController</argument>
           <argument>App\Controller\JoueurController</argument>
+          <argument>App\Controller\PerformanceJoueurController</argument>
           <argument>App\Controller\SportController</argument>
           <argument>Doctrine\Bundle\DoctrineBundle\Controller\ProfilerController</argument>
         </argument>
@@ -8837,6 +8894,12 @@
     </service>
     <service id=".errored..service_locator.0AreAVX.App\Entity\HistoriqueClub" class="App\Entity\HistoriqueClub">
       <tag name="container.error" message="Cannot autowire service &quot;.service_locator.0AreAVX&quot;: it needs an instance of &quot;App\Entity\HistoriqueClub&quot; but this type has been excluded in &quot;config/services.yaml&quot;."/>
+    </service>
+    <service id=".errored..service_locator.z4JrMru.App\Entity\PerformanceJoueur" class="App\Entity\PerformanceJoueur">
+      <tag name="container.error" message="Cannot autowire service &quot;.service_locator.z4JrMru&quot;: it needs an instance of &quot;App\Entity\PerformanceJoueur&quot; but this type has been excluded in &quot;config/services.yaml&quot;."/>
+    </service>
+    <service id=".errored..service_locator.PNlbJGO.App\Entity\PerformanceJoueur" class="App\Entity\PerformanceJoueur">
+      <tag name="container.error" message="Cannot autowire service &quot;.service_locator.PNlbJGO&quot;: it needs an instance of &quot;App\Entity\PerformanceJoueur&quot; but this type has been excluded in &quot;config/services.yaml&quot;."/>
     </service>
     <service id=".console.command.about.lazy" class="Symfony\Component\Console\Command\LazyCommand">
       <argument>about</argument>
@@ -9756,7 +9819,7 @@
     <service id="cache.app.recorder_inner" class="Symfony\Component\Cache\Adapter\FilesystemAdapter">
       <argument>eOznRGp3r4</argument>
       <argument>0</argument>
-      <argument>C:\Users\Hazem Mrad\Desktop\MatchupZ-Web-joueur-espace\var\cache\dev/pools/app</argument>
+      <argument>C:/Users/Hazem Mrad/Desktop/MatchupZ-Web-joueur-espace/var/cache/dev/pools/app</argument>
       <argument type="service" id="cache.default_marshaller" on-invalid="ignore"/>
       <call method="setLogger">
         <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
@@ -9766,7 +9829,7 @@
       <argument>qaftoj+k8-</argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>C:\Users\Hazem Mrad\Desktop\MatchupZ-Web-joueur-espace\var\cache\dev/pools/system</argument>
+      <argument>C:/Users/Hazem Mrad/Desktop/MatchupZ-Web-joueur-espace/var/cache/dev/pools/system</argument>
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
@@ -9774,7 +9837,7 @@
       <argument>vWHyyhwVee</argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>C:\Users\Hazem Mrad\Desktop\MatchupZ-Web-joueur-espace\var\cache\dev/pools/system</argument>
+      <argument>C:/Users/Hazem Mrad/Desktop/MatchupZ-Web-joueur-espace/var/cache/dev/pools/system</argument>
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
@@ -9782,7 +9845,7 @@
       <argument>+gMcdFWCla</argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>C:\Users\Hazem Mrad\Desktop\MatchupZ-Web-joueur-espace\var\cache\dev/pools/system</argument>
+      <argument>C:/Users/Hazem Mrad/Desktop/MatchupZ-Web-joueur-espace/var/cache/dev/pools/system</argument>
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
@@ -9790,7 +9853,7 @@
       <argument>O+hcxZL2x+</argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>C:\Users\Hazem Mrad\Desktop\MatchupZ-Web-joueur-espace\var\cache\dev/pools/system</argument>
+      <argument>C:/Users/Hazem Mrad/Desktop/MatchupZ-Web-joueur-espace/var/cache/dev/pools/system</argument>
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
@@ -9798,7 +9861,7 @@
       <argument>4xhMQuEl1N</argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>C:\Users\Hazem Mrad\Desktop\MatchupZ-Web-joueur-espace\var\cache\dev/pools/system</argument>
+      <argument>C:/Users/Hazem Mrad/Desktop/MatchupZ-Web-joueur-espace/var/cache/dev/pools/system</argument>
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
@@ -9806,14 +9869,14 @@
       <argument>2oz7kQ94lm</argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>C:\Users\Hazem Mrad\Desktop\MatchupZ-Web-joueur-espace\var\cache\dev/pools/system</argument>
+      <argument>C:/Users/Hazem Mrad/Desktop/MatchupZ-Web-joueur-espace/var/cache/dev/pools/system</argument>
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
     <service id="cache.messenger.restart_workers_signal.recorder_inner" class="Symfony\Component\Cache\Adapter\FilesystemAdapter">
       <argument>qQhuhocKrG</argument>
       <argument>0</argument>
-      <argument>C:\Users\Hazem Mrad\Desktop\MatchupZ-Web-joueur-espace\var\cache\dev/pools/app</argument>
+      <argument>C:/Users/Hazem Mrad/Desktop/MatchupZ-Web-joueur-espace/var/cache/dev/pools/app</argument>
       <argument type="service" id="cache.default_marshaller" on-invalid="ignore"/>
       <call method="setLogger">
         <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
@@ -9823,7 +9886,7 @@
       <argument>fcXe9Eqdih</argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>C:\Users\Hazem Mrad\Desktop\MatchupZ-Web-joueur-espace\var\cache\dev/pools/system</argument>
+      <argument>C:/Users/Hazem Mrad/Desktop/MatchupZ-Web-joueur-espace/var/cache/dev/pools/system</argument>
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
@@ -9833,7 +9896,7 @@
       <argument>cduShrB8fc</argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>C:\Users\Hazem Mrad\Desktop\MatchupZ-Web-joueur-espace\var\cache\dev/pools/system</argument>
+      <argument>C:/Users/Hazem Mrad/Desktop/MatchupZ-Web-joueur-espace/var/cache/dev/pools/system</argument>
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
@@ -9841,7 +9904,7 @@
       <argument>-KCLt5jg8Q</argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>C:\Users\Hazem Mrad\Desktop\MatchupZ-Web-joueur-espace\var\cache\dev/pools/system</argument>
+      <argument>C:/Users/Hazem Mrad/Desktop/MatchupZ-Web-joueur-espace/var/cache/dev/pools/system</argument>
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
@@ -10023,7 +10086,7 @@
     <service id="Psr\Log\LoggerInterface" alias="monolog.logger"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.w7.f4fT" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.KnhbmVD"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.7TogeXC"/>
     <service id="doctrine.id_generator_locator" alias=".service_locator.KLVvNIq"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface $requestLogger" alias="monolog.logger.request"/>
@@ -10049,11 +10112,12 @@
     <service id=".service_locator.bJ.4HC5" alias=".service_locator.w7.f4fT"/>
     <service id=".service_locator.Naq5WmR" alias=".service_locator.n8st8m4"/>
     <service id=".service_locator._kIBHZW" alias=".service_locator.0AreAVX"/>
+    <service id=".service_locator.IcIxi4." alias=".service_locator.PNlbJGO"/>
     <service id=".service_locator.vYOHL0D" alias=".service_locator.jpL5_4q"/>
     <service id=".service_locator.X9gG0Wi" alias=".service_locator.geVFa8t"/>
-    <service id=".service_locator.36yodi8" alias=".service_locator.KnhbmVD"/>
+    <service id=".service_locator.RKMS0XD" alias=".service_locator.7TogeXC"/>
     <service id=".service_locator.BFrsqsn" alias=".service_locator.F9PKc.7"/>
-    <service id=".service_locator.rbVlzUp" alias=".service_locator.qLHQyHj"/>
+    <service id=".service_locator.NbmkIfc" alias=".service_locator.PVA9TQH"/>
     <service id=".service_locator.XtmiKbi" alias=".service_locator.MfxSDRP"/>
     <service id=".service_locator.O24_MAy" alias=".service_locator.yY.p4P7"/>
     <service id=".service_locator.jUv.zyj" alias=".service_locator.O2p6Lk7"/>
@@ -10087,6 +10151,9 @@
     <service id=".service_locator.MB8hsSd" alias=".service_locator.4E2JJj5"/>
     <service id=".service_locator.jV9c70C" alias=".service_locator.0AreAVX"/>
     <service id=".service_locator.m9dk8kD" alias=".service_locator.i0N9PQM"/>
+    <service id=".service_locator.LXe3GOx" alias=".service_locator.CrEgygo"/>
+    <service id=".service_locator.5TBLhhJ" alias=".service_locator.z4JrMru"/>
+    <service id=".service_locator.4AVqgs9" alias=".service_locator.PNlbJGO"/>
     <service id=".service_locator.W_TcJ7V" alias=".service_locator.jpL5_4q"/>
     <service id=".service_locator.vtj.h5i" alias=".service_locator.cX9LP_Y"/>
     <service id=".service_locator.0VPh.hj" alias=".service_locator.geVFa8t"/>

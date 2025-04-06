@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 #[Route('/club')]
 class ClubController extends AbstractController
@@ -33,7 +34,30 @@ class ClubController extends AbstractController
         $form = $this->createForm(ClubType::class, $club);
         $form->handleRequest($request);
 
+        // Debug: Check if form is submitted and valid
+        if ($request->isMethod('POST')) {
+            dump('Form submitted', $request->request->all(), $form->isSubmitted(), $form->isValid());
+        }
+
         if ($form->isSubmitted() && $form->isValid()) {
+            $photoFile = $form->get('photoUrl')->getData();
+            if ($photoFile) {
+                $newFilename = uniqid().'.'.$photoFile->guessExtension();
+                try {
+                    $photoFile->move(
+                        $this->getParameter('club_photos_directory'),
+                        $newFilename
+                    );
+                    $club->setPhotoUrl('/uploads/club_photos/'.$newFilename);
+                } catch (FileException $e) {
+                    $this->addFlash('error', 'Failed to upload photo: '.$e->getMessage());
+                    return $this->render('club/new.html.twig', [
+                        'club' => $club,
+                        'form' => $form->createView(),
+                    ]);
+                }
+            }
+
             $entityManager->persist($club);
             $entityManager->flush();
 
@@ -70,6 +94,30 @@ class ClubController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $photoFile = $form->get('photoUrl')->getData();
+            if ($photoFile) {
+                $newFilename = uniqid().'.'.$photoFile->guessExtension();
+                try {
+                    $photoFile->move(
+                        $this->getParameter('club_photos_directory'),
+                        $newFilename
+                    );
+                    if ($club->getPhotoUrl()) {
+                        $oldFile = $this->getParameter('club_photos_directory').'/'.basename($club->getPhotoUrl());
+                        if (file_exists($oldFile)) {
+                            unlink($oldFile);
+                        }
+                    }
+                    $club->setPhotoUrl('/uploads/club_photos/'.$newFilename);
+                } catch (FileException $e) {
+                    $this->addFlash('error', 'Failed to upload photo: '.$e->getMessage());
+                    return $this->render('club/edit.html.twig', [
+                        'club' => $club,
+                        'form' => $form->createView(),
+                    ]);
+                }
+            }
+
             $entityManager->flush();
 
             $this->addFlash('success', 'Club updated successfully!');
@@ -90,6 +138,13 @@ class ClubController extends AbstractController
         }
 
         if ($this->isCsrfTokenValid('delete'.$club->getIdClub(), $request->request->get('_token'))) {
+            if ($club->getPhotoUrl()) {
+                $photoFile = $this->getParameter('club_photos_directory').'/'.basename($club->getPhotoUrl());
+                if (file_exists($photoFile)) {
+                    unlink($photoFile);
+                }
+            }
+            
             $entityManager->remove($club);
             $entityManager->flush();
 
@@ -115,6 +170,4 @@ class ClubController extends AbstractController
             'allClubs' => $clubs,
         ]);
     }
-
-
 }

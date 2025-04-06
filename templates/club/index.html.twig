@@ -3,16 +3,23 @@
 {% block body %}
 
         {% for message in app.flashes('success') %}
-            <div class="alert alert-success">{{ message }}</div>
+            <div class="alert alert-success alert-dismissable">{{ message }}</div>
         {% endfor %}
 
         {% include 'club/club_widgets.html.twig' with {'clubs': clubs, 'clubs_with_photos': clubs_with_photos} %}
 
         <div class="card">
             <h5 class="card-header d-flex justify-content-between align-items-center">
-                All Clubs
-                <a href="{{ path('club_new') }}" class="btn btn-primary">Add New Club</a>
-            </h5>
+                    Liste des Évaluations
+                    <div>
+                        <a href="{{ path('club_statistics') }}" class="btn btn-info me-2">
+                            <i class="bx bx-stats"></i> Statistiques
+                        </a>
+                        <a href="{{ path('club_new') }}" class="btn btn-primary">
+                            <i class="bx bx-plus"></i> Nouveau Club
+                        </a>
+                    </div>
+                </h5>
             <div class="table-responsive text-nowrap">
                 <table class="table">
                     <thead>

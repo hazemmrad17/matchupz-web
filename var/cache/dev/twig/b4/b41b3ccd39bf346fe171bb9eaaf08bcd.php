@@ -135,12 +135,22 @@ class __TwigTemplate_0073bd7091878f93c23833961806b00e extends Template
         // line 15
         yield "                <div class=\"card\">
                     <h5 class=\"card-header d-flex justify-content-between align-items-center\">
-                        Liste des Joueurs
+                    Historique des Clubs
+                    <div>
                         <a href=\"";
-        // line 18
+        // line 19
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("joueur_statistics");
+        yield "\" class=\"btn btn-info me-2\">
+                            <i class=\"bx bx-stats\"></i> Statistiques
+                        </a>
+                        <a href=\"";
+        // line 22
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("joueur_new");
-        yield "\" class=\"btn btn-primary\">Ajouter un Joueur</a>
-                    </h5>
+        yield "\" class=\"btn btn-primary\">
+                            <i class=\"bx bx-plus\"></i> Nouvueau Joueur
+                        </a>
+                    </div>
+                </h5>
                     <div class=\"table-responsive text-nowrap\">
                         <table class=\"table\">
                             <thead>
@@ -161,71 +171,71 @@ class __TwigTemplate_0073bd7091878f93c23833961806b00e extends Template
                             </thead>
                             <tbody class=\"table-border-bottom-0\">
                                 ";
-        // line 39
+        // line 46
         $context['_parent'] = $context;
-        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["joueurs"]) || array_key_exists("joueurs", $context) ? $context["joueurs"] : (function () { throw new RuntimeError('Variable "joueurs" does not exist.', 39, $this->source); })()));
+        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["joueurs"]) || array_key_exists("joueurs", $context) ? $context["joueurs"] : (function () { throw new RuntimeError('Variable "joueurs" does not exist.', 46, $this->source); })()));
         $context['_iterated'] = false;
         foreach ($context['_seq'] as $context["_key"] => $context["joueur"]) {
-            // line 40
+            // line 47
             yield "                                    <tr class=\"table-default\">
                                         <td>
                                             <i class=\"fab fa-sketch fa-lg text-warning me-3\"></i>
                                             <strong>";
-            // line 43
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "nom", [], "any", false, false, false, 43), "html", null, true);
+            // line 50
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "nom", [], "any", false, false, false, 50), "html", null, true);
             yield "</strong>
                                         </td>
                                         <td>";
-            // line 45
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "prenom", [], "any", false, false, false, 45), "html", null, true);
-            yield "</td>
-                                        <td>";
-            // line 46
-            yield (((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "sport", [], "any", false, true, false, 46), "nomSport", [], "any", true, true, false, 46) &&  !(null === CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "sport", [], "any", false, false, false, 46), "nomSport", [], "any", false, false, false, 46)))) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "sport", [], "any", false, false, false, 46), "nomSport", [], "any", false, false, false, 46), "html", null, true)) : ("N/A"));
-            yield "</td>
-                                        <td>";
-            // line 47
-            yield ((CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "dateNaissance", [], "any", false, false, false, 47)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "dateNaissance", [], "any", false, false, false, 47), "d/m/Y"), "html", null, true)) : ("N/A"));
-            yield "</td>
-                                        <td>";
-            // line 48
-            yield (((CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "poste", [], "any", true, true, false, 48) &&  !(null === CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "poste", [], "any", false, false, false, 48)))) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "poste", [], "any", false, false, false, 48), "html", null, true)) : ("N/A"));
-            yield "</td>
-                                        <td>";
-            // line 49
-            yield ((CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "taille", [], "any", false, false, false, 49)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatNumber(CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "taille", [], "any", false, false, false, 49), 2, ".", ","), "html", null, true)) : ("N/A"));
-            yield "</td>
-                                        <td>";
-            // line 50
-            yield ((CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "poids", [], "any", false, false, false, 50)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatNumber(CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "poids", [], "any", false, false, false, 50), 2, ".", ","), "html", null, true)) : ("N/A"));
-            yield "</td>
-                                        <td>";
-            // line 51
-            yield (((CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "statut", [], "any", true, true, false, 51) &&  !(null === CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "statut", [], "any", false, false, false, 51)))) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "statut", [], "any", false, false, false, 51), "html", null, true)) : ("N/A"));
-            yield "</td>
-                                        <td>";
             // line 52
-            yield (((CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "email", [], "any", true, true, false, 52) &&  !(null === CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "email", [], "any", false, false, false, 52)))) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "email", [], "any", false, false, false, 52), "html", null, true)) : ("N/A"));
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "prenom", [], "any", false, false, false, 52), "html", null, true);
             yield "</td>
                                         <td>";
             // line 53
-            yield (((CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "telephone", [], "any", true, true, false, 53) &&  !(null === CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "telephone", [], "any", false, false, false, 53)))) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "telephone", [], "any", false, false, false, 53), "html", null, true)) : ("N/A"));
+            yield (((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "sport", [], "any", false, true, false, 53), "nomSport", [], "any", true, true, false, 53) &&  !(null === CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "sport", [], "any", false, false, false, 53), "nomSport", [], "any", false, false, false, 53)))) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "sport", [], "any", false, false, false, 53), "nomSport", [], "any", false, false, false, 53), "html", null, true)) : ("N/A"));
+            yield "</td>
+                                        <td>";
+            // line 54
+            yield ((CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "dateNaissance", [], "any", false, false, false, 54)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "dateNaissance", [], "any", false, false, false, 54), "d/m/Y"), "html", null, true)) : ("N/A"));
+            yield "</td>
+                                        <td>";
+            // line 55
+            yield (((CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "poste", [], "any", true, true, false, 55) &&  !(null === CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "poste", [], "any", false, false, false, 55)))) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "poste", [], "any", false, false, false, 55), "html", null, true)) : ("N/A"));
+            yield "</td>
+                                        <td>";
+            // line 56
+            yield ((CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "taille", [], "any", false, false, false, 56)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatNumber(CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "taille", [], "any", false, false, false, 56), 2, ".", ","), "html", null, true)) : ("N/A"));
+            yield "</td>
+                                        <td>";
+            // line 57
+            yield ((CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "poids", [], "any", false, false, false, 57)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatNumber(CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "poids", [], "any", false, false, false, 57), 2, ".", ","), "html", null, true)) : ("N/A"));
+            yield "</td>
+                                        <td>";
+            // line 58
+            yield (((CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "statut", [], "any", true, true, false, 58) &&  !(null === CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "statut", [], "any", false, false, false, 58)))) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "statut", [], "any", false, false, false, 58), "html", null, true)) : ("N/A"));
+            yield "</td>
+                                        <td>";
+            // line 59
+            yield (((CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "email", [], "any", true, true, false, 59) &&  !(null === CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "email", [], "any", false, false, false, 59)))) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "email", [], "any", false, false, false, 59), "html", null, true)) : ("N/A"));
+            yield "</td>
+                                        <td>";
+            // line 60
+            yield (((CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "telephone", [], "any", true, true, false, 60) &&  !(null === CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "telephone", [], "any", false, false, false, 60)))) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "telephone", [], "any", false, false, false, 60), "html", null, true)) : ("N/A"));
             yield "</td>
                                         <td>
                                             ";
-            // line 55
-            if (CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "profilePictureUrl", [], "any", false, false, false, 55)) {
-                // line 56
+            // line 62
+            if (CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "profilePictureUrl", [], "any", false, false, false, 62)) {
+                // line 63
                 yield "                                                <img src=\"";
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "profilePictureUrl", [], "any", false, false, false, 56), "html", null, true);
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "profilePictureUrl", [], "any", false, false, false, 63), "html", null, true);
                 yield "\" alt=\"Profile\" class=\"rounded-circle\" style=\"width: 30px; height: 30px;\">
                                             ";
             } else {
-                // line 58
+                // line 65
                 yield "                                                N/A
                                             ";
             }
-            // line 60
+            // line 67
             yield "                                        </td>
                                         <td>
                                             <div class=\"dropdown\">
@@ -234,24 +244,24 @@ class __TwigTemplate_0073bd7091878f93c23833961806b00e extends Template
                                                 </button>
                                                 <div class=\"dropdown-menu\">
                                                     <a class=\"dropdown-item\" href=\"";
-            // line 67
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("joueur_show", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "idJoueur", [], "any", false, false, false, 67)]), "html", null, true);
+            // line 74
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("joueur_show", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "idJoueur", [], "any", false, false, false, 74)]), "html", null, true);
             yield "\">
                                                         <i class=\"bx bx-show me-1\"></i> Voir
                                                     </a>
                                                     <a class=\"dropdown-item\" href=\"";
-            // line 70
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("joueur_edit", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "idJoueur", [], "any", false, false, false, 70)]), "html", null, true);
+            // line 77
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("joueur_edit", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "idJoueur", [], "any", false, false, false, 77)]), "html", null, true);
             yield "\">
                                                         <i class=\"bx bx-edit-alt me-1\"></i> Modifier
                                                     </a>
                                                     <form method=\"post\" action=\"";
-            // line 73
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("joueur_delete", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "idJoueur", [], "any", false, false, false, 73)]), "html", null, true);
+            // line 80
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("joueur_delete", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "idJoueur", [], "any", false, false, false, 80)]), "html", null, true);
             yield "\" style=\"display:inline;\" onsubmit=\"return confirm('Confirmer la suppression?');\">
                                                         <input type=\"hidden\" name=\"_token\" value=\"";
-            // line 74
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderCsrfToken(("delete" . CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "idJoueur", [], "any", false, false, false, 74))), "html", null, true);
+            // line 81
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderCsrfToken(("delete" . CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "idJoueur", [], "any", false, false, false, 81))), "html", null, true);
             yield "\">
                                                         <button class=\"dropdown-item\" type=\"submit\">
                                                             <i class=\"bx bx-trash me-1\"></i> Supprimer
@@ -264,9 +274,9 @@ class __TwigTemplate_0073bd7091878f93c23833961806b00e extends Template
                                 ";
             $context['_iterated'] = true;
         }
-        // line 83
+        // line 90
         if (!$context['_iterated']) {
-            // line 84
+            // line 91
             yield "                                    <tr>
                                         <td colspan=\"12\" class=\"text-center\">Aucun joueur trouvé</td>
                                     </tr>
@@ -275,7 +285,7 @@ class __TwigTemplate_0073bd7091878f93c23833961806b00e extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_key'], $context['joueur'], $context['_parent'], $context['_iterated']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 88
+        // line 95
         yield "                            </tbody>
                         </table>
                     </div>
@@ -341,7 +351,7 @@ class __TwigTemplate_0073bd7091878f93c23833961806b00e extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  313 => 14,  310 => 13,  297 => 12,  279 => 88,  270 => 84,  268 => 83,  254 => 74,  250 => 73,  244 => 70,  238 => 67,  229 => 60,  225 => 58,  219 => 56,  217 => 55,  212 => 53,  208 => 52,  204 => 51,  200 => 50,  196 => 49,  192 => 48,  188 => 47,  184 => 46,  180 => 45,  175 => 43,  170 => 40,  165 => 39,  141 => 18,  136 => 15,  134 => 12,  129 => 9,  116 => 8,  93 => 6,  82 => 4,  79 => 3,  66 => 2,  43 => 1,);
+        return array (  323 => 14,  320 => 13,  307 => 12,  289 => 95,  280 => 91,  278 => 90,  264 => 81,  260 => 80,  254 => 77,  248 => 74,  239 => 67,  235 => 65,  229 => 63,  227 => 62,  222 => 60,  218 => 59,  214 => 58,  210 => 57,  206 => 56,  202 => 55,  198 => 54,  194 => 53,  190 => 52,  185 => 50,  180 => 47,  175 => 46,  148 => 22,  142 => 19,  136 => 15,  134 => 12,  129 => 9,  116 => 8,  93 => 6,  82 => 4,  79 => 3,  66 => 2,  43 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -362,9 +372,16 @@ class __TwigTemplate_0073bd7091878f93c23833961806b00e extends Template
             {% endblock %}
                 <div class=\"card\">
                     <h5 class=\"card-header d-flex justify-content-between align-items-center\">
-                        Liste des Joueurs
-                        <a href=\"{{ path('joueur_new') }}\" class=\"btn btn-primary\">Ajouter un Joueur</a>
-                    </h5>
+                    Historique des Clubs
+                    <div>
+                        <a href=\"{{ path('joueur_statistics') }}\" class=\"btn btn-info me-2\">
+                            <i class=\"bx bx-stats\"></i> Statistiques
+                        </a>
+                        <a href=\"{{ path('joueur_new') }}\" class=\"btn btn-primary\">
+                            <i class=\"bx bx-plus\"></i> Nouvueau Joueur
+                        </a>
+                    </div>
+                </h5>
                     <div class=\"table-responsive text-nowrap\">
                         <table class=\"table\">
                             <thead>

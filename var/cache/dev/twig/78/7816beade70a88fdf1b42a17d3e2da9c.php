@@ -52,47 +52,11 @@ class __TwigTemplate_14fb821bb1fbf8db67e77c8b02293502 extends Template
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("joueur_main");
         yield "\" class=\"app-brand-link\">
       <span class=\"app-brand-logo demo\">
-        <svg
-          width=\"25\"
-          viewBox=\"0 0 25 42\"
-          version=\"1.1\"
-          xmlns=\"http://www.w3.org/2000/svg\"
-          xmlns:xlink=\"http://www.w3.org/1999/xlink\"
-        >
-          <!-- SVG content remains unchanged -->
-          <defs>
-            <path d=\"...\" id=\"path-1\"></path>
-            <path d=\"...\" id=\"path-3\"></path>
-            <path d=\"...\" id=\"path-4\"></path>
-            <path d=\"...\" id=\"path-5\"></path>
-          </defs>
-          <g id=\"g-app-brand\" stroke=\"none\" stroke-width=\"1\" fill=\"none\" fill-rule=\"evenodd\">
-            <g id=\"Brand-Logo\" transform=\"translate(-27.000000, -15.000000)\">
-              <g id=\"Icon\" transform=\"translate(27.000000, 15.000000)\">
-                <g id=\"Mask\" transform=\"translate(0.000000, 8.000000)\">
-                  <mask id=\"mask-2\" fill=\"white\">
-                    <use xlink:href=\"#path-1\"></use>
-                  </mask>
-                  <use fill=\"#696cff\" xlink:href=\"#path-1\"></use>
-                  <g id=\"Path-3\" mask=\"url(#mask-2)\">
-                    <use fill=\"#696cff\" xlink:href=\"#path-3\"></use>
-                    <use fill-opacity=\"0.2\" fill=\"#FFFFFF\" xlink:href=\"#path-3\"></use>
-                  </g>
-                  <g id=\"Path-4\" mask=\"url(#mask-2)\">
-                    <use fill=\"#696cff\" xlink:href=\"#path-4\"></use>
-                    <use fill-opacity=\"0.2\" fill=\"#FFFFFF\" xlink:href=\"#path-4\"></use>
-                  </g>
-                </g>
-                <g id=\"Triangle\" transform=\"translate(19.000000, 11.000000) rotate(-300.000000) translate(-19.000000, -11.000000)\">
-                  <use fill=\"#696cff\" xlink:href=\"#path-5\"></use>
-                  <use fill-opacity=\"0.2\" fill=\"#FFFFFF\" xlink:href=\"#path-5\"></use>
-                </g>
-              </g>
-            </g>
-          </g>
-        </svg>
+        <img src=\"";
+        // line 5
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("img/logo_white.svg"), "html", null, true);
+        yield "\" alt=\"Your App Name\" width=\"200\" height=\"200\">
       </span>
-      <span class=\"app-brand-text demo menu-text fw-bolder ms-2\">Sneat</span>
     </a>
     <a href=\"javascript:void(0);\" class=\"layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none\">
       <i class=\"bx bx-chevron-left bx-sm align-middle\"></i>
@@ -104,13 +68,13 @@ class __TwigTemplate_14fb821bb1fbf8db67e77c8b02293502 extends Template
   <ul class=\"menu-inner py-1\">
     <!-- Dashboard -->
     <li class=\"menu-item ";
-        // line 56
-        if ((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 56, $this->source); })()), "request", [], "any", false, false, false, 56), "attributes", [], "any", false, false, false, 56), "get", ["_route"], "method", false, false, false, 56) == "app_dashboard")) {
+        // line 17
+        if ((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 17, $this->source); })()), "request", [], "any", false, false, false, 17), "attributes", [], "any", false, false, false, 17), "get", ["_route"], "method", false, false, false, 17) == "app_dashboard")) {
             yield "active";
         }
         yield "\">
       <a href=\"";
-        // line 57
+        // line 18
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("joueur_main");
         yield "\" class=\"menu-link\">
         <i class=\"menu-icon tf-icons bx bx-home-circle\"></i>
@@ -124,13 +88,13 @@ class __TwigTemplate_14fb821bb1fbf8db67e77c8b02293502 extends Template
     </li>
     <!-- Users -->
     <li class=\"menu-item ";
-        // line 68
-        if ((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 68, $this->source); })()), "request", [], "any", false, false, false, 68), "attributes", [], "any", false, false, false, 68), "get", ["_route"], "method", false, false, false, 68) == "app_users")) {
+        // line 29
+        if ((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 29, $this->source); })()), "request", [], "any", false, false, false, 29), "attributes", [], "any", false, false, false, 29), "get", ["_route"], "method", false, false, false, 29) == "app_users")) {
             yield "active";
         }
         yield "\">
       <a href=\"";
-        // line 69
+        // line 30
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("joueur_main");
         yield "\" class=\"menu-link\">
         <i class=\"menu-icon tf-icons bx bx-user\"></i>
@@ -138,10 +102,15 @@ class __TwigTemplate_14fb821bb1fbf8db67e77c8b02293502 extends Template
       </a>
     </li>
 
+<!-- Spacer: Users Section -->
+    <li class=\"menu-header small text-uppercase\">
+      <span class=\"menu-header-text\">Players Section</span>
+    </li>
+
     <!-- Under Team Management section -->
     <li class=\"menu-item ";
-        // line 76
-        if ((((is_string($_v0 = CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 76, $this->source); })()), "request", [], "any", false, false, false, 76), "attributes", [], "any", false, false, false, 76), "get", ["_route"], "method", false, false, false, 76)) && is_string($_v1 = "joueur_") && str_starts_with($_v0, $_v1)) || (is_string($_v2 = CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 76, $this->source); })()), "request", [], "any", false, false, false, 76), "attributes", [], "any", false, false, false, 76), "get", ["_route"], "method", false, false, false, 76)) && is_string($_v3 = "sport_") && str_starts_with($_v2, $_v3))) || (is_string($_v4 = CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 76, $this->source); })()), "request", [], "any", false, false, false, 76), "attributes", [], "any", false, false, false, 76), "get", ["_route"], "method", false, false, false, 76)) && is_string($_v5 = "club_") && str_starts_with($_v4, $_v5)))) {
+        // line 42
+        if (((((((is_string($_v0 = CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 42, $this->source); })()), "request", [], "any", false, false, false, 42), "attributes", [], "any", false, false, false, 42), "get", ["_route"], "method", false, false, false, 42)) && is_string($_v1 = "joueur_") && str_starts_with($_v0, $_v1)) || (is_string($_v2 = CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 42, $this->source); })()), "request", [], "any", false, false, false, 42), "attributes", [], "any", false, false, false, 42), "get", ["_route"], "method", false, false, false, 42)) && is_string($_v3 = "sport_") && str_starts_with($_v2, $_v3))) || (is_string($_v4 = CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 42, $this->source); })()), "request", [], "any", false, false, false, 42), "attributes", [], "any", false, false, false, 42), "get", ["_route"], "method", false, false, false, 42)) && is_string($_v5 = "club_") && str_starts_with($_v4, $_v5))) || (is_string($_v6 = CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 42, $this->source); })()), "request", [], "any", false, false, false, 42), "attributes", [], "any", false, false, false, 42), "get", ["_route"], "method", false, false, false, 42)) && is_string($_v7 = "performance_joueur_") && str_starts_with($_v6, $_v7))) || (is_string($_v8 = CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 42, $this->source); })()), "request", [], "any", false, false, false, 42), "attributes", [], "any", false, false, false, 42), "get", ["_route"], "method", false, false, false, 42)) && is_string($_v9 = "app_historique_club_") && str_starts_with($_v8, $_v9))) || (is_string($_v10 = CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 42, $this->source); })()), "request", [], "any", false, false, false, 42), "attributes", [], "any", false, false, false, 42), "get", ["_route"], "method", false, false, false, 42)) && is_string($_v11 = "app_evaluation_physique_") && str_starts_with($_v10, $_v11)))) {
             yield "active open";
         }
         yield "\">
@@ -151,64 +120,79 @@ class __TwigTemplate_14fb821bb1fbf8db67e77c8b02293502 extends Template
       </a>
       <ul class=\"menu-sub\">
         <li class=\"menu-item ";
-        // line 82
-        if ((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 82, $this->source); })()), "request", [], "any", false, false, false, 82), "attributes", [], "any", false, false, false, 82), "get", ["_route"], "method", false, false, false, 82) == "joueur_main")) {
+        // line 48
+        if ((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 48, $this->source); })()), "request", [], "any", false, false, false, 48), "attributes", [], "any", false, false, false, 48), "get", ["_route"], "method", false, false, false, 48) == "joueur_main")) {
             yield "active";
         }
         yield "\">
           <a href=\"";
-        // line 83
+        // line 49
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("joueur_main");
         yield "\" class=\"menu-link\">
             <div data-i18n=\"Joueurs\">Joueurs</div>
           </a>
         </li>
-        <li class=\"menu-item\">
+        <li class=\"menu-item ";
+        // line 53
+        if ((is_string($_v12 = CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 53, $this->source); })()), "request", [], "any", false, false, false, 53), "attributes", [], "any", false, false, false, 53), "get", ["_route"], "method", false, false, false, 53)) && is_string($_v13 = "app_evaluation_physique_") && str_starts_with($_v12, $_v13))) {
+            yield "active";
+        }
+        yield "\">
           <a href=\"";
-        // line 88
-        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("joueur_main");
+        // line 54
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_evaluation_physique_index");
         yield "\" class=\"menu-link\">
             <div data-i18n=\"EvaluationPhysique\">Evaluation Physique</div>
           </a>
         </li>
         <li class=\"menu-item ";
-        // line 92
-        if ((is_string($_v6 = CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 92, $this->source); })()), "request", [], "any", false, false, false, 92), "attributes", [], "any", false, false, false, 92), "get", ["_route"], "method", false, false, false, 92)) && is_string($_v7 = "club_") && str_starts_with($_v6, $_v7))) {
+        // line 58
+        if ((is_string($_v14 = CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 58, $this->source); })()), "request", [], "any", false, false, false, 58), "attributes", [], "any", false, false, false, 58), "get", ["_route"], "method", false, false, false, 58)) && is_string($_v15 = "club_") && str_starts_with($_v14, $_v15))) {
             yield "active";
         }
         yield "\">
           <a href=\"";
-        // line 93
+        // line 59
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("club_index");
         yield "\" class=\"menu-link\">
             <div data-i18n=\"Club\">Club</div>
           </a>
         </li>
         <li class=\"menu-item ";
-        // line 97
-        if ((is_string($_v8 = CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 97, $this->source); })()), "request", [], "any", false, false, false, 97), "attributes", [], "any", false, false, false, 97), "get", ["_route"], "method", false, false, false, 97)) && is_string($_v9 = "sport_") && str_starts_with($_v8, $_v9))) {
+        // line 63
+        if ((is_string($_v16 = CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 63, $this->source); })()), "request", [], "any", false, false, false, 63), "attributes", [], "any", false, false, false, 63), "get", ["_route"], "method", false, false, false, 63)) && is_string($_v17 = "sport_") && str_starts_with($_v16, $_v17))) {
             yield "active";
         }
         yield "\">
           <a href=\"";
-        // line 98
+        // line 64
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("sport_index");
         yield "\" class=\"menu-link\">
             <div data-i18n=\"Sport\">Sport</div>
           </a>
         </li>
-        <li class=\"menu-item\">
+        <li class=\"menu-item ";
+        // line 68
+        if ((is_string($_v18 = CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 68, $this->source); })()), "request", [], "any", false, false, false, 68), "attributes", [], "any", false, false, false, 68), "get", ["_route"], "method", false, false, false, 68)) && is_string($_v19 = "performance_joueur_") && str_starts_with($_v18, $_v19))) {
+            yield "active";
+        }
+        yield "\">
           <a href=\"";
-        // line 103
-        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("joueur_main");
+        // line 69
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("performance_joueur_index");
         yield "\" class=\"menu-link\">
             <div data-i18n=\"PerformanceJoueur\">Performance Joueur</div>
           </a>
         </li>
-        <li class=\"menu-item\">
+        <li class=\"menu-item ";
+        // line 73
+        if ((is_string($_v20 = CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 73, $this->source); })()), "request", [], "any", false, false, false, 73), "attributes", [], "any", false, false, false, 73), "get", ["_route"], "method", false, false, false, 73)) && is_string($_v21 = "app_historique_club_") && str_starts_with($_v20, $_v21))) {
+            yield "active";
+        }
+        yield "\">
           <a href=\"";
-        // line 108
-        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("joueur_main");
+        // line 74
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_historique_club_index");
         yield "\" class=\"menu-link\">
             <div data-i18n=\"HistoriqueClub\">Historique Club</div>
           </a>
@@ -222,8 +206,8 @@ class __TwigTemplate_14fb821bb1fbf8db67e77c8b02293502 extends Template
     </li>
     <!-- Matchs (Scrollable with 2 items) -->
     <li class=\"menu-item ";
-        // line 120
-        if ((is_string($_v10 = CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 120, $this->source); })()), "request", [], "any", false, false, false, 120), "attributes", [], "any", false, false, false, 120), "get", ["_route"], "method", false, false, false, 120)) && is_string($_v11 = "app_matchs_") && str_starts_with($_v10, $_v11))) {
+        // line 86
+        if ((is_string($_v22 = CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 86, $this->source); })()), "request", [], "any", false, false, false, 86), "attributes", [], "any", false, false, false, 86), "get", ["_route"], "method", false, false, false, 86)) && is_string($_v23 = "app_matchs_") && str_starts_with($_v22, $_v23))) {
             yield "active open";
         }
         yield "\">
@@ -233,26 +217,26 @@ class __TwigTemplate_14fb821bb1fbf8db67e77c8b02293502 extends Template
       </a>
       <ul class=\"menu-sub\">
         <li class=\"menu-item ";
-        // line 126
-        if ((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 126, $this->source); })()), "request", [], "any", false, false, false, 126), "attributes", [], "any", false, false, false, 126), "get", ["_route"], "method", false, false, false, 126) == "app_matchs_upcoming")) {
+        // line 92
+        if ((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 92, $this->source); })()), "request", [], "any", false, false, false, 92), "attributes", [], "any", false, false, false, 92), "get", ["_route"], "method", false, false, false, 92) == "app_matchs_upcoming")) {
             yield "active";
         }
         yield "\">
           <a href=\"";
-        // line 127
+        // line 93
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("joueur_main");
         yield "\" class=\"menu-link\">
             <div data-i18n=\"Upcoming\">Upcoming</div>
           </a>
         </li>
         <li class=\"menu-item ";
-        // line 131
-        if ((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 131, $this->source); })()), "request", [], "any", false, false, false, 131), "attributes", [], "any", false, false, false, 131), "get", ["_route"], "method", false, false, false, 131) == "app_matchs_past")) {
+        // line 97
+        if ((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 97, $this->source); })()), "request", [], "any", false, false, false, 97), "attributes", [], "any", false, false, false, 97), "get", ["_route"], "method", false, false, false, 97) == "app_matchs_past")) {
             yield "active";
         }
         yield "\">
           <a href=\"";
-        // line 132
+        // line 98
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("joueur_main");
         yield "\" class=\"menu-link\">
             <div data-i18n=\"Past\">Past</div>
@@ -267,8 +251,8 @@ class __TwigTemplate_14fb821bb1fbf8db67e77c8b02293502 extends Template
     </li>
     <!-- Logistique (Scrollable with 2 items) -->
     <li class=\"menu-item ";
-        // line 144
-        if ((is_string($_v12 = CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 144, $this->source); })()), "request", [], "any", false, false, false, 144), "attributes", [], "any", false, false, false, 144), "get", ["_route"], "method", false, false, false, 144)) && is_string($_v13 = "app_logistique_") && str_starts_with($_v12, $_v13))) {
+        // line 110
+        if ((is_string($_v24 = CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 110, $this->source); })()), "request", [], "any", false, false, false, 110), "attributes", [], "any", false, false, false, 110), "get", ["_route"], "method", false, false, false, 110)) && is_string($_v25 = "app_logistique_") && str_starts_with($_v24, $_v25))) {
             yield "active open";
         }
         yield "\">
@@ -278,26 +262,26 @@ class __TwigTemplate_14fb821bb1fbf8db67e77c8b02293502 extends Template
       </a>
       <ul class=\"menu-sub\">
         <li class=\"menu-item ";
-        // line 150
-        if ((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 150, $this->source); })()), "request", [], "any", false, false, false, 150), "attributes", [], "any", false, false, false, 150), "get", ["_route"], "method", false, false, false, 150) == "app_logistique_transport")) {
+        // line 116
+        if ((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 116, $this->source); })()), "request", [], "any", false, false, false, 116), "attributes", [], "any", false, false, false, 116), "get", ["_route"], "method", false, false, false, 116) == "app_logistique_transport")) {
             yield "active";
         }
         yield "\">
           <a href=\"";
-        // line 151
+        // line 117
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("joueur_main");
         yield "\" class=\"menu-link\">
             <div data-i18n=\"Transport\">Transport</div>
           </a>
         </li>
         <li class=\"menu-item ";
-        // line 155
-        if ((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 155, $this->source); })()), "request", [], "any", false, false, false, 155), "attributes", [], "any", false, false, false, 155), "get", ["_route"], "method", false, false, false, 155) == "app_logistique_equipment")) {
+        // line 121
+        if ((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 121, $this->source); })()), "request", [], "any", false, false, false, 121), "attributes", [], "any", false, false, false, 121), "get", ["_route"], "method", false, false, false, 121) == "app_logistique_equipment")) {
             yield "active";
         }
         yield "\">
           <a href=\"";
-        // line 156
+        // line 122
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("joueur_main");
         yield "\" class=\"menu-link\">
             <div data-i18n=\"Equipment\">Equipment</div>
@@ -312,8 +296,8 @@ class __TwigTemplate_14fb821bb1fbf8db67e77c8b02293502 extends Template
     </li>
     <!-- Sponsoring (Scrollable with 2 items) -->
     <li class=\"menu-item ";
-        // line 168
-        if ((is_string($_v14 = CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 168, $this->source); })()), "request", [], "any", false, false, false, 168), "attributes", [], "any", false, false, false, 168), "get", ["_route"], "method", false, false, false, 168)) && is_string($_v15 = "app_sponsoring_") && str_starts_with($_v14, $_v15))) {
+        // line 134
+        if ((is_string($_v26 = CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 134, $this->source); })()), "request", [], "any", false, false, false, 134), "attributes", [], "any", false, false, false, 134), "get", ["_route"], "method", false, false, false, 134)) && is_string($_v27 = "app_sponsoring_") && str_starts_with($_v26, $_v27))) {
             yield "active open";
         }
         yield "\">
@@ -323,26 +307,26 @@ class __TwigTemplate_14fb821bb1fbf8db67e77c8b02293502 extends Template
       </a>
       <ul class=\"menu-sub\">
         <li class=\"menu-item ";
-        // line 174
-        if ((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 174, $this->source); })()), "request", [], "any", false, false, false, 174), "attributes", [], "any", false, false, false, 174), "get", ["_route"], "method", false, false, false, 174) == "app_sponsoring_partners")) {
+        // line 140
+        if ((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 140, $this->source); })()), "request", [], "any", false, false, false, 140), "attributes", [], "any", false, false, false, 140), "get", ["_route"], "method", false, false, false, 140) == "app_sponsoring_partners")) {
             yield "active";
         }
         yield "\">
           <a href=\"";
-        // line 175
+        // line 141
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("joueur_main");
         yield "\" class=\"menu-link\">
             <div data-i18n=\"Partners\">Partners</div>
           </a>
         </li>
         <li class=\"menu-item ";
-        // line 179
-        if ((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 179, $this->source); })()), "request", [], "any", false, false, false, 179), "attributes", [], "any", false, false, false, 179), "get", ["_route"], "method", false, false, false, 179) == "app_sponsoring_contracts")) {
+        // line 145
+        if ((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 145, $this->source); })()), "request", [], "any", false, false, false, 145), "attributes", [], "any", false, false, false, 145), "get", ["_route"], "method", false, false, false, 145) == "app_sponsoring_contracts")) {
             yield "active";
         }
         yield "\">
           <a href=\"";
-        // line 180
+        // line 146
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("joueur_main");
         yield "\" class=\"menu-link\">
             <div data-i18n=\"Contracts\">Contracts</div>
@@ -357,8 +341,8 @@ class __TwigTemplate_14fb821bb1fbf8db67e77c8b02293502 extends Template
     </li>
     <!-- Espace Sportif (Scrollable with 2 items) -->
     <li class=\"menu-item ";
-        // line 192
-        if ((is_string($_v16 = CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 192, $this->source); })()), "request", [], "any", false, false, false, 192), "attributes", [], "any", false, false, false, 192), "get", ["_route"], "method", false, false, false, 192)) && is_string($_v17 = "app_espace_") && str_starts_with($_v16, $_v17))) {
+        // line 158
+        if ((is_string($_v28 = CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 158, $this->source); })()), "request", [], "any", false, false, false, 158), "attributes", [], "any", false, false, false, 158), "get", ["_route"], "method", false, false, false, 158)) && is_string($_v29 = "app_espace_") && str_starts_with($_v28, $_v29))) {
             yield "active open";
         }
         yield "\">
@@ -368,26 +352,26 @@ class __TwigTemplate_14fb821bb1fbf8db67e77c8b02293502 extends Template
       </a>
       <ul class=\"menu-sub\">
         <li class=\"menu-item ";
-        // line 198
-        if ((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 198, $this->source); })()), "request", [], "any", false, false, false, 198), "attributes", [], "any", false, false, false, 198), "get", ["_route"], "method", false, false, false, 198) == "app_espace_facilities")) {
+        // line 164
+        if ((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 164, $this->source); })()), "request", [], "any", false, false, false, 164), "attributes", [], "any", false, false, false, 164), "get", ["_route"], "method", false, false, false, 164) == "app_espace_facilities")) {
             yield "active";
         }
         yield "\">
           <a href=\"";
-        // line 199
+        // line 165
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("joueur_main");
         yield "\" class=\"menu-link\">
             <div data-i18n=\"Facilities\">Facilities</div>
           </a>
         </li>
         <li class=\"menu-item ";
-        // line 203
-        if ((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 203, $this->source); })()), "request", [], "any", false, false, false, 203), "attributes", [], "any", false, false, false, 203), "get", ["_route"], "method", false, false, false, 203) == "app_espace_events")) {
+        // line 169
+        if ((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 169, $this->source); })()), "request", [], "any", false, false, false, 169), "attributes", [], "any", false, false, false, 169), "get", ["_route"], "method", false, false, false, 169) == "app_espace_events")) {
             yield "active";
         }
         yield "\">
           <a href=\"";
-        // line 204
+        // line 170
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("joueur_main");
         yield "\" class=\"menu-link\">
             <div data-i18n=\"Events\">Events</div>
@@ -427,7 +411,7 @@ class __TwigTemplate_14fb821bb1fbf8db67e77c8b02293502 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  391 => 204,  385 => 203,  378 => 199,  372 => 198,  361 => 192,  346 => 180,  340 => 179,  333 => 175,  327 => 174,  316 => 168,  301 => 156,  295 => 155,  288 => 151,  282 => 150,  271 => 144,  256 => 132,  250 => 131,  243 => 127,  237 => 126,  226 => 120,  211 => 108,  203 => 103,  195 => 98,  189 => 97,  182 => 93,  176 => 92,  169 => 88,  161 => 83,  155 => 82,  144 => 76,  134 => 69,  128 => 68,  114 => 57,  108 => 56,  52 => 3,  48 => 1,);
+        return array (  375 => 170,  369 => 169,  362 => 165,  356 => 164,  345 => 158,  330 => 146,  324 => 145,  317 => 141,  311 => 140,  300 => 134,  285 => 122,  279 => 121,  272 => 117,  266 => 116,  255 => 110,  240 => 98,  234 => 97,  227 => 93,  221 => 92,  210 => 86,  195 => 74,  189 => 73,  182 => 69,  176 => 68,  169 => 64,  163 => 63,  156 => 59,  150 => 58,  143 => 54,  137 => 53,  130 => 49,  124 => 48,  113 => 42,  98 => 30,  92 => 29,  78 => 18,  72 => 17,  57 => 5,  52 => 3,  48 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -436,47 +420,8 @@ class __TwigTemplate_14fb821bb1fbf8db67e77c8b02293502 extends Template
   <div class=\"app-brand demo\">
     <a href=\"{{ path('joueur_main') }}\" class=\"app-brand-link\">
       <span class=\"app-brand-logo demo\">
-        <svg
-          width=\"25\"
-          viewBox=\"0 0 25 42\"
-          version=\"1.1\"
-          xmlns=\"http://www.w3.org/2000/svg\"
-          xmlns:xlink=\"http://www.w3.org/1999/xlink\"
-        >
-          <!-- SVG content remains unchanged -->
-          <defs>
-            <path d=\"...\" id=\"path-1\"></path>
-            <path d=\"...\" id=\"path-3\"></path>
-            <path d=\"...\" id=\"path-4\"></path>
-            <path d=\"...\" id=\"path-5\"></path>
-          </defs>
-          <g id=\"g-app-brand\" stroke=\"none\" stroke-width=\"1\" fill=\"none\" fill-rule=\"evenodd\">
-            <g id=\"Brand-Logo\" transform=\"translate(-27.000000, -15.000000)\">
-              <g id=\"Icon\" transform=\"translate(27.000000, 15.000000)\">
-                <g id=\"Mask\" transform=\"translate(0.000000, 8.000000)\">
-                  <mask id=\"mask-2\" fill=\"white\">
-                    <use xlink:href=\"#path-1\"></use>
-                  </mask>
-                  <use fill=\"#696cff\" xlink:href=\"#path-1\"></use>
-                  <g id=\"Path-3\" mask=\"url(#mask-2)\">
-                    <use fill=\"#696cff\" xlink:href=\"#path-3\"></use>
-                    <use fill-opacity=\"0.2\" fill=\"#FFFFFF\" xlink:href=\"#path-3\"></use>
-                  </g>
-                  <g id=\"Path-4\" mask=\"url(#mask-2)\">
-                    <use fill=\"#696cff\" xlink:href=\"#path-4\"></use>
-                    <use fill-opacity=\"0.2\" fill=\"#FFFFFF\" xlink:href=\"#path-4\"></use>
-                  </g>
-                </g>
-                <g id=\"Triangle\" transform=\"translate(19.000000, 11.000000) rotate(-300.000000) translate(-19.000000, -11.000000)\">
-                  <use fill=\"#696cff\" xlink:href=\"#path-5\"></use>
-                  <use fill-opacity=\"0.2\" fill=\"#FFFFFF\" xlink:href=\"#path-5\"></use>
-                </g>
-              </g>
-            </g>
-          </g>
-        </svg>
+        <img src=\"{{ asset('img/logo_white.svg') }}\" alt=\"Your App Name\" width=\"200\" height=\"200\">
       </span>
-      <span class=\"app-brand-text demo menu-text fw-bolder ms-2\">Sneat</span>
     </a>
     <a href=\"javascript:void(0);\" class=\"layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none\">
       <i class=\"bx bx-chevron-left bx-sm align-middle\"></i>
@@ -506,8 +451,13 @@ class __TwigTemplate_14fb821bb1fbf8db67e77c8b02293502 extends Template
       </a>
     </li>
 
+<!-- Spacer: Users Section -->
+    <li class=\"menu-header small text-uppercase\">
+      <span class=\"menu-header-text\">Players Section</span>
+    </li>
+
     <!-- Under Team Management section -->
-    <li class=\"menu-item {% if app.request.attributes.get('_route') starts with 'joueur_' or app.request.attributes.get('_route') starts with 'sport_' or app.request.attributes.get('_route') starts with 'club_' %}active open{% endif %}\">
+    <li class=\"menu-item {% if app.request.attributes.get('_route') starts with 'joueur_' or app.request.attributes.get('_route') starts with 'sport_' or app.request.attributes.get('_route') starts with 'club_' or app.request.attributes.get('_route') starts with 'performance_joueur_' or app.request.attributes.get('_route') starts with 'app_historique_club_' or app.request.attributes.get('_route') starts with 'app_evaluation_physique_' %}active open{% endif %}\">
       <a href=\"javascript:void(0);\" class=\"menu-link menu-toggle\">
         <i class=\"menu-icon tf-icons bx bx-group\"></i>
         <div data-i18n=\"Equipes\">Equipes</div>
@@ -518,8 +468,8 @@ class __TwigTemplate_14fb821bb1fbf8db67e77c8b02293502 extends Template
             <div data-i18n=\"Joueurs\">Joueurs</div>
           </a>
         </li>
-        <li class=\"menu-item\">
-          <a href=\"{{ path('joueur_main') }}\" class=\"menu-link\">
+        <li class=\"menu-item {% if app.request.attributes.get('_route') starts with 'app_evaluation_physique_' %}active{% endif %}\">
+          <a href=\"{{ path('app_evaluation_physique_index') }}\" class=\"menu-link\">
             <div data-i18n=\"EvaluationPhysique\">Evaluation Physique</div>
           </a>
         </li>
@@ -533,13 +483,13 @@ class __TwigTemplate_14fb821bb1fbf8db67e77c8b02293502 extends Template
             <div data-i18n=\"Sport\">Sport</div>
           </a>
         </li>
-        <li class=\"menu-item\">
-          <a href=\"{{ path('joueur_main') }}\" class=\"menu-link\">
+        <li class=\"menu-item {% if app.request.attributes.get('_route') starts with 'performance_joueur_' %}active{% endif %}\">
+          <a href=\"{{ path('performance_joueur_index') }}\" class=\"menu-link\">
             <div data-i18n=\"PerformanceJoueur\">Performance Joueur</div>
           </a>
         </li>
-        <li class=\"menu-item\">
-          <a href=\"{{ path('joueur_main') }}\" class=\"menu-link\">
+        <li class=\"menu-item {% if app.request.attributes.get('_route') starts with 'app_historique_club_' %}active{% endif %}\">
+          <a href=\"{{ path('app_historique_club_index') }}\" class=\"menu-link\">
             <div data-i18n=\"HistoriqueClub\">Historique Club</div>
           </a>
         </li>

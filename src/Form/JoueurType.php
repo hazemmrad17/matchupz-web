@@ -6,9 +6,11 @@ use App\Entity\Joueur;
 use App\Entity\Sport;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
 
 class JoueurType extends AbstractType
 {
@@ -18,17 +20,53 @@ class JoueurType extends AbstractType
             ->add('nom')
             ->add('prenom')
             ->add('dateNaissance', null, ['widget' => 'single_text'])
-            ->add('poste')
+            ->add('poste', ChoiceType::class, [
+                'choices' => [
+                    'Gardien de but' => 'GK',
+                    'Arrière droit' => 'RB',
+                    'Arrière gauche' => 'LB',
+                    'Ailier droit défensif' => 'RWB',
+                    'Ailier gauche défensif' => 'LWB',
+                    'Libéro' => 'SW',
+                    'Milieu défensif' => 'DM',
+                    'Milieu central' => 'CM',
+                    'Milieu offensif' => 'AM',
+                    'Milieu droit' => 'RM',
+                    'Milieu gauche' => 'LM',
+                    'Ailier droit' => 'RW',
+                    'Ailier gauche' => 'LW',
+                    'Avant-centre' => 'CF',
+                    'Attaquant' => 'ST',
+                    'Second attaquant' => 'SS',
+                ],
+                'placeholder' => 'Sélectionner un poste',
+                'required' => false,
+            ])
             ->add('taille')
             ->add('poids')
-            ->add('statut')
+            ->add('statut', ChoiceType::class, [
+                'choices' => [
+                    'Actif' => 'Actif',
+                    'Blessé' => 'Blessé',
+                    'Suspendu' => 'Suspendu',
+                    'Inactif' => '',
+                ],
+                'placeholder' => 'Sélectionner un statut',
+                'required' => false,
+            ])
             ->add('email')
             ->add('telephone')
             ->add('profilePicture', FileType::class, [
-                'label' => 'Photo de Profil',
+                'label' => 'Photo du joueur',
                 'mapped' => false,
                 'required' => false,
-                'attr' => ['accept' => 'image/*'] // Accept only image files
+                'constraints' => [
+                    new File([
+                        'maxSize' => '2M',
+                        'mimeTypes' => ['image/jpeg', 'image/png'],
+                        'mimeTypesMessage' => 'Veuillez télécharger une image JPEG ou PNG',
+                    ])
+                ],
             ])
             ->add('sport', EntityType::class, [
                 'class' => Sport::class,

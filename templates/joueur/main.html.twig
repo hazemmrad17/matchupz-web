@@ -14,9 +14,16 @@
             {% endblock %}
                 <div class="card">
                     <h5 class="card-header d-flex justify-content-between align-items-center">
-                        Liste des Joueurs
-                        <a href="{{ path('joueur_new') }}" class="btn btn-primary">Ajouter un Joueur</a>
-                    </h5>
+                    Historique des Clubs
+                    <div>
+                        <a href="{{ path('joueur_statistics') }}" class="btn btn-info me-2">
+                            <i class="bx bx-stats"></i> Statistiques
+                        </a>
+                        <a href="{{ path('joueur_new') }}" class="btn btn-primary">
+                            <i class="bx bx-plus"></i> Nouvueau Joueur
+                        </a>
+                    </div>
+                </h5>
                     <div class="table-responsive text-nowrap">
                         <table class="table">
                             <thead>

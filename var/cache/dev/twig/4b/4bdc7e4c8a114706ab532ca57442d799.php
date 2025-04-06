@@ -73,7 +73,7 @@ class __TwigTemplate_f1ea3fca252e144799feb2f29fe79221 extends Template
     <!-- Favicon -->
     <link rel=\"icon\" type=\"image/x-icon\" href=\"";
         // line 19
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("/img/favicon/favicon.ico"), "html", null, true);
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("/img/favicon/icon.svg"), "html", null, true);
         yield "\" />
 
     <!-- Fonts -->
@@ -123,6 +123,24 @@ class __TwigTemplate_f1ea3fca252e144799feb2f29fe79221 extends Template
         // line 43
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("/js/config.js"), "html", null, true);
         yield "\"></script>
+    <style>
+      /* Ensure proper footer placement */
+      html, body {
+        height: 100%;
+      }
+      .layout-wrapper {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+      .content-wrapper {
+        flex: 1;
+      }
+      /* Your original footer styles */
+      .footer {
+        background-color: #f8f9fa !important;
+      }
+    </style>
   </head>
 
   <body>
@@ -131,25 +149,48 @@ class __TwigTemplate_f1ea3fca252e144799feb2f29fe79221 extends Template
       <div class=\"layout-container\">
         <!-- Menu -->
         ";
-        // line 51
+        // line 69
         yield from $this->unwrap()->yieldBlock('navbar', $context, $blocks);
-        // line 54
+        // line 72
         yield "
         <!-- Layout page -->
         <div class=\"layout-page\">
           <!-- Navbar -->
           ";
-        // line 58
+        // line 76
         yield from $this->unwrap()->yieldBlock('searchbar', $context, $blocks);
-        // line 61
+        // line 79
         yield "
           <!-- Content wrapper -->
           ";
-        // line 63
+        // line 81
         yield from $this->unwrap()->yieldBlock('content', $context, $blocks);
-        // line 70
+        // line 88
         yield "        </div>
       </div>
+
+      <!-- Your exact footer code -->
+      <footer class=\"footer bg-light\">
+        <div class=\"container-fluid d-flex flex-md-row flex-column justify-content-between align-items-md-center gap-1 container-p-x py-3\">
+          <div>
+            <a href=\"https://themeselection.com/demo/sneat-bootstrap-html-admin-template/landing/\" target=\"_blank\" class=\"footer-text fw-bolder\">Sneat</a>
+            ©
+          </div>
+          <div>
+            <div class=\"dropdown dropup footer-link me-3\">
+              <button type=\"button\" class=\"btn btn-sm btn-outline-secondary dropdown-toggle\" data-bs-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
+                Language
+              </button>
+              <div class=\"dropdown-menu dropdown-menu-end\">
+                <a class=\"dropdown-item\" href=\"javascript:void(0);\"><i class=\"bx bx-dollar\"></i> Francais</a>
+                <a class=\"dropdown-item\" href=\"javascript:void(0);\"><i class=\"bx bx-euro\"></i> English</a>
+                <a class=\"dropdown-item\" href=\"javascript:void(0);\"><i class=\"bx bx-pound\"></i> Espanol</a>
+              </div>
+            </div>
+            <a href=\"javascript:void(0)\" class=\"btn btn-sm btn-outline-danger\"><i class=\"bx bx-log-out-circle\"></i> Logout</a>
+          </div>
+        </div>
+      </footer>
 
       <!-- Buy Now Button -->
       <div class=\"buy-now\">
@@ -160,46 +201,46 @@ class __TwigTemplate_f1ea3fca252e144799feb2f29fe79221 extends Template
         >Upgrade to Pro</a>
       </div>
     </div>
-
+    
     <!-- Core JS -->
     <script src=\"";
-        // line 84
+        // line 125
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("/vendor/libs/jquery/jquery.js"), "html", null, true);
         yield "\"></script>
     <script src=\"";
-        // line 85
+        // line 126
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("/vendor/libs/popper/popper.js"), "html", null, true);
         yield "\"></script>
     <script src=\"";
-        // line 86
+        // line 127
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("/vendor/js/bootstrap.js"), "html", null, true);
         yield "\"></script>
     <script src=\"";
-        // line 87
+        // line 128
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"), "html", null, true);
         yield "\"></script>
     <script src=\"";
-        // line 88
+        // line 129
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("/vendor/js/menu.js"), "html", null, true);
         yield "\"></script>
 
     <!-- Vendors JS -->
     <script src=\"";
-        // line 91
+        // line 132
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("/vendor/libs/apex-charts/apexcharts.js"), "html", null, true);
         yield "\"></script>
 
     <!-- Main JS -->
     <script src=\"";
-        // line 94
+        // line 135
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("/js/main.js"), "html", null, true);
         yield "\"></script>
 
     <!-- Page-specific JS -->
     ";
-        // line 97
+        // line 138
         yield from $this->unwrap()->yieldBlock('javascripts', $context, $blocks);
-        // line 100
+        // line 141
         yield "
     <!-- GitHub Buttons -->
     <script async defer src=\"https://buttons.github.io/buttons.js\"></script>
@@ -215,7 +256,7 @@ class __TwigTemplate_f1ea3fca252e144799feb2f29fe79221 extends Template
         yield from [];
     }
 
-    // line 51
+    // line 69
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -228,10 +269,10 @@ class __TwigTemplate_f1ea3fca252e144799feb2f29fe79221 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "navbar"));
 
-        // line 52
+        // line 70
         yield "          ";
-        yield from $this->loadTemplate("navbar.html.twig", "base.html.twig", 52)->unwrap()->yield($context);
-        // line 53
+        yield from $this->loadTemplate("navbar.html.twig", "base.html.twig", 70)->unwrap()->yield($context);
+        // line 71
         yield "        ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -242,7 +283,7 @@ class __TwigTemplate_f1ea3fca252e144799feb2f29fe79221 extends Template
         yield from [];
     }
 
-    // line 58
+    // line 76
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -255,10 +296,10 @@ class __TwigTemplate_f1ea3fca252e144799feb2f29fe79221 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "searchbar"));
 
-        // line 59
+        // line 77
         yield "            ";
-        yield from $this->loadTemplate("searchbar.html.twig", "base.html.twig", 59)->unwrap()->yield($context);
-        // line 60
+        yield from $this->loadTemplate("searchbar.html.twig", "base.html.twig", 77)->unwrap()->yield($context);
+        // line 78
         yield "          ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -269,7 +310,7 @@ class __TwigTemplate_f1ea3fca252e144799feb2f29fe79221 extends Template
         yield from [];
     }
 
-    // line 63
+    // line 81
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -282,13 +323,13 @@ class __TwigTemplate_f1ea3fca252e144799feb2f29fe79221 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "content"));
 
-        // line 64
+        // line 82
         yield "            <div class=\"content-wrapper\">
               <div class=\"container-xxl flex-grow-1 container-p-y\">
                 ";
-        // line 66
+        // line 84
         yield from $this->unwrap()->yieldBlock('body', $context, $blocks);
-        // line 67
+        // line 85
         yield "              </div>
             </div>
           ";
@@ -301,7 +342,7 @@ class __TwigTemplate_f1ea3fca252e144799feb2f29fe79221 extends Template
         yield from [];
     }
 
-    // line 66
+    // line 84
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -323,7 +364,7 @@ class __TwigTemplate_f1ea3fca252e144799feb2f29fe79221 extends Template
         yield from [];
     }
 
-    // line 97
+    // line 138
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -336,7 +377,7 @@ class __TwigTemplate_f1ea3fca252e144799feb2f29fe79221 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "javascripts"));
 
-        // line 98
+        // line 139
         yield "      <script src=\"";
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("/js/dashboards-analytics.js"), "html", null, true);
         yield "\"></script>
@@ -371,7 +412,7 @@ class __TwigTemplate_f1ea3fca252e144799feb2f29fe79221 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  340 => 98,  327 => 97,  305 => 66,  292 => 67,  290 => 66,  286 => 64,  273 => 63,  262 => 60,  259 => 59,  246 => 58,  235 => 53,  232 => 52,  219 => 51,  203 => 100,  201 => 97,  195 => 94,  189 => 91,  183 => 88,  179 => 87,  175 => 86,  171 => 85,  167 => 84,  151 => 70,  149 => 63,  145 => 61,  143 => 58,  137 => 54,  135 => 51,  124 => 43,  120 => 42,  114 => 39,  110 => 38,  104 => 35,  100 => 34,  96 => 33,  90 => 30,  76 => 19,  61 => 7,  53 => 1,);
+        return array (  381 => 139,  368 => 138,  346 => 84,  333 => 85,  331 => 84,  327 => 82,  314 => 81,  303 => 78,  300 => 77,  287 => 76,  276 => 71,  273 => 70,  260 => 69,  244 => 141,  242 => 138,  236 => 135,  230 => 132,  224 => 129,  220 => 128,  216 => 127,  212 => 126,  208 => 125,  169 => 88,  167 => 81,  163 => 79,  161 => 76,  155 => 72,  153 => 69,  124 => 43,  120 => 42,  114 => 39,  110 => 38,  104 => 35,  100 => 34,  96 => 33,  90 => 30,  76 => 19,  61 => 7,  53 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -394,7 +435,7 @@ class __TwigTemplate_f1ea3fca252e144799feb2f29fe79221 extends Template
     <title>Matchupz Dashboard</title>
 
     <!-- Favicon -->
-    <link rel=\"icon\" type=\"image/x-icon\" href=\"{{ asset('/img/favicon/favicon.ico') }}\" />
+    <link rel=\"icon\" type=\"image/x-icon\" href=\"{{ asset('/img/favicon/icon.svg') }}\" />
 
     <!-- Fonts -->
     <link rel=\"preconnect\" href=\"https://fonts.googleapis.com\" />
@@ -419,6 +460,24 @@ class __TwigTemplate_f1ea3fca252e144799feb2f29fe79221 extends Template
     <!-- Helpers -->
     <script src=\"{{ asset('/vendor/js/helpers.js') }}\"></script>
     <script src=\"{{ asset('/js/config.js') }}\"></script>
+    <style>
+      /* Ensure proper footer placement */
+      html, body {
+        height: 100%;
+      }
+      .layout-wrapper {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+      .content-wrapper {
+        flex: 1;
+      }
+      /* Your original footer styles */
+      .footer {
+        background-color: #f8f9fa !important;
+      }
+    </style>
   </head>
 
   <body>
@@ -448,6 +507,29 @@ class __TwigTemplate_f1ea3fca252e144799feb2f29fe79221 extends Template
         </div>
       </div>
 
+      <!-- Your exact footer code -->
+      <footer class=\"footer bg-light\">
+        <div class=\"container-fluid d-flex flex-md-row flex-column justify-content-between align-items-md-center gap-1 container-p-x py-3\">
+          <div>
+            <a href=\"https://themeselection.com/demo/sneat-bootstrap-html-admin-template/landing/\" target=\"_blank\" class=\"footer-text fw-bolder\">Sneat</a>
+            ©
+          </div>
+          <div>
+            <div class=\"dropdown dropup footer-link me-3\">
+              <button type=\"button\" class=\"btn btn-sm btn-outline-secondary dropdown-toggle\" data-bs-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
+                Language
+              </button>
+              <div class=\"dropdown-menu dropdown-menu-end\">
+                <a class=\"dropdown-item\" href=\"javascript:void(0);\"><i class=\"bx bx-dollar\"></i> Francais</a>
+                <a class=\"dropdown-item\" href=\"javascript:void(0);\"><i class=\"bx bx-euro\"></i> English</a>
+                <a class=\"dropdown-item\" href=\"javascript:void(0);\"><i class=\"bx bx-pound\"></i> Espanol</a>
+              </div>
+            </div>
+            <a href=\"javascript:void(0)\" class=\"btn btn-sm btn-outline-danger\"><i class=\"bx bx-log-out-circle\"></i> Logout</a>
+          </div>
+        </div>
+      </footer>
+
       <!-- Buy Now Button -->
       <div class=\"buy-now\">
         <a
@@ -457,7 +539,7 @@ class __TwigTemplate_f1ea3fca252e144799feb2f29fe79221 extends Template
         >Upgrade to Pro</a>
       </div>
     </div>
-
+    
     <!-- Core JS -->
     <script src=\"{{ asset('/vendor/libs/jquery/jquery.js') }}\"></script>
     <script src=\"{{ asset('/vendor/libs/popper/popper.js') }}\"></script>

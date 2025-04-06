@@ -80,7 +80,7 @@ class __TwigTemplate_3e90e16a72c3bc1bef8c3ab6011e0fef extends Template
         $context['_seq'] = CoreExtension::ensureTraversable(CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 5, $this->source); })()), "flashes", ["success"], "method", false, false, false, 5));
         foreach ($context['_seq'] as $context["_key"] => $context["message"]) {
             // line 6
-            yield "            <div class=\"alert alert-success\">";
+            yield "            <div class=\"alert alert-success alert-dismissable\">";
             yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($context["message"], "html", null, true);
             yield "</div>
         ";
@@ -97,12 +97,22 @@ class __TwigTemplate_3e90e16a72c3bc1bef8c3ab6011e0fef extends Template
         yield "
         <div class=\"card\">
             <h5 class=\"card-header d-flex justify-content-between align-items-center\">
-                All Clubs
-                <a href=\"";
-        // line 14
+                    Liste des Évaluations
+                    <div>
+                        <a href=\"";
+        // line 15
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("club_statistics");
+        yield "\" class=\"btn btn-info me-2\">
+                            <i class=\"bx bx-stats\"></i> Statistiques
+                        </a>
+                        <a href=\"";
+        // line 18
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("club_new");
-        yield "\" class=\"btn btn-primary\">Add New Club</a>
-            </h5>
+        yield "\" class=\"btn btn-primary\">
+                            <i class=\"bx bx-plus\"></i> Nouveau Club
+                        </a>
+                    </div>
+                </h5>
             <div class=\"table-responsive text-nowrap\">
                 <table class=\"table\">
                     <thead>
@@ -114,23 +124,23 @@ class __TwigTemplate_3e90e16a72c3bc1bef8c3ab6011e0fef extends Template
                     </thead>
                     <tbody>
                         ";
-        // line 26
+        // line 33
         $context['_parent'] = $context;
-        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["clubs"]) || array_key_exists("clubs", $context) ? $context["clubs"] : (function () { throw new RuntimeError('Variable "clubs" does not exist.', 26, $this->source); })()));
+        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["clubs"]) || array_key_exists("clubs", $context) ? $context["clubs"] : (function () { throw new RuntimeError('Variable "clubs" does not exist.', 33, $this->source); })()));
         $context['_iterated'] = false;
         foreach ($context['_seq'] as $context["_key"] => $context["club"]) {
-            // line 27
+            // line 34
             yield "                            <tr>
                                 <td>";
-            // line 28
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["club"], "nomClub", [], "any", false, false, false, 28), "html", null, true);
+            // line 35
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["club"], "nomClub", [], "any", false, false, false, 35), "html", null, true);
             yield "</td>
                                 <td>
                                     <img src=\"";
-            // line 30
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["club"], "photoUrl", [], "any", false, false, false, 30), "html", null, true);
+            // line 37
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["club"], "photoUrl", [], "any", false, false, false, 37), "html", null, true);
             yield "\" alt=\"";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["club"], "nomClub", [], "any", false, false, false, 30), "html", null, true);
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["club"], "nomClub", [], "any", false, false, false, 37), "html", null, true);
             yield "\" style=\"max-width: 100px;\">
                                 </td>
                                 <td>
@@ -140,24 +150,24 @@ class __TwigTemplate_3e90e16a72c3bc1bef8c3ab6011e0fef extends Template
                                         </button>
                                         <div class=\"dropdown-menu\">
                                             <a class=\"dropdown-item\" href=\"";
-            // line 38
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("club_show", ["idClub" => CoreExtension::getAttribute($this->env, $this->source, $context["club"], "idClub", [], "any", false, false, false, 38)]), "html", null, true);
+            // line 45
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("club_show", ["idClub" => CoreExtension::getAttribute($this->env, $this->source, $context["club"], "idClub", [], "any", false, false, false, 45)]), "html", null, true);
             yield "\">
                                                 <i class=\"bx bx-show me-1\"></i> View
                                             </a>
                                             <a class=\"dropdown-item\" href=\"";
-            // line 41
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("club_edit", ["idClub" => CoreExtension::getAttribute($this->env, $this->source, $context["club"], "idClub", [], "any", false, false, false, 41)]), "html", null, true);
+            // line 48
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("club_edit", ["idClub" => CoreExtension::getAttribute($this->env, $this->source, $context["club"], "idClub", [], "any", false, false, false, 48)]), "html", null, true);
             yield "\">
                                                 <i class=\"bx bx-edit-alt me-1\"></i> Edit
                                             </a>
                                             <form method=\"post\" action=\"";
-            // line 44
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("club_delete", ["idClub" => CoreExtension::getAttribute($this->env, $this->source, $context["club"], "idClub", [], "any", false, false, false, 44)]), "html", null, true);
+            // line 51
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("club_delete", ["idClub" => CoreExtension::getAttribute($this->env, $this->source, $context["club"], "idClub", [], "any", false, false, false, 51)]), "html", null, true);
             yield "\" style=\"display:inline;\" onsubmit=\"return confirm('Are you sure you want to delete this club?');\">
                                                 <input type=\"hidden\" name=\"_token\" value=\"";
-            // line 45
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderCsrfToken(("delete" . CoreExtension::getAttribute($this->env, $this->source, $context["club"], "idClub", [], "any", false, false, false, 45))), "html", null, true);
+            // line 52
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderCsrfToken(("delete" . CoreExtension::getAttribute($this->env, $this->source, $context["club"], "idClub", [], "any", false, false, false, 52))), "html", null, true);
             yield "\">
                                                 <button class=\"dropdown-item\" type=\"submit\">
                                                     <i class=\"bx bx-trash me-1\"></i> Delete
@@ -170,9 +180,9 @@ class __TwigTemplate_3e90e16a72c3bc1bef8c3ab6011e0fef extends Template
                         ";
             $context['_iterated'] = true;
         }
-        // line 54
+        // line 61
         if (!$context['_iterated']) {
-            // line 55
+            // line 62
             yield "                            <tr>
                                 <td colspan=\"3\" class=\"text-center\">No clubs found.</td>
                             </tr>
@@ -181,7 +191,7 @@ class __TwigTemplate_3e90e16a72c3bc1bef8c3ab6011e0fef extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_key'], $context['club'], $context['_parent'], $context['_iterated']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 59
+        // line 66
         yield "                    </tbody>
                 </table>
             </div>
@@ -218,7 +228,7 @@ class __TwigTemplate_3e90e16a72c3bc1bef8c3ab6011e0fef extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  185 => 59,  176 => 55,  174 => 54,  160 => 45,  156 => 44,  150 => 41,  144 => 38,  131 => 30,  126 => 28,  123 => 27,  118 => 26,  103 => 14,  97 => 10,  95 => 9,  92 => 8,  83 => 6,  79 => 5,  76 => 4,  63 => 3,  40 => 1,);
+        return array (  195 => 66,  186 => 62,  184 => 61,  170 => 52,  166 => 51,  160 => 48,  154 => 45,  141 => 37,  136 => 35,  133 => 34,  128 => 33,  110 => 18,  104 => 15,  97 => 10,  95 => 9,  92 => 8,  83 => 6,  79 => 5,  76 => 4,  63 => 3,  40 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -228,16 +238,23 @@ class __TwigTemplate_3e90e16a72c3bc1bef8c3ab6011e0fef extends Template
 {% block body %}
 
         {% for message in app.flashes('success') %}
-            <div class=\"alert alert-success\">{{ message }}</div>
+            <div class=\"alert alert-success alert-dismissable\">{{ message }}</div>
         {% endfor %}
 
         {% include 'club/club_widgets.html.twig' with {'clubs': clubs, 'clubs_with_photos': clubs_with_photos} %}
 
         <div class=\"card\">
             <h5 class=\"card-header d-flex justify-content-between align-items-center\">
-                All Clubs
-                <a href=\"{{ path('club_new') }}\" class=\"btn btn-primary\">Add New Club</a>
-            </h5>
+                    Liste des Évaluations
+                    <div>
+                        <a href=\"{{ path('club_statistics') }}\" class=\"btn btn-info me-2\">
+                            <i class=\"bx bx-stats\"></i> Statistiques
+                        </a>
+                        <a href=\"{{ path('club_new') }}\" class=\"btn btn-primary\">
+                            <i class=\"bx bx-plus\"></i> Nouveau Club
+                        </a>
+                    </div>
+                </h5>
             <div class=\"table-responsive text-nowrap\">
                 <table class=\"table\">
                     <thead>

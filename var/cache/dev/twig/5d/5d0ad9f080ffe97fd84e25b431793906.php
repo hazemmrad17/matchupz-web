@@ -165,7 +165,7 @@ class __TwigTemplate_e0b9a76de116b2a1ab2a71f0b78ee0eb extends Template
         <div class=\"card\">
             <div class=\"row row-bordered g-0\">
                 <div class=\"col-md-8\">
-                    <h5 class=\"card-header m-0 me-2 pb-3\">Player Growth</h5>
+                    <h5 class=\"card-header m-0 me-2 pb-3\">Player Distribution by Sport</h5>
                     <div id=\"totalRevenueChart\" class=\"px-2\"></div>
                 </div>
                 <div class=\"col-md-4\">
@@ -180,38 +180,40 @@ class __TwigTemplate_e0b9a76de116b2a1ab2a71f0b78ee0eb extends Template
                                     aria-haspopup=\"true\"
                                     aria-expanded=\"false\"
                                 >
-                                    2024
+                                    All Sports
                                 </button>
                                 <div class=\"dropdown-menu dropdown-menu-end\" aria-labelledby=\"growthReportId\">
-                                    <a class=\"dropdown-item\" href=\"javascript:void(0);\">2023</a>
-                                    <a class=\"dropdown-item\" href=\"javascript:void(0);\">2022</a>
-                                    <a class=\"dropdown-item\" href=\"javascript:void(0);\">2021</a>
+                                    <!-- Could add sport-specific filters here if needed -->
+                                    <a class=\"dropdown-item\" href=\"javascript:void(0);\">All Sports</a>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div id=\"growthChart\"></div>
-                    <div class=\"text-center fw-semibold pt-3 mb-2\">Player Registration Trend</div>
-                    <div class=\"d-flex px-xxl-4 px-lg-2 p-4 gap-xxl-3 gap-lg-1 gap-3 justify-content-between\">
-                        <div class=\"d-flex\">
-                            <div class=\"me-2\">
-                                <span class=\"badge bg-label-primary p-2\"><i class=\"bx bx-user text-primary\"></i></span>
-                            </div>
-                            <div class=\"d-flex flex-column\">
-                                <small>2024</small>
-                                <h6 class=\"mb-0\">";
-        // line 137
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::length($this->env->getCharset(), (isset($context["joueurs"]) || array_key_exists("joueurs", $context) ? $context["joueurs"] : (function () { throw new RuntimeError('Variable "joueurs" does not exist.', 137, $this->source); })())), "html", null, true);
+                        <div id=\"growthChart\"></div>
+                        <div class=\"text-center fw-semibold pt-3 mb-2\">Active Players Rate</div>
+                        <div class=\"d-flex px-xxl-4 px-lg-2 p-4 gap-xxl-3 gap-lg-1 gap-3 justify-content-between\">
+                            <div class=\"d-flex\">
+                                <div class=\"me-2\">
+                                    <span class=\"badge bg-label-primary p-2\"><i class=\"bx bx-user text-primary\"></i></span>
+                                </div>
+                                <div class=\"d-flex flex-column\">
+                                    <small>Total Players</small>
+                                    <h6 class=\"mb-0\">";
+        // line 135
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::length($this->env->getCharset(), (isset($context["joueurs"]) || array_key_exists("joueurs", $context) ? $context["joueurs"] : (function () { throw new RuntimeError('Variable "joueurs" does not exist.', 135, $this->source); })())), "html", null, true);
         yield "</h6>
+                                </div>
                             </div>
-                        </div>
-                        <div class=\"d-flex\">
-                            <div class=\"me-2\">
-                                <span class=\"badge bg-label-info p-2\"><i class=\"bx bx-user text-info\"></i></span>
-                            </div>
-                            <div class=\"d-flex flex-column\">
-                                <small>2023</small>
-                                <h6 class=\"mb-0\">N/A</h6>
+                            <div class=\"d-flex\">
+                                <div class=\"me-2\">
+                                    <span class=\"badge bg-label-success p-2\"><i class=\"bx bx-user-check text-success\"></i></span>
+                                </div>
+                                <div class=\"d-flex flex-column\">
+                                    <small>Active</small>
+                                    <h6 class=\"mb-0\">";
+        // line 144
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["active_players"]) || array_key_exists("active_players", $context) ? $context["active_players"] : (function () { throw new RuntimeError('Variable "active_players" does not exist.', 144, $this->source); })()), "html", null, true);
+        yield "</h6>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -219,6 +221,7 @@ class __TwigTemplate_e0b9a76de116b2a1ab2a71f0b78ee0eb extends Template
             </div>
         </div>
     </div>
+
     <!-- Transactions -->
     <div class=\"col-md-6 col-lg-4 order-2 mb-4\">
         <div class=\"card h-100\">
@@ -298,18 +301,38 @@ class __TwigTemplate_e0b9a76de116b2a1ab2a71f0b78ee0eb extends Template
     document.addEventListener('DOMContentLoaded', function () {
         var options = {
             chart: {
-                type: 'line',
+                type: 'bar', // Changed to bar chart for better visualization
                 height: 300
             },
             series: [{
                 name: 'Players',
-                data: [";
+                data: ";
         // line 211
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::length($this->env->getCharset(), (isset($context["joueurs"]) || array_key_exists("joueurs", $context) ? $context["joueurs"] : (function () { throw new RuntimeError('Variable "joueurs" does not exist.', 211, $this->source); })())), "html", null, true);
-        yield "]
+        yield json_encode((isset($context["sport_distribution"]) || array_key_exists("sport_distribution", $context) ? $context["sport_distribution"] : (function () { throw new RuntimeError('Variable "sport_distribution" does not exist.', 211, $this->source); })()));
+        yield "
             }],
             xaxis: {
-                categories: ['2024']
+                categories: ";
+        // line 214
+        yield json_encode((isset($context["sport_names"]) || array_key_exists("sport_names", $context) ? $context["sport_names"] : (function () { throw new RuntimeError('Variable "sport_names" does not exist.', 214, $this->source); })()));
+        yield "
+            },
+            tooltip: {
+                y: {
+                    formatter: function (val) {
+                        return val + \" players\"
+                    }
+                }
+            },
+            plotOptions: {
+                bar: {
+                    horizontal: false,
+                    columnWidth: '55%',
+                    endingShape: 'rounded'
+                }
+            },
+            dataLabels: {
+                enabled: true
             }
         };
         var chart = new ApexCharts(document.querySelector(\"#totalRevenueChart\"), options);
@@ -346,7 +369,7 @@ class __TwigTemplate_e0b9a76de116b2a1ab2a71f0b78ee0eb extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  308 => 211,  291 => 196,  280 => 191,  276 => 190,  270 => 187,  264 => 186,  257 => 182,  253 => 180,  249 => 179,  204 => 137,  133 => 69,  119 => 58,  111 => 53,  91 => 36,  69 => 17,  58 => 9,  48 => 1,);
+        return array (  317 => 214,  311 => 211,  294 => 196,  283 => 191,  279 => 190,  273 => 187,  267 => 186,  260 => 182,  256 => 180,  252 => 179,  214 => 144,  202 => 135,  133 => 69,  119 => 58,  111 => 53,  91 => 36,  69 => 17,  58 => 9,  48 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -453,7 +476,7 @@ class __TwigTemplate_e0b9a76de116b2a1ab2a71f0b78ee0eb extends Template
         <div class=\"card\">
             <div class=\"row row-bordered g-0\">
                 <div class=\"col-md-8\">
-                    <h5 class=\"card-header m-0 me-2 pb-3\">Player Growth</h5>
+                    <h5 class=\"card-header m-0 me-2 pb-3\">Player Distribution by Sport</h5>
                     <div id=\"totalRevenueChart\" class=\"px-2\"></div>
                 </div>
                 <div class=\"col-md-4\">
@@ -468,35 +491,34 @@ class __TwigTemplate_e0b9a76de116b2a1ab2a71f0b78ee0eb extends Template
                                     aria-haspopup=\"true\"
                                     aria-expanded=\"false\"
                                 >
-                                    2024
+                                    All Sports
                                 </button>
                                 <div class=\"dropdown-menu dropdown-menu-end\" aria-labelledby=\"growthReportId\">
-                                    <a class=\"dropdown-item\" href=\"javascript:void(0);\">2023</a>
-                                    <a class=\"dropdown-item\" href=\"javascript:void(0);\">2022</a>
-                                    <a class=\"dropdown-item\" href=\"javascript:void(0);\">2021</a>
+                                    <!-- Could add sport-specific filters here if needed -->
+                                    <a class=\"dropdown-item\" href=\"javascript:void(0);\">All Sports</a>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div id=\"growthChart\"></div>
-                    <div class=\"text-center fw-semibold pt-3 mb-2\">Player Registration Trend</div>
-                    <div class=\"d-flex px-xxl-4 px-lg-2 p-4 gap-xxl-3 gap-lg-1 gap-3 justify-content-between\">
-                        <div class=\"d-flex\">
-                            <div class=\"me-2\">
-                                <span class=\"badge bg-label-primary p-2\"><i class=\"bx bx-user text-primary\"></i></span>
+                        <div id=\"growthChart\"></div>
+                        <div class=\"text-center fw-semibold pt-3 mb-2\">Active Players Rate</div>
+                        <div class=\"d-flex px-xxl-4 px-lg-2 p-4 gap-xxl-3 gap-lg-1 gap-3 justify-content-between\">
+                            <div class=\"d-flex\">
+                                <div class=\"me-2\">
+                                    <span class=\"badge bg-label-primary p-2\"><i class=\"bx bx-user text-primary\"></i></span>
+                                </div>
+                                <div class=\"d-flex flex-column\">
+                                    <small>Total Players</small>
+                                    <h6 class=\"mb-0\">{{ joueurs|length }}</h6>
+                                </div>
                             </div>
-                            <div class=\"d-flex flex-column\">
-                                <small>2024</small>
-                                <h6 class=\"mb-0\">{{ joueurs|length }}</h6>
-                            </div>
-                        </div>
-                        <div class=\"d-flex\">
-                            <div class=\"me-2\">
-                                <span class=\"badge bg-label-info p-2\"><i class=\"bx bx-user text-info\"></i></span>
-                            </div>
-                            <div class=\"d-flex flex-column\">
-                                <small>2023</small>
-                                <h6 class=\"mb-0\">N/A</h6>
+                            <div class=\"d-flex\">
+                                <div class=\"me-2\">
+                                    <span class=\"badge bg-label-success p-2\"><i class=\"bx bx-user-check text-success\"></i></span>
+                                </div>
+                                <div class=\"d-flex flex-column\">
+                                    <small>Active</small>
+                                    <h6 class=\"mb-0\">{{ active_players }}</h6>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -504,6 +526,7 @@ class __TwigTemplate_e0b9a76de116b2a1ab2a71f0b78ee0eb extends Template
             </div>
         </div>
     </div>
+
     <!-- Transactions -->
     <div class=\"col-md-6 col-lg-4 order-2 mb-4\">
         <div class=\"card h-100\">
@@ -556,15 +579,32 @@ class __TwigTemplate_e0b9a76de116b2a1ab2a71f0b78ee0eb extends Template
     document.addEventListener('DOMContentLoaded', function () {
         var options = {
             chart: {
-                type: 'line',
+                type: 'bar', // Changed to bar chart for better visualization
                 height: 300
             },
             series: [{
                 name: 'Players',
-                data: [{{ joueurs|length }}]
+                data: {{ sport_distribution|json_encode|raw }}
             }],
             xaxis: {
-                categories: ['2024']
+                categories: {{ sport_names|json_encode|raw }}
+            },
+            tooltip: {
+                y: {
+                    formatter: function (val) {
+                        return val + \" players\"
+                    }
+                }
+            },
+            plotOptions: {
+                bar: {
+                    horizontal: false,
+                    columnWidth: '55%',
+                    endingShape: 'rounded'
+                }
+            },
+            dataLabels: {
+                enabled: true
             }
         };
         var chart = new ApexCharts(document.querySelector(\"#totalRevenueChart\"), options);

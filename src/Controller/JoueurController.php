@@ -28,9 +28,26 @@ class JoueurController extends AbstractController
         $joueurs = $joueurRepository->findAll();
         $topPerformers = $joueurRepository->findBy([], ['taille' => 'DESC'], 4);
 
+        // Calculate sport distribution
+        $sportDistribution = $this->entityManager->createQuery(
+            'SELECT s.nomSport as sportName, COUNT(j.idJoueur) as playerCount 
+            FROM App\Entity\Joueur j 
+            JOIN j.sport s 
+            GROUP BY s.nomSport'
+        )->getResult();
+
+        $sportNames = array_column($sportDistribution, 'sportName');
+        $sportCounts = array_column($sportDistribution, 'playerCount');
+
+        // Calculate active players (assuming 'Actif' is the status for active players)
+        $activePlayers = count(array_filter($joueurs, fn($joueur) => $joueur->getStatut() === 'Actif'));
+
         return $this->render('joueur/main.html.twig', [
             'joueurs' => $joueurs,
             'topPerformers' => $topPerformers,
+            'sport_distribution' => $sportCounts,
+            'sport_names' => $sportNames,
+            'active_players' => $activePlayers,
         ]);
     }
 

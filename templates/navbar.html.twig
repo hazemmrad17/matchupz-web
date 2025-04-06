@@ -2,47 +2,8 @@
   <div class="app-brand demo">
     <a href="{{ path('joueur_main') }}" class="app-brand-link">
       <span class="app-brand-logo demo">
-        <svg
-          width="25"
-          viewBox="0 0 25 42"
-          version="1.1"
-          xmlns="http://www.w3.org/2000/svg"
-          xmlns:xlink="http://www.w3.org/1999/xlink"
-        >
-          <!-- SVG content remains unchanged -->
-          <defs>
-            <path d="..." id="path-1"></path>
-            <path d="..." id="path-3"></path>
-            <path d="..." id="path-4"></path>
-            <path d="..." id="path-5"></path>
-          </defs>
-          <g id="g-app-brand" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-            <g id="Brand-Logo" transform="translate(-27.000000, -15.000000)">
-              <g id="Icon" transform="translate(27.000000, 15.000000)">
-                <g id="Mask" transform="translate(0.000000, 8.000000)">
-                  <mask id="mask-2" fill="white">
-                    <use xlink:href="#path-1"></use>
-                  </mask>
-                  <use fill="#696cff" xlink:href="#path-1"></use>
-                  <g id="Path-3" mask="url(#mask-2)">
-                    <use fill="#696cff" xlink:href="#path-3"></use>
-                    <use fill-opacity="0.2" fill="#FFFFFF" xlink:href="#path-3"></use>
-                  </g>
-                  <g id="Path-4" mask="url(#mask-2)">
-                    <use fill="#696cff" xlink:href="#path-4"></use>
-                    <use fill-opacity="0.2" fill="#FFFFFF" xlink:href="#path-4"></use>
-                  </g>
-                </g>
-                <g id="Triangle" transform="translate(19.000000, 11.000000) rotate(-300.000000) translate(-19.000000, -11.000000)">
-                  <use fill="#696cff" xlink:href="#path-5"></use>
-                  <use fill-opacity="0.2" fill="#FFFFFF" xlink:href="#path-5"></use>
-                </g>
-              </g>
-            </g>
-          </g>
-        </svg>
+        <img src="{{ asset('img/logo_white.svg') }}" alt="Your App Name" width="200" height="200">
       </span>
-      <span class="app-brand-text demo menu-text fw-bolder ms-2">Sneat</span>
     </a>
     <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
       <i class="bx bx-chevron-left bx-sm align-middle"></i>
@@ -72,8 +33,13 @@
       </a>
     </li>
 
+<!-- Spacer: Users Section -->
+    <li class="menu-header small text-uppercase">
+      <span class="menu-header-text">Players Section</span>
+    </li>
+
     <!-- Under Team Management section -->
-    <li class="menu-item {% if app.request.attributes.get('_route') starts with 'joueur_' or app.request.attributes.get('_route') starts with 'sport_' or app.request.attributes.get('_route') starts with 'club_' %}active open{% endif %}">
+    <li class="menu-item {% if app.request.attributes.get('_route') starts with 'joueur_' or app.request.attributes.get('_route') starts with 'sport_' or app.request.attributes.get('_route') starts with 'club_' or app.request.attributes.get('_route') starts with 'performance_joueur_' or app.request.attributes.get('_route') starts with 'app_historique_club_' or app.request.attributes.get('_route') starts with 'app_evaluation_physique_' %}active open{% endif %}">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon tf-icons bx bx-group"></i>
         <div data-i18n="Equipes">Equipes</div>
@@ -84,8 +50,8 @@
             <div data-i18n="Joueurs">Joueurs</div>
           </a>
         </li>
-        <li class="menu-item">
-          <a href="{{ path('joueur_main') }}" class="menu-link">
+        <li class="menu-item {% if app.request.attributes.get('_route') starts with 'app_evaluation_physique_' %}active{% endif %}">
+          <a href="{{ path('app_evaluation_physique_index') }}" class="menu-link">
             <div data-i18n="EvaluationPhysique">Evaluation Physique</div>
           </a>
         </li>
@@ -99,13 +65,13 @@
             <div data-i18n="Sport">Sport</div>
           </a>
         </li>
-        <li class="menu-item">
-          <a href="{{ path('joueur_main') }}" class="menu-link">
+        <li class="menu-item {% if app.request.attributes.get('_route') starts with 'performance_joueur_' %}active{% endif %}">
+          <a href="{{ path('performance_joueur_index') }}" class="menu-link">
             <div data-i18n="PerformanceJoueur">Performance Joueur</div>
           </a>
         </li>
-        <li class="menu-item">
-          <a href="{{ path('joueur_main') }}" class="menu-link">
+        <li class="menu-item {% if app.request.attributes.get('_route') starts with 'app_historique_club_' %}active{% endif %}">
+          <a href="{{ path('app_historique_club_index') }}" class="menu-link">
             <div data-i18n="HistoriqueClub">Historique Club</div>
           </a>
         </li>

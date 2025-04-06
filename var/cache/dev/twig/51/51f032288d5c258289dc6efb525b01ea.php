@@ -62,11 +62,11 @@ class __TwigTemplate_333af35d01502999b8b63a68b145aff2 extends Template
                         <a href=\"";
         // line 12
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("club_new");
-        yield "\" class=\"btn btn-sm btn-outline-primary\">Add New Club</a>
+        yield "\" class=\"btn btn-sm btn-outline-primary\">Ajouter Nouveau Club</a>
                         <a href=\"";
         // line 13
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("club_statistics");
-        yield "\" class=\"btn btn-sm btn-primary ms-2\">View All</a>
+        yield "\" class=\"btn btn-sm btn-primary ms-2\">Voir Tous</a>
                     </div>
                 </div>
                 <div class=\"col-sm-5 text-center text-sm-left\">
@@ -74,12 +74,12 @@ class __TwigTemplate_333af35d01502999b8b63a68b145aff2 extends Template
                         <img
                             src=\"";
         // line 19
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("/img/illustrations/team-meeting-light.png"), "html", null, true);
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("/img/illustrations/man-with-laptop-light.png"), "html", null, true);
         yield "\"
                             height=\"140\"
-                            alt=\"Clubs Overview\"
-                            data-app-dark-img=\"illustrations/team-meeting-dark.png\"
-                            data-app-light-img=\"illustrations/team-meeting-light.png\"
+                            alt=\"View Badge User\"
+                            data-app-dark-img=\"illustrations/man-with-laptop-dark.png\"
+                            data-app-light-img=\"illustrations/man-with-laptop-light.png\"
                         />
                     </div>
                 </div>
@@ -256,18 +256,18 @@ class __TwigTemplate_333af35d01502999b8b63a68b145aff2 extends Template
                         <p class=\"mb-4\">
                             You have <span class=\"fw-bold\">{{ clubs|length }}</span> clubs registered in the system.
                         </p>
-                        <a href=\"{{ path('club_new') }}\" class=\"btn btn-sm btn-outline-primary\">Add New Club</a>
-                        <a href=\"{{ path('club_statistics') }}\" class=\"btn btn-sm btn-primary ms-2\">View All</a>
+                        <a href=\"{{ path('club_new') }}\" class=\"btn btn-sm btn-outline-primary\">Ajouter Nouveau Club</a>
+                        <a href=\"{{ path('club_statistics') }}\" class=\"btn btn-sm btn-primary ms-2\">Voir Tous</a>
                     </div>
                 </div>
                 <div class=\"col-sm-5 text-center text-sm-left\">
                     <div class=\"card-body pb-0 px-0 px-md-4\">
                         <img
-                            src=\"{{ asset('/img/illustrations/team-meeting-light.png') }}\"
+                            src=\"{{ asset('/img/illustrations/man-with-laptop-light.png') }}\"
                             height=\"140\"
-                            alt=\"Clubs Overview\"
-                            data-app-dark-img=\"illustrations/team-meeting-dark.png\"
-                            data-app-light-img=\"illustrations/team-meeting-light.png\"
+                            alt=\"View Badge User\"
+                            data-app-dark-img=\"illustrations/man-with-laptop-dark.png\"
+                            data-app-light-img=\"illustrations/man-with-laptop-light.png\"
                         />
                     </div>
                 </div>

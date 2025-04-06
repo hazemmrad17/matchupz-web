@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/evaluation/physique')]
+#[Route('/evaluation_physique')]
 class EvaluationPhysiqueController extends AbstractController
 {
     #[Route('/statistiques', name: 'app_evaluation_physique_stats', methods: ['GET'])]
