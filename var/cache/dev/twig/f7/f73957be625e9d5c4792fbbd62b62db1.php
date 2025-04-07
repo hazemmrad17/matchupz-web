@@ -255,6 +255,6 @@ class __TwigTemplate_6d7bfbd877759c61c62008c725e344d3 extends Template
                 <!--/ User -->
               </ul>
             </div>
-          </nav>", "searchbar.html.twig", "C:\\Users\\Hazem Mrad\\Desktop\\MatchupZ-Web-joueur-espace\\templates\\searchbar.html.twig");
+          </nav>", "searchbar.html.twig", "C:\\Users\\Hazem Mrad\\Desktop\\MatchupZ-Web-joueur-espace - Copy (5)\\templates\\searchbar.html.twig");
     }
 }

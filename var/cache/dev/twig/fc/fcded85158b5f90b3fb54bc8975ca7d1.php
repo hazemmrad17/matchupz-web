@@ -440,6 +440,6 @@ class __TwigTemplate_437d7c5046679771b0a97edec46c6676 extends Template
             }).render();
         });
     </script>
-{% endblock %}", "sport/statistics.html.twig", "C:\\Users\\Hazem Mrad\\Desktop\\MatchupZ-Web-joueur-espace\\templates\\sport\\statistics.html.twig");
+{% endblock %}", "sport/statistics.html.twig", "C:\\Users\\Hazem Mrad\\Desktop\\MatchupZ-Web-joueur-espace - Copy (5)\\templates\\sport\\statistics.html.twig");
     }
 }

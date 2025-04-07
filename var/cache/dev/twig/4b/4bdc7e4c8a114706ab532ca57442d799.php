@@ -562,6 +562,6 @@ class __TwigTemplate_f1ea3fca252e144799feb2f29fe79221 extends Template
     <script async defer src=\"https://buttons.github.io/buttons.js\"></script>
     <script src=\"https://cdn.jsdelivr.net/npm/chart.js\"></script>
   </body>
-</html>", "base.html.twig", "C:\\Users\\Hazem Mrad\\Desktop\\MatchupZ-Web-joueur-espace\\templates\\base.html.twig");
+</html>", "base.html.twig", "C:\\Users\\Hazem Mrad\\Desktop\\MatchupZ-Web-joueur-espace - Copy (5)\\templates\\base.html.twig");
     }
 }

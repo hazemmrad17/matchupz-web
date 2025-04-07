@@ -192,4 +192,88 @@ class EvaluationPhysiqueController extends AbstractController
         ]);
     }
 
+    #[Route('/joueur/{joueurId}', name: 'app_evaluation_physique_by_joueur', methods: ['GET'])]
+    public function evaluationsByJoueur(
+        int $joueurId,
+        EvaluationPhysiqueRepository $evaluationRepository,
+        JoueurRepository $joueurRepository,
+        AnthropometryRepository $anthropometryRepository,
+        FlexibilityEvaluationRepository $flexibilityEvaluationRepository
+    ): Response {
+        // Fetch the player
+        $joueur = $joueurRepository->find($joueurId);
+        if (!$joueur) {
+            throw $this->createNotFoundException('Joueur non trouvé');
+        }
+
+        // Fetch evaluations for the player, ordered by date (most recent first)
+        $evaluations = $evaluationRepository->findBy(['joueur' => $joueur], ['dateEvaluation' => 'DESC']);
+
+        // Calculate trends for performance metrics (endurance, force, vitesse)
+        $enduranceTrend = [];
+        $forceTrend = [];
+        $vitesseTrend = [];
+        $dates = [];
+        foreach ($evaluations as $evaluation) {
+            $enduranceTrend[] = $evaluation->getNiveauEndurance() ?? 0;
+            $forceTrend[] = $evaluation->getForcePhysique() ?? 0;
+            $vitesseTrend[] = $evaluation->getVitesse() ?? 0;
+            $dates[] = $evaluation->getDateEvaluation() ? $evaluation->getDateEvaluation()->format('d/m/Y') : 'N/A';
+        }
+
+        // Fetch the most recent anthropometric data for the player
+        $anthropometryEntity = $anthropometryRepository->findOneBy(
+            ['joueur' => $joueur],
+            ['dateMeasurement' => 'DESC']
+        );
+
+        // Prepare anthropometric data, with defaults if no data exists
+        $anthropometry = [
+            'height' => $joueur->getTaille(),
+            'weight' => $joueur->getPoids(),
+            'bicipital' => $anthropometryEntity ? $anthropometryEntity->getBicipital() : null,
+            'tricipital' => $anthropometryEntity ? $anthropometryEntity->getTricipital() : null,
+            'quadricipital_right' => $anthropometryEntity ? $anthropometryEntity->getQuadricipitalRight() : null,
+            'geminal_right' => $anthropometryEntity ? $anthropometryEntity->getGeminalRight() : null,
+            'fat_mass' => $anthropometryEntity ? $anthropometryEntity->getFatMass() : null,
+        ];
+
+        // Fetch the most recent flexibility evaluation for the player
+        $flexibilityEntity = $flexibilityEvaluationRepository->findOneBy(
+            ['joueur' => $joueur],
+            ['dateEvaluation' => 'DESC']
+        );
+
+        // Prepare flexibility and mobility data, with defaults if no data exists
+        $flexibilityData = [
+            'rear_chain' => [
+                'ev1' => $flexibilityEntity ? $flexibilityEntity->getRearChainEv1() : null,
+                'ev2' => $flexibilityEntity ? $flexibilityEntity->getRearChainEv2() : null,
+                'avg' => $flexibilityEntity ? $flexibilityEntity->getRearChainAvg() : null,
+            ],
+            'adductors' => [
+                'ev1' => $flexibilityEntity ? $flexibilityEntity->getAdductorsEv1() : null,
+                'ev2' => $flexibilityEntity ? $flexibilityEntity->getAdductorsEv2() : null,
+            ],
+            'mobility_active_straight_leg_raise' => [
+                'ev1' => $flexibilityEntity ? $flexibilityEntity->getActiveStraightLegRaiseEv1() : null,
+                'ev2' => $flexibilityEntity ? $flexibilityEntity->getActiveStraightLegRaiseEv2() : null,
+            ],
+            'mobility_overhead_squat' => [
+                'ev1' => $flexibilityEntity ? $flexibilityEntity->getOverheadSquatEv1() : null,
+                'ev2' => $flexibilityEntity ? $flexibilityEntity->getOverheadSquatEv2() : null,
+            ],
+        ];
+
+        return $this->render('evaluation_physique/by_joueur.html.twig', [
+            'joueur' => $joueur,
+            'evaluations' => $evaluations,
+            'endurance_trend' => $enduranceTrend,
+            'force_trend' => $forceTrend,
+            'vitesse_trend' => $vitesseTrend,
+            'dates' => $dates,
+            'flexibility_data' => $flexibilityData,
+            'anthropometry' => $anthropometry,
+        ]);
+    }
 }

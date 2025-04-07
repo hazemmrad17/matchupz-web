@@ -573,6 +573,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
-{% endblock %}", "evaluation_physique/statistics.html.twig", "C:\\Users\\Hazem Mrad\\Desktop\\MatchupZ-Web-joueur-espace\\templates\\evaluation_physique\\statistics.html.twig");
+{% endblock %}", "evaluation_physique/statistics.html.twig", "C:\\Users\\Hazem Mrad\\Desktop\\MatchupZ-Web-joueur-espace - Copy (5)\\templates\\evaluation_physique\\statistics.html.twig");
     }
 }

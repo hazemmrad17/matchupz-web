@@ -109,15 +109,15 @@ class __TwigTemplate_e0b9a76de116b2a1ab2a71f0b78ee0eb extends Template
                                     <a class=\"dropdown-item\" href=\"";
         // line 53
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("joueur_statistics");
-        yield "\">Go To Statistics Page</a>
+        yield "\">Aller à la Page Statistiques</a>
                                 </div>
                             </div>
                         </div>
-                        <span class=\"fw-semibold d-block mb-1\">Statistics</span>
+                        <span class=\"fw-semibold d-block mb-1\">Statistiques</span>
                         <h3 class=\"card-title mb-2\">";
         // line 58
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::length($this->env->getCharset(), (isset($context["joueurs"]) || array_key_exists("joueurs", $context) ? $context["joueurs"] : (function () { throw new RuntimeError('Variable "joueurs" does not exist.', 58, $this->source); })())), "html", null, true);
-        yield " Players</h3>
+        yield " Joueurs</h3>
                         <small class=\"text-success fw-semibold\"><i class=\"bx bx-up-arrow-alt\"></i> Total Registered</small>
                     </div>
                 </div>
@@ -153,7 +153,7 @@ class __TwigTemplate_e0b9a76de116b2a1ab2a71f0b78ee0eb extends Template
                             </div>
                         </div>
                         <span>Player Tracking</span>
-                        <h3 class=\"card-title text-nowrap mb-1\">In Progress</h3>
+                        <h3 class=\"card-title text-nowrap mb-1\">En Cours</h3>
                         <small class=\"text-success fw-semibold\"><i class=\"bx bx-up-arrow-alt\"></i> Coming Soon</small>
                     </div>
                 </div>
@@ -426,12 +426,12 @@ class __TwigTemplate_e0b9a76de116b2a1ab2a71f0b78ee0eb extends Template
                                     <i class=\"bx bx-dots-vertical-rounded\"></i>
                                 </button>
                                 <div class=\"dropdown-menu dropdown-menu-end\" aria-labelledby=\"cardOpt3\">
-                                    <a class=\"dropdown-item\" href=\"{{ path('joueur_statistics') }}\">Go To Statistics Page</a>
+                                    <a class=\"dropdown-item\" href=\"{{ path('joueur_statistics') }}\">Aller à la Page Statistiques</a>
                                 </div>
                             </div>
                         </div>
-                        <span class=\"fw-semibold d-block mb-1\">Statistics</span>
-                        <h3 class=\"card-title mb-2\">{{ joueurs|length }} Players</h3>
+                        <span class=\"fw-semibold d-block mb-1\">Statistiques</span>
+                        <h3 class=\"card-title mb-2\">{{ joueurs|length }} Joueurs</h3>
                         <small class=\"text-success fw-semibold\"><i class=\"bx bx-up-arrow-alt\"></i> Total Registered</small>
                     </div>
                 </div>
@@ -464,7 +464,7 @@ class __TwigTemplate_e0b9a76de116b2a1ab2a71f0b78ee0eb extends Template
                             </div>
                         </div>
                         <span>Player Tracking</span>
-                        <h3 class=\"card-title text-nowrap mb-1\">In Progress</h3>
+                        <h3 class=\"card-title text-nowrap mb-1\">En Cours</h3>
                         <small class=\"text-success fw-semibold\"><i class=\"bx bx-up-arrow-alt\"></i> Coming Soon</small>
                     </div>
                 </div>
@@ -610,6 +610,6 @@ class __TwigTemplate_e0b9a76de116b2a1ab2a71f0b78ee0eb extends Template
         var chart = new ApexCharts(document.querySelector(\"#totalRevenueChart\"), options);
         chart.render();
     });
-</script>", "joueur/widgets.html.twig", "C:\\Users\\Hazem Mrad\\Desktop\\MatchupZ-Web-joueur-espace\\templates\\joueur\\widgets.html.twig");
+</script>", "joueur/widgets.html.twig", "C:\\Users\\Hazem Mrad\\Desktop\\MatchupZ-Web-joueur-espace - Copy (5)\\templates\\joueur\\widgets.html.twig");
     }
 }

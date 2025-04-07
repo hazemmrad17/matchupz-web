@@ -377,6 +377,6 @@ class __TwigTemplate_0746b8fd7af50deb204dddc8293769d4 extends Template
             });
         });
     </script>
-{% endblock %}", "club/new.html.twig", "C:\\Users\\Hazem Mrad\\Desktop\\MatchupZ-Web-joueur-espace\\templates\\club\\new.html.twig");
+{% endblock %}", "club/new.html.twig", "C:\\Users\\Hazem Mrad\\Desktop\\MatchupZ-Web-joueur-espace - Copy (5)\\templates\\club\\new.html.twig");
     }
 }

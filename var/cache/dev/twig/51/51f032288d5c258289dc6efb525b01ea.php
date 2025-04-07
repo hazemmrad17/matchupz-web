@@ -371,6 +371,6 @@ class __TwigTemplate_333af35d01502999b8b63a68b145aff2 extends Template
         var chart = new ApexCharts(document.querySelector(\"#clubsChart\"), options);
         chart.render();
     });
-</script>", "club/club_widgets.html.twig", "C:\\Users\\Hazem Mrad\\Desktop\\MatchupZ-Web-joueur-espace\\templates\\club\\club_widgets.html.twig");
+</script>", "club/club_widgets.html.twig", "C:\\Users\\Hazem Mrad\\Desktop\\MatchupZ-Web-joueur-espace - Copy (5)\\templates\\club\\club_widgets.html.twig");
     }
 }

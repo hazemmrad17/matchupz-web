@@ -69,7 +69,7 @@ class __TwigTemplate_14fb821bb1fbf8db67e77c8b02293502 extends Template
     <!-- Dashboard -->
     <li class=\"menu-item ";
         // line 17
-        if ((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 17, $this->source); })()), "request", [], "any", false, false, false, 17), "attributes", [], "any", false, false, false, 17), "get", ["_route"], "method", false, false, false, 17) == "app_dashboard")) {
+        if ((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 17, $this->source); })()), "request", [], "any", false, false, false, 17), "attributes", [], "any", false, false, false, 17), "get", ["_route"], "method", false, false, false, 17) == "joueur_main")) {
             yield "active";
         }
         yield "\">
@@ -89,7 +89,7 @@ class __TwigTemplate_14fb821bb1fbf8db67e77c8b02293502 extends Template
     <!-- Users -->
     <li class=\"menu-item ";
         // line 29
-        if ((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 29, $this->source); })()), "request", [], "any", false, false, false, 29), "attributes", [], "any", false, false, false, 29), "get", ["_route"], "method", false, false, false, 29) == "app_users")) {
+        if ((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 29, $this->source); })()), "request", [], "any", false, false, false, 29), "attributes", [], "any", false, false, false, 29), "get", ["_route"], "method", false, false, false, 29) == "joueur_main")) {
             yield "active";
         }
         yield "\">
@@ -102,9 +102,9 @@ class __TwigTemplate_14fb821bb1fbf8db67e77c8b02293502 extends Template
       </a>
     </li>
 
-<!-- Spacer: Users Section -->
+    <!-- Spacer: Players Section -->
     <li class=\"menu-header small text-uppercase\">
-      <span class=\"menu-header-text\">Players Section</span>
+      <span class=\"menu-header-text\">Section Staff Technique</span>
     </li>
 
     <!-- Under Team Management section -->
@@ -116,7 +116,7 @@ class __TwigTemplate_14fb821bb1fbf8db67e77c8b02293502 extends Template
         yield "\">
       <a href=\"javascript:void(0);\" class=\"menu-link menu-toggle\">
         <i class=\"menu-icon tf-icons bx bx-group\"></i>
-        <div data-i18n=\"Equipes\">Equipes</div>
+        <div data-i18n=\"Equipes\">Joueurs</div>
       </a>
       <ul class=\"menu-sub\">
         <li class=\"menu-item ";
@@ -155,7 +155,7 @@ class __TwigTemplate_14fb821bb1fbf8db67e77c8b02293502 extends Template
         // line 59
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("club_index");
         yield "\" class=\"menu-link\">
-            <div data-i18n=\"Club\">Club</div>
+            <div data-i18n=\"Club偶\"Club\">Club</div>
           </a>
         </li>
         <li class=\"menu-item ";
@@ -204,7 +204,7 @@ class __TwigTemplate_14fb821bb1fbf8db67e77c8b02293502 extends Template
     <li class=\"menu-header small text-uppercase\">
       <span class=\"menu-header-text\">Match Management</span>
     </li>
-    <!-- Matchs (Scrollable with 2 items) -->
+    <!-- Matchs -->
     <li class=\"menu-item ";
         // line 86
         if ((is_string($_v22 = CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 86, $this->source); })()), "request", [], "any", false, false, false, 86), "attributes", [], "any", false, false, false, 86), "get", ["_route"], "method", false, false, false, 86)) && is_string($_v23 = "app_matchs_") && str_starts_with($_v22, $_v23))) {
@@ -249,7 +249,7 @@ class __TwigTemplate_14fb821bb1fbf8db67e77c8b02293502 extends Template
     <li class=\"menu-header small text-uppercase\">
       <span class=\"menu-header-text\">Logistics</span>
     </li>
-    <!-- Logistique (Scrollable with 2 items) -->
+    <!-- Logistique -->
     <li class=\"menu-item ";
         // line 110
         if ((is_string($_v24 = CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 110, $this->source); })()), "request", [], "any", false, false, false, 110), "attributes", [], "any", false, false, false, 110), "get", ["_route"], "method", false, false, false, 110)) && is_string($_v25 = "app_logistique_") && str_starts_with($_v24, $_v25))) {
@@ -294,7 +294,7 @@ class __TwigTemplate_14fb821bb1fbf8db67e77c8b02293502 extends Template
     <li class=\"menu-header small text-uppercase\">
       <span class=\"menu-header-text\">Sponsorship</span>
     </li>
-    <!-- Sponsoring (Scrollable with 2 items) -->
+    <!-- Sponsoring -->
     <li class=\"menu-item ";
         // line 134
         if ((is_string($_v26 = CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 134, $this->source); })()), "request", [], "any", false, false, false, 134), "attributes", [], "any", false, false, false, 134), "get", ["_route"], "method", false, false, false, 134)) && is_string($_v27 = "app_sponsoring_") && str_starts_with($_v26, $_v27))) {
@@ -337,12 +337,12 @@ class __TwigTemplate_14fb821bb1fbf8db67e77c8b02293502 extends Template
 
     <!-- Spacer: Sports Space -->
     <li class=\"menu-header small text-uppercase\">
-      <span class=\"menu-header-text\">Sports Space</span>
+      <span class=\"menu-header-text\">Section Espace</span>
     </li>
-    <!-- Espace Sportif (Scrollable with 2 items) -->
+    <!-- Espace Sportif -->
     <li class=\"menu-item ";
         // line 158
-        if ((is_string($_v28 = CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 158, $this->source); })()), "request", [], "any", false, false, false, 158), "attributes", [], "any", false, false, false, 158), "get", ["_route"], "method", false, false, false, 158)) && is_string($_v29 = "app_espace_") && str_starts_with($_v28, $_v29))) {
+        if ((is_string($_v28 = CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 158, $this->source); })()), "request", [], "any", false, false, false, 158), "attributes", [], "any", false, false, false, 158), "get", ["_route"], "method", false, false, false, 158)) && is_string($_v29 = "espace_") && str_starts_with($_v28, $_v29))) {
             yield "active open";
         }
         yield "\">
@@ -353,32 +353,31 @@ class __TwigTemplate_14fb821bb1fbf8db67e77c8b02293502 extends Template
       <ul class=\"menu-sub\">
         <li class=\"menu-item ";
         // line 164
-        if ((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 164, $this->source); })()), "request", [], "any", false, false, false, 164), "attributes", [], "any", false, false, false, 164), "get", ["_route"], "method", false, false, false, 164) == "app_espace_facilities")) {
+        if ((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 164, $this->source); })()), "request", [], "any", false, false, false, 164), "attributes", [], "any", false, false, false, 164), "get", ["_route"], "method", false, false, false, 164) == "espace_index")) {
             yield "active";
         }
         yield "\">
           <a href=\"";
         // line 165
-        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("joueur_main");
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("espace_index");
         yield "\" class=\"menu-link\">
-            <div data-i18n=\"Facilities\">Facilities</div>
+            <div data-i18n=\"Facilities\">Facilités</div>
           </a>
         </li>
         <li class=\"menu-item ";
         // line 169
-        if ((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 169, $this->source); })()), "request", [], "any", false, false, false, 169), "attributes", [], "any", false, false, false, 169), "get", ["_route"], "method", false, false, false, 169) == "app_espace_events")) {
+        if ((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 169, $this->source); })()), "request", [], "any", false, false, false, 169), "attributes", [], "any", false, false, false, 169), "get", ["_route"], "method", false, false, false, 169) == "reservation_index")) {
             yield "active";
         }
         yield "\">
           <a href=\"";
         // line 170
-        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("joueur_main");
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("reservation_index");
         yield "\" class=\"menu-link\">
-            <div data-i18n=\"Events\">Events</div>
+            <div data-i18n=\"Statistics\">Réservation</div>
           </a>
         </li>
       </ul>
-    </li>
   </ul>
 </aside>";
         
@@ -432,7 +431,7 @@ class __TwigTemplate_14fb821bb1fbf8db67e77c8b02293502 extends Template
 
   <ul class=\"menu-inner py-1\">
     <!-- Dashboard -->
-    <li class=\"menu-item {% if app.request.attributes.get('_route') == 'app_dashboard' %}active{% endif %}\">
+    <li class=\"menu-item {% if app.request.attributes.get('_route') == 'joueur_main' %}active{% endif %}\">
       <a href=\"{{ path('joueur_main') }}\" class=\"menu-link\">
         <i class=\"menu-icon tf-icons bx bx-home-circle\"></i>
         <div data-i18n=\"Dashboard\">Dashboard</div>
@@ -444,23 +443,23 @@ class __TwigTemplate_14fb821bb1fbf8db67e77c8b02293502 extends Template
       <span class=\"menu-header-text\">Users Section</span>
     </li>
     <!-- Users -->
-    <li class=\"menu-item {% if app.request.attributes.get('_route') == 'app_users' %}active{% endif %}\">
+    <li class=\"menu-item {% if app.request.attributes.get('_route') == 'joueur_main' %}active{% endif %}\">
       <a href=\"{{ path('joueur_main') }}\" class=\"menu-link\">
         <i class=\"menu-icon tf-icons bx bx-user\"></i>
         <div data-i18n=\"Users\">Users</div>
       </a>
     </li>
 
-<!-- Spacer: Users Section -->
+    <!-- Spacer: Players Section -->
     <li class=\"menu-header small text-uppercase\">
-      <span class=\"menu-header-text\">Players Section</span>
+      <span class=\"menu-header-text\">Section Staff Technique</span>
     </li>
 
     <!-- Under Team Management section -->
     <li class=\"menu-item {% if app.request.attributes.get('_route') starts with 'joueur_' or app.request.attributes.get('_route') starts with 'sport_' or app.request.attributes.get('_route') starts with 'club_' or app.request.attributes.get('_route') starts with 'performance_joueur_' or app.request.attributes.get('_route') starts with 'app_historique_club_' or app.request.attributes.get('_route') starts with 'app_evaluation_physique_' %}active open{% endif %}\">
       <a href=\"javascript:void(0);\" class=\"menu-link menu-toggle\">
         <i class=\"menu-icon tf-icons bx bx-group\"></i>
-        <div data-i18n=\"Equipes\">Equipes</div>
+        <div data-i18n=\"Equipes\">Joueurs</div>
       </a>
       <ul class=\"menu-sub\">
         <li class=\"menu-item {% if app.request.attributes.get('_route') == 'joueur_main' %}active{% endif %}\">
@@ -475,7 +474,7 @@ class __TwigTemplate_14fb821bb1fbf8db67e77c8b02293502 extends Template
         </li>
         <li class=\"menu-item {% if app.request.attributes.get('_route') starts with 'club_' %}active{% endif %}\">
           <a href=\"{{ path('club_index') }}\" class=\"menu-link\">
-            <div data-i18n=\"Club\">Club</div>
+            <div data-i18n=\"Club偶\"Club\">Club</div>
           </a>
         </li>
         <li class=\"menu-item {% if app.request.attributes.get('_route') starts with 'sport_' %}active{% endif %}\">
@@ -500,7 +499,7 @@ class __TwigTemplate_14fb821bb1fbf8db67e77c8b02293502 extends Template
     <li class=\"menu-header small text-uppercase\">
       <span class=\"menu-header-text\">Match Management</span>
     </li>
-    <!-- Matchs (Scrollable with 2 items) -->
+    <!-- Matchs -->
     <li class=\"menu-item {% if app.request.attributes.get('_route') starts with 'app_matchs_' %}active open{% endif %}\">
       <a href=\"javascript:void(0);\" class=\"menu-link menu-toggle\">
         <i class=\"menu-icon tf-icons bx bx-football\"></i>
@@ -524,7 +523,7 @@ class __TwigTemplate_14fb821bb1fbf8db67e77c8b02293502 extends Template
     <li class=\"menu-header small text-uppercase\">
       <span class=\"menu-header-text\">Logistics</span>
     </li>
-    <!-- Logistique (Scrollable with 2 items) -->
+    <!-- Logistique -->
     <li class=\"menu-item {% if app.request.attributes.get('_route') starts with 'app_logistique_' %}active open{% endif %}\">
       <a href=\"javascript:void(0);\" class=\"menu-link menu-toggle\">
         <i class=\"menu-icon tf-icons bx bx-truck\"></i>
@@ -548,7 +547,7 @@ class __TwigTemplate_14fb821bb1fbf8db67e77c8b02293502 extends Template
     <li class=\"menu-header small text-uppercase\">
       <span class=\"menu-header-text\">Sponsorship</span>
     </li>
-    <!-- Sponsoring (Scrollable with 2 items) -->
+    <!-- Sponsoring -->
     <li class=\"menu-item {% if app.request.attributes.get('_route') starts with 'app_sponsoring_' %}active open{% endif %}\">
       <a href=\"javascript:void(0);\" class=\"menu-link menu-toggle\">
         <i class=\"menu-icon tf-icons bx bx-money\"></i>
@@ -570,28 +569,27 @@ class __TwigTemplate_14fb821bb1fbf8db67e77c8b02293502 extends Template
 
     <!-- Spacer: Sports Space -->
     <li class=\"menu-header small text-uppercase\">
-      <span class=\"menu-header-text\">Sports Space</span>
+      <span class=\"menu-header-text\">Section Espace</span>
     </li>
-    <!-- Espace Sportif (Scrollable with 2 items) -->
-    <li class=\"menu-item {% if app.request.attributes.get('_route') starts with 'app_espace_' %}active open{% endif %}\">
+    <!-- Espace Sportif -->
+    <li class=\"menu-item {% if app.request.attributes.get('_route') starts with 'espace_' %}active open{% endif %}\">
       <a href=\"javascript:void(0);\" class=\"menu-link menu-toggle\">
         <i class=\"menu-icon tf-icons bx bx-stadium\"></i>
         <div data-i18n=\"EspaceSportif\">Espace Sportif</div>
       </a>
       <ul class=\"menu-sub\">
-        <li class=\"menu-item {% if app.request.attributes.get('_route') == 'app_espace_facilities' %}active{% endif %}\">
-          <a href=\"{{ path('joueur_main') }}\" class=\"menu-link\">
-            <div data-i18n=\"Facilities\">Facilities</div>
+        <li class=\"menu-item {% if app.request.attributes.get('_route') == 'espace_index' %}active{% endif %}\">
+          <a href=\"{{ path('espace_index') }}\" class=\"menu-link\">
+            <div data-i18n=\"Facilities\">Facilités</div>
           </a>
         </li>
-        <li class=\"menu-item {% if app.request.attributes.get('_route') == 'app_espace_events' %}active{% endif %}\">
-          <a href=\"{{ path('joueur_main') }}\" class=\"menu-link\">
-            <div data-i18n=\"Events\">Events</div>
+        <li class=\"menu-item {% if app.request.attributes.get('_route') == 'reservation_index' %}active{% endif %}\">
+          <a href=\"{{ path('reservation_index') }}\" class=\"menu-link\">
+            <div data-i18n=\"Statistics\">Réservation</div>
           </a>
         </li>
       </ul>
-    </li>
   </ul>
-</aside>", "navbar.html.twig", "C:\\Users\\Hazem Mrad\\Desktop\\MatchupZ-Web-joueur-espace\\templates\\navbar.html.twig");
+</aside>", "navbar.html.twig", "C:\\Users\\Hazem Mrad\\Desktop\\MatchupZ-Web-joueur-espace - Copy (5)\\templates\\navbar.html.twig");
     }
 }

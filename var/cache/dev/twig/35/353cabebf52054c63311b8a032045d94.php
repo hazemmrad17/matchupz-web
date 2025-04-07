@@ -303,6 +303,6 @@ class __TwigTemplate_3e90e16a72c3bc1bef8c3ab6011e0fef extends Template
             </div>
         </div>
     </div>
-{% endblock %}", "club/index.html.twig", "C:\\Users\\Hazem Mrad\\Desktop\\MatchupZ-Web-joueur-espace\\templates\\club\\index.html.twig");
+{% endblock %}", "club/index.html.twig", "C:\\Users\\Hazem Mrad\\Desktop\\MatchupZ-Web-joueur-espace - Copy (5)\\templates\\club\\index.html.twig");
     }
 }
