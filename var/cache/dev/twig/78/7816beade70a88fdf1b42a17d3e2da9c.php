@@ -194,7 +194,7 @@ class __TwigTemplate_14fb821bb1fbf8db67e77c8b02293502 extends Template
         // line 74
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_historique_club_index");
         yield "\" class=\"menu-link\">
-            <div data-i18n=\"HistoriqueClub\">Historique Club</div>
+            <div data-i18n=\"HistoriqueClub\">Historique Transfères</div>
           </a>
         </li>
       </ul>
@@ -489,7 +489,7 @@ class __TwigTemplate_14fb821bb1fbf8db67e77c8b02293502 extends Template
         </li>
         <li class=\"menu-item {% if app.request.attributes.get('_route') starts with 'app_historique_club_' %}active{% endif %}\">
           <a href=\"{{ path('app_historique_club_index') }}\" class=\"menu-link\">
-            <div data-i18n=\"HistoriqueClub\">Historique Club</div>
+            <div data-i18n=\"HistoriqueClub\">Historique Transfères</div>
           </a>
         </li>
       </ul>

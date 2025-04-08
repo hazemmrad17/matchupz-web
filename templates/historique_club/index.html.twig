@@ -10,26 +10,53 @@
     <div class="content-wrapper">
         <div class="container-xxl flex-grow-1 container-p-y">
             {% block widgets %}
-                {# You can create a specific widgets file for HistoriqueClub if needed #}
                 {% include 'historique_club/widgets.html.twig' %}
             {% endblock %}
-            
 
-            {# Historique Table #}
             <div class="card">
                 <h5 class="card-header d-flex justify-content-between align-items-center">
-                    Historique des Clubs
+                    <!-- Title and Search Bar on the left -->
+                    <div class="d-flex align-items-center">
+                        <span>Historique des Clubs</span>
+                        <div class="navbar-nav align-items-center ms-3">
+                            <div class="nav-item d-flex align-items-center">
+                                <i class="bx bx-search fs-4 lh-0"></i>
+                                <input
+                                    type="text"
+                                    class="form-control border-0 shadow-none"
+                                    placeholder="Rechercher un historique..."
+                                    aria-label="Rechercher un historique..."
+                                    id="searchInput"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Buttons on the right -->
                     <div>
-                        <a href="{{ path('app_historique_club_stats') }}" class="btn btn-info me-2">
-                            <i class="bx bx-stats"></i> Statistiques
-                        </a>
-                        <a href="{{ path('app_historique_club_new') }}" class="btn btn-primary">
+                        <!-- Add Button -->
+                        <a href="{{ path('app_historique_club_new') }}" class="btn btn-primary me-2">
                             <i class="bx bx-plus"></i> Nouvel Historique
                         </a>
+                        <!-- Statistics Button -->
+                        <a href="{{ path('app_historique_club_stats') }}" class="btn btn-primary me-2">
+                            <i class="bx bx-stats"></i> Statistiques
+                        </a>
+                        <!-- Export Button (Yellow) -->
+                        <div class="btn-group">
+                            <button type="button" class="btn dropdown-toggle btn-yellow" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bx bx-export me-1"></i> Exporter
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{{ path('app_historique_club_export_csv') }}">Exporter en CSV</a></li>
+                                <li><a class="dropdown-item" href="{{ path('app_historique_club_export_pdf') }}">Exporter en PDF</a></li>
+                                <li><a class="dropdown-item" href="{{ path('app_historique_club_export_excel') }}">Exporter en Excel</a></li>
+                            </ul>
+                        </div>
+                        <!-- /Export Button -->
                     </div>
                 </h5>
-                <div class="table-responsive text-nowrap">
-                    <table class="table">
+                <div class="table-responsive text-nowrap" style="max-height: 300px; overflow-y: auto;">
+                    <table class="table" id="historiqueTable">
                         <thead>
                             <tr>
                                 <th>Joueur</th>
@@ -90,37 +117,37 @@
             </div>
         </div>
     </div>
+{% endblock %}
 
-    {# ChartJS Script #}
+{% block javascripts %}
+    {{ parent() }}
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Club Distribution Chart - Example
-            const clubCtx = document.getElementById('clubDistributionChart').getContext('2d');
-            
-            // You would need to pass these variables from your controller
-            const clubData = {
-                labels: {{ clubNames|default([])|json_encode|raw }},
-                datasets: [{
-                    data: {{ playerCounts|default([])|json_encode|raw }},
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.7)',
-                        'rgba(54, 162, 235, 0.7)',
-                        'rgba(255, 206, 86, 0.7)',
-                        'rgba(75, 192, 192, 0.7)',
-                        'rgba(153, 102, 255, 0.7)'
-                    ]
-                }]
-            };
-            
-            new Chart(clubCtx, {
-                type: 'pie',
-                data: clubData,
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: {
-                            position: 'right',
+            // Search functionality
+            const searchInput = document.getElementById('searchInput');
+            const table = document.getElementById('historiqueTable');
+            const rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+
+            searchInput.addEventListener('input', function() {
+                const searchText = searchInput.value.toLowerCase();
+
+                for (let i = 0; i < rows.length; i++) {
+                    const row = rows[i];
+                    const cells = row.getElementsByTagName('td');
+                    let match = false;
+
+                    for (let j = 0; j < cells.length; j++) {
+                        const cellText = cells[j].textContent.toLowerCase();
+                        if (cellText.includes(searchText)) {
+                            match = true;
+                            break;
                         }
+                    }
+
+                    if (match) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
                     }
                 }
             });

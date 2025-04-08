@@ -11,6 +11,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use Knp\Snappy\Pdf;
 
 #[Route('/joueur')]
 class JoueurController extends AbstractController
@@ -42,7 +46,7 @@ class JoueurController extends AbstractController
         // Calculate active players (assuming 'Actif' is the status for active players)
         $activePlayers = count(array_filter($joueurs, fn($joueur) => $joueur->getStatut() === 'Actif'));
 
-        return $this->render('joueur/main.html.twig', [
+        return $this->render('joueur/index.html.twig', [
             'joueurs' => $joueurs,
             'topPerformers' => $topPerformers,
             'sport_distribution' => $sportCounts,
@@ -217,5 +221,153 @@ class JoueurController extends AbstractController
         return $this->render('joueur/show.html.twig', [
             'joueur' => $joueur,
         ]);
+    }
+
+    #[Route('/export/csv', name: 'joueur_export_csv')]
+    public function exportCsv(JoueurRepository $joueurRepository): Response
+    {
+        $joueurs = $joueurRepository->findAll();
+
+        // Create a CSV file in memory
+        $output = fopen('php://memory', 'w');
+
+        // Add headers
+        fputcsv($output, [
+            'Nom',
+            'Prénom',
+            'Sport',
+            'Date de Naissance',
+            'Poste',
+            'Taille (m)',
+            'Poids (kg)',
+            'Statut',
+            'Email',
+            'Téléphone',
+        ]);
+
+        // Add data
+        foreach ($joueurs as $joueur) {
+            fputcsv($output, [
+                $joueur->getNom(),
+                $joueur->getPrenom(),
+                $joueur->getSport() ? $joueur->getSport()->getNomSport() : 'N/A',
+                $joueur->getDateNaissance() ? $joueur->getDateNaissance()->format('d/m/Y') : 'N/A',
+                $joueur->getPoste() ?? 'N/A',
+                $joueur->getTaille() ? number_format($joueur->getTaille(), 2, '.', ',') : 'N/A',
+                $joueur->getPoids() ? number_format($joueur->getPoids(), 2, '.', ',') : 'N/A',
+                $joueur->getStatut() ?? 'N/A',
+                $joueur->getEmail() ?? 'N/A',
+                $joueur->getTelephone() ?? 'N/A',
+            ]);
+        }
+
+        // Rewind the file pointer to the beginning
+        fseek($output, 0);
+
+        // Create the response with the CSV content
+        $response = new Response(stream_get_contents($output));
+        fclose($output);
+
+        // Set headers for download
+        $disposition = $response->headers->makeDisposition(
+            ResponseHeaderBag::DISPOSITION_ATTACHMENT,
+            'joueurs_export_' . date('Y-m-d') . '.csv'
+        );
+        $response->headers->set('Content-Type', 'text/csv');
+        $response->headers->set('Content-Disposition', $disposition);
+
+        return $response;
+    }
+
+    #[Route('/export/pdf', name: 'joueur_export_pdf')]
+    public function exportPdf(JoueurRepository $joueurRepository, Pdf $knpSnappyPdf): Response
+    {
+        $joueurs = $joueurRepository->findAll();
+
+        $html = $this->renderView('joueur/export_pdf.html.twig', [
+            'joueurs' => $joueurs,
+            // Pass the logo path directly if needed
+            'logo_path' => $this->getParameter('kernel.project_dir').'/public/img/logo_white.svg'
+        ]);
+
+        $pdfOptions = [
+            'enable-local-file-access' => true,
+            'encoding' => 'UTF-8',
+            'margin-top' => 10,
+            'margin-bottom' => 10,
+            'margin-left' => 10,
+            'margin-right' => 10,
+            'no-stop-slow-scripts' => true,
+        ];
+
+        $pdfContent = $knpSnappyPdf->getOutputFromHtml($html, $pdfOptions);
+
+        $response = new Response($pdfContent);
+        $disposition = $response->headers->makeDisposition(
+            ResponseHeaderBag::DISPOSITION_ATTACHMENT,
+            'joueurs_export_' . date('Y-m-d') . '.pdf'
+        );
+        $response->headers->set('Content-Type', 'application/pdf');
+        $response->headers->set('Content-Disposition', $disposition);
+
+        return $response;
+    }
+
+    #[Route('/export/excel', name: 'joueur_export_excel')]
+    public function exportExcel(JoueurRepository $joueurRepository): Response
+    {
+        $joueurs = $joueurRepository->findAll();
+
+        // Create a new Spreadsheet object
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+
+        // Set headers
+        $sheet->setCellValue('A1', 'Nom');
+        $sheet->setCellValue('B1', 'Prénom');
+        $sheet->setCellValue('C1', 'Sport');
+        $sheet->setCellValue('D1', 'Date de Naissance');
+        $sheet->setCellValue('E1', 'Poste');
+        $sheet->setCellValue('F1', 'Taille (m)');
+        $sheet->setCellValue('G1', 'Poids (kg)');
+        $sheet->setCellValue('H1', 'Statut');
+        $sheet->setCellValue('I1', 'Email');
+        $sheet->setCellValue('J1', 'Téléphone');
+
+        // Add data
+        $row = 2;
+        foreach ($joueurs as $joueur) {
+            $sheet->setCellValue('A' . $row, $joueur->getNom());
+            $sheet->setCellValue('B' . $row, $joueur->getPrenom());
+            $sheet->setCellValue('C' . $row, $joueur->getSport() ? $joueur->getSport()->getNomSport() : 'N/A');
+            $sheet->setCellValue('D' . $row, $joueur->getDateNaissance() ? $joueur->getDateNaissance()->format('d/m/Y') : 'N/A');
+            $sheet->setCellValue('E' . $row, $joueur->getPoste() ?? 'N/A');
+            $sheet->setCellValue('F' . $row, $joueur->getTaille() ? number_format($joueur->getTaille(), 2, '.', ',') : 'N/A');
+            $sheet->setCellValue('G' . $row, $joueur->getPoids() ? number_format($joueur->getPoids(), 2, '.', ',') : 'N/A');
+            $sheet->setCellValue('H' . $row, $joueur->getStatut() ?? 'N/A');
+            $sheet->setCellValue('I' . $row, $joueur->getEmail() ?? 'N/A');
+            $sheet->setCellValue('J' . $row, $joueur->getTelephone() ?? 'N/A');
+            $row++;
+        }
+
+        // Create the Excel file in memory
+        $writer = new Xlsx($spreadsheet);
+        $fileName = 'joueurs_export_' . date('Y-m-d') . '.xlsx';
+        $tempFile = tempnam(sys_get_temp_dir(), 'joueurs_export');
+        $writer->save($tempFile);
+
+        // Create the response with the Excel content
+        $response = new Response(file_get_contents($tempFile));
+        unlink($tempFile);
+
+        // Set headers for download
+        $disposition = $response->headers->makeDisposition(
+            ResponseHeaderBag::DISPOSITION_ATTACHMENT,
+            $fileName
+        );
+        $response->headers->set('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        $response->headers->set('Content-Disposition', $disposition);
+
+        return $response;
     }
 }

@@ -33,6 +33,7 @@ class __TwigTemplate_b1ae4d4c8d66a3776f9be9c50d54f557 extends Template
             'searchbar' => [$this, 'block_searchbar'],
             'title' => [$this, 'block_title'],
             'content' => [$this, 'block_content'],
+            'javascripts' => [$this, 'block_javascripts'],
         ];
     }
 
@@ -131,24 +132,63 @@ class __TwigTemplate_b1ae4d4c8d66a3776f9be9c50d54f557 extends Template
         // line 12
         yield "            <div class=\"card\">
                 <h5 class=\"card-header d-flex justify-content-between align-items-center\">
-                    Liste des Sports
+                    <!-- Title and Search Bar on the left -->
+                    <div class=\"d-flex align-items-center\">
+                        <span>Liste des Sports</span>
+                        <div class=\"navbar-nav align-items-center ms-3\">
+                            <div class=\"nav-item d-flex align-items-center\">
+                                <i class=\"bx bx-search fs-4 lh-0\"></i>
+                                <input
+                                    type=\"text\"
+                                    class=\"form-control border-0 shadow-none\"
+                                    placeholder=\"Rechercher un sport...\"
+                                    aria-label=\"Rechercher un sport...\"
+                                    id=\"searchInput\"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Buttons on the right -->
                     <div>
+                        <!-- Add Button -->
                         <a href=\"";
-        // line 16
+        // line 33
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("sport_new");
+        yield "\" class=\"btn btn-primary me-2\">
+                            <i class=\"bx bx-plus\"></i> Nouveau Sport
+                        </a>
+                        <!-- Statistics Button -->
+                        <a href=\"";
+        // line 37
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("sport_statistics");
-        yield "\" class=\"btn btn-info me-2\">
+        yield "\" class=\"btn btn-primary me-2\">
                             <i class=\"bx bx-stats\"></i> Statistiques
                         </a>
-                        <a href=\"";
-        // line 19
-        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("sport_new");
-        yield "\" class=\"btn btn-primary\">
-                            <i class=\"bx bx-plus\"></i> Nouvelle Sport
-                        </a>
+                        <!-- Export Button (Yellow) -->
+                        <div class=\"btn-group\">
+                            <button type=\"button\" class=\"btn dropdown-toggle btn-yellow\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\">
+                                <i class=\"bx bx-export me-1\"></i> Exporter
+                            </button>
+                            <ul class=\"dropdown-menu\">
+                                <li><a class=\"dropdown-item\" href=\"";
+        // line 46
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("sport_export_csv");
+        yield "\">Exporter en CSV</a></li>
+                                <li><a class=\"dropdown-item\" href=\"";
+        // line 47
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("sport_export_pdf");
+        yield "\">Exporter en PDF</a></li>
+                                <li><a class=\"dropdown-item\" href=\"";
+        // line 48
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("sport_export_excel");
+        yield "\">Exporter en Excel</a></li>
+                            </ul>
+                        </div>
+                        <!-- /Export Button -->
                     </div>
                 </h5>
-                <div class=\"table-responsive text-nowrap\">
-                    <table class=\"table\">
+                <div class=\"table-responsive text-nowrap\" style=\"max-height: 300px; overflow-y: auto;\">
+                    <table class=\"table\" id=\"sportsTable\">
                         <thead>
                             <tr>
                                 <th>Nom du Sport</th>
@@ -158,23 +198,23 @@ class __TwigTemplate_b1ae4d4c8d66a3776f9be9c50d54f557 extends Template
                         </thead>
                         <tbody class=\"table-border-bottom-0\">
                             ";
-        // line 34
+        // line 64
         $context['_parent'] = $context;
-        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["sports"]) || array_key_exists("sports", $context) ? $context["sports"] : (function () { throw new RuntimeError('Variable "sports" does not exist.', 34, $this->source); })()));
+        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["sports"]) || array_key_exists("sports", $context) ? $context["sports"] : (function () { throw new RuntimeError('Variable "sports" does not exist.', 64, $this->source); })()));
         $context['_iterated'] = false;
         foreach ($context['_seq'] as $context["_key"] => $context["sport"]) {
-            // line 35
+            // line 65
             yield "                                <tr class=\"table-default\">
                                     <td>
                                         <i class=\"fab fa-sketch fa-lg text-warning me-3\"></i>
                                         <strong>";
-            // line 38
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["sport"], "nomSport", [], "any", false, false, false, 38), "html", null, true);
+            // line 68
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["sport"], "nomSport", [], "any", false, false, false, 68), "html", null, true);
             yield "</strong>
                                     </td>
                                     <td>";
-            // line 40
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(((CoreExtension::getAttribute($this->env, $this->source, $context["sport"], "description", [], "any", true, true, false, 40)) ? (Twig\Extension\CoreExtension::default(CoreExtension::getAttribute($this->env, $this->source, $context["sport"], "description", [], "any", false, false, false, 40), "N/A")) : ("N/A")), "html", null, true);
+            // line 70
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(((CoreExtension::getAttribute($this->env, $this->source, $context["sport"], "description", [], "any", true, true, false, 70)) ? (Twig\Extension\CoreExtension::default(CoreExtension::getAttribute($this->env, $this->source, $context["sport"], "description", [], "any", false, false, false, 70), "N/A")) : ("N/A")), "html", null, true);
             yield "</td>
                                     <td>
                                         <div class=\"dropdown\">
@@ -183,24 +223,24 @@ class __TwigTemplate_b1ae4d4c8d66a3776f9be9c50d54f557 extends Template
                                             </button>
                                             <div class=\"dropdown-menu\">
                                                 <a class=\"dropdown-item\" href=\"";
-            // line 47
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("sport_show", ["idSport" => CoreExtension::getAttribute($this->env, $this->source, $context["sport"], "idSport", [], "any", false, false, false, 47)]), "html", null, true);
+            // line 77
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("sport_show", ["idSport" => CoreExtension::getAttribute($this->env, $this->source, $context["sport"], "idSport", [], "any", false, false, false, 77)]), "html", null, true);
             yield "\">
                                                     <i class=\"bx bx-show me-1\"></i> Voir
                                                 </a>
                                                 <a class=\"dropdown-item\" href=\"";
-            // line 50
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("sport_edit", ["idSport" => CoreExtension::getAttribute($this->env, $this->source, $context["sport"], "idSport", [], "any", false, false, false, 50)]), "html", null, true);
+            // line 80
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("sport_edit", ["idSport" => CoreExtension::getAttribute($this->env, $this->source, $context["sport"], "idSport", [], "any", false, false, false, 80)]), "html", null, true);
             yield "\">
                                                     <i class=\"bx bx-edit-alt me-1\"></i> Modifier
                                                 </a>
                                                 <form method=\"post\" action=\"";
-            // line 53
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("sport_delete", ["idSport" => CoreExtension::getAttribute($this->env, $this->source, $context["sport"], "idSport", [], "any", false, false, false, 53)]), "html", null, true);
+            // line 83
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("sport_delete", ["idSport" => CoreExtension::getAttribute($this->env, $this->source, $context["sport"], "idSport", [], "any", false, false, false, 83)]), "html", null, true);
             yield "\" style=\"display:inline;\" onsubmit=\"return confirm('Confirmer la suppression?');\">
                                                     <input type=\"hidden\" name=\"_token\" value=\"";
-            // line 54
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderCsrfToken(("delete" . CoreExtension::getAttribute($this->env, $this->source, $context["sport"], "idSport", [], "any", false, false, false, 54))), "html", null, true);
+            // line 84
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderCsrfToken(("delete" . CoreExtension::getAttribute($this->env, $this->source, $context["sport"], "idSport", [], "any", false, false, false, 84))), "html", null, true);
             yield "\">
                                                     <button class=\"dropdown-item\" type=\"submit\">
                                                         <i class=\"bx bx-trash me-1\"></i> Supprimer
@@ -213,9 +253,9 @@ class __TwigTemplate_b1ae4d4c8d66a3776f9be9c50d54f557 extends Template
                             ";
             $context['_iterated'] = true;
         }
-        // line 63
+        // line 93
         if (!$context['_iterated']) {
-            // line 64
+            // line 94
             yield "                                <tr>
                                     <td colspan=\"3\" class=\"text-center\">Aucun sport trouvé</td>
                                 </tr>
@@ -224,13 +264,71 @@ class __TwigTemplate_b1ae4d4c8d66a3776f9be9c50d54f557 extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_key'], $context['sport'], $context['_parent'], $context['_iterated']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 68
+        // line 98
         yield "                        </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
+";
+        
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
+
+        
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->leave($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof);
+
+        yield from [];
+    }
+
+    // line 106
+    /**
+     * @return iterable<null|scalar|\Stringable>
+     */
+    public function block_javascripts(array $context, array $blocks = []): iterable
+    {
+        $macros = $this->macros;
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2 = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->enter($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "javascripts"));
+
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "javascripts"));
+
+        // line 107
+        yield "    ";
+        yield from $this->yieldParentBlock("javascripts", $context, $blocks);
+        yield "
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const searchInput = document.getElementById('searchInput');
+            const table = document.getElementById('sportsTable');
+            const rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+
+            searchInput.addEventListener('input', function () {
+                const searchText = searchInput.value.toLowerCase();
+
+                for (let i = 0; i < rows.length; i++) {
+                    const row = rows[i];
+                    const cells = row.getElementsByTagName('td');
+                    let match = false;
+
+                    for (let j = 0; j < cells.length; j++) {
+                        const cellText = cells[j].textContent.toLowerCase();
+                        if (cellText.includes(searchText)) {
+                            match = true;
+                            break;
+                        }
+                    }
+
+                    if (match) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                }
+            });
+        });
+    </script>
 ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -262,7 +360,7 @@ class __TwigTemplate_b1ae4d4c8d66a3776f9be9c50d54f557 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  228 => 68,  219 => 64,  217 => 63,  203 => 54,  199 => 53,  193 => 50,  187 => 47,  177 => 40,  172 => 38,  167 => 35,  162 => 34,  144 => 19,  138 => 16,  132 => 12,  130 => 11,  126 => 9,  113 => 8,  90 => 6,  78 => 3,  65 => 2,  42 => 1,);
+        return array (  298 => 107,  285 => 106,  268 => 98,  259 => 94,  257 => 93,  243 => 84,  239 => 83,  233 => 80,  227 => 77,  217 => 70,  212 => 68,  207 => 65,  202 => 64,  183 => 48,  179 => 47,  175 => 46,  163 => 37,  156 => 33,  133 => 12,  131 => 11,  127 => 9,  114 => 8,  91 => 6,  79 => 3,  66 => 2,  43 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -280,18 +378,48 @@ class __TwigTemplate_b1ae4d4c8d66a3776f9be9c50d54f557 extends Template
             {% include 'sport/sport_widgets.html.twig' %}
             <div class=\"card\">
                 <h5 class=\"card-header d-flex justify-content-between align-items-center\">
-                    Liste des Sports
+                    <!-- Title and Search Bar on the left -->
+                    <div class=\"d-flex align-items-center\">
+                        <span>Liste des Sports</span>
+                        <div class=\"navbar-nav align-items-center ms-3\">
+                            <div class=\"nav-item d-flex align-items-center\">
+                                <i class=\"bx bx-search fs-4 lh-0\"></i>
+                                <input
+                                    type=\"text\"
+                                    class=\"form-control border-0 shadow-none\"
+                                    placeholder=\"Rechercher un sport...\"
+                                    aria-label=\"Rechercher un sport...\"
+                                    id=\"searchInput\"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Buttons on the right -->
                     <div>
-                        <a href=\"{{ path('sport_statistics') }}\" class=\"btn btn-info me-2\">
+                        <!-- Add Button -->
+                        <a href=\"{{ path('sport_new') }}\" class=\"btn btn-primary me-2\">
+                            <i class=\"bx bx-plus\"></i> Nouveau Sport
+                        </a>
+                        <!-- Statistics Button -->
+                        <a href=\"{{ path('sport_statistics') }}\" class=\"btn btn-primary me-2\">
                             <i class=\"bx bx-stats\"></i> Statistiques
                         </a>
-                        <a href=\"{{ path('sport_new') }}\" class=\"btn btn-primary\">
-                            <i class=\"bx bx-plus\"></i> Nouvelle Sport
-                        </a>
+                        <!-- Export Button (Yellow) -->
+                        <div class=\"btn-group\">
+                            <button type=\"button\" class=\"btn dropdown-toggle btn-yellow\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\">
+                                <i class=\"bx bx-export me-1\"></i> Exporter
+                            </button>
+                            <ul class=\"dropdown-menu\">
+                                <li><a class=\"dropdown-item\" href=\"{{ path('sport_export_csv') }}\">Exporter en CSV</a></li>
+                                <li><a class=\"dropdown-item\" href=\"{{ path('sport_export_pdf') }}\">Exporter en PDF</a></li>
+                                <li><a class=\"dropdown-item\" href=\"{{ path('sport_export_excel') }}\">Exporter en Excel</a></li>
+                            </ul>
+                        </div>
+                        <!-- /Export Button -->
                     </div>
                 </h5>
-                <div class=\"table-responsive text-nowrap\">
-                    <table class=\"table\">
+                <div class=\"table-responsive text-nowrap\" style=\"max-height: 300px; overflow-y: auto;\">
+                    <table class=\"table\" id=\"sportsTable\">
                         <thead>
                             <tr>
                                 <th>Nom du Sport</th>
@@ -306,7 +434,7 @@ class __TwigTemplate_b1ae4d4c8d66a3776f9be9c50d54f557 extends Template
                                         <i class=\"fab fa-sketch fa-lg text-warning me-3\"></i>
                                         <strong>{{ sport.nomSport }}</strong>
                                     </td>
-                                    <td>{{ sport.description|default('N/A')}}</td>
+                                    <td>{{ sport.description|default('N/A') }}</td>
                                     <td>
                                         <div class=\"dropdown\">
                                             <button type=\"button\" class=\"btn p-0 dropdown-toggle hide-arrow\" data-bs-toggle=\"dropdown\">
@@ -340,6 +468,41 @@ class __TwigTemplate_b1ae4d4c8d66a3776f9be9c50d54f557 extends Template
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const searchInput = document.getElementById('searchInput');
+            const table = document.getElementById('sportsTable');
+            const rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+
+            searchInput.addEventListener('input', function () {
+                const searchText = searchInput.value.toLowerCase();
+
+                for (let i = 0; i < rows.length; i++) {
+                    const row = rows[i];
+                    const cells = row.getElementsByTagName('td');
+                    let match = false;
+
+                    for (let j = 0; j < cells.length; j++) {
+                        const cellText = cells[j].textContent.toLowerCase();
+                        if (cellText.includes(searchText)) {
+                            match = true;
+                            break;
+                        }
+                    }
+
+                    if (match) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                }
+            });
+        });
+    </script>
 {% endblock %}", "sport/index.html.twig", "C:\\Users\\Hazem Mrad\\Desktop\\MatchupZ-Web-joueur-espace - Copy (5)\\templates\\sport\\index.html.twig");
     }
 }
