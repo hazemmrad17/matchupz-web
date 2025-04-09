@@ -101,27 +101,30 @@ return [
                     .'|joueur/([^/]++)(*:479)'
                     .'|club/([^/]++)/current(*:508)'
                 .')'
-                .'|/joueur/([^/]++)(?'
-                    .'|/(?'
-                        .'|edit(*:544)'
-                        .'|delete(*:558)'
+                .'|/joueur/(?'
+                    .'|([^/]++)(?'
+                        .'|/(?'
+                            .'|edit(*:547)'
+                            .'|delete(*:561)'
+                        .')'
+                        .'|(*:570)'
                     .')'
-                    .'|(*:567)'
+                    .'|tracking(*:587)'
                 .')'
                 .'|/performance_joueur/([^/]++)(?'
-                    .'|(*:607)'
-                    .'|/edit(*:620)'
-                    .'|(*:628)'
+                    .'|(*:627)'
+                    .'|/edit(*:640)'
+                    .'|(*:648)'
                 .')'
                 .'|/reservation/(?'
-                    .'|(\\d+)(*:658)'
-                    .'|(\\d+)/edit(*:676)'
-                    .'|(\\d+)(*:689)'
+                    .'|(\\d+)(*:678)'
+                    .'|(\\d+)/edit(*:696)'
+                    .'|(\\d+)(*:709)'
                 .')'
                 .'|/sport/(?'
-                    .'|(\\d+)(*:713)'
-                    .'|(\\d+)/edit(*:731)'
-                    .'|(\\d+)(*:744)'
+                    .'|(\\d+)(*:733)'
+                    .'|(\\d+)/edit(*:751)'
+                    .'|(\\d+)(*:764)'
                 .')'
             .')/?$}sDu',
     ],
@@ -149,18 +152,19 @@ return [
         455 => [[['_route' => 'app_historique_club_delete', '_controller' => 'App\\Controller\\HistoriqueClubController::delete'], ['idHistorique'], ['POST' => 0], null, false, true, null]],
         479 => [[['_route' => 'app_historique_club_by_joueur', '_controller' => 'App\\Controller\\HistoriqueClubController::findByJoueur'], ['joueurId'], ['GET' => 0], null, false, true, null]],
         508 => [[['_route' => 'app_historique_club_current_by_club', '_controller' => 'App\\Controller\\HistoriqueClubController::findCurrentPlayersByClub'], ['clubName'], ['GET' => 0], null, false, false, null]],
-        544 => [[['_route' => 'joueur_edit', '_controller' => 'App\\Controller\\JoueurController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        558 => [[['_route' => 'joueur_delete', '_controller' => 'App\\Controller\\JoueurController::delete'], ['id'], ['POST' => 0], null, false, false, null]],
-        567 => [[['_route' => 'joueur_show', '_controller' => 'App\\Controller\\JoueurController::show'], ['id'], ['GET' => 0], null, false, true, null]],
-        607 => [[['_route' => 'performance_joueur_show', '_controller' => 'App\\Controller\\PerformanceJoueurController::show'], ['idPerformance'], ['GET' => 0], null, false, true, null]],
-        620 => [[['_route' => 'performance_joueur_edit', '_controller' => 'App\\Controller\\PerformanceJoueurController::edit'], ['idPerformance'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        628 => [[['_route' => 'performance_joueur_delete', '_controller' => 'App\\Controller\\PerformanceJoueurController::delete'], ['idPerformance'], ['POST' => 0], null, false, true, null]],
-        658 => [[['_route' => 'reservation_show', '_controller' => 'App\\Controller\\ReservationController::show'], ['id_reservation'], ['GET' => 0], null, false, true, null]],
-        676 => [[['_route' => 'reservation_edit', '_controller' => 'App\\Controller\\ReservationController::edit'], ['id_reservation'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        689 => [[['_route' => 'reservation_delete', '_controller' => 'App\\Controller\\ReservationController::delete'], ['id_reservation'], ['POST' => 0], null, false, true, null]],
-        713 => [[['_route' => 'sport_show', '_controller' => 'App\\Controller\\SportController::show'], ['idSport'], ['GET' => 0], null, false, true, null]],
-        731 => [[['_route' => 'sport_edit', '_controller' => 'App\\Controller\\SportController::edit'], ['idSport'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        744 => [
+        547 => [[['_route' => 'joueur_edit', '_controller' => 'App\\Controller\\JoueurController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        561 => [[['_route' => 'joueur_delete', '_controller' => 'App\\Controller\\JoueurController::delete'], ['id'], ['POST' => 0], null, false, false, null]],
+        570 => [[['_route' => 'joueur_show', '_controller' => 'App\\Controller\\JoueurController::show'], ['id'], ['GET' => 0], null, false, true, null]],
+        587 => [[['_route' => 'joueur_tracking', '_controller' => 'App\\Controller\\JoueurController::trackingRedirect'], [], ['GET' => 0], null, false, false, null]],
+        627 => [[['_route' => 'performance_joueur_show', '_controller' => 'App\\Controller\\PerformanceJoueurController::show'], ['idPerformance'], ['GET' => 0], null, false, true, null]],
+        640 => [[['_route' => 'performance_joueur_edit', '_controller' => 'App\\Controller\\PerformanceJoueurController::edit'], ['idPerformance'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        648 => [[['_route' => 'performance_joueur_delete', '_controller' => 'App\\Controller\\PerformanceJoueurController::delete'], ['idPerformance'], ['POST' => 0], null, false, true, null]],
+        678 => [[['_route' => 'reservation_show', '_controller' => 'App\\Controller\\ReservationController::show'], ['id_reservation'], ['GET' => 0], null, false, true, null]],
+        696 => [[['_route' => 'reservation_edit', '_controller' => 'App\\Controller\\ReservationController::edit'], ['id_reservation'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        709 => [[['_route' => 'reservation_delete', '_controller' => 'App\\Controller\\ReservationController::delete'], ['id_reservation'], ['POST' => 0], null, false, true, null]],
+        733 => [[['_route' => 'sport_show', '_controller' => 'App\\Controller\\SportController::show'], ['idSport'], ['GET' => 0], null, false, true, null]],
+        751 => [[['_route' => 'sport_edit', '_controller' => 'App\\Controller\\SportController::edit'], ['idSport'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        764 => [
             [['_route' => 'sport_delete', '_controller' => 'App\\Controller\\SportController::delete'], ['idSport'], ['POST' => 0], null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],

@@ -3,8 +3,6 @@
 namespace App\Form;
 
 use App\Entity\PerformanceJoueur;
-use App\Entity\Joueur;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -16,39 +14,40 @@ class PerformanceJoueurType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('joueur', EntityType::class, [
-                'class' => Joueur::class,
-                'choice_label' => 'nom', // Assuming Joueur has a nom property, adjust as needed
-                'placeholder' => 'Select a player',
-            ])
             ->add('saison', TextType::class, [
-                'label' => 'Season'
+                'label' => 'Season',
+                'attr' => ['class' => 'form-control'],
             ])
             ->add('nombreMatches', IntegerType::class, [
                 'label' => 'Number of Matches',
-                'required' => false
+                'required' => false,
+                'attr' => ['class' => 'form-control'],
             ])
             ->add('minutesJouees', IntegerType::class, [
                 'label' => 'Minutes Played',
-                'required' => false
+                'required' => false,
+                'attr' => ['class' => 'form-control'],
             ])
             ->add('butsMarques', IntegerType::class, [
                 'label' => 'Goals Scored',
-                'required' => false
+                'required' => false,
+                'attr' => ['class' => 'form-control'],
             ])
             ->add('passesDecisives', IntegerType::class, [
                 'label' => 'Assists',
-                'required' => false
+                'required' => false,
+                'attr' => ['class' => 'form-control'],
             ])
             ->add('cartonsJaunes', IntegerType::class, [
                 'label' => 'Yellow Cards',
-                'required' => false
+                'required' => false,
+                'attr' => ['class' => 'form-control'],
             ])
             ->add('cartonsRouges', IntegerType::class, [
                 'label' => 'Red Cards',
-                'required' => false
-            ])
-        ;
+                'required' => false,
+                'attr' => ['class' => 'form-control'],
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

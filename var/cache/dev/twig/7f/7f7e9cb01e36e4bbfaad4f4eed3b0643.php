@@ -195,6 +195,7 @@ class __TwigTemplate_ca76cab7ea277c39dd67feeb96ecc272 extends Template
                     <table class=\"table\" id=\"joueursTable\">
                         <thead>
                             <tr>
+                                <th>Photo</th>
                                 <th>Nom</th>
                                 <th>Prénom</th>
                                 <th>Sport</th>
@@ -205,128 +206,133 @@ class __TwigTemplate_ca76cab7ea277c39dd67feeb96ecc272 extends Template
                                 <th>Statut</th>
                                 <th>Email</th>
                                 <th>Téléphone</th>
-                                <th>Photo</th>
+                                
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody class=\"table-border-bottom-0\">
-                            ";
-        // line 76
+    ";
+        // line 77
         $context['_parent'] = $context;
-        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["joueurs"]) || array_key_exists("joueurs", $context) ? $context["joueurs"] : (function () { throw new RuntimeError('Variable "joueurs" does not exist.', 76, $this->source); })()));
+        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["joueurs"]) || array_key_exists("joueurs", $context) ? $context["joueurs"] : (function () { throw new RuntimeError('Variable "joueurs" does not exist.', 77, $this->source); })()));
         $context['_iterated'] = false;
         foreach ($context['_seq'] as $context["_key"] => $context["joueur"]) {
-            // line 77
-            yield "                                <tr class=\"table-default\">
-                                    <td>
-                                        <i class=\"fab fa-sketch fa-lg text-warning me-3\"></i>
-                                        <strong>";
+            // line 78
+            yield "        <tr class=\"table-default\">
+            <td>
+                ";
             // line 80
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "nom", [], "any", false, false, false, 80), "html", null, true);
-            yield "</strong>
-                                    </td>
-                                    <td>";
-            // line 82
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "prenom", [], "any", false, false, false, 82), "html", null, true);
-            yield "</td>
-                                    <td>";
-            // line 83
-            yield (((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "sport", [], "any", false, true, false, 83), "nomSport", [], "any", true, true, false, 83) &&  !(null === CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "sport", [], "any", false, false, false, 83), "nomSport", [], "any", false, false, false, 83)))) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "sport", [], "any", false, false, false, 83), "nomSport", [], "any", false, false, false, 83), "html", null, true)) : ("N/A"));
-            yield "</td>
-                                    <td>";
-            // line 84
-            yield ((CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "dateNaissance", [], "any", false, false, false, 84)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "dateNaissance", [], "any", false, false, false, 84), "d/m/Y"), "html", null, true)) : ("N/A"));
-            yield "</td>
-                                    <td>";
-            // line 85
-            yield (((CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "poste", [], "any", true, true, false, 85) &&  !(null === CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "poste", [], "any", false, false, false, 85)))) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "poste", [], "any", false, false, false, 85), "html", null, true)) : ("N/A"));
-            yield "</td>
-                                    <td>";
-            // line 86
-            yield ((CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "taille", [], "any", false, false, false, 86)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatNumber(CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "taille", [], "any", false, false, false, 86), 2, ".", ","), "html", null, true)) : ("N/A"));
-            yield "</td>
-                                    <td>";
-            // line 87
-            yield ((CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "poids", [], "any", false, false, false, 87)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatNumber(CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "poids", [], "any", false, false, false, 87), 2, ".", ","), "html", null, true)) : ("N/A"));
-            yield "</td>
-                                    <td>";
-            // line 88
-            yield (((CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "statut", [], "any", true, true, false, 88) &&  !(null === CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "statut", [], "any", false, false, false, 88)))) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "statut", [], "any", false, false, false, 88), "html", null, true)) : ("N/A"));
-            yield "</td>
-                                    <td>";
-            // line 89
-            yield (((CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "email", [], "any", true, true, false, 89) &&  !(null === CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "email", [], "any", false, false, false, 89)))) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "email", [], "any", false, false, false, 89), "html", null, true)) : ("N/A"));
-            yield "</td>
-                                    <td>";
-            // line 90
-            yield (((CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "telephone", [], "any", true, true, false, 90) &&  !(null === CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "telephone", [], "any", false, false, false, 90)))) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "telephone", [], "any", false, false, false, 90), "html", null, true)) : ("N/A"));
-            yield "</td>
-                                    <td>
-                                        ";
-            // line 92
-            if (CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "profilePictureUrl", [], "any", false, false, false, 92)) {
-                // line 93
-                yield "                                            <img src=\"";
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "profilePictureUrl", [], "any", false, false, false, 93), "html", null, true);
-                yield "\" alt=\"Profile\" class=\"rounded-circle\" style=\"width: 30px; height: 30px;\">
-                                        ";
+            if (CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "profilePictureUrl", [], "any", false, false, false, 80)) {
+                // line 81
+                yield "                    <img src=\"";
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "profilePictureUrl", [], "any", false, false, false, 81), "html", null, true);
+                yield "\" alt=\"Photo de profil de ";
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "prenom", [], "any", false, false, false, 81), "html", null, true);
+                yield " ";
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "nom", [], "any", false, false, false, 81), "html", null, true);
+                yield "\" class=\"rounded-circle\" style=\"width: 40px; height: 40px; object-fit: cover;\" onerror=\"this.src='/path/to/default-image.jpg';\">
+                ";
             } else {
-                // line 95
-                yield "                                            N/A
-                                        ";
+                // line 83
+                yield "                    <span class=\"text-muted\">N/A</span>
+                ";
             }
+            // line 85
+            yield "            </td>
+            <td>
+                <i class=\"fab fa-sketch fa-lg text-warning me-3\"></i>
+                <strong>";
+            // line 88
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "nom", [], "any", false, false, false, 88), "html", null, true);
+            yield "</strong>
+            </td>
+            <td>";
+            // line 90
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "prenom", [], "any", false, false, false, 90), "html", null, true);
+            yield "</td>
+            <td>";
+            // line 91
+            yield (((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "sport", [], "any", false, true, false, 91), "nomSport", [], "any", true, true, false, 91) &&  !(null === CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "sport", [], "any", false, false, false, 91), "nomSport", [], "any", false, false, false, 91)))) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "sport", [], "any", false, false, false, 91), "nomSport", [], "any", false, false, false, 91), "html", null, true)) : ("N/A"));
+            yield "</td>
+            <td>";
+            // line 92
+            yield ((CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "dateNaissance", [], "any", false, false, false, 92)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "dateNaissance", [], "any", false, false, false, 92), "d/m/Y"), "html", null, true)) : ("N/A"));
+            yield "</td>
+            <td>";
+            // line 93
+            yield (((CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "poste", [], "any", true, true, false, 93) &&  !(null === CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "poste", [], "any", false, false, false, 93)))) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "poste", [], "any", false, false, false, 93), "html", null, true)) : ("N/A"));
+            yield "</td>
+            <td>";
+            // line 94
+            yield ((CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "taille", [], "any", false, false, false, 94)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatNumber(CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "taille", [], "any", false, false, false, 94), 2, ".", ","), "html", null, true)) : ("N/A"));
+            yield "</td>
+            <td>";
+            // line 95
+            yield ((CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "poids", [], "any", false, false, false, 95)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatNumber(CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "poids", [], "any", false, false, false, 95), 2, ".", ","), "html", null, true)) : ("N/A"));
+            yield "</td>
+            <td>";
+            // line 96
+            yield (((CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "statut", [], "any", true, true, false, 96) &&  !(null === CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "statut", [], "any", false, false, false, 96)))) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "statut", [], "any", false, false, false, 96), "html", null, true)) : ("N/A"));
+            yield "</td>
+            <td>";
             // line 97
-            yield "                                    </td>
-                                    <td>
-                                        <div class=\"dropdown\">
-                                            <button type=\"button\" class=\"btn p-0 dropdown-toggle hide-arrow\" data-bs-toggle=\"dropdown\">
-                                                <i class=\"bx bx-dots-vertical-rounded\"></i>
-                                            </button>
-                                            <div class=\"dropdown-menu\">
-                                                <a class=\"dropdown-item\" href=\"";
-            // line 104
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("joueur_show", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "idJoueur", [], "any", false, false, false, 104)]), "html", null, true);
+            yield (((CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "email", [], "any", true, true, false, 97) &&  !(null === CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "email", [], "any", false, false, false, 97)))) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "email", [], "any", false, false, false, 97), "html", null, true)) : ("N/A"));
+            yield "</td>
+            <td>";
+            // line 98
+            yield (((CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "telephone", [], "any", true, true, false, 98) &&  !(null === CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "telephone", [], "any", false, false, false, 98)))) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "telephone", [], "any", false, false, false, 98), "html", null, true)) : ("N/A"));
+            yield "</td>
+            
+            <td>
+                <div class=\"dropdown\">
+                    <button type=\"button\" class=\"btn p-0 dropdown-toggle hide-arrow\" data-bs-toggle=\"dropdown\">
+                        <i class=\"bx bx-dots-vertical-rounded\"></i>
+                    </button>
+                    <div class=\"dropdown-menu\">
+                        <a class=\"dropdown-item\" href=\"";
+            // line 106
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("joueur_show", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "idJoueur", [], "any", false, false, false, 106)]), "html", null, true);
             yield "\">
-                                                    <i class=\"bx bx-show me-1\"></i> Voir
-                                                </a>
-                                                <a class=\"dropdown-item\" href=\"";
-            // line 107
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("joueur_edit", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "idJoueur", [], "any", false, false, false, 107)]), "html", null, true);
+                            <i class=\"bx bx-show me-1\"></i> Voir
+                        </a>
+                        <a class=\"dropdown-item\" href=\"";
+            // line 109
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("joueur_edit", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "idJoueur", [], "any", false, false, false, 109)]), "html", null, true);
             yield "\">
-                                                    <i class=\"bx bx-edit-alt me-1\"></i> Modifier
-                                                </a>
-                                                <form method=\"post\" action=\"";
-            // line 110
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("joueur_delete", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "idJoueur", [], "any", false, false, false, 110)]), "html", null, true);
+                            <i class=\"bx bx-edit-alt me-1\"></i> Modifier
+                        </a>
+                        <form method=\"post\" action=\"";
+            // line 112
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("joueur_delete", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "idJoueur", [], "any", false, false, false, 112)]), "html", null, true);
             yield "\" style=\"display:inline;\" onsubmit=\"return confirm('Confirmer la suppression?');\">
-                                                    <input type=\"hidden\" name=\"_token\" value=\"";
-            // line 111
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderCsrfToken(("delete" . CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "idJoueur", [], "any", false, false, false, 111))), "html", null, true);
+                            <input type=\"hidden\" name=\"_token\" value=\"";
+            // line 113
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderCsrfToken(("delete" . CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "idJoueur", [], "any", false, false, false, 113))), "html", null, true);
             yield "\">
-                                                    <button class=\"dropdown-item\" type=\"submit\">
-                                                        <i class=\"bx bx-trash me-1\"></i> Supprimer
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            ";
+                            <button class=\"dropdown-item\" type=\"submit\">
+                                <i class=\"bx bx-trash me-1\"></i> Supprimer
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    ";
             $context['_iterated'] = true;
         }
-        // line 120
+        // line 122
         if (!$context['_iterated']) {
-            // line 121
-            yield "                                <tr>
-                                    <td colspan=\"12\" class=\"text-center\">Aucun joueur trouvé</td>
-                                </tr>
-                            ";
+            // line 123
+            yield "        <tr>
+            <td colspan=\"12\" class=\"text-center\">Aucun joueur trouvé</td>
+        </tr>
+    ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_key'], $context['joueur'], $context['_parent'], $context['_iterated']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 125
-        yield "                        </tbody>
+        // line 127
+        yield "</tbody>
                     </table>
                 </div>
             </div>
@@ -369,7 +375,7 @@ class __TwigTemplate_ca76cab7ea277c39dd67feeb96ecc272 extends Template
         yield from [];
     }
 
-    // line 133
+    // line 135
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -382,7 +388,7 @@ class __TwigTemplate_ca76cab7ea277c39dd67feeb96ecc272 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "javascripts"));
 
-        // line 134
+        // line 136
         yield "    ";
         yield from $this->yieldParentBlock("javascripts", $context, $blocks);
         yield "
@@ -450,7 +456,7 @@ class __TwigTemplate_ca76cab7ea277c39dd67feeb96ecc272 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  386 => 134,  373 => 133,  362 => 13,  359 => 12,  346 => 11,  329 => 125,  320 => 121,  318 => 120,  304 => 111,  300 => 110,  294 => 107,  288 => 104,  279 => 97,  275 => 95,  269 => 93,  267 => 92,  262 => 90,  258 => 89,  254 => 88,  250 => 87,  246 => 86,  242 => 85,  238 => 84,  234 => 83,  230 => 82,  225 => 80,  220 => 77,  215 => 76,  187 => 51,  183 => 50,  179 => 49,  167 => 40,  160 => 36,  136 => 14,  134 => 11,  130 => 9,  117 => 8,  94 => 6,  83 => 4,  80 => 3,  67 => 2,  44 => 1,);
+        return array (  392 => 136,  379 => 135,  368 => 13,  365 => 12,  352 => 11,  335 => 127,  326 => 123,  324 => 122,  310 => 113,  306 => 112,  300 => 109,  294 => 106,  283 => 98,  279 => 97,  275 => 96,  271 => 95,  267 => 94,  263 => 93,  259 => 92,  255 => 91,  251 => 90,  246 => 88,  241 => 85,  237 => 83,  227 => 81,  225 => 80,  221 => 78,  216 => 77,  187 => 51,  183 => 50,  179 => 49,  167 => 40,  160 => 36,  136 => 14,  134 => 11,  130 => 9,  117 => 8,  94 => 6,  83 => 4,  80 => 3,  67 => 2,  44 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -515,6 +521,7 @@ class __TwigTemplate_ca76cab7ea277c39dd67feeb96ecc272 extends Template
                     <table class=\"table\" id=\"joueursTable\">
                         <thead>
                             <tr>
+                                <th>Photo</th>
                                 <th>Nom</th>
                                 <th>Prénom</th>
                                 <th>Sport</th>
@@ -525,61 +532,62 @@ class __TwigTemplate_ca76cab7ea277c39dd67feeb96ecc272 extends Template
                                 <th>Statut</th>
                                 <th>Email</th>
                                 <th>Téléphone</th>
-                                <th>Photo</th>
+                                
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody class=\"table-border-bottom-0\">
-                            {% for joueur in joueurs %}
-                                <tr class=\"table-default\">
-                                    <td>
-                                        <i class=\"fab fa-sketch fa-lg text-warning me-3\"></i>
-                                        <strong>{{ joueur.nom }}</strong>
-                                    </td>
-                                    <td>{{ joueur.prenom }}</td>
-                                    <td>{{ joueur.sport.nomSport ?? 'N/A' }}</td>
-                                    <td>{{ joueur.dateNaissance ? joueur.dateNaissance|date('d/m/Y') : 'N/A' }}</td>
-                                    <td>{{ joueur.poste ?? 'N/A' }}</td>
-                                    <td>{{ joueur.taille ? joueur.taille|number_format(2, '.', ',') : 'N/A' }}</td>
-                                    <td>{{ joueur.poids ? joueur.poids|number_format(2, '.', ',') : 'N/A' }}</td>
-                                    <td>{{ joueur.statut ?? 'N/A' }}</td>
-                                    <td>{{ joueur.email ?? 'N/A' }}</td>
-                                    <td>{{ joueur.telephone ?? 'N/A' }}</td>
-                                    <td>
-                                        {% if joueur.profilePictureUrl %}
-                                            <img src=\"{{ joueur.profilePictureUrl }}\" alt=\"Profile\" class=\"rounded-circle\" style=\"width: 30px; height: 30px;\">
-                                        {% else %}
-                                            N/A
-                                        {% endif %}
-                                    </td>
-                                    <td>
-                                        <div class=\"dropdown\">
-                                            <button type=\"button\" class=\"btn p-0 dropdown-toggle hide-arrow\" data-bs-toggle=\"dropdown\">
-                                                <i class=\"bx bx-dots-vertical-rounded\"></i>
-                                            </button>
-                                            <div class=\"dropdown-menu\">
-                                                <a class=\"dropdown-item\" href=\"{{ path('joueur_show', {'id': joueur.idJoueur}) }}\">
-                                                    <i class=\"bx bx-show me-1\"></i> Voir
-                                                </a>
-                                                <a class=\"dropdown-item\" href=\"{{ path('joueur_edit', {'id': joueur.idJoueur}) }}\">
-                                                    <i class=\"bx bx-edit-alt me-1\"></i> Modifier
-                                                </a>
-                                                <form method=\"post\" action=\"{{ path('joueur_delete', {'id': joueur.idJoueur}) }}\" style=\"display:inline;\" onsubmit=\"return confirm('Confirmer la suppression?');\">
-                                                    <input type=\"hidden\" name=\"_token\" value=\"{{ csrf_token('delete' ~ joueur.idJoueur) }}\">
-                                                    <button class=\"dropdown-item\" type=\"submit\">
-                                                        <i class=\"bx bx-trash me-1\"></i> Supprimer
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            {% else %}
-                                <tr>
-                                    <td colspan=\"12\" class=\"text-center\">Aucun joueur trouvé</td>
-                                </tr>
-                            {% endfor %}
-                        </tbody>
+    {% for joueur in joueurs %}
+        <tr class=\"table-default\">
+            <td>
+                {% if joueur.profilePictureUrl %}
+                    <img src=\"{{ joueur.profilePictureUrl }}\" alt=\"Photo de profil de {{ joueur.prenom }} {{ joueur.nom }}\" class=\"rounded-circle\" style=\"width: 40px; height: 40px; object-fit: cover;\" onerror=\"this.src='/path/to/default-image.jpg';\">
+                {% else %}
+                    <span class=\"text-muted\">N/A</span>
+                {% endif %}
+            </td>
+            <td>
+                <i class=\"fab fa-sketch fa-lg text-warning me-3\"></i>
+                <strong>{{ joueur.nom }}</strong>
+            </td>
+            <td>{{ joueur.prenom }}</td>
+            <td>{{ joueur.sport.nomSport ?? 'N/A' }}</td>
+            <td>{{ joueur.dateNaissance ? joueur.dateNaissance|date('d/m/Y') : 'N/A' }}</td>
+            <td>{{ joueur.poste ?? 'N/A' }}</td>
+            <td>{{ joueur.taille ? joueur.taille|number_format(2, '.', ',') : 'N/A' }}</td>
+            <td>{{ joueur.poids ? joueur.poids|number_format(2, '.', ',') : 'N/A' }}</td>
+            <td>{{ joueur.statut ?? 'N/A' }}</td>
+            <td>{{ joueur.email ?? 'N/A' }}</td>
+            <td>{{ joueur.telephone ?? 'N/A' }}</td>
+            
+            <td>
+                <div class=\"dropdown\">
+                    <button type=\"button\" class=\"btn p-0 dropdown-toggle hide-arrow\" data-bs-toggle=\"dropdown\">
+                        <i class=\"bx bx-dots-vertical-rounded\"></i>
+                    </button>
+                    <div class=\"dropdown-menu\">
+                        <a class=\"dropdown-item\" href=\"{{ path('joueur_show', {'id': joueur.idJoueur}) }}\">
+                            <i class=\"bx bx-show me-1\"></i> Voir
+                        </a>
+                        <a class=\"dropdown-item\" href=\"{{ path('joueur_edit', {'id': joueur.idJoueur}) }}\">
+                            <i class=\"bx bx-edit-alt me-1\"></i> Modifier
+                        </a>
+                        <form method=\"post\" action=\"{{ path('joueur_delete', {'id': joueur.idJoueur}) }}\" style=\"display:inline;\" onsubmit=\"return confirm('Confirmer la suppression?');\">
+                            <input type=\"hidden\" name=\"_token\" value=\"{{ csrf_token('delete' ~ joueur.idJoueur) }}\">
+                            <button class=\"dropdown-item\" type=\"submit\">
+                                <i class=\"bx bx-trash me-1\"></i> Supprimer
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan=\"12\" class=\"text-center\">Aucun joueur trouvé</td>
+        </tr>
+    {% endfor %}
+</tbody>
                     </table>
                 </div>
             </div>

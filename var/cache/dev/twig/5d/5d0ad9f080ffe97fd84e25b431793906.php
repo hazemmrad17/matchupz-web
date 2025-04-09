@@ -148,7 +148,10 @@ class __TwigTemplate_e0b9a76de116b2a1ab2a71f0b78ee0eb extends Template
                                     <i class=\"bx bx-dots-vertical-rounded\"></i>
                                 </button>
                                 <div class=\"dropdown-menu dropdown-menu-end\" aria-labelledby=\"cardOpt6\">
-                                    <a class=\"dropdown-item\" href=\"#\">Go To Tracking Page</a>
+                                    <a class=\"dropdown-item\" href=\"";
+        // line 86
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("joueur_tracking");
+        yield "\">Go To Tracking Page</a>
                                 </div>
                             </div>
                         </div>
@@ -369,7 +372,7 @@ class __TwigTemplate_e0b9a76de116b2a1ab2a71f0b78ee0eb extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  317 => 214,  311 => 211,  294 => 196,  283 => 191,  279 => 190,  273 => 187,  267 => 186,  260 => 182,  256 => 180,  252 => 179,  214 => 144,  202 => 135,  133 => 69,  119 => 58,  111 => 53,  91 => 36,  69 => 17,  58 => 9,  48 => 1,);
+        return array (  320 => 214,  314 => 211,  297 => 196,  286 => 191,  282 => 190,  276 => 187,  270 => 186,  263 => 182,  259 => 180,  255 => 179,  217 => 144,  205 => 135,  153 => 86,  133 => 69,  119 => 58,  111 => 53,  91 => 36,  69 => 17,  58 => 9,  48 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -459,7 +462,7 @@ class __TwigTemplate_e0b9a76de116b2a1ab2a71f0b78ee0eb extends Template
                                     <i class=\"bx bx-dots-vertical-rounded\"></i>
                                 </button>
                                 <div class=\"dropdown-menu dropdown-menu-end\" aria-labelledby=\"cardOpt6\">
-                                    <a class=\"dropdown-item\" href=\"#\">Go To Tracking Page</a>
+                                    <a class=\"dropdown-item\" href=\"{{ path('joueur_tracking') }}\">Go To Tracking Page</a>
                                 </div>
                             </div>
                         </div>

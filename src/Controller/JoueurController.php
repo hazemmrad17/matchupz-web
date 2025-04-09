@@ -213,15 +213,25 @@ class JoueurController extends AbstractController
     }
 
     #[Route('/{id}', name: 'joueur_show', methods: ['GET'])]
-    public function show(?Joueur $joueur): Response
-    {
-        if (!$joueur) {
-            throw $this->createNotFoundException('Joueur not found');
-        }
-        return $this->render('joueur/show.html.twig', [
-            'joueur' => $joueur,
-        ]);
+public function show(
+    ?Joueur $joueur,
+    \App\Repository\PerformanceJoueurRepository $performanceRepository,
+    \App\Repository\EvaluationPhysiqueRepository $evaluationRepository
+): Response {
+    if (!$joueur) {
+        throw $this->createNotFoundException('Joueur not found');
     }
+
+    // Fetch performance and evaluation data for this player
+    $performances = $performanceRepository->findBy(['joueur' => $joueur]);
+    $evaluations = $evaluationRepository->findBy(['joueur' => $joueur]);
+
+    return $this->render('joueur/show.html.twig', [
+        'joueur' => $joueur,
+        'performances' => $performances,
+        'evaluations' => $evaluations,
+    ]);
+}
 
     #[Route('/export/csv', name: 'joueur_export_csv')]
     public function exportCsv(JoueurRepository $joueurRepository): Response
@@ -311,6 +321,7 @@ class JoueurController extends AbstractController
         $response->headers->set('Content-Disposition', $disposition);
 
         return $response;
+        
     }
 
     #[Route('/export/excel', name: 'joueur_export_excel')]
@@ -369,5 +380,13 @@ class JoueurController extends AbstractController
         $response->headers->set('Content-Disposition', $disposition);
 
         return $response;
+    }
+
+    #[Route('/tracking', name: 'joueur_tracking', methods: ['GET'])]
+    public function trackingRedirect(): Response
+    {
+        return $this->render('maintenance.html.twig', [
+            'message' => 'Player Tracking is currently under maintenance. Please check back later.',
+        ]);
     }
 }

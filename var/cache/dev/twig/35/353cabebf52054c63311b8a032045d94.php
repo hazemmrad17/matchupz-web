@@ -177,7 +177,7 @@ class __TwigTemplate_3e90e16a72c3bc1bef8c3ab6011e0fef extends Template
                         </div>
                     </div>
                 </h5>
-                <div class=\"table-responsive text-nowrap\">
+                <div class=\"table-responsive text-nowrap\" style=\"max-height: 300px; overflow-y: auto;\">
                     <table class=\"table\" id=\"clubsTable\">
                         <thead>
                             <tr>
@@ -318,6 +318,17 @@ class __TwigTemplate_3e90e16a72c3bc1bef8c3ab6011e0fef extends Template
                     }
                 }
             });
+
+            // Ensure table is scrollable and shows only first 5 rows initially
+            const tbody = table.getElementsByTagName('tbody')[0];
+            const rowHeight = 70; // Approximate height of each row in pixels (adjusted for image)
+            const maxVisibleRows = 5;
+            const totalRows = rows.length;
+
+            if (totalRows > maxVisibleRows) {
+                tbody.style.maxHeight = `\${rowHeight * maxVisibleRows}px`;
+                tbody.style.overflowY = 'auto';
+            }
         });
     </script>
 ";
@@ -410,7 +421,7 @@ class __TwigTemplate_3e90e16a72c3bc1bef8c3ab6011e0fef extends Template
                         </div>
                     </div>
                 </h5>
-                <div class=\"table-responsive text-nowrap\">
+                <div class=\"table-responsive text-nowrap\" style=\"max-height: 300px; overflow-y: auto;\">
                     <table class=\"table\" id=\"clubsTable\">
                         <thead>
                             <tr>
@@ -492,6 +503,17 @@ class __TwigTemplate_3e90e16a72c3bc1bef8c3ab6011e0fef extends Template
                     }
                 }
             });
+
+            // Ensure table is scrollable and shows only first 5 rows initially
+            const tbody = table.getElementsByTagName('tbody')[0];
+            const rowHeight = 70; // Approximate height of each row in pixels (adjusted for image)
+            const maxVisibleRows = 5;
+            const totalRows = rows.length;
+
+            if (totalRows > maxVisibleRows) {
+                tbody.style.maxHeight = `\${rowHeight * maxVisibleRows}px`;
+                tbody.style.overflowY = 'auto';
+            }
         });
     </script>
 {% endblock %}", "club/index.html.twig", "C:\\Users\\Hazem Mrad\\Desktop\\MatchupZ-Web-joueur-espace - Copy (5)\\templates\\club\\index.html.twig");

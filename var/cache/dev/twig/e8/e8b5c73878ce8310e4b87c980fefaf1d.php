@@ -101,7 +101,7 @@ class __TwigTemplate_e6e0635676f176e67185411cdf346dcd extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "title"));
 
-        yield "Historique des Clubs";
+        yield "Historique des Transferts des Joueurs";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
 
@@ -388,6 +388,17 @@ class __TwigTemplate_e6e0635676f176e67185411cdf346dcd extends Template
                     }
                 }
             });
+
+            // Ensure table is scrollable and shows only first 5 rows initially
+            const tbody = table.getElementsByTagName('tbody')[0];
+            const rowHeight = 50; // Approximate height of each row in pixels (adjust as needed)
+            const maxVisibleRows = 5;
+            const totalRows = rows.length;
+
+            if (totalRows > maxVisibleRows) {
+                tbody.style.maxHeight = `\${rowHeight * maxVisibleRows}px`;
+                tbody.style.overflowY = 'auto';
+            }
         });
     </script>
 ";
@@ -432,7 +443,7 @@ class __TwigTemplate_e6e0635676f176e67185411cdf346dcd extends Template
     {% include 'searchbar.html.twig' %}
 {% endblock %}
 
-{% block title %}Historique des Clubs{% endblock %}
+{% block title %}Historique des Transferts des Joueurs{% endblock %}
 
 {% block content %}
     <div class=\"content-wrapper\">
@@ -579,6 +590,17 @@ class __TwigTemplate_e6e0635676f176e67185411cdf346dcd extends Template
                     }
                 }
             });
+
+            // Ensure table is scrollable and shows only first 5 rows initially
+            const tbody = table.getElementsByTagName('tbody')[0];
+            const rowHeight = 50; // Approximate height of each row in pixels (adjust as needed)
+            const maxVisibleRows = 5;
+            const totalRows = rows.length;
+
+            if (totalRows > maxVisibleRows) {
+                tbody.style.maxHeight = `\${rowHeight * maxVisibleRows}px`;
+                tbody.style.overflowY = 'auto';
+            }
         });
     </script>
 {% endblock %}", "historique_club/index.html.twig", "C:\\Users\\Hazem Mrad\\Desktop\\MatchupZ-Web-joueur-espace - Copy (5)\\templates\\historique_club\\index.html.twig");

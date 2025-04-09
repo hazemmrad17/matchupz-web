@@ -557,7 +557,7 @@
     </service>
     <service id="argument_resolver.service" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
       <tag priority="-50" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">controller.argument_value_resolver</tag>
-      <argument type="service" id=".service_locator.ZqtnGBP"/>
+      <argument type="service" id=".service_locator.dzHEK8T"/>
     </service>
     <service id="argument_resolver.default" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">
       <tag priority="-100" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">controller.argument_value_resolver</tag>
@@ -3461,7 +3461,7 @@
     </service>
     <service id="argument_resolver.not_tagged_controller" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
       <tag name="controller.argument_value_resolver" priority="-200"/>
-      <argument type="service" id=".service_locator.ZqtnGBP"/>
+      <argument type="service" id=".service_locator.dzHEK8T"/>
     </service>
     <service id="debug.log_processor" class="Symfony\Bridge\Monolog\Processor\DebugProcessor">
       <tag name="kernel.reset" method="reset"/>
@@ -7836,6 +7836,13 @@
       <tag name="container.service_locator"/>
       <argument type="collection"/>
     </service>
+    <service id=".service_locator.BKF_x8u" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="evaluationRepository" type="service_closure" id="App\Repository\EvaluationPhysiqueRepository"/>
+        <argument key="performanceRepository" type="service_closure" id="App\Repository\PerformanceJoueurRepository"/>
+      </argument>
+    </service>
     <service id=".service_locator.TDAL4Wh" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -7908,7 +7915,7 @@
         <argument key="sportRepository" type="service_closure" id="App\Repository\SportRepository"/>
       </argument>
     </service>
-    <service id=".service_locator.ZqtnGBP" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.dzHEK8T" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\ClubController::exportCsv" type="service_closure" id=".service_locator.eOJlB0r"/>
@@ -7944,6 +7951,7 @@
         <argument key="App\Controller\JoueurController::exportExcel" type="service_closure" id=".service_locator.i0N9PQM"/>
         <argument key="App\Controller\JoueurController::exportPdf" type="service_closure" id=".service_locator.TDAL4Wh"/>
         <argument key="App\Controller\JoueurController::index" type="service_closure" id=".service_locator.i0N9PQM"/>
+        <argument key="App\Controller\JoueurController::show" type="service_closure" id=".service_locator.BKF_x8u"/>
         <argument key="App\Controller\PerformanceJoueurController::delete" type="service_closure" id=".service_locator.PNlbJGO"/>
         <argument key="App\Controller\PerformanceJoueurController::edit" type="service_closure" id=".service_locator.PNlbJGO"/>
         <argument key="App\Controller\PerformanceJoueurController::index" type="service_closure" id=".service_locator.CrEgygo"/>
@@ -8000,6 +8008,7 @@
         <argument key="App\Controller\JoueurController:exportExcel" type="service_closure" id=".service_locator.i0N9PQM"/>
         <argument key="App\Controller\JoueurController:exportPdf" type="service_closure" id=".service_locator.TDAL4Wh"/>
         <argument key="App\Controller\JoueurController:index" type="service_closure" id=".service_locator.i0N9PQM"/>
+        <argument key="App\Controller\JoueurController:show" type="service_closure" id=".service_locator.BKF_x8u"/>
         <argument key="App\Controller\PerformanceJoueurController:delete" type="service_closure" id=".service_locator.PNlbJGO"/>
         <argument key="App\Controller\PerformanceJoueurController:edit" type="service_closure" id=".service_locator.PNlbJGO"/>
         <argument key="App\Controller\PerformanceJoueurController:index" type="service_closure" id=".service_locator.CrEgygo"/>
@@ -10300,7 +10309,7 @@
     <service id="Knp\Snappy\Image" alias="knp_snappy.image"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.w7.f4fT" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.ZqtnGBP"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.dzHEK8T"/>
     <service id="doctrine.id_generator_locator" alias=".service_locator.KLVvNIq"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface $requestLogger" alias="monolog.logger.request"/>
@@ -10329,12 +10338,13 @@
     <service id=".service_locator.Naq5WmR" alias=".service_locator.n8st8m4"/>
     <service id=".service_locator.MteuFlB" alias=".service_locator.0qaldgn"/>
     <service id=".service_locator._kIBHZW" alias=".service_locator.0AreAVX"/>
+    <service id=".service_locator.j7s8Dqo" alias=".service_locator.BKF_x8u"/>
     <service id=".service_locator.IcIxi4." alias=".service_locator.PNlbJGO"/>
     <service id=".service_locator.r3wEyuD" alias=".service_locator.Lt49UVm"/>
     <service id=".service_locator.vYOHL0D" alias=".service_locator.jpL5_4q"/>
     <service id=".service_locator.X9gG0Wi" alias=".service_locator.geVFa8t"/>
     <service id=".service_locator.RwykrWv" alias=".service_locator.s2P9uaA"/>
-    <service id=".service_locator.ZNnmOhs" alias=".service_locator.ZqtnGBP"/>
+    <service id=".service_locator.Dvs5lKC" alias=".service_locator.dzHEK8T"/>
     <service id=".service_locator.BFrsqsn" alias=".service_locator.F9PKc.7"/>
     <service id=".service_locator.OJzapFA" alias=".service_locator.0Wscov6"/>
     <service id=".service_locator.XtmiKbi" alias=".service_locator.MfxSDRP"/>
@@ -10374,6 +10384,7 @@
     <service id=".service_locator.jV9c70C" alias=".service_locator.0AreAVX"/>
     <service id=".service_locator.s8pPuoc" alias=".service_locator.FFEnhRj"/>
     <service id=".service_locator.m9dk8kD" alias=".service_locator.i0N9PQM"/>
+    <service id=".service_locator.R9pqApQ" alias=".service_locator.BKF_x8u"/>
     <service id=".service_locator.ne_snVk" alias=".service_locator.TDAL4Wh"/>
     <service id=".service_locator.LXe3GOx" alias=".service_locator.CrEgygo"/>
     <service id=".service_locator.5TBLhhJ" alias=".service_locator.z4JrMru"/>

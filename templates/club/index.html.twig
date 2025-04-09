@@ -52,7 +52,7 @@
                         </div>
                     </div>
                 </h5>
-                <div class="table-responsive text-nowrap">
+                <div class="table-responsive text-nowrap" style="max-height: 300px; overflow-y: auto;">
                     <table class="table" id="clubsTable">
                         <thead>
                             <tr>
@@ -134,6 +134,17 @@
                     }
                 }
             });
+
+            // Ensure table is scrollable and shows only first 5 rows initially
+            const tbody = table.getElementsByTagName('tbody')[0];
+            const rowHeight = 70; // Approximate height of each row in pixels (adjusted for image)
+            const maxVisibleRows = 5;
+            const totalRows = rows.length;
+
+            if (totalRows > maxVisibleRows) {
+                tbody.style.maxHeight = `${rowHeight * maxVisibleRows}px`;
+                tbody.style.overflowY = 'auto';
+            }
         });
     </script>
 {% endblock %}

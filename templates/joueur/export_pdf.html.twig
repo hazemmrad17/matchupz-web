@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Clubs Export - MatchupZ</title>
+    <title>Joueurs Export - MatchupZ</title>
     <style>
         * {
             margin: 0;
@@ -103,32 +103,44 @@
 </head>
 <body>
     <div class="header">
-        <img src="file://{{ logo_path|url_encode }}" alt="MatchupZ Logo">
-        <h1>Clubs Export</h1>
+        <img src="file:///{{ (app.request.server.get('DOCUMENT_ROOT') ~ '/img/logo_white.png')|url_encode }}" alt="MatchupZ Logo">
+        <h1>Joueurs Export</h1>
         <div class="subtitle">Generated on {{ "now"|date("d/m/Y H:i") }}</div>
     </div>
     <div class="content">
-        <h2>Liste des Clubs</h2>
+        <h2>Liste des Joueurs</h2>
         <table>
             <thead>
                 <tr>
-                    <th>Nom du Club</th>
-                    <th>Adresse</th>
-                    <th>Date de Création</th>
-                    <th>Photo URL</th>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Sport</th>
+                    <th>Date de Naissance</th>
+                    <th>Poste</th>
+                    <th>Taille (m)</th>
+                    <th>Poids (kg)</th>
+                    <th>Statut</th>
+                    <th>Email</th>
+                    <th>Téléphone</th>
                 </tr>
             </thead>
             <tbody>
-                {% for club in clubs %}
+                {% for joueur in joueurs %}
                     <tr>
-                        <td>{{ club.nomClub }}</td>
-                        <td>{{ club.adresse ?? 'N/A' }}</td>
-                        <td>{{ club.dateCreation ? club.dateCreation|date('d/m/Y') : 'N/A' }}</td>
-                        <td>{{ club.photoUrl ?? 'N/A' }}</td>
+                        <td>{{ joueur.nom }}</td>
+                        <td>{{ joueur.prenom }}</td>
+                        <td>{{ joueur.sport ? joueur.sport.nomSport : 'N/A' }}</td>
+                        <td>{{ joueur.dateNaissance ? joueur.dateNaissance|date('d/m/Y') : 'N/A' }}</td>
+                        <td>{{ joueur.poste ?? 'N/A' }}</td>
+                        <td>{{ joueur.taille ? joueur.taille|number_format(2, '.', ',') : 'N/A' }}</td>
+                        <td>{{ joueur.poids ? joueur.poids|number_format(2, '.', ',') : 'N/A' }}</td>
+                        <td>{{ joueur.statut ?? 'N/A' }}</td>
+                        <td>{{ joueur.email ?? 'N/A' }}</td>
+                        <td>{{ joueur.telephone ?? 'N/A' }}</td>
                     </tr>
                 {% else %}
                     <tr>
-                        <td colspan="4" style="text-align: center; color: #555;">Aucun club trouvé</td>
+                        <td colspan="10" style="text-align: center; color: #555;">Aucun joueur trouvé</td>
                     </tr>
                 {% endfor %}
             </tbody>

@@ -4,7 +4,7 @@
     {% include 'searchbar.html.twig' %}
 {% endblock %}
 
-{% block title %}Historique des Clubs{% endblock %}
+{% block title %}Historique des Transferts des Joueurs{% endblock %}
 
 {% block content %}
     <div class="content-wrapper">
@@ -151,6 +151,17 @@
                     }
                 }
             });
+
+            // Ensure table is scrollable and shows only first 5 rows initially
+            const tbody = table.getElementsByTagName('tbody')[0];
+            const rowHeight = 50; // Approximate height of each row in pixels (adjust as needed)
+            const maxVisibleRows = 5;
+            const totalRows = rows.length;
+
+            if (totalRows > maxVisibleRows) {
+                tbody.style.maxHeight = `${rowHeight * maxVisibleRows}px`;
+                tbody.style.overflowY = 'auto';
+            }
         });
     </script>
 {% endblock %}
