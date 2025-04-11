@@ -216,25 +216,31 @@ class __TwigTemplate_879df912434b2e25ec0ec0e315e7d522 extends Template
                     <a href=\"";
         // line 91
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_user_new");
-        yield "\" class=\"btn btn-primary\">
+        yield "\" class=\"btn btn-primary me-2\">
                         <i class=\"bx bx-plus\"></i> Nouveau utilisateur
                     </a>
+                    <button id=\"exportPdfBtn\" class=\"btn btn-success me-2\">
+                        <i class=\"bx bx-file\"></i> Exporter en PDF
+                    </button>
+                    <button id=\"sortMenBtn\" class=\"btn btn-warning\">
+                        <i class=\"bx bx-sort\"></i> Tri par genre 
+                    </button>
                 </div>
             </div>
 
             ";
-        // line 98
+        // line 104
         yield "            <div class=\"mb-4\">
-                <form method=\"get\" action=\"";
-        // line 99
+                <form id=\"searchForm\" method=\"get\" action=\"";
+        // line 105
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_user_index");
         yield "\" class=\"d-flex align-items-center\">
                     <div class=\"input-group\">
                         <span class=\"input-group-text\"><i class=\"bx bx-search\"></i></span>
                         <input type=\"text\" name=\"search\" class=\"form-control\" placeholder=\"Rechercher par nom, prénom ou email...\" 
                                value=\"";
-        // line 103
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(((array_key_exists("searchQuery", $context)) ? (Twig\Extension\CoreExtension::default((isset($context["searchQuery"]) || array_key_exists("searchQuery", $context) ? $context["searchQuery"] : (function () { throw new RuntimeError('Variable "searchQuery" does not exist.', 103, $this->source); })()), "")) : ("")), "html", null, true);
+        // line 109
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(((array_key_exists("searchQuery", $context)) ? (Twig\Extension\CoreExtension::default((isset($context["searchQuery"]) || array_key_exists("searchQuery", $context) ? $context["searchQuery"] : (function () { throw new RuntimeError('Variable "searchQuery" does not exist.', 109, $this->source); })()), "")) : ("")), "html", null, true);
         yield "\" id=\"searchInput\">
                     </div>
                     <button type=\"submit\" class=\"btn btn-primary ms-2\">Rechercher</button>
@@ -243,63 +249,67 @@ class __TwigTemplate_879df912434b2e25ec0ec0e315e7d522 extends Template
 
             <div class=\"row\" id=\"userList\">
                 ";
-        // line 110
+        // line 116
         $context['_parent'] = $context;
-        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["users"]) || array_key_exists("users", $context) ? $context["users"] : (function () { throw new RuntimeError('Variable "users" does not exist.', 110, $this->source); })()));
+        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["users"]) || array_key_exists("users", $context) ? $context["users"] : (function () { throw new RuntimeError('Variable "users" does not exist.', 116, $this->source); })()));
         $context['_iterated'] = false;
         foreach ($context['_seq'] as $context["_key"] => $context["user"]) {
-            // line 111
+            // line 117
             yield "                    <div class=\"col-md-6 col-lg-4 mb-4 user-card\" 
                          data-nom=\"";
-            // line 112
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::lower($this->env->getCharset(), CoreExtension::getAttribute($this->env, $this->source, $context["user"], "nom", [], "any", false, false, false, 112)), "html", null, true);
+            // line 118
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::lower($this->env->getCharset(), CoreExtension::getAttribute($this->env, $this->source, $context["user"], "nom", [], "any", false, false, false, 118)), "html", null, true);
             yield "\" 
                          data-prenom=\"";
-            // line 113
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::lower($this->env->getCharset(), CoreExtension::getAttribute($this->env, $this->source, $context["user"], "prenom", [], "any", false, false, false, 113)), "html", null, true);
+            // line 119
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::lower($this->env->getCharset(), CoreExtension::getAttribute($this->env, $this->source, $context["user"], "prenom", [], "any", false, false, false, 119)), "html", null, true);
             yield "\" 
                          data-email=\"";
-            // line 114
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::lower($this->env->getCharset(), CoreExtension::getAttribute($this->env, $this->source, $context["user"], "email", [], "any", false, false, false, 114)), "html", null, true);
+            // line 120
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::lower($this->env->getCharset(), CoreExtension::getAttribute($this->env, $this->source, $context["user"], "email", [], "any", false, false, false, 120)), "html", null, true);
+            yield "\"
+                         data-genre=\"";
+            // line 121
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::lower($this->env->getCharset(), CoreExtension::getAttribute($this->env, $this->source, $context["user"], "genre", [], "any", false, false, false, 121)), "html", null, true);
             yield "\">
                         <div class=\"card h-100 shadow-sm\">
                             <div class=\"card-body\">
                                 <div class=\"d-flex align-items-center mb-3\">
                                     <div class=\"flex-shrink-0 me-3 position-relative\">
                                         ";
-            // line 119
-            if (CoreExtension::getAttribute($this->env, $this->source, $context["user"], "image", [], "any", false, false, false, 119)) {
-                // line 120
+            // line 126
+            if (CoreExtension::getAttribute($this->env, $this->source, $context["user"], "image", [], "any", false, false, false, 126)) {
+                // line 127
                 yield "                                            <img src=\"";
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("uploads/users/" . CoreExtension::getAttribute($this->env, $this->source, $context["user"], "image", [], "any", false, false, false, 120))), "html", null, true);
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("Uploads/users/" . CoreExtension::getAttribute($this->env, $this->source, $context["user"], "image", [], "any", false, false, false, 127))), "html", null, true);
                 yield "\" 
                                                  class=\"rounded-circle avatar-img\" 
                                                  alt=\"";
-                // line 122
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["user"], "nom", [], "any", false, false, false, 122), "html", null, true);
+                // line 129
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["user"], "nom", [], "any", false, false, false, 129), "html", null, true);
                 yield "\">
                                             <span class=\"avatar-status\"></span>
                                         ";
             } else {
-                // line 125
+                // line 132
                 yield "                                            <div class=\"rounded-circle bg-light d-flex align-items-center justify-content-center avatar-img\">
                                                 <i class=\"fas fa-user text-muted\"></i>
                                             </div>
                                             <span class=\"avatar-status\"></span>
                                         ";
             }
-            // line 130
+            // line 137
             yield "                                    </div>
                                     <div>
                                         <h5 class=\"mb-0 fw-bold\">";
-            // line 132
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["user"], "prenom", [], "any", false, false, false, 132), "html", null, true);
+            // line 139
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["user"], "prenom", [], "any", false, false, false, 139), "html", null, true);
             yield " ";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["user"], "nom", [], "any", false, false, false, 132), "html", null, true);
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["user"], "nom", [], "any", false, false, false, 139), "html", null, true);
             yield "</h5>
                                         <small class=\"text-muted\">";
-            // line 133
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["user"], "role", [], "any", false, false, false, 133), "html", null, true);
+            // line 140
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["user"], "role", [], "any", false, false, false, 140), "html", null, true);
             yield "</small>
                                     </div>
                                 </div>
@@ -308,57 +318,57 @@ class __TwigTemplate_879df912434b2e25ec0ec0e315e7d522 extends Template
                                     <div class=\"detail-item\">
                                         <span class=\"detail-label fw-bold\">Email:</span>
                                         <span class=\"detail-value\">";
-            // line 140
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["user"], "email", [], "any", false, false, false, 140), "html", null, true);
+            // line 147
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["user"], "email", [], "any", false, false, false, 147), "html", null, true);
             yield "</span>
                                     </div>
                                     ";
-            // line 142
-            if (CoreExtension::getAttribute($this->env, $this->source, $context["user"], "dateDeNaissance", [], "any", false, false, false, 142)) {
-                // line 143
+            // line 149
+            if (CoreExtension::getAttribute($this->env, $this->source, $context["user"], "dateDeNaissance", [], "any", false, false, false, 149)) {
+                // line 150
                 yield "                                    <div class=\"detail-item\">
                                         <span class=\"detail-label fw-bold\">Date de naissance:</span>
                                         <span class=\"detail-value\">";
-                // line 145
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["user"], "dateDeNaissance", [], "any", false, false, false, 145), "d/m/Y"), "html", null, true);
+                // line 152
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["user"], "dateDeNaissance", [], "any", false, false, false, 152), "d/m/Y"), "html", null, true);
                 yield "</span>
                                     </div>
                                     <div class=\"detail-item\">
                                         <span class=\"detail-label fw-bold\">Âge:</span>
                                         <span class=\"detail-value\">
                                             ";
-                // line 150
-                $context["birthYear"] = $this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["user"], "dateDeNaissance", [], "any", false, false, false, 150), "Y");
-                // line 151
+                // line 157
+                $context["birthYear"] = $this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["user"], "dateDeNaissance", [], "any", false, false, false, 157), "Y");
+                // line 158
                 yield "                                            ";
                 $context["currentYear"] = $this->extensions['Twig\Extension\CoreExtension']->formatDate("now", "Y");
-                // line 152
+                // line 159
                 yield "                                            ";
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(((isset($context["currentYear"]) || array_key_exists("currentYear", $context) ? $context["currentYear"] : (function () { throw new RuntimeError('Variable "currentYear" does not exist.', 152, $this->source); })()) - (isset($context["birthYear"]) || array_key_exists("birthYear", $context) ? $context["birthYear"] : (function () { throw new RuntimeError('Variable "birthYear" does not exist.', 152, $this->source); })())), "html", null, true);
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(((isset($context["currentYear"]) || array_key_exists("currentYear", $context) ? $context["currentYear"] : (function () { throw new RuntimeError('Variable "currentYear" does not exist.', 159, $this->source); })()) - (isset($context["birthYear"]) || array_key_exists("birthYear", $context) ? $context["birthYear"] : (function () { throw new RuntimeError('Variable "birthYear" does not exist.', 159, $this->source); })())), "html", null, true);
                 yield " ans
                                         </span>
                                     </div>
                                     ";
             }
-            // line 156
+            // line 163
             yield "                                    ";
-            if (CoreExtension::getAttribute($this->env, $this->source, $context["user"], "numTelephone", [], "any", false, false, false, 156)) {
-                // line 157
+            if (CoreExtension::getAttribute($this->env, $this->source, $context["user"], "numTelephone", [], "any", false, false, false, 163)) {
+                // line 164
                 yield "                                    <div class=\"detail-item\">
                                         <span class=\"detail-label fw-bold\">Téléphone:</span>
                                         <span class=\"detail-value\">";
-                // line 159
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["user"], "numTelephone", [], "any", false, false, false, 159), "html", null, true);
+                // line 166
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["user"], "numTelephone", [], "any", false, false, false, 166), "html", null, true);
                 yield "</span>
                                     </div>
                                     ";
             }
-            // line 162
+            // line 169
             yield "                                    <div class=\"detail-item\">
                                         <span class=\"detail-label fw-bold\">Genre:</span>
                                         <span class=\"detail-value\">";
-            // line 164
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["user"], "genre", [], "any", false, false, false, 164), "html", null, true);
+            // line 171
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["user"], "genre", [], "any", false, false, false, 171), "html", null, true);
             yield "</span>
                                     </div>
                                 </div>
@@ -366,21 +376,21 @@ class __TwigTemplate_879df912434b2e25ec0ec0e315e7d522 extends Template
                             
                             <div class=\"card-footer bg-white border-top-0 d-flex justify-content-end gap-2\">
                                 <a href=\"";
-            // line 170
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_user_edit", ["id_user" => CoreExtension::getAttribute($this->env, $this->source, $context["user"], "id_user", [], "any", false, false, false, 170)]), "html", null, true);
+            // line 177
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_user_edit", ["id_user" => CoreExtension::getAttribute($this->env, $this->source, $context["user"], "id_user", [], "any", false, false, false, 177)]), "html", null, true);
             yield "\" 
                                    class=\"btn btn-sm btn-outline-primary px-3\"
                                    onclick=\"return confirm('Êtes-vous sûr de vouloir modifier cet utilisateur ?');\">
                                     Modifier
                                 </a>
                                 <form method=\"post\" action=\"";
-            // line 175
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_user_delete", ["id_user" => CoreExtension::getAttribute($this->env, $this->source, $context["user"], "id_user", [], "any", false, false, false, 175)]), "html", null, true);
+            // line 182
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_user_delete", ["id_user" => CoreExtension::getAttribute($this->env, $this->source, $context["user"], "id_user", [], "any", false, false, false, 182)]), "html", null, true);
             yield "\" 
                                       onsubmit=\"return confirm('Êtes-vous sûr ?');\">
                                     <input type=\"hidden\" name=\"_token\" value=\"";
-            // line 177
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderCsrfToken(("delete" . CoreExtension::getAttribute($this->env, $this->source, $context["user"], "id_user", [], "any", false, false, false, 177))), "html", null, true);
+            // line 184
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderCsrfToken(("delete" . CoreExtension::getAttribute($this->env, $this->source, $context["user"], "id_user", [], "any", false, false, false, 184))), "html", null, true);
             yield "\">
                                     <button class=\"btn btn-sm btn-outline-danger px-3\">
                                         Supprimer
@@ -392,9 +402,9 @@ class __TwigTemplate_879df912434b2e25ec0ec0e315e7d522 extends Template
                 ";
             $context['_iterated'] = true;
         }
-        // line 185
+        // line 192
         if (!$context['_iterated']) {
-            // line 186
+            // line 193
             yield "                    <div class=\"col-12\">
                         <div class=\"alert alert-info\">
                             Aucun utilisateur trouvé.
@@ -405,22 +415,22 @@ class __TwigTemplate_879df912434b2e25ec0ec0e315e7d522 extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_key'], $context['user'], $context['_parent'], $context['_iterated']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 192
+        // line 199
         yield "            </div>
 
             ";
-        // line 195
+        // line 202
         yield "            <div class=\"navigation mt-4 custom-pagination\">
                 ";
-        // line 196
-        yield $this->env->getRuntime('Knp\Bundle\PaginatorBundle\Twig\Extension\PaginationRuntime')->render($this->env, (isset($context["users"]) || array_key_exists("users", $context) ? $context["users"] : (function () { throw new RuntimeError('Variable "users" does not exist.', 196, $this->source); })()));
+        // line 203
+        yield $this->env->getRuntime('Knp\Bundle\PaginatorBundle\Twig\Extension\PaginationRuntime')->render($this->env, (isset($context["users"]) || array_key_exists("users", $context) ? $context["users"] : (function () { throw new RuntimeError('Variable "users" does not exist.', 203, $this->source); })()));
         yield "
             </div>
         </div>
     </div>
 
     ";
-        // line 202
+        // line 209
         yield "    <script src=\"https://cdn.jsdelivr.net/npm/chart.js\"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -435,22 +445,22 @@ class __TwigTemplate_879df912434b2e25ec0ec0e315e7d522 extends Template
                         datasets: [{
                             data: [
                                 ";
-        // line 215
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["ageStats"]) || array_key_exists("ageStats", $context) ? $context["ageStats"] : (function () { throw new RuntimeError('Variable "ageStats" does not exist.', 215, $this->source); })()), "18-30", [], "array", false, false, false, 215), "html", null, true);
+        // line 222
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["ageStats"]) || array_key_exists("ageStats", $context) ? $context["ageStats"] : (function () { throw new RuntimeError('Variable "ageStats" does not exist.', 222, $this->source); })()), "18-30", [], "array", false, false, false, 222), "html", null, true);
         yield ",
                                 ";
-        // line 216
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["ageStats"]) || array_key_exists("ageStats", $context) ? $context["ageStats"] : (function () { throw new RuntimeError('Variable "ageStats" does not exist.', 216, $this->source); })()), "31-50", [], "array", false, false, false, 216), "html", null, true);
+        // line 223
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["ageStats"]) || array_key_exists("ageStats", $context) ? $context["ageStats"] : (function () { throw new RuntimeError('Variable "ageStats" does not exist.', 223, $this->source); })()), "31-50", [], "array", false, false, false, 223), "html", null, true);
         yield ",
                                 ";
-        // line 217
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["ageStats"]) || array_key_exists("ageStats", $context) ? $context["ageStats"] : (function () { throw new RuntimeError('Variable "ageStats" does not exist.', 217, $this->source); })()), "51+", [], "array", false, false, false, 217), "html", null, true);
+        // line 224
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["ageStats"]) || array_key_exists("ageStats", $context) ? $context["ageStats"] : (function () { throw new RuntimeError('Variable "ageStats" does not exist.', 224, $this->source); })()), "51+", [], "array", false, false, false, 224), "html", null, true);
         yield "
                             ],
                             backgroundColor: [
-                                '#FF6F61', // Coral (plus vibrant)
-                                '#6B48FF', // Violet (moderne)
-                                '#FFD166'  // Jaune moutarde (chaleureux)
+                                '#FF6F61',
+                                '#6B48FF',
+                                '#FFD166'
                             ],
                             borderWidth: 1
                         }]
@@ -462,7 +472,7 @@ class __TwigTemplate_879df912434b2e25ec0ec0e315e7d522 extends Template
                                 position: 'bottom',
                                 labels: {
                                     font: {
-                                        size: 12 // Réduire la taille de la légende
+                                        size: 12
                                     }
                                 }
                             },
@@ -470,7 +480,7 @@ class __TwigTemplate_879df912434b2e25ec0ec0e315e7d522 extends Template
                                 display: true,
                                 text: 'Répartition des utilisateurs par âge',
                                 font: {
-                                    size: 14 // Réduire la taille du titre
+                                    size: 14
                                 }
                             }
                         }
@@ -478,12 +488,14 @@ class __TwigTemplate_879df912434b2e25ec0ec0e315e7d522 extends Template
                 });
             });
 
-            // Recherche dynamique côté client
+            // Recherche dynamique et tri côté client
             const searchInput = document.getElementById('searchInput');
+            const userList = document.getElementById('userList');
             const userCards = document.querySelectorAll('.user-card');
 
-            searchInput.addEventListener('input', function () {
-                const searchTerm = this.value.toLowerCase();
+            // Fonction pour filtrer par recherche
+            function filterCards() {
+                const searchTerm = searchInput.value.toLowerCase();
 
                 userCards.forEach(card => {
                     const nom = card.getAttribute('data-nom');
@@ -496,6 +508,43 @@ class __TwigTemplate_879df912434b2e25ec0ec0e315e7d522 extends Template
                         card.style.display = 'none';
                     }
                 });
+            }
+
+            // Fonction pour trier par genre (hommes d'abord)
+            function sortByGender() {
+                const cardsArray = Array.from(userCards);
+                cardsArray.sort((a, b) => {
+                    const genreA = a.getAttribute('data-genre');
+                    const genreB = b.getAttribute('data-genre');
+                    if (genreA === 'homme' && genreB !== 'homme') return -1;
+                    if (genreA !== 'homme' && genreB === 'homme') return 1;
+                    return 0;
+                });
+
+                // Réorganiser les cartes dans le DOM
+                userList.innerHTML = '';
+                cardsArray.forEach(card => userList.appendChild(card));
+
+                // Réappliquer le filtre de recherche après le tri
+                filterCards();
+            }
+
+            // Écouteur pour la recherche
+            searchInput.addEventListener('input', filterCards);
+
+            // Écouteur pour le tri par genre
+            const sortMenBtn = document.getElementById('sortMenBtn');
+            sortMenBtn.addEventListener('click', sortByGender);
+
+            // PDF export button handler
+            const exportPdfBtn = document.getElementById('exportPdfBtn');
+            exportPdfBtn.addEventListener('click', function () {
+                const searchQuery = document.getElementById('searchInput').value;
+                const currentPage = new URLSearchParams(window.location.search).get('page') || 1;
+                window.location.href = '";
+        // line 310
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_user_export_pdf");
+        yield "?search=' + encodeURIComponent(searchQuery) + '&page=' + currentPage;
             });
         });
     </script>
@@ -503,7 +552,7 @@ class __TwigTemplate_879df912434b2e25ec0ec0e315e7d522 extends Template
     <style>
         .user-details {
             font-size: 0.9rem;
-            line-height: 1.6;
+            line-height: 1イオン1.6;
         }
         .detail-item {
             margin-bottom: 0.5rem;
@@ -566,11 +615,10 @@ class __TwigTemplate_879df912434b2e25ec0ec0e315e7d522 extends Template
             font-size: 1.2rem;
             padding: 0 10px;
         }
-        /* Styles pour l'avatar */
         .avatar-img {
             width: 40px;
             height: 40px;
-            object-fit: cover; /* Assure que l'image remplit le cercle sans déformation */
+            object-fit: cover;
         }
         .position-relative {
             position: relative;
@@ -581,11 +629,10 @@ class __TwigTemplate_879df912434b2e25ec0ec0e315e7d522 extends Template
             right: 0;
             width: 14px;
             height: 14px;
-            background-color: #28a745; /* Vert pour le statut en ligne */
-            border: 2px solid #fff; /* Bordure blanche pour contraste */
+            background-color: #28a745;
+            border: 2px solid #fff;
             border-radius: 50%;
         }
-        /* Ajuster la taille du modal */
         .modal-sm .modal-content {
             padding: 10px;
         }
@@ -624,7 +671,7 @@ class __TwigTemplate_879df912434b2e25ec0ec0e315e7d522 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  447 => 217,  443 => 216,  439 => 215,  424 => 202,  416 => 196,  413 => 195,  409 => 192,  398 => 186,  396 => 185,  383 => 177,  378 => 175,  370 => 170,  361 => 164,  357 => 162,  351 => 159,  347 => 157,  344 => 156,  336 => 152,  333 => 151,  331 => 150,  323 => 145,  319 => 143,  317 => 142,  312 => 140,  302 => 133,  296 => 132,  292 => 130,  285 => 125,  279 => 122,  273 => 120,  271 => 119,  263 => 114,  259 => 113,  255 => 112,  252 => 111,  247 => 110,  237 => 103,  230 => 99,  227 => 98,  218 => 91,  209 => 84,  190 => 66,  180 => 58,  176 => 57,  172 => 56,  168 => 55,  160 => 50,  153 => 46,  145 => 40,  130 => 27,  118 => 18,  113 => 16,  104 => 9,  100 => 6,  87 => 5,  64 => 3,  41 => 1,);
+        return array (  546 => 310,  457 => 224,  453 => 223,  449 => 222,  434 => 209,  426 => 203,  423 => 202,  419 => 199,  408 => 193,  406 => 192,  393 => 184,  388 => 182,  380 => 177,  371 => 171,  367 => 169,  361 => 166,  357 => 164,  354 => 163,  346 => 159,  343 => 158,  341 => 157,  333 => 152,  329 => 150,  327 => 149,  322 => 147,  312 => 140,  306 => 139,  302 => 137,  295 => 132,  289 => 129,  283 => 127,  281 => 126,  273 => 121,  269 => 120,  265 => 119,  261 => 118,  258 => 117,  253 => 116,  243 => 109,  236 => 105,  233 => 104,  218 => 91,  209 => 84,  190 => 66,  180 => 58,  176 => 57,  172 => 56,  168 => 55,  160 => 50,  153 => 46,  145 => 40,  130 => 27,  118 => 18,  113 => 16,  104 => 9,  100 => 6,  87 => 5,  64 => 3,  41 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -719,15 +766,21 @@ class __TwigTemplate_879df912434b2e25ec0ec0e315e7d522 extends Template
                     <a href=\"#\" class=\"btn btn-info me-2\" data-bs-toggle=\"modal\" data-bs-target=\"#statsModal\">
                         <i class=\"bx bx-stats\"></i> Statistiques
                     </a>
-                    <a href=\"{{ path('app_user_new') }}\" class=\"btn btn-primary\">
+                    <a href=\"{{ path('app_user_new') }}\" class=\"btn btn-primary me-2\">
                         <i class=\"bx bx-plus\"></i> Nouveau utilisateur
                     </a>
+                    <button id=\"exportPdfBtn\" class=\"btn btn-success me-2\">
+                        <i class=\"bx bx-file\"></i> Exporter en PDF
+                    </button>
+                    <button id=\"sortMenBtn\" class=\"btn btn-warning\">
+                        <i class=\"bx bx-sort\"></i> Tri par genre 
+                    </button>
                 </div>
             </div>
 
             {# Barre de recherche #}
             <div class=\"mb-4\">
-                <form method=\"get\" action=\"{{ path('app_user_index') }}\" class=\"d-flex align-items-center\">
+                <form id=\"searchForm\" method=\"get\" action=\"{{ path('app_user_index') }}\" class=\"d-flex align-items-center\">
                     <div class=\"input-group\">
                         <span class=\"input-group-text\"><i class=\"bx bx-search\"></i></span>
                         <input type=\"text\" name=\"search\" class=\"form-control\" placeholder=\"Rechercher par nom, prénom ou email...\" 
@@ -742,13 +795,14 @@ class __TwigTemplate_879df912434b2e25ec0ec0e315e7d522 extends Template
                     <div class=\"col-md-6 col-lg-4 mb-4 user-card\" 
                          data-nom=\"{{ user.nom|lower }}\" 
                          data-prenom=\"{{ user.prenom|lower }}\" 
-                         data-email=\"{{ user.email|lower }}\">
+                         data-email=\"{{ user.email|lower }}\"
+                         data-genre=\"{{ user.genre|lower }}\">
                         <div class=\"card h-100 shadow-sm\">
                             <div class=\"card-body\">
                                 <div class=\"d-flex align-items-center mb-3\">
                                     <div class=\"flex-shrink-0 me-3 position-relative\">
                                         {% if user.image %}
-                                            <img src=\"{{ asset('uploads/users/' ~ user.image) }}\" 
+                                            <img src=\"{{ asset('Uploads/users/' ~ user.image) }}\" 
                                                  class=\"rounded-circle avatar-img\" 
                                                  alt=\"{{ user.nom }}\">
                                             <span class=\"avatar-status\"></span>
@@ -848,9 +902,9 @@ class __TwigTemplate_879df912434b2e25ec0ec0e315e7d522 extends Template
                                 {{ ageStats['51+'] }}
                             ],
                             backgroundColor: [
-                                '#FF6F61', // Coral (plus vibrant)
-                                '#6B48FF', // Violet (moderne)
-                                '#FFD166'  // Jaune moutarde (chaleureux)
+                                '#FF6F61',
+                                '#6B48FF',
+                                '#FFD166'
                             ],
                             borderWidth: 1
                         }]
@@ -862,7 +916,7 @@ class __TwigTemplate_879df912434b2e25ec0ec0e315e7d522 extends Template
                                 position: 'bottom',
                                 labels: {
                                     font: {
-                                        size: 12 // Réduire la taille de la légende
+                                        size: 12
                                     }
                                 }
                             },
@@ -870,7 +924,7 @@ class __TwigTemplate_879df912434b2e25ec0ec0e315e7d522 extends Template
                                 display: true,
                                 text: 'Répartition des utilisateurs par âge',
                                 font: {
-                                    size: 14 // Réduire la taille du titre
+                                    size: 14
                                 }
                             }
                         }
@@ -878,12 +932,14 @@ class __TwigTemplate_879df912434b2e25ec0ec0e315e7d522 extends Template
                 });
             });
 
-            // Recherche dynamique côté client
+            // Recherche dynamique et tri côté client
             const searchInput = document.getElementById('searchInput');
+            const userList = document.getElementById('userList');
             const userCards = document.querySelectorAll('.user-card');
 
-            searchInput.addEventListener('input', function () {
-                const searchTerm = this.value.toLowerCase();
+            // Fonction pour filtrer par recherche
+            function filterCards() {
+                const searchTerm = searchInput.value.toLowerCase();
 
                 userCards.forEach(card => {
                     const nom = card.getAttribute('data-nom');
@@ -896,6 +952,40 @@ class __TwigTemplate_879df912434b2e25ec0ec0e315e7d522 extends Template
                         card.style.display = 'none';
                     }
                 });
+            }
+
+            // Fonction pour trier par genre (hommes d'abord)
+            function sortByGender() {
+                const cardsArray = Array.from(userCards);
+                cardsArray.sort((a, b) => {
+                    const genreA = a.getAttribute('data-genre');
+                    const genreB = b.getAttribute('data-genre');
+                    if (genreA === 'homme' && genreB !== 'homme') return -1;
+                    if (genreA !== 'homme' && genreB === 'homme') return 1;
+                    return 0;
+                });
+
+                // Réorganiser les cartes dans le DOM
+                userList.innerHTML = '';
+                cardsArray.forEach(card => userList.appendChild(card));
+
+                // Réappliquer le filtre de recherche après le tri
+                filterCards();
+            }
+
+            // Écouteur pour la recherche
+            searchInput.addEventListener('input', filterCards);
+
+            // Écouteur pour le tri par genre
+            const sortMenBtn = document.getElementById('sortMenBtn');
+            sortMenBtn.addEventListener('click', sortByGender);
+
+            // PDF export button handler
+            const exportPdfBtn = document.getElementById('exportPdfBtn');
+            exportPdfBtn.addEventListener('click', function () {
+                const searchQuery = document.getElementById('searchInput').value;
+                const currentPage = new URLSearchParams(window.location.search).get('page') || 1;
+                window.location.href = '{{ path('app_user_export_pdf') }}?search=' + encodeURIComponent(searchQuery) + '&page=' + currentPage;
             });
         });
     </script>
@@ -903,7 +993,7 @@ class __TwigTemplate_879df912434b2e25ec0ec0e315e7d522 extends Template
     <style>
         .user-details {
             font-size: 0.9rem;
-            line-height: 1.6;
+            line-height: 1イオン1.6;
         }
         .detail-item {
             margin-bottom: 0.5rem;
@@ -966,11 +1056,10 @@ class __TwigTemplate_879df912434b2e25ec0ec0e315e7d522 extends Template
             font-size: 1.2rem;
             padding: 0 10px;
         }
-        /* Styles pour l'avatar */
         .avatar-img {
             width: 40px;
             height: 40px;
-            object-fit: cover; /* Assure que l'image remplit le cercle sans déformation */
+            object-fit: cover;
         }
         .position-relative {
             position: relative;
@@ -981,11 +1070,10 @@ class __TwigTemplate_879df912434b2e25ec0ec0e315e7d522 extends Template
             right: 0;
             width: 14px;
             height: 14px;
-            background-color: #28a745; /* Vert pour le statut en ligne */
-            border: 2px solid #fff; /* Bordure blanche pour contraste */
+            background-color: #28a745;
+            border: 2px solid #fff;
             border-radius: 50%;
         }
-        /* Ajuster la taille du modal */
         .modal-sm .modal-content {
             padding: 10px;
         }

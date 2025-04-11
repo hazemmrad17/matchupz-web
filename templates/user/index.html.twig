@@ -88,15 +88,21 @@
                     <a href="#" class="btn btn-info me-2" data-bs-toggle="modal" data-bs-target="#statsModal">
                         <i class="bx bx-stats"></i> Statistiques
                     </a>
-                    <a href="{{ path('app_user_new') }}" class="btn btn-primary">
+                    <a href="{{ path('app_user_new') }}" class="btn btn-primary me-2">
                         <i class="bx bx-plus"></i> Nouveau utilisateur
                     </a>
+                    <button id="exportPdfBtn" class="btn btn-success me-2">
+                        <i class="bx bx-file"></i> Exporter en PDF
+                    </button>
+                    <button id="sortMenBtn" class="btn btn-warning">
+                        <i class="bx bx-sort"></i> Tri par genre 
+                    </button>
                 </div>
             </div>
 
             {# Barre de recherche #}
             <div class="mb-4">
-                <form method="get" action="{{ path('app_user_index') }}" class="d-flex align-items-center">
+                <form id="searchForm" method="get" action="{{ path('app_user_index') }}" class="d-flex align-items-center">
                     <div class="input-group">
                         <span class="input-group-text"><i class="bx bx-search"></i></span>
                         <input type="text" name="search" class="form-control" placeholder="Rechercher par nom, prénom ou email..." 
@@ -111,13 +117,14 @@
                     <div class="col-md-6 col-lg-4 mb-4 user-card" 
                          data-nom="{{ user.nom|lower }}" 
                          data-prenom="{{ user.prenom|lower }}" 
-                         data-email="{{ user.email|lower }}">
+                         data-email="{{ user.email|lower }}"
+                         data-genre="{{ user.genre|lower }}">
                         <div class="card h-100 shadow-sm">
                             <div class="card-body">
                                 <div class="d-flex align-items-center mb-3">
                                     <div class="flex-shrink-0 me-3 position-relative">
                                         {% if user.image %}
-                                            <img src="{{ asset('uploads/users/' ~ user.image) }}" 
+                                            <img src="{{ asset('Uploads/users/' ~ user.image) }}" 
                                                  class="rounded-circle avatar-img" 
                                                  alt="{{ user.nom }}">
                                             <span class="avatar-status"></span>
@@ -217,9 +224,9 @@
                                 {{ ageStats['51+'] }}
                             ],
                             backgroundColor: [
-                                '#FF6F61', // Coral (plus vibrant)
-                                '#6B48FF', // Violet (moderne)
-                                '#FFD166'  // Jaune moutarde (chaleureux)
+                                '#FF6F61',
+                                '#6B48FF',
+                                '#FFD166'
                             ],
                             borderWidth: 1
                         }]
@@ -231,7 +238,7 @@
                                 position: 'bottom',
                                 labels: {
                                     font: {
-                                        size: 12 // Réduire la taille de la légende
+                                        size: 12
                                     }
                                 }
                             },
@@ -239,7 +246,7 @@
                                 display: true,
                                 text: 'Répartition des utilisateurs par âge',
                                 font: {
-                                    size: 14 // Réduire la taille du titre
+                                    size: 14
                                 }
                             }
                         }
@@ -247,12 +254,14 @@
                 });
             });
 
-            // Recherche dynamique côté client
+            // Recherche dynamique et tri côté client
             const searchInput = document.getElementById('searchInput');
+            const userList = document.getElementById('userList');
             const userCards = document.querySelectorAll('.user-card');
 
-            searchInput.addEventListener('input', function () {
-                const searchTerm = this.value.toLowerCase();
+            // Fonction pour filtrer par recherche
+            function filterCards() {
+                const searchTerm = searchInput.value.toLowerCase();
 
                 userCards.forEach(card => {
                     const nom = card.getAttribute('data-nom');
@@ -265,6 +274,40 @@
                         card.style.display = 'none';
                     }
                 });
+            }
+
+            // Fonction pour trier par genre (hommes d'abord)
+            function sortByGender() {
+                const cardsArray = Array.from(userCards);
+                cardsArray.sort((a, b) => {
+                    const genreA = a.getAttribute('data-genre');
+                    const genreB = b.getAttribute('data-genre');
+                    if (genreA === 'homme' && genreB !== 'homme') return -1;
+                    if (genreA !== 'homme' && genreB === 'homme') return 1;
+                    return 0;
+                });
+
+                // Réorganiser les cartes dans le DOM
+                userList.innerHTML = '';
+                cardsArray.forEach(card => userList.appendChild(card));
+
+                // Réappliquer le filtre de recherche après le tri
+                filterCards();
+            }
+
+            // Écouteur pour la recherche
+            searchInput.addEventListener('input', filterCards);
+
+            // Écouteur pour le tri par genre
+            const sortMenBtn = document.getElementById('sortMenBtn');
+            sortMenBtn.addEventListener('click', sortByGender);
+
+            // PDF export button handler
+            const exportPdfBtn = document.getElementById('exportPdfBtn');
+            exportPdfBtn.addEventListener('click', function () {
+                const searchQuery = document.getElementById('searchInput').value;
+                const currentPage = new URLSearchParams(window.location.search).get('page') || 1;
+                window.location.href = '{{ path('app_user_export_pdf') }}?search=' + encodeURIComponent(searchQuery) + '&page=' + currentPage;
             });
         });
     </script>
@@ -272,7 +315,7 @@
     <style>
         .user-details {
             font-size: 0.9rem;
-            line-height: 1.6;
+            line-height: 1イオン1.6;
         }
         .detail-item {
             margin-bottom: 0.5rem;
@@ -335,11 +378,10 @@
             font-size: 1.2rem;
             padding: 0 10px;
         }
-        /* Styles pour l'avatar */
         .avatar-img {
             width: 40px;
             height: 40px;
-            object-fit: cover; /* Assure que l'image remplit le cercle sans déformation */
+            object-fit: cover;
         }
         .position-relative {
             position: relative;
@@ -350,11 +392,10 @@
             right: 0;
             width: 14px;
             height: 14px;
-            background-color: #28a745; /* Vert pour le statut en ligne */
-            border: 2px solid #fff; /* Bordure blanche pour contraste */
+            background-color: #28a745;
+            border: 2px solid #fff;
             border-radius: 50%;
         }
-        /* Ajuster la taille du modal */
         .modal-sm .modal-content {
             padding: 10px;
         }

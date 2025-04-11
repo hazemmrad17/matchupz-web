@@ -40,6 +40,7 @@ return [
         '/sport/new' => [[['_route' => 'sport_new', '_controller' => 'App\\Controller\\SportController::new'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
         '/sport/statistics' => [[['_route' => 'sport_statistics', '_controller' => 'App\\Controller\\SportController::statistics'], null, ['GET' => 0], null, false, false, null]],
         '/user' => [[['_route' => 'app_user_index', '_controller' => 'App\\Controller\\UserController::index'], null, ['GET' => 0], null, false, false, null]],
+        '/user/export-pdf' => [[['_route' => 'app_user_export_pdf', '_controller' => 'App\\Controller\\UserController::exportPdf'], null, ['GET' => 0], null, false, false, null]],
         '/user/verif-user' => [[['_route' => 'app_verif_user', '_controller' => 'App\\Controller\\UserController::verifUser'], null, ['POST' => 0], null, false, false, null]],
         '/user/auth' => [[['_route' => 'app_user_auth', '_controller' => 'App\\Controller\\UserController::auth'], null, null, null, false, false, null]],
         '/user/logout' => [[['_route' => 'app_user_logout', '_controller' => 'App\\Controller\\UserController::logout'], null, ['GET' => 0], null, false, false, null]],

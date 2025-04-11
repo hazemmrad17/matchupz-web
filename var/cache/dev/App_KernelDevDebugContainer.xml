@@ -565,7 +565,7 @@
     </service>
     <service id="argument_resolver.service" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
       <tag priority="-50" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">controller.argument_value_resolver</tag>
-      <argument type="service" id=".service_locator.gBYepfk"/>
+      <argument type="service" id=".service_locator.kY5I1iQ"/>
     </service>
     <service id="argument_resolver.default" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">
       <tag priority="-100" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">controller.argument_value_resolver</tag>
@@ -3549,7 +3549,7 @@
     </service>
     <service id="argument_resolver.not_tagged_controller" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
       <tag name="controller.argument_value_resolver" priority="-200"/>
-      <argument type="service" id=".service_locator.gBYepfk"/>
+      <argument type="service" id=".service_locator.kY5I1iQ"/>
     </service>
     <service id="debug.log_processor" class="Symfony\Bridge\Monolog\Processor\DebugProcessor">
       <tag name="kernel.reset" method="reset"/>
@@ -8059,7 +8059,7 @@
         <argument key="user" type="service_closure" id=".errored..service_locator.rvMNZGh.App\Entity\User"/>
       </argument>
     </service>
-    <service id=".service_locator.gBYepfk" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.kY5I1iQ" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\ClubController::delete" type="service_closure" id=".service_locator.GbJZUn8"/>
@@ -8107,6 +8107,7 @@
         <argument key="App\Controller\SportController::statistics" type="service_closure" id=".service_locator.cX9LP_Y"/>
         <argument key="App\Controller\UserController::delete" type="service_closure" id=".service_locator.rvMNZGh"/>
         <argument key="App\Controller\UserController::edit" type="service_closure" id=".service_locator.rvMNZGh"/>
+        <argument key="App\Controller\UserController::exportPdf" type="service_closure" id=".service_locator.lDw5jgg"/>
         <argument key="App\Controller\UserController::index" type="service_closure" id=".service_locator.lDw5jgg"/>
         <argument key="App\Controller\UserController::new" type="service_closure" id=".service_locator.CsMkqUa"/>
         <argument key="App\Controller\UserController::show" type="service_closure" id=".service_locator.Hz5btge"/>
@@ -8160,6 +8161,7 @@
         <argument key="App\Controller\SportController:statistics" type="service_closure" id=".service_locator.cX9LP_Y"/>
         <argument key="App\Controller\UserController:delete" type="service_closure" id=".service_locator.rvMNZGh"/>
         <argument key="App\Controller\UserController:edit" type="service_closure" id=".service_locator.rvMNZGh"/>
+        <argument key="App\Controller\UserController:exportPdf" type="service_closure" id=".service_locator.lDw5jgg"/>
         <argument key="App\Controller\UserController:index" type="service_closure" id=".service_locator.lDw5jgg"/>
         <argument key="App\Controller\UserController:new" type="service_closure" id=".service_locator.CsMkqUa"/>
         <argument key="App\Controller\UserController:show" type="service_closure" id=".service_locator.Hz5btge"/>
@@ -10449,7 +10451,7 @@
     <service id="Knp\Component\Pager\ArgumentAccess\ArgumentAccessInterface" alias="Knp\Component\Pager\ArgumentAccess\RequestArgumentAccess"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.w7.f4fT" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.gBYepfk"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.kY5I1iQ"/>
     <service id="doctrine.id_generator_locator" alias=".service_locator.KLVvNIq"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface $requestLogger" alias="monolog.logger.request"/>
@@ -10483,7 +10485,7 @@
     <service id=".service_locator.X9gG0Wi" alias=".service_locator.geVFa8t"/>
     <service id=".service_locator.RtCGHrO" alias=".service_locator.lDw5jgg"/>
     <service id=".service_locator.R0Sb2kd" alias=".service_locator.rvMNZGh"/>
-    <service id=".service_locator.rdZOPbN" alias=".service_locator.gBYepfk"/>
+    <service id=".service_locator.H5ybZeY" alias=".service_locator.kY5I1iQ"/>
     <service id=".service_locator.BFrsqsn" alias=".service_locator.F9PKc.7"/>
     <service id=".service_locator.ldexW86" alias=".service_locator.6D1n88v"/>
     <service id=".service_locator.XtmiKbi" alias=".service_locator.MfxSDRP"/>
