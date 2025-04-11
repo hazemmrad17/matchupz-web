@@ -1,0 +1,129 @@
+{% extends 'base.html.twig' %}
+
+{% block searchbar %}
+    {% include 'searchbar.html.twig' %}
+{% endblock %}
+
+{% block title %}Historique des Clubs{% endblock %}
+
+{% block content %}
+    <div class="content-wrapper">
+        <div class="container-xxl flex-grow-1 container-p-y">
+            {% block widgets %}
+                {# You can create a specific widgets file for HistoriqueClub if needed #}
+                {% include 'historique_club/widgets.html.twig' %}
+            {% endblock %}
+            
+
+            {# Historique Table #}
+            <div class="card">
+                <h5 class="card-header d-flex justify-content-between align-items-center">
+                    Historique des Clubs
+                    <div>
+                        <a href="{{ path('app_historique_club_stats') }}" class="btn btn-info me-2">
+                            <i class="bx bx-stats"></i> Statistiques
+                        </a>
+                        <a href="{{ path('app_historique_club_new') }}" class="btn btn-primary">
+                            <i class="bx bx-plus"></i> Nouvel Historique
+                        </a>
+                    </div>
+                </h5>
+                <div class="table-responsive text-nowrap">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Joueur</th>
+                                <th>Club</th>
+                                <th>Saison Début</th>
+                                <th>Saison Fin</th>
+                                <th>Durée</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-border-bottom-0">
+                            {% for historique in historique_clubs %}
+                                <tr>
+                                    <td>
+                                        <i class="fab fa-sketch fa-lg text-warning me-3"></i>
+                                        <strong>{{ historique.joueur.nom }} {{ historique.joueur.prenom }}</strong>
+                                    </td>
+                                    <td>{{ historique.nomClub }}</td>
+                                    <td>{{ historique.saisonDebut ? historique.saisonDebut|date('m/Y') : 'N/A' }}</td>
+                                    <td>{{ historique.saisonFin ? historique.saisonFin|date('m/Y') : 'Actuel' }}</td>
+                                    <td>
+                                        {% if historique.saisonFin %}
+                                            {{ historique.saisonDebut.diff(historique.saisonFin)|date('%y ans, %m mois') }}
+                                        {% else %}
+                                            En cours ({{ historique.saisonDebut.diff(date())|date('%y ans, %m mois') }})
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <div class="dropdown">
+                                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                                <i class="bx bx-dots-vertical-rounded"></i>
+                                            </button>
+                                            <div class="dropdown-menu">
+                                                <a class="dropdown-item" href="{{ path('app_historique_club_show', {'idHistorique': historique.idHistorique}) }}">
+                                                    <i class="bx bx-show me-1"></i> Voir
+                                                </a>
+                                                <a class="dropdown-item" href="{{ path('app_historique_club_edit', {'idHistorique': historique.idHistorique}) }}">
+                                                    <i class="bx bx-edit-alt me-1"></i> Modifier
+                                                </a>
+                                                <form method="post" action="{{ path('app_historique_club_delete', {'idHistorique': historique.idHistorique}) }}" style="display:inline;" onsubmit="return confirm('Confirmer la suppression?');">
+                                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ historique.idHistorique) }}">
+                                                    <button class="dropdown-item" type="submit">
+                                                        <i class="bx bx-trash me-1"></i> Supprimer
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="6" class="text-center">Aucun historique trouvé</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {# ChartJS Script #}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Club Distribution Chart - Example
+            const clubCtx = document.getElementById('clubDistributionChart').getContext('2d');
+            
+            // You would need to pass these variables from your controller
+            const clubData = {
+                labels: {{ clubNames|default([])|json_encode|raw }},
+                datasets: [{
+                    data: {{ playerCounts|default([])|json_encode|raw }},
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.7)',
+                        'rgba(54, 162, 235, 0.7)',
+                        'rgba(255, 206, 86, 0.7)',
+                        'rgba(75, 192, 192, 0.7)',
+                        'rgba(153, 102, 255, 0.7)'
+                    ]
+                }]
+            };
+            
+            new Chart(clubCtx, {
+                type: 'pie',
+                data: clubData,
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'right',
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+{% endblock %}

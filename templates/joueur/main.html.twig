@@ -1,0 +1,102 @@
+{% extends 'base.html.twig' %}
+    {% block searchbar %}
+        {% include 'searchbar.html.twig' %}
+    {% endblock %}
+
+{% block title %}Liste des Joueurs{% endblock %}
+
+{% block content %}
+
+    <div class="content-wrapper">
+        <div class="container-xxl flex-grow-1 container-p-y">
+            {% block widgets %}
+                {% include 'joueur/widgets.html.twig' %}
+            {% endblock %}
+                <div class="card">
+                    <h5 class="card-header d-flex justify-content-between align-items-center">
+                    Historique des Clubs
+                    <div>
+                        <a href="{{ path('joueur_statistics') }}" class="btn btn-info me-2">
+                            <i class="bx bx-stats"></i> Statistiques
+                        </a>
+                        <a href="{{ path('joueur_new') }}" class="btn btn-primary">
+                            <i class="bx bx-plus"></i> Nouvueau Joueur
+                        </a>
+                    </div>
+                </h5>
+                    <div class="table-responsive text-nowrap">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Nom</th>
+                                    <th>Prénom</th>
+                                    <th>Sport</th>
+                                    <th>Date de Naissance</th>
+                                    <th>Poste</th>
+                                    <th>Taille (m)</th>
+                                    <th>Poids (kg)</th>
+                                    <th>Statut</th>
+                                    <th>Email</th>
+                                    <th>Téléphone</th>
+                                    <th>Photo</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-border-bottom-0">
+                                {% for joueur in joueurs %}
+                                    <tr class="table-default">
+                                        <td>
+                                            <i class="fab fa-sketch fa-lg text-warning me-3"></i>
+                                            <strong>{{ joueur.nom }}</strong>
+                                        </td>
+                                        <td>{{ joueur.prenom }}</td>
+                                        <td>{{ joueur.sport.nomSport ?? 'N/A' }}</td>
+                                        <td>{{ joueur.dateNaissance ? joueur.dateNaissance|date('d/m/Y') : 'N/A' }}</td>
+                                        <td>{{ joueur.poste ?? 'N/A' }}</td>
+                                        <td>{{ joueur.taille ? joueur.taille|number_format(2, '.', ',') : 'N/A' }}</td>
+                                        <td>{{ joueur.poids ? joueur.poids|number_format(2, '.', ',') : 'N/A' }}</td>
+                                        <td>{{ joueur.statut ?? 'N/A' }}</td>
+                                        <td>{{ joueur.email ?? 'N/A' }}</td>
+                                        <td>{{ joueur.telephone ?? 'N/A' }}</td>
+                                        <td>
+                                            {% if joueur.profilePictureUrl %}
+                                                <img src="{{ joueur.profilePictureUrl }}" alt="Profile" class="rounded-circle" style="width: 30px; height: 30px;">
+                                            {% else %}
+                                                N/A
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            <div class="dropdown">
+                                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                                    <i class="bx bx-dots-vertical-rounded"></i>
+                                                </button>
+                                                <div class="dropdown-menu">
+                                                    <a class="dropdown-item" href="{{ path('joueur_show', {'id': joueur.idJoueur}) }}">
+                                                        <i class="bx bx-show me-1"></i> Voir
+                                                    </a>
+                                                    <a class="dropdown-item" href="{{ path('joueur_edit', {'id': joueur.idJoueur}) }}">
+                                                        <i class="bx bx-edit-alt me-1"></i> Modifier
+                                                    </a>
+                                                    <form method="post" action="{{ path('joueur_delete', {'id': joueur.idJoueur}) }}" style="display:inline;" onsubmit="return confirm('Confirmer la suppression?');">
+                                                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ joueur.idJoueur) }}">
+                                                        <button class="dropdown-item" type="submit">
+                                                            <i class="bx bx-trash me-1"></i> Supprimer
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                {% else %}
+                                    <tr>
+                                        <td colspan="12" class="text-center">Aucun joueur trouvé</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
