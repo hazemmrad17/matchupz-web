@@ -173,7 +173,7 @@ class __TwigTemplate_9ccce3b2f654b7a6599d6c5f8b29f103 extends Template
 
               <form id=\"formAuthentication\" class=\"mb-3\" action=\"";
         // line 127
-        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_user_auth");
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_user_register");
         yield "\" method=\"POST\" enctype=\"multipart/form-data\">
               
                 <!-- Nom -->
@@ -630,7 +630,7 @@ class __TwigTemplate_9ccce3b2f654b7a6599d6c5f8b29f103 extends Template
               <!-- Toast container -->
               <div class=\"position-fixed top-0 end-0 p-3\" style=\"z-index: 1050;\" id=\"toast-container\"></div>
 
-              <form id=\"formAuthentication\" class=\"mb-3\" action=\"{{ path('app_user_auth') }}\" method=\"POST\" enctype=\"multipart/form-data\">
+              <form id=\"formAuthentication\" class=\"mb-3\" action=\"{{ path('app_user_register') }}\" method=\"POST\" enctype=\"multipart/form-data\">
               
                 <!-- Nom -->
                 <div class=\"mb-3\">

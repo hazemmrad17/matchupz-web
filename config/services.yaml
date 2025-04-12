@@ -9,6 +9,7 @@ parameters:
     photos_directory: '%kernel.project_dir%/public/uploads/photos'
    
     users_image_directory: '%kernel.project_dir%/public/uploads/users'
+    
 services:
     App\Twig\AppExtension:
         tags: ['twig.extension']

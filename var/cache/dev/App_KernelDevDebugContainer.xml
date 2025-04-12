@@ -565,7 +565,7 @@
     </service>
     <service id="argument_resolver.service" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
       <tag priority="-50" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">controller.argument_value_resolver</tag>
-      <argument type="service" id=".service_locator.kY5I1iQ"/>
+      <argument type="service" id=".service_locator.za3Da9Q"/>
     </service>
     <service id="argument_resolver.default" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">
       <tag priority="-100" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">controller.argument_value_resolver</tag>
@@ -1379,6 +1379,7 @@
         <argument>C:\Users\MSI\Desktop\matchupz-web-0\vendor\knplabs\knp-paginator-bundle/translations</argument>
       </argument>
       <argument type="collection">
+        <argument>C:\Users\MSI\Desktop\matchupz-web-0/front</argument>
         <argument>C:\Users\MSI\Desktop\matchupz-web-0\vendor\symfony\twig-bridge/Resources/views/Email</argument>
         <argument>C:\Users\MSI\Desktop\matchupz-web-0\vendor\symfony\twig-bridge/Resources/views/Form</argument>
       </argument>
@@ -1406,6 +1407,7 @@
         <argument>C:\Users\MSI\Desktop\matchupz-web-0\vendor\knplabs\knp-paginator-bundle/translations</argument>
       </argument>
       <argument type="collection">
+        <argument>C:\Users\MSI\Desktop\matchupz-web-0/front</argument>
         <argument>C:\Users\MSI\Desktop\matchupz-web-0\vendor\symfony\twig-bridge/Resources/views/Email</argument>
         <argument>C:\Users\MSI\Desktop\matchupz-web-0\vendor\symfony\twig-bridge/Resources/views/Form</argument>
       </argument>
@@ -3549,7 +3551,7 @@
     </service>
     <service id="argument_resolver.not_tagged_controller" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
       <tag name="controller.argument_value_resolver" priority="-200"/>
-      <argument type="service" id=".service_locator.kY5I1iQ"/>
+      <argument type="service" id=".service_locator.za3Da9Q"/>
     </service>
     <service id="debug.log_processor" class="Symfony\Bridge\Monolog\Processor\DebugProcessor">
       <tag name="kernel.reset" method="reset"/>
@@ -6025,6 +6027,7 @@
     <service id="twig.template_iterator" class="Symfony\Bundle\TwigBundle\TemplateIterator">
       <argument type="service" id="kernel"/>
       <argument type="collection">
+        <argument key="C:\Users\MSI\Desktop\matchupz-web-0/front">front</argument>
         <argument key="C:\Users\MSI\Desktop\matchupz-web-0\vendor\symfony\twig-bridge/Resources/views/Email">email</argument>
         <argument key="C:\Users\MSI\Desktop\matchupz-web-0\vendor\symfony\twig-bridge/Resources/views/Form">null</argument>
       </argument>
@@ -6043,6 +6046,10 @@
       <tag name="twig.loader"/>
       <argument type="collection"/>
       <argument>C:\Users\MSI\Desktop\matchupz-web-0</argument>
+      <call method="addPath">
+        <argument>C:\Users\MSI\Desktop\matchupz-web-0/front</argument>
+        <argument>front</argument>
+      </call>
       <call method="addPath">
         <argument>C:\Users\MSI\Desktop\matchupz-web-0\vendor\doctrine\doctrine-bundle/templates</argument>
         <argument>Doctrine</argument>
@@ -8040,6 +8047,13 @@
         <argument key="userRepository" type="service_closure" id="App\Repository\UserRepository"/>
       </argument>
     </service>
+    <service id=".service_locator.qWLXMoh" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="em" type="service_closure" id="doctrine.orm.default_entity_manager"/>
+        <argument key="logger" type="service_closure" id="monolog.logger"/>
+      </argument>
+    </service>
     <service id=".service_locator.9kKwU2t" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -8059,7 +8073,7 @@
         <argument key="user" type="service_closure" id=".errored..service_locator.rvMNZGh.App\Entity\User"/>
       </argument>
     </service>
-    <service id=".service_locator.kY5I1iQ" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.za3Da9Q" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\ClubController::delete" type="service_closure" id=".service_locator.GbJZUn8"/>
@@ -8110,8 +8124,11 @@
         <argument key="App\Controller\UserController::exportPdf" type="service_closure" id=".service_locator.lDw5jgg"/>
         <argument key="App\Controller\UserController::index" type="service_closure" id=".service_locator.lDw5jgg"/>
         <argument key="App\Controller\UserController::new" type="service_closure" id=".service_locator.CsMkqUa"/>
+        <argument key="App\Controller\UserController::register" type="service_closure" id=".service_locator.qWLXMoh"/>
+        <argument key="App\Controller\UserController::registerF" type="service_closure" id=".service_locator.qWLXMoh"/>
         <argument key="App\Controller\UserController::show" type="service_closure" id=".service_locator.Hz5btge"/>
         <argument key="App\Controller\UserController::verifUser" type="service_closure" id=".service_locator.9kKwU2t"/>
+        <argument key="App\Controller\UserController::verifUserF" type="service_closure" id=".service_locator.9kKwU2t"/>
         <argument key="App\Kernel::loadRoutes" type="service_closure" id=".service_locator.y4_Zrx."/>
         <argument key="App\Kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.y4_Zrx."/>
         <argument key="kernel::loadRoutes" type="service_closure" id=".service_locator.y4_Zrx."/>
@@ -8164,8 +8181,11 @@
         <argument key="App\Controller\UserController:exportPdf" type="service_closure" id=".service_locator.lDw5jgg"/>
         <argument key="App\Controller\UserController:index" type="service_closure" id=".service_locator.lDw5jgg"/>
         <argument key="App\Controller\UserController:new" type="service_closure" id=".service_locator.CsMkqUa"/>
+        <argument key="App\Controller\UserController:register" type="service_closure" id=".service_locator.qWLXMoh"/>
+        <argument key="App\Controller\UserController:registerF" type="service_closure" id=".service_locator.qWLXMoh"/>
         <argument key="App\Controller\UserController:show" type="service_closure" id=".service_locator.Hz5btge"/>
         <argument key="App\Controller\UserController:verifUser" type="service_closure" id=".service_locator.9kKwU2t"/>
+        <argument key="App\Controller\UserController:verifUserF" type="service_closure" id=".service_locator.9kKwU2t"/>
         <argument key="kernel:loadRoutes" type="service_closure" id=".service_locator.y4_Zrx."/>
         <argument key="kernel:registerContainerConfiguration" type="service_closure" id=".service_locator.y4_Zrx."/>
       </argument>
@@ -10451,7 +10471,7 @@
     <service id="Knp\Component\Pager\ArgumentAccess\ArgumentAccessInterface" alias="Knp\Component\Pager\ArgumentAccess\RequestArgumentAccess"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.w7.f4fT" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.kY5I1iQ"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.za3Da9Q"/>
     <service id="doctrine.id_generator_locator" alias=".service_locator.KLVvNIq"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface $requestLogger" alias="monolog.logger.request"/>
@@ -10485,7 +10505,7 @@
     <service id=".service_locator.X9gG0Wi" alias=".service_locator.geVFa8t"/>
     <service id=".service_locator.RtCGHrO" alias=".service_locator.lDw5jgg"/>
     <service id=".service_locator.R0Sb2kd" alias=".service_locator.rvMNZGh"/>
-    <service id=".service_locator.H5ybZeY" alias=".service_locator.kY5I1iQ"/>
+    <service id=".service_locator.BUYWh7D" alias=".service_locator.za3Da9Q"/>
     <service id=".service_locator.BFrsqsn" alias=".service_locator.F9PKc.7"/>
     <service id=".service_locator.ldexW86" alias=".service_locator.6D1n88v"/>
     <service id=".service_locator.XtmiKbi" alias=".service_locator.MfxSDRP"/>
@@ -10533,6 +10553,7 @@
     <service id=".service_locator.vtj.h5i" alias=".service_locator.cX9LP_Y"/>
     <service id=".service_locator.0VPh.hj" alias=".service_locator.geVFa8t"/>
     <service id=".service_locator.EwtfK4Y" alias=".service_locator.lDw5jgg"/>
+    <service id=".service_locator.USpvWCd" alias=".service_locator.qWLXMoh"/>
     <service id=".service_locator.gaTSUXr" alias=".service_locator.9kKwU2t"/>
     <service id=".service_locator.EmZ4cZI" alias=".service_locator.Hz5btge"/>
     <service id=".service_locator.ICTRhpx" alias=".service_locator.rvMNZGh"/>

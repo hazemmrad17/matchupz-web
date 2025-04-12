@@ -13,6 +13,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use TCPDF;
 
 #[Route('/user')]
@@ -72,6 +74,7 @@ final class UserController extends AbstractController
                 }
             }
         }
+        
     
         return $this->render('user/index.html.twig', [
             'users' => $pagination,
@@ -81,6 +84,138 @@ final class UserController extends AbstractController
         ]);
     }
 
+   
+    #[Route('/registerF', name: 'app_registerF', methods: ['GET', 'POST'])]
+    public function registerF(Request $request, EntityManagerInterface $em, \Psr\Log\LoggerInterface $logger): Response
+    {
+        if ($request->isMethod('POST')) {
+            // Log form data for debugging
+            $logger->info('RegisterF form submitted', [
+                'post' => $request->request->all(),
+                'files' => $request->files->all(),
+            ]);
+    
+            // Créer l'utilisateur
+            $user = new User();
+            $user->setNom($request->request->get('nom'));
+            $user->setPrenom($request->request->get('prenom'));
+            $user->setEmail($request->request->get('email'));
+            $user->setPassword($request->request->get('password')); // Stocke le mot de passe en clair
+            $user->setGenre($request->request->get('genre'));
+            $user->setRole($request->request->get('role', 'Utilisateur')); // Set role from form or default
+    
+            // Champs facultatifs
+            $numTelephone = $request->request->get('num_telephone');
+            if ($numTelephone) {
+                $user->setNumTelephone($numTelephone);
+            }
+    
+            $dateNaissance = $request->request->get('date_de_naissance');
+            if ($dateNaissance) {
+                try {
+                    $user->setDateDeNaissance(new \DateTime($dateNaissance));
+                } catch (\Exception $e) {
+                    $logger->error('Invalid date format', ['date' => $dateNaissance, 'error' => $e->getMessage()]);
+                }
+            }
+    
+            // Gérer l'upload de l'image
+            $imagePath = 'uploads/users/default-avatar.png'; // Default image
+            $imageFile = $request->files->get('image');
+            if ($imageFile instanceof UploadedFile) {
+                $imagesDirectory = $this->getParameter('users_image_directory');
+                // Use simpler naming like app_user_new for consistency
+                $newFilename = uniqid() . '.' . $imageFile->guessExtension();
+                try {
+                    $imageFile->move($imagesDirectory, $newFilename);
+                    $imagePath = 'Uploads/users/' . $newFilename; // Store relative path
+                } catch (FileException $e) {
+                    $logger->error('Image upload failed', ['error' => $e->getMessage()]);
+                    $this->addFlash('error', 'Échec du téléchargement de l\'image.');
+                }
+            }
+            $user->setImage($imagePath);
+    
+            try {
+                $em->persist($user);
+                $em->flush();
+                $this->addFlash('success', 'Inscription réussie ! Vous pouvez maintenant vous connecter.');
+                return $this->redirectToRoute('app_login');
+            } catch (\Exception $e) {
+                $logger->error('Database error', ['error' => $e->getMessage()]);
+                $this->addFlash('error', 'Erreur lors de l\'inscription : ' . $e->getMessage());
+            }
+        }
+    
+        return $this->render('user/registerF.html.twig');
+    }
+
+    #[Route('/login', name: 'app_login')]
+    public function login(Request $request, SessionInterface $session): Response
+    {
+        // Get the last username (email) from the session if available
+        $lastUsername = $session->get('_security.last_username', '');
+
+        return $this->render('user/login.html.twig', [
+            'last_username' => $lastUsername,
+        ]);
+    }
+
+    #[Route('/pagenjareb', name: 'app_jareb')]
+    public function pagejareb(Request $request, SessionInterface $session): Response
+    {
+        // Get the last username (email) from the session if available
+       
+
+        return $this->render('user/jareb.html.twig');
+    }
+
+    #[Route('/verif-userF', name: 'app_verif_userF', methods: ['POST'])]
+    public function verifUserF(
+        Request $request,
+        EntityManagerInterface $em,
+        SessionInterface $session
+    ): Response {
+        // Get the email and password from the form
+        $email = $request->request->get('_username');
+        $password = $request->request->get('_password');
+    
+        // Store the email in the session to pre-fill the form if login fails
+        $session->set('_security.last_username', $email);
+    
+        // Verify CSRF token
+        if (!$this->isCsrfTokenValid('authenticate', $request->request->get('_csrf_token'))) {
+            $this->addFlash('error', 'Invalid CSRF token.');
+            return $this->redirectToRoute('app_login');
+        }
+    
+        // Find the user by email
+        $user = $em->getRepository(User::class)->findOneBy(['email' => $email]);
+    
+        // Check if the user exists and the password matches (plain-text comparison)
+        if ($user && $user->getPassword() === $password) {
+            // Store user data in the session
+            $session->set('user', [
+                'id' => $user->getId_user(),
+                'email' => $user->getEmail(),
+                'nom' => $user->getNom(),
+                'prenom' => $user->getPrenom(),
+                'image' => $user->getImage(),
+                'role' => $user->getRole(),
+            ]);
+    
+            // Redirect based on role
+            if ($user->getRole() === 'ADMIN') {
+                return $this->redirectToRoute('app_user_index');
+            }
+    
+            return $this->redirectToRoute('app_jareb');
+        }
+    
+        // If authentication fails, add a flash message and redirect back to the login page
+        $this->addFlash('error', 'Email or password incorrect.');
+        return $this->redirectToRoute('app_login');
+    }
     #[Route('/export-pdf', name: 'app_user_export_pdf', methods: ['GET'])]
     public function exportPdf(Request $request, UserRepository $userRepository, PaginatorInterface $paginator): Response
     {
@@ -257,12 +392,72 @@ final class UserController extends AbstractController
         return $this->redirectToRoute('app_user_auth');
     }
 
-    #[Route('/register', name: 'app_user_register')]
-    public function register(): Response
+    #[Route('/register', name: 'app_user_register', methods: ['GET', 'POST'])]
+    public function register(Request $request, EntityManagerInterface $em, \Psr\Log\LoggerInterface $logger): Response
     {
-        return $this->render('user/register.html.twig', [
-            'controller_name' => 'UserController',
-        ]);
+
+        if ($request->isMethod('POST')) {
+            // Log form data for debugging
+            $logger->info('RegisterF form submitted', [
+                'post' => $request->request->all(),
+                'files' => $request->files->all(),
+            ]);
+    
+            // Créer l'utilisateur
+            $user = new User();
+            $user->setNom($request->request->get('nom'));
+            $user->setPrenom($request->request->get('prenom'));
+            $user->setEmail($request->request->get('email'));
+            $user->setPassword($request->request->get('password')); // Stocke le mot de passe en clair
+            $user->setGenre($request->request->get('genre'));
+            $user->setRole($request->request->get('role', 'Utilisateur')); // Set role from form or default
+    
+            // Champs facultatifs
+            $numTelephone = $request->request->get('num_telephone');
+            if ($numTelephone) {
+                $user->setNumTelephone($numTelephone);
+            }
+    
+            $dateNaissance = $request->request->get('date_de_naissance');
+            if ($dateNaissance) {
+                try {
+                    $user->setDateDeNaissance(new \DateTime($dateNaissance));
+                } catch (\Exception $e) {
+                    $logger->error('Invalid date format', ['date' => $dateNaissance, 'error' => $e->getMessage()]);
+                }
+            }
+    
+            // Gérer l'upload de l'image
+            $imagePath = 'uploads/users/default-avatar.png'; // Default image
+            $imageFile = $request->files->get('image');
+            if ($imageFile instanceof UploadedFile) {
+                $imagesDirectory = $this->getParameter('users_image_directory');
+                // Use simpler naming like app_user_new for consistency
+                $newFilename = uniqid() . '.' . $imageFile->guessExtension();
+                try {
+                    $imageFile->move($imagesDirectory, $newFilename);
+                    $imagePath = 'Uploads/users/' . $newFilename; // Store relative path
+                } catch (FileException $e) {
+                    $logger->error('Image upload failed', ['error' => $e->getMessage()]);
+                    $this->addFlash('error', 'Échec du téléchargement de l\'image.');
+                }
+            }
+            $user->setImage($imagePath);
+    
+            try {
+                $em->persist($user);
+                $em->flush();
+                $this->addFlash('success', 'Inscription réussie ! Vous pouvez maintenant vous connecter.');
+                return $this->redirectToRoute('app_user_auth');
+            } catch (\Exception $e) {
+                $logger->error('Database error', ['error' => $e->getMessage()]);
+                $this->addFlash('error', 'Erreur lors de l\'inscription : ' . $e->getMessage());
+            }
+        }
+    
+        return $this->render('user/register.html.twig');
+    
+
     }
 
     #[Route('/new', name: 'app_user_new', methods: ['GET', 'POST'])]
