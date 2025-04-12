@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% block searchbar %}
+    {% include 'searchbar.html.twig' %}
+{% endblock %}
+
+{% block title %}Statistiques Performance Joueur{% endblock %}
+
+{% block content %}
+    <div class="content-wrapper">
+        <div class="container-xxl flex-grow-1 container-p-y">
+            <div class="card mb-4">
+                <h5 class="card-header">Statistiques des Performances Joueurs</h5>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <h5 class="card-title">Total Performances</h5>
+                                    <p class="display-4">{{ stats.total_performances }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <h5 class="card-title">Matches Joués</h5>
+                                    <p class="display-4">{{ stats.total_matches }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <h5 class="card-title">Minutes Jouées</h5>
+                                    <p class="display-4">{{ stats.total_minutes }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <h5 class="card-title">Buts Totaux</h5>
+                                    <p class="display-4">{{ stats.total_goals }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <h5 class="card-title">Passes Décisives</h5>
+                                    <p class="display-4">{{ stats.total_assists }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <h5 class="card-title">Cartons Jaunes</h5>
+                                    <p class="display-4">{{ stats.total_yellow_cards }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <h5 class="card-title">Cartons Rouges</h5>
+                                    <p class="display-4">{{ stats.total_red_cards }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
