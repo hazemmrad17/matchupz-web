@@ -5,53 +5,219 @@
 {% block content %}
     <div class="content-wrapper">
         <div class="container-xxl flex-grow-1 container-p-y">
-            <h4 class="fw-bold py-3 mb-4">Modifier le Contrat</h4>
+            <div class="card">
+                <h5 class="card-header">Modifier le Contrat</h5>
+                <div class="card-body">
+                    {% for message in app.flashes('success') %}
+                        <div class="alert alert-success" role="alert">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                    {% for message in app.flashes('error') %}
+                        <div class="alert alert-danger" role="alert">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
 
-            {{ form_start(form) }}
-                <div class="row mb-3">
-                    <div class="col">
-                        {{ form_label(form.Titre) }}
-                        {{ form_widget(form.Titre) }}
-                        {{ form_errors(form.Titre) }}
-                    </div>
+                    {{ form_start(form, {'attr': {'novalidate': 'novalidate', 'class': 'form-horizontal', 'id': 'contratForm'}}) }}
+                        {% if form_errors(form) %}
+                            <div class="alert alert-danger" role="alert">
+                                {{ form_errors(form) }}
+                            </div>
+                        {% endif %}
+                        <div class="mb-3">
+                            {{ form_label(form.Titre, null, {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_widget(form.Titre, {'attr': {'class': 'form-control w-50'}}) }}
+                            {% if form_errors(form.Titre) %}
+                                <div class="text-danger small">{{ form_errors(form.Titre) }}</div>
+                            {% endif %}
+                        </div>
+                        <div class="mb-3">
+                            {{ form_label(form.DateDebut, null, {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_widget(form.DateDebut, {'attr': {'class': 'form-control w-50'}}) }}
+                            {% if form_errors(form.DateDebut) %}
+                                <div class="text-danger small">{{ form_errors(form.DateDebut) }}</div>
+                            {% endif %}
+                        </div>
+                        <div class="mb-3">
+                            {{ form_label(form.DateFin, null, {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_widget(form.DateFin, {'attr': {'class': 'form-control w-50'}}) }}
+                            {% if form_errors(form.DateFin) %}
+                                <div class="text-danger small">{{ form_errors(form.DateFin) }}</div>
+                            {% endif %}
+                        </div>
+                        <div class="mb-3">
+                            {{ form_label(form.Montant, null, {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_widget(form.Montant, {'attr': {'class': 'form-control w-50'}}) }}
+                            {% if form_errors(form.Montant) %}
+                                <div class="text-danger small">{{ form_errors(form.Montant) }}</div>
+                            {% endif %}
+                        </div>
+                        <div class="mb-3">
+                            {{ form_label(form.sponsor, null, {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_widget(form.sponsor, {'attr': {'class': 'form-control w-50'}}) }}
+                            {% if form_errors(form.sponsor) %}
+                                <div class="text-danger small">{{ form_errors(form.sponsor) }}</div>
+                            {% endif %}
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Signature</label>
+                            {% if contrat.signature %}
+                                <div class="mb-2">
+                                    <img src="{{ asset(contrat.signature) }}" alt="Signature actuelle" class="img-fluid" style="max-width: 300px;">
+                                </div>
+                            {% endif %}
+                            <canvas id="signatureCanvas" class="form-control" width="300" height="80" style="width: 300px; height: 80px; background-color: #ffffff;"></canvas>
+                            {{ form_widget(form.signature, {'attr': {'id': 'signatureInput', 'class': 'd-none'}}) }}
+                            <!-- Fallback hidden input in case form.signature doesn't render -->
+                            <input type="hidden" id="signatureInput" name="contrat[signature]" class="d-none" value="{{ contrat.signature|default('') }}">
+                            {% if form_errors(form.signature) %}
+                                <div class="text-danger small">{{ form_errors(form.signature) }}</div>
+                            {% endif %}
+                            <button type="button" id="clearCanvas" class="btn btn-outline-secondary mt-2">Effacer</button>
+                        </div>
+                        <div class="mb-3">
+                            <button type="submit" class="btn btn-primary me-2">Mettre à jour</button>
+                            <a href="{{ path('contrat_main') }}" class="btn btn-secondary">Annuler</a>
+                        </div>
+                    {{ form_end(form) }}
                 </div>
-                <div class="row mb-3">
-                    <div class="col">
-                        {{ form_label(form.DateDebut) }}
-                        {{ form_widget(form.DateDebut) }}
-                        {{ form_errors(form.DateDebut) }}
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col">
-                        {{ form_label(form.DateFin) }}
-                        {{ form_widget(form.DateFin) }}
-                        {{ form_errors(form.DateFin) }}
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col">
-                        {{ form_label(form.Montant) }}
-                        {{ form_widget(form.Montant) }}
-                        {{ form_errors(form.Montant) }}
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col">
-                        {{ form_label(form.sponsor) }}
-                        {{ form_widget(form.sponsor) }}
-                        {{ form_errors(form.sponsor) }}
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col">
-                        {{ form_label(form.signature) }}
-                        {{ form_widget(form.signature) }}
-                        {{ form_errors(form.signature) }}
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-primary">Mettre à jour</button>
-            {{ form_end(form) }}
+            </div>
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const canvas = document.getElementById('signatureCanvas');
+            const ctx = canvas.getContext('2d');
+            const signatureInput = document.getElementById('signatureInput');
+            const clearButton = document.getElementById('clearCanvas');
+            const form = document.getElementById('contratForm');
+            let isDrawing = false;
+
+            // Log to verify elements are found
+            console.log('Canvas:', canvas);
+            console.log('Signature Input:', signatureInput);
+            console.log('Clear Button:', clearButton);
+            console.log('Form:', form);
+
+            // Check if signatureInput exists
+            if (!signatureInput) {
+                console.error('Signature input element not found! Check the form rendering.');
+                return;
+            }
+
+            // Initialize canvas
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.strokeStyle = '#000000';
+            ctx.lineWidth = 2;
+            ctx.lineCap = 'round';
+
+            // Drawing events
+            canvas.addEventListener('mousedown', startDrawing);
+            canvas.addEventListener('mousemove', draw);
+            canvas.addEventListener('mouseup', stopDrawing);
+            canvas.addEventListener('mouseout', stopDrawing);
+            canvas.addEventListener('touchstart', startTouch);
+            canvas.addEventListener('touchmove', drawTouch);
+            canvas.addEventListener('touchend', stopDrawing);
+
+            function startDrawing(e) {
+                isDrawing = true;
+                ctx.beginPath();
+                draw(e);
+                console.log('Started drawing');
+            }
+
+            function draw(e) {
+                if (!isDrawing) return;
+                e.preventDefault();
+                const rect = canvas.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                ctx.lineTo(x, y);
+                ctx.stroke();
+                console.log('Drawing at:', x, y);
+            }
+
+            function stopDrawing() {
+                if (isDrawing) {
+                    isDrawing = false;
+                    ctx.closePath();
+                    console.log('Stopped drawing');
+                }
+            }
+
+            function startTouch(e) {
+                e.preventDefault();
+                isDrawing = true;
+                ctx.beginPath();
+                drawTouch(e);
+                console.log('Started touch drawing');
+            }
+
+            function drawTouch(e) {
+                if (!isDrawing) return;
+                e.preventDefault();
+                const rect = canvas.getBoundingClientRect();
+                const touch = e.touches[0];
+                const x = touch.clientX - rect.left;
+                const y = touch.clientY - rect.top;
+                ctx.lineTo(x, y);
+                ctx.stroke();
+                console.log('Touch drawing at:', x, y);
+            }
+
+            // Clear canvas
+            clearButton.addEventListener('click', function () {
+                ctx.fillStyle = '#ffffff';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                if (signatureInput) {
+                    signatureInput.value = 'signatures/signature_contrat_1741119108385.png';
+                    console.log('Canvas cleared, signature input set to default:', signatureInput.value);
+                } else {
+                    console.error('Signature input not found when clearing canvas');
+                }
+            });
+
+            // Form submission
+            form.addEventListener('submit', function (e) {
+                console.log('Form submission triggered');
+                const isEmpty = isCanvasEmpty(canvas);
+                console.log('Is canvas empty?', isEmpty);
+                if (signatureInput) {
+                    if (isEmpty) {
+                        signatureInput.value = 'signatures/signature_contrat_1741119108385.png';
+                        console.log('Canvas is empty, signature input set to default:', signatureInput.value);
+                    } else {
+                        const dataUrl = canvas.toDataURL('image/png');
+                        signatureInput.value = dataUrl;
+                        console.log('Signature data URL:', dataUrl.substring(0, 50) + '...');
+                        console.log('Signature input value set to:', signatureInput.value.substring(0, 50) + '...');
+                    }
+                } else {
+                    console.error('Signature input not found during form submission');
+                    e.preventDefault();
+                }
+            });
+
+            // Check if canvas is empty
+            function isCanvasEmpty(canvas) {
+                const context = canvas.getContext('2d');
+                const pixelData = context.getImageData(0, 0, canvas.width, canvas.height).data;
+                for (let i = 0; i < pixelData.length; i += 4) {
+                    if (pixelData[i + 3] !== 0) { // Check alpha channel
+                        console.log('Non-transparent pixel found, canvas is not empty');
+                        return false;
+                    }
+                }
+                console.log('All pixels are transparent, canvas is empty');
+                return true;
+            }
+        });
+    </script>
 {% endblock %}

@@ -24,10 +24,15 @@
                         <strong>Sponsor:</strong> {{ contrat.Sponsor ? contrat.Sponsor.nom : 'N/A' }}
                     </div>
                     <div class="mb-3">
-                        <strong>Signature:</strong> {{ contrat.Signature }}
+                        <strong>Signature:</strong>
+                        {% if contrat.Signature %}
+                            <img src="{{ asset(contrat.Signature) }}" alt="Signature" style="max-width: 200px; max-height: 100px;" />
+                        {% else %}
+                            Aucune signature
+                        {% endif %}
                     </div>
                     <a href="{{ path('contrat_main') }}" class="btn btn-secondary">Retour à la liste</a>
-                    <a href="{{ path('contrat_edit', {'id': contrat.Id_Contrat}) }}" class="btn btn-primary">Modifier</a>
+                    <a href="{{ path('contrat_edit', {'idContrat': contrat.idContrat}) }}" class="btn btn-primary">Modifier</a>
                 </div>
             </div>
         </div>

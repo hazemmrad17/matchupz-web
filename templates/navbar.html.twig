@@ -172,12 +172,12 @@
       </a>
       <ul class="menu-sub">
         <li class="menu-item {% if app.request.attributes.get('_route') == 'app_sponsoring_partners' %}active{% endif %}">
-          <a href="{{ path('joueur_main') }}" class="menu-link">
+          <a href="{{ path('sponsor_main') }}" class="menu-link">
             <div data-i18n="Partners">Partners</div>
           </a>
         </li>
         <li class="menu-item {% if app.request.attributes.get('_route') == 'app_sponsoring_contracts' %}active{% endif %}">
-          <a href="{{ path('joueur_main') }}" class="menu-link">
+          <a href="{{ path('contrat_main') }}" class="menu-link">
             <div data-i18n="Contracts">Contracts</div>
           </a>
         </li>

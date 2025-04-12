@@ -19,6 +19,7 @@ return [
         '/club/statistics' => [[['_route' => 'club_statistics', '_controller' => 'App\\Controller\\ClubController::statistics'], null, ['GET' => 0], null, false, false, null]],
         '/contrat/main' => [[['_route' => 'contrat_main', '_controller' => 'App\\Controller\\ContratController::index'], null, ['GET' => 0], null, false, false, null]],
         '/contrat/new' => [[['_route' => 'contrat_new', '_controller' => 'App\\Controller\\ContratController::new'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        '/contrat/statistics' => [[['_route' => 'contrat_statistics', '_controller' => 'App\\Controller\\ContratController::statistics'], null, ['GET' => 0], null, false, false, null]],
         '/joueur/main' => [[['_route' => 'joueur_main', '_controller' => 'App\\Controller\\JoueurController::index'], null, ['GET' => 0], null, false, false, null]],
         '/joueur/new' => [[['_route' => 'joueur_new', '_controller' => 'App\\Controller\\JoueurController::new'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
         '/joueur/stats' => [[['_route' => 'joueur_statistics', '_controller' => 'App\\Controller\\JoueurController::statistics'], null, ['GET' => 0], null, false, false, null]],
@@ -56,30 +57,30 @@ return [
                         .'|(\\d+)(*:250)'
                     .')'
                     .'|ontrat/(?'
-                        .'|([^/]++)(?'
-                            .'|/edit(*:285)'
-                            .'|(*:293)'
-                        .')'
-                        .'|statistics(*:312)'
+                        .'|(\\d+)(*:274)'
+                        .'|(\\d+)/edit(*:292)'
+                        .'|(\\d+)(*:305)'
+                        .'|export(?:/([^/]++))?(*:333)'
                     .')'
                 .')'
                 .'|/joueur/([^/]++)(?'
                     .'|/(?'
-                        .'|edit(*:349)'
-                        .'|delete(*:363)'
+                        .'|edit(*:370)'
+                        .'|delete(*:384)'
                     .')'
-                    .'|(*:372)'
+                    .'|(*:393)'
                 .')'
                 .'|/spo(?'
                     .'|nsor/(?'
-                        .'|(\\d+)(*:401)'
-                        .'|(\\d+)/edit(*:419)'
-                        .'|(\\d+)(*:432)'
+                        .'|(\\d+)(*:422)'
+                        .'|(\\d+)/edit(*:440)'
+                        .'|(\\d+)(*:453)'
+                        .'|export(?:/([^/]++))?(*:481)'
                     .')'
                     .'|rt/(?'
-                        .'|(\\d+)(*:452)'
-                        .'|(\\d+)/edit(*:470)'
-                        .'|(\\d+)(*:483)'
+                        .'|(\\d+)(*:501)'
+                        .'|(\\d+)/edit(*:519)'
+                        .'|(\\d+)(*:532)'
                     .')'
                 .')'
             .')/?$}sDu',
@@ -96,21 +97,20 @@ return [
         219 => [[['_route' => 'club_show', '_controller' => 'App\\Controller\\ClubController::show'], ['idClub'], ['GET' => 0], null, false, true, null]],
         237 => [[['_route' => 'club_edit', '_controller' => 'App\\Controller\\ClubController::edit'], ['idClub'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
         250 => [[['_route' => 'club_delete', '_controller' => 'App\\Controller\\ClubController::delete'], ['idClub'], ['POST' => 0], null, false, true, null]],
-        285 => [[['_route' => 'contrat_edit', '_controller' => 'App\\Controller\\ContratController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        293 => [
-            [['_route' => 'contrat_show', '_controller' => 'App\\Controller\\ContratController::show'], ['id'], ['GET' => 0], null, false, true, null],
-            [['_route' => 'contrat_delete', '_controller' => 'App\\Controller\\ContratController::delete'], ['id'], ['POST' => 0], null, false, true, null],
-        ],
-        312 => [[['_route' => 'contrat_statistics', '_controller' => 'App\\Controller\\ContratController::statistics'], [], ['GET' => 0], null, false, false, null]],
-        349 => [[['_route' => 'joueur_edit', '_controller' => 'App\\Controller\\JoueurController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        363 => [[['_route' => 'joueur_delete', '_controller' => 'App\\Controller\\JoueurController::delete'], ['id'], ['POST' => 0], null, false, false, null]],
-        372 => [[['_route' => 'joueur_show', '_controller' => 'App\\Controller\\JoueurController::show'], ['id'], ['GET' => 0], null, false, true, null]],
-        401 => [[['_route' => 'sponsor_show', '_controller' => 'App\\Controller\\SponsorController::show'], ['id'], ['GET' => 0], null, false, true, null]],
-        419 => [[['_route' => 'sponsor_edit', '_controller' => 'App\\Controller\\SponsorController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        432 => [[['_route' => 'sponsor_delete', '_controller' => 'App\\Controller\\SponsorController::delete'], ['id'], ['POST' => 0], null, false, true, null]],
-        452 => [[['_route' => 'sport_show', '_controller' => 'App\\Controller\\SportController::show'], ['idSport'], ['GET' => 0], null, false, true, null]],
-        470 => [[['_route' => 'sport_edit', '_controller' => 'App\\Controller\\SportController::edit'], ['idSport'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        483 => [
+        274 => [[['_route' => 'contrat_show', '_controller' => 'App\\Controller\\ContratController::show'], ['idContrat'], ['GET' => 0], null, false, true, null]],
+        292 => [[['_route' => 'contrat_edit', '_controller' => 'App\\Controller\\ContratController::edit'], ['idContrat'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        305 => [[['_route' => 'contrat_delete', '_controller' => 'App\\Controller\\ContratController::delete'], ['idContrat'], ['POST' => 0], null, false, true, null]],
+        333 => [[['_route' => 'contrat_export', 'format' => 'xlsx', '_controller' => 'App\\Controller\\ContratController::export'], ['format'], null, null, false, true, null]],
+        370 => [[['_route' => 'joueur_edit', '_controller' => 'App\\Controller\\JoueurController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        384 => [[['_route' => 'joueur_delete', '_controller' => 'App\\Controller\\JoueurController::delete'], ['id'], ['POST' => 0], null, false, false, null]],
+        393 => [[['_route' => 'joueur_show', '_controller' => 'App\\Controller\\JoueurController::show'], ['id'], ['GET' => 0], null, false, true, null]],
+        422 => [[['_route' => 'sponsor_show', '_controller' => 'App\\Controller\\SponsorController::show'], ['id'], ['GET' => 0], null, false, true, null]],
+        440 => [[['_route' => 'sponsor_edit', '_controller' => 'App\\Controller\\SponsorController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        453 => [[['_route' => 'sponsor_delete', '_controller' => 'App\\Controller\\SponsorController::delete'], ['id'], ['POST' => 0], null, false, true, null]],
+        481 => [[['_route' => 'sponsor_export', 'format' => 'xlsx', '_controller' => 'App\\Controller\\SponsorController::export'], ['format'], null, null, false, true, null]],
+        501 => [[['_route' => 'sport_show', '_controller' => 'App\\Controller\\SportController::show'], ['idSport'], ['GET' => 0], null, false, true, null]],
+        519 => [[['_route' => 'sport_edit', '_controller' => 'App\\Controller\\SportController::edit'], ['idSport'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        532 => [
             [['_route' => 'sport_delete', '_controller' => 'App\\Controller\\SportController::delete'], ['idSport'], ['POST' => 0], null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],

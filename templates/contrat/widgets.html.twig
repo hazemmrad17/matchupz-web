@@ -210,7 +210,7 @@
             <div class="card-body">
                 <ul class="p-0 m-0">
                     {% if app.request.attributes.get('_route') == 'contrat_main' %}
-                        {% for contrat in recentContrats %}
+                        {% for contrat in recentContracts %} {# Changed recentContrats to recentContracts #}
                             <li class="d-flex mb-4 pb-1">
                                 <div class="avatar flex-shrink-0 me-3">
                                     <img src="{{ asset('/img/icons/unicons/file.png') }}" alt="Contract" class="rounded" />

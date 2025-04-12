@@ -17,7 +17,7 @@ class Sponsor
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(name: 'Id_sponsor', type: 'integer')] 
-    public ?int $idSponsor = null;
+    public ?int $Id_sponsor = null;
 
     #[ORM\Column(type: 'string', nullable: false)]
     #[Assert\NotBlank(message: "Le nom du sponsor est obligatoire.")]
