@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Club{% endblock %}
+
+{% block body %}
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <h4 class="fw-bold py-3 mb-4">Add New Club</h4>
+
+        {{ form_start(form) }}
+            {{ form_widget(form) }}
+        {{ form_end(form) }}
+
+        <a href="{{ path('club_index') }}" class="btn btn-outline-secondary mt-3">Back to List</a>
+    </div>
+{% endblock %}
