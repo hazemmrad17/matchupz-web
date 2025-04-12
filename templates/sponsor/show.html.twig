@@ -9,14 +9,14 @@
 
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
-                    <h5 class="card-title mb-0">Sponsor #{{ sponsor.id_sponsor }}</h5>
+                    <h5 class="card-title mb-0">Sponsor #{{ sponsor.idSponsor }}</h5>
                     <div>
-                        <a href="{{ path('sponsor_edit', {'id': sponsor.id_sponsor}) }}" class="btn btn-sm btn-primary">Modifier</a>
+                        <a href="{{ path('sponsor_edit', {'id': sponsor.idSponsor}) }}" class="btn btn-sm btn-primary">Modifier</a>
                         <a href="{{ path('sponsor_main') }}" class="btn btn-sm btn-secondary">Retour à la liste</a>
 
                         {# Remove Button #}
-                        <form method="post" action="{{ path('sponsor_delete', {'id': sponsor.id_sponsor}) }}" style="display:inline;" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce sponsor ?');">
-                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ sponsor.id_sponsor) }}">
+                        <form method="post" action="{{ path('sponsor_delete', {'id': sponsor.idSponsor}) }}" style="display:inline;" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce sponsor ?');">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ sponsor.idSponsor) }}">
                             <button class="btn btn-sm btn-danger" type="submit">
                                 Supprimer
                             </button>

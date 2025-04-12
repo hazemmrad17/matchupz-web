@@ -10,12 +10,76 @@
     <div class="content-wrapper">
         <div class="container-xxl flex-grow-1 container-p-y">
             {% block widgets %}
-                {% include '/contrat/widgets.html.twig' %}
+                {% include '/contrat/widgets.html.twig' with {'recentContracts': recentContracts} %}
             {% endblock %}
+
+            {# Main Contracts Table #}
             <div class="card">
                 <h5 class="card-header d-flex justify-content-between align-items-center">
-                    Liste des Contrats
-                    <a href="{{ path('contrat_new') }}" class="btn btn-primary">Ajouter un Contrat</a>
+                    <div class="d-flex align-items-center">
+                        {# Search Bar Left-Aligned #}
+                        <form class="d-flex" method="get" action="{{ path('contrat_main') }}">
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bx bx-search"></i></span>
+                                <input type="text" class="form-control" name="search" placeholder="Rechercher titre, sponsor ou montant..." value="{{ searchTerm|default('') }}">
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="d-flex align-items-center">
+                        {# Filtrer Dropdown #}
+                        <div class="btn-group me-2">
+                            <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                Filtrer
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{{ path('contrat_main', {'filter': 'titre'}) }}">Par Titre</a></li>
+                                <li><a class="dropdown-item" href="{{ path('contrat_main', {'filter': 'datedebut'}) }}">Par Date de Début</a></li>
+                                <li><a class="dropdown-item" href="{{ path('contrat_main', {'filter': 'datefin'}) }}">Par Date de Fin</a></li>
+                                <li><a class="dropdown-item" href="{{ path('contrat_main', {'filter': 'montant'}) }}">Par Montant</a></li>
+                                <li><a class="dropdown-item" href="{{ path('contrat_main', {'filter': 'sponsor'}) }}">Par Sponsor</a></li>
+                            </ul>
+                        </div>
+
+                        {# Statistiques Button #}
+                        <a href="{{ path('contrat_statistics') }}" class="btn btn-dark me-2">
+                            <i class="bx bx-bar-chart-alt-2 me-1"></i> Statistiques
+                        </a>
+
+                        {# Ajouter Contrat Button #}
+                        <a href="{{ path('contrat_new') }}" class="btn btn-success me-2">
+                            <i class="bx bx-plus me-1"></i> Ajouter Contrat
+                        </a>
+
+                        {# Exporter Dropdown #}
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bx bx-download me-1"></i> Exporter
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end" style="max-height: 200px; overflow-y: auto;">
+                                <li>
+                                    <a class="dropdown-item" href="{{ path('contrat_export', {'format': 'xlsx'}) }}">
+                                        <i class="bx bx-file me-1"></i> Excel (.xlsx)
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="{{ path('contrat_export', {'format': 'csv'}) }}">
+                                        <i class="bx bx-file me-1"></i> CSV (.csv)
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="{{ path('contrat_export', {'format': 'pdf'}) }}">
+                                        <i class="bx bx-file me-1"></i> PDF (.pdf)
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="{{ path('contrat_export', {'format': 'sql'}) }}">
+                                        <i class="bx bx-data me-1"></i> SQL (.sql)
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </h5>
                 <div class="table-responsive text-nowrap">
                     <table class="table">
@@ -49,25 +113,29 @@
                                         {% endif %}
                                     </td>
                                     <td>
-                                        <div class="dropdown">
-                                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                                <i class="bx bx-dots-vertical-rounded"></i>
-                                            </button>
-                                            <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="{{ path('contrat_show', {'id': contrat.idContrat}) }}">
-                                                    <i class="bx bx-show me-1"></i> Voir
-                                                </a>
-                                                <a class="dropdown-item" href="{{ path('contrat_edit', {'id': contrat.idContrat}) }}">
-                                                    <i class="bx bx-edit-alt me-1"></i> Modifier
-                                                </a>
-                                                <form method="post" action="{{ path('contrat_delete', {'id': contrat.idContrat}) }}" style="display:inline;" onsubmit="return confirm('Confirmer la suppression?');">
-                                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ contrat.idContrat) }}">
-                                                    <button class="dropdown-item" type="submit">
-                                                        <i class="bx bx-trash me-1"></i> Supprimer
-                                                    </button>
-                                                </form>
+                                        {% if contrat.idContrat is not null %}
+                                            <div class="dropdown">
+                                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                                    <i class="bx bx-dots-vertical-rounded"></i>
+                                                </button>
+                                                <div class="dropdown-menu">
+                                                    <a class="dropdown-item" href="{{ path('contrat_show', {'idContrat': contrat.idContrat}) }}">
+                                                        <i class="bx bx-show me-1"></i> Voir
+                                                    </a>
+                                                    <a class="dropdown-item" href="{{ path('contrat_edit', {'idContrat': contrat.idContrat}) }}">
+                                                        <i class="bx bx-edit-alt me-1"></i> Modifier
+                                                    </a>
+                                                    <form method="post" action="{{ path('contrat_delete', {'idContrat': contrat.idContrat}) }}" style="display:inline;" onsubmit="return confirm('Confirmer la suppression?');">
+                                                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ contrat.idContrat) }}">
+                                                        <button class="dropdown-item" type="submit">
+                                                            <i class="bx bx-trash me-1"></i> Supprimer
+                                                        </button>
+                                                    </form>
+                                                </div>
                                             </div>
-                                        </div>
+                                        {% else %}
+                                            <span class="text-muted">Actions non disponibles</span>
+                                        {% endif %}
                                     </td>
                                 </tr>
                             {% else %}
@@ -78,7 +146,42 @@
                         </tbody>
                     </table>
                 </div>
+
+                {# Pagination #}
+                <div class="card-footer">
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item {% if contrats.currentPageNumber == 1 %}disabled{% endif %}">
+                                <a class="page-link" href="{{ path('contrat_main', {'page': contrats.currentPageNumber - 1, 'search': searchTerm|default(''), 'filter': filter|default('')}) }}">Previous</a>
+                            </li>
+                            {% for page in 1..contrats.getPageCount() %}
+                                <li class="page-item {% if page == contrats.currentPageNumber %}active{% endif %}">
+                                    <a class="page-link" href="{{ path('contrat_main', {'page': page, 'search': searchTerm|default(''), 'filter': filter|default('')}) }}">{{ page }}</a>
+                                </li>
+                            {% endfor %}
+                            <li class="page-item {% if contrats.currentPageNumber == contrats.getPageCount() %}disabled{% endif %}">
+                                <a class="page-link" href="{{ path('contrat_main', {'page': contrats.currentPageNumber + 1, 'search': searchTerm|default(''), 'filter': filter|default('')}) }}">Next</a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <div class="text-center">
+                        <small>
+                            Page {{ contrats.currentPageNumber }} sur {{ contrats.getPageCount() }} |
+                            Total Contrats : {{ contrats.totalItemCount }}
+                        </small>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Placeholder for chart rendering if needed
+        });
+    </script>
 {% endblock %}

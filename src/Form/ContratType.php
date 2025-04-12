@@ -11,6 +11,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
 class ContratType extends AbstractType
 {
@@ -19,14 +20,16 @@ class ContratType extends AbstractType
         $builder
             ->add('Titre', TextType::class, [
                 'label' => 'Titre du contrat',
-                'attr' => ['class' => 'form-control'],
+                'attr' => [
+                    'placeholder' => 'Entrer le titre du contrat',
+                    'class' => 'form-control'],
                 'required' => true,
             ])
             ->add('DateDebut', DateType::class, [
                 'label' => 'Date de début',
                 'widget' => 'single_text',
-                'format' => 'yyyy-MM-dd', // Format for rendering the DateTime object as a string
-                'input' => 'datetime', // Tell Symfony the data is a DateTime object
+                'format' => 'yyyy-MM-dd',
+                'input' => 'datetime',
                 'attr' => [
                     'class' => 'form-control',
                     'type' => 'date',
@@ -49,6 +52,7 @@ class ContratType extends AbstractType
             ->add('Montant', NumberType::class, [
                 'label' => 'Montant',
                 'attr' => [
+                    'placeholder' => 'Entrer le montant du contrat',
                     'class' => 'form-control',
                     'min' => 0,
                     'step' => 0.01,
@@ -63,10 +67,10 @@ class ContratType extends AbstractType
                 'attr' => ['class' => 'form-control'],
                 'required' => true,
             ])
-            ->add('signature', TextType::class, [
-                'label' => 'Signature',
-                'attr' => ['class' => 'form-control'],
-                'required' => true,
+            ->add('signature', HiddenType::class, [
+                'label' => false,
+                'required' => false,
+                'mapped' => false,
             ])
         ;
     }
@@ -75,8 +79,6 @@ class ContratType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Contrat::class,
-            // Disable strict type checking for form data
-            'allow_extra_fields' => true,
         ]);
     }
 }

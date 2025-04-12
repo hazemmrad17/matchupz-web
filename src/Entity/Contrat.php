@@ -18,7 +18,7 @@ class Contrat
     #[ORM\Column(type: 'integer', name: 'Id_Contrat')]
     public ?int $Id_Contrat = null;
 
-    #[ORM\Column(type: 'string', nullable: false)]
+    #[ORM\Column(name : 'Titre', type: 'string', nullable: false)]
     #[Assert\NotBlank(message: "Le titre du contrat est obligatoire.")]
     #[Assert\Regex(
         pattern: '/^[a-zA-Z0-9\s]+$/',
@@ -28,8 +28,9 @@ class Contrat
 
     #[ORM\Column(name: 'DateDebut', type: 'date', nullable: false)]
     #[Assert\NotBlank(message: "La date de début est obligatoire.")]
-    // Removed Assert\Date to avoid string type validation
+    #[Assert\GreaterThanOrEqual("today", message: "La date de début ne peut pas être antérieure à aujourd'hui.")]
     private ?\DateTimeInterface $DateDebut = null;
+
 
     #[ORM\Column(name: 'DateFin', type: 'date', nullable: false)]
     #[Assert\NotBlank(message: "La date de fin est obligatoire.")]
@@ -40,7 +41,7 @@ class Contrat
     )]
     private ?\DateTimeInterface $DateFin = null;
 
-    #[ORM\Column(type: 'float', nullable: false)]
+    #[ORM\Column(name: 'Montant', type: 'float', nullable: false)]
     #[Assert\NotBlank(message: "Le montant est obligatoire.")]
     #[Assert\Positive(message: "Le montant doit être un nombre positif.")]
     private ?float $Montant = null;
@@ -54,7 +55,6 @@ class Contrat
     private Collection $transactions;
 
     #[ORM\Column(type: 'string', nullable: false)]
-    #[Assert\NotBlank(message: "La signature est obligatoire.")]
     private ?string $signature = null;
 
     public function __construct()
@@ -91,9 +91,6 @@ class Contrat
 
     public function setDateDebut(?\DateTimeInterface $DateDebut): self
     {
-        if ($DateDebut === null) {
-            throw new \InvalidArgumentException("La date de début est obligatoire et ne peut pas être vide.");
-        }
         $this->DateDebut = $DateDebut;
         return $this;
     }
@@ -105,9 +102,6 @@ class Contrat
 
     public function setDateFin(?\DateTimeInterface $DateFin): self
     {
-        if ($DateFin === null) {
-            throw new \InvalidArgumentException("La date de fin est obligatoire et ne peut pas être vide.");
-        }
         $this->DateFin = $DateFin;
         return $this;
     }
@@ -133,37 +127,7 @@ class Contrat
         $this->sponsor = $sponsor;
         return $this;
     }
-
-    /**
-     * @return Collection<int, Transaction>
-     */
-    public function getTransactions(): Collection
-    {
-        if (!$this->transactions instanceof Collection) {
-            $this->transactions = new ArrayCollection();
-        }
-        return $this->transactions;
-    }
-
-    public function addTransaction(Transaction $transaction): self
-    {
-        if (!$this->getTransactions()->contains($transaction)) {
-            $this->getTransactions()->add($transaction);
-            $transaction->setContrat($this);
-        }
-        return $this;
-    }
-
-    public function removeTransaction(Transaction $transaction): self
-    {
-        if ($this->getTransactions()->removeElement($transaction)) {
-            if ($transaction->getContrat() === $this) {
-                $transaction->setContrat(null);
-            }
-        }
-        return $this;
-    }
-
+    
     public function getSignature(): ?string
     {
         return $this->signature;
