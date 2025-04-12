@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Sponsor{% endblock %}
+
+{% block body %}
+<h4 class="fw-bold py-3 mb-4">Edit Sponsor</h4>
+
+<div class="card">
+    <div class="card-body">
+        {{ form_start(form) }}
+            <div class="mb-3">
+                {{ form_label(form.nom, 'Name', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
+            </div>
+            <div class="mb-3">
+                {{ form_label(form.pack, 'Pack', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.pack, {'attr': {'class': 'form-control'}}) }}
+            </div>
+            <div class="mb-3">
+                {{ form_label(form.contact, 'Contact', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.contact, {'attr': {'class': 'form-control'}}) }}
+            </div>
+            <button type="submit" class="btn btn-primary">Save</button>
+        {{ form_end(form) }}
+
+        <a href="{{ path('sponsor_main') }}" class="btn btn-secondary mt-3">Back to List</a>
+    </div>
+</div>
+{% endblock %}

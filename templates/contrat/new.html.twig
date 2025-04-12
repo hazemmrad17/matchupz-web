@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouveau Contrat{% endblock %}
+
+{% block content %}
+    <div class="content-wrapper">
+        <div class="container-xxl flex-grow-1 container-p-y">
+            <h4 class="fw-bold py-3 mb-4">Ajouter un Contrat</h4>
+
+            {{ form_start(form) }}
+                <div class="row mb-3">
+                    <div class="col">
+                        {{ form_label(form.Titre) }}
+                        {{ form_widget(form.Titre) }}
+                        {{ form_errors(form.Titre) }}
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col">
+                        {{ form_label(form.DateDebut) }}
+                        {{ form_widget(form.DateDebut) }}
+                        {{ form_errors(form.DateDebut) }}
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col">
+                        {{ form_label(form.DateFin) }}
+                        {{ form_widget(form.DateFin) }}
+                        {{ form_errors(form.DateFin) }}
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col">
+                        {{ form_label(form.Montant) }}
+                        {{ form_widget(form.Montant) }}
+                        {{ form_errors(form.Montant) }}
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col">
+                        {{ form_label(form.sponsor) }}
+                        {{ form_widget(form.sponsor) }}
+                        {{ form_errors(form.sponsor) }}
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col">
+                        {{ form_label(form.signature) }}
+                        {{ form_widget(form.signature) }}
+                        {{ form_errors(form.signature) }}
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Créer</button>
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}
