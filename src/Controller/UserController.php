@@ -209,12 +209,23 @@ final class UserController extends AbstractController
                 return $this->redirectToRoute('app_user_index');
             }
     
-            return $this->redirectToRoute('app_jareb');
+            return $this->redirectToRoute('app_acceuil');
         }
+
+        
     
         // If authentication fails, add a flash message and redirect back to the login page
         $this->addFlash('error', 'Email or password incorrect.');
         return $this->redirectToRoute('app_login');
+    }
+
+    #[Route('/acceuil', name: 'app_acceuil')]
+    public function acceuil(Request $request, SessionInterface $session): Response
+    {
+        // Get the last username (email) from the session if available
+       
+
+        return $this->render('@templates/baseM.html.twig');
     }
     #[Route('/export-pdf', name: 'app_user_export_pdf', methods: ['GET'])]
     public function exportPdf(Request $request, UserRepository $userRepository, PaginatorInterface $paginator): Response
@@ -391,6 +402,15 @@ final class UserController extends AbstractController
         $this->addFlash('success', 'Vous êtes déconnecté.');
         return $this->redirectToRoute('app_user_auth');
     }
+
+
+    #[Route('/logoutF', name: 'app_user_logoutF', methods: ['GET'])]
+public function logoutF(SessionInterface $session): Response
+{
+    $session->remove('user');
+    $this->addFlash('success', 'Vous êtes déconnecté.');
+    return $this->redirectToRoute('app_login'); // Changé de 'app_user_auth' à 'app_login'
+}
 
     #[Route('/register', name: 'app_user_register', methods: ['GET', 'POST'])]
     public function register(Request $request, EntityManagerInterface $em, \Psr\Log\LoggerInterface $logger): Response

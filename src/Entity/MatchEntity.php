@@ -6,23 +6,28 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use App\Repository\MatchEntityRepository;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: MatchEntityRepository::class)]
-#[ORM\Table(name: 'matchs')] // La table reste "matchs"
+#[ORM\Table(name: 'matchs')]
 class MatchEntity
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
+    #[ORM\Column(type: 'integer', name: 'idMatch')]
     private ?int $idMatch = null;
 
-    #[ORM\Column(type: 'string', nullable: false)]
-    private string $c1 = '';
+    #[ORM\Column(type: 'string', nullable: false, name: 'C1')]
+    #[Assert\NotBlank(message: "Le champ Competitor 1 ne peut pas être vide.")]
+    #[Assert\Length(max: 15, maxMessage: "Le champ Competitor 1 ne peut pas dépasser 15 caractères.")]
+    private ?string $c1 = '';
 
-    #[ORM\Column(type: 'string', nullable: false)]
-    private string $c2 = '';
+    #[ORM\Column(type: 'string', nullable: false, name: 'C2')]
+    #[Assert\NotBlank(message: "Le champ Competitor 2 ne peut pas être vide.")]
+    #[Assert\Length(max: 15, maxMessage: "Le champ Competitor 2 ne peut pas dépasser 15 caractères.")]
+    private ?string $c2 = '';
 
-    #[ORM\Column(type: 'string', nullable: true)]
+    #[ORM\Column(type: 'string', nullable: true, name: 'SportType')]
     private ?string $sportType = null;
 
     #[ORM\OneToMany(targetEntity: Schedule::class, mappedBy: 'matchEntity')]
@@ -44,23 +49,28 @@ class MatchEntity
         return $this;
     }
 
-    public function getC1(): string
+    public function getId(): ?int
+    {
+        return $this->getIdMatch();
+    }
+
+    public function getC1(): ?string
     {
         return $this->c1;
     }
 
-    public function setC1(string $c1): self
+    public function setC1(?string $c1): self
     {
         $this->c1 = $c1;
         return $this;
     }
 
-    public function getC2(): string
+    public function getC2(): ?string
     {
         return $this->c2;
     }
 
-    public function setC2(string $c2): self
+    public function setC2(?string $c2): self
     {
         $this->c2 = $c2;
         return $this;

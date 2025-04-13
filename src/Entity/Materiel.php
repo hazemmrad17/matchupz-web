@@ -3,9 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-
+use Symfony\Component\Validator\Constraints as Assert;
 use App\Repository\MaterielRepository;
 
 #[ORM\Entity(repositoryClass: MaterielRepository::class)]
@@ -14,23 +12,64 @@ class Materiel
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
-    private ?int $id_materiel = null;
+    #[ORM\Column(name: 'id_materiel', type: 'integer')]
+    private ?int $id = null;
 
-    public function getId_materiel(): ?int
-    {
-        return $this->id_materiel;
-    }
-
-    public function setId_materiel(int $id_materiel): self
-    {
-        $this->id_materiel = $id_materiel;
-        return $this;
-    }
-
-    #[ORM\ManyToOne(targetEntity: Fournisseur::class, inversedBy: 'materiels')]
-    #[ORM\JoinColumn(name: 'id_fournisseur', referencedColumnName: 'id_fournisseur')]
+    #[ORM\ManyToOne(targetEntity: Fournisseur::class)]
+    #[ORM\JoinColumn(name: 'id_fournisseur', referencedColumnName: 'id_fournisseur', nullable: true)]
     private ?Fournisseur $fournisseur = null;
+
+    #[ORM\Column(type: 'string', length: 200)]
+    #[Assert\NotBlank(message: "Le nom du matériel ne peut pas être vide.")]
+    #[Assert\Length(
+        min: 2,
+        max: 200,
+        minMessage: "Le nom doit contenir au moins {{ limit }} caractères.",
+        maxMessage: "Le nom ne peut pas dépasser {{ limit }} caractères."
+    )]
+    private ?string $nom = null;
+
+    #[ORM\Column(type: 'string', nullable: false)]
+    #[Assert\NotBlank(message: "Le type de matériel est requis.")]
+    #[Assert\Choice(
+        choices: ['EQUIPEMENT', 'ACCESSOIRE', 'TENUE', 'INFRASTRUCTURE'],
+        message: "Veuillez sélectionner un type valide."
+    )]
+    private ?string $type = null;
+
+    #[ORM\Column(type: 'integer')]
+    #[Assert\NotBlank(message: "La quantité ne peut pas être vide.")]
+    #[Assert\PositiveOrZero(message: "La quantité doit être un nombre positif ou zéro.")]
+    private ?int $quantite = null;
+
+    #[ORM\Column(type: 'string', columnDefinition: "ENUM('NEUF', 'USE', 'ENDOMMAGE')")]
+    #[Assert\NotBlank(message: "L'état du matériel ne peut pas être vide.")]
+    private ?string $etat = null;
+
+    #[ORM\Column(name: 'prix_unitaire', type: 'float')]
+    #[Assert\NotBlank(message: "Le prix unitaire ne peut pas être vide.")]
+    #[Assert\Positive(message: "Le prix unitaire doit être un nombre positif.")]
+    private ?float $prix = null;
+
+    #[ORM\Column(type: 'string', length: 200)]
+    #[Assert\NotBlank(message: "Le code-barres ne peut pas être vide.")]
+    #[Assert\Length(
+        min: 2,
+        max: 200,
+        minMessage: "Le code-barres doit contenir au moins {{ limit }} caractères.",
+        maxMessage: "Le code-barres ne peut pas dépasser {{ limit }} caractères."
+    )]
+    private ?string $barcode = null;
+
+    #[ORM\Column(name: 'image_data', type: 'string', length: 255)]
+    private ?string $image = null;
+
+    // Getters and Setters
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
 
     public function getFournisseur(): ?Fournisseur
     {
@@ -43,9 +82,6 @@ class Materiel
         return $this;
     }
 
-    #[ORM\Column(type: 'string', nullable: false)]
-    private ?string $nom = null;
-
     public function getNom(): ?string
     {
         return $this->nom;
@@ -57,22 +93,16 @@ class Materiel
         return $this;
     }
 
-    #[ORM\Column(type: 'string', nullable: false)]
-    private ?string $type = null;
-
     public function getType(): ?string
-    {
-        return $this->type;
-    }
+{
+    return $this->type;
+}
 
     public function setType(string $type): self
     {
-        $this->type = $type;
+         $this->type = $type;
         return $this;
     }
-
-    #[ORM\Column(type: 'integer', nullable: false)]
-    private ?int $quantite = null;
 
     public function getQuantite(): ?int
     {
@@ -85,9 +115,6 @@ class Materiel
         return $this;
     }
 
-    #[ORM\Column(type: 'string', nullable: false)]
-    private ?string $etat = null;
-
     public function getEtat(): ?string
     {
         return $this->etat;
@@ -99,35 +126,36 @@ class Materiel
         return $this;
     }
 
-    #[ORM\Column(type: 'float', nullable: false)]
-    private ?float $prix_unitaire = null;
-
-    public function getPrix_unitaire(): ?float
+    public function getPrix(): ?float
     {
-        return $this->prix_unitaire;
+        return $this->prix;
     }
 
-    public function setPrix_unitaire(float $prix_unitaire): self
+    public function setPrix(float $prix): self
     {
-        $this->prix_unitaire = $prix_unitaire;
+        $this->prix = $prix;
         return $this;
     }
 
-    public function getIdMateriel(): ?int
+    public function getBarcode(): ?string
     {
-        return $this->id_materiel;
+        return $this->barcode;
     }
 
-    public function getPrixUnitaire(): ?float
+    public function setBarcode(string $barcode): self
     {
-        return $this->prix_unitaire;
-    }
-
-    public function setPrixUnitaire(float $prix_unitaire): static
-    {
-        $this->prix_unitaire = $prix_unitaire;
-
+        $this->barcode = $barcode;
         return $this;
     }
 
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(string $image): self
+    {
+        $this->image = $image;
+        return $this;
+    }
 }

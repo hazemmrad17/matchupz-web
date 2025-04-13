@@ -8,6 +8,11 @@ use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @extends ServiceEntityRepository<Sponsor>
+ *
+ * @method Sponsor|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Sponsor|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Sponsor[]    findAll()
+ * @method Sponsor[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class SponsorRepository extends ServiceEntityRepository
 {
@@ -16,28 +21,16 @@ class SponsorRepository extends ServiceEntityRepository
         parent::__construct($registry, Sponsor::class);
     }
 
-//    /**
-//     * @return Sponsor[] Returns an array of Sponsor objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('s')
-//            ->andWhere('s.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('s.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?Sponsor
-//    {
-//        return $this->createQueryBuilder('s')
-//            ->andWhere('s.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    /**
+     * Get pack distribution
+     * @return array
+     */
+    public function getPackDistribution(): array
+    {
+        return $this->createQueryBuilder('s')
+            ->select('s.pack, COUNT(s.Id_sponsor) as count')
+            ->groupBy('s.pack')
+            ->getQuery()
+            ->getResult();
+    }
 }

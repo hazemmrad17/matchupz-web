@@ -58,7 +58,7 @@ class __TwigTemplate_c9df0ff297188abb18f1d88147d20f59 extends Template
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::length($this->env->getCharset(), (isset($context["joueurs"]) || array_key_exists("joueurs", $context) ? $context["joueurs"] : (function () { throw new RuntimeError('Variable "joueurs" does not exist.', 9, $this->source); })())), "html", null, true);
         yield "</span> players today. Check your profile for updates.
                         </p>
-                        <a href=\"javascript:;\" class=\"btn btn-sm btn-outline-primary\">View Profile</a>
+                        <a href=\"javascript:;\" class=\"btn btn-sm btn-outline-primary\">Voir Profile</a>
                     </div>
                 </div>
                 <div class=\"col-sm-5 text-center text-sm-left\">
@@ -148,7 +148,10 @@ class __TwigTemplate_c9df0ff297188abb18f1d88147d20f59 extends Template
                                     <i class=\"bx bx-dots-vertical-rounded\"></i>
                                 </button>
                                 <div class=\"dropdown-menu dropdown-menu-end\" aria-labelledby=\"cardOpt6\">
-                                    <a class=\"dropdown-item\" href=\"#\">Go To Tracking Page</a>
+                                    <a class=\"dropdown-item\" href=\"";
+        // line 86
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("joueur_tracking");
+        yield "\">Go To Tracking Page</a>
                                 </div>
                             </div>
                         </div>
@@ -160,12 +163,12 @@ class __TwigTemplate_c9df0ff297188abb18f1d88147d20f59 extends Template
             </div>
         </div>
     </div>
-    <!-- Total Revenue -->
+    <!-- Player Distribution by Sport -->
     <div class=\"col-12 col-lg-8 order-2 order-md-3 order-lg-2 mb-4\">
         <div class=\"card\">
             <div class=\"row row-bordered g-0\">
                 <div class=\"col-md-8\">
-                    <h5 class=\"card-header m-0 me-2 pb-3\">Player Distribution by Sport</h5>
+                    <h5 class=\"card-header m-0 me-2 pb-3\">Moyenne Performance Sportif des</h5>
                     <div id=\"totalRevenueChart\" class=\"px-2\"></div>
                 </div>
                 <div class=\"col-md-4\">
@@ -183,13 +186,12 @@ class __TwigTemplate_c9df0ff297188abb18f1d88147d20f59 extends Template
                                     All Sports
                                 </button>
                                 <div class=\"dropdown-menu dropdown-menu-end\" aria-labelledby=\"growthReportId\">
-                                    <!-- Could add sport-specific filters here if needed -->
                                     <a class=\"dropdown-item\" href=\"javascript:void(0);\">All Sports</a>
                                 </div>
                             </div>
                         </div>
                         <div id=\"growthChart\"></div>
-                        <div class=\"text-center fw-semibold pt-3 mb-2\">Active Players Rate</div>
+                        <div class=\"text-center fw-semibold pt-3 mb-2\">Moyenne Fitness Physique</div>
                         <div class=\"d-flex px-xxl-4 px-lg-2 p-4 gap-xxl-3 gap-lg-1 gap-3 justify-content-between\">
                             <div class=\"d-flex\">
                                 <div class=\"me-2\">
@@ -198,8 +200,8 @@ class __TwigTemplate_c9df0ff297188abb18f1d88147d20f59 extends Template
                                 <div class=\"d-flex flex-column\">
                                     <small>Total Players</small>
                                     <h6 class=\"mb-0\">";
-        // line 135
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::length($this->env->getCharset(), (isset($context["joueurs"]) || array_key_exists("joueurs", $context) ? $context["joueurs"] : (function () { throw new RuntimeError('Variable "joueurs" does not exist.', 135, $this->source); })())), "html", null, true);
+        // line 134
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::length($this->env->getCharset(), (isset($context["joueurs"]) || array_key_exists("joueurs", $context) ? $context["joueurs"] : (function () { throw new RuntimeError('Variable "joueurs" does not exist.', 134, $this->source); })())), "html", null, true);
         yield "</h6>
                                 </div>
                             </div>
@@ -210,8 +212,8 @@ class __TwigTemplate_c9df0ff297188abb18f1d88147d20f59 extends Template
                                 <div class=\"d-flex flex-column\">
                                     <small>Active</small>
                                     <h6 class=\"mb-0\">";
-        // line 144
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["active_players"]) || array_key_exists("active_players", $context) ? $context["active_players"] : (function () { throw new RuntimeError('Variable "active_players" does not exist.', 144, $this->source); })()), "html", null, true);
+        // line 143
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["active_players"]) || array_key_exists("active_players", $context) ? $context["active_players"] : (function () { throw new RuntimeError('Variable "active_players" does not exist.', 143, $this->source); })()), "html", null, true);
         yield "</h6>
                                 </div>
                             </div>
@@ -222,7 +224,7 @@ class __TwigTemplate_c9df0ff297188abb18f1d88147d20f59 extends Template
         </div>
     </div>
 
-    <!-- Transactions -->
+    <!-- Top Performers -->
     <div class=\"col-md-6 col-lg-4 order-2 mb-4\">
         <div class=\"card h-100\">
             <div class=\"card-header d-flex align-items-center justify-content-between\">
@@ -248,97 +250,46 @@ class __TwigTemplate_c9df0ff297188abb18f1d88147d20f59 extends Template
             <div class=\"card-body\">
                 <ul class=\"p-0 m-0\">
                     ";
-        // line 179
+        // line 178
         $context['_parent'] = $context;
-        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["topPerformers"]) || array_key_exists("topPerformers", $context) ? $context["topPerformers"] : (function () { throw new RuntimeError('Variable "topPerformers" does not exist.', 179, $this->source); })()));
-        foreach ($context['_seq'] as $context["_key"] => $context["joueur"]) {
-            // line 180
+        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["topPerformers"]) || array_key_exists("topPerformers", $context) ? $context["topPerformers"] : (function () { throw new RuntimeError('Variable "topPerformers" does not exist.', 178, $this->source); })()));
+        foreach ($context['_seq'] as $context["_key"] => $context["performer"]) {
+            // line 179
             yield "                        <li class=\"d-flex mb-4 pb-1\">
                             <div class=\"avatar flex-shrink-0 me-3\">
                                 <img src=\"";
-            // line 182
-            yield ((CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "profilePictureUrl", [], "any", false, false, false, 182)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "profilePictureUrl", [], "any", false, false, false, 182), "html", null, true)) : ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("/img/icons/unicons/user.png"), "html", null, true)));
+            // line 181
+            yield ((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["performer"], "joueur", [], "any", false, false, false, 181), "profilePictureUrl", [], "any", false, false, false, 181)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["performer"], "joueur", [], "any", false, false, false, 181), "profilePictureUrl", [], "any", false, false, false, 181), "html", null, true)) : ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("/img/icons/unicons/user.png"), "html", null, true)));
             yield "\" alt=\"User\" class=\"rounded\" />
                             </div>
                             <div class=\"d-flex w-100 flex-wrap align-items-center justify-content-between gap-2\">
                                 <div class=\"me-2\">
                                     <small class=\"text-muted d-block mb-1\">";
-            // line 186
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "prenom", [], "any", false, false, false, 186), "html", null, true);
+            // line 185
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["performer"], "joueur", [], "any", false, false, false, 185), "prenom", [], "any", false, false, false, 185), "html", null, true);
             yield " ";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "nom", [], "any", false, false, false, 186), "html", null, true);
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["performer"], "joueur", [], "any", false, false, false, 185), "nom", [], "any", false, false, false, 185), "html", null, true);
             yield "</small>
-                                    <h6 class=\"mb-0\">";
-            // line 187
-            yield (((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "sport", [], "any", false, true, false, 187), "nom", [], "any", true, true, false, 187) &&  !(null === CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "sport", [], "any", false, false, false, 187), "nom", [], "any", false, false, false, 187)))) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "sport", [], "any", false, false, false, 187), "nom", [], "any", false, false, false, 187), "html", null, true)) : ("N/A"));
-            yield "</h6>
                                 </div>
                                 <div class=\"user-progress d-flex align-items-center gap-1\">
                                     <h6 class=\"mb-0\">";
-            // line 190
-            yield ((CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "taille", [], "any", false, false, false, 190)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "taille", [], "any", false, false, false, 190) . " m"), "html", null, true)) : ("N/A"));
-            yield "</h6>
-                                    <span class=\"text-muted\">";
-            // line 191
-            yield (((CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "poste", [], "any", true, true, false, 191) &&  !(null === CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "poste", [], "any", false, false, false, 191)))) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "poste", [], "any", false, false, false, 191), "html", null, true)) : ("N/A"));
-            yield "</span>
+            // line 188
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["performer"], "score", [], "any", false, false, false, 188), "html", null, true);
+            yield "/100</h6>
                                 </div>
                             </div>
                         </li>
                     ";
         }
         $_parent = $context['_parent'];
-        unset($context['_seq'], $context['_key'], $context['joueur'], $context['_parent']);
+        unset($context['_seq'], $context['_key'], $context['performer'], $context['_parent']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 196
+        // line 193
         yield "                </ul>
             </div>
         </div>
     </div>
-</div>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var options = {
-            chart: {
-                type: 'bar', // Changed to bar chart for better visualization
-                height: 300
-            },
-            series: [{
-                name: 'Players',
-                data: ";
-        // line 211
-        yield json_encode((isset($context["sport_distribution"]) || array_key_exists("sport_distribution", $context) ? $context["sport_distribution"] : (function () { throw new RuntimeError('Variable "sport_distribution" does not exist.', 211, $this->source); })()));
-        yield "
-            }],
-            xaxis: {
-                categories: ";
-        // line 214
-        yield json_encode((isset($context["sport_names"]) || array_key_exists("sport_names", $context) ? $context["sport_names"] : (function () { throw new RuntimeError('Variable "sport_names" does not exist.', 214, $this->source); })()));
-        yield "
-            },
-            tooltip: {
-                y: {
-                    formatter: function (val) {
-                        return val + \" players\"
-                    }
-                }
-            },
-            plotOptions: {
-                bar: {
-                    horizontal: false,
-                    columnWidth: '55%',
-                    endingShape: 'rounded'
-                }
-            },
-            dataLabels: {
-                enabled: true
-            }
-        };
-        var chart = new ApexCharts(document.querySelector(\"#totalRevenueChart\"), options);
-        chart.render();
-    });
-</script>";
+</div>";
         
         $__internal_5a27a8ba21ca79b61932376b2fa922d2->leave($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof);
 
@@ -369,7 +320,7 @@ class __TwigTemplate_c9df0ff297188abb18f1d88147d20f59 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  317 => 214,  311 => 211,  294 => 196,  283 => 191,  279 => 190,  273 => 187,  267 => 186,  260 => 182,  256 => 180,  252 => 179,  214 => 144,  202 => 135,  133 => 69,  119 => 58,  111 => 53,  91 => 36,  69 => 17,  58 => 9,  48 => 1,);
+        return array (  288 => 193,  277 => 188,  269 => 185,  262 => 181,  258 => 179,  254 => 178,  216 => 143,  204 => 134,  153 => 86,  133 => 69,  119 => 58,  111 => 53,  91 => 36,  69 => 17,  58 => 9,  48 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -384,7 +335,7 @@ class __TwigTemplate_c9df0ff297188abb18f1d88147d20f59 extends Template
                         <p class=\"mb-4\">
                             You have added <span class=\"fw-bold\">{{ joueurs|length }}</span> players today. Check your profile for updates.
                         </p>
-                        <a href=\"javascript:;\" class=\"btn btn-sm btn-outline-primary\">View Profile</a>
+                        <a href=\"javascript:;\" class=\"btn btn-sm btn-outline-primary\">Voir Profile</a>
                     </div>
                 </div>
                 <div class=\"col-sm-5 text-center text-sm-left\">
@@ -459,7 +410,7 @@ class __TwigTemplate_c9df0ff297188abb18f1d88147d20f59 extends Template
                                     <i class=\"bx bx-dots-vertical-rounded\"></i>
                                 </button>
                                 <div class=\"dropdown-menu dropdown-menu-end\" aria-labelledby=\"cardOpt6\">
-                                    <a class=\"dropdown-item\" href=\"#\">Go To Tracking Page</a>
+                                    <a class=\"dropdown-item\" href=\"{{ path('joueur_tracking') }}\">Go To Tracking Page</a>
                                 </div>
                             </div>
                         </div>
@@ -471,12 +422,12 @@ class __TwigTemplate_c9df0ff297188abb18f1d88147d20f59 extends Template
             </div>
         </div>
     </div>
-    <!-- Total Revenue -->
+    <!-- Player Distribution by Sport -->
     <div class=\"col-12 col-lg-8 order-2 order-md-3 order-lg-2 mb-4\">
         <div class=\"card\">
             <div class=\"row row-bordered g-0\">
                 <div class=\"col-md-8\">
-                    <h5 class=\"card-header m-0 me-2 pb-3\">Player Distribution by Sport</h5>
+                    <h5 class=\"card-header m-0 me-2 pb-3\">Moyenne Performance Sportif des</h5>
                     <div id=\"totalRevenueChart\" class=\"px-2\"></div>
                 </div>
                 <div class=\"col-md-4\">
@@ -494,13 +445,12 @@ class __TwigTemplate_c9df0ff297188abb18f1d88147d20f59 extends Template
                                     All Sports
                                 </button>
                                 <div class=\"dropdown-menu dropdown-menu-end\" aria-labelledby=\"growthReportId\">
-                                    <!-- Could add sport-specific filters here if needed -->
                                     <a class=\"dropdown-item\" href=\"javascript:void(0);\">All Sports</a>
                                 </div>
                             </div>
                         </div>
                         <div id=\"growthChart\"></div>
-                        <div class=\"text-center fw-semibold pt-3 mb-2\">Active Players Rate</div>
+                        <div class=\"text-center fw-semibold pt-3 mb-2\">Moyenne Fitness Physique</div>
                         <div class=\"d-flex px-xxl-4 px-lg-2 p-4 gap-xxl-3 gap-lg-1 gap-3 justify-content-between\">
                             <div class=\"d-flex\">
                                 <div class=\"me-2\">
@@ -527,7 +477,7 @@ class __TwigTemplate_c9df0ff297188abb18f1d88147d20f59 extends Template
         </div>
     </div>
 
-    <!-- Transactions -->
+    <!-- Top Performers -->
     <div class=\"col-md-6 col-lg-4 order-2 mb-4\">
         <div class=\"card h-100\">
             <div class=\"card-header d-flex align-items-center justify-content-between\">
@@ -552,19 +502,17 @@ class __TwigTemplate_c9df0ff297188abb18f1d88147d20f59 extends Template
             </div>
             <div class=\"card-body\">
                 <ul class=\"p-0 m-0\">
-                    {% for joueur in topPerformers %}
+                    {% for performer in topPerformers %}
                         <li class=\"d-flex mb-4 pb-1\">
                             <div class=\"avatar flex-shrink-0 me-3\">
-                                <img src=\"{{ joueur.profilePictureUrl ?: asset('/img/icons/unicons/user.png') }}\" alt=\"User\" class=\"rounded\" />
+                                <img src=\"{{ performer.joueur.profilePictureUrl ?: asset('/img/icons/unicons/user.png') }}\" alt=\"User\" class=\"rounded\" />
                             </div>
                             <div class=\"d-flex w-100 flex-wrap align-items-center justify-content-between gap-2\">
                                 <div class=\"me-2\">
-                                    <small class=\"text-muted d-block mb-1\">{{ joueur.prenom }} {{ joueur.nom }}</small>
-                                    <h6 class=\"mb-0\">{{ joueur.sport.nom ?? 'N/A' }}</h6>
+                                    <small class=\"text-muted d-block mb-1\">{{ performer.joueur.prenom }} {{ performer.joueur.nom }}</small>
                                 </div>
                                 <div class=\"user-progress d-flex align-items-center gap-1\">
-                                    <h6 class=\"mb-0\">{{ joueur.taille ? joueur.taille ~ ' m' : 'N/A' }}</h6>
-                                    <span class=\"text-muted\">{{ joueur.poste ?? 'N/A' }}</span>
+                                    <h6 class=\"mb-0\">{{ performer.score }}/100</h6>
                                 </div>
                             </div>
                         </li>
@@ -573,43 +521,6 @@ class __TwigTemplate_c9df0ff297188abb18f1d88147d20f59 extends Template
             </div>
         </div>
     </div>
-</div>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var options = {
-            chart: {
-                type: 'bar', // Changed to bar chart for better visualization
-                height: 300
-            },
-            series: [{
-                name: 'Players',
-                data: {{ sport_distribution|json_encode|raw }}
-            }],
-            xaxis: {
-                categories: {{ sport_names|json_encode|raw }}
-            },
-            tooltip: {
-                y: {
-                    formatter: function (val) {
-                        return val + \" players\"
-                    }
-                }
-            },
-            plotOptions: {
-                bar: {
-                    horizontal: false,
-                    columnWidth: '55%',
-                    endingShape: 'rounded'
-                }
-            },
-            dataLabels: {
-                enabled: true
-            }
-        };
-        var chart = new ApexCharts(document.querySelector(\"#totalRevenueChart\"), options);
-        chart.render();
-    });
-</script>", "joueur/widgets.html.twig", "C:\\Users\\MSI\\Desktop\\matchupz-web-0\\templates\\joueur\\widgets.html.twig");
+</div>", "joueur/widgets.html.twig", "C:\\Users\\MSI\\Desktop\\matchupz-web-0\\templates\\joueur\\widgets.html.twig");
     }
 }

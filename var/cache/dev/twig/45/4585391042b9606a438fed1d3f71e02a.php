@@ -61,11 +61,11 @@ class __TwigTemplate_db30d61fdabab92c1e4fc8a65c916eee extends Template
                         <a href=\"";
         // line 11
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("sport_new");
-        yield "\" class=\"btn btn-sm btn-outline-primary\">Add New Sport</a>
+        yield "\" class=\"btn btn-sm btn-outline-primary\">Ajouter Nouvueau Sport</a>
                         <a href=\"";
         // line 12
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("sport_statistics");
-        yield "\" class=\"btn btn-sm btn-primary ms-2\">View More</a>
+        yield "\" class=\"btn btn-sm btn-primary ms-2\">Voir Plus</a>
                     </div>
                 </div>
                 <div class=\"col-sm-5 text-center text-sm-left\">
@@ -242,8 +242,8 @@ class __TwigTemplate_db30d61fdabab92c1e4fc8a65c916eee extends Template
                         <p class=\"mb-4\">
                             You have <span class=\"fw-bold\">{{ sports|length }}</span> sports registered in the system.
                         </p>
-                        <a href=\"{{ path('sport_new') }}\" class=\"btn btn-sm btn-outline-primary\">Add New Sport</a>
-                        <a href=\"{{ path('sport_statistics') }}\" class=\"btn btn-sm btn-primary ms-2\">View More</a>
+                        <a href=\"{{ path('sport_new') }}\" class=\"btn btn-sm btn-outline-primary\">Ajouter Nouvueau Sport</a>
+                        <a href=\"{{ path('sport_statistics') }}\" class=\"btn btn-sm btn-primary ms-2\">Voir Plus</a>
                     </div>
                 </div>
                 <div class=\"col-sm-5 text-center text-sm-left\">

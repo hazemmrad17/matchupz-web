@@ -3,17 +3,24 @@
 namespace App\Form;
 
 use App\Entity\Espacesportif;
+use App\Repository\EspacesportifRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Regex;
+use Symfony\Component\Validator\Constraints\Callback;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 class EspacesportifType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        // Get the repository from options
+        $repository = $options['espace_repository'];
+
         $builder
             ->add('nom_espace', TextType::class, [
                 'label' => 'Nom de l\'Espace',
@@ -27,6 +34,26 @@ class EspacesportifType extends AbstractType
                 ],
                 'row_attr' => [
                     'class' => 'mb-3',
+                ],
+                'constraints' => [
+                    new Regex([
+                        'pattern' => '/^[a-zA-Z\s]+$/',
+                        'message' => 'Le nom de l\'espace ne peut contenir que des lettres et des espaces.',
+                    ]),
+                    new Callback([
+                        'callback' => function ($value, ExecutionContextInterface $context) use ($repository, $options) {
+                            // Get the current entity (if editing)
+                            $currentEntity = $options['data'];
+                            $currentId = $currentEntity ? $currentEntity->getIdLieu() : null;
+
+                            // Check if the nom_espace already exists for another entity
+                            $existing = $repository->findOneBy(['nom_espace' => $value]);
+                            if ($existing && (!$currentId || $existing->getIdLieu() !== $currentId)) {
+                                $context->buildViolation('Le nom de l\'espace doit être unique.')
+                                    ->addViolation();
+                            }
+                        },
+                    ]),
                 ],
             ])
             ->add('adresse', TextType::class, [
@@ -79,11 +106,9 @@ class EspacesportifType extends AbstractType
                     'class' => 'mb-3',
                 ],
             ])
-            // Add a field to display related statistics (e.g., number of reservations)
-            // This is a read-only field, as statistics are typically calculated, not user-editable
             ->add('nombre_reservations', NumberType::class, [
                 'label' => 'Nombre de Réservations',
-                'mapped' => false, // This field is not mapped to the entity
+                'mapped' => false,
                 'required' => false,
                 'disabled' => true,
                 'attr' => [
@@ -96,7 +121,7 @@ class EspacesportifType extends AbstractType
                 'row_attr' => [
                     'class' => 'mb-3',
                 ],
-                'data' => $options['data'] ? $options['data']->getReservations()->count() : 0, // Calculate the number of reservations
+                'data' => $options['data'] ? $options['data']->getReservations()->count() : 0,
             ])
         ;
     }
@@ -105,6 +130,10 @@ class EspacesportifType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Espacesportif::class,
+            'espace_repository' => null,
         ]);
+
+        $resolver->setRequired('espace_repository');
+        $resolver->setAllowedTypes('espace_repository', [EspacesportifRepository::class]);
     }
 }

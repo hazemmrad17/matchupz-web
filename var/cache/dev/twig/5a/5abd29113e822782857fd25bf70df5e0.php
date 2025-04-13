@@ -110,23 +110,51 @@ class __TwigTemplate_0695cb9d061f50a42b42ec7b99530915 extends Template
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["club"]) || array_key_exists("club", $context) ? $context["club"] : (function () { throw new RuntimeError('Variable "club" does not exist.', 11, $this->source); })()), "nomClub", [], "any", false, false, false, 11), "html", null, true);
         yield "</p>
                 <p><strong>Photo:</strong></p>
-                <img src=\"";
+                ";
         // line 13
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["club"]) || array_key_exists("club", $context) ? $context["club"] : (function () { throw new RuntimeError('Variable "club" does not exist.', 13, $this->source); })()), "photoUrl", [], "any", false, false, false, 13), "html", null, true);
-        yield "\" alt=\"";
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["club"]) || array_key_exists("club", $context) ? $context["club"] : (function () { throw new RuntimeError('Variable "club" does not exist.', 13, $this->source); })()), "nomClub", [], "any", false, false, false, 13), "html", null, true);
-        yield "\" style=\"max-width: 300px;\">
-            </div>
+        if (CoreExtension::getAttribute($this->env, $this->source, (isset($context["club"]) || array_key_exists("club", $context) ? $context["club"] : (function () { throw new RuntimeError('Variable "club" does not exist.', 13, $this->source); })()), "photoUrl", [], "any", false, false, false, 13)) {
+            // line 14
+            yield "                    <img 
+                        src=\"";
+            // line 15
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(CoreExtension::getAttribute($this->env, $this->source, (isset($context["club"]) || array_key_exists("club", $context) ? $context["club"] : (function () { throw new RuntimeError('Variable "club" does not exist.', 15, $this->source); })()), "photoUrl", [], "any", false, false, false, 15)), "html", null, true);
+            yield "\" 
+                        alt=\"";
+            // line 16
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["club"]) || array_key_exists("club", $context) ? $context["club"] : (function () { throw new RuntimeError('Variable "club" does not exist.', 16, $this->source); })()), "nomClub", [], "any", false, false, false, 16), "html", null, true);
+            yield "\" 
+                        style=\"max-width: 300px;\" 
+                        onerror=\"this.onerror=null; this.src='";
+            // line 18
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("img/default_club.png"), "html", null, true);
+            yield "';\"
+                    >
+                ";
+        } else {
+            // line 21
+            yield "                    <img 
+                        src=\"";
+            // line 22
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("img/default_club.png"), "html", null, true);
+            yield "\" 
+                        alt=\"Default Club Image\" 
+                        style=\"max-width: 300px;\"
+                    >
+                    <p class=\"text-muted\">No photo available for this club.</p>
+                ";
+        }
+        // line 28
+        yield "            </div>
         </div>
 
         <a href=\"";
-        // line 17
+        // line 31
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("club_index");
-        yield "\" class=\"btn btn-outline-secondary mt-3\">Back to List</a>
+        yield "\" class=\"btn btn-outline-secondary mt-3\">Vers La List</a>
         <a href=\"";
-        // line 18
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("club_edit", ["idClub" => CoreExtension::getAttribute($this->env, $this->source, (isset($context["club"]) || array_key_exists("club", $context) ? $context["club"] : (function () { throw new RuntimeError('Variable "club" does not exist.', 18, $this->source); })()), "idClub", [], "any", false, false, false, 18)]), "html", null, true);
-        yield "\" class=\"btn btn-primary mt-3\">Edit</a>
+        // line 32
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("club_edit", ["idClub" => CoreExtension::getAttribute($this->env, $this->source, (isset($context["club"]) || array_key_exists("club", $context) ? $context["club"] : (function () { throw new RuntimeError('Variable "club" does not exist.', 32, $this->source); })()), "idClub", [], "any", false, false, false, 32)]), "html", null, true);
+        yield "\" class=\"btn btn-primary mt-3\">Modifier</a>
     </div>
 ";
         
@@ -159,7 +187,7 @@ class __TwigTemplate_0695cb9d061f50a42b42ec7b99530915 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  128 => 18,  124 => 17,  115 => 13,  110 => 11,  103 => 7,  100 => 6,  87 => 5,  64 => 3,  41 => 1,);
+        return array (  156 => 32,  152 => 31,  147 => 28,  138 => 22,  135 => 21,  129 => 18,  124 => 16,  120 => 15,  117 => 14,  115 => 13,  110 => 11,  103 => 7,  100 => 6,  87 => 5,  64 => 3,  41 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -176,12 +204,26 @@ class __TwigTemplate_0695cb9d061f50a42b42ec7b99530915 extends Template
             <div class=\"card-body\">
                 <p><strong>Name:</strong> {{ club.nomClub }}</p>
                 <p><strong>Photo:</strong></p>
-                <img src=\"{{ club.photoUrl }}\" alt=\"{{ club.nomClub }}\" style=\"max-width: 300px;\">
+                {% if club.photoUrl %}
+                    <img 
+                        src=\"{{ asset(club.photoUrl) }}\" 
+                        alt=\"{{ club.nomClub }}\" 
+                        style=\"max-width: 300px;\" 
+                        onerror=\"this.onerror=null; this.src='{{ asset('img/default_club.png') }}';\"
+                    >
+                {% else %}
+                    <img 
+                        src=\"{{ asset('img/default_club.png') }}\" 
+                        alt=\"Default Club Image\" 
+                        style=\"max-width: 300px;\"
+                    >
+                    <p class=\"text-muted\">No photo available for this club.</p>
+                {% endif %}
             </div>
         </div>
 
-        <a href=\"{{ path('club_index') }}\" class=\"btn btn-outline-secondary mt-3\">Back to List</a>
-        <a href=\"{{ path('club_edit', {'idClub': club.idClub}) }}\" class=\"btn btn-primary mt-3\">Edit</a>
+        <a href=\"{{ path('club_index') }}\" class=\"btn btn-outline-secondary mt-3\">Vers La List</a>
+        <a href=\"{{ path('club_edit', {'idClub': club.idClub}) }}\" class=\"btn btn-primary mt-3\">Modifier</a>
     </div>
 {% endblock %}", "club/show.html.twig", "C:\\Users\\MSI\\Desktop\\matchupz-web-0\\templates\\club\\show.html.twig");
     }

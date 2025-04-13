@@ -8,7 +8,7 @@
                         <p class="mb-4">
                             You have added <span class="fw-bold">{{ joueurs|length }}</span> players today. Check your profile for updates.
                         </p>
-                        <a href="javascript:;" class="btn btn-sm btn-outline-primary">View Profile</a>
+                        <a href="javascript:;" class="btn btn-sm btn-outline-primary">Voir Profile</a>
                     </div>
                 </div>
                 <div class="col-sm-5 text-center text-sm-left">
@@ -83,7 +83,7 @@
                                     <i class="bx bx-dots-vertical-rounded"></i>
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt6">
-                                    <a class="dropdown-item" href="#">Go To Tracking Page</a>
+                                    <a class="dropdown-item" href="{{ path('joueur_tracking') }}">Go To Tracking Page</a>
                                 </div>
                             </div>
                         </div>
@@ -95,12 +95,12 @@
             </div>
         </div>
     </div>
-    <!-- Total Revenue -->
+    <!-- Player Distribution by Sport -->
     <div class="col-12 col-lg-8 order-2 order-md-3 order-lg-2 mb-4">
         <div class="card">
             <div class="row row-bordered g-0">
                 <div class="col-md-8">
-                    <h5 class="card-header m-0 me-2 pb-3">Player Distribution by Sport</h5>
+                    <h5 class="card-header m-0 me-2 pb-3">Moyenne Performance Sportif des</h5>
                     <div id="totalRevenueChart" class="px-2"></div>
                 </div>
                 <div class="col-md-4">
@@ -118,13 +118,12 @@
                                     All Sports
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="growthReportId">
-                                    <!-- Could add sport-specific filters here if needed -->
                                     <a class="dropdown-item" href="javascript:void(0);">All Sports</a>
                                 </div>
                             </div>
                         </div>
                         <div id="growthChart"></div>
-                        <div class="text-center fw-semibold pt-3 mb-2">Active Players Rate</div>
+                        <div class="text-center fw-semibold pt-3 mb-2">Moyenne Fitness Physique</div>
                         <div class="d-flex px-xxl-4 px-lg-2 p-4 gap-xxl-3 gap-lg-1 gap-3 justify-content-between">
                             <div class="d-flex">
                                 <div class="me-2">
@@ -151,7 +150,7 @@
         </div>
     </div>
 
-    <!-- Transactions -->
+    <!-- Top Performers -->
     <div class="col-md-6 col-lg-4 order-2 mb-4">
         <div class="card h-100">
             <div class="card-header d-flex align-items-center justify-content-between">
@@ -176,19 +175,17 @@
             </div>
             <div class="card-body">
                 <ul class="p-0 m-0">
-                    {% for joueur in topPerformers %}
+                    {% for performer in topPerformers %}
                         <li class="d-flex mb-4 pb-1">
                             <div class="avatar flex-shrink-0 me-3">
-                                <img src="{{ joueur.profilePictureUrl ?: asset('/img/icons/unicons/user.png') }}" alt="User" class="rounded" />
+                                <img src="{{ performer.joueur.profilePictureUrl ?: asset('/img/icons/unicons/user.png') }}" alt="User" class="rounded" />
                             </div>
                             <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                                 <div class="me-2">
-                                    <small class="text-muted d-block mb-1">{{ joueur.prenom }} {{ joueur.nom }}</small>
-                                    <h6 class="mb-0">{{ joueur.sport.nom ?? 'N/A' }}</h6>
+                                    <small class="text-muted d-block mb-1">{{ performer.joueur.prenom }} {{ performer.joueur.nom }}</small>
                                 </div>
                                 <div class="user-progress d-flex align-items-center gap-1">
-                                    <h6 class="mb-0">{{ joueur.taille ? joueur.taille ~ ' m' : 'N/A' }}</h6>
-                                    <span class="text-muted">{{ joueur.poste ?? 'N/A' }}</span>
+                                    <h6 class="mb-0">{{ performer.score }}/100</h6>
                                 </div>
                             </div>
                         </li>
@@ -198,40 +195,3 @@
         </div>
     </div>
 </div>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var options = {
-            chart: {
-                type: 'bar', // Changed to bar chart for better visualization
-                height: 300
-            },
-            series: [{
-                name: 'Players',
-                data: {{ sport_distribution|json_encode|raw }}
-            }],
-            xaxis: {
-                categories: {{ sport_names|json_encode|raw }}
-            },
-            tooltip: {
-                y: {
-                    formatter: function (val) {
-                        return val + " players"
-                    }
-                }
-            },
-            plotOptions: {
-                bar: {
-                    horizontal: false,
-                    columnWidth: '55%',
-                    endingShape: 'rounded'
-                }
-            },
-            dataLabels: {
-                enabled: true
-            }
-        };
-        var chart = new ApexCharts(document.querySelector("#totalRevenueChart"), options);
-        chart.render();
-    });
-</script>

@@ -1,0 +1,170 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier Matériel #{{ materiel.id }}{% endblock %}
+
+{% block content %}
+<div class="content-wrapper">
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <h4 class="fw-bold py-3 mb-4">
+            <span class="text-muted fw-light">Matériel /</span> Modifier
+        </h4>
+
+        <!-- Flash Messages -->
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="alert alert-{{ label == 'success' ? 'success' : 'error' }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        {% endfor %}
+
+        <div class="col-xl">
+            <div class="card mb-4">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">Modifier Matériel #{{ materiel.id }}</h5>
+                    <small class="text-muted float-end">Les champs marqués * sont obligatoires</small>
+                </div>
+                <div class="card-body">
+                    {{ form_start(form, {'attr': {'class': 'needs-validation', 'enctype': 'multipart/form-data'}}) }}
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    {{ form_label(form.nom, 'Nom du Matériel *', {'label_attr': {'class': 'form-label'}}) }}
+                                    {{ form_widget(form.nom, {'attr': {'class': 'form-control', 'placeholder': 'Nom du matériel', 'required': 'required'}}) }}
+                                    <div class="invalid-feedback">
+                                        {{ form_errors(form.nom) ?: 'Veuillez entrer un nom.' }}
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    {{ form_label(form.type, 'Type *', {'label_attr': {'class': 'form-label'}}) }}
+                                    {{ form_widget(form.type, {'attr': {'class': 'form-select', 'required': 'required'}}) }}
+                                    <div class="invalid-feedback">
+                                        {{ form_errors(form.type) ?: 'Veuillez sélectionner un type.' }}
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    {{ form_label(form.quantite, 'Quantité *', {'label_attr': {'class': 'form-label'}}) }}
+                                    {{ form_widget(form.quantite, {'attr': {'class': 'form-control', 'placeholder': 'Quantité en stock', 'required': 'required', 'min': '0'}}) }}
+                                    <div class="invalid-feedback">
+                                        {{ form_errors(form.quantite) ?: 'Veuillez entrer une quantité valide.' }}
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    {{ form_label(form.etat, 'État *', {'label_attr': {'class': 'form-label'}}) }}
+                                    {{ form_widget(form.etat, {'attr': {'class': 'form-select', 'required': 'required'}}) }}
+                                    <div class="invalid-feedback">
+                                        {{ form_errors(form.etat) ?: 'Veuillez sélectionner un état.' }}
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    {{ form_label(form.prix, 'Prix Unitaire (€) *', {'label_attr': {'class': 'form-label'}}) }}
+                                    <div class="input-group">
+                                        <span class="input-group-text">€</span>
+                                        {{ form_widget(form.prix, {'attr': {'class': 'form-control', 'placeholder': 'Prix unitaire', 'required': 'required', 'step': '0.01', 'min': '0'}}) }}
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        {{ form_errors(form.prix) ?: 'Veuillez entrer un prix valide.' }}
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    {{ form_label(form.barcode, 'Code-barres', {'label_attr': {'class': 'form-label'}}) }}
+                                    {{ form_widget(form.barcode, {'attr': {'class': 'form-control', 'placeholder': 'Code-barres'}}) }}
+                                    <div class="invalid-feedback">
+                                        {{ form_errors(form.barcode) ?: 'Veuillez entrer un code-barres valide.' }}
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    {{ form_label(form.fournisseur, 'Fournisseur', {'label_attr': {'class': 'form-label'}}) }}
+                                    {{ form_widget(form.fournisseur, {'attr': {'class': 'form-select'}}) }}
+                                    <div class="invalid-feedback">
+                                        {{ form_errors(form.fournisseur) ?: 'Veuillez sélectionner un fournisseur.' }}
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    {{ form_label(form.image, 'Image', {'label_attr': {'class': 'form-label'}}) }}
+                                    {{ form_widget(form.image, {'attr': {'class': 'form-control', 'accept': 'image/jpeg,image/png,image/gif'}}) }}
+                                    <div class="invalid-feedback">
+                                        {{ form_errors(form.image) ?: 'Veuillez sélectionner une image valide.' }}
+                                    </div>
+                                    <small class="text-muted">Formats acceptés: JPG, PNG, GIF (Max 2MB). Laissez vide pour conserver l'image actuelle.</small>
+                                    {% if materiel.image %}
+                                        <div class="mt-2">
+                                            <p>Image actuelle :</p>
+                                            <img src="{{ asset('Uploads/materiels/' ~ materiel.image) }}" alt="Image actuelle" style="max-width: 200px;">
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bx bx-save me-1"></i> Mettre à jour
+                            </button>
+                            <a href="{{ path('app_materiel_index') }}" class="btn btn-outline-secondary">
+                                <i class="bx bx-arrow-back me-1"></i> Annuler
+                            </a>
+                        </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap Validation Script -->
+<script>
+    (function () {
+        'use strict';
+        window.addEventListener('load', function () {
+            var forms = document.getElementsByClassName('needs-validation');
+            Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        // Prévisualisation de l'image avant upload
+        document.addEventListener('DOMContentLoaded', function() {
+            const imageFileInput = document.querySelector('#{{ form.image.vars.id }}');
+            const imagePreview = document.createElement('div');
+            imagePreview.className = 'mt-2';
+            imagePreview.innerHTML = '<img id="imagePreview" src="#" alt="Prévisualisation" style="max-width: 200px; display: none;">';
+            imageFileInput.parentNode.appendChild(imagePreview);
+            
+            imageFileInput.addEventListener('change', function(event) {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const preview = document.getElementById('imagePreview');
+                        preview.src = e.target.result;
+                        preview.style.display = 'block';
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        });
+    </script>
+{% endblock %}

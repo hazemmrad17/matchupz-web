@@ -55,7 +55,7 @@ class __TwigTemplate_9007454101073ed99c821e913828eae4 extends Template
                         <p class=\"mb-4\">
                             Vous avez <span class=\"fw-bold\">";
         // line 9
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::length($this->env->getCharset(), (isset($context["reservations"]) || array_key_exists("reservations", $context) ? $context["reservations"] : (function () { throw new RuntimeError('Variable "reservations" does not exist.', 9, $this->source); })())), "html", null, true);
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["reservations"]) || array_key_exists("reservations", $context) ? $context["reservations"] : (function () { throw new RuntimeError('Variable "reservations" does not exist.', 9, $this->source); })()), "totalItemCount", [], "any", false, false, false, 9), "html", null, true);
         yield "</span> réservations enregistrées dans le système.
                         </p>
                         <a href=\"";
@@ -123,7 +123,7 @@ class __TwigTemplate_9007454101073ed99c821e913828eae4 extends Template
                         <span class=\"fw-semibold d-block mb-1\">Total Réservations</span>
                         <h3 class=\"card-title mb-2\">";
         // line 59
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::length($this->env->getCharset(), (isset($context["reservations"]) || array_key_exists("reservations", $context) ? $context["reservations"] : (function () { throw new RuntimeError('Variable "reservations" does not exist.', 59, $this->source); })())), "html", null, true);
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["reservations"]) || array_key_exists("reservations", $context) ? $context["reservations"] : (function () { throw new RuntimeError('Variable "reservations" does not exist.', 59, $this->source); })()), "totalItemCount", [], "any", false, false, false, 59), "html", null, true);
         yield "</h3>
                         <small class=\"text-success fw-semibold\"><i class=\"bx bx-up-arrow-alt\"></i> Enregistrées</small>
                     </div>
@@ -186,7 +186,7 @@ class __TwigTemplate_9007454101073ed99c821e913828eae4 extends Template
                 name: 'Réservations',
                 data: [";
         // line 110
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::length($this->env->getCharset(), (isset($context["reservations"]) || array_key_exists("reservations", $context) ? $context["reservations"] : (function () { throw new RuntimeError('Variable "reservations" does not exist.', 110, $this->source); })())), "html", null, true);
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["reservations"]) || array_key_exists("reservations", $context) ? $context["reservations"] : (function () { throw new RuntimeError('Variable "reservations" does not exist.', 110, $this->source); })()), "totalItemCount", [], "any", false, false, false, 110), "html", null, true);
         yield "]
             }],
             xaxis: {
@@ -240,7 +240,7 @@ class __TwigTemplate_9007454101073ed99c821e913828eae4 extends Template
                     <div class=\"card-body\">
                         <h3 class=\"card-title text-primary\">Aperçu des Réservations 🎯</h3>
                         <p class=\"mb-4\">
-                            Vous avez <span class=\"fw-bold\">{{ reservations|length }}</span> réservations enregistrées dans le système.
+                            Vous avez <span class=\"fw-bold\">{{ reservations.totalItemCount }}</span> réservations enregistrées dans le système.
                         </p>
                         <a href=\"{{ path('reservation_new') }}\" class=\"btn btn-sm btn-outline-primary\">Ajouter une Réservation</a>
                         <a href=\"{{ path('reservation_statistics') }}\" class=\"btn btn-sm btn-primary ms-2\">Voir Plus</a>
@@ -290,7 +290,7 @@ class __TwigTemplate_9007454101073ed99c821e913828eae4 extends Template
                             </div>
                         </div>
                         <span class=\"fw-semibold d-block mb-1\">Total Réservations</span>
-                        <h3 class=\"card-title mb-2\">{{ reservations|length }}</h3>
+                        <h3 class=\"card-title mb-2\">{{ reservations.totalItemCount }}</h3>
                         <small class=\"text-success fw-semibold\"><i class=\"bx bx-up-arrow-alt\"></i> Enregistrées</small>
                     </div>
                 </div>
@@ -341,7 +341,7 @@ class __TwigTemplate_9007454101073ed99c821e913828eae4 extends Template
             },
             series: [{
                 name: 'Réservations',
-                data: [{{ reservations|length }}]
+                data: [{{ reservations.totalItemCount }}]
             }],
             xaxis: {
                 categories: ['Total Réservations']

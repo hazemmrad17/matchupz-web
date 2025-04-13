@@ -87,6 +87,8 @@
     <parameter key="club_photos_directory">C:\Users\MSI\Desktop\matchupz-web-0/public/uploads/club_photos</parameter>
     <parameter key="photos_directory">C:\Users\MSI\Desktop\matchupz-web-0/public/uploads/photos</parameter>
     <parameter key="users_image_directory">C:\Users\MSI\Desktop\matchupz-web-0/public/uploads/users</parameter>
+    <parameter key="signatures_directory">C:\Users\MSI\Desktop\matchupz-web-0/public/signatures</parameter>
+    <parameter key="materiels_directory">C:\Users\MSI\Desktop\matchupz-web-0/public/uploads/materiels</parameter>
     <parameter key="event_dispatcher.event_aliases" type="collection">
       <parameter key="Symfony\Component\Console\Event\ConsoleCommandEvent">console.command</parameter>
       <parameter key="Symfony\Component\Console\Event\ConsoleErrorEvent">console.error</parameter>
@@ -369,17 +371,47 @@
       <tag name="controller.service_arguments"/>
       <tag name="routing.route_loader"/>
     </service>
+    <service id="Knp\Snappy\Pdf" class="Knp\Snappy\Pdf" autowire="true" autoconfigure="true">
+      <argument>%env(WKHTMLTOPDF_PATH)%</argument>
+      <call method="setLogger">
+        <argument type="service" id="monolog.logger"/>
+      </call>
+    </service>
     <service id="App\Twig\AppExtension" class="App\Twig\AppExtension" autowire="true" autoconfigure="true">
       <tag name="twig.extension"/>
     </service>
     <service id="App\Entity" class="App\Entity" abstract="true">
       <tag name="container.excluded" source="in &quot;config/services.yaml&quot;"/>
     </service>
-    <service id="App\Controller\ClubController" class="App\Controller\ClubController" public="true" autowire="true" autoconfigure="true">
+    <service id="App\Controller\AbonnementController" class="App\Controller\AbonnementController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
       <call method="setContainer">
+        <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\AbonnementController"/>
+      </call>
+    </service>
+    <service id="App\Controller\ClubController" class="App\Controller\ClubController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="container.service_subscriber"/>
+      <argument type="service" id="doctrine.orm.default_entity_manager"/>
+      <call method="setContainer">
         <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\ClubController"/>
+      </call>
+    </service>
+    <service id="App\Controller\ContratController" class="App\Controller\ContratController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="container.service_subscriber"/>
+      <argument type="service" id="App\Repository\ContratRepository"/>
+      <argument type="service" id="monolog.logger"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\ContratController"/>
+      </call>
+    </service>
+    <service id="App\Controller\DashboardController" class="App\Controller\DashboardController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="container.service_subscriber"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\DashboardController"/>
       </call>
     </service>
     <service id="App\Controller\EspacesportifController" class="App\Controller\EspacesportifController" public="true" autowire="true" autoconfigure="true">
@@ -396,11 +428,26 @@
         <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\EvaluationPhysiqueController"/>
       </call>
     </service>
-    <service id="App\Controller\HistoriqueClubController" class="App\Controller\HistoriqueClubController" public="true" autowire="true" autoconfigure="true">
+    <service id="App\Controller\FournisseurController" class="App\Controller\FournisseurController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
       <call method="setContainer">
+        <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\FournisseurController"/>
+      </call>
+    </service>
+    <service id="App\Controller\HistoriqueClubController" class="App\Controller\HistoriqueClubController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="container.service_subscriber"/>
+      <argument type="service" id="doctrine.orm.default_entity_manager"/>
+      <call method="setContainer">
         <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\HistoriqueClubController"/>
+      </call>
+    </service>
+    <service id="App\Controller\HomeController" class="App\Controller\HomeController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="container.service_subscriber"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\HomeController"/>
       </call>
     </service>
     <service id="App\Controller\JoueurController" class="App\Controller\JoueurController" public="true" autowire="true" autoconfigure="true">
@@ -409,6 +456,21 @@
       <argument type="service" id="doctrine.orm.default_entity_manager"/>
       <call method="setContainer">
         <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\JoueurController"/>
+      </call>
+    </service>
+    <service id="App\Controller\MatchController" class="App\Controller\MatchController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="container.service_subscriber"/>
+      <argument type="service" id="doctrine.orm.default_entity_manager"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\MatchController"/>
+      </call>
+    </service>
+    <service id="App\Controller\MaterielController" class="App\Controller\MaterielController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="container.service_subscriber"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\MaterielController"/>
       </call>
     </service>
     <service id="App\Controller\PerformanceJoueurController" class="App\Controller\PerformanceJoueurController" public="true" autowire="true" autoconfigure="true">
@@ -425,9 +487,26 @@
         <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\ReservationController"/>
       </call>
     </service>
+    <service id="App\Controller\ScheduleController" class="App\Controller\ScheduleController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="container.service_subscriber"/>
+      <argument type="service" id="doctrine.orm.default_entity_manager"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\ScheduleController"/>
+      </call>
+    </service>
+    <service id="App\Controller\SponsorController" class="App\Controller\SponsorController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="container.service_subscriber"/>
+      <argument type="service" id="App\Repository\SponsorRepository"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\SponsorController"/>
+      </call>
+    </service>
     <service id="App\Controller\SportController" class="App\Controller\SportController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
+      <argument type="service" id="doctrine.orm.default_entity_manager"/>
       <call method="setContainer">
         <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\SportController"/>
       </call>
@@ -443,7 +522,13 @@
     <service id="App\Doctrine\TimestampDiffFunction" class="App\Doctrine\TimestampDiffFunction" autowire="true" autoconfigure="true">
       <tag name="container.error" message="Cannot autowire service &quot;App\Doctrine\TimestampDiffFunction&quot;: argument &quot;$name&quot; of method &quot;Doctrine\ORM\Query\AST\Functions\FunctionNode::__construct()&quot; is type-hinted &quot;string&quot;, you should configure its value explicitly."/>
     </service>
+    <service id="App\Form\AbonnementType" class="App\Form\AbonnementType" autowire="true" autoconfigure="true">
+      <tag name="form.type"/>
+    </service>
     <service id="App\Form\ClubType" class="App\Form\ClubType" autowire="true" autoconfigure="true">
+      <tag name="form.type"/>
+    </service>
+    <service id="App\Form\ContratType" class="App\Form\ContratType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
     <service id="App\Form\EspacesportifType" class="App\Form\EspacesportifType" autowire="true" autoconfigure="true">
@@ -452,16 +537,31 @@
     <service id="App\Form\EvaluationPhysiqueType" class="App\Form\EvaluationPhysiqueType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
+    <service id="App\Form\FournisseurType" class="App\Form\FournisseurType" autowire="true" autoconfigure="true">
+      <tag name="form.type"/>
+    </service>
     <service id="App\Form\HistoriqueClubType" class="App\Form\HistoriqueClubType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
     <service id="App\Form\JoueurType" class="App\Form\JoueurType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
+    <service id="App\Form\MatchType" class="App\Form\MatchType" autowire="true" autoconfigure="true">
+      <tag name="form.type"/>
+    </service>
+    <service id="App\Form\MaterielType" class="App\Form\MaterielType" autowire="true" autoconfigure="true">
+      <tag name="form.type"/>
+    </service>
     <service id="App\Form\PerformanceJoueurType" class="App\Form\PerformanceJoueurType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
     <service id="App\Form\ReservationType" class="App\Form\ReservationType" autowire="true" autoconfigure="true">
+      <tag name="form.type"/>
+    </service>
+    <service id="App\Form\ScheduleType" class="App\Form\ScheduleType" autowire="true" autoconfigure="true">
+      <tag name="form.type"/>
+    </service>
+    <service id="App\Form\SponsorType" class="App\Form\SponsorType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
     <service id="App\Form\SportType" class="App\Form\SportType" autowire="true" autoconfigure="true">
@@ -565,7 +665,7 @@
     </service>
     <service id="argument_resolver.service" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
       <tag priority="-50" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">controller.argument_value_resolver</tag>
-      <argument type="service" id=".service_locator.za3Da9Q"/>
+      <argument type="service" id=".service_locator.UMQSXih"/>
     </service>
     <service id="argument_resolver.default" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">
       <tag priority="-100" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">controller.argument_value_resolver</tag>
@@ -1380,6 +1480,7 @@
       </argument>
       <argument type="collection">
         <argument>C:\Users\MSI\Desktop\matchupz-web-0/front</argument>
+        <argument>C:\Users\MSI\Desktop\matchupz-web-0/templates/</argument>
         <argument>C:\Users\MSI\Desktop\matchupz-web-0\vendor\symfony\twig-bridge/Resources/views/Email</argument>
         <argument>C:\Users\MSI\Desktop\matchupz-web-0\vendor\symfony\twig-bridge/Resources/views/Form</argument>
       </argument>
@@ -1408,6 +1509,7 @@
       </argument>
       <argument type="collection">
         <argument>C:\Users\MSI\Desktop\matchupz-web-0/front</argument>
+        <argument>C:\Users\MSI\Desktop\matchupz-web-0/templates/</argument>
         <argument>C:\Users\MSI\Desktop\matchupz-web-0\vendor\symfony\twig-bridge/Resources/views/Email</argument>
         <argument>C:\Users\MSI\Desktop\matchupz-web-0\vendor\symfony\twig-bridge/Resources/views/Form</argument>
       </argument>
@@ -1490,13 +1592,20 @@
         <argument>Symfony\Bridge\Doctrine\Form\Type</argument>
       </argument>
       <argument type="collection">
+        <argument>App\Form\AbonnementType</argument>
         <argument>App\Form\ClubType</argument>
+        <argument>App\Form\ContratType</argument>
         <argument>App\Form\EspacesportifType</argument>
         <argument>App\Form\EvaluationPhysiqueType</argument>
+        <argument>App\Form\FournisseurType</argument>
         <argument>App\Form\HistoriqueClubType</argument>
         <argument>App\Form\JoueurType</argument>
+        <argument>App\Form\MatchType</argument>
+        <argument>App\Form\MaterielType</argument>
         <argument>App\Form\PerformanceJoueurType</argument>
         <argument>App\Form\ReservationType</argument>
+        <argument>App\Form\ScheduleType</argument>
+        <argument>App\Form\SponsorType</argument>
         <argument>App\Form\SportType</argument>
         <argument>App\Form\UserType</argument>
         <argument>Symfony\Component\Form\Extension\Core\Type\FormType</argument>
@@ -2066,6 +2175,11 @@
         <argument type="service" id="monolog.logger.http_client" on-invalid="ignore"/>
       </call>
       <factory class="Symfony\Component\HttpClient\HttpClient" method="create"/>
+    </service>
+    <service id="psr18.http_client" class="Symfony\Component\HttpClient\Psr18Client">
+      <argument type="service" id=".debug.http_client"/>
+      <argument>null</argument>
+      <argument>null</argument>
     </service>
     <service id="http_client.abstract_retry_strategy" class="Symfony\Component\HttpClient\Retry\GenericRetryStrategy" abstract="true">
       <argument type="abstract">http codes</argument>
@@ -3551,7 +3665,7 @@
     </service>
     <service id="argument_resolver.not_tagged_controller" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
       <tag name="controller.argument_value_resolver" priority="-200"/>
-      <argument type="service" id=".service_locator.za3Da9Q"/>
+      <argument type="service" id=".service_locator.UMQSXih"/>
     </service>
     <service id="debug.log_processor" class="Symfony\Bridge\Monolog\Processor\DebugProcessor">
       <tag name="kernel.reset" method="reset"/>
@@ -4040,7 +4154,7 @@
       <argument type="service" id="form.registry"/>
     </service>
     <service id="form.extension" class="Symfony\Component\Form\Extension\DependencyInjection\DependencyInjectionExtension">
-      <argument type="service" id=".service_locator.6D1n88v"/>
+      <argument type="service" id=".service_locator.YoJLwco"/>
       <argument type="collection">
         <argument key="Symfony\Component\Form\Extension\Core\Type\FormType" type="iterator">
           <argument type="service" id="form.type_extension.form.transformation_failure_handling"/>
@@ -5972,6 +6086,9 @@
         <argument type="service" id="turbo.twig.extension"/>
       </call>
       <call method="addExtension">
+        <argument type="service" id="twig.extension.intl"/>
+      </call>
+      <call method="addExtension">
         <argument type="service" id="knp_paginator.twig.extension.pagination"/>
       </call>
       <call method="addExtension">
@@ -6028,6 +6145,7 @@
       <argument type="service" id="kernel"/>
       <argument type="collection">
         <argument key="C:\Users\MSI\Desktop\matchupz-web-0/front">front</argument>
+        <argument key="C:\Users\MSI\Desktop\matchupz-web-0/templates/">templates</argument>
         <argument key="C:\Users\MSI\Desktop\matchupz-web-0\vendor\symfony\twig-bridge/Resources/views/Email">email</argument>
         <argument key="C:\Users\MSI\Desktop\matchupz-web-0\vendor\symfony\twig-bridge/Resources/views/Form">null</argument>
       </argument>
@@ -6049,6 +6167,10 @@
       <call method="addPath">
         <argument>C:\Users\MSI\Desktop\matchupz-web-0/front</argument>
         <argument>front</argument>
+      </call>
+      <call method="addPath">
+        <argument>C:\Users\MSI\Desktop\matchupz-web-0/templates/</argument>
+        <argument>templates</argument>
       </call>
       <call method="addPath">
         <argument>C:\Users\MSI\Desktop\matchupz-web-0\vendor\doctrine\doctrine-bundle/templates</argument>
@@ -6410,6 +6532,9 @@
       <tag name="container.hot_path"/>
     </service>
     <service id="twig.missing_extension_suggestor" class="Twig\Extra\TwigExtraBundle\MissingExtensionSuggestor"/>
+    <service id="twig.extension.intl" class="Twig\Extra\Intl\IntlExtension">
+      <tag name="twig.extension"/>
+    </service>
     <service id="security.authorization_checker" class="Symfony\Component\Security\Core\Authorization\AuthorizationChecker">
       <argument type="service" id="security.token_storage"/>
       <argument type="service" id="debug.security.access.decision_manager"/>
@@ -7367,49 +7492,92 @@
       <argument>page</argument>
       <argument>false</argument>
     </service>
+    <service id=".instanceof.Psr\Log\LoggerAwareInterface.0.Knp\Snappy\Pdf" class="Knp\Snappy\Pdf" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.Knp\Snappy\Pdf" class="Knp\Snappy\Pdf" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Twig\Extension\ExtensionInterface.0.App\Twig\AppExtension" class="App\Twig\AppExtension" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Twig\AppExtension" class="App\Twig\AppExtension" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\AbonnementController" class="App\Controller\AbonnementController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\AbonnementController" class="App\Controller\AbonnementController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\AbonnementController" class="App\Controller\AbonnementController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\ClubController" class="App\Controller\ClubController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\ClubController" class="App\Controller\ClubController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\ClubController" class="App\Controller\ClubController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\ContratController" class="App\Controller\ContratController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\ContratController" class="App\Controller\ContratController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\ContratController" class="App\Controller\ContratController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\DashboardController" class="App\Controller\DashboardController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\DashboardController" class="App\Controller\DashboardController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\DashboardController" class="App\Controller\DashboardController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\EspacesportifController" class="App\Controller\EspacesportifController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\EspacesportifController" class="App\Controller\EspacesportifController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\EspacesportifController" class="App\Controller\EspacesportifController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\EvaluationPhysiqueController" class="App\Controller\EvaluationPhysiqueController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\EvaluationPhysiqueController" class="App\Controller\EvaluationPhysiqueController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\EvaluationPhysiqueController" class="App\Controller\EvaluationPhysiqueController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\FournisseurController" class="App\Controller\FournisseurController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\FournisseurController" class="App\Controller\FournisseurController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\FournisseurController" class="App\Controller\FournisseurController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\HistoriqueClubController" class="App\Controller\HistoriqueClubController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\HistoriqueClubController" class="App\Controller\HistoriqueClubController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\HistoriqueClubController" class="App\Controller\HistoriqueClubController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\HomeController" class="App\Controller\HomeController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\HomeController" class="App\Controller\HomeController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\HomeController" class="App\Controller\HomeController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\JoueurController" class="App\Controller\JoueurController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\JoueurController" class="App\Controller\JoueurController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\JoueurController" class="App\Controller\JoueurController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\MatchController" class="App\Controller\MatchController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\MatchController" class="App\Controller\MatchController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\MatchController" class="App\Controller\MatchController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\MaterielController" class="App\Controller\MaterielController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\MaterielController" class="App\Controller\MaterielController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\MaterielController" class="App\Controller\MaterielController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\PerformanceJoueurController" class="App\Controller\PerformanceJoueurController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\PerformanceJoueurController" class="App\Controller\PerformanceJoueurController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\PerformanceJoueurController" class="App\Controller\PerformanceJoueurController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\ReservationController" class="App\Controller\ReservationController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\ReservationController" class="App\Controller\ReservationController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\ReservationController" class="App\Controller\ReservationController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\ScheduleController" class="App\Controller\ScheduleController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\ScheduleController" class="App\Controller\ScheduleController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\ScheduleController" class="App\Controller\ScheduleController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\SponsorController" class="App\Controller\SponsorController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\SponsorController" class="App\Controller\SponsorController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\SponsorController" class="App\Controller\SponsorController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\SportController" class="App\Controller\SportController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\SportController" class="App\Controller\SportController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\SportController" class="App\Controller\SportController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\UserController" class="App\Controller\UserController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\UserController" class="App\Controller\UserController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\UserController" class="App\Controller\UserController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\AbonnementType" class="App\Form\AbonnementType" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Form\AbonnementType" class="App\Form\AbonnementType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\ClubType" class="App\Form\ClubType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\ClubType" class="App\Form\ClubType" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\ContratType" class="App\Form\ContratType" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Form\ContratType" class="App\Form\ContratType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\EspacesportifType" class="App\Form\EspacesportifType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\EspacesportifType" class="App\Form\EspacesportifType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\EvaluationPhysiqueType" class="App\Form\EvaluationPhysiqueType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\EvaluationPhysiqueType" class="App\Form\EvaluationPhysiqueType" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\FournisseurType" class="App\Form\FournisseurType" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Form\FournisseurType" class="App\Form\FournisseurType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\HistoriqueClubType" class="App\Form\HistoriqueClubType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\HistoriqueClubType" class="App\Form\HistoriqueClubType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\JoueurType" class="App\Form\JoueurType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\JoueurType" class="App\Form\JoueurType" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\MatchType" class="App\Form\MatchType" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Form\MatchType" class="App\Form\MatchType" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\MaterielType" class="App\Form\MaterielType" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Form\MaterielType" class="App\Form\MaterielType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\PerformanceJoueurType" class="App\Form\PerformanceJoueurType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\PerformanceJoueurType" class="App\Form\PerformanceJoueurType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\ReservationType" class="App\Form\ReservationType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\ReservationType" class="App\Form\ReservationType" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\ScheduleType" class="App\Form\ScheduleType" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Form\ScheduleType" class="App\Form\ScheduleType" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\SponsorType" class="App\Form\SponsorType" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Form\SponsorType" class="App\Form\SponsorType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\SportType" class="App\Form\SportType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\SportType" class="App\Form\SportType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\UserType" class="App\Form\UserType" autowire="true" abstract="true"/>
@@ -7871,10 +8039,17 @@
         <argument key="loader" type="service_closure" id=".errored..service_locator.y4_Zrx..Symfony\Component\Config\Loader\LoaderInterface"/>
       </argument>
     </service>
-    <service id=".service_locator.eOJlB0r" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.3a_pjdo" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
-        <argument key="clubRepository" type="service_closure" id="App\Repository\ClubRepository"/>
+        <argument key="abonnementRepository" type="service_closure" id="App\Repository\AbonnementRepository"/>
+        <argument key="paginator" type="service_closure" id="knp_paginator"/>
+      </argument>
+    </service>
+    <service id=".service_locator.9_.T.FR" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="abonnementRepository" type="service_closure" id="App\Repository\AbonnementRepository"/>
       </argument>
     </service>
     <service id=".service_locator.CsMkqUa" class="Symfony\Component\DependencyInjection\ServiceLocator">
@@ -7883,14 +8058,65 @@
         <argument key="entityManager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
       </argument>
     </service>
+    <service id=".service_locator.r0xiDtM" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection"/>
+    </service>
+    <service id=".service_locator.RsAjdld" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="entityManager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
+      </argument>
+    </service>
+    <service id=".service_locator.d2ecNSb" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="clubRepository" type="service_closure" id="App\Repository\ClubRepository"/>
+        <argument key="paginator" type="service_closure" id="knp_paginator"/>
+      </argument>
+    </service>
     <service id=".service_locator.HofvZjN" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection"/>
     </service>
-    <service id=".service_locator.GbJZUn8" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.eOJlB0r" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="clubRepository" type="service_closure" id="App\Repository\ClubRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.8te4nbt" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="clubRepository" type="service_closure" id="App\Repository\ClubRepository"/>
+        <argument key="knpSnappyPdf" type="service_closure" id="Knp\Snappy\Pdf"/>
+      </argument>
+    </service>
+    <service id=".service_locator.8H.sdZM" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="entityManager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
+        <argument key="paginator" type="service_closure" id="knp_paginator"/>
+      </argument>
+    </service>
+    <service id=".service_locator.0TK7yZ8" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="contratRepository" type="service_closure" id="App\Repository\ContratRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.46d3SGC" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="contratRepository" type="service_closure" id="App\Repository\ContratRepository"/>
+        <argument key="entityManager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
+      </argument>
+    </service>
+    <service id=".service_locator.USDzM3K" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="espaceSportifRepository" type="service_closure" id="App\Repository\EspacesportifRepository"/>
+        <argument key="paginator" type="service_closure" id="knp_paginator"/>
       </argument>
     </service>
     <service id=".service_locator.KEBwH6u" class="Symfony\Component\DependencyInjection\ServiceLocator">
@@ -7899,21 +8125,35 @@
         <argument key="espaceSportifRepository" type="service_closure" id="App\Repository\EspacesportifRepository"/>
       </argument>
     </service>
+    <service id=".service_locator.ioGT2SM" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="espaceSportifRepository" type="service_closure" id="App\Repository\EspacesportifRepository"/>
+        <argument key="knpSnappyPdf" type="service_closure" id="Knp\Snappy\Pdf"/>
+      </argument>
+    </service>
+    <service id=".service_locator.wlYIEyg" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="entityManager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
+        <argument key="espaceSportifRepository" type="service_closure" id="App\Repository\EspacesportifRepository"/>
+      </argument>
+    </service>
     <service id=".service_locator.btqHHeD" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection"/>
+    </service>
+    <service id=".service_locator.rCZqcqr" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="entityManager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
+        <argument key="espaceSportifRepository" type="service_closure" id="App\Repository\EspacesportifRepository"/>
+      </argument>
     </service>
     <service id=".service_locator.cCvvgRo" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="entityManager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
-      </argument>
-    </service>
-    <service id=".service_locator.CbdBTI6" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator"/>
-      <argument type="collection">
-        <argument key="evaluationRepository" type="service_closure" id="App\Repository\EvaluationPhysiqueRepository"/>
-        <argument key="joueurRepository" type="service_closure" id="App\Repository\JoueurRepository"/>
       </argument>
     </service>
     <service id=".service_locator.Nm9r6bo" class="Symfony\Component\DependencyInjection\ServiceLocator">
@@ -7953,6 +8193,37 @@
         <argument key="joueurRepository" type="service_closure" id="App\Repository\JoueurRepository"/>
       </argument>
     </service>
+    <service id=".service_locator.2vMbG.c" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="paginator" type="service_closure" id="knp_paginator"/>
+        <argument key="repository" type="service_closure" id="App\Repository\FournisseurRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.83HI7Iy" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection"/>
+    </service>
+    <service id=".service_locator.RalIsqi" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="entityManager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
+        <argument key="fournisseur" type="service_closure" id=".errored..service_locator.RalIsqi.App\Entity\Fournisseur"/>
+      </argument>
+    </service>
+    <service id=".service_locator.gRU4WRm" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="repository" type="service_closure" id="App\Repository\FournisseurRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.M1LzjtO" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="historiqueClubRepository" type="service_closure" id="App\Repository\HistoriqueClubRepository"/>
+        <argument key="paginator" type="service_closure" id="knp_paginator"/>
+      </argument>
+    </service>
     <service id=".service_locator.ZE9R63e" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -7972,15 +8243,109 @@
         <argument key="historiqueClub" type="service_closure" id=".errored..service_locator.0AreAVX.App\Entity\HistoriqueClub"/>
       </argument>
     </service>
+    <service id=".service_locator.FFEnhRj" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="historiqueClubRepository" type="service_closure" id="App\Repository\HistoriqueClubRepository"/>
+        <argument key="knpSnappyPdf" type="service_closure" id="Knp\Snappy\Pdf"/>
+      </argument>
+    </service>
     <service id=".service_locator.i0N9PQM" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="joueurRepository" type="service_closure" id="App\Repository\JoueurRepository"/>
       </argument>
     </service>
+    <service id=".service_locator.gfugV81" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="evaluationRepository" type="service_closure" id="App\Repository\EvaluationPhysiqueRepository"/>
+        <argument key="joueurRepository" type="service_closure" id="App\Repository\JoueurRepository"/>
+        <argument key="paginator" type="service_closure" id="knp_paginator"/>
+        <argument key="performanceRepository" type="service_closure" id="App\Repository\PerformanceJoueurRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.dvlXw22" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="evaluationRepository" type="service_closure" id="App\Repository\EvaluationPhysiqueRepository"/>
+        <argument key="joueurRepository" type="service_closure" id="App\Repository\JoueurRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.SYFRzfM" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="entityManager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
+        <argument key="evaluationRepository" type="service_closure" id="App\Repository\EvaluationPhysiqueRepository"/>
+        <argument key="performanceRepository" type="service_closure" id="App\Repository\PerformanceJoueurRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.BKF_x8u" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="evaluationRepository" type="service_closure" id="App\Repository\EvaluationPhysiqueRepository"/>
+        <argument key="performanceRepository" type="service_closure" id="App\Repository\PerformanceJoueurRepository"/>
+      </argument>
+    </service>
     <service id=".service_locator.1tthCDM" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection"/>
+    </service>
+    <service id=".service_locator.TDAL4Wh" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="joueurRepository" type="service_closure" id="App\Repository\JoueurRepository"/>
+        <argument key="knpSnappyPdf" type="service_closure" id="Knp\Snappy\Pdf"/>
+      </argument>
+    </service>
+    <service id=".service_locator.7eyVGjZ" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="matchEntityRepository" type="service_closure" id="App\Repository\MatchEntityRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.4cRY5uj" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection"/>
+    </service>
+    <service id=".service_locator.RCuzfnb" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="paginator" type="service_closure" id="knp_paginator"/>
+        <argument key="repository" type="service_closure" id="App\Repository\MaterielRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.LNwsF6h" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="entityManager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
+        <argument key="slugger" type="service_closure" id="slugger"/>
+      </argument>
+    </service>
+    <service id=".service_locator.p._PKR9" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection"/>
+    </service>
+    <service id=".service_locator.DBl8PzK" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="entityManager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
+        <argument key="materiel" type="service_closure" id=".errored..service_locator.DBl8PzK.App\Entity\Materiel"/>
+        <argument key="slugger" type="service_closure" id="slugger"/>
+      </argument>
+    </service>
+    <service id=".service_locator.NgvlNzc" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="entityManager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
+        <argument key="materiel" type="service_closure" id=".errored..service_locator.NgvlNzc.App\Entity\Materiel"/>
+      </argument>
+    </service>
+    <service id=".service_locator.jnu2S_s" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="repository" type="service_closure" id="App\Repository\MaterielRepository"/>
+      </argument>
     </service>
     <service id=".service_locator.CrEgygo" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
@@ -8001,6 +8366,13 @@
         <argument key="performanceJoueur" type="service_closure" id=".errored..service_locator.PNlbJGO.App\Entity\PerformanceJoueur"/>
       </argument>
     </service>
+    <service id=".service_locator.0YVKWVu" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="paginator" type="service_closure" id="knp_paginator"/>
+        <argument key="reservationRepository" type="service_closure" id="App\Repository\ReservationRepository"/>
+      </argument>
+    </service>
     <service id=".service_locator.caJHb8S" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -8015,6 +8387,29 @@
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="entityManager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
+      </argument>
+    </service>
+    <service id=".service_locator.Z3Oe1ma" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="scheduleRepository" type="service_closure" id="App\Repository\ScheduleRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.VA.oRVl" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="csrfTokenManager" type="service_closure" id="security.csrf.token_manager"/>
+        <argument key="scheduleRepository" type="service_closure" id="App\Repository\ScheduleRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.tUUIxuw" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection"/>
+    </service>
+    <service id=".service_locator.MPUuYf0" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="sponsorRepository" type="service_closure" id="App\Repository\SponsorRepository"/>
       </argument>
     </service>
     <service id=".service_locator.jpL5_4q" class="Symfony\Component\DependencyInjection\ServiceLocator">
@@ -8038,6 +8433,13 @@
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="entityManager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
+      </argument>
+    </service>
+    <service id=".service_locator.s2P9uaA" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="knpSnappyPdf" type="service_closure" id="Knp\Snappy\Pdf"/>
+        <argument key="sportRepository" type="service_closure" id="App\Repository\SportRepository"/>
       </argument>
     </service>
     <service id=".service_locator.lDw5jgg" class="Symfony\Component\DependencyInjection\ServiceLocator">
@@ -8073,36 +8475,82 @@
         <argument key="user" type="service_closure" id=".errored..service_locator.rvMNZGh.App\Entity\User"/>
       </argument>
     </service>
-    <service id=".service_locator.za3Da9Q" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.UMQSXih" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
-        <argument key="App\Controller\ClubController::delete" type="service_closure" id=".service_locator.GbJZUn8"/>
-        <argument key="App\Controller\ClubController::edit" type="service_closure" id=".service_locator.GbJZUn8"/>
-        <argument key="App\Controller\ClubController::index" type="service_closure" id=".service_locator.eOJlB0r"/>
-        <argument key="App\Controller\ClubController::new" type="service_closure" id=".service_locator.CsMkqUa"/>
+        <argument key="App\Controller\AbonnementController::delete" type="service_closure" id=".service_locator.RsAjdld"/>
+        <argument key="App\Controller\AbonnementController::edit" type="service_closure" id=".service_locator.RsAjdld"/>
+        <argument key="App\Controller\AbonnementController::exportCsv" type="service_closure" id=".service_locator.9_.T.FR"/>
+        <argument key="App\Controller\AbonnementController::exportExcel" type="service_closure" id=".service_locator.9_.T.FR"/>
+        <argument key="App\Controller\AbonnementController::exportPdf" type="service_closure" id=".service_locator.9_.T.FR"/>
+        <argument key="App\Controller\AbonnementController::index" type="service_closure" id=".service_locator.3a_pjdo"/>
+        <argument key="App\Controller\AbonnementController::new" type="service_closure" id=".service_locator.CsMkqUa"/>
+        <argument key="App\Controller\AbonnementController::statistics" type="service_closure" id=".service_locator.9_.T.FR"/>
+        <argument key="App\Controller\ClubController::exportCsv" type="service_closure" id=".service_locator.eOJlB0r"/>
+        <argument key="App\Controller\ClubController::exportExcel" type="service_closure" id=".service_locator.eOJlB0r"/>
+        <argument key="App\Controller\ClubController::exportPdf" type="service_closure" id=".service_locator.8te4nbt"/>
+        <argument key="App\Controller\ClubController::index" type="service_closure" id=".service_locator.d2ecNSb"/>
         <argument key="App\Controller\ClubController::statistics" type="service_closure" id=".service_locator.eOJlB0r"/>
+        <argument key="App\Controller\ContratController::delete" type="service_closure" id=".service_locator.46d3SGC"/>
+        <argument key="App\Controller\ContratController::edit" type="service_closure" id=".service_locator.46d3SGC"/>
+        <argument key="App\Controller\ContratController::export" type="service_closure" id=".service_locator.0TK7yZ8"/>
+        <argument key="App\Controller\ContratController::front" type="service_closure" id=".service_locator.0TK7yZ8"/>
+        <argument key="App\Controller\ContratController::index" type="service_closure" id=".service_locator.8H.sdZM"/>
+        <argument key="App\Controller\ContratController::new" type="service_closure" id=".service_locator.CsMkqUa"/>
+        <argument key="App\Controller\ContratController::show" type="service_closure" id=".service_locator.0TK7yZ8"/>
         <argument key="App\Controller\EspacesportifController::delete" type="service_closure" id=".service_locator.cCvvgRo"/>
-        <argument key="App\Controller\EspacesportifController::edit" type="service_closure" id=".service_locator.cCvvgRo"/>
-        <argument key="App\Controller\EspacesportifController::index" type="service_closure" id=".service_locator.KEBwH6u"/>
-        <argument key="App\Controller\EspacesportifController::new" type="service_closure" id=".service_locator.CsMkqUa"/>
+        <argument key="App\Controller\EspacesportifController::edit" type="service_closure" id=".service_locator.rCZqcqr"/>
+        <argument key="App\Controller\EspacesportifController::exportCsv" type="service_closure" id=".service_locator.KEBwH6u"/>
+        <argument key="App\Controller\EspacesportifController::exportExcel" type="service_closure" id=".service_locator.KEBwH6u"/>
+        <argument key="App\Controller\EspacesportifController::exportPdf" type="service_closure" id=".service_locator.ioGT2SM"/>
+        <argument key="App\Controller\EspacesportifController::front" type="service_closure" id=".service_locator.KEBwH6u"/>
+        <argument key="App\Controller\EspacesportifController::index" type="service_closure" id=".service_locator.USDzM3K"/>
+        <argument key="App\Controller\EspacesportifController::new" type="service_closure" id=".service_locator.wlYIEyg"/>
         <argument key="App\Controller\EspacesportifController::statistics" type="service_closure" id=".service_locator.CsMkqUa"/>
         <argument key="App\Controller\EvaluationPhysiqueController::delete" type="service_closure" id=".service_locator.n8st8m4"/>
         <argument key="App\Controller\EvaluationPhysiqueController::edit" type="service_closure" id=".service_locator.n8st8m4"/>
         <argument key="App\Controller\EvaluationPhysiqueController::evaluationsByJoueur" type="service_closure" id=".service_locator.0qaldgn"/>
         <argument key="App\Controller\EvaluationPhysiqueController::findCurrentPlayersByClub" type="service_closure" id=".service_locator.zPKYcSn"/>
-        <argument key="App\Controller\EvaluationPhysiqueController::index" type="service_closure" id=".service_locator.CbdBTI6"/>
+        <argument key="App\Controller\EvaluationPhysiqueController::index" type="service_closure" id=".service_locator.dvlXw22"/>
         <argument key="App\Controller\EvaluationPhysiqueController::new" type="service_closure" id=".service_locator.CsMkqUa"/>
         <argument key="App\Controller\EvaluationPhysiqueController::show" type="service_closure" id=".service_locator.Nm9r6bo"/>
-        <argument key="App\Controller\EvaluationPhysiqueController::statistics" type="service_closure" id=".service_locator.CbdBTI6"/>
+        <argument key="App\Controller\EvaluationPhysiqueController::statistics" type="service_closure" id=".service_locator.dvlXw22"/>
+        <argument key="App\Controller\FournisseurController::delete" type="service_closure" id=".service_locator.RalIsqi"/>
+        <argument key="App\Controller\FournisseurController::edit" type="service_closure" id=".service_locator.RalIsqi"/>
+        <argument key="App\Controller\FournisseurController::index" type="service_closure" id=".service_locator.2vMbG.c"/>
+        <argument key="App\Controller\FournisseurController::indexF" type="service_closure" id=".service_locator.2vMbG.c"/>
+        <argument key="App\Controller\FournisseurController::new" type="service_closure" id=".service_locator.CsMkqUa"/>
+        <argument key="App\Controller\FournisseurController::stats" type="service_closure" id=".service_locator.gRU4WRm"/>
         <argument key="App\Controller\HistoriqueClubController::delete" type="service_closure" id=".service_locator.0AreAVX"/>
         <argument key="App\Controller\HistoriqueClubController::edit" type="service_closure" id=".service_locator.0AreAVX"/>
+        <argument key="App\Controller\HistoriqueClubController::exportCsv" type="service_closure" id=".service_locator.ZE9R63e"/>
+        <argument key="App\Controller\HistoriqueClubController::exportExcel" type="service_closure" id=".service_locator.ZE9R63e"/>
+        <argument key="App\Controller\HistoriqueClubController::exportPdf" type="service_closure" id=".service_locator.FFEnhRj"/>
         <argument key="App\Controller\HistoriqueClubController::findByJoueur" type="service_closure" id=".service_locator.ZE9R63e"/>
         <argument key="App\Controller\HistoriqueClubController::findCurrentPlayersByClub" type="service_closure" id=".service_locator.ZE9R63e"/>
-        <argument key="App\Controller\HistoriqueClubController::index" type="service_closure" id=".service_locator.ZE9R63e"/>
+        <argument key="App\Controller\HistoriqueClubController::index" type="service_closure" id=".service_locator.M1LzjtO"/>
         <argument key="App\Controller\HistoriqueClubController::new" type="service_closure" id=".service_locator.CsMkqUa"/>
         <argument key="App\Controller\HistoriqueClubController::show" type="service_closure" id=".service_locator.4E2JJj5"/>
         <argument key="App\Controller\HistoriqueClubController::stats" type="service_closure" id=".service_locator.ZE9R63e"/>
-        <argument key="App\Controller\JoueurController::index" type="service_closure" id=".service_locator.i0N9PQM"/>
+        <argument key="App\Controller\JoueurController::edit" type="service_closure" id=".service_locator.SYFRzfM"/>
+        <argument key="App\Controller\JoueurController::exportCsv" type="service_closure" id=".service_locator.i0N9PQM"/>
+        <argument key="App\Controller\JoueurController::exportExcel" type="service_closure" id=".service_locator.i0N9PQM"/>
+        <argument key="App\Controller\JoueurController::exportPdf" type="service_closure" id=".service_locator.TDAL4Wh"/>
+        <argument key="App\Controller\JoueurController::index" type="service_closure" id=".service_locator.gfugV81"/>
+        <argument key="App\Controller\JoueurController::layout" type="service_closure" id=".service_locator.i0N9PQM"/>
+        <argument key="App\Controller\JoueurController::show" type="service_closure" id=".service_locator.BKF_x8u"/>
+        <argument key="App\Controller\JoueurController::statistics" type="service_closure" id=".service_locator.dvlXw22"/>
+        <argument key="App\Controller\JoueurController::test" type="service_closure" id=".service_locator.i0N9PQM"/>
+        <argument key="App\Controller\MatchController::index" type="service_closure" id=".service_locator.7eyVGjZ"/>
+        <argument key="App\Controller\MaterielController::delete" type="service_closure" id=".service_locator.NgvlNzc"/>
+        <argument key="App\Controller\MaterielController::edit" type="service_closure" id=".service_locator.DBl8PzK"/>
+        <argument key="App\Controller\MaterielController::exportCsv" type="service_closure" id=".service_locator.jnu2S_s"/>
+        <argument key="App\Controller\MaterielController::exportExcel" type="service_closure" id=".service_locator.jnu2S_s"/>
+        <argument key="App\Controller\MaterielController::exportPdf" type="service_closure" id=".service_locator.jnu2S_s"/>
+        <argument key="App\Controller\MaterielController::index" type="service_closure" id=".service_locator.RCuzfnb"/>
+        <argument key="App\Controller\MaterielController::indexF" type="service_closure" id=".service_locator.RCuzfnb"/>
+        <argument key="App\Controller\MaterielController::new" type="service_closure" id=".service_locator.LNwsF6h"/>
+        <argument key="App\Controller\MaterielController::statistics" type="service_closure" id=".service_locator.jnu2S_s"/>
         <argument key="App\Controller\PerformanceJoueurController::delete" type="service_closure" id=".service_locator.PNlbJGO"/>
         <argument key="App\Controller\PerformanceJoueurController::edit" type="service_closure" id=".service_locator.PNlbJGO"/>
         <argument key="App\Controller\PerformanceJoueurController::index" type="service_closure" id=".service_locator.CrEgygo"/>
@@ -8111,11 +8559,30 @@
         <argument key="App\Controller\PerformanceJoueurController::stats" type="service_closure" id=".service_locator.CrEgygo"/>
         <argument key="App\Controller\ReservationController::delete" type="service_closure" id=".service_locator.Lt49UVm"/>
         <argument key="App\Controller\ReservationController::edit" type="service_closure" id=".service_locator.Lt49UVm"/>
-        <argument key="App\Controller\ReservationController::index" type="service_closure" id=".service_locator.caJHb8S"/>
+        <argument key="App\Controller\ReservationController::exportCsv" type="service_closure" id=".service_locator.caJHb8S"/>
+        <argument key="App\Controller\ReservationController::exportExcel" type="service_closure" id=".service_locator.caJHb8S"/>
+        <argument key="App\Controller\ReservationController::exportPdf" type="service_closure" id=".service_locator.caJHb8S"/>
+        <argument key="App\Controller\ReservationController::index" type="service_closure" id=".service_locator.0YVKWVu"/>
         <argument key="App\Controller\ReservationController::new" type="service_closure" id=".service_locator.CsMkqUa"/>
         <argument key="App\Controller\ReservationController::statistics" type="service_closure" id=".service_locator.caJHb8S"/>
+        <argument key="App\Controller\ScheduleController::edit" type="service_closure" id=".service_locator.Z3Oe1ma"/>
+        <argument key="App\Controller\ScheduleController::main" type="service_closure" id=".service_locator.Z3Oe1ma"/>
+        <argument key="App\Controller\ScheduleController::mainF" type="service_closure" id=".service_locator.Z3Oe1ma"/>
+        <argument key="App\Controller\ScheduleController::search" type="service_closure" id=".service_locator.VA.oRVl"/>
+        <argument key="App\Controller\ScheduleController::show" type="service_closure" id=".service_locator.Z3Oe1ma"/>
+        <argument key="App\Controller\ScheduleController::showF" type="service_closure" id=".service_locator.Z3Oe1ma"/>
+        <argument key="App\Controller\ScheduleController::statistics" type="service_closure" id=".service_locator.Z3Oe1ma"/>
+        <argument key="App\Controller\SponsorController::delete" type="service_closure" id=".service_locator.CsMkqUa"/>
+        <argument key="App\Controller\SponsorController::edit" type="service_closure" id=".service_locator.CsMkqUa"/>
+        <argument key="App\Controller\SponsorController::export" type="service_closure" id=".service_locator.MPUuYf0"/>
+        <argument key="App\Controller\SponsorController::front" type="service_closure" id=".service_locator.MPUuYf0"/>
+        <argument key="App\Controller\SponsorController::main" type="service_closure" id=".service_locator.8H.sdZM"/>
+        <argument key="App\Controller\SponsorController::new" type="service_closure" id=".service_locator.CsMkqUa"/>
         <argument key="App\Controller\SportController::delete" type="service_closure" id=".service_locator.geVFa8t"/>
         <argument key="App\Controller\SportController::edit" type="service_closure" id=".service_locator.geVFa8t"/>
+        <argument key="App\Controller\SportController::exportCsv" type="service_closure" id=".service_locator.cX9LP_Y"/>
+        <argument key="App\Controller\SportController::exportExcel" type="service_closure" id=".service_locator.cX9LP_Y"/>
+        <argument key="App\Controller\SportController::exportPdf" type="service_closure" id=".service_locator.s2P9uaA"/>
         <argument key="App\Controller\SportController::index" type="service_closure" id=".service_locator.jpL5_4q"/>
         <argument key="App\Controller\SportController::new" type="service_closure" id=".service_locator.CsMkqUa"/>
         <argument key="App\Controller\SportController::statistics" type="service_closure" id=".service_locator.cX9LP_Y"/>
@@ -8133,33 +8600,79 @@
         <argument key="App\Kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.y4_Zrx."/>
         <argument key="kernel::loadRoutes" type="service_closure" id=".service_locator.y4_Zrx."/>
         <argument key="kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.y4_Zrx."/>
-        <argument key="App\Controller\ClubController:delete" type="service_closure" id=".service_locator.GbJZUn8"/>
-        <argument key="App\Controller\ClubController:edit" type="service_closure" id=".service_locator.GbJZUn8"/>
-        <argument key="App\Controller\ClubController:index" type="service_closure" id=".service_locator.eOJlB0r"/>
-        <argument key="App\Controller\ClubController:new" type="service_closure" id=".service_locator.CsMkqUa"/>
+        <argument key="App\Controller\AbonnementController:delete" type="service_closure" id=".service_locator.RsAjdld"/>
+        <argument key="App\Controller\AbonnementController:edit" type="service_closure" id=".service_locator.RsAjdld"/>
+        <argument key="App\Controller\AbonnementController:exportCsv" type="service_closure" id=".service_locator.9_.T.FR"/>
+        <argument key="App\Controller\AbonnementController:exportExcel" type="service_closure" id=".service_locator.9_.T.FR"/>
+        <argument key="App\Controller\AbonnementController:exportPdf" type="service_closure" id=".service_locator.9_.T.FR"/>
+        <argument key="App\Controller\AbonnementController:index" type="service_closure" id=".service_locator.3a_pjdo"/>
+        <argument key="App\Controller\AbonnementController:new" type="service_closure" id=".service_locator.CsMkqUa"/>
+        <argument key="App\Controller\AbonnementController:statistics" type="service_closure" id=".service_locator.9_.T.FR"/>
+        <argument key="App\Controller\ClubController:exportCsv" type="service_closure" id=".service_locator.eOJlB0r"/>
+        <argument key="App\Controller\ClubController:exportExcel" type="service_closure" id=".service_locator.eOJlB0r"/>
+        <argument key="App\Controller\ClubController:exportPdf" type="service_closure" id=".service_locator.8te4nbt"/>
+        <argument key="App\Controller\ClubController:index" type="service_closure" id=".service_locator.d2ecNSb"/>
         <argument key="App\Controller\ClubController:statistics" type="service_closure" id=".service_locator.eOJlB0r"/>
+        <argument key="App\Controller\ContratController:delete" type="service_closure" id=".service_locator.46d3SGC"/>
+        <argument key="App\Controller\ContratController:edit" type="service_closure" id=".service_locator.46d3SGC"/>
+        <argument key="App\Controller\ContratController:export" type="service_closure" id=".service_locator.0TK7yZ8"/>
+        <argument key="App\Controller\ContratController:front" type="service_closure" id=".service_locator.0TK7yZ8"/>
+        <argument key="App\Controller\ContratController:index" type="service_closure" id=".service_locator.8H.sdZM"/>
+        <argument key="App\Controller\ContratController:new" type="service_closure" id=".service_locator.CsMkqUa"/>
+        <argument key="App\Controller\ContratController:show" type="service_closure" id=".service_locator.0TK7yZ8"/>
         <argument key="App\Controller\EspacesportifController:delete" type="service_closure" id=".service_locator.cCvvgRo"/>
-        <argument key="App\Controller\EspacesportifController:edit" type="service_closure" id=".service_locator.cCvvgRo"/>
-        <argument key="App\Controller\EspacesportifController:index" type="service_closure" id=".service_locator.KEBwH6u"/>
-        <argument key="App\Controller\EspacesportifController:new" type="service_closure" id=".service_locator.CsMkqUa"/>
+        <argument key="App\Controller\EspacesportifController:edit" type="service_closure" id=".service_locator.rCZqcqr"/>
+        <argument key="App\Controller\EspacesportifController:exportCsv" type="service_closure" id=".service_locator.KEBwH6u"/>
+        <argument key="App\Controller\EspacesportifController:exportExcel" type="service_closure" id=".service_locator.KEBwH6u"/>
+        <argument key="App\Controller\EspacesportifController:exportPdf" type="service_closure" id=".service_locator.ioGT2SM"/>
+        <argument key="App\Controller\EspacesportifController:front" type="service_closure" id=".service_locator.KEBwH6u"/>
+        <argument key="App\Controller\EspacesportifController:index" type="service_closure" id=".service_locator.USDzM3K"/>
+        <argument key="App\Controller\EspacesportifController:new" type="service_closure" id=".service_locator.wlYIEyg"/>
         <argument key="App\Controller\EspacesportifController:statistics" type="service_closure" id=".service_locator.CsMkqUa"/>
         <argument key="App\Controller\EvaluationPhysiqueController:delete" type="service_closure" id=".service_locator.n8st8m4"/>
         <argument key="App\Controller\EvaluationPhysiqueController:edit" type="service_closure" id=".service_locator.n8st8m4"/>
         <argument key="App\Controller\EvaluationPhysiqueController:evaluationsByJoueur" type="service_closure" id=".service_locator.0qaldgn"/>
         <argument key="App\Controller\EvaluationPhysiqueController:findCurrentPlayersByClub" type="service_closure" id=".service_locator.zPKYcSn"/>
-        <argument key="App\Controller\EvaluationPhysiqueController:index" type="service_closure" id=".service_locator.CbdBTI6"/>
+        <argument key="App\Controller\EvaluationPhysiqueController:index" type="service_closure" id=".service_locator.dvlXw22"/>
         <argument key="App\Controller\EvaluationPhysiqueController:new" type="service_closure" id=".service_locator.CsMkqUa"/>
         <argument key="App\Controller\EvaluationPhysiqueController:show" type="service_closure" id=".service_locator.Nm9r6bo"/>
-        <argument key="App\Controller\EvaluationPhysiqueController:statistics" type="service_closure" id=".service_locator.CbdBTI6"/>
+        <argument key="App\Controller\EvaluationPhysiqueController:statistics" type="service_closure" id=".service_locator.dvlXw22"/>
+        <argument key="App\Controller\FournisseurController:delete" type="service_closure" id=".service_locator.RalIsqi"/>
+        <argument key="App\Controller\FournisseurController:edit" type="service_closure" id=".service_locator.RalIsqi"/>
+        <argument key="App\Controller\FournisseurController:index" type="service_closure" id=".service_locator.2vMbG.c"/>
+        <argument key="App\Controller\FournisseurController:indexF" type="service_closure" id=".service_locator.2vMbG.c"/>
+        <argument key="App\Controller\FournisseurController:new" type="service_closure" id=".service_locator.CsMkqUa"/>
+        <argument key="App\Controller\FournisseurController:stats" type="service_closure" id=".service_locator.gRU4WRm"/>
         <argument key="App\Controller\HistoriqueClubController:delete" type="service_closure" id=".service_locator.0AreAVX"/>
         <argument key="App\Controller\HistoriqueClubController:edit" type="service_closure" id=".service_locator.0AreAVX"/>
+        <argument key="App\Controller\HistoriqueClubController:exportCsv" type="service_closure" id=".service_locator.ZE9R63e"/>
+        <argument key="App\Controller\HistoriqueClubController:exportExcel" type="service_closure" id=".service_locator.ZE9R63e"/>
+        <argument key="App\Controller\HistoriqueClubController:exportPdf" type="service_closure" id=".service_locator.FFEnhRj"/>
         <argument key="App\Controller\HistoriqueClubController:findByJoueur" type="service_closure" id=".service_locator.ZE9R63e"/>
         <argument key="App\Controller\HistoriqueClubController:findCurrentPlayersByClub" type="service_closure" id=".service_locator.ZE9R63e"/>
-        <argument key="App\Controller\HistoriqueClubController:index" type="service_closure" id=".service_locator.ZE9R63e"/>
+        <argument key="App\Controller\HistoriqueClubController:index" type="service_closure" id=".service_locator.M1LzjtO"/>
         <argument key="App\Controller\HistoriqueClubController:new" type="service_closure" id=".service_locator.CsMkqUa"/>
         <argument key="App\Controller\HistoriqueClubController:show" type="service_closure" id=".service_locator.4E2JJj5"/>
         <argument key="App\Controller\HistoriqueClubController:stats" type="service_closure" id=".service_locator.ZE9R63e"/>
-        <argument key="App\Controller\JoueurController:index" type="service_closure" id=".service_locator.i0N9PQM"/>
+        <argument key="App\Controller\JoueurController:edit" type="service_closure" id=".service_locator.SYFRzfM"/>
+        <argument key="App\Controller\JoueurController:exportCsv" type="service_closure" id=".service_locator.i0N9PQM"/>
+        <argument key="App\Controller\JoueurController:exportExcel" type="service_closure" id=".service_locator.i0N9PQM"/>
+        <argument key="App\Controller\JoueurController:exportPdf" type="service_closure" id=".service_locator.TDAL4Wh"/>
+        <argument key="App\Controller\JoueurController:index" type="service_closure" id=".service_locator.gfugV81"/>
+        <argument key="App\Controller\JoueurController:layout" type="service_closure" id=".service_locator.i0N9PQM"/>
+        <argument key="App\Controller\JoueurController:show" type="service_closure" id=".service_locator.BKF_x8u"/>
+        <argument key="App\Controller\JoueurController:statistics" type="service_closure" id=".service_locator.dvlXw22"/>
+        <argument key="App\Controller\JoueurController:test" type="service_closure" id=".service_locator.i0N9PQM"/>
+        <argument key="App\Controller\MatchController:index" type="service_closure" id=".service_locator.7eyVGjZ"/>
+        <argument key="App\Controller\MaterielController:delete" type="service_closure" id=".service_locator.NgvlNzc"/>
+        <argument key="App\Controller\MaterielController:edit" type="service_closure" id=".service_locator.DBl8PzK"/>
+        <argument key="App\Controller\MaterielController:exportCsv" type="service_closure" id=".service_locator.jnu2S_s"/>
+        <argument key="App\Controller\MaterielController:exportExcel" type="service_closure" id=".service_locator.jnu2S_s"/>
+        <argument key="App\Controller\MaterielController:exportPdf" type="service_closure" id=".service_locator.jnu2S_s"/>
+        <argument key="App\Controller\MaterielController:index" type="service_closure" id=".service_locator.RCuzfnb"/>
+        <argument key="App\Controller\MaterielController:indexF" type="service_closure" id=".service_locator.RCuzfnb"/>
+        <argument key="App\Controller\MaterielController:new" type="service_closure" id=".service_locator.LNwsF6h"/>
+        <argument key="App\Controller\MaterielController:statistics" type="service_closure" id=".service_locator.jnu2S_s"/>
         <argument key="App\Controller\PerformanceJoueurController:delete" type="service_closure" id=".service_locator.PNlbJGO"/>
         <argument key="App\Controller\PerformanceJoueurController:edit" type="service_closure" id=".service_locator.PNlbJGO"/>
         <argument key="App\Controller\PerformanceJoueurController:index" type="service_closure" id=".service_locator.CrEgygo"/>
@@ -8168,11 +8681,30 @@
         <argument key="App\Controller\PerformanceJoueurController:stats" type="service_closure" id=".service_locator.CrEgygo"/>
         <argument key="App\Controller\ReservationController:delete" type="service_closure" id=".service_locator.Lt49UVm"/>
         <argument key="App\Controller\ReservationController:edit" type="service_closure" id=".service_locator.Lt49UVm"/>
-        <argument key="App\Controller\ReservationController:index" type="service_closure" id=".service_locator.caJHb8S"/>
+        <argument key="App\Controller\ReservationController:exportCsv" type="service_closure" id=".service_locator.caJHb8S"/>
+        <argument key="App\Controller\ReservationController:exportExcel" type="service_closure" id=".service_locator.caJHb8S"/>
+        <argument key="App\Controller\ReservationController:exportPdf" type="service_closure" id=".service_locator.caJHb8S"/>
+        <argument key="App\Controller\ReservationController:index" type="service_closure" id=".service_locator.0YVKWVu"/>
         <argument key="App\Controller\ReservationController:new" type="service_closure" id=".service_locator.CsMkqUa"/>
         <argument key="App\Controller\ReservationController:statistics" type="service_closure" id=".service_locator.caJHb8S"/>
+        <argument key="App\Controller\ScheduleController:edit" type="service_closure" id=".service_locator.Z3Oe1ma"/>
+        <argument key="App\Controller\ScheduleController:main" type="service_closure" id=".service_locator.Z3Oe1ma"/>
+        <argument key="App\Controller\ScheduleController:mainF" type="service_closure" id=".service_locator.Z3Oe1ma"/>
+        <argument key="App\Controller\ScheduleController:search" type="service_closure" id=".service_locator.VA.oRVl"/>
+        <argument key="App\Controller\ScheduleController:show" type="service_closure" id=".service_locator.Z3Oe1ma"/>
+        <argument key="App\Controller\ScheduleController:showF" type="service_closure" id=".service_locator.Z3Oe1ma"/>
+        <argument key="App\Controller\ScheduleController:statistics" type="service_closure" id=".service_locator.Z3Oe1ma"/>
+        <argument key="App\Controller\SponsorController:delete" type="service_closure" id=".service_locator.CsMkqUa"/>
+        <argument key="App\Controller\SponsorController:edit" type="service_closure" id=".service_locator.CsMkqUa"/>
+        <argument key="App\Controller\SponsorController:export" type="service_closure" id=".service_locator.MPUuYf0"/>
+        <argument key="App\Controller\SponsorController:front" type="service_closure" id=".service_locator.MPUuYf0"/>
+        <argument key="App\Controller\SponsorController:main" type="service_closure" id=".service_locator.8H.sdZM"/>
+        <argument key="App\Controller\SponsorController:new" type="service_closure" id=".service_locator.CsMkqUa"/>
         <argument key="App\Controller\SportController:delete" type="service_closure" id=".service_locator.geVFa8t"/>
         <argument key="App\Controller\SportController:edit" type="service_closure" id=".service_locator.geVFa8t"/>
+        <argument key="App\Controller\SportController:exportCsv" type="service_closure" id=".service_locator.cX9LP_Y"/>
+        <argument key="App\Controller\SportController:exportExcel" type="service_closure" id=".service_locator.cX9LP_Y"/>
+        <argument key="App\Controller\SportController:exportPdf" type="service_closure" id=".service_locator.s2P9uaA"/>
         <argument key="App\Controller\SportController:index" type="service_closure" id=".service_locator.jpL5_4q"/>
         <argument key="App\Controller\SportController:new" type="service_closure" id=".service_locator.CsMkqUa"/>
         <argument key="App\Controller\SportController:statistics" type="service_closure" id=".service_locator.cX9LP_Y"/>
@@ -8347,16 +8879,23 @@
       <argument type="service" id="argument_resolver.query_parameter_value_resolver"/>
       <argument type="service" id="debug.stopwatch"/>
     </service>
-    <service id=".service_locator.6D1n88v" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.YoJLwco" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
+        <argument key="App\Form\AbonnementType" type="service_closure" id="App\Form\AbonnementType"/>
         <argument key="App\Form\ClubType" type="service_closure" id="App\Form\ClubType"/>
+        <argument key="App\Form\ContratType" type="service_closure" id="App\Form\ContratType"/>
         <argument key="App\Form\EspacesportifType" type="service_closure" id="App\Form\EspacesportifType"/>
         <argument key="App\Form\EvaluationPhysiqueType" type="service_closure" id="App\Form\EvaluationPhysiqueType"/>
+        <argument key="App\Form\FournisseurType" type="service_closure" id="App\Form\FournisseurType"/>
         <argument key="App\Form\HistoriqueClubType" type="service_closure" id="App\Form\HistoriqueClubType"/>
         <argument key="App\Form\JoueurType" type="service_closure" id="App\Form\JoueurType"/>
+        <argument key="App\Form\MatchType" type="service_closure" id="App\Form\MatchType"/>
+        <argument key="App\Form\MaterielType" type="service_closure" id="App\Form\MaterielType"/>
         <argument key="App\Form\PerformanceJoueurType" type="service_closure" id="App\Form\PerformanceJoueurType"/>
         <argument key="App\Form\ReservationType" type="service_closure" id="App\Form\ReservationType"/>
+        <argument key="App\Form\ScheduleType" type="service_closure" id="App\Form\ScheduleType"/>
+        <argument key="App\Form\SponsorType" type="service_closure" id="App\Form\SponsorType"/>
         <argument key="App\Form\SportType" type="service_closure" id="App\Form\SportType"/>
         <argument key="App\Form\UserType" type="service_closure" id="App\Form\UserType"/>
         <argument key="Symfony\Bridge\Doctrine\Form\Type\EntityType" type="service_closure" id="form.type.entity"/>
@@ -8821,9 +9360,27 @@
         <argument key="web_link.http_header_serializer" type="service_closure" id="web_link.http_header_serializer" on-invalid="ignore"/>
       </argument>
     </service>
+    <service id=".service_locator.O2p6Lk7.App\Controller\AbonnementController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\AbonnementController"/>
+      <argument>App\Controller\AbonnementController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.O2p6Lk7" method="withContext"/>
+    </service>
     <service id=".service_locator.O2p6Lk7.App\Controller\ClubController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\ClubController"/>
       <argument>App\Controller\ClubController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.O2p6Lk7" method="withContext"/>
+    </service>
+    <service id=".service_locator.O2p6Lk7.App\Controller\ContratController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\ContratController"/>
+      <argument>App\Controller\ContratController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.O2p6Lk7" method="withContext"/>
+    </service>
+    <service id=".service_locator.O2p6Lk7.App\Controller\DashboardController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\DashboardController"/>
+      <argument>App\Controller\DashboardController</argument>
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.O2p6Lk7" method="withContext"/>
     </service>
@@ -8839,15 +9396,39 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.O2p6Lk7" method="withContext"/>
     </service>
+    <service id=".service_locator.O2p6Lk7.App\Controller\FournisseurController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\FournisseurController"/>
+      <argument>App\Controller\FournisseurController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.O2p6Lk7" method="withContext"/>
+    </service>
     <service id=".service_locator.O2p6Lk7.App\Controller\HistoriqueClubController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\HistoriqueClubController"/>
       <argument>App\Controller\HistoriqueClubController</argument>
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.O2p6Lk7" method="withContext"/>
     </service>
+    <service id=".service_locator.O2p6Lk7.App\Controller\HomeController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\HomeController"/>
+      <argument>App\Controller\HomeController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.O2p6Lk7" method="withContext"/>
+    </service>
     <service id=".service_locator.O2p6Lk7.App\Controller\JoueurController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\JoueurController"/>
       <argument>App\Controller\JoueurController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.O2p6Lk7" method="withContext"/>
+    </service>
+    <service id=".service_locator.O2p6Lk7.App\Controller\MatchController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\MatchController"/>
+      <argument>App\Controller\MatchController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.O2p6Lk7" method="withContext"/>
+    </service>
+    <service id=".service_locator.O2p6Lk7.App\Controller\MaterielController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\MaterielController"/>
+      <argument>App\Controller\MaterielController</argument>
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.O2p6Lk7" method="withContext"/>
     </service>
@@ -8860,6 +9441,18 @@
     <service id=".service_locator.O2p6Lk7.App\Controller\ReservationController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\ReservationController"/>
       <argument>App\Controller\ReservationController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.O2p6Lk7" method="withContext"/>
+    </service>
+    <service id=".service_locator.O2p6Lk7.App\Controller\ScheduleController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\ScheduleController"/>
+      <argument>App\Controller\ScheduleController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.O2p6Lk7" method="withContext"/>
+    </service>
+    <service id=".service_locator.O2p6Lk7.App\Controller\SponsorController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\SponsorController"/>
+      <argument>App\Controller\SponsorController</argument>
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.O2p6Lk7" method="withContext"/>
     </service>
@@ -9049,13 +9642,22 @@
       <call method="allowControllers">
         <argument type="collection">
           <argument>App\Kernel</argument>
+          <argument>App\Controller\AbonnementController</argument>
           <argument>App\Controller\ClubController</argument>
+          <argument>App\Controller\ContratController</argument>
+          <argument>App\Controller\DashboardController</argument>
           <argument>App\Controller\EspacesportifController</argument>
           <argument>App\Controller\EvaluationPhysiqueController</argument>
+          <argument>App\Controller\FournisseurController</argument>
           <argument>App\Controller\HistoriqueClubController</argument>
+          <argument>App\Controller\HomeController</argument>
           <argument>App\Controller\JoueurController</argument>
+          <argument>App\Controller\MatchController</argument>
+          <argument>App\Controller\MaterielController</argument>
           <argument>App\Controller\PerformanceJoueurController</argument>
           <argument>App\Controller\ReservationController</argument>
+          <argument>App\Controller\ScheduleController</argument>
+          <argument>App\Controller\SponsorController</argument>
           <argument>App\Controller\SportController</argument>
           <argument>App\Controller\UserController</argument>
           <argument>Doctrine\Bundle\DoctrineBundle\Controller\ProfilerController</argument>
@@ -9265,11 +9867,20 @@
     <service id=".errored..service_locator.n8st8m4.App\Entity\EvaluationPhysique" class="App\Entity\EvaluationPhysique">
       <tag name="container.error" message="Cannot autowire service &quot;.service_locator.n8st8m4&quot;: it needs an instance of &quot;App\Entity\EvaluationPhysique&quot; but this type has been excluded in &quot;config/services.yaml&quot;."/>
     </service>
+    <service id=".errored..service_locator.RalIsqi.App\Entity\Fournisseur" class="App\Entity\Fournisseur">
+      <tag name="container.error" message="Cannot autowire service &quot;.service_locator.RalIsqi&quot;: it needs an instance of &quot;App\Entity\Fournisseur&quot; but this type has been excluded in &quot;config/services.yaml&quot;."/>
+    </service>
     <service id=".errored..service_locator.4E2JJj5.App\Entity\HistoriqueClub" class="App\Entity\HistoriqueClub">
       <tag name="container.error" message="Cannot autowire service &quot;.service_locator.4E2JJj5&quot;: it needs an instance of &quot;App\Entity\HistoriqueClub&quot; but this type has been excluded in &quot;config/services.yaml&quot;."/>
     </service>
     <service id=".errored..service_locator.0AreAVX.App\Entity\HistoriqueClub" class="App\Entity\HistoriqueClub">
       <tag name="container.error" message="Cannot autowire service &quot;.service_locator.0AreAVX&quot;: it needs an instance of &quot;App\Entity\HistoriqueClub&quot; but this type has been excluded in &quot;config/services.yaml&quot;."/>
+    </service>
+    <service id=".errored..service_locator.DBl8PzK.App\Entity\Materiel" class="App\Entity\Materiel">
+      <tag name="container.error" message="Cannot autowire service &quot;.service_locator.DBl8PzK&quot;: it needs an instance of &quot;App\Entity\Materiel&quot; but this type has been excluded in &quot;config/services.yaml&quot;."/>
+    </service>
+    <service id=".errored..service_locator.NgvlNzc.App\Entity\Materiel" class="App\Entity\Materiel">
+      <tag name="container.error" message="Cannot autowire service &quot;.service_locator.NgvlNzc&quot;: it needs an instance of &quot;App\Entity\Materiel&quot; but this type has been excluded in &quot;config/services.yaml&quot;."/>
     </service>
     <service id=".errored..service_locator.z4JrMru.App\Entity\PerformanceJoueur" class="App\Entity\PerformanceJoueur">
       <tag name="container.error" message="Cannot autowire service &quot;.service_locator.z4JrMru&quot;: it needs an instance of &quot;App\Entity\PerformanceJoueur&quot; but this type has been excluded in &quot;config/services.yaml&quot;."/>
@@ -10338,6 +10949,7 @@
     <service id="asset_mapper.http_client" alias=".debug.http_client"/>
     <service id="Symfony\Component\AssetMapper\ImportMap\ImportMapManager" alias="asset_mapper.importmap.manager"/>
     <service id="Symfony\Contracts\HttpClient\HttpClientInterface" alias=".debug.http_client"/>
+    <service id="Psr\Http\Client\ClientInterface" alias="psr18.http_client"/>
     <service id="mailer" alias="mailer.mailer"/>
     <service id="Symfony\Component\Mailer\MailerInterface" alias="mailer.mailer"/>
     <service id="mailer.default_transport" alias="mailer.transports"/>
@@ -10471,7 +11083,7 @@
     <service id="Knp\Component\Pager\ArgumentAccess\ArgumentAccessInterface" alias="Knp\Component\Pager\ArgumentAccess\RequestArgumentAccess"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.w7.f4fT" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.za3Da9Q"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.UMQSXih"/>
     <service id="doctrine.id_generator_locator" alias=".service_locator.KLVvNIq"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface $requestLogger" alias="monolog.logger.request"/>
@@ -10495,19 +11107,33 @@
     <service id=".service_locator.80edgLI" alias="messenger.receiver_locator"/>
     <service id=".service_locator.h8Jkkd2" alias="messenger.retry_strategy_locator"/>
     <service id=".service_locator.bJ.4HC5" alias=".service_locator.w7.f4fT"/>
+    <service id=".service_locator.Ecpu4I3" alias=".service_locator.8H.sdZM"/>
+    <service id=".service_locator.U1vYzKJ" alias=".service_locator.rCZqcqr"/>
     <service id=".service_locator.Ujuv6y5" alias=".service_locator.cCvvgRo"/>
     <service id=".service_locator.Naq5WmR" alias=".service_locator.n8st8m4"/>
     <service id=".service_locator.MteuFlB" alias=".service_locator.0qaldgn"/>
+    <service id=".service_locator.yhCnENY" alias=".service_locator.2vMbG.c"/>
+    <service id=".service_locator.fnQ8Sk2" alias=".service_locator.RalIsqi"/>
     <service id=".service_locator._kIBHZW" alias=".service_locator.0AreAVX"/>
+    <service id=".service_locator.OTRGUMV" alias=".service_locator.gfugV81"/>
+    <service id=".service_locator.CbdBTI6" alias=".service_locator.dvlXw22"/>
+    <service id=".service_locator.982YDwk" alias=".service_locator.SYFRzfM"/>
+    <service id=".service_locator.j7s8Dqo" alias=".service_locator.BKF_x8u"/>
+    <service id=".service_locator.wGYfj2p" alias=".service_locator.RCuzfnb"/>
+    <service id=".service_locator.COmA09s" alias=".service_locator.DBl8PzK"/>
+    <service id=".service_locator.EETwEHG" alias=".service_locator.NgvlNzc"/>
     <service id=".service_locator.IcIxi4." alias=".service_locator.PNlbJGO"/>
+    <service id=".service_locator.OgM2.1e" alias=".service_locator.0YVKWVu"/>
     <service id=".service_locator.r3wEyuD" alias=".service_locator.Lt49UVm"/>
+    <service id=".service_locator.UA97Ptq" alias=".service_locator.VA.oRVl"/>
     <service id=".service_locator.vYOHL0D" alias=".service_locator.jpL5_4q"/>
     <service id=".service_locator.X9gG0Wi" alias=".service_locator.geVFa8t"/>
+    <service id=".service_locator.RwykrWv" alias=".service_locator.s2P9uaA"/>
     <service id=".service_locator.RtCGHrO" alias=".service_locator.lDw5jgg"/>
     <service id=".service_locator.R0Sb2kd" alias=".service_locator.rvMNZGh"/>
-    <service id=".service_locator.BUYWh7D" alias=".service_locator.za3Da9Q"/>
+    <service id=".service_locator.MPlGvy5" alias=".service_locator.UMQSXih"/>
     <service id=".service_locator.BFrsqsn" alias=".service_locator.F9PKc.7"/>
-    <service id=".service_locator.ldexW86" alias=".service_locator.6D1n88v"/>
+    <service id=".service_locator.Q8MRPOg" alias=".service_locator.YoJLwco"/>
     <service id=".service_locator.XtmiKbi" alias=".service_locator.MfxSDRP"/>
     <service id=".service_locator.O24_MAy" alias=".service_locator.yY.p4P7"/>
     <service id=".service_locator.jUv.zyj" alias=".service_locator.O2p6Lk7"/>
@@ -10531,27 +11157,58 @@
     <service id="doctrine.orm.default_metadata_driver" alias=".doctrine.orm.default_metadata_driver"/>
     <service id="security.event_dispatcher.main" alias="debug.security.event_dispatcher.main"/>
     <service id=".service_locator.gFlme_s" alias=".service_locator.y4_Zrx."/>
-    <service id=".service_locator.zb_P8ny" alias=".service_locator.eOJlB0r"/>
+    <service id=".service_locator.4CyRaPf" alias=".service_locator.3a_pjdo"/>
+    <service id=".service_locator.YJIKvn2" alias=".service_locator.9_.T.FR"/>
     <service id=".service_locator.9e2t_lq" alias=".service_locator.CsMkqUa"/>
-    <service id=".service_locator.0rL9syw" alias=".service_locator.GbJZUn8"/>
+    <service id=".service_locator.uUZ1mZm" alias=".service_locator.RsAjdld"/>
+    <service id=".service_locator.BjUZy0_" alias=".service_locator.d2ecNSb"/>
+    <service id=".service_locator.zb_P8ny" alias=".service_locator.eOJlB0r"/>
+    <service id=".service_locator.5EzUEJW" alias=".service_locator.8te4nbt"/>
+    <service id=".service_locator.mRHrHxc" alias=".service_locator.8H.sdZM"/>
+    <service id=".service_locator.8CdGlak" alias=".service_locator.0TK7yZ8"/>
+    <service id=".service_locator.jd8N3By" alias=".service_locator.46d3SGC"/>
+    <service id=".service_locator.sB.Ojz4" alias=".service_locator.USDzM3K"/>
     <service id=".service_locator.yjrcdVj" alias=".service_locator.KEBwH6u"/>
+    <service id=".service_locator.1s_pXv_" alias=".service_locator.ioGT2SM"/>
+    <service id=".service_locator.NTH9FCZ" alias=".service_locator.wlYIEyg"/>
+    <service id=".service_locator.4T9dBuw" alias=".service_locator.rCZqcqr"/>
     <service id=".service_locator.yEqFhNP" alias=".service_locator.cCvvgRo"/>
-    <service id=".service_locator.o4u8GOZ" alias=".service_locator.CbdBTI6"/>
     <service id=".service_locator.KFl_Jdo" alias=".service_locator.Nm9r6bo"/>
     <service id=".service_locator.s5W9BFG" alias=".service_locator.n8st8m4"/>
     <service id=".service_locator.pJ_xnf_" alias=".service_locator.0qaldgn"/>
+    <service id=".service_locator.IIE7_z1" alias=".service_locator.2vMbG.c"/>
+    <service id=".service_locator.qeHuYrT" alias=".service_locator.RalIsqi"/>
+    <service id=".service_locator.2pHRNqe" alias=".service_locator.gRU4WRm"/>
+    <service id=".service_locator.JFvnd0a" alias=".service_locator.M1LzjtO"/>
     <service id=".service_locator.WL1gjZt" alias=".service_locator.ZE9R63e"/>
     <service id=".service_locator.MB8hsSd" alias=".service_locator.4E2JJj5"/>
     <service id=".service_locator.jV9c70C" alias=".service_locator.0AreAVX"/>
+    <service id=".service_locator.s8pPuoc" alias=".service_locator.FFEnhRj"/>
     <service id=".service_locator.m9dk8kD" alias=".service_locator.i0N9PQM"/>
+    <service id=".service_locator.6eTaCtE" alias=".service_locator.gfugV81"/>
+    <service id=".service_locator.o4u8GOZ" alias=".service_locator.dvlXw22"/>
+    <service id=".service_locator.X_gmxku" alias=".service_locator.SYFRzfM"/>
+    <service id=".service_locator.R9pqApQ" alias=".service_locator.BKF_x8u"/>
+    <service id=".service_locator.ne_snVk" alias=".service_locator.TDAL4Wh"/>
+    <service id=".service_locator.xb.lGKw" alias=".service_locator.7eyVGjZ"/>
+    <service id=".service_locator.Y5_X5BF" alias=".service_locator.RCuzfnb"/>
+    <service id=".service_locator.lUJI3Z8" alias=".service_locator.LNwsF6h"/>
+    <service id=".service_locator.W17v7YY" alias=".service_locator.DBl8PzK"/>
+    <service id=".service_locator.sZiCqRZ" alias=".service_locator.NgvlNzc"/>
+    <service id=".service_locator.QyKL_NR" alias=".service_locator.jnu2S_s"/>
     <service id=".service_locator.LXe3GOx" alias=".service_locator.CrEgygo"/>
     <service id=".service_locator.5TBLhhJ" alias=".service_locator.z4JrMru"/>
     <service id=".service_locator.4AVqgs9" alias=".service_locator.PNlbJGO"/>
+    <service id=".service_locator.tUvBoga" alias=".service_locator.0YVKWVu"/>
     <service id=".service_locator.LuS44bc" alias=".service_locator.caJHb8S"/>
     <service id=".service_locator.Egb5n_m" alias=".service_locator.Lt49UVm"/>
+    <service id=".service_locator.sdWL846" alias=".service_locator.Z3Oe1ma"/>
+    <service id=".service_locator.deNQON3" alias=".service_locator.VA.oRVl"/>
+    <service id=".service_locator..KBaod7" alias=".service_locator.MPUuYf0"/>
     <service id=".service_locator.W_TcJ7V" alias=".service_locator.jpL5_4q"/>
     <service id=".service_locator.vtj.h5i" alias=".service_locator.cX9LP_Y"/>
     <service id=".service_locator.0VPh.hj" alias=".service_locator.geVFa8t"/>
+    <service id=".service_locator.pHhadZw" alias=".service_locator.s2P9uaA"/>
     <service id=".service_locator.EwtfK4Y" alias=".service_locator.lDw5jgg"/>
     <service id=".service_locator.USpvWCd" alias=".service_locator.qWLXMoh"/>
     <service id=".service_locator.gaTSUXr" alias=".service_locator.9kKwU2t"/>

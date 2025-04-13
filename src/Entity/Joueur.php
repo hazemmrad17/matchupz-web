@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 #[ORM\Entity]
 #[ORM\Table(name: "joueur")]
@@ -14,40 +16,50 @@ class Joueur
     private ?int $idJoueur = null;
 
     #[ORM\ManyToOne(targetEntity: Sport::class)]
-    #[ORM\JoinColumn(name: "id_sport", referencedColumnName: "id_sport", nullable: false)]
+    #[ORM\JoinColumn(name: "id_sport", referencedColumnName: "id_sport", nullable: true)]
     private ?Sport $sport = null;
 
-    #[ORM\Column(type: "string", length: 50)]
-    private ?string $nom = null;
+    #[ORM\OneToMany(mappedBy: "joueur", targetEntity: PerformanceJoueur::class)]
+    private Collection $performances;
 
-    #[ORM\Column(type: "string", length: 50)]
-    private ?string $prenom = null;
+    #[ORM\OneToOne(mappedBy: "joueur", targetEntity: EvaluationPhysique::class, cascade: ["persist", "remove"])]
+    private ?EvaluationPhysique $evaluationPhysique = null;
+
+    #[ORM\Column(type: "string", length: 255)]
+    private string $nom;
+
+    #[ORM\Column(type: "string", length: 255)]
+    private string $prenom;
 
     #[ORM\Column(type: "date")]
-    private ?\DateTimeInterface $dateNaissance = null;
+    private \DateTimeInterface $dateNaissance;
 
-    #[ORM\Column(type: "string", length: 50, nullable: true)]
-    private ?string $poste = null;
+    #[ORM\Column(type: "string", columnDefinition: "ENUM('GK', 'RB', 'LB', 'RWB', 'LWB', 'SW', 'DM', 'CM', 'AM', 'RM', 'LM', 'RW', 'LW', 'CF', 'ST', 'SS') NOT NULL")]
+    private string $poste;
 
-    #[ORM\Column(type: "float", nullable: true)]
-    private ?float $taille = null;
+    #[ORM\Column(type: "float")]
+    private float $taille;
 
-    #[ORM\Column(type: "float", nullable: true)] // Fixed the typo here
-    private ?float $poids = null;
+    #[ORM\Column(type: "float")]
+    private float $poids;
 
-    #[ORM\Column(type: "string", length: 50, nullable: true)]
-    private ?string $statut = null;
+    #[ORM\Column(type: "string", columnDefinition: "ENUM('Actif', 'Blessé', 'Suspendu', '') NOT NULL")]
+    private string $statut;
 
-    #[ORM\Column(type: "string", length: 100, nullable: true)]
-    private ?string $email = null;
+    #[ORM\Column(type: "string", length: 255)]
+    private string $email;
 
-    #[ORM\Column(type: "string", length: 20, nullable: true)]
-    private ?string $telephone = null;
+    #[ORM\Column(type: "string", length: 255)]
+    private string $telephone;
 
     #[ORM\Column(type: "string", length: 255, nullable: true)]
     private ?string $profilePictureUrl = null;
 
-    // Getters and Setters
+    public function __construct()
+    {
+        $this->performances = new ArrayCollection();
+    }
+
     public function getIdJoueur(): ?int
     {
         return $this->idJoueur;
@@ -58,13 +70,54 @@ class Joueur
         return $this->sport;
     }
 
-    public function setSport(Sport $sport): self
+    public function setSport(?Sport $sport): self
     {
         $this->sport = $sport;
         return $this;
     }
 
-    public function getNom(): ?string
+    /**
+     * @return Collection<int, PerformanceJoueur>
+     */
+    public function getPerformances(): Collection
+    {
+        return $this->performances;
+    }
+
+    public function addPerformance(PerformanceJoueur $performance): self
+    {
+        if (!$this->performances->contains($performance)) {
+            $this->performances->add($performance);
+            $performance->setJoueur($this);
+        }
+        return $this;
+    }
+
+    public function removePerformance(PerformanceJoueur $performance): self
+    {
+        if ($this->performances->removeElement($performance)) {
+            if ($performance->getJoueur() === $this) {
+                $performance->setJoueur(null);
+            }
+        }
+        return $this;
+    }
+
+    public function getEvaluationPhysique(): ?EvaluationPhysique
+    {
+        return $this->evaluationPhysique;
+    }
+
+    public function setEvaluationPhysique(?EvaluationPhysique $evaluationPhysique): self
+    {
+        if ($evaluationPhysique !== null && $evaluationPhysique->getJoueur() !== $this) {
+            $evaluationPhysique->setJoueur($this);
+        }
+        $this->evaluationPhysique = $evaluationPhysique;
+        return $this;
+    }
+
+    public function getNom(): string
     {
         return $this->nom;
     }
@@ -75,7 +128,7 @@ class Joueur
         return $this;
     }
 
-    public function getPrenom(): ?string
+    public function getPrenom(): string
     {
         return $this->prenom;
     }
@@ -86,7 +139,7 @@ class Joueur
         return $this;
     }
 
-    public function getDateNaissance(): ?\DateTimeInterface
+    public function getDateNaissance(): \DateTimeInterface
     {
         return $this->dateNaissance;
     }
@@ -97,67 +150,67 @@ class Joueur
         return $this;
     }
 
-    public function getPoste(): ?string
+    public function getPoste(): string
     {
         return $this->poste;
     }
 
-    public function setPoste(?string $poste): self
+    public function setPoste(string $poste): self
     {
         $this->poste = $poste;
         return $this;
     }
 
-    public function getTaille(): ?float
+    public function getTaille(): float
     {
         return $this->taille;
     }
 
-    public function setTaille(?float $taille): self
+    public function setTaille(float $taille): self
     {
         $this->taille = $taille;
         return $this;
     }
 
-    public function getPoids(): ?float
+    public function getPoids(): float
     {
         return $this->poids;
     }
 
-    public function setPoids(?float $poids): self
+    public function setPoids(float $poids): self
     {
         $this->poids = $poids;
         return $this;
     }
 
-    public function getStatut(): ?string
+    public function getStatut(): string
     {
         return $this->statut;
     }
 
-    public function setStatut(?string $statut): self
+    public function setStatut(string $statut): self
     {
         $this->statut = $statut;
         return $this;
     }
 
-    public function getEmail(): ?string
+    public function getEmail(): string
     {
         return $this->email;
     }
 
-    public function setEmail(?string $email): self
+    public function setEmail(string $email): self
     {
         $this->email = $email;
         return $this;
     }
 
-    public function getTelephone(): ?string
+    public function getTelephone(): string
     {
         return $this->telephone;
     }
 
-    public function setTelephone(?string $telephone): self
+    public function setTelephone(string $telephone): self
     {
         $this->telephone = $telephone;
         return $this;

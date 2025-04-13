@@ -1,0 +1,107 @@
+{% extends 'base.html.twig' %}
+    {% block searchbar %}
+        {% include 'searchbar.html.twig' %}
+    {% endblock %}
+
+{% block content %}
+    <div class="content-wrapper">
+        <div class="container-xxl flex-grow-1 container-p-y">
+            <h4 class="fw-bold py-3 mb-4">
+                <span class="text-muted fw-light">Matchs /</span> Modifier Match
+            </h4>
+
+            <div class="col-xl">
+                <div class="card mb-4">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">Modifier Match #{{ match.id }}</h5>
+                        <small class="text-muted float-end">Mettre à jour les détails</small>
+                    </div>
+                    <div class="card-body">
+                        {{ form_start(form, {'id': 'matchForm', 'novalidate': 'novalidate'}) }}
+                            <div class="mb-3">
+                                <label class="form-label" for="match_c1">Competitor 1</label>
+                                <div class="input-group input-group-merge">
+                                    <span class="input-group-text"><i class="bx bx-user"></i></span>
+                                    {{ form_widget(form.c1, {'attr': {'class': 'form-control', 'id': 'match_c1'}}) }}
+                                </div>
+                                <div class="text-danger mt-1" id="c1Error"></div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="match_c2">Competitor 2</label>
+                                <div class="input-group input-group-merge">
+                                    <span class="input-group-text"><i class="bx bx-user"></i></span>
+                                    {{ form_widget(form.c2, {'attr': {'class': 'form-control', 'id': 'match_c2'}}) }}
+                                </div>
+                                <div class="text-danger mt-1" id="c2Error"></div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="match_sportType">Type de Sport</label>
+                                <div class="input-group input-group-merge">
+                                    <span class="input-group-text"><i class="bx bx-run"></i></span>
+                                    {{ form_widget(form.sportType, {'attr': {'class': 'form-control', 'id': 'match_sportType'}}) }}
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Mettre à Jour</button>
+                            <a href="{{ path('match_show', {'id': match.id}) }}" class="btn btn-secondary">Annuler</a>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.getElementById('matchForm');
+            const c1Input = document.getElementById('match_c1');
+            const c2Input = document.getElementById('match_c2');
+            const c1Error = document.getElementById('c1Error');
+            const c2Error = document.getElementById('c2Error');
+
+            // Function to validate a single field
+            function validateField(input, errorElement, fieldName) {
+                let hasError = false;
+                errorElement.textContent = '';
+                input.classList.remove('is-invalid');
+
+                if (!input.value.trim()) {
+                    errorElement.textContent = `Le champ ${fieldName} ne peut pas être vide.`;
+                    input.classList.add('is-invalid');
+                    hasError = true;
+                } else if (input.value.length > 15) {
+                    errorElement.textContent = `Le champ ${fieldName} ne peut pas dépasser 15 caractères.`;
+                    input.classList.add('is-invalid');
+                    hasError = true;
+                }
+                return hasError;
+            }
+
+            // Real-time validation on input
+            c1Input.addEventListener('input', function () {
+                validateField(c1Input, c1Error, 'Competitor 1');
+            });
+
+            c2Input.addEventListener('input', function () {
+                validateField(c2Input, c2Error, 'Competitor 2');
+            });
+
+            // Validate on form submission
+            form.addEventListener('submit', function (event) {
+                let hasError = false;
+
+                // Validate both fields
+                if (validateField(c1Input, c1Error, 'Competitor 1')) {
+                    hasError = true;
+                }
+                if (validateField(c2Input, c2Error, 'Competitor 2')) {
+                    hasError = true;
+                }
+
+                if (hasError) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+            });
+        });
+    </script>
+{% endblock %}

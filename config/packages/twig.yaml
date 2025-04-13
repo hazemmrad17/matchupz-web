@@ -2,6 +2,7 @@ twig:
     file_name_pattern: '*.twig'
     paths:
         '%kernel.project_dir%/front': front
+        '%kernel.project_dir%/templates/': templates
 
 when@test:
     twig:

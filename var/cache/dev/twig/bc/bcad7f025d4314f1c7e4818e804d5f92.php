@@ -136,7 +136,7 @@ class __TwigTemplate_7812afceb7a6c4e86719ee892dd6d30d extends Template
                         <a href=\"";
         // line 16
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("sport_statistics");
-        yield "\" class=\"btn btn-info me-2\">
+        yield "\" class=\"btn btn-primary me-2\">
                             <i class=\"bx bx-stats\"></i> Statistiques
                         </a>
                         <a href=\"";
@@ -282,7 +282,7 @@ class __TwigTemplate_7812afceb7a6c4e86719ee892dd6d30d extends Template
                 <h5 class=\"card-header d-flex justify-content-between align-items-center\">
                     Liste des Sports
                     <div>
-                        <a href=\"{{ path('sport_statistics') }}\" class=\"btn btn-info me-2\">
+                        <a href=\"{{ path('sport_statistics') }}\" class=\"btn btn-primary me-2\">
                             <i class=\"bx bx-stats\"></i> Statistiques
                         </a>
                         <a href=\"{{ path('sport_new') }}\" class=\"btn btn-primary\">

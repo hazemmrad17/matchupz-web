@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sponsor Statistics{% endblock %}
+
+{% block body %}
+<h4 class="fw-bold py-3 mb-4">Sponsor Statistics</h4>
+
+<div class="row">
+    <!-- Total Sponsors -->
+    <div class="col-lg-4 col-md-6 mb-4">
+        <div class="card">
+            <div class="card-body">
+                <div class="card-title d-flex align-items-start justify-content-between">
+                    <div class="avatar flex-shrink-0">
+                        <img src="{{ asset('img/icons/unicons/chart-success.png') }}" alt="Sponsors" class="rounded" />
+                    </div>
+                </div>
+                <span class="fw-semibold d-block mb-1">Total Sponsors</span>
+                <h3 class="card-title mb-2">{{ totalSponsors }}</h3>
+                <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> Updated Today</small>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pack Distribution Chart -->
+    <div class="col-12 col-lg-6 mb-4">
+        <div class="card">
+            <div class="card-header"><h5 class="card-title m-0 me-2">Pack Distribution</h5></div>
+            <div class="card-body"><div id="packDistributionChart"></div></div>
+        </div>
+    </div>
+
+    <!-- All Sponsors List -->
+    <div class="col-12 col-lg-6 mb-4">
+        <div class="card">
+            <div class="card-header"><h5 class="card-title m-0 me-2">All Sponsors</h5></div>
+            <div class="card-body" style="max-height: 400px; overflow-y: auto;">
+                <ul class="p-0 m-0">
+                    {% for sponsor in allSponsors %}
+                        <li class="d-flex mb-4 pb-1">
+                            <div class="avatar flex-shrink-0 me-3">
+                                <img src="{{ asset('img/default-avatar.png') }}" alt="Sponsor" class="rounded" />
+                            </div>
+                            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                                <div class="me-2">
+                                    <h6 class="mb-0">{{ sponsor.nom }}</h6>
+                                    <small class="text-muted">{{ sponsor.pack }}</small>
+                                </div>
+                                <div class="user-progress">
+                                    <small class="fw-semibold">{{ sponsor.contact }}</small>
+                                </div>
+                            </div>
+                        </li>
+                    {% else %}
+                        <li>No sponsors found.</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Pack Distribution
+            new ApexCharts(document.querySelector("#packDistributionChart"), {
+                chart: { type: 'pie', height: 350 },
+                series: [{% for pack, count in packDistribution %}{{ count }},{% endfor %}],
+                labels: [{% for pack in packDistribution|keys %}'{{ pack }}',{% endfor %}]
+            }).render();
+        });
+    </script>
+{% endblock %}

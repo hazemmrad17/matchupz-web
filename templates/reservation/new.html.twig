@@ -22,7 +22,10 @@
                             <div class="alert alert-danger">{{ message }}</div>
                         {% endfor %}
 
-                        {{ form_start(form) }}
+                        {# Display global form errors #}
+                        {{ form_errors(form) }}
+
+                        {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
                             <div class="mb-3">
                                 <label class="form-label" for="espacesportif">Lieu Sportif</label>
                                 <div class="input-group input-group-merge">

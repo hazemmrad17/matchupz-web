@@ -76,31 +76,31 @@ class __TwigTemplate_99110e98df4190347b6b1dd4e9ced8a5 extends Template
         yield "    <div class=\"content-wrapper\">
         <div class=\"container-xxl flex-grow-1 container-p-y\">
             <h4 class=\"fw-bold py-3 mb-4\">
-                <span class=\"text-muted fw-light\">Sports /</span> Détails du Sport
+                <span class=\"text-muted fw-light\">Abonnements /</span> Détails de l'Abonnement
             </h4>
 
             <div class=\"card\">
                 <div class=\"card-header d-flex justify-content-between align-items-center\">
-                    <h5 class=\"card-title mb-0\">Sport #";
+                    <h5 class=\"card-title mb-0\">Abonnement #";
         // line 12
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["sport"]) || array_key_exists("sport", $context) ? $context["sport"] : (function () { throw new RuntimeError('Variable "sport" does not exist.', 12, $this->source); })()), "idSport", [], "any", false, false, false, 12), "html", null, true);
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["abonnement"]) || array_key_exists("abonnement", $context) ? $context["abonnement"] : (function () { throw new RuntimeError('Variable "abonnement" does not exist.', 12, $this->source); })()), "idAbonnement", [], "any", false, false, false, 12), "html", null, true);
         yield "</h5>
                     <div>
                         <a href=\"";
         // line 14
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("sport_edit", ["idSport" => CoreExtension::getAttribute($this->env, $this->source, (isset($context["sport"]) || array_key_exists("sport", $context) ? $context["sport"] : (function () { throw new RuntimeError('Variable "sport" does not exist.', 14, $this->source); })()), "idSport", [], "any", false, false, false, 14)]), "html", null, true);
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("abonnement_edit", ["idAbonnement" => CoreExtension::getAttribute($this->env, $this->source, (isset($context["abonnement"]) || array_key_exists("abonnement", $context) ? $context["abonnement"] : (function () { throw new RuntimeError('Variable "abonnement" does not exist.', 14, $this->source); })()), "idAbonnement", [], "any", false, false, false, 14)]), "html", null, true);
         yield "\" class=\"btn btn-sm btn-primary\">Modifier</a>
                         <a href=\"";
         // line 15
-        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("sport_index");
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("abonnement_index");
         yield "\" class=\"btn btn-sm btn-secondary\">Retour à la liste</a>
                         <form method=\"post\" action=\"";
         // line 16
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("sport_delete", ["idSport" => CoreExtension::getAttribute($this->env, $this->source, (isset($context["sport"]) || array_key_exists("sport", $context) ? $context["sport"] : (function () { throw new RuntimeError('Variable "sport" does not exist.', 16, $this->source); })()), "idSport", [], "any", false, false, false, 16)]), "html", null, true);
-        yield "\" style=\"display:inline;\" onsubmit=\"return confirm('Êtes-vous sûr de vouloir supprimer ce sport ?');\">
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("abonnement_delete", ["idAbonnement" => CoreExtension::getAttribute($this->env, $this->source, (isset($context["abonnement"]) || array_key_exists("abonnement", $context) ? $context["abonnement"] : (function () { throw new RuntimeError('Variable "abonnement" does not exist.', 16, $this->source); })()), "idAbonnement", [], "any", false, false, false, 16)]), "html", null, true);
+        yield "\" style=\"display:inline;\" onsubmit=\"return confirm('Êtes-vous sûr de vouloir supprimer cet abonnement ?');\">
                             <input type=\"hidden\" name=\"_token\" value=\"";
         // line 17
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderCsrfToken(("delete" . CoreExtension::getAttribute($this->env, $this->source, (isset($context["sport"]) || array_key_exists("sport", $context) ? $context["sport"] : (function () { throw new RuntimeError('Variable "sport" does not exist.', 17, $this->source); })()), "idSport", [], "any", false, false, false, 17))), "html", null, true);
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderCsrfToken(("delete" . CoreExtension::getAttribute($this->env, $this->source, (isset($context["abonnement"]) || array_key_exists("abonnement", $context) ? $context["abonnement"] : (function () { throw new RuntimeError('Variable "abonnement" does not exist.', 17, $this->source); })()), "idAbonnement", [], "any", false, false, false, 17))), "html", null, true);
         yield "\">
                             <button class=\"btn btn-sm btn-danger\" type=\"submit\">
                                 Supprimer
@@ -111,17 +111,45 @@ class __TwigTemplate_99110e98df4190347b6b1dd4e9ced8a5 extends Template
                 <div class=\"card-body\">
                     <div class=\"row\">
                         <div class=\"col-md-6\">
-                            <h6>Nom du Sport</h6>
+                            <h6>Club</h6>
                             <p>";
         // line 28
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["sport"]) || array_key_exists("sport", $context) ? $context["sport"] : (function () { throw new RuntimeError('Variable "sport" does not exist.', 28, $this->source); })()), "nomSport", [], "any", false, false, false, 28), "html", null, true);
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["abonnement"]) || array_key_exists("abonnement", $context) ? $context["abonnement"] : (function () { throw new RuntimeError('Variable "abonnement" does not exist.', 28, $this->source); })()), "club", [], "any", false, false, false, 28), "nomClub", [], "any", false, false, false, 28), "html", null, true);
         yield "</p>
                         </div>
                         <div class=\"col-md-6\">
-                            <h6>Description</h6>
+                            <h6>Type d'Abonnement</h6>
                             <p>";
         // line 32
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(((CoreExtension::getAttribute($this->env, $this->source, ($context["sport"] ?? null), "description", [], "any", true, true, false, 32)) ? (Twig\Extension\CoreExtension::default(CoreExtension::getAttribute($this->env, $this->source, (isset($context["sport"]) || array_key_exists("sport", $context) ? $context["sport"] : (function () { throw new RuntimeError('Variable "sport" does not exist.', 32, $this->source); })()), "description", [], "any", false, false, false, 32), "Non spécifiée")) : ("Non spécifiée")), "html", null, true);
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["abonnement"]) || array_key_exists("abonnement", $context) ? $context["abonnement"] : (function () { throw new RuntimeError('Variable "abonnement" does not exist.', 32, $this->source); })()), "typeAbonnement", [], "any", false, false, false, 32), "html", null, true);
+        yield "</p>
+                        </div>
+                        <div class=\"col-md-6\">
+                            <h6>Date de Début</h6>
+                            <p>";
+        // line 36
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, (isset($context["abonnement"]) || array_key_exists("abonnement", $context) ? $context["abonnement"] : (function () { throw new RuntimeError('Variable "abonnement" does not exist.', 36, $this->source); })()), "dateDebut", [], "any", false, false, false, 36), "d/m/Y"), "html", null, true);
+        yield "</p>
+                        </div>
+                        <div class=\"col-md-6\">
+                            <h6>Date de Fin</h6>
+                            <p>";
+        // line 40
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, (isset($context["abonnement"]) || array_key_exists("abonnement", $context) ? $context["abonnement"] : (function () { throw new RuntimeError('Variable "abonnement" does not exist.', 40, $this->source); })()), "dateFin", [], "any", false, false, false, 40), "d/m/Y"), "html", null, true);
+        yield "</p>
+                        </div>
+                        <div class=\"col-md-6\">
+                            <h6>Tarif</h6>
+                            <p>";
+        // line 44
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["abonnement"]) || array_key_exists("abonnement", $context) ? $context["abonnement"] : (function () { throw new RuntimeError('Variable "abonnement" does not exist.', 44, $this->source); })()), "tarif", [], "any", false, false, false, 44), "html", null, true);
+        yield "</p>
+                        </div>
+                        <div class=\"col-md-6\">
+                            <h6>État</h6>
+                            <p>";
+        // line 48
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["abonnement"]) || array_key_exists("abonnement", $context) ? $context["abonnement"] : (function () { throw new RuntimeError('Variable "abonnement" does not exist.', 48, $this->source); })()), "etat", [], "any", false, false, false, 48), "html", null, true);
         yield "</p>
                         </div>
                     </div>
@@ -160,7 +188,7 @@ class __TwigTemplate_99110e98df4190347b6b1dd4e9ced8a5 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  124 => 32,  117 => 28,  103 => 17,  99 => 16,  95 => 15,  91 => 14,  86 => 12,  76 => 4,  63 => 3,  40 => 1,);
+        return array (  152 => 48,  145 => 44,  138 => 40,  131 => 36,  124 => 32,  117 => 28,  103 => 17,  99 => 16,  95 => 15,  91 => 14,  86 => 12,  76 => 4,  63 => 3,  40 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -171,17 +199,17 @@ class __TwigTemplate_99110e98df4190347b6b1dd4e9ced8a5 extends Template
     <div class=\"content-wrapper\">
         <div class=\"container-xxl flex-grow-1 container-p-y\">
             <h4 class=\"fw-bold py-3 mb-4\">
-                <span class=\"text-muted fw-light\">Sports /</span> Détails du Sport
+                <span class=\"text-muted fw-light\">Abonnements /</span> Détails de l'Abonnement
             </h4>
 
             <div class=\"card\">
                 <div class=\"card-header d-flex justify-content-between align-items-center\">
-                    <h5 class=\"card-title mb-0\">Sport #{{ sport.idSport }}</h5>
+                    <h5 class=\"card-title mb-0\">Abonnement #{{ abonnement.idAbonnement }}</h5>
                     <div>
-                        <a href=\"{{ path('sport_edit', {'idSport': sport.idSport}) }}\" class=\"btn btn-sm btn-primary\">Modifier</a>
-                        <a href=\"{{ path('sport_index') }}\" class=\"btn btn-sm btn-secondary\">Retour à la liste</a>
-                        <form method=\"post\" action=\"{{ path('sport_delete', {'idSport': sport.idSport}) }}\" style=\"display:inline;\" onsubmit=\"return confirm('Êtes-vous sûr de vouloir supprimer ce sport ?');\">
-                            <input type=\"hidden\" name=\"_token\" value=\"{{ csrf_token('delete' ~ sport.idSport) }}\">
+                        <a href=\"{{ path('abonnement_edit', {'idAbonnement': abonnement.idAbonnement}) }}\" class=\"btn btn-sm btn-primary\">Modifier</a>
+                        <a href=\"{{ path('abonnement_index') }}\" class=\"btn btn-sm btn-secondary\">Retour à la liste</a>
+                        <form method=\"post\" action=\"{{ path('abonnement_delete', {'idAbonnement': abonnement.idAbonnement}) }}\" style=\"display:inline;\" onsubmit=\"return confirm('Êtes-vous sûr de vouloir supprimer cet abonnement ?');\">
+                            <input type=\"hidden\" name=\"_token\" value=\"{{ csrf_token('delete' ~ abonnement.idAbonnement) }}\">
                             <button class=\"btn btn-sm btn-danger\" type=\"submit\">
                                 Supprimer
                             </button>
@@ -191,12 +219,28 @@ class __TwigTemplate_99110e98df4190347b6b1dd4e9ced8a5 extends Template
                 <div class=\"card-body\">
                     <div class=\"row\">
                         <div class=\"col-md-6\">
-                            <h6>Nom du Sport</h6>
-                            <p>{{ sport.nomSport }}</p>
+                            <h6>Club</h6>
+                            <p>{{ abonnement.club.nomClub }}</p>
                         </div>
                         <div class=\"col-md-6\">
-                            <h6>Description</h6>
-                            <p>{{ sport.description|default('Non spécifiée') }}</p>
+                            <h6>Type d'Abonnement</h6>
+                            <p>{{ abonnement.typeAbonnement }}</p>
+                        </div>
+                        <div class=\"col-md-6\">
+                            <h6>Date de Début</h6>
+                            <p>{{ abonnement.dateDebut|date('d/m/Y') }}</p>
+                        </div>
+                        <div class=\"col-md-6\">
+                            <h6>Date de Fin</h6>
+                            <p>{{ abonnement.dateFin|date('d/m/Y') }}</p>
+                        </div>
+                        <div class=\"col-md-6\">
+                            <h6>Tarif</h6>
+                            <p>{{ abonnement.tarif }}</p>
+                        </div>
+                        <div class=\"col-md-6\">
+                            <h6>État</h6>
+                            <p>{{ abonnement.etat }}</p>
                         </div>
                     </div>
                 </div>

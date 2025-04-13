@@ -74,7 +74,7 @@ class __TwigTemplate_073aaeedeecc5b6fec9e64b3afa3bb31 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "title"));
 
-        yield "Sport Statistics";
+        yield "Statistiques des Abonnements";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
 
@@ -98,155 +98,107 @@ class __TwigTemplate_073aaeedeecc5b6fec9e64b3afa3bb31 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
 
         // line 6
-        yield "<h4 class=\"fw-bold py-3 mb-4\">Sport Statistics</h4>
+        yield "    <h4 class=\"fw-bold py-3 mb-4\">Statistiques des Abonnements</h4>
 
-<div class=\"row\">
-    <!-- Total Sports -->
-    <div class=\"col-lg-4 col-md-6 mb-4\">
-        <div class=\"card\">
-            <div class=\"card-body\">
-                <div class=\"card-title d-flex align-items-start justify-content-between\">
-                    <div class=\"avatar flex-shrink-0\">
-                        <img src=\"";
-        // line 15
+    <div class=\"row\">
+        <div class=\"col-lg-4 col-md-6 mb-4\">
+            <div class=\"card\">
+                <div class=\"card-body\">
+                    <div class=\"card-title d-flex align-items-start justify-content-between\">
+                        <div class=\"avatar flex-shrink-0\">
+                            <img src=\"";
+        // line 14
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("img/icons/unicons/chart-success.png"), "html", null, true);
-        yield "\" alt=\"Sports\" class=\"rounded\" />
+        yield "\" alt=\"Abonnements\" class=\"rounded\" />
+                        </div>
                     </div>
-                </div>
-                <span class=\"fw-semibold d-block mb-1\">Total Sports</span>
-                <h3 class=\"card-title mb-2\">";
-        // line 19
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["totalSports"]) || array_key_exists("totalSports", $context) ? $context["totalSports"] : (function () { throw new RuntimeError('Variable "totalSports" does not exist.', 19, $this->source); })()), "html", null, true);
+                    <span class=\"fw-semibold d-block mb-1\">Total Abonnements</span>
+                    <h3 class=\"card-title mb-2\">";
+        // line 18
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["totalAbonnements"]) || array_key_exists("totalAbonnements", $context) ? $context["totalAbonnements"] : (function () { throw new RuntimeError('Variable "totalAbonnements" does not exist.', 18, $this->source); })()), "html", null, true);
         yield "</h3>
-                <small class=\"text-success fw-semibold\"><i class=\"bx bx-up-arrow-alt\"></i> Updated Today</small>
-            </div>
-        </div>
-    </div>
-
-    <!-- Average Description Length -->
-    <div class=\"col-lg-4 col-md-6 mb-4\">
-        <div class=\"card\">
-            <div class=\"card-body\">
-                <div class=\"card-title d-flex align-items-start justify-content-between\">
-                    <div class=\"avatar flex-shrink-0\">
-                        <img src=\"";
-        // line 31
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("img/icons/unicons/text.png"), "html", null, true);
-        yield "\" alt=\"Description\" class=\"rounded\" />
-                    </div>
+                    <small class=\"text-success fw-semibold\"><i class=\"bx bx-up-arrow-alt\"></i> Mis à jour aujourd'hui</small>
                 </div>
-                <span class=\"fw-semibold d-block mb-1\">Avg. Description Length</span>
-                <h3 class=\"card-title mb-2\">";
-        // line 35
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::round((isset($context["averageDescriptionLength"]) || array_key_exists("averageDescriptionLength", $context) ? $context["averageDescriptionLength"] : (function () { throw new RuntimeError('Variable "averageDescriptionLength" does not exist.', 35, $this->source); })()), 0), "html", null, true);
-        yield " chars</h3>
-                <small class=\"text-muted\">Based on all sports with descriptions</small>
             </div>
         </div>
-    </div>
 
-    <!-- Sports with Descriptions -->
-    <div class=\"col-lg-4 col-md-6 mb-4\">
-        <div class=\"card\">
-            <div class=\"card-body\">
-                <div class=\"card-title d-flex align-items-start justify-content-between\">
-                    <div class=\"avatar flex-shrink-0\">
-                        <img src=\"";
-        // line 47
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("img/icons/unicons/check.png"), "html", null, true);
-        yield "\" alt=\"Described\" class=\"rounded\" />
-                    </div>
-                </div>
-                <span class=\"fw-semibold d-block mb-1\">Sports with Descriptions</span>
-                <h3 class=\"card-title mb-2\">";
-        // line 51
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["sportsWithDescription"]) || array_key_exists("sportsWithDescription", $context) ? $context["sportsWithDescription"] : (function () { throw new RuntimeError('Variable "sportsWithDescription" does not exist.', 51, $this->source); })()), "html", null, true);
-        yield "</h3>
-                <small class=\"text-muted\">Out of ";
-        // line 52
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["totalSports"]) || array_key_exists("totalSports", $context) ? $context["totalSports"] : (function () { throw new RuntimeError('Variable "totalSports" does not exist.', 52, $this->source); })()), "html", null, true);
-        yield " total sports</small>
+        <div class=\"col-lg-4 col-md-6 mb-4\">
+            <div class=\"card\">
+                <div class=\"card-header\"><h5 class=\"card-title m-0 me-2\">Distribution par État</h5></div>
+                <div class=\"card-body\"><div id=\"etatChart\"></div></div>
             </div>
         </div>
-    </div>
 
-    <!-- All Sports List -->
-    <div class=\"col-12 col-lg-6 mb-4\">
-        <div class=\"card\">
-            <div class=\"card-header\"><h5 class=\"card-title m-0 me-2\">All Sports</h5></div>
-            <div class=\"card-body\" style=\"max-height: 400px; overflow-y: auto;\">
-                <ul class=\"p-0 m-0\">
-                    ";
-        // line 63
+        <div class=\"col-lg-4 col-md-6 mb-4\">
+            <div class=\"card\">
+                <div class=\"card-header\"><h5 class=\"card-title m-0 me-2\">Distribution par Type</h5></div>
+                <div class=\"card-body\"><div id=\"typeChart\"></div></div>
+            </div>
+        </div>
+
+        <div class=\"col-12 col-lg-6 mb-4\">
+            <div class=\"card\">
+                <div class=\"card-header\"><h5 class=\"card-title m-0 me-2\">Tous les Abonnements</h5></div>
+                <div class=\"card-body\" style=\"max-height: 400px; overflow-y: auto;\">
+                    <ul class=\"p-0 m-0\">
+                        ";
+        // line 43
         $context['_parent'] = $context;
-        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["allSports"]) || array_key_exists("allSports", $context) ? $context["allSports"] : (function () { throw new RuntimeError('Variable "allSports" does not exist.', 63, $this->source); })()));
+        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["allAbonnements"]) || array_key_exists("allAbonnements", $context) ? $context["allAbonnements"] : (function () { throw new RuntimeError('Variable "allAbonnements" does not exist.', 43, $this->source); })()));
         $context['_iterated'] = false;
-        foreach ($context['_seq'] as $context["_key"] => $context["sport"]) {
-            // line 64
-            yield "                        <li class=\"d-flex mb-4 pb-1\">
-                            <div class=\"avatar flex-shrink-0 me-3\">
-                                <img src=\"";
-            // line 66
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("img/icons/unicons/sport.png"), "html", null, true);
-            yield "\" alt=\"Sport\" class=\"rounded\" />
-                            </div>
-                            <div class=\"d-flex w-100 flex-wrap align-items-center justify-content-between gap-2\">
-                                <div class=\"me-2\">
-                                    <h6 class=\"mb-0\">";
-            // line 70
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["sport"], "nomSport", [], "any", false, false, false, 70), "html", null, true);
+        foreach ($context['_seq'] as $context["_key"] => $context["abonnement"]) {
+            // line 44
+            yield "                            <li class=\"d-flex mb-4 pb-1\">
+                                <div class=\"avatar flex-shrink-0 me-3\">
+                                    <img src=\"";
+            // line 46
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("img/icons/unicons/chart.png"), "html", null, true);
+            yield "\" alt=\"Abonnement\" class=\"rounded\" />
+                                </div>
+                                <div class=\"d-flex w-100 flex-wrap align-items-center justify-content-between gap-2\">
+                                    <div class=\"me-2\">
+                                        <h6 class=\"mb-0\">";
+            // line 50
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["abonnement"], "club", [], "any", false, false, false, 50), "nomClub", [], "any", false, false, false, 50), "html", null, true);
             yield "</h6>
-                                    <small class=\"text-muted\">
-                                        ";
-            // line 72
-            if (CoreExtension::getAttribute($this->env, $this->source, $context["sport"], "description", [], "any", false, false, false, 72)) {
-                // line 73
-                yield "                                            ";
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::length($this->env->getCharset(), CoreExtension::getAttribute($this->env, $this->source, $context["sport"], "description", [], "any", false, false, false, 73)), "html", null, true);
-                yield " chars
-                                        ";
-            } else {
-                // line 75
-                yield "                                            No description
-                                        ";
-            }
-            // line 77
-            yield "                                    </small>
-                                </div>
-                                <div class=\"user-progress\">
-                                    <small class=\"fw-semibold\">ID: ";
-            // line 80
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["sport"], "idSport", [], "any", false, false, false, 80), "html", null, true);
+                                        <small class=\"text-muted\">";
+            // line 51
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["abonnement"], "dateDebut", [], "any", false, false, false, 51), "d/m/Y"), "html", null, true);
             yield "</small>
+                                    </div>
+                                    <div class=\"user-progress\">
+                                        <small class=\"fw-semibold\">";
+            // line 54
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["abonnement"], "etat", [], "any", false, false, false, 54), "html", null, true);
+            yield "</small>
+                                    </div>
                                 </div>
-                            </div>
-                        </li>
-                    ";
+                            </li>
+                        ";
             $context['_iterated'] = true;
         }
-        // line 84
+        // line 58
         if (!$context['_iterated']) {
-            // line 85
-            yield "                        <li>No sports found.</li>
-                    ";
+            // line 59
+            yield "                            <li>Aucun abonnement trouvé.</li>
+                        ";
         }
         $_parent = $context['_parent'];
-        unset($context['_seq'], $context['_key'], $context['sport'], $context['_parent'], $context['_iterated']);
+        unset($context['_seq'], $context['_key'], $context['abonnement'], $context['_parent'], $context['_iterated']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 87
-        yield "                </ul>
+        // line 61
+        yield "                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class=\"col-12 col-lg-6 mb-4\">
+            <div class=\"card\">
+                <div class=\"card-header\"><h5 class=\"card-title m-0 me-2\">Abonnements par Club</h5></div>
+                <div class=\"card-body\"><div id=\"clubChart\"></div></div>
             </div>
         </div>
     </div>
-
-    <!-- Description Availability Chart -->
-    <div class=\"col-12 col-lg-6 mb-4\">
-        <div class=\"card\">
-            <div class=\"card-header\"><h5 class=\"card-title m-0 me-2\">Description Availability</h5></div>
-            <div class=\"card-body\"><div id=\"descriptionChart\"></div></div>
-        </div>
-    </div>
-</div>
 ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -257,7 +209,7 @@ class __TwigTemplate_073aaeedeecc5b6fec9e64b3afa3bb31 extends Template
         yield from [];
     }
 
-    // line 102
+    // line 75
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -270,23 +222,249 @@ class __TwigTemplate_073aaeedeecc5b6fec9e64b3afa3bb31 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "javascripts"));
 
-        // line 103
+        // line 76
         yield "    ";
         yield from $this->yieldParentBlock("javascripts", $context, $blocks);
         yield "
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // Description Availability Chart
-            new ApexCharts(document.querySelector(\"#descriptionChart\"), {
+            // Etat Distribution Chart
+            new ApexCharts(document.querySelector(\"#etatChart\"), {
                 chart: { type: 'pie', height: 350 },
                 series: [";
-        // line 109
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["sportsWithDescription"]) || array_key_exists("sportsWithDescription", $context) ? $context["sportsWithDescription"] : (function () { throw new RuntimeError('Variable "sportsWithDescription" does not exist.', 109, $this->source); })()), "html", null, true);
-        yield ", ";
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(((isset($context["totalSports"]) || array_key_exists("totalSports", $context) ? $context["totalSports"] : (function () { throw new RuntimeError('Variable "totalSports" does not exist.', 109, $this->source); })()) - (isset($context["sportsWithDescription"]) || array_key_exists("sportsWithDescription", $context) ? $context["sportsWithDescription"] : (function () { throw new RuntimeError('Variable "sportsWithDescription" does not exist.', 109, $this->source); })())), "html", null, true);
+        // line 82
+        $context['_parent'] = $context;
+        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["etatDistribution"]) || array_key_exists("etatDistribution", $context) ? $context["etatDistribution"] : (function () { throw new RuntimeError('Variable "etatDistribution" does not exist.', 82, $this->source); })()));
+        $context['loop'] = [
+          'parent' => $context['_parent'],
+          'index0' => 0,
+          'index'  => 1,
+          'first'  => true,
+        ];
+        if (is_array($context['_seq']) || (is_object($context['_seq']) && $context['_seq'] instanceof \Countable)) {
+            $length = count($context['_seq']);
+            $context['loop']['revindex0'] = $length - 1;
+            $context['loop']['revindex'] = $length;
+            $context['loop']['length'] = $length;
+            $context['loop']['last'] = 1 === $length;
+        }
+        foreach ($context['_seq'] as $context["etat"] => $context["count"]) {
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($context["count"], "html", null, true);
+            if ( !CoreExtension::getAttribute($this->env, $this->source, $context["loop"], "last", [], "any", false, false, false, 82)) {
+                yield ",";
+            }
+            ++$context['loop']['index0'];
+            ++$context['loop']['index'];
+            $context['loop']['first'] = false;
+            if (isset($context['loop']['revindex0'], $context['loop']['revindex'])) {
+                --$context['loop']['revindex0'];
+                --$context['loop']['revindex'];
+                $context['loop']['last'] = 0 === $context['loop']['revindex0'];
+            }
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['etat'], $context['count'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
         yield "],
-                labels: ['With Description', 'Without Description'],
-                colors: ['#28a745', '#dc3545']
+                labels: [";
+        // line 83
+        $context['_parent'] = $context;
+        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["etatDistribution"]) || array_key_exists("etatDistribution", $context) ? $context["etatDistribution"] : (function () { throw new RuntimeError('Variable "etatDistribution" does not exist.', 83, $this->source); })()));
+        $context['loop'] = [
+          'parent' => $context['_parent'],
+          'index0' => 0,
+          'index'  => 1,
+          'first'  => true,
+        ];
+        if (is_array($context['_seq']) || (is_object($context['_seq']) && $context['_seq'] instanceof \Countable)) {
+            $length = count($context['_seq']);
+            $context['loop']['revindex0'] = $length - 1;
+            $context['loop']['revindex'] = $length;
+            $context['loop']['length'] = $length;
+            $context['loop']['last'] = 1 === $length;
+        }
+        foreach ($context['_seq'] as $context["etat"] => $context["count"]) {
+            yield "\"";
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($context["etat"], "html", null, true);
+            yield "\"";
+            if ( !CoreExtension::getAttribute($this->env, $this->source, $context["loop"], "last", [], "any", false, false, false, 83)) {
+                yield ",";
+            }
+            ++$context['loop']['index0'];
+            ++$context['loop']['index'];
+            $context['loop']['first'] = false;
+            if (isset($context['loop']['revindex0'], $context['loop']['revindex'])) {
+                --$context['loop']['revindex0'];
+                --$context['loop']['revindex'];
+                $context['loop']['last'] = 0 === $context['loop']['revindex0'];
+            }
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['etat'], $context['count'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        yield "],
+                colors: ['#28a745', '#dc3545', '#ffc107']
+            }).render();
+
+            // Type Distribution Chart
+            new ApexCharts(document.querySelector(\"#typeChart\"), {
+                chart: { type: 'pie', height: 350 },
+                series: [";
+        // line 90
+        $context['_parent'] = $context;
+        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["typeDistribution"]) || array_key_exists("typeDistribution", $context) ? $context["typeDistribution"] : (function () { throw new RuntimeError('Variable "typeDistribution" does not exist.', 90, $this->source); })()));
+        $context['loop'] = [
+          'parent' => $context['_parent'],
+          'index0' => 0,
+          'index'  => 1,
+          'first'  => true,
+        ];
+        if (is_array($context['_seq']) || (is_object($context['_seq']) && $context['_seq'] instanceof \Countable)) {
+            $length = count($context['_seq']);
+            $context['loop']['revindex0'] = $length - 1;
+            $context['loop']['revindex'] = $length;
+            $context['loop']['length'] = $length;
+            $context['loop']['last'] = 1 === $length;
+        }
+        foreach ($context['_seq'] as $context["type"] => $context["count"]) {
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($context["count"], "html", null, true);
+            if ( !CoreExtension::getAttribute($this->env, $this->source, $context["loop"], "last", [], "any", false, false, false, 90)) {
+                yield ",";
+            }
+            ++$context['loop']['index0'];
+            ++$context['loop']['index'];
+            $context['loop']['first'] = false;
+            if (isset($context['loop']['revindex0'], $context['loop']['revindex'])) {
+                --$context['loop']['revindex0'];
+                --$context['loop']['revindex'];
+                $context['loop']['last'] = 0 === $context['loop']['revindex0'];
+            }
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['type'], $context['count'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        yield "],
+                labels: [";
+        // line 91
+        $context['_parent'] = $context;
+        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["typeDistribution"]) || array_key_exists("typeDistribution", $context) ? $context["typeDistribution"] : (function () { throw new RuntimeError('Variable "typeDistribution" does not exist.', 91, $this->source); })()));
+        $context['loop'] = [
+          'parent' => $context['_parent'],
+          'index0' => 0,
+          'index'  => 1,
+          'first'  => true,
+        ];
+        if (is_array($context['_seq']) || (is_object($context['_seq']) && $context['_seq'] instanceof \Countable)) {
+            $length = count($context['_seq']);
+            $context['loop']['revindex0'] = $length - 1;
+            $context['loop']['revindex'] = $length;
+            $context['loop']['length'] = $length;
+            $context['loop']['last'] = 1 === $length;
+        }
+        foreach ($context['_seq'] as $context["type"] => $context["count"]) {
+            yield "\"";
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($context["type"], "html", null, true);
+            yield "\"";
+            if ( !CoreExtension::getAttribute($this->env, $this->source, $context["loop"], "last", [], "any", false, false, false, 91)) {
+                yield ",";
+            }
+            ++$context['loop']['index0'];
+            ++$context['loop']['index'];
+            $context['loop']['first'] = false;
+            if (isset($context['loop']['revindex0'], $context['loop']['revindex'])) {
+                --$context['loop']['revindex0'];
+                --$context['loop']['revindex'];
+                $context['loop']['last'] = 0 === $context['loop']['revindex0'];
+            }
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['type'], $context['count'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        yield "],
+                colors: ['#007bff', '#28a745', '#dc3545']
+            }).render();
+
+            // Club Distribution Chart
+            new ApexCharts(document.querySelector(\"#clubChart\"), {
+                chart: { type: 'bar', height: 350 },
+                series: [{
+                    name: 'Abonnements',
+                    data: [";
+        // line 100
+        $context['_parent'] = $context;
+        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["clubDistribution"]) || array_key_exists("clubDistribution", $context) ? $context["clubDistribution"] : (function () { throw new RuntimeError('Variable "clubDistribution" does not exist.', 100, $this->source); })()));
+        $context['loop'] = [
+          'parent' => $context['_parent'],
+          'index0' => 0,
+          'index'  => 1,
+          'first'  => true,
+        ];
+        if (is_array($context['_seq']) || (is_object($context['_seq']) && $context['_seq'] instanceof \Countable)) {
+            $length = count($context['_seq']);
+            $context['loop']['revindex0'] = $length - 1;
+            $context['loop']['revindex'] = $length;
+            $context['loop']['length'] = $length;
+            $context['loop']['last'] = 1 === $length;
+        }
+        foreach ($context['_seq'] as $context["club"] => $context["count"]) {
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($context["count"], "html", null, true);
+            if ( !CoreExtension::getAttribute($this->env, $this->source, $context["loop"], "last", [], "any", false, false, false, 100)) {
+                yield ",";
+            }
+            ++$context['loop']['index0'];
+            ++$context['loop']['index'];
+            $context['loop']['first'] = false;
+            if (isset($context['loop']['revindex0'], $context['loop']['revindex'])) {
+                --$context['loop']['revindex0'];
+                --$context['loop']['revindex'];
+                $context['loop']['last'] = 0 === $context['loop']['revindex0'];
+            }
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['club'], $context['count'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        yield "]
+                }],
+                xaxis: {
+                    categories: [";
+        // line 103
+        $context['_parent'] = $context;
+        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["clubDistribution"]) || array_key_exists("clubDistribution", $context) ? $context["clubDistribution"] : (function () { throw new RuntimeError('Variable "clubDistribution" does not exist.', 103, $this->source); })()));
+        $context['loop'] = [
+          'parent' => $context['_parent'],
+          'index0' => 0,
+          'index'  => 1,
+          'first'  => true,
+        ];
+        if (is_array($context['_seq']) || (is_object($context['_seq']) && $context['_seq'] instanceof \Countable)) {
+            $length = count($context['_seq']);
+            $context['loop']['revindex0'] = $length - 1;
+            $context['loop']['revindex'] = $length;
+            $context['loop']['length'] = $length;
+            $context['loop']['last'] = 1 === $length;
+        }
+        foreach ($context['_seq'] as $context["club"] => $context["count"]) {
+            yield "\"";
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($context["club"], "html", null, true);
+            yield "\"";
+            if ( !CoreExtension::getAttribute($this->env, $this->source, $context["loop"], "last", [], "any", false, false, false, 103)) {
+                yield ",";
+            }
+            ++$context['loop']['index0'];
+            ++$context['loop']['index'];
+            $context['loop']['first'] = false;
+            if (isset($context['loop']['revindex0'], $context['loop']['revindex'])) {
+                --$context['loop']['revindex0'];
+                --$context['loop']['revindex'];
+                $context['loop']['last'] = 0 === $context['loop']['revindex0'];
+            }
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['club'], $context['count'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        yield "]
+                },
+                colors: ['#007bff']
             }).render();
         });
     </script>
@@ -321,122 +499,116 @@ class __TwigTemplate_073aaeedeecc5b6fec9e64b3afa3bb31 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  284 => 109,  274 => 103,  261 => 102,  237 => 87,  230 => 85,  228 => 84,  219 => 80,  214 => 77,  210 => 75,  204 => 73,  202 => 72,  197 => 70,  190 => 66,  186 => 64,  181 => 63,  167 => 52,  163 => 51,  156 => 47,  141 => 35,  134 => 31,  119 => 19,  112 => 15,  101 => 6,  88 => 5,  65 => 3,  42 => 1,);
+        return array (  431 => 103,  394 => 100,  349 => 91,  314 => 90,  271 => 83,  236 => 82,  226 => 76,  213 => 75,  190 => 61,  183 => 59,  181 => 58,  172 => 54,  166 => 51,  162 => 50,  155 => 46,  151 => 44,  146 => 43,  118 => 18,  111 => 14,  101 => 6,  88 => 5,  65 => 3,  42 => 1,);
     }
 
     public function getSourceContext(): Source
     {
         return new Source("{% extends 'base.html.twig' %}
 
-{% block title %}Sport Statistics{% endblock %}
+{% block title %}Statistiques des Abonnements{% endblock %}
 
 {% block body %}
-<h4 class=\"fw-bold py-3 mb-4\">Sport Statistics</h4>
+    <h4 class=\"fw-bold py-3 mb-4\">Statistiques des Abonnements</h4>
 
-<div class=\"row\">
-    <!-- Total Sports -->
-    <div class=\"col-lg-4 col-md-6 mb-4\">
-        <div class=\"card\">
-            <div class=\"card-body\">
-                <div class=\"card-title d-flex align-items-start justify-content-between\">
-                    <div class=\"avatar flex-shrink-0\">
-                        <img src=\"{{ asset('img/icons/unicons/chart-success.png') }}\" alt=\"Sports\" class=\"rounded\" />
+    <div class=\"row\">
+        <div class=\"col-lg-4 col-md-6 mb-4\">
+            <div class=\"card\">
+                <div class=\"card-body\">
+                    <div class=\"card-title d-flex align-items-start justify-content-between\">
+                        <div class=\"avatar flex-shrink-0\">
+                            <img src=\"{{ asset('img/icons/unicons/chart-success.png') }}\" alt=\"Abonnements\" class=\"rounded\" />
+                        </div>
                     </div>
+                    <span class=\"fw-semibold d-block mb-1\">Total Abonnements</span>
+                    <h3 class=\"card-title mb-2\">{{ totalAbonnements }}</h3>
+                    <small class=\"text-success fw-semibold\"><i class=\"bx bx-up-arrow-alt\"></i> Mis à jour aujourd'hui</small>
                 </div>
-                <span class=\"fw-semibold d-block mb-1\">Total Sports</span>
-                <h3 class=\"card-title mb-2\">{{ totalSports }}</h3>
-                <small class=\"text-success fw-semibold\"><i class=\"bx bx-up-arrow-alt\"></i> Updated Today</small>
             </div>
         </div>
-    </div>
 
-    <!-- Average Description Length -->
-    <div class=\"col-lg-4 col-md-6 mb-4\">
-        <div class=\"card\">
-            <div class=\"card-body\">
-                <div class=\"card-title d-flex align-items-start justify-content-between\">
-                    <div class=\"avatar flex-shrink-0\">
-                        <img src=\"{{ asset('img/icons/unicons/text.png') }}\" alt=\"Description\" class=\"rounded\" />
-                    </div>
-                </div>
-                <span class=\"fw-semibold d-block mb-1\">Avg. Description Length</span>
-                <h3 class=\"card-title mb-2\">{{ averageDescriptionLength|round(0) }} chars</h3>
-                <small class=\"text-muted\">Based on all sports with descriptions</small>
+        <div class=\"col-lg-4 col-md-6 mb-4\">
+            <div class=\"card\">
+                <div class=\"card-header\"><h5 class=\"card-title m-0 me-2\">Distribution par État</h5></div>
+                <div class=\"card-body\"><div id=\"etatChart\"></div></div>
             </div>
         </div>
-    </div>
 
-    <!-- Sports with Descriptions -->
-    <div class=\"col-lg-4 col-md-6 mb-4\">
-        <div class=\"card\">
-            <div class=\"card-body\">
-                <div class=\"card-title d-flex align-items-start justify-content-between\">
-                    <div class=\"avatar flex-shrink-0\">
-                        <img src=\"{{ asset('img/icons/unicons/check.png') }}\" alt=\"Described\" class=\"rounded\" />
-                    </div>
-                </div>
-                <span class=\"fw-semibold d-block mb-1\">Sports with Descriptions</span>
-                <h3 class=\"card-title mb-2\">{{ sportsWithDescription }}</h3>
-                <small class=\"text-muted\">Out of {{ totalSports }} total sports</small>
+        <div class=\"col-lg-4 col-md-6 mb-4\">
+            <div class=\"card\">
+                <div class=\"card-header\"><h5 class=\"card-title m-0 me-2\">Distribution par Type</h5></div>
+                <div class=\"card-body\"><div id=\"typeChart\"></div></div>
             </div>
         </div>
-    </div>
 
-    <!-- All Sports List -->
-    <div class=\"col-12 col-lg-6 mb-4\">
-        <div class=\"card\">
-            <div class=\"card-header\"><h5 class=\"card-title m-0 me-2\">All Sports</h5></div>
-            <div class=\"card-body\" style=\"max-height: 400px; overflow-y: auto;\">
-                <ul class=\"p-0 m-0\">
-                    {% for sport in allSports %}
-                        <li class=\"d-flex mb-4 pb-1\">
-                            <div class=\"avatar flex-shrink-0 me-3\">
-                                <img src=\"{{ asset('img/icons/unicons/sport.png') }}\" alt=\"Sport\" class=\"rounded\" />
-                            </div>
-                            <div class=\"d-flex w-100 flex-wrap align-items-center justify-content-between gap-2\">
-                                <div class=\"me-2\">
-                                    <h6 class=\"mb-0\">{{ sport.nomSport }}</h6>
-                                    <small class=\"text-muted\">
-                                        {% if sport.description %}
-                                            {{ sport.description|length }} chars
-                                        {% else %}
-                                            No description
-                                        {% endif %}
-                                    </small>
+        <div class=\"col-12 col-lg-6 mb-4\">
+            <div class=\"card\">
+                <div class=\"card-header\"><h5 class=\"card-title m-0 me-2\">Tous les Abonnements</h5></div>
+                <div class=\"card-body\" style=\"max-height: 400px; overflow-y: auto;\">
+                    <ul class=\"p-0 m-0\">
+                        {% for abonnement in allAbonnements %}
+                            <li class=\"d-flex mb-4 pb-1\">
+                                <div class=\"avatar flex-shrink-0 me-3\">
+                                    <img src=\"{{ asset('img/icons/unicons/chart.png') }}\" alt=\"Abonnement\" class=\"rounded\" />
                                 </div>
-                                <div class=\"user-progress\">
-                                    <small class=\"fw-semibold\">ID: {{ sport.idSport }}</small>
+                                <div class=\"d-flex w-100 flex-wrap align-items-center justify-content-between gap-2\">
+                                    <div class=\"me-2\">
+                                        <h6 class=\"mb-0\">{{ abonnement.club.nomClub }}</h6>
+                                        <small class=\"text-muted\">{{ abonnement.dateDebut|date('d/m/Y') }}</small>
+                                    </div>
+                                    <div class=\"user-progress\">
+                                        <small class=\"fw-semibold\">{{ abonnement.etat }}</small>
+                                    </div>
                                 </div>
-                            </div>
-                        </li>
-                    {% else %}
-                        <li>No sports found.</li>
-                    {% endfor %}
-                </ul>
+                            </li>
+                        {% else %}
+                            <li>Aucun abonnement trouvé.</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class=\"col-12 col-lg-6 mb-4\">
+            <div class=\"card\">
+                <div class=\"card-header\"><h5 class=\"card-title m-0 me-2\">Abonnements par Club</h5></div>
+                <div class=\"card-body\"><div id=\"clubChart\"></div></div>
             </div>
         </div>
     </div>
-
-    <!-- Description Availability Chart -->
-    <div class=\"col-12 col-lg-6 mb-4\">
-        <div class=\"card\">
-            <div class=\"card-header\"><h5 class=\"card-title m-0 me-2\">Description Availability</h5></div>
-            <div class=\"card-body\"><div id=\"descriptionChart\"></div></div>
-        </div>
-    </div>
-</div>
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // Description Availability Chart
-            new ApexCharts(document.querySelector(\"#descriptionChart\"), {
+            // Etat Distribution Chart
+            new ApexCharts(document.querySelector(\"#etatChart\"), {
                 chart: { type: 'pie', height: 350 },
-                series: [{{ sportsWithDescription }}, {{ totalSports - sportsWithDescription }}],
-                labels: ['With Description', 'Without Description'],
-                colors: ['#28a745', '#dc3545']
+                series: [{% for etat, count in etatDistribution %}{{ count }}{% if not loop.last %},{% endif %}{% endfor %}],
+                labels: [{% for etat, count in etatDistribution %}\"{{ etat }}\"{% if not loop.last %},{% endif %}{% endfor %}],
+                colors: ['#28a745', '#dc3545', '#ffc107']
+            }).render();
+
+            // Type Distribution Chart
+            new ApexCharts(document.querySelector(\"#typeChart\"), {
+                chart: { type: 'pie', height: 350 },
+                series: [{% for type, count in typeDistribution %}{{ count }}{% if not loop.last %},{% endif %}{% endfor %}],
+                labels: [{% for type, count in typeDistribution %}\"{{ type }}\"{% if not loop.last %},{% endif %}{% endfor %}],
+                colors: ['#007bff', '#28a745', '#dc3545']
+            }).render();
+
+            // Club Distribution Chart
+            new ApexCharts(document.querySelector(\"#clubChart\"), {
+                chart: { type: 'bar', height: 350 },
+                series: [{
+                    name: 'Abonnements',
+                    data: [{% for club, count in clubDistribution %}{{ count }}{% if not loop.last %},{% endif %}{% endfor %}]
+                }],
+                xaxis: {
+                    categories: [{% for club, count in clubDistribution %}\"{{ club }}\"{% if not loop.last %},{% endif %}{% endfor %}]
+                },
+                colors: ['#007bff']
             }).render();
         });
     </script>

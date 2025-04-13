@@ -54,10 +54,10 @@ class __TwigTemplate_dc13c5a619521d4f927d2f2a9b449b58 extends Template
                     <div class=\"card-body\">
                         <h3 class=\"card-title text-primary\">Clubs Overview 🏟️</h3>
                         <p class=\"mb-4\">
-                            You have <span class=\"fw-bold\">";
+                            Vous Avez <span class=\"fw-bold\">";
         // line 10
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::length($this->env->getCharset(), (isset($context["clubs"]) || array_key_exists("clubs", $context) ? $context["clubs"] : (function () { throw new RuntimeError('Variable "clubs" does not exist.', 10, $this->source); })())), "html", null, true);
-        yield "</span> clubs registered in the system.
+        yield "</span> Clubs Registré Dans le Système.
                         </p>
                         <a href=\"";
         // line 12
@@ -254,7 +254,7 @@ class __TwigTemplate_dc13c5a619521d4f927d2f2a9b449b58 extends Template
                     <div class=\"card-body\">
                         <h3 class=\"card-title text-primary\">Clubs Overview 🏟️</h3>
                         <p class=\"mb-4\">
-                            You have <span class=\"fw-bold\">{{ clubs|length }}</span> clubs registered in the system.
+                            Vous Avez <span class=\"fw-bold\">{{ clubs|length }}</span> Clubs Registré Dans le Système.
                         </p>
                         <a href=\"{{ path('club_new') }}\" class=\"btn btn-sm btn-outline-primary\">Ajouter Nouveau Club</a>
                         <a href=\"{{ path('club_statistics') }}\" class=\"btn btn-sm btn-primary ms-2\">Voir Tous</a>

@@ -5,17 +5,51 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-
 use App\Repository\SponsorRepository;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: SponsorRepository::class)]
 #[ORM\Table(name: 'sponsors')]
+#[UniqueEntity(fields: ['nom'], message: 'Ce nom de sponsor existe déjà.')]
 class Sponsor
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
-    private ?int $Id_sponsor = null;
+    #[ORM\Column(name: 'Id_sponsor', type: 'integer')] 
+    public ?int $Id_sponsor = null;
+
+    #[ORM\Column(type: 'string', nullable: false)]
+    #[Assert\NotBlank(message: "Le nom du sponsor est obligatoire.")]
+    #[Assert\Regex(
+        pattern: '/^[a-zA-Z0-9]+$/',
+        message: "Le nom doit être alphanumérique (lettres et chiffres uniquement)."
+    )]
+    private ?string $nom = null;
+
+    #[ORM\Column(type: 'string', nullable: false)]
+    #[Assert\NotBlank(message: "Le contact est obligatoire.")]
+    #[Assert\Length(
+        exactly: 8,
+        exactMessage: "Le contact doit contenir exactement 8 chiffres."
+    )]
+    #[Assert\Regex(
+        pattern: '/^\d{8}$/',
+        message: "Le contact doit contenir uniquement 8 chiffres."
+    )]
+    private ?string $contact = null;
+
+    #[ORM\Column(type: 'string', nullable: false)]
+    #[Assert\NotBlank(message: "Vous devez sélectionner un pack.")]
+    private ?string $pack = null;
+
+    #[ORM\OneToMany(targetEntity: Contrat::class, mappedBy: 'sponsor')]
+    private Collection $contrats;
+
+    public function __construct()
+    {
+        $this->contrats = new ArrayCollection();
+    }
 
     public function getId_sponsor(): ?int
     {
@@ -28,9 +62,6 @@ class Sponsor
         return $this;
     }
 
-    #[ORM\Column(type: 'string', nullable: false)]
-    private ?string $nom = null;
-
     public function getNom(): ?string
     {
         return $this->nom;
@@ -41,9 +72,6 @@ class Sponsor
         $this->nom = $nom;
         return $this;
     }
-
-    #[ORM\Column(type: 'string', nullable: false)]
-    private ?string $contact = null;
 
     public function getContact(): ?string
     {
@@ -56,9 +84,6 @@ class Sponsor
         return $this;
     }
 
-    #[ORM\Column(type: 'string', nullable: false)]
-    private ?string $pack = null;
-
     public function getPack(): ?string
     {
         return $this->pack;
@@ -68,14 +93,6 @@ class Sponsor
     {
         $this->pack = $pack;
         return $this;
-    }
-
-    #[ORM\OneToMany(targetEntity: Contrat::class, mappedBy: 'sponsor')]
-    private Collection $contrats;
-
-    public function __construct()
-    {
-        $this->contrats = new ArrayCollection();
     }
 
     /**
@@ -107,5 +124,4 @@ class Sponsor
     {
         return $this->Id_sponsor;
     }
-
 }
