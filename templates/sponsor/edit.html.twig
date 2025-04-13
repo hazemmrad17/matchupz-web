@@ -11,14 +11,17 @@
             <div class="mb-3">
                 {{ form_label(form.nom, 'Name', {'label_attr': {'class': 'form-label'}}) }}
                 {{ form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.nom) }}
             </div>
             <div class="mb-3">
                 {{ form_label(form.pack, 'Pack', {'label_attr': {'class': 'form-label'}}) }}
                 {{ form_widget(form.pack, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.pack) }}
             </div>
             <div class="mb-3">
                 {{ form_label(form.contact, 'Contact', {'label_attr': {'class': 'form-label'}}) }}
                 {{ form_widget(form.contact, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.contact) }}
             </div>
             <button type="submit" class="btn btn-primary">Save</button>
         {{ form_end(form) }}

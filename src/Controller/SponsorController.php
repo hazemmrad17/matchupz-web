@@ -313,8 +313,16 @@ class SponsorController extends AbstractController
 
     return $response;
     }
-    
 
+    #[Route('/front', name: 'sponsor_front', methods: ['GET'])]
+    public function front(SponsorRepository $sponsorRepository): Response
+    {
+    $sponsors = $sponsorRepository->findAll();
+    return $this->render('sponsor/sponsor_front.html.twig', [
+        'sponsors' => $sponsors,
+    ]);
+    }
+    
 
 
 }

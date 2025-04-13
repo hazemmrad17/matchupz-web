@@ -484,4 +484,13 @@ class ContratController extends AbstractController
         }
         return $sponsorDistribution;
     }
+
+    #[Route('/front', name: 'contrat_front', methods: ['GET'])]
+    public function front(ContratRepository $contratRepository): Response
+    {
+    $contrats = $contratRepository->findAll();
+    return $this->render('contrat/contrat_front.html.twig', [
+        'contrats' => $contrats,
+    ]);
+    }
 }
