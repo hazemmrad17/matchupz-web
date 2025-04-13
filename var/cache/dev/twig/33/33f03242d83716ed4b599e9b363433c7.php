@@ -32,6 +32,7 @@ class __TwigTemplate_3971dbc5a83cdf5ddaeea8d5b13e54bd extends Template
         $this->blocks = [
             'title' => [$this, 'block_title'],
             'content' => [$this, 'block_content'],
+            'stylesheets' => [$this, 'block_stylesheets'],
         ];
     }
 
@@ -167,6 +168,46 @@ class __TwigTemplate_3971dbc5a83cdf5ddaeea8d5b13e54bd extends Template
         yield from [];
     }
 
+    // line 34
+    /**
+     * @return iterable<null|scalar|\Stringable>
+     */
+    public function block_stylesheets(array $context, array $blocks = []): iterable
+    {
+        $macros = $this->macros;
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2 = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->enter($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "stylesheets"));
+
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "stylesheets"));
+
+        // line 35
+        yield "    ";
+        yield from $this->yieldParentBlock("stylesheets", $context, $blocks);
+        yield "
+    <style>
+        /* Style form errors in red */
+        .form-error {
+            color: #dc3545; /* Bootstrap's red color for danger */
+            font-size: 0.875rem; /* Slightly smaller font size */
+            margin-top: 0.25rem; /* Space between the input and the error message */
+        }
+
+        /* Optional: Add red border to invalid fields */
+        .form-control.is-invalid {
+            border-color: #dc3545;
+        }
+    </style>
+";
+        
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
+
+        
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->leave($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof);
+
+        yield from [];
+    }
+
     /**
      * @codeCoverageIgnore
      */
@@ -188,7 +229,7 @@ class __TwigTemplate_3971dbc5a83cdf5ddaeea8d5b13e54bd extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  154 => 28,  148 => 25,  144 => 24,  140 => 23,  134 => 20,  130 => 19,  126 => 18,  120 => 15,  116 => 14,  112 => 13,  107 => 11,  100 => 6,  87 => 5,  64 => 3,  41 => 1,);
+        return array (  185 => 35,  172 => 34,  155 => 28,  149 => 25,  145 => 24,  141 => 23,  135 => 20,  131 => 19,  127 => 18,  121 => 15,  117 => 14,  113 => 13,  108 => 11,  101 => 6,  88 => 5,  65 => 3,  42 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -225,6 +266,22 @@ class __TwigTemplate_3971dbc5a83cdf5ddaeea8d5b13e54bd extends Template
             </div>
         </div>
     </div>
+{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        /* Style form errors in red */
+        .form-error {
+            color: #dc3545; /* Bootstrap's red color for danger */
+            font-size: 0.875rem; /* Slightly smaller font size */
+            margin-top: 0.25rem; /* Space between the input and the error message */
+        }
+
+        /* Optional: Add red border to invalid fields */
+        .form-control.is-invalid {
+            border-color: #dc3545;
+        }
+    </style>
 {% endblock %}", "sponsor/new.html.twig", "C:\\Users\\amine\\Downloads\\matchupz-web-0\\matchupz-web-0\\templates\\sponsor\\new.html.twig");
     }
 }

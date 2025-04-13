@@ -31,3 +31,19 @@
         </div>
     </div>
 {% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        /* Style form errors in red */
+        .form-error {
+            color: #dc3545; /* Bootstrap's red color for danger */
+            font-size: 0.875rem; /* Slightly smaller font size */
+            margin-top: 0.25rem; /* Space between the input and the error message */
+        }
+
+        /* Optional: Add red border to invalid fields */
+        .form-control.is-invalid {
+            border-color: #dc3545;
+        }
+    </style>
+{% endblock %}

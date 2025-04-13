@@ -382,6 +382,13 @@
         <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\ContratController"/>
       </call>
     </service>
+    <service id="App\Controller\HomeController" class="App\Controller\HomeController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="container.service_subscriber"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\HomeController"/>
+      </call>
+    </service>
     <service id="App\Controller\JoueurController" class="App\Controller\JoueurController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
@@ -515,7 +522,7 @@
     </service>
     <service id="argument_resolver.service" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
       <tag priority="-50" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">controller.argument_value_resolver</tag>
-      <argument type="service" id=".service_locator.dfsAOXD"/>
+      <argument type="service" id=".service_locator.YZvGxUL"/>
     </service>
     <service id="argument_resolver.default" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">
       <tag priority="-100" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">controller.argument_value_resolver</tag>
@@ -3500,7 +3507,7 @@
     </service>
     <service id="argument_resolver.not_tagged_controller" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
       <tag name="controller.argument_value_resolver" priority="-200"/>
-      <argument type="service" id=".service_locator.dfsAOXD"/>
+      <argument type="service" id=".service_locator.YZvGxUL"/>
     </service>
     <service id="debug.log_processor" class="Symfony\Bridge\Monolog\Processor\DebugProcessor">
       <tag name="kernel.reset" method="reset"/>
@@ -7312,6 +7319,9 @@
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\ContratController" class="App\Controller\ContratController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\ContratController" class="App\Controller\ContratController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\ContratController" class="App\Controller\ContratController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\HomeController" class="App\Controller\HomeController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\HomeController" class="App\Controller\HomeController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\HomeController" class="App\Controller\HomeController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\JoueurController" class="App\Controller\JoueurController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\JoueurController" class="App\Controller\JoueurController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\JoueurController" class="App\Controller\JoueurController" autowire="true" autoconfigure="true" abstract="true"/>
@@ -7869,7 +7879,7 @@
         <argument key="entityManager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
       </argument>
     </service>
-    <service id=".service_locator.dfsAOXD" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.YZvGxUL" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\ClubController::delete" type="service_closure" id=".service_locator.GbJZUn8"/>
@@ -7880,6 +7890,7 @@
         <argument key="App\Controller\ContratController::delete" type="service_closure" id=".service_locator.46d3SGC"/>
         <argument key="App\Controller\ContratController::edit" type="service_closure" id=".service_locator.46d3SGC"/>
         <argument key="App\Controller\ContratController::export" type="service_closure" id=".service_locator.0TK7yZ8"/>
+        <argument key="App\Controller\ContratController::front" type="service_closure" id=".service_locator.0TK7yZ8"/>
         <argument key="App\Controller\ContratController::index" type="service_closure" id=".service_locator.8H.sdZM"/>
         <argument key="App\Controller\ContratController::new" type="service_closure" id=".service_locator.CsMkqUa"/>
         <argument key="App\Controller\ContratController::show" type="service_closure" id=".service_locator.0TK7yZ8"/>
@@ -7887,6 +7898,7 @@
         <argument key="App\Controller\SponsorController::delete" type="service_closure" id=".service_locator.CsMkqUa"/>
         <argument key="App\Controller\SponsorController::edit" type="service_closure" id=".service_locator.CsMkqUa"/>
         <argument key="App\Controller\SponsorController::export" type="service_closure" id=".service_locator.MPUuYf0"/>
+        <argument key="App\Controller\SponsorController::front" type="service_closure" id=".service_locator.MPUuYf0"/>
         <argument key="App\Controller\SponsorController::main" type="service_closure" id=".service_locator.8H.sdZM"/>
         <argument key="App\Controller\SponsorController::new" type="service_closure" id=".service_locator.CsMkqUa"/>
         <argument key="App\Controller\SportController::delete" type="service_closure" id=".service_locator.geVFa8t"/>
@@ -7906,6 +7918,7 @@
         <argument key="App\Controller\ContratController:delete" type="service_closure" id=".service_locator.46d3SGC"/>
         <argument key="App\Controller\ContratController:edit" type="service_closure" id=".service_locator.46d3SGC"/>
         <argument key="App\Controller\ContratController:export" type="service_closure" id=".service_locator.0TK7yZ8"/>
+        <argument key="App\Controller\ContratController:front" type="service_closure" id=".service_locator.0TK7yZ8"/>
         <argument key="App\Controller\ContratController:index" type="service_closure" id=".service_locator.8H.sdZM"/>
         <argument key="App\Controller\ContratController:new" type="service_closure" id=".service_locator.CsMkqUa"/>
         <argument key="App\Controller\ContratController:show" type="service_closure" id=".service_locator.0TK7yZ8"/>
@@ -7913,6 +7926,7 @@
         <argument key="App\Controller\SponsorController:delete" type="service_closure" id=".service_locator.CsMkqUa"/>
         <argument key="App\Controller\SponsorController:edit" type="service_closure" id=".service_locator.CsMkqUa"/>
         <argument key="App\Controller\SponsorController:export" type="service_closure" id=".service_locator.MPUuYf0"/>
+        <argument key="App\Controller\SponsorController:front" type="service_closure" id=".service_locator.MPUuYf0"/>
         <argument key="App\Controller\SponsorController:main" type="service_closure" id=".service_locator.8H.sdZM"/>
         <argument key="App\Controller\SponsorController:new" type="service_closure" id=".service_locator.CsMkqUa"/>
         <argument key="App\Controller\SportController:delete" type="service_closure" id=".service_locator.geVFa8t"/>
@@ -8563,6 +8577,12 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.O2p6Lk7" method="withContext"/>
     </service>
+    <service id=".service_locator.O2p6Lk7.App\Controller\HomeController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\HomeController"/>
+      <argument>App\Controller\HomeController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.O2p6Lk7" method="withContext"/>
+    </service>
     <service id=".service_locator.O2p6Lk7.App\Controller\JoueurController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\JoueurController"/>
       <argument>App\Controller\JoueurController</argument>
@@ -8757,6 +8777,7 @@
           <argument>App\Kernel</argument>
           <argument>App\Controller\ClubController</argument>
           <argument>App\Controller\ContratController</argument>
+          <argument>App\Controller\HomeController</argument>
           <argument>App\Controller\JoueurController</argument>
           <argument>App\Controller\SponsorController</argument>
           <argument>App\Controller\SportController</argument>
@@ -10150,7 +10171,7 @@
     <service id="Knp\Component\Pager\ArgumentAccess\ArgumentAccessInterface" alias="Knp\Component\Pager\ArgumentAccess\RequestArgumentAccess"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.w7.f4fT" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.dfsAOXD"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.YZvGxUL"/>
     <service id="doctrine.id_generator_locator" alias=".service_locator.KLVvNIq"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface $requestLogger" alias="monolog.logger.request"/>
@@ -10177,7 +10198,7 @@
     <service id=".service_locator.Ecpu4I3" alias=".service_locator.8H.sdZM"/>
     <service id=".service_locator.vYOHL0D" alias=".service_locator.jpL5_4q"/>
     <service id=".service_locator.X9gG0Wi" alias=".service_locator.geVFa8t"/>
-    <service id=".service_locator.Bez92yX" alias=".service_locator.dfsAOXD"/>
+    <service id=".service_locator.arSg1lh" alias=".service_locator.YZvGxUL"/>
     <service id=".service_locator.BFrsqsn" alias=".service_locator.F9PKc.7"/>
     <service id=".service_locator.pIrLmPL" alias=".service_locator.ytsBBbz"/>
     <service id=".service_locator.XtmiKbi" alias=".service_locator.MfxSDRP"/>
