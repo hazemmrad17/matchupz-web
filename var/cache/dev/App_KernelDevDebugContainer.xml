@@ -424,6 +424,13 @@
         <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\HistoriqueClubController"/>
       </call>
     </service>
+    <service id="App\Controller\HomeController" class="App\Controller\HomeController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="container.service_subscriber"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\HomeController"/>
+      </call>
+    </service>
     <service id="App\Controller\JoueurController" class="App\Controller\JoueurController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
@@ -580,7 +587,7 @@
     </service>
     <service id="argument_resolver.service" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
       <tag priority="-50" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">controller.argument_value_resolver</tag>
-      <argument type="service" id=".service_locator.IgNy0qj"/>
+      <argument type="service" id=".service_locator.AT2ttso"/>
     </service>
     <service id="argument_resolver.default" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">
       <tag priority="-100" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">controller.argument_value_resolver</tag>
@@ -3571,7 +3578,7 @@
     </service>
     <service id="argument_resolver.not_tagged_controller" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
       <tag name="controller.argument_value_resolver" priority="-200"/>
-      <argument type="service" id=".service_locator.IgNy0qj"/>
+      <argument type="service" id=".service_locator.AT2ttso"/>
     </service>
     <service id="debug.log_processor" class="Symfony\Bridge\Monolog\Processor\DebugProcessor">
       <tag name="kernel.reset" method="reset"/>
@@ -7412,6 +7419,9 @@
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\HistoriqueClubController" class="App\Controller\HistoriqueClubController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\HistoriqueClubController" class="App\Controller\HistoriqueClubController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\HistoriqueClubController" class="App\Controller\HistoriqueClubController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\HomeController" class="App\Controller\HomeController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\HomeController" class="App\Controller\HomeController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\HomeController" class="App\Controller\HomeController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\JoueurController" class="App\Controller\JoueurController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\JoueurController" class="App\Controller\JoueurController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\JoueurController" class="App\Controller\JoueurController" autowire="true" autoconfigure="true" abstract="true"/>
@@ -8180,7 +8190,7 @@
         <argument key="sportRepository" type="service_closure" id="App\Repository\SportRepository"/>
       </argument>
     </service>
-    <service id=".service_locator.IgNy0qj" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.AT2ttso" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\AbonnementController::delete" type="service_closure" id=".service_locator.RsAjdld"/>
@@ -8201,6 +8211,7 @@
         <argument key="App\Controller\EspacesportifController::exportCsv" type="service_closure" id=".service_locator.KEBwH6u"/>
         <argument key="App\Controller\EspacesportifController::exportExcel" type="service_closure" id=".service_locator.KEBwH6u"/>
         <argument key="App\Controller\EspacesportifController::exportPdf" type="service_closure" id=".service_locator.ioGT2SM"/>
+        <argument key="App\Controller\EspacesportifController::front" type="service_closure" id=".service_locator.KEBwH6u"/>
         <argument key="App\Controller\EspacesportifController::index" type="service_closure" id=".service_locator.USDzM3K"/>
         <argument key="App\Controller\EspacesportifController::new" type="service_closure" id=".service_locator.wlYIEyg"/>
         <argument key="App\Controller\EspacesportifController::statistics" type="service_closure" id=".service_locator.CsMkqUa"/>
@@ -8275,6 +8286,7 @@
         <argument key="App\Controller\EspacesportifController:exportCsv" type="service_closure" id=".service_locator.KEBwH6u"/>
         <argument key="App\Controller\EspacesportifController:exportExcel" type="service_closure" id=".service_locator.KEBwH6u"/>
         <argument key="App\Controller\EspacesportifController:exportPdf" type="service_closure" id=".service_locator.ioGT2SM"/>
+        <argument key="App\Controller\EspacesportifController:front" type="service_closure" id=".service_locator.KEBwH6u"/>
         <argument key="App\Controller\EspacesportifController:index" type="service_closure" id=".service_locator.USDzM3K"/>
         <argument key="App\Controller\EspacesportifController:new" type="service_closure" id=".service_locator.wlYIEyg"/>
         <argument key="App\Controller\EspacesportifController:statistics" type="service_closure" id=".service_locator.CsMkqUa"/>
@@ -9002,6 +9014,12 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.O2p6Lk7" method="withContext"/>
     </service>
+    <service id=".service_locator.O2p6Lk7.App\Controller\HomeController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\HomeController"/>
+      <argument>App\Controller\HomeController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.O2p6Lk7" method="withContext"/>
+    </service>
     <service id=".service_locator.O2p6Lk7.App\Controller\JoueurController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\JoueurController"/>
       <argument>App\Controller\JoueurController</argument>
@@ -9205,6 +9223,7 @@
           <argument>App\Controller\EspacesportifController</argument>
           <argument>App\Controller\EvaluationPhysiqueController</argument>
           <argument>App\Controller\HistoriqueClubController</argument>
+          <argument>App\Controller\HomeController</argument>
           <argument>App\Controller\JoueurController</argument>
           <argument>App\Controller\PerformanceJoueurController</argument>
           <argument>App\Controller\ReservationController</argument>
@@ -10619,7 +10638,7 @@
     <service id="Knp\Component\Pager\ArgumentAccess\ArgumentAccessInterface" alias="Knp\Component\Pager\ArgumentAccess\RequestArgumentAccess"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.w7.f4fT" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.IgNy0qj"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.AT2ttso"/>
     <service id="doctrine.id_generator_locator" alias=".service_locator.KLVvNIq"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface $requestLogger" alias="monolog.logger.request"/>
@@ -10659,7 +10678,7 @@
     <service id=".service_locator.vYOHL0D" alias=".service_locator.jpL5_4q"/>
     <service id=".service_locator.X9gG0Wi" alias=".service_locator.geVFa8t"/>
     <service id=".service_locator.RwykrWv" alias=".service_locator.s2P9uaA"/>
-    <service id=".service_locator.tmufUNQ" alias=".service_locator.IgNy0qj"/>
+    <service id=".service_locator.9t0xBh1" alias=".service_locator.AT2ttso"/>
     <service id=".service_locator.BFrsqsn" alias=".service_locator.F9PKc.7"/>
     <service id=".service_locator.eC9PMMu" alias=".service_locator.A.dra_W"/>
     <service id=".service_locator.XtmiKbi" alias=".service_locator.MfxSDRP"/>

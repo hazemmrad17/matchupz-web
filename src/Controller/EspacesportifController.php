@@ -315,4 +315,30 @@ class EspacesportifController extends AbstractController
             'allEspaces' => $allEspaces,
         ]);
     }
+
+    // New route for the front-end display of espaces using espaceF.html.twig
+    #[Route('/front', name: 'app_espace_sportifs', methods: ['GET'])]
+    public function front(EspacesportifRepository $espaceSportifRepository): Response
+    {
+        // Fetch all espaces for the front-end display
+        $espaces = $espaceSportifRepository->findAll();
+
+        return $this->render('espace/espaceF.html.twig', [
+            'espaces' => $espaces,
+            'espaces_description' => 'Découvrez nos espaces sportifs pour vos activités préférées.',
+            'social_media' => [
+                ['url' => '#', 'icon' => 'fab fa-facebook-f'],
+                ['url' => '#', 'icon' => 'fab fa-twitter'],
+                ['url' => '#', 'icon' => 'fab fa-instagram'],
+                ['url' => '#', 'icon' => 'fab fa-linkedin-in'],
+            ],
+            'contact_email' => 'info@fitness.com',
+            'working_hours' => 'Mon - Sat: 8.00 am-7.00 pm',
+            'contact_address' => '123 street New York',
+            'contact_phone' => '(+012) 3456 7890 123',
+            'footer_description' => 'Dolor amet sit justo amet elitr clita ipsum elitr est.',
+            'site_name' => 'Fitness',
+            'recent_works' => [],
+        ]);
+    }
 }
