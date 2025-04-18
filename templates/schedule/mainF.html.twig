@@ -1,0 +1,123 @@
+{% extends 'baseM.html.twig' %}
+
+{% block title %}Matchupz - Horaires{% endblock %}
+
+{% block body %}
+    <!-- Header Start -->
+    <div class="container-fluid bg-breadcrumb">
+        <div class="container text-center py-5" style="max-width: 900px;">
+            <h4 class="text-white display-4 mb-4 wow fadeInDown" data-wow-delay="0.1s">Horaires des matchs</h4>
+            <ol class="breadcrumb d-flex justify-content-center mb-0 wow fadeInDown" data-wow-delay="0.3s">
+                <li class="breadcrumb-item"><a href="{{ path('app_home') }}">Accueil</a></li>
+                <li class="breadcrumb-item active text-primary">Horaires</li>
+            </ol>
+        </div>
+    </div>
+    <!-- Header End -->
+
+    <!-- Schedules Start -->
+    <div class="container-fluid courses overflow-hidden py-5" style="margin-bottom: 90px;">
+        <div class="container py-5">
+            <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
+                <h4 class="text-primary">Nos horaires</h4>
+                <h1 class="display-4 text-white mb-4">Matchs à venir et en cours</h1>
+                <p class="text-white mb-0">
+                    Restez informé de tous les matchs programmés. Les matchs en cours sont listés ci-dessous.
+                </p>
+            </div>
+
+            <!-- Ongoing Matches -->
+            <div class="mb-5">
+                <h3 class="text-primary mb-4">Matchs en cours</h3>
+                {% if ongoingSchedules|length > 0 %}
+                    <div class="row gy-4 gx-0 justify-content-center">
+                        {% for schedule in ongoingSchedules %}
+                            <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="{{ 0.2 + (loop.index0 % 3) * 0.2 }}s">
+                                <div class="courses-item">
+                                    <div class="courses-item-inner p-4">
+                                        <div class="d-flex justify-content-between mb-4">
+                                            <div class="courses-icon-img p-3">
+                                                <img src="{{ asset('img/' ~ (schedule.matchEntity and schedule.matchEntity.sportType ? schedule.matchEntity.sportType : 'default') ~ '.png') }}" class="img-fluid" alt="{{ schedule.matchEntity.sportType ?? 'Default' }} icon">
+                                            </div>
+                                            <div class="data-info d-flex flex-column">
+                                                <div class="courses-date">
+                                                    <p class="mb-1">Date : {{ schedule.dateMatch|date('Y-m-d') }}</p>
+                                                    <p class="mb-0">Heure : {{ schedule.startTime|date('H:i') }} - {{ schedule.endTime|date('H:i') }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <a href="{{ path('schedule_showF', {'idSchedule': schedule.idSchedule}) }}" class="d-inline-block h4 mb-3">
+                                            {% if schedule.matchEntity %}
+                                                {{ schedule.matchEntity.c1 }} contre {{ schedule.matchEntity.c2 }}
+                                            {% else %}
+                                                Match à déterminer
+                                            {% endif %}
+                                        </a>
+                                        <p class="mb-4">
+                                            <strong>Lieu :</strong> {{ schedule.espaceSportif ? schedule.espaceSportif.nomEspace : 'N/A' }}<br>
+                                            {% if schedule.matchEntity and schedule.matchEntity.sportType %}
+                                                <strong>Sport :</strong> {{ schedule.matchEntity.sportType }}
+                                            {% endif %}
+                                        </p>
+                                        <a href="{{ path('schedule_showF', {'idSchedule': schedule.idSchedule}) }}" class="btn btn-primary py-2 px-4">
+                                            <span>Voir les détails</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p class="text-white">Aucun match n'est actuellement en cours.</p>
+                {% endif %}
+            </div>
+
+            <!-- All Schedules -->
+            <div>
+                <h3 class="text-primary mb-4">Tous les horaires</h3>
+                <div class="row gy-4 gx-0 justify-content-center">
+                    {% for schedule in schedules %}
+                        <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="{{ 0.2 + (loop.index0 % 3) * 0.2 }}s">
+                            <div class="courses-item">
+                                <div class="courses-item-inner p-4">
+                                    <div class="d-flex justify-content-between mb-4">
+                                        <div class="courses-icon-img p-3">
+                                            <img src="{{ asset('img/' ~ (schedule.matchEntity and schedule.matchEntity.sportType ? schedule.matchEntity.sportType : 'default') ~ '.png') }}" class="img-fluid" alt="{{ schedule.matchEntity.sportType ?? 'Default' }} icon">
+                                        </div>
+                                        <div class="data-info d-flex flex-column">
+                                            <div class="courses-date">
+                                                <p class="mb-1">Date : {{ schedule.dateMatch|date('Y-m-d') }}</p>
+                                                <p class="mb-0">Heure : {{ schedule.startTime|date('H:i') }} - {{ schedule.endTime|date('H:i') }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <a href="{{ path('schedule_showF', {'idSchedule': schedule.idSchedule}) }}" class="d-inline-block h4 mb-3">
+                                        {% if schedule.matchEntity %}
+                                            {{ schedule.matchEntity.c1 }} contre {{ schedule.matchEntity.c2 }}
+                                        {% else %}
+                                            Match à déterminer
+                                        {% endif %}
+                                    </a>
+                                    <p class="mb-4">
+                                        <strong>Lieu :</strong> {{ schedule.espaceSportif ? schedule.espaceSportif.nomEspace : 'N/A' }}<br>
+                                        {% if schedule.matchEntity and schedule.matchEntity.sportType %}
+                                            <strong>Sport :</strong> {{ schedule.matchEntity.sportType }}
+                                        {% endif %}
+                                    </p>
+                                    <a href="{{ path('schedule_showF', {'idSchedule': schedule.idSchedule}) }}" class="btn btn-primary py-2 px-4">
+                                        <span>Voir les détails</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="col-12 text-center">
+                            <p class="text-white">Aucun horaire disponible pour le moment.</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Schedules End -->
+{% endblock %}

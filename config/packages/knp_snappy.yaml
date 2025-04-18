@@ -1,0 +1,9 @@
+knp_snappy:
+    pdf:
+        enabled: true
+        binary: '"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe"'
+        options:
+            enable-local-file-access: true  # Allow local file access
+            disable-local-file-access: false # Ensure this is disabled
+            no-stop-slow-scripts: true      # Prevent timeouts from scripts
+            lowquality: true                # Reduce quality to speed up rendering (optional)

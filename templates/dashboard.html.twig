@@ -1,0 +1,275 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block searchbar %}
+    {% include 'searchbar.html.twig' %}
+{% endblock %}
+
+{% block content %}
+    <div class="content-wrapper">
+        <div class="container-xxl flex-grow-1 container-p-y">
+            <!-- Header -->
+            <h4 class="fw-bold py-3 mb-4">
+                <span class="text-muted fw-light">Dashboard /</span> Overview
+            </h4>
+
+            <!-- Users Section -->
+            <div class="row mb-5">
+                <div class="col-12">
+                    <h5 class="menu-header-text text-uppercase small mb-3">Users Section</h5>
+                    <div class="row">
+                        <!-- Users Widget -->
+                        <div class="col-md-6 col-lg-4 mb-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="card-title d-flex align-items-start justify-content-between">
+                                        <div class="avatar flex-shrink-0">
+                                            <span class="avatar-initial rounded bg-label-primary">
+                                                <i class="bx bx-user widget-icon"></i>
+                                            </span>
+                                        </div>
+                                        <div class="dropdown">
+                                            <button class="btn p-0" type="button" data-bs-toggle="dropdown">
+                                                <i class="bx bx-dots-vertical-rounded"></i>
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-end">
+                                                <a class="dropdown-item" href="{{ path('joueur_main') }}">View All</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <span>Total Users</span>
+                                    <h3 class="card-title text-nowrap mb-1">{{ stats.users.total|default(0) }}</h3>
+                                    <small class="text-muted">Active: {{ stats.users.active|default(0) }}</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section Staff Technique (Joueurs) -->
+            <div class="row mb-5">
+                <div class="col-12">
+                    <h5 class="menu-header-text text-uppercase small mb-3">Section Staff Technique</h5>
+                    <div class="row">
+                        <!-- Joueurs Widget -->
+                        <div class="col-md-6 col-lg-4 mb-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="card-title d-flex align-items-start justify-content-between">
+                                        <div class="avatar flex-shrink-0">
+                                            <span class="avatar-initial rounded bg-label-success">
+                                                <i class="bx bx-group widget-icon"></i>
+                                            </span>
+                                        </div>
+                                        <div class="dropdown">
+                                            <button class="btn p-0" type="button" data-bs-toggle="dropdown">
+                                                <i class="bx bx-dots-vertical-rounded"></i>
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-end">
+                                                <a class="dropdown-item" href="{{ path('joueur_main') }}">View All</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <span>Joueurs</span>
+                                    <h3 class="card-title text-nowrap mb-1">{{ stats.joueurs.total|default(0) }}</h3>
+                                    <small class="text-muted">Clubs: {{ stats.joueurs.clubs|default(0) }}</small>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Clubs Widget -->
+                        <div class="col-md-6 col-lg-4 mb-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="card-title d-flex align-items-start justify-content-between">
+                                        <div class="avatar flex-shrink-0">
+                                            <span class="avatar-initial rounded bg-label-info">
+                                                <i class="bx bx-building widget-icon"></i>
+                                            </span>
+                                        </div>
+                                        <div class="dropdown">
+                                            <button class="btn p-0" type="button" data-bs-toggle="dropdown">
+                                                <i class="bx bx-dots-vertical-rounded"></i>
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-end">
+                                                <a class="dropdown-item" href="{{ path('club_index') }}">View All</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <span>Clubs</span>
+                                    <h3 class="card-title text-nowrap mb-1">{{ stats.clubs.total|default(0) }}</h3>
+                                    <small class="text-muted">Active: {{ stats.clubs.active|default(0) }}</small>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Historique Transferts Widget -->
+                        <div class="col-md-6 col-lg-4 mb-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="card-title d-flex align-items-start justify-content-between">
+                                        <div class="avatar flex-shrink-0">
+                                            <span class="avatar-initial rounded bg-label-warning">
+                                                <i class="bx bx-transfer widget-icon"></i>
+                                            </span>
+                                        </div>
+                                        <div class="dropdown">
+                                            <button class="btn p-0" type="button" data-bs-toggle="dropdown">
+                                                <i class="bx bx-dots-vertical-rounded"></i>
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-end">
+                                                <a class="dropdown-item" href="{{ path('app_historique_club_index') }}">View All</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <span>Historique Transferts</span>
+                                    <h3 class="card-title text-nowrap mb-1">{{ stats.historique.total|default(0) }}</h3>
+                                    <small class="text-muted">Recent: {{ stats.historique.recent|default(0) }}</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Match Management -->
+            <div class="row mb-5">
+                <div class="col-12">
+                    <h5 class="menu-header-text text-uppercase small mb-3">Match Management</h5>
+                    <div class="row">
+                        <!-- Matchs Widget -->
+                        <div class="col-md-6 col-lg-4 mb-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="card-title d-flex align-items-start justify-content-between">
+                                        <div class="avatar flex-shrink-0">
+                                            <span class="avatar-initial rounded bg-label-danger">
+                                                <i class="bx bx-football widget-icon"></i>
+                                            </span>
+                                        </div>
+                                        <div class="dropdown">
+                                            <button class="btn p-0" type="button" data-bs-toggle="dropdown">
+                                                <i class="bx bx-dots-vertical-rounded"></i>
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-end">
+                                                <a class="dropdown-item">View Upcoming</a>
+                                                <a class="dropdown-item">View Past</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <span>Matchs</span>
+                                    <h3 class="card-title text-nowrap mb-1">{{ stats.matchs.total|default(0) }}</h3>
+                                    <small class="text-muted">Upcoming: {{ stats.matchs.upcoming|default(0) }}</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section Espace -->
+            <div class="row mb-5">
+                <div class="col-12">
+                    <h5 class="menu-header-text text-uppercase small mb-3">Section Espace</h5>
+                    <div class="row">
+                        <!-- Espace Sportif Widget -->
+                        <div class="col-md-6 col-lg-4 mb-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="card-title d-flex align-items-start justify-content-between">
+                                        <div class="avatar flex-shrink-0">
+                                            <span class="avatar-initial rounded bg-label-primary">
+                                                <i class="bx bx-stadium widget-icon"></i>
+                                            </span>
+                                        </div>
+                                        <div class="dropdown">
+                                            <button class="btn p-0" type="button" data-bs-toggle="dropdown">
+                                                <i class="bx bx-dots-vertical-rounded"></i>
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-end">
+                                                <a class="dropdown-item" href="{{ path('espace_index') }}">View All</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <span>Espace Sportif</span>
+                                    <h3 class="card-title text-nowrap mb-1">{{ stats.espace.total|default(0) }}</h3>
+                                    <small class="text-muted">Réservations: {{ stats.espace.reservations|default(0) }}</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Logistics -->
+            <div class="row mb-5">
+                <div class="col-12">
+                    <h5 class="menu-header-text text-uppercase small mb-3">Logistics</h5>
+                    <div class="row">
+                        <!-- Logistique Widget -->
+                        <div class="col-md-6 col-lg-4 mb-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="card-title d-flex align-items-start justify-content-between">
+                                        <div class="avatar flex-shrink-0">
+                                            <span class="avatar-initial rounded bg-label-success">
+                                                <i class="bx bx-truck widget-icon"></i>
+                                            </span>
+                                        </div>
+                                        <div class="dropdown">
+                                            <button class="btn p-0" type="button" data-bs-toggle="dropdown">
+                                                <i class="bx bx-dots-vertical-rounded"></i>
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-end">
+                                                <a class="dropdown-item ">View Transport</a>
+                                                <a class="dropdown-item">View Equipment</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <span>Logistique</span>
+                                    <h3 class="card-title text-nowrap mb-1">{{ stats.logistique.total|default(0) }}</h3>
+                                    <small class="text-muted">Equipment: {{ stats.logistique.equipment|default(0) }}</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sponsorship -->
+            <div class="row mb-5">
+                <div class="col-12">
+                    <h5 class="menu-header-text text-uppercase small mb-3">Sponsorship</h5>
+                    <div class="row">
+                        <!-- Sponsoring Widget -->
+                        <div class="col-md-6 col-lg-4 mb-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="card-title d-flex align-items-start justify-content-between">
+                                        <div class="avatar flex-shrink-0">
+                                            <span class="avatar-initial rounded bg-label-warning">
+                                                <i class="bx bx-money widget-icon"></i>
+                                            </span>
+                                        </div>
+                                        <div class="dropdown">
+                                            <button class="btn p-0" type="button" data-bs-toggle="dropdown">
+                                                <i class="bx bx-dots-vertical-rounded"></i>
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-end">
+                                                <a class="dropdown-item">View Partners</a>
+                                                <a class="dropdown-item">View Contracts</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <span>Sponsoring</span>
+                                    <h3 class="card-title text-nowrap mb-1">{{ stats.sponsoring.total|default(0) }}</h3>
+                                    <small class="text-muted">Contracts: {{ stats.sponsoring.contracts|default(0) }}</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
