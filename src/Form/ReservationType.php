@@ -1,0 +1,73 @@
+<?php
+
+namespace App\Form;
+
+use App\Entity\Reservation;
+use App\Entity\Espacesportif;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+
+class ReservationType extends AbstractType
+{
+    public function buildForm(FormBuilderInterface $builder, array $options): void
+    {
+        $builder
+            ->add('espacesportif', EntityType::class, [
+                'class' => Espacesportif::class,
+                'choice_label' => 'nom_espace',
+                'label' => 'Lieu Sportif',
+                'placeholder' => 'Sélectionner un lieu sportif',
+                'required' => true,
+                'attr' => [
+                    'class' => 'form-control',
+                ],
+            ])
+            ->add('date_reservee', DateTimeType::class, [
+                'label' => 'Date et Heure Réservée',
+                'widget' => 'single_text',
+                'html5' => true,
+                'attr' => [
+                    'class' => 'form-control',
+                    'min' => (new \DateTime())->format('Y-m-d\TH:i'), // Ensures future dates
+                ],
+                'required' => true,
+            ])
+            ->add('motif', ChoiceType::class, [
+                'label' => 'Motif',
+                'choices' => [
+                    'Match' => 'match',
+                    'Entraînement' => 'entraînement',
+                    'Tournoi' => 'tournoi',
+                    'Autre' => 'autre',
+                ],
+                'required' => true,
+                'attr' => [
+                    'class' => 'form-control',
+                ],
+            ])
+            ->add('status', ChoiceType::class, [
+                'label' => 'Statut',
+                'choices' => [
+                    'Confirmée' => 'confirmée',
+                    'Annulée' => 'annulée',
+                    'En attente' => 'en attente',
+                ],
+                'required' => true,
+                'attr' => [
+                    'class' => 'form-control',
+                ],
+            ])
+        ;
+    }
+
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->setDefaults([
+            'data_class' => Reservation::class,
+        ]);
+    }
+}

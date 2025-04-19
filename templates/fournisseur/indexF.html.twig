@@ -1,0 +1,83 @@
+{% extends 'baseM.html.twig' %}
+
+{% block title %}Nos Fournisseurs - Fitness Center{% endblock %}
+
+{% block body %}
+    <!-- Header Start -->
+    <div class="container-fluid bg-breadcrumb">
+        <div class="container text-center py-5" style="max-width: 900px;">
+            <h4 class="text-white display-4 mb-4 wow fadeInDown" data-wow-delay="0.1s">Nos Fournisseurs</h4>
+            <ol class="breadcrumb d-flex justify-content-center mb-0 wow fadeInDown" data-wow-delay="0.3s">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item"><a href="#">Pages</a></li>
+                <li class="breadcrumb-item active text-primary">Fournisseurs</li>
+            </ol>    
+        </div>
+    </div>
+    <!-- Header End -->
+
+    <!-- Fournisseurs Carousel Start -->
+    <div class="container-fluid feature bg-light py-5">
+        <div class="container py-5 position-relative">
+            <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
+                <h4 class="text-primary">Nos Partenaires</h4>
+                <h1 class="display-4 mb-4">Découvrez Nos Fournisseurs de Qualité</h1>
+                <p class="mb-3">Nous collaborons avec des fournisseurs de confiance pour vous offrir les meilleurs équipements et services pour votre expérience fitness.</p>
+                <p class="mb-0">Explorez nos partenaires et découvrez comment ils contribuent à votre réussite sportive.</p>
+            </div>
+
+            {% set images = ['fournisseur1.jpg', 'fournisseur2.jpg', 'fournisseur3.jpg', 'fournisseur4.jpg', 'fournisseur5.jpg'] %}
+
+            {% if pagination|length > 0 %}
+                <div class="fournisseur-carousel owl-carousel mb-5 position-relative" style="z-index: 2;">
+                    {% for fournisseur in pagination %}
+                        <div class="feature-item wow fadeInUp" data-wow-delay="{{ 0.2 + (loop.index0 * 0.2) }}s">
+                            <div class="feature-img">
+                                <img src="{{ asset('img/' ~ images[loop.index0 % images|length]) }}" class="img-fluid w-100" alt="Fournisseur">
+                            </div>
+                            <div class="feature-content p-4">
+                                <h4 class="mb-3">{{ fournisseur.nom }}</h4>
+                                <p class="mb-2"><i class="fas fa-map-marker-alt me-2 text-primary"></i><strong>Adresse:</strong> {{ fournisseur.adresse }}</p>
+                                <p class="mb-2"><i class="fas fa-envelope me-2 text-primary"></i><strong>Email:</strong> {{ fournisseur.email }}</p>
+                                <p class="mb-3"><i class="fas fa-tags me-2 text-primary"></i><strong>Catégorie:</strong> {{ fournisseur.categorieProduit }}</p>
+                                <a href="{{ path('app_fournisseur_show', {'id_fournisseur': fournisseur.idFournisseur}) }}" class="btn btn-primary py-2 px-4"></a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="col-12 text-center">
+                    <p class="text-muted">Aucun fournisseur trouvé.</p>
+                </div>
+            {% endif %}
+
+            <div class="feature-shaps position-absolute top-0 start-0 w-100 h-100" style="z-index: 1;"></div>
+        </div>
+    </div>
+    <!-- Fournisseurs Carousel End -->
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        new WOW().init();
+
+        $(document).ready(function(){
+            $(".fournisseur-carousel").owlCarousel({
+                items: 3,
+                margin: 30,
+                loop: true,
+                autoplay: true,
+                autoplayTimeout: 3500,
+                smartSpeed: 800,
+                dots: true,
+                nav: false,
+                responsive: {
+                    0:{ items:1 },
+                    768:{ items:2 },
+                    992:{ items:3 }
+                }
+            });
+        });
+    </script>
+{% endblock %}

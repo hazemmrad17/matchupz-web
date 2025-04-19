@@ -1,0 +1,119 @@
+{% extends 'baseM.html.twig' %}
+
+{% block title %}Liste du Matériel{% endblock %}
+
+{% block body %}
+    <!-- Header Start -->
+    <div class="container-fluid bg-breadcrumb">
+        <div class="container text-center py-5" style="max-width: 900px;">
+            <h4 class="text-white display-4 mb-4 wow fadeInDown" data-wow-delay="0.1s">Notre Matériel</h4>
+            <ol class="breadcrumb d-flex justify-content-center mb-0 wow fadeInDown" data-wow-delay="0.3s">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item"><a href="#">Pages</a></li>
+                <li class="breadcrumb-item active text-primary">Matériel</li>
+            </ol>    
+        </div>
+    </div>
+    <!-- Header End -->
+
+    <!-- Materiel Carousel Start -->
+    <div class="container-fluid feature bg-light py-5">
+        <div class="container py-5 position-relative">
+            <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
+                <h4 class="text-primary">Nos Équipements</h4>
+                <h1 class="display-4 mb-4">Découvrez Notre Matériel de Qualité</h1>
+                <p class="mb-3">Nous mettons à votre disposition des équipements professionnels pour optimiser vos performances sportives.</p>
+                <p class="mb-0">Explorez notre inventaire et trouvez le matériel adapté à vos besoins.</p>
+            </div>
+
+            {% if pagination|length > 0 %}
+                <div class="materiel-carousel owl-carousel mb-5 position-relative" style="z-index: 2;">
+                    {% for materiel in pagination %}
+                        <div class="feature-item wow fadeInUp" data-wow-delay="{{ 0.2 + (loop.index0 * 0.2) }}s">
+                            <div class="feature-img">
+                                {% if materiel.image %}
+                                    <img src="{{ asset('Uploads/materiels/' ~ materiel.image) }}" class="img-fluid w-100" alt="{{ materiel.nom }}">
+                                {% else %}
+                                    <div style="width: 100%; height: 200px; display: flex; align-items: center; justify-content: center; background-color: #f8f9fa;">
+                                        <i class="fas fa-camera fa-3x text-muted"></i>
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <div class="feature-content p-4">
+                                <h4 class="mb-3">{{ materiel.nom }}</h4>
+                                <p class="mb-2"><i class="fas fa-tags me-2 text-primary"></i><strong>Type:</strong> {{ materiel.type|replace({'_': ' '})|lower|capitalize }}</p>
+                                <p class="mb-2"><i class="fas fa-boxes me-2 text-primary"></i><strong>Quantité:</strong> {{ materiel.quantite }}</p>
+                                <p class="mb-2"><i class="fas fa-check-circle me-2 text-primary"></i><strong>État:</strong> 
+                                    <span class="badge {{ 
+                                        materiel.etat == 'NEUF' ? 'bg-primary' : 
+                                        (materiel.etat == 'BON' ? 'bg-success' :
+                                        (materiel.etat == 'USE' ? 'bg-warning' : 
+                                        (materiel.etat == 'DEFAUT' ? 'bg-danger' : 'bg-secondary'))) 
+                                    }}">
+                                        {{ materiel.etat|replace({'_': ' '})|lower|capitalize }}
+                                    </span>
+                                </p>
+                                <p class="mb-2"><i class="fas fa-barcode me-2 text-primary"></i><strong>Code-barres:</strong> {{ materiel.barcode|default('N/A') }}</p>
+                                <p class="mb-3"><i class="fas fa-store me-2 text-primary"></i><strong>Fournisseur:</strong> 
+                                    {% if materiel.fournisseur %}
+                                        <a href="{{ path('app_fournisseur_showF', {'id_fournisseur': materiel.fournisseur.idFournisseur}) }}">
+                                            {{ materiel.fournisseur.nom }}
+                                        </a>
+                                    {% else %}
+                                        Aucun fournisseur
+                                    {% endif %}
+                                </p>
+                                <a href="{{ path('app_materiel_showF', {'id': materiel.id}) }}" class="btn btn-primary py-2 px-4"></a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <!-- Pagination -->
+                <div class="row mt-5">
+                    <div class="col-12 text-center">
+                        <div class="navigation">
+                            {{ knp_pagination_render(pagination, null, {}, {
+                                'align': 'center',
+                                'rounded': true,
+                                'size': 'sm'
+                            }) }}
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <div class="col-12 text-center">
+                    <p class="text-muted">Aucun matériel trouvé.</p>
+                </div>
+            {% endif %}
+
+            <div class="feature-shaps position-absolute top-0 start-0 w-100 h-100" style="z-index: 1;"></div>
+        </div>
+    </div>
+    <!-- Materiel Carousel End -->
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        new WOW().init();
+
+        $(document).ready(function(){
+            $(".materiel-carousel").owlCarousel({
+                items: 3,
+                margin: 30,
+                loop: true,
+                autoplay: true,
+                autoplayTimeout: 3500,
+                smartSpeed: 800,
+                dots: true,
+                nav: false,
+                responsive: {
+                    0:{ items:1 },
+                    768:{ items:2 },
+                    992:{ items:3 }
+                }
+            });
+        });
+    </script>
+{% endblock %}
