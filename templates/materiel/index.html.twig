@@ -9,6 +9,56 @@
 {% block content %}
 <div class="content-wrapper">
     <div class="container-xxl flex-grow-1 container-p-y">
+        <!-- Congratulatory and Moyenne par Type Widgets -->
+        <div class="row">
+            <!-- Congratulatory Widget -->
+            <div class="col-lg-8 col-md-6 mb-4 order-0">
+                <div class="card h-100 shadow-sm">
+                    <div class="d-flex align-items-end row">
+                        <div class="col-sm-7">
+                            <div class="card-body">
+                                <h5 class="card-title text-primary">Félicitations Cher Responsable Logistique ! 🎉</h5>
+                                <p class="mb-4">
+                                    Vous avez ajouté <span class="fw-bold">{{ totalMateriels }}</span> matériels aujourd'hui. Consultez votre profil pour les mises à jour.
+                                </p>
+                                <a href="javascript:;" class="btn btn-sm btn-outline-primary">Voir Profil</a>
+                            </div>
+                        </div>
+                        <div class="col-sm-5 text-center text-sm-left">
+                            <div class="card-body pb-0 px-0 px-md-4">
+                                <img
+                                    src="{{ asset('img/illustrations/man-with-laptop-light.png') }}"
+                                    height="140"
+                                    alt="Illustration"
+                                    data-app-dark-img="illustrations/man-with-laptop-dark.png"
+                                    data-app-light-img="illustrations/man-with-laptop-light.png"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Moyenne par Type Widget -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body">
+                        <div class="d-flex align-items-start justify-content-between mb-3">
+                            <div class="avatar flex-shrink-0">
+                                <img
+                                    src="{{ asset('img/icons/unicons/chart.png') }}"
+                                    alt="Average per Type"
+                                    class="rounded"
+                                />
+                            </div>
+                        </div>
+                        <span class="fw-semibold d-block mb-1">Moyenne par Type</span>
+                        <h3 class="card-title mb-2">{{ typeDistribution|length > 0 ? (totalMateriels / typeDistribution|length)|round(1) : 0 }}</h3>
+                        <small class="text-muted">Matériels par type</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         {% block widgets %}
             <!-- Existing Widgets Section -->
             <div class="row">
@@ -86,45 +136,16 @@
             </div>
         {% endblock %}
 
-        {# New Simple Widgets Above Table (Adapted for Materiel) #}
-        <div class="row mt-4">
-            <!-- Total Materials Widget -->
-            <div class="col-md-4 col-lg-4 mb-4">
-                <div class="card shadow-sm h-100">
-                    <div class="card-body">
-                        <div class="d-flex align-items-start justify-content-between mb-3">
-                            <div class="avatar flex-shrink-0">
-                                <img
-                                    src="{{ asset('img/icons/unicons/cube.png') }}"
-                                    alt="Total Materials"
-                                    class="rounded"
-                                />
-                            </div>
-                        </div>
-                        <span class="fw-semibold d-block mb-1">Total Matériels</span>
-                        <h3 class="card-title mb-2">{{ totalMateriels }}</h3>
-                        <small class="text-muted">Nombre total de matériels</small>
-                    </div>
+        <!-- Toast Notification for Low Quantity -->
+        <div class="position-fixed top-0 end-0 p-3" style="z-index: 1050;">
+            <div id="lowQuantityToast" class="toast hide bg-danger text-white" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000">
+                <div class="toast-header bg-danger text-white">
+                    <i class="bx bx-bell me-2"></i>
+                    <strong class="me-auto">Alerte Stock</strong>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
                 </div>
-            </div>
-
-            <!-- Average Materials per Type Widget -->
-            <div class="col-md-4 col-lg-4 mb-4">
-                <div class="card shadow-sm h-100">
-                    <div class="card-body">
-                        <div class="d-flex align-items-start justify-content-between mb-3">
-                            <div class="avatar flex-shrink-0">
-                                <img
-                                    src="{{ asset('img/icons/unicons/chart.png') }}"
-                                    alt="Average per Type"
-                                    class="rounded"
-                                />
-                            </div>
-                        </div>
-                        <span class="fw-semibold d-block mb-1">Moyenne par Type</span>
-                        <h3 class="card-title mb-2">{{ typeDistribution|length > 0 ? (totalMateriels / typeDistribution|length)|round(1) : 0 }}</h3>
-                        <small class="text-muted">Matériels par type</small>
-                    </div>
+                <div class="toast-body">
+                    La quantité de certains matériels est inférieure à 5. Veuillez commander de nouveaux matériaux.
                 </div>
             </div>
         </div>
@@ -191,93 +212,91 @@
             </h5>
 
             <div class="table-responsive text-nowrap">
-    <table class="table" id="materielsTable">
-        <thead>
-            <tr>
-                <th>{{ knp_pagination_sortable(pagination, 'ID', 'm.id') }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'Nom', 'm.nom') }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'Type', 'm.type') }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'Quantité', 'm.quantite') }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'État', 'm.etat') }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'Prix unitaire', 'm.prix') }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'Code-barres', 'm.barcode') }}</th>
-                <th>Image</th>
-                <th>Fournisseur</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody class="table-border-bottom-0">
-            {% if pagination is defined and pagination|length > 0 %}
-                {% for materiel in pagination %}
-                    <tr class="table-default">
-                        <td><strong>#{{ materiel.id }}</strong></td>
-                        <td>
-                            <i class="bx bx-package fa-lg text-primary me-3"></i>
-                            <strong>{{ materiel.nom }}</strong>
-                        </td>
-                        <td>{{ materiel.type|default('N/A') }}</td>
-                        <td>{{ materiel.quantite|default('N/A') }}</td>
-                        <td>{{ materiel.etat|default('N/A') }}</td>
-                        <td>{{ materiel.prix|number_format(2, ',', ' ')|default('N/A') }} €</td>
-                        <td>{{ materiel.barcode|default('N/A') }}</td>
-                        <td>
-                            {% if materiel.image %}
-                                <img src="{{ asset('uploads/materiels/' ~ materiel.image) }}" width="50" height="50" class="rounded-circle" alt="Image matériel">
-                            {% else %}
-                                <span class="text-muted">N/A</span>
-                            {% endif %}
-                        </td>
-                        <td>
-                            {% if materiel.fournisseur %}
-                                <a href="{{ path('app_fournisseur_show', {'id_fournisseur': materiel.fournisseur.id_fournisseur}) }}">
-                                    {{ materiel.fournisseur.nom }}
-                                </a>
-                            {% else %}
-                                <span class="text-muted">N/A</span>
-                            {% endif %}
-                        </td>
-                        <td>
-                            <div class="dropdown">
-                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                    <i class="bx bx-dots-vertical-rounded"></i>
-                                </button>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="{{ path('app_materiel_show', {'id': materiel.id}) }}">
-                                        <i class="bx bx-show me-1"></i> Voir
-                                    </a>
-                                    <a class="dropdown-item" href="{{ path('app_materiel_edit', {'id': materiel.id}) }}">
-                                        <i class="bx bx-edit-alt me-1"></i> Modifier
-                                    </a>
-                                    <form method="post" action="{{ path('app_materiel_delete', {'id': materiel.id}) }}" style="display:inline;" onsubmit="return confirm('Confirmer la suppression ?');">
-                                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ materiel.id) }}">
-                                        <button class="dropdown-item" type="submit">
-                                            <i class="bx bx-trash me-1"></i> Supprimer
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                {% endfor %}
-            {% else %}
-                <tr>
-                    <td colspan="10" class="text-center">Aucun matériel trouvé</td>
-                </tr>
-            {% endif %}
-        </tbody>
-    </table>
-</div>
+                <table class="table" id="materielsTable">
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Nom</th>
+                            <th>Type</th>
+                            <th>Quantité</th>
+                            <th>État</th>
+                            <th>Prix unitaire</th>
+                            <th>Code-barres</th>
+                            <th>Fournisseur</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-border-bottom-0">
+                        {% if pagination is defined and pagination|length > 0 %}
+                            {% for materiel in pagination %}
+                                <tr class="table-default {% if materiel.quantite is not null and materiel.quantite < 5 %}low-quantity{% endif %}" data-quantity="{{ materiel.quantite|default('N/A') }}">
+                                    <td>
+                                        {% if materiel.image %}
+                                            <img src="{{ asset('Uploads/materiels/' ~ materiel.image) }}" width="50" height="50" class="rounded-circle" alt="Image matériel">
+                                        {% else %}
+                                            <span class="text-muted">N/A</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <i class="bx bx-package fa-lg text-primary me-3"></i>
+                                        <strong>{{ materiel.nom }}</strong>
+                                    </td>
+                                    <td>{{ materiel.type|default('N/A') }}</td>
+                                    <td>{{ materiel.quantite|default('N/A') }}</td>
+                                    <td>{{ materiel.etat|default('N/A') }}</td>
+                                    <td>{{ materiel.prix|number_format(2, ',', ' ')|default('N/A') }} €</td>
+                                    <td>{{ materiel.barcode|default('N/A') }}</td>
+                                    <td>
+                                        {% if materiel.fournisseur %}
+                                            <a href="{{ path('app_fournisseur_show', {'id_fournisseur': materiel.fournisseur.id_fournisseur}) }}">
+                                                {{ materiel.fournisseur.nom }}
+                                            </a>
+                                        {% else %}
+                                            <span class="text-muted">N/A</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <div class="dropdown">
+                                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                                <i class="bx bx-dots-vertical-rounded"></i>
+                                            </button>
+                                            <div class="dropdown-menu">
+                                                <a class="dropdown-item" href="{{ path('app_materiel_show', {'id': materiel.id}) }}">
+                                                    <i class="bx bx-show me-1"></i> Voir
+                                                </a>
+                                                <a class="dropdown-item" href="{{ path('app_materiel_edit', {'id': materiel.id}) }}">
+                                                    <i class="bx bx-edit-alt me-1"></i> Modifier
+                                                </a>
+                                                <form method="post" action="{{ path('app_materiel_delete', {'id': materiel.id}) }}" style="display:inline;" onsubmit="return confirm('Confirmer la suppression ?');">
+                                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ materiel.id) }}">
+                                                    <button class="dropdown-item" type="submit">
+                                                        <i class="bx bx-trash me-1"></i> Supprimer
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        {% else %}
+                            <tr>
+                                <td colspan="9" class="text-center">Aucun matériel trouvé</td>
+                            </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
 
             {# Pagination #}
             <div class="card-footer">
-    {{ knp_pagination_render(pagination) }}
-    <div class="text-center">
-        <small>
-            Page {{ pagination.currentPageNumber }} sur {{ pagination.getPageCount() }} |
-            Total Matériels : {{ pagination.totalItemCount }}
-        </small>
-    </div>
-</div>
+                {{ knp_pagination_render(pagination) }}
+                <div class="text-center">
+                    <small>
+                        Page {{ pagination.currentPageNumber }} sur {{ pagination.getPageCount() }} |
+                        Total Matériels : {{ pagination.totalItemCount }}
+                    </small>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -285,5 +304,47 @@
 
 {% block javascripts %}
     {{ parent() }}
-    <!-- No JavaScript needed for search since it's now server-side -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Debug: Log low quantity rows
+            const lowQuantityRows = document.querySelectorAll('.low-quantity');
+            console.log('Low quantity rows found:', lowQuantityRows.length);
+            lowQuantityRows.forEach(row => {
+                console.log('Row Name:', row.querySelector('td:nth-child(2)').textContent, 'Quantity:', row.getAttribute('data-quantity'));
+            });
+
+            // Show toast if low quantity rows exist
+            if (lowQuantityRows.length > 0) {
+                const toastElement = document.getElementById('lowQuantityToast');
+                const toast = new bootstrap.Toast(toastElement);
+                toast.show();
+            }
+        });
+    </script>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/low_quantity.css') }}">
+    <style>
+        /* Fallback inline CSS */
+        .table#materielsTable th, .table#materielsTable td {
+            width: auto;
+        }
+        .table#materielsTable th:first-child, .table#materielsTable td:first-child {
+            width: 70px; /* Fixed width for image column */
+            text-align: center;
+        }
+        .table#materielsTable tbody tr.low-quantity,
+        .table#materielsTable tbody tr.low-quantity td {
+            background-color: rgba(255, 0, 0, 0.2) !important;
+            border: 2px solid red !important;
+            animation: blink 1s infinite !important;
+        }
+        @keyframes blink {
+            0% { background-color: rgba(255, 0, 0, 0.2); }
+            50% { background-color: rgba(255, 0, 0, 0.5); }
+            100% { background-color: rgba(255, 0, 0, 0.2); }
+        }
+    </style>
 {% endblock %}

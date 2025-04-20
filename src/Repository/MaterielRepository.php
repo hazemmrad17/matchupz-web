@@ -12,6 +12,17 @@ class MaterielRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Materiel::class);
     }
+    /**
+     * Check if the fournisseur's categorie_produit matches the materiel's type.
+     *
+     * @param Fournisseur $fournisseur
+     * @param string $type
+     * @return bool
+     */
+    public function checkFournisseurCategoryMatch($fournisseur, string $type): bool
+    {
+        return $fournisseur instanceof Fournisseur && $fournisseur->getCategorieProduit() === $type;
+    }
 
     public function countUniqueTypes(): int
     {

@@ -2,18 +2,22 @@
 
 {% block title %}Statistiques des Matériels{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="https://unpkg.com/@iconscout/unicons@4.0.8/css/line.min.css">
+{% endblock %}
+
 {% block body %}
 <h4 class="fw-bold py-3 mb-4">Statistiques des Matériels</h4>
 
 <div class="row">
-
     <!-- Total Matériels -->
     <div class="col-lg-4 col-md-6 mb-4">
-        <div class="card">
+        <div class="card h-100">
             <div class="card-body">
                 <div class="card-title d-flex align-items-start justify-content-between">
                     <div class="avatar flex-shrink-0">
-                        <img src="{{ asset('img/icons/unicons/box.png') }}" alt="Matériels" class="rounded" />
+                        <i class="uil uil-box text-primary" style="font-size: 2rem;"></i>
                     </div>
                 </div>
                 <span class="fw-semibold d-block mb-1">Total Matériels</span>
@@ -25,11 +29,11 @@
 
     <!-- Types Uniques -->
     <div class="col-lg-4 col-md-6 mb-4">
-        <div class="card">
+        <div class="card h-100">
             <div class="card-body">
                 <div class="card-title d-flex align-items-start justify-content-between">
                     <div class="avatar flex-shrink-0">
-                        <img src="{{ asset('img/icons/unicons/category.png') }}" alt="Types" class="rounded" />
+                        <i class="uil uil-grid text-primary" style="font-size: 2rem;"></i>
                     </div>
                 </div>
                 <span class="fw-semibold d-block mb-1">Types Uniques</span>
@@ -41,11 +45,11 @@
 
     <!-- Couverture Barcode -->
     <div class="col-lg-4 col-md-6 mb-4">
-        <div class="card">
+        <div class="card h-100">
             <div class="card-body">
                 <div class="card-title d-flex align-items-start justify-content-between">
                     <div class="avatar flex-shrink-0">
-                        <img src="{{ asset('img/icons/unicons/barcode.png') }}" alt="Barcode" class="rounded" />
+                        <i class="uil uil-barcode text-primary" style="font-size: 2rem;"></i>
                     </div>
                 </div>
                 <span class="fw-semibold d-block mb-1">Couverture Barcode</span>
@@ -57,11 +61,11 @@
 
     <!-- Valeur de l'Inventaire -->
     <div class="col-lg-4 col-md-6 mb-4">
-        <div class="card">
+        <div class="card h-100">
             <div class="card-body">
                 <div class="card-title d-flex align-items-start justify-content-between">
                     <div class="avatar flex-shrink-0">
-                        <img src="{{ asset('img/icons/unicons/money.png') }}" alt="Valeur" class="rounded" />
+                        <i class="uil uil-wallet text-primary" style="font-size: 2rem;"></i>
                     </div>
                 </div>
                 <span class="fw-semibold d-block mb-1">Valeur de l'Inventaire</span>
@@ -73,11 +77,11 @@
 
     <!-- Longueur Moyenne Nom -->
     <div class="col-lg-4 col-md-6 mb-4">
-        <div class="card">
-            <div class="card-body">
+        <div class="card h-100">
+        <div class="card-body">
                 <div class="card-title d-flex align-items-start justify-content-between">
                     <div class="avatar flex-shrink-0">
-                        <img src="{{ asset('img/icons/unicons/text.png') }}" alt="Nom" class="rounded" />
+                        <i class="uil uil-text text-primary" style="font-size: 2rem;"></i>
                     </div>
                 </div>
                 <span class="fw-semibold d-block mb-1">Longueur Moyenne Nom</span>
@@ -89,11 +93,11 @@
 
     <!-- Matériels avec État -->
     <div class="col-lg-4 col-md-6 mb-4">
-        <div class="card">
+        <div class="card h-100">
             <div class="card-body">
                 <div class="card-title d-flex align-items-start justify-content-between">
                     <div class="avatar flex-shrink-0">
-                        <img src="{{ asset('img/icons/unicons/check.png') }}" alt="État" class="rounded" />
+                        <i class="uil uil-check text-primary" style="font-size: 2rem;"></i>
                     </div>
                 </div>
                 <span class="fw-semibold d-block mb-1">Matériels avec État</span>
@@ -111,7 +115,7 @@
 <div class="row">
     <!-- Type Distribution Chart -->
     <div class="col-12 col-lg-6 mb-4">
-        <div class="card">
+        <div class="card h-100">
             <div class="card-header"><h5 class="card-title m-0 me-2">Distribution des Types</h5></div>
             <div class="card-body"><div id="typeDistributionChart"></div></div>
         </div>
@@ -119,7 +123,7 @@
 
     <!-- State Distribution Chart -->
     <div class="col-12 col-lg-6 mb-4">
-        <div class="card">
+        <div class="card h-100">
             <div class="card-header"><h5 class="card-title m-0 me-2">Distribution par État</h5></div>
             <div class="card-body"><div id="stateDistributionChart"></div></div>
         </div>
@@ -127,7 +131,7 @@
 
     <!-- Top Matériels par Nom Table -->
     <div class="col-12 col-lg-6 mb-4">
-        <div class="card">
+        <div class="card h-100">
             <div class="card-header"><h5 class="card-title m-0 me-2">Matériels par Longueur de Nom</h5></div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -163,7 +167,7 @@
 
     <!-- Matériels avec Barcode Table -->
     <div class="col-12 col-lg-6 mb-4">
-        <div class="card">
+        <div class="card h-100">
             <div class="card-header"><h5 class="card-title m-0 me-2">Matériels avec Barcode</h5></div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -193,65 +197,117 @@
             </div>
         </div>
     </div>
-
-    <!-- Tous les Matériels List -->
-    <div class="col-12 col-lg-6 mb-4">
-        <div class="card">
-            <div class="card-header"><h5 class="card-title m-0 me-2">Tous les Matériels</h5></div>
-            <div class="card-body" style="max-height: 400px; overflow-y: auto;">
-                <ul class="p-0 m-0">
-                    {% for material in allMaterials %}
-                        <li class="d-flex mb-4 pb-1">
-                            <div class="avatar flex-shrink-0 me-3">
-                                <img src="{{ asset('img/icons/unicons/box.png') }}"
-                                     alt="Matériel" class="rounded" />
-                            </div>
-                            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                                <div class="me-2">
-                                    <h6 class="mb-0">{{ material.nom }}</h6>
-                                    <small class="text-muted">{{ material.type|default('N/A') }}</small>
-                                </div>
-                                <div class="user-progress">
-                                    <small class="fw-semibold">{{ material.barcode ? 'Avec Barcode' : 'Sans Barcode' }}</small>
-                                </div>
-                            </div>
-                        </li>
-                    {% else %}
-                        <li>Aucun matériel trouvé.</li>
-                    {% endfor %}
-                </ul>
-            </div>
-        </div>
-    </div>
 </div>
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts@3.37.0/dist/apexcharts.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
+            // Prepare data for Type Distribution Chart
+            const typeLabels = [
+                {% for type, count in typeDistribution %}
+                    '{{ type|default('Non défini')|e('js') }}'{% if not loop.last %},{% endif %}
+                {% endfor %}
+            ];
+            const typeSeries = [
+                {% for type, count in typeDistribution %}
+                    {{ count }}{% if not loop.last %},{% endif %}
+                {% endfor %}
+            ];
+
             // Type Distribution Chart
-            new ApexCharts(document.querySelector("#typeDistributionChart"), {
-                chart: { type: 'pie', height: 350 },
-                series: [{% for type, count in typeDistribution %}{{ count }},{% endfor %}],
-                labels: [{% for type in typeDistribution|keys %}'{{ type|default('Non défini') }}',{% endfor %}],
-                colors: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40']
-            }).render();
+            if (typeSeries.length > 0) {
+                new ApexCharts(document.querySelector("#typeDistributionChart"), {
+                    chart: {
+                        type: 'pie',
+                        height: 350
+                    },
+                    series: typeSeries,
+                    labels: typeLabels,
+                    colors: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40'],
+                    legend: {
+                        position: 'bottom'
+                    },
+                    dataLabels: {
+                        enabled: true
+                    },
+                    responsive: [{
+                        breakpoint: 480,
+                        options: {
+                            chart: {
+                                height: 300
+                            },
+                            legend: {
+                                position: 'bottom'
+                            }
+                        }
+                    }]
+                }).render();
+            }
+
+            // Prepare data for State Distribution Chart
+            const stateLabels = [
+                {% for state, count in stateDistribution %}
+                    '{{ state|default('Non défini')|e('js') }}'{% if not loop.last %},{% endif %}
+                {% endfor %}
+            ];
+            const stateSeries = [
+                {% for state, count in stateDistribution %}
+                    {{ count }}{% if not loop.last %},{% endif %}
+                {% endfor %}
+            ];
 
             // State Distribution Chart
-            new ApexCharts(document.querySelector("#stateDistributionChart"), {
-                chart: { type: 'bar', height: 350 },
-                series: [{
-                    name: "Nombre de matériels",
-                    data: [{% for state, count in stateDistribution %}{{ count }},{% endfor %}]
-                }],
-                xaxis: {
-                    categories: [{% for state in stateDistribution|keys %}'{{ state|default('Non défini') }}',{% endfor %}],
-                    labels: { rotate: -45 }
-                },
-                colors: ['#36A2EB']
-            }).render();
+            if (stateSeries.length > 0) {
+                new ApexCharts(document.querySelector("#stateDistributionChart"), {
+                    chart: {
+                        type: 'bar',
+                        height: 350
+                    },
+                    series: [{
+                        name: 'Nombre de matériels',
+                        data: stateSeries
+                    }],
+                    xaxis: {
+                        categories: stateLabels,
+                        labels: {
+                            rotate: -45,
+                            style: {
+                                fontSize: '12px'
+                            }
+                        }
+                    },
+                    colors: ['#36A2EB'],
+                    plotOptions: {
+                        bar: {
+                            horizontal: false,
+                            columnWidth: '55%',
+                            endingShape: 'rounded'
+                        }
+                    },
+                    dataLabels: {
+                        enabled: false
+                    },
+                    grid: {
+                        borderColor: '#e7e7e7'
+                    },
+                    yaxis: {
+                        title: {
+                            text: 'Nombre de matériels'
+                        }
+                    },
+                    responsive: [{
+                        breakpoint: 480,
+                        options: {
+                            chart: {
+                                height: 300
+                            }
+                        }
+                    }]
+                }).render();
+            }
         });
     </script>
 {% endblock %}

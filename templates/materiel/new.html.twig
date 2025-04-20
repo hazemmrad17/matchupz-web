@@ -29,17 +29,25 @@
                     <small class="text-muted float-end">Remplir les détails</small>
                 </div>
                 <div class="card-body">
-                    <!-- Toast container (positioned at top-right) -->
-                    <div class="position-fixed top-0 end-0 p-3" style="z-index: 1050;" id="toast-container"></div>
+                    <!-- Affichage des erreurs globales du formulaire -->
+                    {% if form_errors(form) %}
+                        <div class="alert alert-danger">
+                            {{ form_errors(form) }}
+                        </div>
+                    {% endif %}
 
-                    {{ form_start(form, {'attr': {'enctype': 'multipart/form-data', 'id': 'materielForm', 'novalidate': 'novalidate'}}) }}
+                    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
                         <div class="mb-3">
                             <label class="form-label" for="materiel_nom">Nom du Matériel</label>
                             <div class="input-group input-group-merge">
                                 <span class="input-group-text"><i class="bx bx-box"></i></span>
                                 {{ form_widget(form.nom, {'attr': {'class': 'form-control', 'placeholder': 'Ex: Ballon de football'}}) }}
                             </div>
-                            {{ form_errors(form.nom) }}
+                            {% if form_errors(form.nom) %}
+                                <div class="text-danger">
+                                    {{ form_errors(form.nom) }}
+                                </div>
+                            {% endif %}
                         </div>
 
                         <div class="mb-3">
@@ -48,7 +56,11 @@
                                 <span class="input-group-text"><i class="bx bx-tag"></i></span>
                                 {{ form_widget(form.type, {'attr': {'class': 'form-select'}}) }}
                             </div>
-                            {{ form_errors(form.type) }}
+                            {% if form_errors(form.type) %}
+                                <div class="text-danger">
+                                    {{ form_errors(form.type) }}
+                                </div>
+                            {% endif %}
                         </div>
 
                         <div class="mb-3">
@@ -57,7 +69,11 @@
                                 <span class="input-group-text"><i class="bx bx-cube"></i></span>
                                 {{ form_widget(form.quantite, {'attr': {'class': 'form-control', 'placeholder': 'Ex: 10'}}) }}
                             </div>
-                            {{ form_errors(form.quantite) }}
+                            {% if form_errors(form.quantite) %}
+                                <div class="text-danger">
+                                    {{ form_errors(form.quantite) }}
+                                </div>
+                            {% endif %}
                         </div>
 
                         <div class="mb-3">
@@ -66,7 +82,11 @@
                                 <span class="input-group-text"><i class="bx bx-check-circle"></i></span>
                                 {{ form_widget(form.etat, {'attr': {'class': 'form-select'}}) }}
                             </div>
-                            {{ form_errors(form.etat) }}
+                            {% if form_errors(form.etat) %}
+                                <div class="text-danger">
+                                    {{ form_errors(form.etat) }}
+                                </div>
+                            {% endif %}
                         </div>
 
                         <div class="mb-3">
@@ -75,7 +95,24 @@
                                 <span class="input-group-text"><i class="bx bx-euro"></i></span>
                                 {{ form_widget(form.prix, {'attr': {'class': 'form-control', 'placeholder': 'Ex: 29.99'}}) }}
                             </div>
-                            {{ form_errors(form.prix) }}
+                            {% if form_errors(form.prix) %}
+                                <div class="text-danger">
+                                    {{ form_errors(form.prix) }}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label" for="materiel_barcode">Code-barres</label>
+                            <div class="input-group input-group-merge">
+                                <span class="input-group-text"><i class="bx bx-barcode"></i></span>
+                                {{ form_widget(form.barcode, {'attr': {'class': 'form-control', 'placeholder': 'Ex: 123456789'}}) }}
+                            </div>
+                            {% if form_errors(form.barcode) %}
+                                <div class="text-danger">
+                                    {{ form_errors(form.barcode) }}
+                                </div>
+                            {% endif %}
                         </div>
 
                         <div class="mb-3">
@@ -84,7 +121,11 @@
                                 <span class="input-group-text"><i class="bx bx-building"></i></span>
                                 {{ form_widget(form.fournisseur, {'attr': {'class': 'form-select'}}) }}
                             </div>
-                            {{ form_errors(form.fournisseur) }}
+                            {% if form_errors(form.fournisseur) %}
+                                <div class="text-danger">
+                                    {{ form_errors(form.fournisseur) }}
+                                </div>
+                            {% endif %}
                         </div>
 
                         <div class="mb-3">
@@ -93,11 +134,15 @@
                                 <span class="input-group-text"><i class="bx bx-image"></i></span>
                                 {{ form_widget(form.image, {'attr': {'class': 'form-control'}}) }}
                             </div>
-                            {{ form_errors(form.image) }}
+                            {% if form_errors(form.image) %}
+                                <div class="text-danger">
+                                    {{ form_errors(form.image) }}
+                                </div>
+                            {% endif %}
                             {% if materiel.image and form.vars.value.id %}
                                 <div class="mt-2">
                                     <p>Image actuelle :</p>
-                                    <img src="{{ asset('uploads/materiels/' ~ materiel.image) }}" alt="Image du matériel" style="max-width: 150px; max-height: 150px;" class="rounded">
+                                    <img src="{{ asset('Uploads/materiels/' ~ materiel.image) }}" alt="Image du matériel" style="max-width: 150px; max-height: 150px;" class="rounded">
                                 </div>
                             {% endif %}
                         </div>
@@ -112,107 +157,7 @@
                     {{ form_end(form) }}
                 </div>
             </div>
-            
         </div>
     </div>
 </div>
-
-<script>
-    document.getElementById('materielForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const toastContainer = document.getElementById('toast-container');
-        toastContainer.innerHTML = '';
-
-        const nom = document.getElementById('materiel_nom')?.value.trim() || '';
-        const type = document.getElementById('materiel_type')?.value || '';
-        const quantite = document.getElementById('materiel_quantite')?.value.trim() || '';
-        const etat = document.getElementById('materiel_etat')?.value || '';
-        const prix = document.getElementById('materiel_prix')?.value.trim() || '';
-        const fournisseur = document.getElementById('materiel_fournisseur')?.value || '';
-        const imageInput = document.getElementById('materiel_image');
-        const imageFile = imageInput?.files[0];
-        const isEditing = !!document.getElementById('materiel_image').closest('form').querySelector('input[name="materiel[_token]"]').value;
-
-        // Validation for Nom
-        if (!nom) {
-            addToast('Erreur Nom', 'Le champ nom est vide.');
-        } else if (nom.length > 255) {
-            addToast('Erreur Nom', 'Le nom ne doit pas dépasser 255 caractères.');
-        }
-
-        // Validation for Type
-        if (!type) {
-            addToast('Erreur Type', 'Le champ type est vide.');
-        } else if (![' EQUIPEMENT_SPORTIF','ACCESSOIRE_ENTRAINEMENT','MATERIEL_JEU','TENUE_SPORTIVE','EQUIPEMENT_PROTECTION','INFRASTRUCTURE'].includes(type)) {
-            addToast('Erreur Type', 'Veuillez sélectionner un type valide.');
-        }
-
-        // Validation for Quantité
-        if (!quantite) {
-            addToast('Erreur Quantité', 'Le champ quantité est vide.');
-        } else if (isNaN(quantite) || parseInt(quantite) < 0) {
-            addToast('Erreur Quantité', 'La quantité doit être un nombre positif.');
-        }
-
-        // Validation for État
-        if (!etat) {
-            addToast('Erreur État', 'Le champ état est vide.');
-        } else if (!['NEUF', 'USE', 'ENDOMMAGE'].includes(etat)) {
-            addToast('Erreur État', 'Veuillez sélectionner un état valide.');
-        }
-
-        // Validation for Prix
-        if (!prix) {
-            addToast('Erreur Prix', 'Le champ prix est vide.');
-        } else if (isNaN(prix) || parseFloat(prix) < 0) {
-            addToast('Erreur Prix', 'Le prix doit être un nombre positif.');
-        }
-
-        // Validation for Fournisseur (optional field)
-        if (fournisseur && fournisseur.length > 255) {
-            addToast('Erreur Fournisseur', 'Le fournisseur ne doit pas dépasser 255 caractères.');
-        }
-
-        // Validation for Image
-        if (!isEditing && !imageFile) {
-            addToast('Erreur Image', 'Veuillez sélectionner une image pour un nouveau matériel.');
-        } else if (imageFile) {
-            const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg'];
-            const maxSize = 5 * 1024 * 1024; // 5MB in bytes
-
-            if (!allowedTypes.includes(imageFile.type)) {
-                addToast('Erreur Image', 'L\'image doit être au format JPG, JPEG ou PNG.');
-            }
-
-            if (imageFile.size > maxSize) {
-                addToast('Erreur Image', 'L\'image ne doit pas dépasser 5 Mo.');
-            }
-        }
-
-        // Submit if no errors
-        if (toastContainer.children.length === 0) {
-            this.submit();
-        } else {
-            const toastElements = toastContainer.querySelectorAll('.toast');
-            toastElements.forEach(toast => new bootstrap.Toast(toast, { autohide: true, delay: 5000 }).show());
-        }
-    });
-
-    function addToast(title, message) {
-        const toastContainer = document.getElementById('toast-container');
-        const toastId = 'toast-' + Date.now();
-        const toastHTML = `
-            <div id="${toastId}" class="bs-toast toast fade bg-danger" role="alert" aria-live="assertive" aria-atomic="true">
-                <div class="toast-header">
-                    <i class="bx bx-bell me-2"></i>
-                    <div class="me-auto fw-semibold">${title}</div>
-                    <small>Maintenant</small>
-                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-                </div>
-                <div class="toast-body">${message}</div>
-            </div>
-        `;
-        toastContainer.innerHTML += toastHTML;
-    }
-</script>
 {% endblock %}

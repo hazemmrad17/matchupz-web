@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Validator\Constraints\File;
 
 class MaterielType extends AbstractType
 {
@@ -21,6 +22,7 @@ class MaterielType extends AbstractType
             ->add('nom', TextType::class, [
                 'label' => 'Nom du Matériel',
                 'required' => true,
+                'empty_data' => '',
                 'attr' => ['class' => 'form-control', 'placeholder' => 'Nom du matériel'],
             ])
             ->add('type', ChoiceType::class, [
@@ -34,18 +36,14 @@ class MaterielType extends AbstractType
                     'Équipement de Protection' => 'EQUIPEMENT_PROTECTION',
                     'Infrastructure' => 'INFRASTRUCTURE',
                 ],
-                'placeholder' => false, // No empty option
+                'empty_data' => '',
                 'attr' => ['class' => 'form-select'],
             ])
             ->add('quantite', NumberType::class, [
                 'label' => 'Quantité',
                 'required' => true,
-                'attr' => [
-                    'class' => 'form-control',
-                    'placeholder' => 'Quantité en stock',
-                    'min' => 0,
-                ],
-                'invalid_message' => 'Veuillez entrer une quantité valide.',
+                'empty_data' => 6,
+                'attr' => ['class' => 'form-control', 'placeholder' => 'Quantité en stock (> 5)'],
             ])
             ->add('etat', ChoiceType::class, [
                 'label' => 'État',
@@ -55,30 +53,28 @@ class MaterielType extends AbstractType
                     'Usé' => 'USÉ',
                     'Endommagé' => 'ENDOMMAGÉ',
                 ],
-                'placeholder' => false, // No empty option
+                'empty_data' => '',
                 'attr' => ['class' => 'form-select'],
             ])
             ->add('prix', NumberType::class, [
                 'label' => 'Prix Unitaire (€)',
                 'required' => true,
-                'attr' => [
-                    'class' => 'form-control',
-                    'placeholder' => 'Prix unitaire',
-                    'step' => '0.01',
-                ],
-                'invalid_message' => 'Veuillez entrer un prix valide.',
+                'empty_data' => 0.0,
+                'attr' => ['class' => 'form-control', 'placeholder' => 'Prix unitaire'],
             ])
             ->add('barcode', TextType::class, [
                 'label' => 'Code-barres',
-                'required' => false,
+                'required' => true,
+                'empty_data' => '',
                 'attr' => ['class' => 'form-control', 'placeholder' => 'Code-barres'],
             ])
             ->add('fournisseur', EntityType::class, [
                 'label' => 'Fournisseur',
                 'class' => Fournisseur::class,
                 'choice_label' => 'nom',
-                'required' => false,
+                'required' => true,
                 'placeholder' => 'Sélectionnez un fournisseur',
+                'empty_data' => null,
                 'attr' => ['class' => 'form-select'],
             ])
             ->add('image', FileType::class, [
@@ -86,6 +82,14 @@ class MaterielType extends AbstractType
                 'required' => false,
                 'mapped' => false,
                 'attr' => ['class' => 'form-control'],
+                'constraints' => [
+                    new File([
+                        'maxSize' => '5m',
+                        'mimeTypes' => ['image/jpeg', 'image/png', 'image/jpg'],
+                        'mimeTypesMessage' => 'Veuillez uploader une image valide (JPG, JPEG, PNG).',
+                        'maxSizeMessage' => 'L\'image ne doit pas dépasser 5 Mo.',
+                    ])
+                ],
             ]);
     }
 

@@ -163,258 +163,256 @@ class __TwigTemplate_ac5e9c83e830941a71b6844340daefd6 extends Template
                     <small class=\"text-muted float-end\">Remplir les détails</small>
                 </div>
                 <div class=\"card-body\">
-                    <!-- Toast container (positioned at top-right) -->
-                    <div class=\"position-fixed top-0 end-0 p-3\" style=\"z-index: 1050;\" id=\"toast-container\"></div>
-
+                    <!-- Affichage des erreurs globales du formulaire -->
                     ";
-        // line 35
-        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 35, $this->source); })()), 'form_start', ["attr" => ["enctype" => "multipart/form-data", "id" => "materielForm", "novalidate" => "novalidate"]]);
+        // line 33
+        if ($this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 33, $this->source); })()), 'errors')) {
+            // line 34
+            yield "                        <div class=\"alert alert-danger\">
+                            ";
+            // line 35
+            yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 35, $this->source); })()), 'errors');
+            yield "
+                        </div>
+                    ";
+        }
+        // line 38
+        yield "
+                    ";
+        // line 39
+        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 39, $this->source); })()), 'form_start', ["attr" => ["novalidate" => "novalidate"]]);
         yield "
                         <div class=\"mb-3\">
                             <label class=\"form-label\" for=\"materiel_nom\">Nom du Matériel</label>
                             <div class=\"input-group input-group-merge\">
                                 <span class=\"input-group-text\"><i class=\"bx bx-box\"></i></span>
                                 ";
-        // line 40
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 40, $this->source); })()), "nom", [], "any", false, false, false, 40), 'widget', ["attr" => ["class" => "form-control", "placeholder" => "Ex: Ballon de football"]]);
+        // line 44
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 44, $this->source); })()), "nom", [], "any", false, false, false, 44), 'widget', ["attr" => ["class" => "form-control", "placeholder" => "Ex: Ballon de football"]]);
         yield "
                             </div>
                             ";
-        // line 42
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 42, $this->source); })()), "nom", [], "any", false, false, false, 42), 'errors');
-        yield "
-                        </div>
+        // line 46
+        if ($this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 46, $this->source); })()), "nom", [], "any", false, false, false, 46), 'errors')) {
+            // line 47
+            yield "                                <div class=\"text-danger\">
+                                    ";
+            // line 48
+            yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 48, $this->source); })()), "nom", [], "any", false, false, false, 48), 'errors');
+            yield "
+                                </div>
+                            ";
+        }
+        // line 51
+        yield "                        </div>
 
                         <div class=\"mb-3\">
                             <label class=\"form-label\" for=\"materiel_type\">Type</label>
                             <div class=\"input-group input-group-merge\">
                                 <span class=\"input-group-text\"><i class=\"bx bx-tag\"></i></span>
                                 ";
-        // line 49
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 49, $this->source); })()), "type", [], "any", false, false, false, 49), 'widget', ["attr" => ["class" => "form-select"]]);
+        // line 57
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 57, $this->source); })()), "type", [], "any", false, false, false, 57), 'widget', ["attr" => ["class" => "form-select"]]);
         yield "
                             </div>
                             ";
-        // line 51
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 51, $this->source); })()), "type", [], "any", false, false, false, 51), 'errors');
-        yield "
-                        </div>
+        // line 59
+        if ($this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 59, $this->source); })()), "type", [], "any", false, false, false, 59), 'errors')) {
+            // line 60
+            yield "                                <div class=\"text-danger\">
+                                    ";
+            // line 61
+            yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 61, $this->source); })()), "type", [], "any", false, false, false, 61), 'errors');
+            yield "
+                                </div>
+                            ";
+        }
+        // line 64
+        yield "                        </div>
 
                         <div class=\"mb-3\">
                             <label class=\"form-label\" for=\"materiel_quantite\">Quantité en Stock</label>
                             <div class=\"input-group input-group-merge\">
                                 <span class=\"input-group-text\"><i class=\"bx bx-cube\"></i></span>
                                 ";
-        // line 58
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 58, $this->source); })()), "quantite", [], "any", false, false, false, 58), 'widget', ["attr" => ["class" => "form-control", "placeholder" => "Ex: 10"]]);
+        // line 70
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 70, $this->source); })()), "quantite", [], "any", false, false, false, 70), 'widget', ["attr" => ["class" => "form-control", "placeholder" => "Ex: 10"]]);
         yield "
                             </div>
                             ";
-        // line 60
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 60, $this->source); })()), "quantite", [], "any", false, false, false, 60), 'errors');
-        yield "
-                        </div>
+        // line 72
+        if ($this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 72, $this->source); })()), "quantite", [], "any", false, false, false, 72), 'errors')) {
+            // line 73
+            yield "                                <div class=\"text-danger\">
+                                    ";
+            // line 74
+            yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 74, $this->source); })()), "quantite", [], "any", false, false, false, 74), 'errors');
+            yield "
+                                </div>
+                            ";
+        }
+        // line 77
+        yield "                        </div>
 
                         <div class=\"mb-3\">
                             <label class=\"form-label\" for=\"materiel_etat\">État</label>
                             <div class=\"input-group input-group-merge\">
                                 <span class=\"input-group-text\"><i class=\"bx bx-check-circle\"></i></span>
                                 ";
-        // line 67
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 67, $this->source); })()), "etat", [], "any", false, false, false, 67), 'widget', ["attr" => ["class" => "form-select"]]);
+        // line 83
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 83, $this->source); })()), "etat", [], "any", false, false, false, 83), 'widget', ["attr" => ["class" => "form-select"]]);
         yield "
                             </div>
                             ";
-        // line 69
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 69, $this->source); })()), "etat", [], "any", false, false, false, 69), 'errors');
-        yield "
-                        </div>
+        // line 85
+        if ($this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 85, $this->source); })()), "etat", [], "any", false, false, false, 85), 'errors')) {
+            // line 86
+            yield "                                <div class=\"text-danger\">
+                                    ";
+            // line 87
+            yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 87, $this->source); })()), "etat", [], "any", false, false, false, 87), 'errors');
+            yield "
+                                </div>
+                            ";
+        }
+        // line 90
+        yield "                        </div>
 
                         <div class=\"mb-3\">
                             <label class=\"form-label\" for=\"materiel_prix\">Prix Unitaire (€)</label>
                             <div class=\"input-group input-group-merge\">
                                 <span class=\"input-group-text\"><i class=\"bx bx-euro\"></i></span>
                                 ";
-        // line 76
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 76, $this->source); })()), "prix", [], "any", false, false, false, 76), 'widget', ["attr" => ["class" => "form-control", "placeholder" => "Ex: 29.99"]]);
-        yield "
-                            </div>
-                            ";
-        // line 78
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 78, $this->source); })()), "prix", [], "any", false, false, false, 78), 'errors');
-        yield "
-                        </div>
-
-                        <div class=\"mb-3\">
-                            <label class=\"form-label\" for=\"materiel_fournisseur\">Fournisseur</label>
-                            <div class=\"input-group input-group-merge\">
-                                <span class=\"input-group-text\"><i class=\"bx bx-building\"></i></span>
-                                ";
-        // line 85
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 85, $this->source); })()), "fournisseur", [], "any", false, false, false, 85), 'widget', ["attr" => ["class" => "form-select"]]);
-        yield "
-                            </div>
-                            ";
-        // line 87
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 87, $this->source); })()), "fournisseur", [], "any", false, false, false, 87), 'errors');
-        yield "
-                        </div>
-
-                        <div class=\"mb-3\">
-                            <label class=\"form-label\" for=\"materiel_image\">Image du Matériel</label>
-                            <div class=\"input-group input-group-merge\">
-                                <span class=\"input-group-text\"><i class=\"bx bx-image\"></i></span>
-                                ";
-        // line 94
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 94, $this->source); })()), "image", [], "any", false, false, false, 94), 'widget', ["attr" => ["class" => "form-control"]]);
-        yield "
-                            </div>
-                            ";
         // line 96
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 96, $this->source); })()), "image", [], "any", false, false, false, 96), 'errors');
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 96, $this->source); })()), "prix", [], "any", false, false, false, 96), 'widget', ["attr" => ["class" => "form-control", "placeholder" => "Ex: 29.99"]]);
         yield "
+                            </div>
                             ";
-        // line 97
-        if ((CoreExtension::getAttribute($this->env, $this->source, (isset($context["materiel"]) || array_key_exists("materiel", $context) ? $context["materiel"] : (function () { throw new RuntimeError('Variable "materiel" does not exist.', 97, $this->source); })()), "image", [], "any", false, false, false, 97) && CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 97, $this->source); })()), "vars", [], "any", false, false, false, 97), "value", [], "any", false, false, false, 97), "id", [], "any", false, false, false, 97))) {
-            // line 98
-            yield "                                <div class=\"mt-2\">
-                                    <p>Image actuelle :</p>
-                                    <img src=\"";
+        // line 98
+        if ($this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 98, $this->source); })()), "prix", [], "any", false, false, false, 98), 'errors')) {
+            // line 99
+            yield "                                <div class=\"text-danger\">
+                                    ";
             // line 100
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("uploads/materiels/" . CoreExtension::getAttribute($this->env, $this->source, (isset($context["materiel"]) || array_key_exists("materiel", $context) ? $context["materiel"] : (function () { throw new RuntimeError('Variable "materiel" does not exist.', 100, $this->source); })()), "image", [], "any", false, false, false, 100))), "html", null, true);
-            yield "\" alt=\"Image du matériel\" style=\"max-width: 150px; max-height: 150px;\" class=\"rounded\">
+            yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 100, $this->source); })()), "prix", [], "any", false, false, false, 100), 'errors');
+            yield "
                                 </div>
                             ";
         }
         // line 103
         yield "                        </div>
 
+                        <div class=\"mb-3\">
+                            <label class=\"form-label\" for=\"materiel_barcode\">Code-barres</label>
+                            <div class=\"input-group input-group-merge\">
+                                <span class=\"input-group-text\"><i class=\"bx bx-barcode\"></i></span>
+                                ";
+        // line 109
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 109, $this->source); })()), "barcode", [], "any", false, false, false, 109), 'widget', ["attr" => ["class" => "form-control", "placeholder" => "Ex: 123456789"]]);
+        yield "
+                            </div>
+                            ";
+        // line 111
+        if ($this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 111, $this->source); })()), "barcode", [], "any", false, false, false, 111), 'errors')) {
+            // line 112
+            yield "                                <div class=\"text-danger\">
+                                    ";
+            // line 113
+            yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 113, $this->source); })()), "barcode", [], "any", false, false, false, 113), 'errors');
+            yield "
+                                </div>
+                            ";
+        }
+        // line 116
+        yield "                        </div>
+
+                        <div class=\"mb-3\">
+                            <label class=\"form-label\" for=\"materiel_fournisseur\">Fournisseur</label>
+                            <div class=\"input-group input-group-merge\">
+                                <span class=\"input-group-text\"><i class=\"bx bx-building\"></i></span>
+                                ";
+        // line 122
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 122, $this->source); })()), "fournisseur", [], "any", false, false, false, 122), 'widget', ["attr" => ["class" => "form-select"]]);
+        yield "
+                            </div>
+                            ";
+        // line 124
+        if ($this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 124, $this->source); })()), "fournisseur", [], "any", false, false, false, 124), 'errors')) {
+            // line 125
+            yield "                                <div class=\"text-danger\">
+                                    ";
+            // line 126
+            yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 126, $this->source); })()), "fournisseur", [], "any", false, false, false, 126), 'errors');
+            yield "
+                                </div>
+                            ";
+        }
+        // line 129
+        yield "                        </div>
+
+                        <div class=\"mb-3\">
+                            <label class=\"form-label\" for=\"materiel_image\">Image du Matériel</label>
+                            <div class=\"input-group input-group-merge\">
+                                <span class=\"input-group-text\"><i class=\"bx bx-image\"></i></span>
+                                ";
+        // line 135
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 135, $this->source); })()), "image", [], "any", false, false, false, 135), 'widget', ["attr" => ["class" => "form-control"]]);
+        yield "
+                            </div>
+                            ";
+        // line 137
+        if ($this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 137, $this->source); })()), "image", [], "any", false, false, false, 137), 'errors')) {
+            // line 138
+            yield "                                <div class=\"text-danger\">
+                                    ";
+            // line 139
+            yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 139, $this->source); })()), "image", [], "any", false, false, false, 139), 'errors');
+            yield "
+                                </div>
+                            ";
+        }
+        // line 142
+        yield "                            ";
+        if ((CoreExtension::getAttribute($this->env, $this->source, (isset($context["materiel"]) || array_key_exists("materiel", $context) ? $context["materiel"] : (function () { throw new RuntimeError('Variable "materiel" does not exist.', 142, $this->source); })()), "image", [], "any", false, false, false, 142) && CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 142, $this->source); })()), "vars", [], "any", false, false, false, 142), "value", [], "any", false, false, false, 142), "id", [], "any", false, false, false, 142))) {
+            // line 143
+            yield "                                <div class=\"mt-2\">
+                                    <p>Image actuelle :</p>
+                                    <img src=\"";
+            // line 145
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("Uploads/materiels/" . CoreExtension::getAttribute($this->env, $this->source, (isset($context["materiel"]) || array_key_exists("materiel", $context) ? $context["materiel"] : (function () { throw new RuntimeError('Variable "materiel" does not exist.', 145, $this->source); })()), "image", [], "any", false, false, false, 145))), "html", null, true);
+            yield "\" alt=\"Image du matériel\" style=\"max-width: 150px; max-height: 150px;\" class=\"rounded\">
+                                </div>
+                            ";
+        }
+        // line 148
+        yield "                        </div>
+
                         <!-- Button Container -->
                         <div class=\"d-flex justify-content-center gap-2 mt-4\">
                             <button type=\"submit\" class=\"btn btn-primary px-4\" style=\"min-width: 150px;\">
                                 ";
-        // line 108
-        if (CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 108, $this->source); })()), "vars", [], "any", false, false, false, 108), "value", [], "any", false, false, false, 108), "id", [], "any", false, false, false, 108)) {
+        // line 153
+        if (CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 153, $this->source); })()), "vars", [], "any", false, false, false, 153), "value", [], "any", false, false, false, 153), "id", [], "any", false, false, false, 153)) {
             yield "Mettre à jour";
         } else {
             yield "Créer";
         }
-        // line 109
+        // line 154
         yield "                            </button>
                             <a href=\"";
-        // line 110
+        // line 155
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_materiel_index");
         yield "\" class=\"btn btn-secondary px-4\" style=\"min-width: 150px;\">Annuler</a>
                         </div>
                     ";
-        // line 112
-        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 112, $this->source); })()), 'form_end');
+        // line 157
+        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 157, $this->source); })()), 'form_end');
         yield "
                 </div>
             </div>
-            
         </div>
     </div>
 </div>
-
-<script>
-    document.getElementById('materielForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const toastContainer = document.getElementById('toast-container');
-        toastContainer.innerHTML = '';
-
-        const nom = document.getElementById('materiel_nom')?.value.trim() || '';
-        const type = document.getElementById('materiel_type')?.value || '';
-        const quantite = document.getElementById('materiel_quantite')?.value.trim() || '';
-        const etat = document.getElementById('materiel_etat')?.value || '';
-        const prix = document.getElementById('materiel_prix')?.value.trim() || '';
-        const fournisseur = document.getElementById('materiel_fournisseur')?.value || '';
-        const imageInput = document.getElementById('materiel_image');
-        const imageFile = imageInput?.files[0];
-        const isEditing = !!document.getElementById('materiel_image').closest('form').querySelector('input[name=\"materiel[_token]\"]').value;
-
-        // Validation for Nom
-        if (!nom) {
-            addToast('Erreur Nom', 'Le champ nom est vide.');
-        } else if (nom.length > 255) {
-            addToast('Erreur Nom', 'Le nom ne doit pas dépasser 255 caractères.');
-        }
-
-        // Validation for Type
-        if (!type) {
-            addToast('Erreur Type', 'Le champ type est vide.');
-        } else if (![' EQUIPEMENT_SPORTIF','ACCESSOIRE_ENTRAINEMENT','MATERIEL_JEU','TENUE_SPORTIVE','EQUIPEMENT_PROTECTION','INFRASTRUCTURE'].includes(type)) {
-            addToast('Erreur Type', 'Veuillez sélectionner un type valide.');
-        }
-
-        // Validation for Quantité
-        if (!quantite) {
-            addToast('Erreur Quantité', 'Le champ quantité est vide.');
-        } else if (isNaN(quantite) || parseInt(quantite) < 0) {
-            addToast('Erreur Quantité', 'La quantité doit être un nombre positif.');
-        }
-
-        // Validation for État
-        if (!etat) {
-            addToast('Erreur État', 'Le champ état est vide.');
-        } else if (!['NEUF', 'USE', 'ENDOMMAGE'].includes(etat)) {
-            addToast('Erreur État', 'Veuillez sélectionner un état valide.');
-        }
-
-        // Validation for Prix
-        if (!prix) {
-            addToast('Erreur Prix', 'Le champ prix est vide.');
-        } else if (isNaN(prix) || parseFloat(prix) < 0) {
-            addToast('Erreur Prix', 'Le prix doit être un nombre positif.');
-        }
-
-        // Validation for Fournisseur (optional field)
-        if (fournisseur && fournisseur.length > 255) {
-            addToast('Erreur Fournisseur', 'Le fournisseur ne doit pas dépasser 255 caractères.');
-        }
-
-        // Validation for Image
-        if (!isEditing && !imageFile) {
-            addToast('Erreur Image', 'Veuillez sélectionner une image pour un nouveau matériel.');
-        } else if (imageFile) {
-            const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg'];
-            const maxSize = 5 * 1024 * 1024; // 5MB in bytes
-
-            if (!allowedTypes.includes(imageFile.type)) {
-                addToast('Erreur Image', 'L\\'image doit être au format JPG, JPEG ou PNG.');
-            }
-
-            if (imageFile.size > maxSize) {
-                addToast('Erreur Image', 'L\\'image ne doit pas dépasser 5 Mo.');
-            }
-        }
-
-        // Submit if no errors
-        if (toastContainer.children.length === 0) {
-            this.submit();
-        } else {
-            const toastElements = toastContainer.querySelectorAll('.toast');
-            toastElements.forEach(toast => new bootstrap.Toast(toast, { autohide: true, delay: 5000 }).show());
-        }
-    });
-
-    function addToast(title, message) {
-        const toastContainer = document.getElementById('toast-container');
-        const toastId = 'toast-' + Date.now();
-        const toastHTML = `
-            <div id=\"\${toastId}\" class=\"bs-toast toast fade bg-danger\" role=\"alert\" aria-live=\"assertive\" aria-atomic=\"true\">
-                <div class=\"toast-header\">
-                    <i class=\"bx bx-bell me-2\"></i>
-                    <div class=\"me-auto fw-semibold\">\${title}</div>
-                    <small>Maintenant</small>
-                    <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"toast\" aria-label=\"Close\"></button>
-                </div>
-                <div class=\"toast-body\">\${message}</div>
-            </div>
-        `;
-        toastContainer.innerHTML += toastHTML;
-    }
-</script>
 ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -446,7 +444,7 @@ class __TwigTemplate_ac5e9c83e830941a71b6844340daefd6 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  311 => 112,  306 => 110,  303 => 109,  297 => 108,  290 => 103,  284 => 100,  280 => 98,  278 => 97,  274 => 96,  269 => 94,  259 => 87,  254 => 85,  244 => 78,  239 => 76,  229 => 69,  224 => 67,  214 => 60,  209 => 58,  199 => 51,  194 => 49,  184 => 42,  179 => 40,  171 => 35,  162 => 28,  158 => 26,  154 => 24,  152 => 23,  144 => 17,  138 => 16,  132 => 12,  119 => 11,  103 => 8,  90 => 7,  78 => 4,  65 => 3,  42 => 1,);
+        return array (  409 => 157,  404 => 155,  401 => 154,  395 => 153,  388 => 148,  382 => 145,  378 => 143,  375 => 142,  369 => 139,  366 => 138,  364 => 137,  359 => 135,  351 => 129,  345 => 126,  342 => 125,  340 => 124,  335 => 122,  327 => 116,  321 => 113,  318 => 112,  316 => 111,  311 => 109,  303 => 103,  297 => 100,  294 => 99,  292 => 98,  287 => 96,  279 => 90,  273 => 87,  270 => 86,  268 => 85,  263 => 83,  255 => 77,  249 => 74,  246 => 73,  244 => 72,  239 => 70,  231 => 64,  225 => 61,  222 => 60,  220 => 59,  215 => 57,  207 => 51,  201 => 48,  198 => 47,  196 => 46,  191 => 44,  183 => 39,  180 => 38,  174 => 35,  171 => 34,  169 => 33,  162 => 28,  158 => 26,  154 => 24,  152 => 23,  144 => 17,  138 => 16,  132 => 12,  119 => 11,  103 => 8,  90 => 7,  78 => 4,  65 => 3,  42 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -482,17 +480,25 @@ class __TwigTemplate_ac5e9c83e830941a71b6844340daefd6 extends Template
                     <small class=\"text-muted float-end\">Remplir les détails</small>
                 </div>
                 <div class=\"card-body\">
-                    <!-- Toast container (positioned at top-right) -->
-                    <div class=\"position-fixed top-0 end-0 p-3\" style=\"z-index: 1050;\" id=\"toast-container\"></div>
+                    <!-- Affichage des erreurs globales du formulaire -->
+                    {% if form_errors(form) %}
+                        <div class=\"alert alert-danger\">
+                            {{ form_errors(form) }}
+                        </div>
+                    {% endif %}
 
-                    {{ form_start(form, {'attr': {'enctype': 'multipart/form-data', 'id': 'materielForm', 'novalidate': 'novalidate'}}) }}
+                    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
                         <div class=\"mb-3\">
                             <label class=\"form-label\" for=\"materiel_nom\">Nom du Matériel</label>
                             <div class=\"input-group input-group-merge\">
                                 <span class=\"input-group-text\"><i class=\"bx bx-box\"></i></span>
                                 {{ form_widget(form.nom, {'attr': {'class': 'form-control', 'placeholder': 'Ex: Ballon de football'}}) }}
                             </div>
-                            {{ form_errors(form.nom) }}
+                            {% if form_errors(form.nom) %}
+                                <div class=\"text-danger\">
+                                    {{ form_errors(form.nom) }}
+                                </div>
+                            {% endif %}
                         </div>
 
                         <div class=\"mb-3\">
@@ -501,7 +507,11 @@ class __TwigTemplate_ac5e9c83e830941a71b6844340daefd6 extends Template
                                 <span class=\"input-group-text\"><i class=\"bx bx-tag\"></i></span>
                                 {{ form_widget(form.type, {'attr': {'class': 'form-select'}}) }}
                             </div>
-                            {{ form_errors(form.type) }}
+                            {% if form_errors(form.type) %}
+                                <div class=\"text-danger\">
+                                    {{ form_errors(form.type) }}
+                                </div>
+                            {% endif %}
                         </div>
 
                         <div class=\"mb-3\">
@@ -510,7 +520,11 @@ class __TwigTemplate_ac5e9c83e830941a71b6844340daefd6 extends Template
                                 <span class=\"input-group-text\"><i class=\"bx bx-cube\"></i></span>
                                 {{ form_widget(form.quantite, {'attr': {'class': 'form-control', 'placeholder': 'Ex: 10'}}) }}
                             </div>
-                            {{ form_errors(form.quantite) }}
+                            {% if form_errors(form.quantite) %}
+                                <div class=\"text-danger\">
+                                    {{ form_errors(form.quantite) }}
+                                </div>
+                            {% endif %}
                         </div>
 
                         <div class=\"mb-3\">
@@ -519,7 +533,11 @@ class __TwigTemplate_ac5e9c83e830941a71b6844340daefd6 extends Template
                                 <span class=\"input-group-text\"><i class=\"bx bx-check-circle\"></i></span>
                                 {{ form_widget(form.etat, {'attr': {'class': 'form-select'}}) }}
                             </div>
-                            {{ form_errors(form.etat) }}
+                            {% if form_errors(form.etat) %}
+                                <div class=\"text-danger\">
+                                    {{ form_errors(form.etat) }}
+                                </div>
+                            {% endif %}
                         </div>
 
                         <div class=\"mb-3\">
@@ -528,7 +546,24 @@ class __TwigTemplate_ac5e9c83e830941a71b6844340daefd6 extends Template
                                 <span class=\"input-group-text\"><i class=\"bx bx-euro\"></i></span>
                                 {{ form_widget(form.prix, {'attr': {'class': 'form-control', 'placeholder': 'Ex: 29.99'}}) }}
                             </div>
-                            {{ form_errors(form.prix) }}
+                            {% if form_errors(form.prix) %}
+                                <div class=\"text-danger\">
+                                    {{ form_errors(form.prix) }}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <div class=\"mb-3\">
+                            <label class=\"form-label\" for=\"materiel_barcode\">Code-barres</label>
+                            <div class=\"input-group input-group-merge\">
+                                <span class=\"input-group-text\"><i class=\"bx bx-barcode\"></i></span>
+                                {{ form_widget(form.barcode, {'attr': {'class': 'form-control', 'placeholder': 'Ex: 123456789'}}) }}
+                            </div>
+                            {% if form_errors(form.barcode) %}
+                                <div class=\"text-danger\">
+                                    {{ form_errors(form.barcode) }}
+                                </div>
+                            {% endif %}
                         </div>
 
                         <div class=\"mb-3\">
@@ -537,7 +572,11 @@ class __TwigTemplate_ac5e9c83e830941a71b6844340daefd6 extends Template
                                 <span class=\"input-group-text\"><i class=\"bx bx-building\"></i></span>
                                 {{ form_widget(form.fournisseur, {'attr': {'class': 'form-select'}}) }}
                             </div>
-                            {{ form_errors(form.fournisseur) }}
+                            {% if form_errors(form.fournisseur) %}
+                                <div class=\"text-danger\">
+                                    {{ form_errors(form.fournisseur) }}
+                                </div>
+                            {% endif %}
                         </div>
 
                         <div class=\"mb-3\">
@@ -546,11 +585,15 @@ class __TwigTemplate_ac5e9c83e830941a71b6844340daefd6 extends Template
                                 <span class=\"input-group-text\"><i class=\"bx bx-image\"></i></span>
                                 {{ form_widget(form.image, {'attr': {'class': 'form-control'}}) }}
                             </div>
-                            {{ form_errors(form.image) }}
+                            {% if form_errors(form.image) %}
+                                <div class=\"text-danger\">
+                                    {{ form_errors(form.image) }}
+                                </div>
+                            {% endif %}
                             {% if materiel.image and form.vars.value.id %}
                                 <div class=\"mt-2\">
                                     <p>Image actuelle :</p>
-                                    <img src=\"{{ asset('uploads/materiels/' ~ materiel.image) }}\" alt=\"Image du matériel\" style=\"max-width: 150px; max-height: 150px;\" class=\"rounded\">
+                                    <img src=\"{{ asset('Uploads/materiels/' ~ materiel.image) }}\" alt=\"Image du matériel\" style=\"max-width: 150px; max-height: 150px;\" class=\"rounded\">
                                 </div>
                             {% endif %}
                         </div>
@@ -565,109 +608,9 @@ class __TwigTemplate_ac5e9c83e830941a71b6844340daefd6 extends Template
                     {{ form_end(form) }}
                 </div>
             </div>
-            
         </div>
     </div>
 </div>
-
-<script>
-    document.getElementById('materielForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const toastContainer = document.getElementById('toast-container');
-        toastContainer.innerHTML = '';
-
-        const nom = document.getElementById('materiel_nom')?.value.trim() || '';
-        const type = document.getElementById('materiel_type')?.value || '';
-        const quantite = document.getElementById('materiel_quantite')?.value.trim() || '';
-        const etat = document.getElementById('materiel_etat')?.value || '';
-        const prix = document.getElementById('materiel_prix')?.value.trim() || '';
-        const fournisseur = document.getElementById('materiel_fournisseur')?.value || '';
-        const imageInput = document.getElementById('materiel_image');
-        const imageFile = imageInput?.files[0];
-        const isEditing = !!document.getElementById('materiel_image').closest('form').querySelector('input[name=\"materiel[_token]\"]').value;
-
-        // Validation for Nom
-        if (!nom) {
-            addToast('Erreur Nom', 'Le champ nom est vide.');
-        } else if (nom.length > 255) {
-            addToast('Erreur Nom', 'Le nom ne doit pas dépasser 255 caractères.');
-        }
-
-        // Validation for Type
-        if (!type) {
-            addToast('Erreur Type', 'Le champ type est vide.');
-        } else if (![' EQUIPEMENT_SPORTIF','ACCESSOIRE_ENTRAINEMENT','MATERIEL_JEU','TENUE_SPORTIVE','EQUIPEMENT_PROTECTION','INFRASTRUCTURE'].includes(type)) {
-            addToast('Erreur Type', 'Veuillez sélectionner un type valide.');
-        }
-
-        // Validation for Quantité
-        if (!quantite) {
-            addToast('Erreur Quantité', 'Le champ quantité est vide.');
-        } else if (isNaN(quantite) || parseInt(quantite) < 0) {
-            addToast('Erreur Quantité', 'La quantité doit être un nombre positif.');
-        }
-
-        // Validation for État
-        if (!etat) {
-            addToast('Erreur État', 'Le champ état est vide.');
-        } else if (!['NEUF', 'USE', 'ENDOMMAGE'].includes(etat)) {
-            addToast('Erreur État', 'Veuillez sélectionner un état valide.');
-        }
-
-        // Validation for Prix
-        if (!prix) {
-            addToast('Erreur Prix', 'Le champ prix est vide.');
-        } else if (isNaN(prix) || parseFloat(prix) < 0) {
-            addToast('Erreur Prix', 'Le prix doit être un nombre positif.');
-        }
-
-        // Validation for Fournisseur (optional field)
-        if (fournisseur && fournisseur.length > 255) {
-            addToast('Erreur Fournisseur', 'Le fournisseur ne doit pas dépasser 255 caractères.');
-        }
-
-        // Validation for Image
-        if (!isEditing && !imageFile) {
-            addToast('Erreur Image', 'Veuillez sélectionner une image pour un nouveau matériel.');
-        } else if (imageFile) {
-            const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg'];
-            const maxSize = 5 * 1024 * 1024; // 5MB in bytes
-
-            if (!allowedTypes.includes(imageFile.type)) {
-                addToast('Erreur Image', 'L\\'image doit être au format JPG, JPEG ou PNG.');
-            }
-
-            if (imageFile.size > maxSize) {
-                addToast('Erreur Image', 'L\\'image ne doit pas dépasser 5 Mo.');
-            }
-        }
-
-        // Submit if no errors
-        if (toastContainer.children.length === 0) {
-            this.submit();
-        } else {
-            const toastElements = toastContainer.querySelectorAll('.toast');
-            toastElements.forEach(toast => new bootstrap.Toast(toast, { autohide: true, delay: 5000 }).show());
-        }
-    });
-
-    function addToast(title, message) {
-        const toastContainer = document.getElementById('toast-container');
-        const toastId = 'toast-' + Date.now();
-        const toastHTML = `
-            <div id=\"\${toastId}\" class=\"bs-toast toast fade bg-danger\" role=\"alert\" aria-live=\"assertive\" aria-atomic=\"true\">
-                <div class=\"toast-header\">
-                    <i class=\"bx bx-bell me-2\"></i>
-                    <div class=\"me-auto fw-semibold\">\${title}</div>
-                    <small>Maintenant</small>
-                    <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"toast\" aria-label=\"Close\"></button>
-                </div>
-                <div class=\"toast-body\">\${message}</div>
-            </div>
-        `;
-        toastContainer.innerHTML += toastHTML;
-    }
-</script>
 {% endblock %}", "materiel/new.html.twig", "C:\\Users\\ibtis\\Downloads\\matchupz-web-joueur\\matchupz-web-joueur\\templates\\materiel\\new.html.twig");
     }
 }

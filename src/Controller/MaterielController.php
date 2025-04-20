@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Materiel;
+use App\Entity\Fournisseur;
 use App\Form\MaterielType;
 use App\Repository\MaterielRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -16,7 +17,7 @@ use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Symfony\Component\HttpFoundation\StreamedResponse;
-use Symfony\Component\String\Slugger\SluggerInterface; // Correct import
+use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 #[Route('/materiel')]
@@ -32,94 +33,71 @@ final class MaterielController extends AbstractController
     }
 
     #[Route('/', name: 'app_materiel_index')]
-public function index(Request $request): Response
-{
-    // Get search term, filter, sort, order, and page from query parameters
-    $searchTerm = $request->query->get('search', '');
-    $filter = $request->query->get('filter', '');
-    $sort = $request->query->get('sort', 'm.nom'); // Default sort includes alias
-    $order = $request->query->get('order', 'asc');
-    $page = $request->query->getInt('page', 1);
+    public function index(Request $request): Response
+    {
+        // Get search term, filter, and page from query parameters
+        $searchTerm = $request->query->get('search', '');
+        $filter = $request->query->get('filter', '');
+        $page = $request->query->getInt('page', 1);
 
-    // Validate sort and order
-    $validSorts = [
-        'm.id' => 'id',
-        'm.nom' => 'nom',
-        'm.type' => 'type',
-        'm.quantite' => 'quantite',
-        'm.etat' => 'etat',
-        'm.prix' => 'prix',
-        'm.barcode' => 'barcode',
-    ];
-    $sort = array_key_exists($sort, $validSorts) ? $sort : 'm.nom';
-    $order = in_array($order, ['asc', 'desc']) ? $order : 'asc';
+        // Build the query for materials
+        $queryBuilder = $this->materielRepository->createQueryBuilder('m');
 
-    // Build the query for materials
-    $queryBuilder = $this->materielRepository->createQueryBuilder('m');
+        // Apply search term
+        if ($searchTerm) {
+            $queryBuilder->andWhere('m.nom LIKE :search OR m.type LIKE :search OR m.etat LIKE :search OR m.barcode LIKE :search')
+                         ->setParameter('search', '%' . $searchTerm . '%');
+        }
 
-    // Apply search term
-    if ($searchTerm) {
-        $queryBuilder->andWhere('m.nom LIKE :search OR m.type LIKE :search OR m.etat LIKE :search OR m.barcode LIKE :search')
-                     ->setParameter('search', '%' . $searchTerm . '%');
+        // Apply filter
+        if ($filter && in_array($filter, ['nom', 'type', 'etat'])) {
+            $queryBuilder->andWhere('m.' . $filter . ' IS NOT NULL');
+        }
+
+        // Sort by id DESC to show latest material first
+        $queryBuilder->orderBy('m.id', 'DESC');
+
+        // Paginate the results
+        $pagination = $this->paginator->paginate(
+            $queryBuilder->getQuery(),
+            $page,
+            10 // Items per page
+        );
+
+        // Calculate widget data
+        $allMateriels = $this->materielRepository->findAll();
+        $totalMateriels = count($allMateriels);
+
+        // Type distribution
+        $typeDistribution = $this->materielRepository->createQueryBuilder('m')
+            ->select('m.type, COUNT(m.id) as count')
+            ->groupBy('m.type')
+            ->getQuery()
+            ->getResult();
+        $typeDistribution = array_column($typeDistribution, 'count', 'type');
+
+        // State distribution
+        $stateDistribution = $this->materielRepository->createQueryBuilder('m')
+            ->select('m.etat, COUNT(m.id) as count')
+            ->groupBy('m.etat')
+            ->getQuery()
+            ->getResult();
+        $stateDistribution = array_column($stateDistribution, 'count', 'etat');
+
+        // Inventory value
+        $inventoryValue = array_reduce($allMateriels, fn($carry, $materiel) => $carry + ($materiel->getPrix() * $materiel->getQuantite()), 0);
+
+        // Render the template
+        return $this->render('materiel/index.html.twig', [
+            'pagination' => $pagination,
+            'searchTerm' => $searchTerm,
+            'filter' => $filter,
+            'totalMateriels' => $totalMateriels,
+            'typeDistribution' => $typeDistribution,
+            'stateDistribution' => $stateDistribution,
+            'inventoryValue' => $inventoryValue,
+        ]);
     }
-
-    // Apply filter
-    if ($filter && in_array($filter, ['nom', 'type', 'etat'])) {
-        $queryBuilder->andWhere('m.' . $filter . ' IS NOT NULL');
-    }
-
-    // Do NOT apply sorting here; let KnpPaginator handle it
-    $query = $queryBuilder->getQuery();
-
-    // Paginate the results with sort and direction options
-    $pagination = $this->paginator->paginate(
-        $query,
-        $page,
-        10, // Items per page
-        [
-            'defaultSortFieldName' => 'm.nom',
-            'defaultSortDirection' => 'asc',
-            'sortFieldParameterName' => 'sort',
-            'sortDirectionParameterName' => 'order',
-        ]
-    );
-
-    // Calculate widget data
-    $allMateriels = $this->materielRepository->findAll();
-    $totalMateriels = count($allMateriels);
-
-    // Type distribution
-    $typeDistribution = $this->materielRepository->createQueryBuilder('m')
-        ->select('m.type, COUNT(m.id) as count')
-        ->groupBy('m.type')
-        ->getQuery()
-        ->getResult();
-    $typeDistribution = array_column($typeDistribution, 'count', 'type');
-
-    // State distribution
-    $stateDistribution = $this->materielRepository->createQueryBuilder('m')
-        ->select('m.etat, COUNT(m.id) as count')
-        ->groupBy('m.etat')
-        ->getQuery()
-        ->getResult();
-    $stateDistribution = array_column($stateDistribution, 'count', 'etat');
-
-    // Inventory value
-    $inventoryValue = array_reduce($allMateriels, fn($carry, $materiel) => $carry + ($materiel->getPrix() * $materiel->getQuantite()), 0);
-
-    // Render the template
-    return $this->render('materiel/index.html.twig', [
-        'pagination' => $pagination,
-        'searchTerm' => $searchTerm,
-        'filter' => $filter,
-        'sort' => $sort,
-        'order' => $order,
-        'totalMateriels' => $totalMateriels,
-        'typeDistribution' => $typeDistribution,
-        'stateDistribution' => $stateDistribution,
-        'inventoryValue' => $inventoryValue,
-    ]);
-}
 
     #[Route('/materiel', name: 'app_materiel_indexF', methods: ['GET'])]
     public function indexF(
@@ -130,6 +108,7 @@ public function index(Request $request): Response
         $query = $repository->createQueryBuilder('m')
             ->leftJoin('m.fournisseur', 'f')
             ->addSelect('f')
+            ->orderBy('m.id', 'DESC') // Sort by id DESC for latest first
             ->getQuery();
 
         $pagination = $paginator->paginate(
@@ -167,7 +146,6 @@ public function index(Request $request): Response
             'inventoryValue' => $inventoryValue
         ]);
     }
-
 
     #[Route('/new', name: 'app_materiel_new', methods: ['GET', 'POST'])]
     public function new(
@@ -221,7 +199,9 @@ public function index(Request $request): Response
             'materiel' => $materiel,
             'form' => $form->createView(),
         ]);
-    } #[Route('/statistics', name: 'app_materiel_statistics', methods: ['GET'])]
+    }
+
+    #[Route('/statistics', name: 'app_materiel_statistics', methods: ['GET'])]
     public function statistics(MaterielRepository $repository): Response
     {
         $allMaterials = $repository->findAll();
@@ -311,7 +291,6 @@ public function index(Request $request): Response
         ]);
     }
 
-
     #[Route('/materiel/{id}', name: 'app_materiel_showF', methods: ['GET'])]
     public function showF(Materiel $materiel = null): Response
     {
@@ -325,58 +304,84 @@ public function index(Request $request): Response
     }
 
     #[Route('/{id}/edit', name: 'app_materiel_edit', methods: ['GET', 'POST'])]
-public function edit(
-    Request $request,
-    Materiel $materiel,
-    EntityManagerInterface $entityManager,
-    SluggerInterface $slugger
-): Response {
-    $form = $this->createForm(MaterielType::class, $materiel);
-    $form->handleRequest($request);
-
-    if ($form->isSubmitted() && $form->isValid()) {
-        /** @var UploadedFile|null $imageFile */
-        $imageFile = $form->get('image')->getData();
-        if ($imageFile) {
-            $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
-            $safeFilename = $slugger->slug($originalFilename);
-            $newFilename = $safeFilename.'-'.uniqid().'.'.$imageFile->guessExtension();
-
-            try {
-                $imageFile->move(
-                    $this->getParameter('materiels_directory'),
-                    $newFilename
-                );
-                if ($materiel->getImage()) {
-                    $oldImage = $this->getParameter('materiels_directory').'/'.$materiel->getImage();
-                    if (file_exists($oldImage)) {
-                        unlink($oldImage);
-                    }
-                }
-                $materiel->setImage($newFilename);
-            } catch (FileException $e) {
-                $this->addFlash('error', 'Erreur lors du téléchargement de l’image.');
-                return $this->render('materiel/edit.html.twig', [
-                    'materiel' => $materiel,
-                    'form' => $form->createView(),
-                ]);
+    public function edit(
+        Request $request,
+        Materiel $materiel,
+        EntityManagerInterface $entityManager,
+        SluggerInterface $slugger
+    ): Response {
+        // Vérifier les champs non-nullables pour éviter les erreurs avec les données existantes
+        if ($materiel->getNom() === null) $materiel->setNom('');
+        if ($materiel->getType() === null) $materiel->setType('');
+        if ($materiel->getEtat() === null) $materiel->setEtat('');
+        if ($materiel->getQuantite() <= 5) $materiel->setQuantite(6); // Respecter > 5
+        if ($materiel->getPrix() === null) $materiel->setPrix(0.0);
+        if ($materiel->getBarcode() === null) $materiel->setBarcode('');
+        if ($materiel->getFournisseur() === null || !$this->materielRepository->checkFournisseurCategoryMatch($materiel->getFournisseur(), $materiel->getType())) {
+            // Trouver un fournisseur par défaut correspondant au type
+            $defaultFournisseur = $entityManager->getRepository(Fournisseur::class)
+                ->findOneBy(['categorie_produit' => $materiel->getType()]);
+            if ($defaultFournisseur) {
+                $materiel->setFournisseur($defaultFournisseur);
+            } else {
+                $this->addFlash('error', 'Aucun fournisseur disponible pour la catégorie ' . $materiel->getType());
             }
         }
 
-        $entityManager->flush();
-        $this->addFlash('success', 'Le matériel a été mis à jour avec succès.');
-        return $this->redirectToRoute('app_materiel_show', ['id' => $materiel->getId()], Response::HTTP_SEE_OTHER);
+        $form = $this->createForm(MaterielType::class, $materiel);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()) {
+            dump($form->getErrors(true, true));
+            if (!$form->isValid()) {
+                dump($form->getData());
+            }
+        }
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            /** @var UploadedFile|null $imageFile */
+            $imageFile = $form->get('image')->getData();
+            if ($imageFile) {
+                $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$imageFile->guessExtension();
+
+                try {
+                    $imageFile->move(
+                        $this->getParameter('materiels_directory'),
+                        $newFilename
+                    );
+                    if ($materiel->getImage()) {
+                        $oldImage = $this->getParameter('materiels_directory').'/'.$materiel->getImage();
+                        if (file_exists($oldImage)) {
+                            unlink($oldImage);
+                        }
+                    }
+                    $materiel->setImage($newFilename);
+                } catch (FileException $e) {
+                    $this->addFlash('error', 'Erreur lors du téléchargement de l’image.');
+                    return $this->render('materiel/edit.html.twig', [
+                        'materiel' => $materiel,
+                        'form' => $form->createView(),
+                    ]);
+                }
+            }
+
+            $entityManager->flush();
+            $this->addFlash('success', 'Le matériel a été mis à jour avec succès.');
+            return $this->redirectToRoute('app_materiel_show', ['id' => $materiel->getId()], Response::HTTP_SEE_OTHER);
+        }
+
+        if ($form->isSubmitted() && !$form->isValid()) {
+            $this->addFlash('error', 'Veuillez corriger les erreurs dans le formulaire.');
+        }
+
+        return $this->render('materiel/edit.html.twig', [
+            'materiel' => $materiel,
+            'form' => $form->createView(),
+        ]);
     }
 
-    if ($form->isSubmitted() && !$form->isValid()) {
-        $this->addFlash('error', 'Veuillez remplir tous les champs obligatoires.');
-    }
-
-    return $this->render('materiel/edit.html.twig', [
-        'materiel' => $materiel,
-        'form' => $form->createView(),
-    ]);
-}
     #[Route('/{id}', name: 'app_materiel_delete', methods: ['POST'])]
     public function delete(
         Request $request, 
@@ -391,8 +396,6 @@ public function edit(
 
         return $this->redirectToRoute('app_materiel_index', [], Response::HTTP_SEE_OTHER);
     }
-
-    
 
     #[Route('/export/csv', name: 'app_materiel_export_csv')]
     public function exportCsv(MaterielRepository $repository): Response
