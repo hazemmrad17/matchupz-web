@@ -601,7 +601,7 @@
     </service>
     <service id="argument_resolver.service" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
       <tag priority="-50" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">controller.argument_value_resolver</tag>
-      <argument type="service" id=".service_locator.IeHqlzv"/>
+      <argument type="service" id=".service_locator.CtjTo1s"/>
     </service>
     <service id="argument_resolver.default" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">
       <tag priority="-100" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">controller.argument_value_resolver</tag>
@@ -3593,7 +3593,7 @@
     </service>
     <service id="argument_resolver.not_tagged_controller" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
       <tag name="controller.argument_value_resolver" priority="-200"/>
-      <argument type="service" id=".service_locator.IeHqlzv"/>
+      <argument type="service" id=".service_locator.CtjTo1s"/>
     </service>
     <service id="debug.log_processor" class="Symfony\Bridge\Monolog\Processor\DebugProcessor">
       <tag name="kernel.reset" method="reset"/>
@@ -8130,6 +8130,12 @@
         <argument key="knpSnappyPdf" type="service_closure" id="knp_snappy.pdf"/>
       </argument>
     </service>
+    <service id=".service_locator.jnu2S_s" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="repository" type="service_closure" id="App\Repository\MaterielRepository"/>
+      </argument>
+    </service>
     <service id=".service_locator.RCuzfnb" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -8142,12 +8148,6 @@
       <argument type="collection">
         <argument key="entityManager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
         <argument key="slugger" type="service_closure" id="slugger"/>
-      </argument>
-    </service>
-    <service id=".service_locator.jnu2S_s" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator"/>
-      <argument type="collection">
-        <argument key="repository" type="service_closure" id="App\Repository\MaterielRepository"/>
       </argument>
     </service>
     <service id=".service_locator.p._PKR9" class="Symfony\Component\DependencyInjection\ServiceLocator">
@@ -8234,7 +8234,7 @@
         <argument key="sportRepository" type="service_closure" id="App\Repository\SportRepository"/>
       </argument>
     </service>
-    <service id=".service_locator.IeHqlzv" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.CtjTo1s" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\ClubController::exportCsv" type="service_closure" id=".service_locator.eOJlB0r"/>
@@ -8289,6 +8289,7 @@
         <argument key="App\Controller\MaterielController::exportPdf" type="service_closure" id=".service_locator.jnu2S_s"/>
         <argument key="App\Controller\MaterielController::indexF" type="service_closure" id=".service_locator.RCuzfnb"/>
         <argument key="App\Controller\MaterielController::new" type="service_closure" id=".service_locator.LNwsF6h"/>
+        <argument key="App\Controller\MaterielController::scan" type="service_closure" id=".service_locator.jnu2S_s"/>
         <argument key="App\Controller\MaterielController::statistics" type="service_closure" id=".service_locator.jnu2S_s"/>
         <argument key="App\Controller\PerformanceJoueurController::delete" type="service_closure" id=".service_locator.PNlbJGO"/>
         <argument key="App\Controller\PerformanceJoueurController::edit" type="service_closure" id=".service_locator.PNlbJGO"/>
@@ -8365,6 +8366,7 @@
         <argument key="App\Controller\MaterielController:exportPdf" type="service_closure" id=".service_locator.jnu2S_s"/>
         <argument key="App\Controller\MaterielController:indexF" type="service_closure" id=".service_locator.RCuzfnb"/>
         <argument key="App\Controller\MaterielController:new" type="service_closure" id=".service_locator.LNwsF6h"/>
+        <argument key="App\Controller\MaterielController:scan" type="service_closure" id=".service_locator.jnu2S_s"/>
         <argument key="App\Controller\MaterielController:statistics" type="service_closure" id=".service_locator.jnu2S_s"/>
         <argument key="App\Controller\PerformanceJoueurController:delete" type="service_closure" id=".service_locator.PNlbJGO"/>
         <argument key="App\Controller\PerformanceJoueurController:edit" type="service_closure" id=".service_locator.PNlbJGO"/>
@@ -10704,7 +10706,7 @@
     <service id="Knp\Component\Pager\ArgumentAccess\ArgumentAccessInterface" alias="Knp\Component\Pager\ArgumentAccess\RequestArgumentAccess"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.w7.f4fT" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.IeHqlzv"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.CtjTo1s"/>
     <service id="doctrine.id_generator_locator" alias=".service_locator.KLVvNIq"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface $requestLogger" alias="monolog.logger.request"/>
@@ -10747,7 +10749,7 @@
     <service id=".service_locator.vYOHL0D" alias=".service_locator.jpL5_4q"/>
     <service id=".service_locator.X9gG0Wi" alias=".service_locator.geVFa8t"/>
     <service id=".service_locator.RwykrWv" alias=".service_locator.s2P9uaA"/>
-    <service id=".service_locator.F1aispR" alias=".service_locator.IeHqlzv"/>
+    <service id=".service_locator.x1BFIO9" alias=".service_locator.CtjTo1s"/>
     <service id=".service_locator.BFrsqsn" alias=".service_locator.F9PKc.7"/>
     <service id=".service_locator.I5D3BSa" alias=".service_locator.qLN7qz3"/>
     <service id=".service_locator.XtmiKbi" alias=".service_locator.MfxSDRP"/>
@@ -10797,9 +10799,9 @@
     <service id=".service_locator.X_gmxku" alias=".service_locator.SYFRzfM"/>
     <service id=".service_locator.Y4bILpk" alias=".service_locator.HTMJznC"/>
     <service id=".service_locator.ne_snVk" alias=".service_locator.TDAL4Wh"/>
+    <service id=".service_locator.QyKL_NR" alias=".service_locator.jnu2S_s"/>
     <service id=".service_locator.Y5_X5BF" alias=".service_locator.RCuzfnb"/>
     <service id=".service_locator.lUJI3Z8" alias=".service_locator.LNwsF6h"/>
-    <service id=".service_locator.QyKL_NR" alias=".service_locator.jnu2S_s"/>
     <service id=".service_locator.W17v7YY" alias=".service_locator.DBl8PzK"/>
     <service id=".service_locator.sZiCqRZ" alias=".service_locator.NgvlNzc"/>
     <service id=".service_locator.LXe3GOx" alias=".service_locator.CrEgygo"/>

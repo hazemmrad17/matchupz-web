@@ -84,44 +84,48 @@ class __TwigTemplate_bfec0e9ffe5f0f1cfeb14742ca67d78b extends Template
       href=\"https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap\"
       rel=\"stylesheet\"
     />
+    <link rel=\"stylesheet\" href=\"";
+        // line 29
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("/css/barcode.css"), "html", null, true);
+        yield "\" />
 
     <!-- Icons -->
     <link rel=\"stylesheet\" href=\"";
-        // line 31
+        // line 32
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("/vendor/fonts/boxicons.css"), "html", null, true);
         yield "\" />
 
     <!-- Core CSS -->
     <link rel=\"stylesheet\" href=\"";
-        // line 34
+        // line 35
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("/vendor/css/core.css"), "html", null, true);
         yield "\" class=\"template-customizer-core-css\" />
     <link rel=\"stylesheet\" href=\"";
-        // line 35
+        // line 36
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("/vendor/css/theme-default.css"), "html", null, true);
         yield "\" class=\"template-customizer-theme-css\" />
     <link rel=\"stylesheet\" href=\"";
-        // line 36
+        // line 37
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("/css/demo.css"), "html", null, true);
         yield "\" />
 
     <!-- Vendors CSS -->
     <link rel=\"stylesheet\" href=\"";
-        // line 39
+        // line 40
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("/vendor/libs/perfect-scrollbar/perfect-scrollbar.css"), "html", null, true);
         yield "\" />
     <link rel=\"stylesheet\" href=\"";
-        // line 40
+        // line 41
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("/vendor/libs/apex-charts/apex-charts.css"), "html", null, true);
         yield "\" />
 
     <!-- Helpers -->
     <script src=\"";
-        // line 43
+        // line 44
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("/vendor/js/helpers.js"), "html", null, true);
         yield "\"></script>
     <script src=\"";
-        // line 44
+        // line 45
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("/js/config.js"), "html", null, true);
         yield "\"></script>
     <style>
@@ -150,23 +154,23 @@ class __TwigTemplate_bfec0e9ffe5f0f1cfeb14742ca67d78b extends Template
       <div class=\"layout-container\">
         <!-- Menu -->
         ";
-        // line 70
+        // line 71
         yield from $this->unwrap()->yieldBlock('navbar', $context, $blocks);
-        // line 73
+        // line 74
         yield "
         <!-- Layout page -->
         <div class=\"layout-page\">
           <!-- Navbar -->
           ";
-        // line 77
+        // line 78
         yield from $this->unwrap()->yieldBlock('searchbar', $context, $blocks);
-        // line 80
+        // line 81
         yield "
           <!-- Content wrapper -->
           ";
-        // line 82
+        // line 83
         yield from $this->unwrap()->yieldBlock('content', $context, $blocks);
-        // line 89
+        // line 90
         yield "        </div>
       </div>
 
@@ -205,43 +209,48 @@ class __TwigTemplate_bfec0e9ffe5f0f1cfeb14742ca67d78b extends Template
     
     <!-- Core JS -->
     <script src=\"";
-        // line 126
+        // line 127
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("/vendor/libs/jquery/jquery.js"), "html", null, true);
         yield "\"></script>
     <script src=\"";
-        // line 127
+        // line 128
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("/vendor/libs/popper/popper.js"), "html", null, true);
         yield "\"></script>
     <script src=\"";
-        // line 128
+        // line 129
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("/vendor/js/bootstrap.js"), "html", null, true);
         yield "\"></script>
     <script src=\"";
-        // line 129
+        // line 130
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"), "html", null, true);
         yield "\"></script>
     <script src=\"";
-        // line 130
+        // line 131
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("/vendor/js/menu.js"), "html", null, true);
         yield "\"></script>
 
     <!-- Vendors JS -->
     <script src=\"";
-        // line 133
+        // line 134
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("/vendor/libs/apex-charts/apexcharts.js"), "html", null, true);
+        yield "\"></script>
+    <script src=\"https://cdn.jsdelivr.net/npm/quagga@0.12.1/dist/quagga.min.js\"></script>
+    <script src=\"";
+        // line 136
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("/js/barcode-scanner.js"), "html", null, true);
         yield "\"></script>
 
     <!-- Main JS -->
     <script src=\"";
-        // line 136
+        // line 139
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("/js/main.js"), "html", null, true);
         yield "\"></script>
 
     <!-- Page-specific JS -->
     ";
-        // line 139
-        yield from $this->unwrap()->yieldBlock('javascripts', $context, $blocks);
         // line 142
+        yield from $this->unwrap()->yieldBlock('javascripts', $context, $blocks);
+        // line 145
         yield "
     <!-- GitHub Buttons -->
     <script async defer src=\"https://buttons.github.io/buttons.js\"></script>
@@ -257,7 +266,7 @@ class __TwigTemplate_bfec0e9ffe5f0f1cfeb14742ca67d78b extends Template
         yield from [];
     }
 
-    // line 70
+    // line 71
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -270,10 +279,10 @@ class __TwigTemplate_bfec0e9ffe5f0f1cfeb14742ca67d78b extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "navbar"));
 
-        // line 71
-        yield "          ";
-        yield from $this->loadTemplate("navbar.html.twig", "base.html.twig", 71)->unwrap()->yield($context);
         // line 72
+        yield "          ";
+        yield from $this->loadTemplate("navbar.html.twig", "base.html.twig", 72)->unwrap()->yield($context);
+        // line 73
         yield "        ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -284,7 +293,7 @@ class __TwigTemplate_bfec0e9ffe5f0f1cfeb14742ca67d78b extends Template
         yield from [];
     }
 
-    // line 77
+    // line 78
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -297,10 +306,10 @@ class __TwigTemplate_bfec0e9ffe5f0f1cfeb14742ca67d78b extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "searchbar"));
 
-        // line 78
-        yield "            ";
-        yield from $this->loadTemplate("searchbar.html.twig", "base.html.twig", 78)->unwrap()->yield($context);
         // line 79
+        yield "            ";
+        yield from $this->loadTemplate("searchbar.html.twig", "base.html.twig", 79)->unwrap()->yield($context);
+        // line 80
         yield "          ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -311,7 +320,7 @@ class __TwigTemplate_bfec0e9ffe5f0f1cfeb14742ca67d78b extends Template
         yield from [];
     }
 
-    // line 82
+    // line 83
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -324,13 +333,13 @@ class __TwigTemplate_bfec0e9ffe5f0f1cfeb14742ca67d78b extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "content"));
 
-        // line 83
+        // line 84
         yield "            <div class=\"content-wrapper\">
               <div class=\"container-xxl flex-grow-1 container-p-y\">
                 ";
-        // line 85
-        yield from $this->unwrap()->yieldBlock('body', $context, $blocks);
         // line 86
+        yield from $this->unwrap()->yieldBlock('body', $context, $blocks);
+        // line 87
         yield "              </div>
             </div>
           ";
@@ -343,7 +352,7 @@ class __TwigTemplate_bfec0e9ffe5f0f1cfeb14742ca67d78b extends Template
         yield from [];
     }
 
-    // line 85
+    // line 86
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -365,7 +374,7 @@ class __TwigTemplate_bfec0e9ffe5f0f1cfeb14742ca67d78b extends Template
         yield from [];
     }
 
-    // line 139
+    // line 142
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -378,7 +387,7 @@ class __TwigTemplate_bfec0e9ffe5f0f1cfeb14742ca67d78b extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "javascripts"));
 
-        // line 140
+        // line 143
         yield "      <script src=\"";
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("/js/dashboards-analytics.js"), "html", null, true);
         yield "\"></script>
@@ -413,7 +422,7 @@ class __TwigTemplate_bfec0e9ffe5f0f1cfeb14742ca67d78b extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  382 => 140,  369 => 139,  347 => 85,  334 => 86,  332 => 85,  328 => 83,  315 => 82,  304 => 79,  301 => 78,  288 => 77,  277 => 72,  274 => 71,  261 => 70,  245 => 142,  243 => 139,  237 => 136,  231 => 133,  225 => 130,  221 => 129,  217 => 128,  213 => 127,  209 => 126,  170 => 89,  168 => 82,  164 => 80,  162 => 77,  156 => 73,  154 => 70,  125 => 44,  121 => 43,  115 => 40,  111 => 39,  105 => 36,  101 => 35,  97 => 34,  91 => 31,  76 => 19,  61 => 7,  53 => 1,);
+        return array (  391 => 143,  378 => 142,  356 => 86,  343 => 87,  341 => 86,  337 => 84,  324 => 83,  313 => 80,  310 => 79,  297 => 78,  286 => 73,  283 => 72,  270 => 71,  254 => 145,  252 => 142,  246 => 139,  240 => 136,  235 => 134,  229 => 131,  225 => 130,  221 => 129,  217 => 128,  213 => 127,  174 => 90,  172 => 83,  168 => 81,  166 => 78,  160 => 74,  158 => 71,  129 => 45,  125 => 44,  119 => 41,  115 => 40,  109 => 37,  105 => 36,  101 => 35,  95 => 32,  89 => 29,  76 => 19,  61 => 7,  53 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -446,6 +455,7 @@ class __TwigTemplate_bfec0e9ffe5f0f1cfeb14742ca67d78b extends Template
       href=\"https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap\"
       rel=\"stylesheet\"
     />
+    <link rel=\"stylesheet\" href=\"{{ asset('/css/barcode.css') }}\" />
 
     <!-- Icons -->
     <link rel=\"stylesheet\" href=\"{{ asset('/vendor/fonts/boxicons.css') }}\" />
@@ -551,6 +561,8 @@ class __TwigTemplate_bfec0e9ffe5f0f1cfeb14742ca67d78b extends Template
 
     <!-- Vendors JS -->
     <script src=\"{{ asset('/vendor/libs/apex-charts/apexcharts.js') }}\"></script>
+    <script src=\"https://cdn.jsdelivr.net/npm/quagga@0.12.1/dist/quagga.min.js\"></script>
+    <script src=\"{{ asset('/js/barcode-scanner.js') }}\"></script>
 
     <!-- Main JS -->
     <script src=\"{{ asset('/js/main.js') }}\"></script>

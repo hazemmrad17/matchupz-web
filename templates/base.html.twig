@@ -26,6 +26,7 @@
       href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="{{ asset('/css/barcode.css') }}" />
 
     <!-- Icons -->
     <link rel="stylesheet" href="{{ asset('/vendor/fonts/boxicons.css') }}" />
@@ -131,6 +132,8 @@
 
     <!-- Vendors JS -->
     <script src="{{ asset('/vendor/libs/apex-charts/apexcharts.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/quagga@0.12.1/dist/quagga.min.js"></script>
+    <script src="{{ asset('/js/barcode-scanner.js') }}"></script>
 
     <!-- Main JS -->
     <script src="{{ asset('/js/main.js') }}"></script>

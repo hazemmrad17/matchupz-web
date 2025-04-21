@@ -150,6 +150,36 @@
             </div>
         </div>
 
+        <!-- Barcode Scanner Modal -->
+        <div class="modal fade" id="barcodeScannerModal" tabindex="-1" aria-labelledby="barcodeScannerModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="barcodeScannerModalLabel">Scanner Code-barres</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <!-- Dans votre modal -->
+<div class="modal-body">
+    <div class="scanner-container">
+        <div id="scanner-video"></div>
+        <div class="scanner-overlay"></div>
+    </div>
+    <div id="scanner-result">
+        <div class="placeholder-text">
+            <i class="bx bx-barcode"></i> Positionnez le code-barres dans le cadre
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+    <button type="button" class="btn btn-primary" onclick="resetScanner()">
+        <i class="bx bx-refresh"></i> Nouveau scan
+    </button>
+</div>
+                </div>
+            </div>
+        </div>
+
         <div class="card">
             <h5 class="card-header d-flex justify-content-between align-items-center">
                 <div class="d-flex align-items-center">
@@ -163,6 +193,10 @@
                 </div>
 
                 <div class="d-flex align-items-center">
+                    {# Scanner Button #}
+                    <button type="button" class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#barcodeScannerModal">
+                        <i class="bx bx-barcode me-1"></i> Scanner
+                    </button>
                     {# Filtrer Dropdown #}
                     <div class="btn-group me-2">
                         <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
@@ -319,6 +353,16 @@
                 const toast = new bootstrap.Toast(toastElement);
                 toast.show();
             }
+
+            // Barcode scanner modal logic
+            const scannerModal = document.getElementById('barcodeScannerModal');
+            scannerModal.addEventListener('shown.bs.modal', function () {
+                initScanner('scanner-video', 'scanner-result');
+            });
+            scannerModal.addEventListener('hidden.bs.modal', function () {
+                Quagga.stop();
+                document.getElementById('scanner-result').innerText = '';
+            });
         });
     </script>
 {% endblock %}

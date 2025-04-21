@@ -47,6 +47,7 @@ return [
         '/joueur/export/pdf' => [[['_route' => 'joueur_export_pdf', '_controller' => 'App\\Controller\\JoueurController::exportPdf'], null, null, null, false, false, null]],
         '/joueur/export/excel' => [[['_route' => 'joueur_export_excel', '_controller' => 'App\\Controller\\JoueurController::exportExcel'], null, null, null, false, false, null]],
         '/materiel' => [[['_route' => 'app_materiel_index', '_controller' => 'App\\Controller\\MaterielController::index'], null, null, null, true, false, null]],
+        '/materiel/scan' => [[['_route' => 'app_materiel_scan', '_controller' => 'App\\Controller\\MaterielController::scan'], null, ['GET' => 0], null, false, false, null]],
         '/materiel/materiel' => [[['_route' => 'app_materiel_indexF', '_controller' => 'App\\Controller\\MaterielController::indexF'], null, ['GET' => 0], null, false, false, null]],
         '/materiel/new' => [[['_route' => 'app_materiel_new', '_controller' => 'App\\Controller\\MaterielController::new'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
         '/materiel/statistics' => [[['_route' => 'app_materiel_statistics', '_controller' => 'App\\Controller\\MaterielController::statistics'], null, ['GET' => 0], null, false, false, null]],

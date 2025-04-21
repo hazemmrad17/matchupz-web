@@ -209,19 +209,49 @@ class __TwigTemplate_5c70b982ea033088af46b807352840cb extends Template
             </div>
         </div>
 
+        <!-- Barcode Scanner Modal -->
+        <div class=\"modal fade\" id=\"barcodeScannerModal\" tabindex=\"-1\" aria-labelledby=\"barcodeScannerModalLabel\" aria-hidden=\"true\">
+            <div class=\"modal-dialog\">
+                <div class=\"modal-content\">
+                    <div class=\"modal-header\">
+                        <h5 class=\"modal-title\" id=\"barcodeScannerModalLabel\">Scanner Code-barres</h5>
+                        <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"modal\" aria-label=\"Close\"></button>
+                    </div>
+                    <!-- Dans votre modal -->
+<div class=\"modal-body\">
+    <div class=\"scanner-container\">
+        <div id=\"scanner-video\"></div>
+        <div class=\"scanner-overlay\"></div>
+    </div>
+    <div id=\"scanner-result\">
+        <div class=\"placeholder-text\">
+            <i class=\"bx bx-barcode\"></i> Positionnez le code-barres dans le cadre
+        </div>
+    </div>
+</div>
+<div class=\"modal-footer\">
+    <button type=\"button\" class=\"btn btn-secondary\" data-bs-dismiss=\"modal\">Fermer</button>
+    <button type=\"button\" class=\"btn btn-primary\" onclick=\"resetScanner()\">
+        <i class=\"bx bx-refresh\"></i> Nouveau scan
+    </button>
+</div>
+                </div>
+            </div>
+        </div>
+
         <div class=\"card\">
             <h5 class=\"card-header d-flex justify-content-between align-items-center\">
                 <div class=\"d-flex align-items-center\">
                     ";
-        // line 157
+        // line 187
         yield "                    <form class=\"d-flex\" method=\"get\" action=\"";
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_materiel_index");
         yield "\">
                         <div class=\"input-group\">
                             <span class=\"input-group-text\"><i class=\"bx bx-search\"></i></span>
                             <input type=\"text\" class=\"form-control\" name=\"search\" placeholder=\"Rechercher nom, type, état...\" value=\"";
-        // line 160
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["searchTerm"]) || array_key_exists("searchTerm", $context) ? $context["searchTerm"] : (function () { throw new RuntimeError('Variable "searchTerm" does not exist.', 160, $this->source); })()), "html", null, true);
+        // line 190
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["searchTerm"]) || array_key_exists("searchTerm", $context) ? $context["searchTerm"] : (function () { throw new RuntimeError('Variable "searchTerm" does not exist.', 190, $this->source); })()), "html", null, true);
         yield "\">
                         </div>
                     </form>
@@ -229,29 +259,34 @@ class __TwigTemplate_5c70b982ea033088af46b807352840cb extends Template
 
                 <div class=\"d-flex align-items-center\">
                     ";
-        // line 167
+        // line 197
+        yield "                    <button type=\"button\" class=\"btn btn-primary me-2\" data-bs-toggle=\"modal\" data-bs-target=\"#barcodeScannerModal\">
+                        <i class=\"bx bx-barcode me-1\"></i> Scanner
+                    </button>
+                    ";
+        // line 201
         yield "                    <div class=\"btn-group me-2\">
                         <button type=\"button\" class=\"btn btn-outline-secondary dropdown-toggle\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\">
                             Filtrer
                         </button>
                         <ul class=\"dropdown-menu\">
                             <li><a class=\"dropdown-item\" href=\"";
-        // line 172
+        // line 206
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_materiel_index", ["filter" => "nom"]);
         yield "\">Par Nom</a></li>
                             <li><a class=\"dropdown-item\" href=\"";
-        // line 173
+        // line 207
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_materiel_index", ["filter" => "type"]);
         yield "\">Par Type</a></li>
                             <li><a class=\"dropdown-item\" href=\"";
-        // line 174
+        // line 208
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_materiel_index", ["filter" => "etat"]);
         yield "\">Par État</a></li>
                         </ul>
                     </div>
 
                     ";
-        // line 179
+        // line 213
         yield "                    <a href=\"";
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_materiel_statistics");
         yield "\" class=\"btn btn-dark me-2\">
@@ -259,7 +294,7 @@ class __TwigTemplate_5c70b982ea033088af46b807352840cb extends Template
                     </a>
 
                     ";
-        // line 184
+        // line 218
         yield "                    <a href=\"";
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_materiel_new");
         yield "\" class=\"btn btn-success me-2\">
@@ -267,7 +302,7 @@ class __TwigTemplate_5c70b982ea033088af46b807352840cb extends Template
                     </a>
 
                     ";
-        // line 189
+        // line 223
         yield "                    <div class=\"btn-group\">
                         <button type=\"button\" class=\"btn btn-warning dropdown-toggle\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\">
                             <i class=\"bx bx-download me-1\"></i> Exporter
@@ -275,7 +310,7 @@ class __TwigTemplate_5c70b982ea033088af46b807352840cb extends Template
                         <ul class=\"dropdown-menu dropdown-menu-end\" style=\"max-height: 200px; overflow-y: auto;\">
                             <li>
                                 <a class=\"dropdown-item\" href=\"";
-        // line 195
+        // line 229
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_materiel_export_excel");
         yield "\">
                                     <i class=\"bx bx-file me-1\"></i> Excel
@@ -283,7 +318,7 @@ class __TwigTemplate_5c70b982ea033088af46b807352840cb extends Template
                             </li>
                             <li>
                                 <a class=\"dropdown-item\" href=\"";
-        // line 200
+        // line 234
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_materiel_export_csv");
         yield "\">
                                     <i class=\"bx bx-file me-1\"></i> CSV
@@ -291,7 +326,7 @@ class __TwigTemplate_5c70b982ea033088af46b807352840cb extends Template
                             </li>
                             <li>
                                 <a class=\"dropdown-item\" href=\"";
-        // line 205
+        // line 239
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_materiel_export_pdf");
         yield "\">
                                     <i class=\"bx bx-file me-1\"></i> PDF
@@ -319,84 +354,84 @@ class __TwigTemplate_5c70b982ea033088af46b807352840cb extends Template
                     </thead>
                     <tbody class=\"table-border-bottom-0\">
                         ";
-        // line 230
-        if ((array_key_exists("pagination", $context) && (Twig\Extension\CoreExtension::length($this->env->getCharset(), (isset($context["pagination"]) || array_key_exists("pagination", $context) ? $context["pagination"] : (function () { throw new RuntimeError('Variable "pagination" does not exist.', 230, $this->source); })())) > 0))) {
-            // line 231
+        // line 264
+        if ((array_key_exists("pagination", $context) && (Twig\Extension\CoreExtension::length($this->env->getCharset(), (isset($context["pagination"]) || array_key_exists("pagination", $context) ? $context["pagination"] : (function () { throw new RuntimeError('Variable "pagination" does not exist.', 264, $this->source); })())) > 0))) {
+            // line 265
             yield "                            ";
             $context['_parent'] = $context;
-            $context['_seq'] = CoreExtension::ensureTraversable((isset($context["pagination"]) || array_key_exists("pagination", $context) ? $context["pagination"] : (function () { throw new RuntimeError('Variable "pagination" does not exist.', 231, $this->source); })()));
+            $context['_seq'] = CoreExtension::ensureTraversable((isset($context["pagination"]) || array_key_exists("pagination", $context) ? $context["pagination"] : (function () { throw new RuntimeError('Variable "pagination" does not exist.', 265, $this->source); })()));
             foreach ($context['_seq'] as $context["_key"] => $context["materiel"]) {
-                // line 232
+                // line 266
                 yield "                                <tr class=\"table-default ";
-                if (( !(null === CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "quantite", [], "any", false, false, false, 232)) && (CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "quantite", [], "any", false, false, false, 232) < 5))) {
+                if (( !(null === CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "quantite", [], "any", false, false, false, 266)) && (CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "quantite", [], "any", false, false, false, 266) < 5))) {
                     yield "low-quantity";
                 }
                 yield "\" data-quantity=\"";
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(((CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "quantite", [], "any", true, true, false, 232)) ? (Twig\Extension\CoreExtension::default(CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "quantite", [], "any", false, false, false, 232), "N/A")) : ("N/A")), "html", null, true);
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(((CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "quantite", [], "any", true, true, false, 266)) ? (Twig\Extension\CoreExtension::default(CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "quantite", [], "any", false, false, false, 266), "N/A")) : ("N/A")), "html", null, true);
                 yield "\">
                                     <td>
                                         ";
-                // line 234
-                if (CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "image", [], "any", false, false, false, 234)) {
-                    // line 235
+                // line 268
+                if (CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "image", [], "any", false, false, false, 268)) {
+                    // line 269
                     yield "                                            <img src=\"";
-                    yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("Uploads/materiels/" . CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "image", [], "any", false, false, false, 235))), "html", null, true);
+                    yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("Uploads/materiels/" . CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "image", [], "any", false, false, false, 269))), "html", null, true);
                     yield "\" width=\"50\" height=\"50\" class=\"rounded-circle\" alt=\"Image matériel\">
                                         ";
                 } else {
-                    // line 237
+                    // line 271
                     yield "                                            <span class=\"text-muted\">N/A</span>
                                         ";
                 }
-                // line 239
+                // line 273
                 yield "                                    </td>
                                     <td>
                                         <i class=\"bx bx-package fa-lg text-primary me-3\"></i>
                                         <strong>";
-                // line 242
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "nom", [], "any", false, false, false, 242), "html", null, true);
+                // line 276
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "nom", [], "any", false, false, false, 276), "html", null, true);
                 yield "</strong>
                                     </td>
                                     <td>";
-                // line 244
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(((CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "type", [], "any", true, true, false, 244)) ? (Twig\Extension\CoreExtension::default(CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "type", [], "any", false, false, false, 244), "N/A")) : ("N/A")), "html", null, true);
+                // line 278
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(((CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "type", [], "any", true, true, false, 278)) ? (Twig\Extension\CoreExtension::default(CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "type", [], "any", false, false, false, 278), "N/A")) : ("N/A")), "html", null, true);
                 yield "</td>
                                     <td>";
-                // line 245
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(((CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "quantite", [], "any", true, true, false, 245)) ? (Twig\Extension\CoreExtension::default(CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "quantite", [], "any", false, false, false, 245), "N/A")) : ("N/A")), "html", null, true);
+                // line 279
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(((CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "quantite", [], "any", true, true, false, 279)) ? (Twig\Extension\CoreExtension::default(CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "quantite", [], "any", false, false, false, 279), "N/A")) : ("N/A")), "html", null, true);
                 yield "</td>
                                     <td>";
-                // line 246
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(((CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "etat", [], "any", true, true, false, 246)) ? (Twig\Extension\CoreExtension::default(CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "etat", [], "any", false, false, false, 246), "N/A")) : ("N/A")), "html", null, true);
+                // line 280
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(((CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "etat", [], "any", true, true, false, 280)) ? (Twig\Extension\CoreExtension::default(CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "etat", [], "any", false, false, false, 280), "N/A")) : ("N/A")), "html", null, true);
                 yield "</td>
                                     <td>";
-                // line 247
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::default($this->extensions['Twig\Extension\CoreExtension']->formatNumber(CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "prix", [], "any", false, false, false, 247), 2, ",", " "), "N/A"), "html", null, true);
+                // line 281
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::default($this->extensions['Twig\Extension\CoreExtension']->formatNumber(CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "prix", [], "any", false, false, false, 281), 2, ",", " "), "N/A"), "html", null, true);
                 yield " €</td>
                                     <td>";
-                // line 248
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(((CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "barcode", [], "any", true, true, false, 248)) ? (Twig\Extension\CoreExtension::default(CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "barcode", [], "any", false, false, false, 248), "N/A")) : ("N/A")), "html", null, true);
+                // line 282
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(((CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "barcode", [], "any", true, true, false, 282)) ? (Twig\Extension\CoreExtension::default(CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "barcode", [], "any", false, false, false, 282), "N/A")) : ("N/A")), "html", null, true);
                 yield "</td>
                                     <td>
                                         ";
-                // line 250
-                if (CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "fournisseur", [], "any", false, false, false, 250)) {
-                    // line 251
+                // line 284
+                if (CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "fournisseur", [], "any", false, false, false, 284)) {
+                    // line 285
                     yield "                                            <a href=\"";
-                    yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_fournisseur_show", ["id_fournisseur" => CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "fournisseur", [], "any", false, false, false, 251), "id_fournisseur", [], "any", false, false, false, 251)]), "html", null, true);
+                    yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_fournisseur_show", ["id_fournisseur" => CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "fournisseur", [], "any", false, false, false, 285), "id_fournisseur", [], "any", false, false, false, 285)]), "html", null, true);
                     yield "\">
                                                 ";
-                    // line 252
-                    yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "fournisseur", [], "any", false, false, false, 252), "nom", [], "any", false, false, false, 252), "html", null, true);
+                    // line 286
+                    yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "fournisseur", [], "any", false, false, false, 286), "nom", [], "any", false, false, false, 286), "html", null, true);
                     yield "
                                             </a>
                                         ";
                 } else {
-                    // line 255
+                    // line 289
                     yield "                                            <span class=\"text-muted\">N/A</span>
                                         ";
                 }
-                // line 257
+                // line 291
                 yield "                                    </td>
                                     <td>
                                         <div class=\"dropdown\">
@@ -405,24 +440,24 @@ class __TwigTemplate_5c70b982ea033088af46b807352840cb extends Template
                                             </button>
                                             <div class=\"dropdown-menu\">
                                                 <a class=\"dropdown-item\" href=\"";
-                // line 264
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_materiel_show", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "id", [], "any", false, false, false, 264)]), "html", null, true);
+                // line 298
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_materiel_show", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "id", [], "any", false, false, false, 298)]), "html", null, true);
                 yield "\">
                                                     <i class=\"bx bx-show me-1\"></i> Voir
                                                 </a>
                                                 <a class=\"dropdown-item\" href=\"";
-                // line 267
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_materiel_edit", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "id", [], "any", false, false, false, 267)]), "html", null, true);
+                // line 301
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_materiel_edit", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "id", [], "any", false, false, false, 301)]), "html", null, true);
                 yield "\">
                                                     <i class=\"bx bx-edit-alt me-1\"></i> Modifier
                                                 </a>
                                                 <form method=\"post\" action=\"";
-                // line 270
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_materiel_delete", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "id", [], "any", false, false, false, 270)]), "html", null, true);
+                // line 304
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_materiel_delete", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "id", [], "any", false, false, false, 304)]), "html", null, true);
                 yield "\" style=\"display:inline;\" onsubmit=\"return confirm('Confirmer la suppression ?');\">
                                                     <input type=\"hidden\" name=\"_token\" value=\"";
-                // line 271
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderCsrfToken(("delete" . CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "id", [], "any", false, false, false, 271))), "html", null, true);
+                // line 305
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderCsrfToken(("delete" . CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "id", [], "any", false, false, false, 305))), "html", null, true);
                 yield "\">
                                                     <button class=\"dropdown-item\" type=\"submit\">
                                                         <i class=\"bx bx-trash me-1\"></i> Supprimer
@@ -437,38 +472,38 @@ class __TwigTemplate_5c70b982ea033088af46b807352840cb extends Template
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_key'], $context['materiel'], $context['_parent']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 281
+            // line 315
             yield "                        ";
         } else {
-            // line 282
+            // line 316
             yield "                            <tr>
                                 <td colspan=\"9\" class=\"text-center\">Aucun matériel trouvé</td>
                             </tr>
                         ";
         }
-        // line 286
+        // line 320
         yield "                    </tbody>
                 </table>
             </div>
 
             ";
-        // line 291
+        // line 325
         yield "            <div class=\"card-footer\">
                 ";
-        // line 292
-        yield $this->env->getRuntime('Knp\Bundle\PaginatorBundle\Twig\Extension\PaginationRuntime')->render($this->env, (isset($context["pagination"]) || array_key_exists("pagination", $context) ? $context["pagination"] : (function () { throw new RuntimeError('Variable "pagination" does not exist.', 292, $this->source); })()));
+        // line 326
+        yield $this->env->getRuntime('Knp\Bundle\PaginatorBundle\Twig\Extension\PaginationRuntime')->render($this->env, (isset($context["pagination"]) || array_key_exists("pagination", $context) ? $context["pagination"] : (function () { throw new RuntimeError('Variable "pagination" does not exist.', 326, $this->source); })()));
         yield "
                 <div class=\"text-center\">
                     <small>
                         Page ";
-        // line 295
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["pagination"]) || array_key_exists("pagination", $context) ? $context["pagination"] : (function () { throw new RuntimeError('Variable "pagination" does not exist.', 295, $this->source); })()), "currentPageNumber", [], "any", false, false, false, 295), "html", null, true);
+        // line 329
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["pagination"]) || array_key_exists("pagination", $context) ? $context["pagination"] : (function () { throw new RuntimeError('Variable "pagination" does not exist.', 329, $this->source); })()), "currentPageNumber", [], "any", false, false, false, 329), "html", null, true);
         yield " sur ";
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["pagination"]) || array_key_exists("pagination", $context) ? $context["pagination"] : (function () { throw new RuntimeError('Variable "pagination" does not exist.', 295, $this->source); })()), "getPageCount", [], "method", false, false, false, 295), "html", null, true);
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["pagination"]) || array_key_exists("pagination", $context) ? $context["pagination"] : (function () { throw new RuntimeError('Variable "pagination" does not exist.', 329, $this->source); })()), "getPageCount", [], "method", false, false, false, 329), "html", null, true);
         yield " |
                         Total Matériels : ";
-        // line 296
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["pagination"]) || array_key_exists("pagination", $context) ? $context["pagination"] : (function () { throw new RuntimeError('Variable "pagination" does not exist.', 296, $this->source); })()), "totalItemCount", [], "any", false, false, false, 296), "html", null, true);
+        // line 330
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["pagination"]) || array_key_exists("pagination", $context) ? $context["pagination"] : (function () { throw new RuntimeError('Variable "pagination" does not exist.', 330, $this->source); })()), "totalItemCount", [], "any", false, false, false, 330), "html", null, true);
         yield "
                     </small>
                 </div>
@@ -596,7 +631,7 @@ class __TwigTemplate_5c70b982ea033088af46b807352840cb extends Template
         yield from [];
     }
 
-    // line 305
+    // line 339
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -609,7 +644,7 @@ class __TwigTemplate_5c70b982ea033088af46b807352840cb extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "javascripts"));
 
-        // line 306
+        // line 340
         yield "    ";
         yield from $this->yieldParentBlock("javascripts", $context, $blocks);
         yield "
@@ -628,6 +663,16 @@ class __TwigTemplate_5c70b982ea033088af46b807352840cb extends Template
                 const toast = new bootstrap.Toast(toastElement);
                 toast.show();
             }
+
+            // Barcode scanner modal logic
+            const scannerModal = document.getElementById('barcodeScannerModal');
+            scannerModal.addEventListener('shown.bs.modal', function () {
+                initScanner('scanner-video', 'scanner-result');
+            });
+            scannerModal.addEventListener('hidden.bs.modal', function () {
+                Quagga.stop();
+                document.getElementById('scanner-result').innerText = '';
+            });
         });
     </script>
 ";
@@ -640,7 +685,7 @@ class __TwigTemplate_5c70b982ea033088af46b807352840cb extends Template
         yield from [];
     }
 
-    // line 326
+    // line 370
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -653,12 +698,12 @@ class __TwigTemplate_5c70b982ea033088af46b807352840cb extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "stylesheets"));
 
-        // line 327
+        // line 371
         yield "    ";
         yield from $this->yieldParentBlock("stylesheets", $context, $blocks);
         yield "
     <link rel=\"stylesheet\" href=\"";
-        // line 328
+        // line 372
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("css/low_quantity.css"), "html", null, true);
         yield "\">
     <style>
@@ -713,7 +758,7 @@ class __TwigTemplate_5c70b982ea033088af46b807352840cb extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  662 => 328,  657 => 327,  644 => 326,  613 => 306,  600 => 305,  582 => 131,  561 => 113,  540 => 95,  519 => 77,  503 => 63,  490 => 62,  471 => 296,  465 => 295,  459 => 292,  456 => 291,  450 => 286,  444 => 282,  441 => 281,  425 => 271,  421 => 270,  415 => 267,  409 => 264,  400 => 257,  396 => 255,  390 => 252,  385 => 251,  383 => 250,  378 => 248,  374 => 247,  370 => 246,  366 => 245,  362 => 244,  357 => 242,  352 => 239,  348 => 237,  342 => 235,  340 => 234,  330 => 232,  325 => 231,  323 => 230,  295 => 205,  287 => 200,  279 => 195,  271 => 189,  263 => 184,  255 => 179,  248 => 174,  244 => 173,  240 => 172,  233 => 167,  224 => 160,  217 => 157,  197 => 138,  195 => 62,  185 => 55,  175 => 48,  154 => 30,  143 => 22,  129 => 10,  116 => 9,  93 => 7,  81 => 4,  68 => 3,  45 => 1,);
+        return array (  707 => 372,  702 => 371,  689 => 370,  648 => 340,  635 => 339,  617 => 131,  596 => 113,  575 => 95,  554 => 77,  538 => 63,  525 => 62,  506 => 330,  500 => 329,  494 => 326,  491 => 325,  485 => 320,  479 => 316,  476 => 315,  460 => 305,  456 => 304,  450 => 301,  444 => 298,  435 => 291,  431 => 289,  425 => 286,  420 => 285,  418 => 284,  413 => 282,  409 => 281,  405 => 280,  401 => 279,  397 => 278,  392 => 276,  387 => 273,  383 => 271,  377 => 269,  375 => 268,  365 => 266,  360 => 265,  358 => 264,  330 => 239,  322 => 234,  314 => 229,  306 => 223,  298 => 218,  290 => 213,  283 => 208,  279 => 207,  275 => 206,  268 => 201,  263 => 197,  254 => 190,  247 => 187,  197 => 138,  195 => 62,  185 => 55,  175 => 48,  154 => 30,  143 => 22,  129 => 10,  116 => 9,  93 => 7,  81 => 4,  68 => 3,  45 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -870,6 +915,36 @@ class __TwigTemplate_5c70b982ea033088af46b807352840cb extends Template
             </div>
         </div>
 
+        <!-- Barcode Scanner Modal -->
+        <div class=\"modal fade\" id=\"barcodeScannerModal\" tabindex=\"-1\" aria-labelledby=\"barcodeScannerModalLabel\" aria-hidden=\"true\">
+            <div class=\"modal-dialog\">
+                <div class=\"modal-content\">
+                    <div class=\"modal-header\">
+                        <h5 class=\"modal-title\" id=\"barcodeScannerModalLabel\">Scanner Code-barres</h5>
+                        <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"modal\" aria-label=\"Close\"></button>
+                    </div>
+                    <!-- Dans votre modal -->
+<div class=\"modal-body\">
+    <div class=\"scanner-container\">
+        <div id=\"scanner-video\"></div>
+        <div class=\"scanner-overlay\"></div>
+    </div>
+    <div id=\"scanner-result\">
+        <div class=\"placeholder-text\">
+            <i class=\"bx bx-barcode\"></i> Positionnez le code-barres dans le cadre
+        </div>
+    </div>
+</div>
+<div class=\"modal-footer\">
+    <button type=\"button\" class=\"btn btn-secondary\" data-bs-dismiss=\"modal\">Fermer</button>
+    <button type=\"button\" class=\"btn btn-primary\" onclick=\"resetScanner()\">
+        <i class=\"bx bx-refresh\"></i> Nouveau scan
+    </button>
+</div>
+                </div>
+            </div>
+        </div>
+
         <div class=\"card\">
             <h5 class=\"card-header d-flex justify-content-between align-items-center\">
                 <div class=\"d-flex align-items-center\">
@@ -883,6 +958,10 @@ class __TwigTemplate_5c70b982ea033088af46b807352840cb extends Template
                 </div>
 
                 <div class=\"d-flex align-items-center\">
+                    {# Scanner Button #}
+                    <button type=\"button\" class=\"btn btn-primary me-2\" data-bs-toggle=\"modal\" data-bs-target=\"#barcodeScannerModal\">
+                        <i class=\"bx bx-barcode me-1\"></i> Scanner
+                    </button>
                     {# Filtrer Dropdown #}
                     <div class=\"btn-group me-2\">
                         <button type=\"button\" class=\"btn btn-outline-secondary dropdown-toggle\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\">
@@ -1039,6 +1118,16 @@ class __TwigTemplate_5c70b982ea033088af46b807352840cb extends Template
                 const toast = new bootstrap.Toast(toastElement);
                 toast.show();
             }
+
+            // Barcode scanner modal logic
+            const scannerModal = document.getElementById('barcodeScannerModal');
+            scannerModal.addEventListener('shown.bs.modal', function () {
+                initScanner('scanner-video', 'scanner-result');
+            });
+            scannerModal.addEventListener('hidden.bs.modal', function () {
+                Quagga.stop();
+                document.getElementById('scanner-result').innerText = '';
+            });
         });
     </script>
 {% endblock %}

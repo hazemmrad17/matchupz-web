@@ -19,6 +19,7 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 #[Route('/materiel')]
 final class MaterielController extends AbstractController
@@ -98,7 +99,41 @@ final class MaterielController extends AbstractController
             'inventoryValue' => $inventoryValue,
         ]);
     }
-
+    
+    #[Route('/scan', name: 'app_materiel_scan', methods: ['GET'])]
+    public function scan(Request $request, MaterielRepository $repository): JsonResponse
+    {
+        try {
+            $barcode = $request->query->get('barcode');
+            if (empty($barcode)) {
+                return new JsonResponse(['error' => 'Code-barres vide'], 400);
+            }
+    
+            $materiel = $repository->findOneBy(['barcode' => $barcode]);
+            
+            if (!$materiel) {
+                return new JsonResponse([
+                    'materiel' => null,
+                    'barcode' => $barcode
+                ]);
+            }
+    
+            return new JsonResponse([
+                'materiel' => [
+                    'id' => $materiel->getId(),
+                    'nom' => $materiel->getNom(),
+                    'type' => $materiel->getType(),
+                    'etat' => $materiel->getEtat(),
+                    'quantite' => $materiel->getQuantite()
+                ]
+            ]);
+        } catch (\Exception $e) {
+            return new JsonResponse([
+                'error' => 'Erreur serveur',
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
     #[Route('/materiel', name: 'app_materiel_indexF', methods: ['GET'])]
     public function indexF(
         MaterielRepository $repository,
