@@ -10,11 +10,25 @@
             <div class="card-body">
                 <p><strong>Name:</strong> {{ club.nomClub }}</p>
                 <p><strong>Photo:</strong></p>
-                <img src="{{ club.photoUrl }}" alt="{{ club.nomClub }}" style="max-width: 300px;">
+                {% if club.photoUrl %}
+                    <img 
+                        src="{{ asset(club.photoUrl) }}" 
+                        alt="{{ club.nomClub }}" 
+                        style="max-width: 300px;" 
+                        onerror="this.onerror=null; this.src='{{ asset('img/default_club.png') }}';"
+                    >
+                {% else %}
+                    <img 
+                        src="{{ asset('img/default_club.png') }}" 
+                        alt="Default Club Image" 
+                        style="max-width: 300px;"
+                    >
+                    <p class="text-muted">No photo available for this club.</p>
+                {% endif %}
             </div>
         </div>
 
-        <a href="{{ path('club_index') }}" class="btn btn-outline-secondary mt-3">Back to List</a>
-        <a href="{{ path('club_edit', {'idClub': club.idClub}) }}" class="btn btn-primary mt-3">Edit</a>
+        <a href="{{ path('club_index') }}" class="btn btn-outline-secondary mt-3">Vers La List</a>
+        <a href="{{ path('club_edit', {'idClub': club.idClub}) }}" class="btn btn-primary mt-3">Modifier</a>
     </div>
 {% endblock %}

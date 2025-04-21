@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un Sponsor{% endblock %}
+
+{% block content %}
+    <div class="content-wrapper">
+        <div class="container-xxl flex-grow-1 container-p-y">
+            <div class="card">
+                <h5 class="card-header">Ajouter un Nouveau Sponsor</h5>
+                <div class="card-body">
+                    {{ form_start(form, {'attr': {'novalidate': 'novalidate', 'class': 'form-horizontal'}}) }}
+                        <div class="mb-3">
+                            {{ form_label(form.nom) }}
+                            {{ form_widget(form.nom) }}
+                            {{ form_errors(form.nom) }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form_label(form.contact) }}
+                            {{ form_widget(form.contact) }}
+                            {{ form_errors(form.contact) }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form_label(form.pack) }}
+                            {{ form_widget(form.pack) }}
+                            {{ form_errors(form.pack) }}
+                        </div>
+                        <button type="submit" class="btn btn-primary">Ajouter</button>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        /* Style form errors in red */
+        .form-error {
+            color: #dc3545; /* Bootstrap's red color for danger */
+            font-size: 0.875rem; /* Slightly smaller font size */
+            margin-top: 0.25rem; /* Space between the input and the error message */
+        }
+
+        /* Optional: Add red border to invalid fields */
+        .form-control.is-invalid {
+            border-color: #dc3545;
+        }
+    </style>
+{% endblock %}

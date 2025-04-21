@@ -1,0 +1,93 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contract Statistics{% endblock %}
+
+{% block body %}
+<h4 class="fw-bold py-3 mb-4">Contract Statistics</h4>
+
+<div class="row">
+    <!-- Total Contracts -->
+    <div class="col-lg-4 col-md-6 mb-4">
+        <div class="card">
+            <div class="card-body">
+                <div class="card-title d-flex align-items-start justify-content-between">
+                    <div class="avatar flex-shrink-0">
+                        <img src="{{ asset('img/icons/unicons/chart-success.png') }}" alt="Contracts" class="rounded" />
+                    </div>
+                </div>
+                <span class="fw-semibold d-block mb-1">Total Contracts</span>
+                <h3 class="card-title mb-2">{{ totalContracts }}</h3>
+                <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> Updated Today</small>
+            </div>
+        </div>
+    </div>
+
+    <!-- Montant Distribution Chart -->
+    <div class="col-12 col-lg-6 mb-4">
+        <div class="card">
+            <div class="card-header"><h5 class="card-title m-0 me-2">Montant Distribution</h5></div>
+            <div class="card-body"><div id="montantDistributionChart"></div></div>
+        </div>
+    </div>
+
+    <!-- All Contracts List -->
+    <div class="col-12 col-lg-6 mb-4">
+        <div class="card">
+            <div class="card-header"><h5 class="card-title m-0 me-2">All Contracts</h5></div>
+            <div class="card-body" style="max-height: 400px; overflow-y: auto;">
+                <ul class="p-0 m-0">
+                    {% for contract in allContracts %}
+                        <li class="d-flex mb-4 pb-1">
+                            <div class="avatar flex-shrink-0 me-3">
+                                <img src="{{ asset('img/default-avatar.png') }}" alt="Contract" class="rounded" />
+                            </div>
+                            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                                <div class="me-2">
+                                    <h6 class="mb-0">{{ contract.Titre }}</h6>
+                                </div>
+                                <div class="user-progress">
+                                    <small class="fw-semibold">{{ contract.Montant }} €</small>
+                                </div>
+                            </div>
+                        </li>
+                    {% else %}
+                        <li>No contracts found.</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Montant Distribution Chart (Histogram)
+            new ApexCharts(document.querySelector("#montantDistributionChart"), {
+                chart: { type: 'histogram', height: 350 },
+                series: [{
+                    name: 'Montant',
+                    data: [
+                        {% for count in montantDistribution %}
+                            {{ count }},
+                        {% endfor %}
+                    ]
+                }],
+                xaxis: {
+                    categories: [{% for bin in montantDistribution|keys %}'{{ bin }}',{% endfor %}],
+                    title: { text: 'Montant Range (€)' }
+                },
+                yaxis: {
+                    title: { text: 'Number of Contracts' }
+                },
+                colors: ['#FF5733'], // Match the orange color from the image
+                title: {
+                    text: 'Distribution des montants des contrats',
+                    align: 'center'
+                }
+            }).render();
+        });
+    </script>
+{% endblock %}

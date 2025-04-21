@@ -1,0 +1,289 @@
+{% extends 'base.html.twig' %}
+
+{% block searchbar %}
+    {% include 'searchbar.html.twig' %}
+{% endblock %}
+
+{% block title %}Liste des Matériels{% endblock %}
+
+{% block content %}
+<div class="content-wrapper">
+    <div class="container-xxl flex-grow-1 container-p-y">
+        {% block widgets %}
+            <!-- Existing Widgets Section -->
+            <div class="row">
+                <!-- Total Materials Widget -->
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="card-title d-flex align-items-start justify-content-between">
+                                <div class="avatar flex-shrink-0">
+                                    <span class="avatar-initial rounded bg-label-primary p-2">
+                                        <i class="bx bx-cube fs-4"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <span class="fw-semibold d-block mb-1">Total Matériels</span>
+                            <h3 class="card-title mb-2">{{ totalMateriels }}</h3>
+                            <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> Mis à jour aujourd'hui</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Types Count Widget -->
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="card-title d-flex align-items-start justify-content-between">
+                                <div class="avatar flex-shrink-0">
+                                    <span class="avatar-initial rounded bg-label-info p-2">
+                                        <i class="bx bx-category fs-4"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <span class="fw-semibold d-block mb-1">Types uniques</span>
+                            <h3 class="card-title mb-2">{{ typeDistribution|length }}</h3>
+                            <small class="text-muted">Catégories de matériel</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- State Coverage Widget -->
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="card-title d-flex align-items-start justify-content-between">
+                                <div class="avatar flex-shrink-0">
+                                    <span class="avatar-initial rounded bg-label-success p-2">
+                                        <i class="bx bx-check-circle fs-4"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <span class="fw-semibold d-block mb-1">Matériels neufs</span>
+                            <h3 class="card-title mb-2">{{ stateDistribution['NEUF'] ?? 0 }}</h3>
+                            <small class="text-muted">En parfait état</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Inventory Value Widget -->
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="card-title d-flex align-items-start justify-content-between">
+                                <div class="avatar flex-shrink-0">
+                                    <span class="avatar-initial rounded bg-label-warning p-2">
+                                        <i class="bx bx-dollar fs-4"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <span class="fw-semibold d-block mb-1">Valeur totale</span>
+                            <h3 class="card-title mb-2">{{ inventoryValue|number_format(2, ',', ' ') }} €</h3>
+                            <small class="text-muted">Valeur du stock</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endblock %}
+
+        {# New Simple Widgets Above Table (Adapted for Materiel) #}
+        <div class="row mt-4">
+            <!-- Total Materials Widget -->
+            <div class="col-md-4 col-lg-4 mb-4">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body">
+                        <div class="d-flex align-items-start justify-content-between mb-3">
+                            <div class="avatar flex-shrink-0">
+                                <img
+                                    src="{{ asset('img/icons/unicons/cube.png') }}"
+                                    alt="Total Materials"
+                                    class="rounded"
+                                />
+                            </div>
+                        </div>
+                        <span class="fw-semibold d-block mb-1">Total Matériels</span>
+                        <h3 class="card-title mb-2">{{ totalMateriels }}</h3>
+                        <small class="text-muted">Nombre total de matériels</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Average Materials per Type Widget -->
+            <div class="col-md-4 col-lg-4 mb-4">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body">
+                        <div class="d-flex align-items-start justify-content-between mb-3">
+                            <div class="avatar flex-shrink-0">
+                                <img
+                                    src="{{ asset('img/icons/unicons/chart.png') }}"
+                                    alt="Average per Type"
+                                    class="rounded"
+                                />
+                            </div>
+                        </div>
+                        <span class="fw-semibold d-block mb-1">Moyenne par Type</span>
+                        <h3 class="card-title mb-2">{{ typeDistribution|length > 0 ? (totalMateriels / typeDistribution|length)|round(1) : 0 }}</h3>
+                        <small class="text-muted">Matériels par type</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h5 class="card-header d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center">
+                    {# Search Bar Left-Aligned #}
+                    <form class="d-flex" method="get" action="{{ path('app_materiel_index') }}">
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="bx bx-search"></i></span>
+                            <input type="text" class="form-control" name="search" placeholder="Rechercher nom, type, état..." value="{{ searchTerm }}">
+                        </div>
+                    </form>
+                </div>
+
+                <div class="d-flex align-items-center">
+                    {# Filtrer Dropdown #}
+                    <div class="btn-group me-2">
+                        <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            Filtrer
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{{ path('app_materiel_index', {'filter': 'nom'}) }}">Par Nom</a></li>
+                            <li><a class="dropdown-item" href="{{ path('app_materiel_index', {'filter': 'type'}) }}">Par Type</a></li>
+                            <li><a class="dropdown-item" href="{{ path('app_materiel_index', {'filter': 'etat'}) }}">Par État</a></li>
+                        </ul>
+                    </div>
+
+                    {# Statistiques Button #}
+                    <a href="{{ path('app_materiel_statistics') }}" class="btn btn-dark me-2">
+                        <i class="bx bx-bar-chart-alt-2 me-1"></i> Statistiques
+                    </a>
+
+                    {# Ajouter Matériel Button #}
+                    <a href="{{ path('app_materiel_new') }}" class="btn btn-success me-2">
+                        <i class="bx bx-plus me-1"></i> Ajouter Matériel
+                    </a>
+
+                    {# Exporter Button #}
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bx bx-download me-1"></i> Exporter
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end" style="max-height: 200px; overflow-y: auto;">
+                            <li>
+                                <a class="dropdown-item" href="{{ path('app_materiel_export_excel') }}">
+                                    <i class="bx bx-file me-1"></i> Excel
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{ path('app_materiel_export_csv') }}">
+                                    <i class="bx bx-file me-1"></i> CSV
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{ path('app_materiel_export_pdf') }}">
+                                    <i class="bx bx-file me-1"></i> PDF
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </h5>
+
+            <div class="table-responsive text-nowrap">
+    <table class="table" id="materielsTable">
+        <thead>
+            <tr>
+                <th>{{ knp_pagination_sortable(pagination, 'ID', 'm.id') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'Nom', 'm.nom') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'Type', 'm.type') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'Quantité', 'm.quantite') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'État', 'm.etat') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'Prix unitaire', 'm.prix') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'Code-barres', 'm.barcode') }}</th>
+                <th>Image</th>
+                <th>Fournisseur</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody class="table-border-bottom-0">
+            {% if pagination is defined and pagination|length > 0 %}
+                {% for materiel in pagination %}
+                    <tr class="table-default">
+                        <td><strong>#{{ materiel.id }}</strong></td>
+                        <td>
+                            <i class="bx bx-package fa-lg text-primary me-3"></i>
+                            <strong>{{ materiel.nom }}</strong>
+                        </td>
+                        <td>{{ materiel.type|default('N/A') }}</td>
+                        <td>{{ materiel.quantite|default('N/A') }}</td>
+                        <td>{{ materiel.etat|default('N/A') }}</td>
+                        <td>{{ materiel.prix|number_format(2, ',', ' ')|default('N/A') }} €</td>
+                        <td>{{ materiel.barcode|default('N/A') }}</td>
+                        <td>
+                            {% if materiel.image %}
+                                <img src="{{ asset('uploads/materiels/' ~ materiel.image) }}" width="50" height="50" class="rounded-circle" alt="Image matériel">
+                            {% else %}
+                                <span class="text-muted">N/A</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if materiel.fournisseur %}
+                                <a href="{{ path('app_fournisseur_show', {'id_fournisseur': materiel.fournisseur.id_fournisseur}) }}">
+                                    {{ materiel.fournisseur.nom }}
+                                </a>
+                            {% else %}
+                                <span class="text-muted">N/A</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <div class="dropdown">
+                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                    <i class="bx bx-dots-vertical-rounded"></i>
+                                </button>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="{{ path('app_materiel_show', {'id': materiel.id}) }}">
+                                        <i class="bx bx-show me-1"></i> Voir
+                                    </a>
+                                    <a class="dropdown-item" href="{{ path('app_materiel_edit', {'id': materiel.id}) }}">
+                                        <i class="bx bx-edit-alt me-1"></i> Modifier
+                                    </a>
+                                    <form method="post" action="{{ path('app_materiel_delete', {'id': materiel.id}) }}" style="display:inline;" onsubmit="return confirm('Confirmer la suppression ?');">
+                                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ materiel.id) }}">
+                                        <button class="dropdown-item" type="submit">
+                                            <i class="bx bx-trash me-1"></i> Supprimer
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="10" class="text-center">Aucun matériel trouvé</td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+</div>
+
+            {# Pagination #}
+            <div class="card-footer">
+    {{ knp_pagination_render(pagination) }}
+    <div class="text-center">
+        <small>
+            Page {{ pagination.currentPageNumber }} sur {{ pagination.getPageCount() }} |
+            Total Matériels : {{ pagination.totalItemCount }}
+        </small>
+    </div>
+</div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <!-- No JavaScript needed for search since it's now server-side -->
+{% endblock %}

@@ -1,0 +1,88 @@
+{% extends 'baseM.html.twig' %}
+
+{% block title %}Fitness - Nos Espaces{% endblock %}
+
+{% block navigation %}
+    {# Navigation block remains unchanged — omitted for brevity #}
+{% endblock %}
+
+{% block body %}
+    <!-- Header Start -->
+    <div class="container-fluid bg-breadcrumb">
+        <div class="container text-center py-5" style="max-width: 900px;">
+            <h4 class="text-white display-4 mb-4 wow fadeInDown" data-wow-delay="0.1s">Nos Espaces</h4>
+            <ol class="breadcrumb d-flex justify-content-center mb-0 wow fadeInDown" data-wow-delay="0.3s">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item"><a href="#">Pages</a></li>
+                <li class="breadcrumb-item active text-primary">Feature</li>
+            </ol>    
+        </div>
+    </div>
+    <!-- Header End -->
+
+    <!-- Espaces Sportifs Carousel Start -->
+    <div class="container-fluid feature bg-light py-5">
+        <div class="container py-5 position-relative">
+            <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
+                <h4 class="text-primary">Why choose us?</h4>
+                <h1 class="display-4 mb-4">Découvrer Nos Espaces Sportifs</h1>
+                <p class="mb-3">{{ espaces_description }}</p>
+                <p class="mb-0">Ce site vous permet également de <strong>réserver votre club</strong> préféré et de souscrire à un <strong>abonnement</strong> en toute simplicité.</p>
+            </div>
+
+            {% set images = ['stadium1.jpg', 'stadium2.jpg', 'stadium3.jpg', 'stadium4.jpg', 'stadium5.jpg'] %}
+
+            {% if espaces|length > 0 %}
+                <div class="espace-carousel owl-carousel mb-5 position-relative" style="z-index: 2;">
+                    {% for espace in espaces %}
+                        <div class="feature-item wow fadeInUp" data-wow-delay="{{ 0.2 + (loop.index0 * 0.2) }}s">
+                            <div class="feature-img">
+                                <img src="{{ asset('img/' ~ images[loop.index0 % images|length]) }}" class="img-fluid w-100" alt="Espace Sportif">
+                            </div>
+                            <div class="feature-content p-4">
+                                <h4 class="mb-3">{{ espace.nom_espace }}</h4>
+                                <p class="mb-2"><i class="fas fa-map-marker-alt me-2 text-primary"></i><strong>Adresse:</strong> {{ espace.adresse }}</p>
+                                <p class="mb-2"><i class="fas fa-tags me-2 text-primary"></i><strong>Catégorie:</strong> {{ espace.categorie }}</p>
+                                <p class="mb-3"><i class="fas fa-users me-2 text-primary"></i><strong>Capacité:</strong> {{ espace.capacite }} personnes</p>
+                                <p class="mb-3 text-muted"><i class="fas fa-calendar-check me-2 text-success"></i>Vous pouvez réserver un créneau pour votre club préféré.</p>
+                                <a href="#" class="btn btn-primary py-2 px-4"><span>En savoir plus</span></a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="col-12 text-center">
+                    <p class="text-muted">Aucun espace sportif trouvé.</p>
+                </div>
+            {% endif %}
+
+            <div class="feature-shaps position-absolute top-0 start-0 w-100 h-100" style="z-index: 1;"></div>
+        </div>
+    </div>
+    <!-- Espaces Sportifs Carousel End -->
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        new WOW().init();
+
+        $(document).ready(function(){
+            $(".espace-carousel").owlCarousel({
+                items: 3,
+                margin: 30,
+                loop: true,
+                autoplay: true,
+                autoplayTimeout: 3500,
+                smartSpeed: 800,
+                dots: true,
+                nav: false,
+                responsive: {
+                    0:{ items:1 },
+                    768:{ items:2 },
+                    992:{ items:3 }
+                }
+            });
+        });
+    </script>
+{% endblock %}

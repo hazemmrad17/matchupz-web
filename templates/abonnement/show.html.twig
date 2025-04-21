@@ -4,17 +4,17 @@
     <div class="content-wrapper">
         <div class="container-xxl flex-grow-1 container-p-y">
             <h4 class="fw-bold py-3 mb-4">
-                <span class="text-muted fw-light">Sports /</span> Détails du Sport
+                <span class="text-muted fw-light">Abonnements /</span> Détails de l'Abonnement
             </h4>
 
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
-                    <h5 class="card-title mb-0">Sport #{{ sport.idSport }}</h5>
+                    <h5 class="card-title mb-0">Abonnement #{{ abonnement.idAbonnement }}</h5>
                     <div>
-                        <a href="{{ path('sport_edit', {'idSport': sport.idSport}) }}" class="btn btn-sm btn-primary">Modifier</a>
-                        <a href="{{ path('sport_index') }}" class="btn btn-sm btn-secondary">Retour à la liste</a>
-                        <form method="post" action="{{ path('sport_delete', {'idSport': sport.idSport}) }}" style="display:inline;" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce sport ?');">
-                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ sport.idSport) }}">
+                        <a href="{{ path('abonnement_edit', {'idAbonnement': abonnement.idAbonnement}) }}" class="btn btn-sm btn-primary">Modifier</a>
+                        <a href="{{ path('abonnement_index') }}" class="btn btn-sm btn-secondary">Retour à la liste</a>
+                        <form method="post" action="{{ path('abonnement_delete', {'idAbonnement': abonnement.idAbonnement}) }}" style="display:inline;" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet abonnement ?');">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ abonnement.idAbonnement) }}">
                             <button class="btn btn-sm btn-danger" type="submit">
                                 Supprimer
                             </button>
@@ -24,12 +24,28 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-6">
-                            <h6>Nom du Sport</h6>
-                            <p>{{ sport.nomSport }}</p>
+                            <h6>Club</h6>
+                            <p>{{ abonnement.club.nomClub }}</p>
                         </div>
                         <div class="col-md-6">
-                            <h6>Description</h6>
-                            <p>{{ sport.description|default('Non spécifiée') }}</p>
+                            <h6>Type d'Abonnement</h6>
+                            <p>{{ abonnement.typeAbonnement }}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>Date de Début</h6>
+                            <p>{{ abonnement.dateDebut|date('d/m/Y') }}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>Date de Fin</h6>
+                            <p>{{ abonnement.dateFin|date('d/m/Y') }}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>Tarif</h6>
+                            <p>{{ abonnement.tarif }}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>État</h6>
+                            <p>{{ abonnement.etat }}</p>
                         </div>
                     </div>
                 </div>

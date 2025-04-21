@@ -10,6 +10,8 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\GreaterThanOrEqual;
 
 class ReservationType extends AbstractType
 {
@@ -22,6 +24,9 @@ class ReservationType extends AbstractType
                 'label' => 'Lieu Sportif',
                 'placeholder' => 'Sélectionner un lieu sportif',
                 'required' => true,
+                'constraints' => [
+                    new NotBlank(['message' => 'Veuillez sélectionner un lieu sportif.']),
+                ],
                 'attr' => [
                     'class' => 'form-control',
                 ],
@@ -35,6 +40,14 @@ class ReservationType extends AbstractType
                     'min' => (new \DateTime())->format('Y-m-d\TH:i'), // Ensures future dates
                 ],
                 'required' => true,
+                'data' => new \DateTime(), // Set a default value to prevent null
+                'constraints' => [
+                    new NotBlank(['message' => 'Veuillez sélectionner une date et une heure.']),
+                    new GreaterThanOrEqual([
+                        'value' => new \DateTime(),
+                        'message' => 'La date de réservation doit être dans le futur.',
+                    ]),
+                ],
             ])
             ->add('motif', ChoiceType::class, [
                 'label' => 'Motif',
@@ -45,6 +58,9 @@ class ReservationType extends AbstractType
                     'Autre' => 'autre',
                 ],
                 'required' => true,
+                'constraints' => [
+                    new NotBlank(['message' => 'Veuillez sélectionner un motif.']),
+                ],
                 'attr' => [
                     'class' => 'form-control',
                 ],
@@ -57,6 +73,9 @@ class ReservationType extends AbstractType
                     'En attente' => 'en attente',
                 ],
                 'required' => true,
+                'constraints' => [
+                    new NotBlank(['message' => 'Veuillez sélectionner un statut.']),
+                ],
                 'attr' => [
                     'class' => 'form-control',
                 ],

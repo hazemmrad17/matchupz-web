@@ -4,6 +4,8 @@ namespace App\Form;
 
 use App\Entity\Joueur;
 use App\Entity\Sport;
+use App\Form\EvaluationPhysiqueType;
+use App\Form\PerformanceJoueurType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -40,7 +42,7 @@ class JoueurType extends AbstractType
                     'Second attaquant' => 'SS',
                 ],
                 'placeholder' => 'Sélectionner un poste',
-                'required' => false,
+                'required' => true,
             ])
             ->add('taille')
             ->add('poids')
@@ -52,7 +54,7 @@ class JoueurType extends AbstractType
                     'Inactif' => '',
                 ],
                 'placeholder' => 'Sélectionner un statut',
-                'required' => false,
+                'required' => true,
             ])
             ->add('email')
             ->add('telephone')
@@ -71,6 +73,20 @@ class JoueurType extends AbstractType
             ->add('sport', EntityType::class, [
                 'class' => Sport::class,
                 'choice_label' => 'nomSport',
+                'placeholder' => 'Sélectionner un sport',
+                'required' => true,
+            ])
+            ->add('evaluationPhysique', EvaluationPhysiqueType::class, [
+                'label' => 'Évaluation Physique',
+                'required' => false,
+                'mapped' => false,
+                'data' => $options['evaluation_physique_data'] ?? null,
+            ])
+            ->add('performanceJoueur', PerformanceJoueurType::class, [
+                'label' => 'Performance du Joueur',
+                'required' => false,
+                'mapped' => false,
+                'data' => $options['performance_joueur_data'] ?? null,
             ])
         ;
     }
@@ -79,6 +95,8 @@ class JoueurType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Joueur::class,
+            'evaluation_physique_data' => null,
+            'performance_joueur_data' => null,
         ]);
     }
 }

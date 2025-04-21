@@ -3,8 +3,6 @@
 namespace App\Form;
 
 use App\Entity\EvaluationPhysique;
-use App\Entity\Joueur;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
@@ -17,24 +15,16 @@ class EvaluationPhysiqueType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('joueur', EntityType::class, [
-                'class' => Joueur::class,
-                'choice_label' => function(Joueur $joueur) {
-                    return $joueur->getNom() . ' ' . $joueur->getPrenom();
-                },
-                'attr' => ['class' => 'form-control'],
-                'placeholder' => 'Sélectionner un joueur',
-                'required' => true,
-            ])
             ->add('dateEvaluation', DateType::class, [
                 'widget' => 'single_text',
                 'html5' => true,
                 'attr' => ['class' => 'form-control'],
                 'label' => 'Date d\'évaluation',
+                'required' => false,
             ])
             ->add('niveauEndurance', NumberType::class, [
                 'label' => 'Niveau d\'endurance (0-10)',
-                'required' => true,
+                'required' => false,
                 'attr' => [
                     'class' => 'form-control',
                     'min' => 0,
@@ -44,7 +34,7 @@ class EvaluationPhysiqueType extends AbstractType
             ])
             ->add('forcePhysique', NumberType::class, [
                 'label' => 'Force physique (0-10)',
-                'required' => true,
+                'required' => false,
                 'attr' => [
                     'class' => 'form-control',
                     'min' => 0,
@@ -54,7 +44,7 @@ class EvaluationPhysiqueType extends AbstractType
             ])
             ->add('vitesse', NumberType::class, [
                 'label' => 'Vitesse (0-10)',
-                'required' => true,
+                'required' => false,
                 'attr' => [
                     'class' => 'form-control',
                     'min' => 0,

@@ -1,0 +1,159 @@
+{# templates/fournisseur/new.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block searchbar %}
+    {% include 'searchbar.html.twig' %}
+{% endblock %}
+
+{% block content %}
+    <div class="content-wrapper">
+        <div class="container-xxl flex-grow-1 container-p-y">
+            <h4 class="fw-bold py-3 mb-4">
+                <span class="text-muted fw-light">Fournisseurs /</span>
+                {% if form.vars.value.id_fournisseur %}Modifier Fournisseur{% else %}Nouveau Fournisseur{% endif %}
+            </h4>
+
+            <div class="col-xl">
+                <div class="card mb-4">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">
+                            {% if form.vars.value.id_fournisseur %}
+                                Modifier le Fournisseur
+                            {% else %}
+                                Ajouter un Nouveau Fournisseur
+                            {% endif %}
+                        </h5>
+                        <small class="text-muted float-end">Remplir les détails</small>
+                    </div>
+                    <div class="card-body">
+                        <!-- Toast container (positioned at top-right) -->
+                        <div class="position-fixed top-0 end-0 p-3" style="z-index: 1050;" id="toast-container"></div>
+
+                        {{ form_start(form, {'attr': {'enctype': 'multipart/form-data', 'id': 'fournisseurForm', 'novalidate': 'novalidate'}}) }}
+                            <div class="mb-3">
+                                <label class="form-label" for="fournisseur_nom">Nom du Fournisseur</label>
+                                <div class="input-group input-group-merge">
+                                    <span class="input-group-text"><i class="bx bx-building"></i></span>
+                                    {{ form_widget(form.nom, {'attr': {'class': 'form-control', 'placeholder': 'Ex: SportPlus Inc.'}}) }}
+                                </div>
+                                {{ form_errors(form.nom) }}
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label" for="fournisseur_email">Email</label>
+                                <div class="input-group input-group-merge">
+                                    <span class="input-group-text"><i class="bx bx-envelope"></i></span>
+                                    {{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder': 'contact@fournisseur.com'}}) }}
+                                </div>
+                                {{ form_errors(form.email) }}
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label" for="fournisseur_adresse">Adresse Complète</label>
+                                <div class="input-group input-group-merge">
+                                    <span class="input-group-text"><i class="bx bx-map"></i></span>
+                                    {{ form_widget(form.adresse, {'attr': {'class': 'form-control', 'placeholder': 'Adresse, Ville, Code Postal'}}) }}
+                                </div>
+                                {{ form_errors(form.adresse) }}
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label" for="fournisseur_categorie_produit">Catégorie de Produits</label>
+                                <div class="input-group input-group-merge">
+                                    <span class="input-group-text"><i class="bx bx-category"></i></span>
+                                    {{ form_widget(form.categorie_produit, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                                {{ form_errors(form.categorie_produit) }}
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">
+                                {% if form.vars.value.id_fournisseur %}Mettre à jour{% else %}Créer{% endif %}
+                            </button>
+                            <a href="{{ path('app_fournisseur_index') }}" class="btn btn-secondary">Annuler</a>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('fournisseurForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const toastContainer = document.getElementById('toast-container');
+            toastContainer.innerHTML = '';
+
+            const nom = document.getElementById('fournisseur_nom')?.value.trim() || '';
+            const email = document.getElementById('fournisseur_email')?.value.trim() || '';
+            const adresse = document.getElementById('fournisseur_adresse')?.value.trim() || '';
+            const categorieProduit = document.getElementById('fournisseur_categorie_produit')?.value || '';
+
+            // Validation for Nom
+            if (!nom) {
+                addToast('Erreur Nom', 'Le champ nom est vide.');
+            } else if (nom.length > 100) {
+                addToast('Erreur Nom', 'Le nom ne doit pas dépasser 100 caractères.');
+            }
+
+            // Validation for Email
+            if (!email) {
+                addToast('Erreur Email', 'Le champ email est vide.');
+            } else if (!isValidEmail(email)) {
+                addToast('Erreur Email', 'Veuillez entrer un email valide.');
+            } else if (email.length > 100) {
+                addToast('Erreur Email', "L'email ne doit pas dépasser 100 caractères.");
+            }
+
+            // Validation for Adresse
+            if (!adresse) {
+                addToast('Erreur Adresse', 'Le champ adresse est vide.');
+            } else if (adresse.length > 255) {
+                addToast('Erreur Adresse', "L'adresse ne doit pas dépasser 255 caractères.");
+            }
+
+            // Validation for Categorie Produit
+            if (!categorieProduit) {
+                addToast('Erreur Catégorie', 'Le champ catégorie de produits est vide.');
+            } else if (![
+                'EQUIPEMENT_SPORTIF',
+                'ACCESSOIRE_ENTRAINEMENT',
+                'MATERIEL_JEU',
+                'TENUE_SPORTIVE',
+                'EQUIPEMENT_PROTECTION',
+                'INFRASTRUCTURE'
+            ].includes(categorieProduit)) {
+                addToast('Erreur Catégorie', 'Veuillez sélectionner une catégorie valide.');
+            }
+
+            // Submit if no errors
+            if (toastContainer.children.length === 0) {
+                this.submit();
+            } else {
+                const toastElements = toastContainer.querySelectorAll('.toast');
+                toastElements.forEach(toast => new bootstrap.Toast(toast, { autohide: true, delay: 5000 }).show());
+            }
+        });
+
+        function addToast(title, message) {
+            const toastContainer = document.getElementById('toast-container');
+            const toastId = 'toast-' + Date.now();
+            const toastHTML = `
+                <div id="${toastId}" class="bs-toast toast fade bg-danger" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="toast-header">
+                        <i class="bx bx-bell me-2"></i>
+                        <div class="me-auto fw-semibold">${title}</div>
+                        <small>Maintenant</small>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">${message}</div>
+                </div>
+            `;
+            toastContainer.innerHTML += toastHTML;
+        }
+
+        function isValidEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+    </script>
+{% endblock %}

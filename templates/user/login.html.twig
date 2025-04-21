@@ -20,17 +20,14 @@
                             {% endfor %}
                         {% endfor %}
 
-                        <!-- Toast container -->
-                        <div class="position-fixed top-0 end-0 p-3" style="z-index: 1050;" id="toast-container"></div>
-
-                        <form id="formAuthentication" action="{{ path('app_verif_userF') }}" method="post">
+                        <form id="formAuthentication" action="{{ path('app_verif_userF') }}" method="post" novalidate>
                             <!-- Email -->
                             <div class="mb-3">
                                 <label for="username" class="form-label">Email</label>
                                 <div class="input-group input-group-merge">
                                     <span class="input-group-text"><i class="bx bx-envelope"></i></span>
                                     <input
-                                        type="email"
+                                        type="text"
                                         id="username"
                                         name="_username"
                                         class="form-control"
@@ -55,11 +52,20 @@
                                 </div>
                             </div>
 
+                            <!-- reCAPTCHA -->
+                            <div class="mb-3">
+                                {% if recaptcha_site_key is defined and recaptcha_site_key is not empty %}
+                                    <div class="g-recaptcha" data-sitekey="{{ recaptcha_site_key }}" data-callback="onRecaptchaSuccess"></div>
+                                {% else %}
+                                    <p style="color: red;">Erreur : Clé de site reCAPTCHA non définie.</p>
+                                {% endif %}
+                            </div>
+
                             <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
                             <div class="d-flex justify-content-between align-items-center mb-3">
                                 <button type="submit" class="btn btn-primary">Login</button>
-                                <a href="#" class="text-muted small">Forgot Password?</a>
+                                <a href="{{ path('app_forgot_password') }}" class="text-muted small">Forgot Password?</a>
                             </div>
                         </form>
                         <div class="text-center">
@@ -76,6 +82,13 @@
     {{ parent() }}
     <!-- Ensure Boxicons is included -->
     <link rel="stylesheet" href="{{ asset('assets/vendor/fonts/boxicons.css') }}" />
+    <style>
+        .g-recaptcha {
+            display: block !important;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+    </style>
 {% endblock %}
 
 {% block javascripts %}
@@ -91,57 +104,11 @@
     <!-- Main JS -->
     <script src="{{ asset('assets/js/main.js') }}"></script>
 
-    <!-- Validation Script -->
+    <!-- reCAPTCHA Script -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+    <!-- Password Toggle Script -->
     <script>
-        document.getElementById('formAuthentication').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const toastContainer = document.getElementById('toast-container');
-            toastContainer.innerHTML = ''; // Clear previous toasts
-
-            // Get form field values
-            const email = document.getElementById('username')?.value.trim() || '';
-            const password = document.getElementById('password')?.value || '';
-
-            // Validation des champs
-            if (!email) {
-                addToast('Erreur Email', 'Veuillez entrer un email.');
-            } else if (!/^[^\s@]+@gmail\.com$/.test(email)) {
-                addToast('Erreur Email', 'L\'email doit être de la forme nom@gmail.com.');
-            }
-
-            if (!password) {
-                addToast('Erreur Mot de passe', 'Veuillez entrer un mot de passe.');
-            } else if (password.length < 6) {
-                addToast('Erreur Mot de passe', 'Le mot de passe doit contenir au moins 6 caractères.');
-            }
-
-            // Submit if no errors
-            if (toastContainer.children.length === 0) {
-                this.submit();
-            } else {
-                const toastElements = toastContainer.querySelectorAll('.toast');
-                toastElements.forEach(toast => new bootstrap.Toast(toast, { autohide: true, delay: 5000 }).show());
-            }
-        });
-
-        // Fonction pour ajouter un toast
-        function addToast(title, message) {
-            const toastContainer = document.getElementById('toast-container');
-            const toastId = 'toast-' + Date.now();
-            const toastHTML = `
-                <div id="${toastId}" class="bs-toast toast fade bg-danger" role="alert" aria-live="assertive" aria-atomic="true">
-                    <div class="toast-header">
-                        <i class="bx bx-bell me-2"></i>
-                        <div class="me-auto fw-semibold">${title}</div>
-                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-                    </div>
-                    <div class="toast-body">${message}</div>
-                </div>
-            `;
-            toastContainer.innerHTML += toastHTML;
-        }
-
-        // Gestion du toggle password
         document.addEventListener('DOMContentLoaded', function() {
             const togglePassword = document.querySelector('.toggle-password');
             const passwordInput = document.getElementById('password');
@@ -156,5 +123,10 @@
                 });
             }
         });
+
+        // Callback for reCAPTCHA success (for debugging)
+        function onRecaptchaSuccess(token) {
+            console.log("reCAPTCHA vérifié avec succès. Jeton :", token);
+        }
     </script>
 {% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <div class="content-wrapper">
+        <div class="container-xxl flex-grow-1 container-p-y">
+            <h4 class="fw-bold py-3 mb-4">
+                <span class="text-muted fw-light">Sponsors /</span> Détails du Sponsor
+            </h4>
+
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="card-title mb-0">Sponsor #{{ sponsor.idSponsor }}</h5>
+                    <div>
+                        <a href="{{ path('sponsor_edit', {'id': sponsor.idSponsor}) }}" class="btn btn-sm btn-primary">Modifier</a>
+                        <a href="{{ path('sponsor_main') }}" class="btn btn-sm btn-secondary">Retour à la liste</a>
+
+                        {# Remove Button #}
+                        <form method="post" action="{{ path('sponsor_delete', {'id': sponsor.idSponsor}) }}" style="display:inline;" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce sponsor ?');">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ sponsor.idSponsor) }}">
+                            <button class="btn btn-sm btn-danger" type="submit">
+                                Supprimer
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6>Nom</h6>
+                            <p>{{ sponsor.nom }}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>Contact</h6>
+                            <p>{{ sponsor.contact }}</p>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <h6>Pack</h6>
+                            <p>{{ sponsor.pack }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -4,10 +4,8 @@ namespace App\Entity;
 
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-
 use App\Repository\UserRepository;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: 'user')]
@@ -16,8 +14,79 @@ class User
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private ?int $id_user = null;
+    private ?int $id_user  =null;
 
+    #[ORM\Column(type: 'string', nullable: false)]
+    #[Assert\NotBlank(message: "Le nom est obligatoire")]
+    #[Assert\Regex(
+        pattern: "/^[a-zA-ZÀ-ÿ\s\-']+$/",
+        message: "Le nom ne doit contenir que des lettres"
+    )]
+    private ?string $nom = null;
+
+    #[ORM\Column(type: 'string', nullable: false)]
+    #[Assert\NotBlank(message: "Le prénom est obligatoire")]
+    #[Assert\Regex(
+        pattern: "/^[a-zA-ZÀ-ÿ\s\-']+$/",
+        message: "Le prénom ne doit contenir que des lettres"
+    )]
+    private ?string $prenom = null;
+
+    #[ORM\Column(type: 'string', nullable: false)]
+    #[Assert\NotBlank(message: "L'email est obligatoire")]
+    #[Assert\Email(message: "L'email doit être valide")]
+    private ?string $email = null;
+
+    #[ORM\Column(type: 'string', nullable: false)]
+    #[Assert\NotBlank(message: "Le mot de passe est obligatoire")]
+    #[Assert\Length(
+        min: 8,
+        minMessage: "Le mot de passe doit contenir au moins 8 caractères"
+    )]
+    #[Assert\Regex(
+        pattern: "/^(?=.*[a-zA-Z])(?=.*\d)/",
+        message: "Le mot de passe doit contenir des lettres et des chiffres"
+    )]
+    private ?string $password = null;
+
+    #[ORM\Column(type: 'string', length: 8, nullable: false)]
+    #[Assert\NotBlank(message: "Le téléphone est obligatoire")]
+    #[Assert\Regex(
+        pattern: "/^\d{8}$/",
+        message: "Le téléphone doit contenir exactement 8 chiffres"
+    )]
+    private ?string $num_telephone = null;
+
+    #[ORM\Column(type: 'date', nullable: false)]
+    #[Assert\NotBlank(message: "La date de naissance est obligatoire")]
+    #[Assert\LessThanOrEqual(
+        value: "today",
+        message: "La date de naissance ne peut pas être dans le futur"
+    )]
+    #[Assert\LessThan(
+        value: "-18 years",
+        message: "L'utilisateur doit avoir au moins 18 ans"
+    )]
+    private ?\DateTimeInterface $date_de_naissance = null;
+
+    #[ORM\Column(type: 'string', nullable: false)]
+    #[Assert\NotBlank(message: "Le genre est obligatoire")]
+    #[Assert\Choice(
+        choices: ['Homme', 'Femme'],
+        message: "Le genre doit être Homme ou Femme"
+    )]
+    private ?string $genre = null;
+
+    #[ORM\Column(type: 'string', nullable: false)]
+    #[Assert\NotBlank(message: "Le rôle est obligatoire")]
+    private string $role = 'Utilisateur';
+    #[ORM\Column(type: 'string', nullable: true)]
+    private ?string $image = null;
+
+    #[ORM\Column(type: 'integer', nullable: false)]
+    private ?int $reset_code = 0;
+
+    // Getters et Setters (inchangés, sauf pour num_telephone)
     public function getId_user(): ?int
     {
         return $this->id_user;
@@ -28,9 +97,6 @@ class User
         $this->id_user = $id_user;
         return $this;
     }
-
-    #[ORM\Column(type: 'string', nullable: false)]
-    private ?string $nom = null;
 
     public function getNom(): ?string
     {
@@ -43,9 +109,6 @@ class User
         return $this;
     }
 
-    #[ORM\Column(type: 'string', nullable: false)]
-    private ?string $prenom = null;
-
     public function getPrenom(): ?string
     {
         return $this->prenom;
@@ -56,9 +119,6 @@ class User
         $this->prenom = $prenom;
         return $this;
     }
-
-    #[ORM\Column(type: 'string', nullable: false)]
-    private ?string $email = null;
 
     public function getEmail(): ?string
     {
@@ -71,9 +131,6 @@ class User
         return $this;
     }
 
-    #[ORM\Column(type: 'string', nullable: false)]
-    private ?string $password = null;
-
     public function getPassword(): ?string
     {
         return $this->password;
@@ -85,22 +142,16 @@ class User
         return $this;
     }
 
-    #[ORM\Column(type: 'integer', nullable: false)]
-    private ?int $num_telephone = null;
-
-    public function getNum_telephone(): ?int
+    public function getNum_telephone(): ?string
     {
         return $this->num_telephone;
     }
 
-    public function setNum_telephone(int $num_telephone): self
+    public function setNum_telephone(string $num_telephone): self
     {
         $this->num_telephone = $num_telephone;
         return $this;
     }
-
-    #[ORM\Column(type: 'date', nullable: false)]
-    private ?\DateTimeInterface $date_de_naissance = null;
 
     public function getDate_de_naissance(): ?\DateTimeInterface
     {
@@ -113,9 +164,6 @@ class User
         return $this;
     }
 
-    #[ORM\Column(type: 'string', nullable: false)]
-    private ?string $genre = null;
-
     public function getGenre(): ?string
     {
         return $this->genre;
@@ -126,9 +174,6 @@ class User
         $this->genre = $genre;
         return $this;
     }
-
-    #[ORM\Column(type: 'string', nullable: false)]
-    private ?string $role = null;
 
     public function getRole(): ?string
     {
@@ -141,22 +186,16 @@ class User
         return $this;
     }
 
-    #[ORM\Column(type: 'string', nullable: false)]
-    private ?string $image = null;
-
     public function getImage(): ?string
     {
         return $this->image;
     }
 
-    public function setImage(string $image): self
+    public function setImage(?string $image): self
     {
         $this->image = $image;
         return $this;
     }
-
-    #[ORM\Column(type: 'integer', nullable: false)]
-    private ?int $reset_code = 0;
 
     public function getReset_code(): ?int
     {
@@ -174,15 +213,14 @@ class User
         return $this->id_user;
     }
 
-    public function getNumTelephone(): ?int
+    public function getNumTelephone(): ?string
     {
         return $this->num_telephone;
     }
 
-    public function setNumTelephone(int $num_telephone): static
+    public function setNumTelephone(string $num_telephone): static
     {
         $this->num_telephone = $num_telephone;
-
         return $this;
     }
 
@@ -194,7 +232,6 @@ class User
     public function setDateDeNaissance(\DateTimeInterface $date_de_naissance): static
     {
         $this->date_de_naissance = $date_de_naissance;
-
         return $this;
     }
 
@@ -206,8 +243,6 @@ class User
     public function setResetCode(int $reset_code): static
     {
         $this->reset_code = $reset_code;
-
         return $this;
     }
-
 }

@@ -1,0 +1,118 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails du Matériel #{{ materiel.id }}{% endblock %}
+
+{% block content %}
+<div class="content-wrapper">
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <h4 class="fw-bold py-3 mb-4">
+            <span class="text-muted fw-light">Matériel /</span> Détails du Matériel
+        </h4>
+
+        <!-- Filled Tabs -->
+        <div class="nav-align-top mb-4">
+            <ul class="nav nav-tabs nav-fill" role="tablist">
+                <li class="nav-item">
+                    <button
+                        type="button"
+                        class="nav-link active"
+                        role="tab"
+                        data-bs-toggle="tab"
+                        data-bs-target="#navs-justified-materiel"
+                        aria-controls="navs-justified-materiel"
+                        aria-selected="true"
+                    >
+                        <i class="tf-icons bx bx-box"></i> Matériel
+                    </button>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <!-- Matériel Tab -->
+                <div class="tab-pane fade show active" id="navs-justified-materiel" role="tabpanel">
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5 class="card-title mb-0">Matériel #{{ materiel.id }}</h5>
+                            <div>
+                                <a href="{{ path('app_materiel_edit', {'id': materiel.id}) }}" class="btn btn-sm btn-primary">Modifier</a>
+                                <a href="{{ path('app_materiel_index') }}" class="btn btn-sm btn-secondary">Retour</a>
+                                <form method="post" action="{{ path('app_materiel_delete', {'id': materiel.id}) }}" style="display:inline;" onsubmit="return confirm('Confirmer la suppression?');">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ materiel.id) }}">
+                                    <button class="btn btn-sm btn-danger" type="submit">Supprimer</button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            {% if materiel.image %}
+                                <div class="mb-3 text-center">
+                                    <img src="{{ asset('uploads/materiels/' ~ materiel.image) }}" alt="Image du matériel" class="img-fluid rounded" style="max-width: 200px;">
+                                </div>
+                            {% endif %}
+
+                            <h5>Informations Générales</h5>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6>Nom</h6>
+                                    <p>{{ materiel.nom }}</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6>Type</h6>
+                                    <p>
+                                        <span class="badge bg-{{ 
+    materiel.type == 'EQUIPEMENT_SPORTIF' ? 'primary' : 
+    (materiel.type == 'ACCESSOIRE_ENTRAINEMENT' ? 'info' :
+    (materiel.type == 'MATERIEL_JEU' ? 'success' : 
+    (materiel.type == 'TENUE_SPORTIVE' ? 'warning' : 
+    (materiel.type == 'EQUIPEMENT_PROTECTION' ? 'danger' : 
+    (materiel.type == 'INFRASTRUCTURE' ? 'dark' : 'secondary'))))) 
+}}">
+    {{ materiel.type|default('Non spécifié') }}
+</span>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-6">
+                                    <h6>Quantité</h6>
+                                    <p>{{ materiel.quantite|default('Non spécifié') }}</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6>État</h6>
+                                    <p>
+                                        <span class="badge bg-{{ 
+                                            materiel.etat == 'NEUF' ? 'primary' : 
+                                            (materiel.etat == 'BON' ? 'success' :
+                                            (materiel.etat == 'USE' ? 'warning' : 
+                                            (materiel.etat == 'DEFAUT' ? 'danger' : 'secondary'))) 
+                                        }}">
+                                            {{ materiel.etat|default('Non spécifié') }}
+                                        </span>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-6">
+                                    <h6>Prix Unitaire</h6>
+                                    <p>{{ materiel.prix ? (materiel.prix|number_format(2, '.', ',')) ~ ' €' : 'Non spécifié' }}</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6>Fournisseur</h6>
+                                    <p>
+                                        {% if materiel.fournisseur %}
+                                            <a href="{{ path('app_fournisseur_show', {'id_fournisseur': materiel.fournisseur.idFournisseur}) }}">
+                                                {{ materiel.fournisseur.nom }}
+                                            </a>
+                                        {% else %}
+                                            <span class="text-muted">Aucun fournisseur associé</span>
+                                        {% endif %}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- / Filled Tabs -->
+    </div>
+</div>
+{% endblock %}

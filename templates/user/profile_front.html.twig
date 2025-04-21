@@ -1,0 +1,81 @@
+{% extends 'baseM.html.twig' %}
+
+{% block title %}My Profile - Fitness{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        .profile-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 30px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .profile-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-bottom: 20px;
+        }
+        .profile-info {
+            margin-bottom: 20px;
+        }
+        .profile-info label {
+            font-weight: bold;
+            color: #333;
+            width: 150px;
+            display: inline-block;
+        }
+        .edit-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .edit-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="container-fluid py-5">
+        <div class="container">
+            <div class="profile-container">
+                <div class="profile-header">
+                    <h2>My Profile</h2>
+                    {% if user.image %}
+                        <img src="{{ asset('Uploads/users/' ~ user.image) }}" 
+                             class="profile-image" 
+                             alt="Profile Image">
+                    {% else %}
+                        <img src="{{ asset('images/default-profile.png') }}" 
+                             class="profile-image" 
+                             alt="Default Profile Image">
+                    {% endif %}
+                </div>
+                
+                <div class="profile-info">
+                    <p><label>Full Name:</label> {{ user.nom }} {{ user.prenom }}</p>
+                    <p><label>Email:</label> {{ user.email }}</p>
+                    <p><label>Role:</label> {{ user.role }}</p>
+                    <p><label>Telephone:</label> {{ user.num_telephone|default('Non défini') }}</p>
+                    <p><label>Gender:</label> {{ user.genre|default('Non défini') }}</p>
+                </div>
+
+                <div class="text-center">
+                    <a href="{{ path('app_user_edit_profile_front', {'id_user': user.id}) }}" class="edit-button">Edit Profile</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

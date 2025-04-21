@@ -34,4 +34,19 @@ class ClubRepository extends ServiceEntityRepository
             ->getQuery()
             ->getOneOrNullResult();
     }
+
+    public function findFilteredClubs(?string $nom): array
+    {
+        $qb = $this->createQueryBuilder('c');
+
+        if (!empty($nom)) {
+            $qb->andWhere('c.nom LIKE :nom')
+            ->setParameter('nom', '%' . $nom . '%');
+        }
+
+        return $qb->orderBy('c.nom', 'ASC')
+                ->getQuery()
+                ->getResult();
+    }
+
 }
