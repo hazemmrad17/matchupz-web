@@ -2,6 +2,64 @@
 
 {% block title %}Matchupz - Horaires{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .courses-item-inner {
+            position: relative; /* Positioning context for the GIF */
+        }
+        .live-gif {
+            position: absolute;
+            bottom: 10px; /* Distance from the bottom */
+            right: 10px; /* Distance from the right */
+            width: 80px; /* Adjust size as needed */
+            height: 80px;
+            z-index: 10; /* Ensure it’s above other content */
+        }
+        .hidden {
+            display: none; /* Hide cards that don’t match the filter */
+        }
+        .filter-container {
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+        .filter-container label {
+            color: #fff;
+            margin-right: 10px;
+            font-weight: 500;
+        }
+        .filter-container .dropdown-toggle {
+            color: #fff;
+            background-color:rgb(255, 55, 55); /* Primary color to match the theme */
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+        }
+        .filter-container .dropdown-toggle:hover {
+            background-color:rgb(200, 2, 2); /* Darker shade on hover */
+        }
+        .filter-container .dropdown-menu {
+            background-color: #fff;
+            border: 1px solid rgba(0,0,0,.15);
+            box-shadow: 0 0.5rem 1rem rgba(0,0,0,.175);
+            border-radius: 0.25rem;
+            min-width: 150px;
+        }
+        .filter-container .dropdown-item {
+            color: #212529;
+            padding: 0.25rem 1.5rem;
+            font-size: 1rem;
+        }
+        .filter-container .dropdown-item:hover {
+            background-color: #f8f9fa;
+            color: #007bff; /* Primary color on hover */
+        }
+    </style>
+{% endblock %}
+
 {% block body %}
     <!-- Header Start -->
     <div class="container-fluid bg-breadcrumb">
@@ -26,13 +84,44 @@
                 </p>
             </div>
 
+            <!-- Define valid sport types -->
+            {% set validSportTypes = ['Football', 'Basketball', 'Tennis', 'Handball', 'Volleyball', 'Rugby', 'Paddle'] %}
+
             <!-- Ongoing Matches -->
             <div class="mb-5">
                 <h3 class="text-primary mb-4">Matchs en cours</h3>
+                {# Extract all sport types from ongoingSchedules #}
+                {% set allOngoingSportTypes = ongoingSchedules|map(schedule => schedule.matchEntity and schedule.matchEntity.sportType and schedule.matchEntity.sportType in validSportTypes ? schedule.matchEntity.sportType : 'Unknown')|filter(v => v != 'Unknown')|sort %}
+                {# Manually remove duplicates #}
+                {% set ongoingSportTypes = [] %}
+                {% for sportType in allOngoingSportTypes %}
+                    {% if sportType not in ongoingSportTypes %}
+                        {% set ongoingSportTypes = ongoingSportTypes|merge([sportType]) %}
+                    {% endif %}
+                {% endfor %}
+                {% if ongoingSportTypes|length > 0 %}
+                    <div class="filter-container">
+                        <label for="ongoing-sport-filter">Filtrer par sport :</label>
+                        <div class="dropdown">
+                            <button class="btn dropdown-toggle" type="button" id="ongoing-sport-filter" data-bs-toggle="dropdown" aria-expanded="false">
+                                Tous
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="ongoing-sport-filter">
+                                <li><a class="dropdown-item" href="#" data-value="all">Tous</a></li>
+                                {% for sportType in ongoingSportTypes %}
+                                    <li><a class="dropdown-item" href="#" data-value="{{ sportType }}">{{ sportType }}</a></li>
+                                {% endfor %}
+                                {% if ongoingSchedules|map(schedule => schedule.matchEntity and schedule.matchEntity.sportType and schedule.matchEntity.sportType in validSportTypes ? schedule.matchEntity.sportType : 'Unknown')|filter(v => v == 'Unknown')|length > 0 %}
+                                    <li><a class="dropdown-item" href="#" data-value="Unknown">Inconnu</a></li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+                {% endif %}
                 {% if ongoingSchedules|length > 0 %}
-                    <div class="row gy-4 gx-0 justify-content-center">
+                    <div class="row gy-4 gx-0 justify-content-center" id="ongoing-schedules">
                         {% for schedule in ongoingSchedules %}
-                            <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="{{ 0.2 + (loop.index0 % 3) * 0.2 }}s">
+                            <div class="col-md-6 col-lg-4 wow fadeInUp schedule-card" data-wow-delay="{{ 0.2 + (loop.index0 % 3) * 0.2 }}s" data-sport-type="{{ schedule.matchEntity and schedule.matchEntity.sportType and schedule.matchEntity.sportType in validSportTypes ? schedule.matchEntity.sportType : 'Unknown' }}">
                                 <div class="courses-item">
                                     <div class="courses-item-inner p-4">
                                         <div class="d-flex justify-content-between mb-4">
@@ -57,11 +146,14 @@
                                             <strong>Lieu :</strong> {{ schedule.espaceSportif ? schedule.espaceSportif.nomEspace : 'N/A' }}<br>
                                             {% if schedule.matchEntity and schedule.matchEntity.sportType %}
                                                 <strong>Sport :</strong> {{ schedule.matchEntity.sportType }}
+                                            {% else %}
+                                                <strong>Sport :</strong> Inconnu
                                             {% endif %}
                                         </p>
                                         <a href="{{ path('schedule_showF', {'idSchedule': schedule.idSchedule}) }}" class="btn btn-primary py-2 px-4">
                                             <span>Voir les détails</span>
                                         </a>
+                                        <img src="{{ asset('img/live.gif') }}" alt="Live Indicator" class="live-gif">
                                     </div>
                                 </div>
                             </div>
@@ -75,49 +167,149 @@
             <!-- All Schedules -->
             <div>
                 <h3 class="text-primary mb-4">Tous les horaires</h3>
-                <div class="row gy-4 gx-0 justify-content-center">
+                {% set ongoingIds = ongoingSchedules|map(schedule => schedule.idSchedule)|join(',') %}
+                {# Extract all sport types from schedules #}
+                {% set allSportTypesRaw = schedules|map(schedule => schedule.matchEntity and schedule.matchEntity.sportType and schedule.matchEntity.sportType in validSportTypes ? schedule.matchEntity.sportType : 'Unknown')|filter(v => v != 'Unknown')|sort %}
+                {# Manually remove duplicates #}
+                {% set allSportTypes = [] %}
+                {% for sportType in allSportTypesRaw %}
+                    {% if sportType not in allSportTypes %}
+                        {% set allSportTypes = allSportTypes|merge([sportType]) %}
+                    {% endif %}
+                {% endfor %}
+                {% if allSportTypes|length > 0 %}
+                    <div class="filter-container">
+                        <label for="all-sport-filter">Filtrer par sport :</label>
+                        <div class="dropdown">
+                            <button class="btn dropdown-toggle" type="button" id="all-sport-filter" data-bs-toggle="dropdown" aria-expanded="false">
+                                Tous
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="all-sport-filter">
+                                <li><a class="dropdown-item" href="#" data-value="all">Tous</a></li>
+                                {% for sportType in allSportTypes %}
+                                    <li><a class="dropdown-item" href="#" data-value="{{ sportType }}">{{ sportType }}</a></li>
+                                {% endfor %}
+                                {% if schedules|map(schedule => schedule.matchEntity and schedule.matchEntity.sportType and schedule.matchEntity.sportType in validSportTypes ? schedule.matchEntity.sportType : 'Unknown')|filter(v => v == 'Unknown')|length > 0 %}
+                                    <li><a class="dropdown-item" href="#" data-value="Unknown">Inconnu</a></li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+                {% endif %}
+                {% set hasNonOngoingSchedules = false %}
+                <div class="row gy-4 gx-0 justify-content-center" id="all-schedules">
                     {% for schedule in schedules %}
-                        <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="{{ 0.2 + (loop.index0 % 3) * 0.2 }}s">
-                            <div class="courses-item">
-                                <div class="courses-item-inner p-4">
-                                    <div class="d-flex justify-content-between mb-4">
-                                        <div class="courses-icon-img p-3">
-                                            <img src="{{ asset('img/' ~ (schedule.matchEntity and schedule.matchEntity.sportType ? schedule.matchEntity.sportType : 'default') ~ '.png') }}" class="img-fluid" alt="{{ schedule.matchEntity.sportType ?? 'Default' }} icon">
-                                        </div>
-                                        <div class="data-info d-flex flex-column">
-                                            <div class="courses-date">
-                                                <p class="mb-1">Date : {{ schedule.dateMatch|date('Y-m-d') }}</p>
-                                                <p class="mb-0">Heure : {{ schedule.startTime|date('H:i') }} - {{ schedule.endTime|date('H:i') }}</p>
+                        {% if schedule.idSchedule not in ongoingIds %}
+                            {% set hasNonOngoingSchedules = true %}
+                            <div class="col-md-6 col-lg-4 wow fadeInUp schedule-card" data-wow-delay="{{ 0.2 + (loop.index0 % 3) * 0.2 }}s" data-sport-type="{{ schedule.matchEntity and schedule.matchEntity.sportType and schedule.matchEntity.sportType in validSportTypes ? schedule.matchEntity.sportType : 'Unknown' }}">
+                                <div class="courses-item">
+                                    <div class="courses-item-inner p-4">
+                                        <div class="d-flex justify-content-between mb-4">
+                                            <div class="courses-icon-img p-3">
+                                                <img src="{{ asset('img/' ~ (schedule.matchEntity and schedule.matchEntity.sportType ? schedule.matchEntity.sportType : 'default') ~ '.png') }}" class="img-fluid" alt="{{ schedule.matchEntity.sportType ?? 'Default' }} icon">
+                                            </div>
+                                            <div class="data-info d-flex flex-column">
+                                                <div class="courses-date">
+                                                    <p class="mb-1">Date : {{ schedule.dateMatch|date('Y-m-d') }}</p>
+                                                    <p class="mb-0">Heure : {{ schedule.startTime|date('H:i') }} - {{ schedule.endTime|date('H:i') }}</p>
+                                                </div>
                                             </div>
                                         </div>
+                                        <a href="{{ path('schedule_showF', {'idSchedule': schedule.idSchedule}) }}" class="d-inline-block h4 mb-3">
+                                            {% if schedule.matchEntity %}
+                                                {{ schedule.matchEntity.c1 }} contre {{ schedule.matchEntity.c2 }}
+                                            {% else %}
+                                                Match à déterminer
+                                            {% endif %}
+                                        </a>
+                                        <p class="mb-4">
+                                            <strong>Lieu :</strong> {{ schedule.espaceSportif ? schedule.espaceSportif.nomEspace : 'N/A' }}<br>
+                                            {% if schedule.matchEntity and schedule.matchEntity.sportType %}
+                                                <strong>Sport :</strong> {{ schedule.matchEntity.sportType }}
+                                            {% else %}
+                                                <strong>Sport :</strong> Inconnu
+                                            {% endif %}
+                                        </p>
+                                        <a href="{{ path('schedule_showF', {'idSchedule': schedule.idSchedule}) }}" class="btn btn-primary py-2 px-4">
+                                            <span>Voir les détails</span>
+                                        </a>
                                     </div>
-                                    <a href="{{ path('schedule_showF', {'idSchedule': schedule.idSchedule}) }}" class="d-inline-block h4 mb-3">
-                                        {% if schedule.matchEntity %}
-                                            {{ schedule.matchEntity.c1 }} contre {{ schedule.matchEntity.c2 }}
-                                        {% else %}
-                                            Match à déterminer
-                                        {% endif %}
-                                    </a>
-                                    <p class="mb-4">
-                                        <strong>Lieu :</strong> {{ schedule.espaceSportif ? schedule.espaceSportif.nomEspace : 'N/A' }}<br>
-                                        {% if schedule.matchEntity and schedule.matchEntity.sportType %}
-                                            <strong>Sport :</strong> {{ schedule.matchEntity.sportType }}
-                                        {% endif %}
-                                    </p>
-                                    <a href="{{ path('schedule_showF', {'idSchedule': schedule.idSchedule}) }}" class="btn btn-primary py-2 px-4">
-                                        <span>Voir les détails</span>
-                                    </a>
                                 </div>
                             </div>
-                        </div>
-                    {% else %}
-                        <div class="col-12 text-center">
-                            <p class="text-white">Aucun horaire disponible pour le moment.</p>
-                        </div>
+                        {% endif %}
                     {% endfor %}
                 </div>
+                {% if not hasNonOngoingSchedules %}
+                    <div class="col-12 text-center">
+                        <p class="text-white">Aucun horaire disponible pour le moment (hors matchs en cours).</p>
+                    </div>
+                {% endif %}
             </div>
         </div>
     </div>
     <!-- Schedules End -->
+
+    <!-- JavaScript for Filtering -->
+    {% block javascripts %}
+        {{ parent() }}
+        <script>
+            // Filter for Ongoing Matches
+            document.querySelectorAll('#ongoing-sport-filter + .dropdown-menu .dropdown-item').forEach(item => {
+                item.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const selectedSport = this.getAttribute('data-value');
+                    const dropdownButton = document.getElementById('ongoing-sport-filter');
+                    dropdownButton.textContent = this.textContent; // Update button text to selected option
+
+                    const cards = document.querySelectorAll('#ongoing-schedules .schedule-card');
+                    cards.forEach(card => {
+                        const sportType = card.getAttribute('data-sport-type');
+                        if (selectedSport === 'all' || sportType === selectedSport) {
+                            card.classList.remove('hidden');
+                        } else {
+                            card.classList.add('hidden');
+                        }
+                    });
+
+                    // Move the selected sport to the top of the dropdown
+                    const dropdownMenu = this.closest('.dropdown-menu');
+                    const items = Array.from(dropdownMenu.querySelectorAll('.dropdown-item'));
+                    const selectedItem = items.find(item => item.getAttribute('data-value') === selectedSport);
+                    if (selectedItem && selectedSport !== 'all') {
+                        dropdownMenu.removeChild(selectedItem);
+                        dropdownMenu.insertBefore(selectedItem, items[1]); // After "Tous"
+                    }
+                });
+            });
+
+            // Filter for All Schedules
+            document.querySelectorAll('#all-sport-filter + .dropdown-menu .dropdown-item').forEach(item => {
+                item.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const selectedSport = this.getAttribute('data-value');
+                    const dropdownButton = document.getElementById('all-sport-filter');
+                    dropdownButton.textContent = this.textContent; // Update button text to selected option
+
+                    const cards = document.querySelectorAll('#all-schedules .schedule-card');
+                    cards.forEach(card => {
+                        const sportType = card.getAttribute('data-sport-type');
+                        if (selectedSport === 'all' || sportType === selectedSport) {
+                            card.classList.remove('hidden');
+                        } else {
+                            card.classList.add('hidden');
+                        }
+                    });
+
+                    // Move the selected sport to the top of the dropdown
+                    const dropdownMenu = this.closest('.dropdown-menu');
+                    const items = Array.from(dropdownMenu.querySelectorAll('.dropdown-item'));
+                    const selectedItem = items.find(item => item.getAttribute('data-value') === selectedSport);
+                    if (selectedItem && selectedSport !== 'all') {
+                        dropdownMenu.removeChild(selectedItem);
+                        dropdownMenu.insertBefore(selectedItem, items[1]); // After "Tous"
+                    }
+                });
+            });
+        </script>
+    {% endblock %}
 {% endblock %}

@@ -1,6 +1,5 @@
-
 {% block body %}
-    <h4 class="fw-bold py-3 mb-4 text-center">Statesiques des plannings</h4>
+    <h4 class="fw-bold py-3 mb-4 text-center">Statistiques des plannings</h4>
 
     <!-- Summary Cards -->
     <div class="row justify-content-center mb-4">
@@ -30,7 +29,7 @@
                         </div>
                     </div>
                     <span class="fw-semibold d-block mb-1">Ongoing Matches</span>
-                    <h3 class="card-title mb-2">{{ ongoingMatches }}</h3>
+                    <h3 class="card-title mb-2">{{ ongoingMatches|length }}</h3>
                     <small class="text-warning fw-semibold">Currently Active</small>
                 </div>
             </div>

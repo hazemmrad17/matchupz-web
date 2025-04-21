@@ -30,6 +30,7 @@ class MatchType extends AbstractType
                     'Tennis' => 'Tennis',
                     'Volleyball' => 'Volleyball',
                     'Rugby' => 'Rugby',
+                    'Paddle' => 'Paddle',
                 ],
                 'placeholder' => 'Sélectionnez un sport', // Optional: Adds a default "Select a sport" option
             ])

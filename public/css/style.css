@@ -141,6 +141,66 @@
     background: var(--bs-primary);
 }
 
+/* Gold Button */
+.btn.btn-gold {
+    color: var(--bs-white);
+    background-color: #FFD700; /* Gold */
+    border: none;
+    transform: skew(18deg);
+    transition: 0.5s;
+}
+
+.btn.btn-gold span,
+.btn.btn-gold i {
+    display: inline-block;
+    transform: skew(-18deg);
+}
+
+.btn.btn-gold:hover {
+    background: var(--bs-white);
+    color: var(--bs-dark);
+}
+
+/* Sky Blue Button */
+.btn.btn-skyblue {
+    color: var(--bs-white);
+    background-color: #87CEEB; /* Sky Blue */
+    border: none;
+    transform: skew(18deg);
+    transition: 0.5s;
+}
+
+.btn.btn-skyblue span,
+.btn.btn-skyblue i {
+    display: inline-block;
+    transform: skew(-18deg);
+}
+
+.btn.btn-skyblue:hover {
+    background: var(--bs-white);
+    color: var(--bs-dark);
+}
+
+/* Green Button */
+.btn.btn-green {
+    color: var(--bs-white);
+    background-color: #28A745; /* Green */
+    border: none;
+    transform: skew(18deg);
+    transition: 0.5s;
+}
+
+.btn.btn-green span,
+.btn.btn-green i {
+    display: inline-block;
+    transform: skew(-18deg);
+}
+
+.btn.btn-green:hover {
+    background: var(--bs-white);
+    color: var(--bs-dark);
+}
+
 /*** Navbar Start ***/
 .header-top {
     height: 100%;

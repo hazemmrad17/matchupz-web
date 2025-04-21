@@ -18,6 +18,13 @@ use Knp\Component\Pager\PaginatorInterface;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Psr\Log\LoggerInterface;
+use Google_Client;
+use Google_Service_Calendar;
+use Google_Service_Calendar_Event;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+
 
 
 #[Route('/schedule')]
@@ -86,9 +93,11 @@ public function mainF(ScheduleRepository $scheduleRepository): Response
     ]);
 }
 #[Route('/main', name: 'schedule_main', methods: ['GET'])]
-public function main(ScheduleRepository $scheduleRepository): Response
+public function main(ScheduleRepository $scheduleRepository, LoggerInterface $logger): Response
 {
     $now = new \DateTime('now');
+    $nowTimestamp = $now->getTimestamp();
+    $logger->info('Current time: ' . $now->format('Y-m-d H:i:s') . ' (Timestamp: ' . $nowTimestamp . ')');
 
     // Fetch all schedules with related entities
     $allSchedules = $scheduleRepository->createQueryBuilder('s')
@@ -99,24 +108,53 @@ public function main(ScheduleRepository $scheduleRepository): Response
         ->getQuery()
         ->getResult();
 
-    // Ongoing matches
-    $ongoingMatches = array_filter($allSchedules, function (Schedule $schedule) use ($now) {
-        $startDateTime = (clone $schedule->getDateMatch())->setTime(
-            (int) $schedule->getStartTime()->format('H'),
-            (int) $schedule->getStartTime()->format('i')
-        );
-        $endDateTime = (clone $schedule->getDateMatch())->setTime(
-            (int) $schedule->getEndTime()->format('H'),
-            (int) $schedule->getEndTime()->format('i')
-        );
-        return $now >= $startDateTime && $now <= $endDateTime;
+    // Ongoing matches (align with Twig logic)
+    $ongoingMatches = array_filter($allSchedules, function (Schedule $schedule) use ($now, $logger) {
+        try {
+            $startDateTime = (clone $schedule->getDateMatch())->setTime(
+                (int) $schedule->getStartTime()->format('H'),
+                (int) $schedule->getStartTime()->format('i'),
+                (int) $schedule->getStartTime()->format('s') // Include seconds
+            );
+            $endDateTime = (clone $schedule->getDateMatch())->setTime(
+                (int) $schedule->getEndTime()->format('H'),
+                (int) $schedule->getEndTime()->format('i'),
+                (int) $schedule->getEndTime()->format('s') // Include seconds
+            );
+
+            // Convert to timestamps for comparison (like Twig)
+            $startTimestamp = $startDateTime->getTimestamp();
+            $endTimestamp = $endDateTime->getTimestamp();
+            $nowTimestamp = $now->getTimestamp();
+
+            // Debug logging
+            $logger->info(sprintf(
+                'Schedule ID %d: dateMatch=%s, startTime=%s, endTime=%s, startTimestamp=%d, endTimestamp=%d, nowTimestamp=%d, isOngoing=%s',
+                $schedule->getIdSchedule(),
+                $schedule->getDateMatch()->format('Y-m-d'),
+                $startDateTime->format('H:i:s'),
+                $endDateTime->format('H:i:s'),
+                $startTimestamp,
+                $endTimestamp,
+                $nowTimestamp,
+                ($nowTimestamp >= $startTimestamp && $nowTimestamp <= $endTimestamp) ? 'true' : 'false'
+            ));
+
+            return $nowTimestamp >= $startTimestamp && $nowTimestamp <= $endTimestamp;
+        } catch (\Exception $e) {
+            $logger->warning('Error processing schedule ID ' . $schedule->getIdSchedule() . ': ' . $e->getMessage());
+            return false;
+        }
     });
+
+    $logger->info('Ongoing matches count: ' . count($ongoingMatches));
 
     // Completed matches
     $completedMatches = array_filter($allSchedules, function (Schedule $schedule) use ($now) {
         $endDateTime = (clone $schedule->getDateMatch())->setTime(
             (int) $schedule->getEndTime()->format('H'),
-            (int) $schedule->getEndTime()->format('i')
+            (int) $schedule->getEndTime()->format('i'),
+            (int) $schedule->getEndTime()->format('s') // Include seconds here too
         );
         return $now > $endDateTime;
     });
@@ -138,73 +176,99 @@ public function main(ScheduleRepository $scheduleRepository): Response
     return $this->render('schedule/main.html.twig', [
         'schedules' => $allSchedules,
         'totalSchedules' => count($allSchedules),
-        'ongoingMatches' => count($ongoingMatches),
+        'ongoingMatches' => $ongoingMatches,
         'completedMatches' => count($completedMatches),
         'sportDistribution' => $sportDistribution,
         'venueDistribution' => $venueDistribution,
     ]);
 }
+#[Route('/statistics', name: 'schedule_statistics', methods: ['GET'])]
+public function statistics(ScheduleRepository $scheduleRepository, LoggerInterface $logger): Response
+{
+    $now = new \DateTime('now');
+    $nowTimestamp = $now->getTimestamp();
+    $logger->info('Statistics - Current time: ' . $now->format('Y-m-d H:i:s') . ' (Timestamp: ' . $nowTimestamp . ')');
 
-    #[Route('/statistics', name: 'schedule_statistics', methods: ['GET'])]
-    public function statistics(ScheduleRepository $scheduleRepository): Response
-    {
-        $now = new \DateTime('now');
-    
-        // Fetch all schedules with related entities
-        $allSchedules = $scheduleRepository->createQueryBuilder('s')
-            ->leftJoin('s.matchEntity', 'm')
-            ->leftJoin('s.espaceSportif', 'e')
-            ->addSelect('m')
-            ->addSelect('e')
-            ->getQuery()
-            ->getResult();
-    
-        // Ongoing matches
-        $ongoingMatches = array_filter($allSchedules, function (Schedule $schedule) use ($now) {
+    // Fetch all schedules with related entities
+    $allSchedules = $scheduleRepository->createQueryBuilder('s')
+        ->leftJoin('s.matchEntity', 'm')
+        ->leftJoin('s.espaceSportif', 'e')
+        ->addSelect('m')
+        ->addSelect('e')
+        ->getQuery()
+        ->getResult();
+
+    // Ongoing matches (using the same logic as main)
+    $ongoingMatches = array_filter($allSchedules, function (Schedule $schedule) use ($now, $nowTimestamp, $logger) {
+        try {
             $startDateTime = (clone $schedule->getDateMatch())->setTime(
                 (int) $schedule->getStartTime()->format('H'),
-                (int) $schedule->getStartTime()->format('i')
+                (int) $schedule->getStartTime()->format('i'),
+                (int) $schedule->getStartTime()->format('s')
             );
             $endDateTime = (clone $schedule->getDateMatch())->setTime(
                 (int) $schedule->getEndTime()->format('H'),
-                (int) $schedule->getEndTime()->format('i')
+                (int) $schedule->getEndTime()->format('i'),
+                (int) $schedule->getEndTime()->format('s')
             );
-            return $now >= $startDateTime && $now <= $endDateTime;
-        });
-    
-        // Completed matches
-        $completedMatches = array_filter($allSchedules, function (Schedule $schedule) use ($now) {
-            $endDateTime = (clone $schedule->getDateMatch())->setTime(
-                (int) $schedule->getEndTime()->format('H'),
-                (int) $schedule->getEndTime()->format('i')
-            );
-            return $now > $endDateTime;
-        });
-    
-        // Sport distribution (from MatchEntity::sportType)
-        $sportDistribution = [];
-        foreach ($allSchedules as $schedule) {
-            $sport = $schedule->getMatchEntity() ? $schedule->getMatchEntity()->getSportType() : 'Unknown';
-            $sportDistribution[$sport] = ($sportDistribution[$sport] ?? 0) + 1;
+
+            $startTimestamp = $startDateTime->getTimestamp();
+            $endTimestamp = $endDateTime->getTimestamp();
+
+            $logger->info(sprintf(
+                'Statistics - Schedule ID %d: dateMatch=%s, startTime=%s, endTime=%s, startTimestamp=%d, endTimestamp=%d, nowTimestamp=%d, isOngoing=%s',
+                $schedule->getIdSchedule(),
+                $schedule->getDateMatch()->format('Y-m-d'),
+                $startDateTime->format('H:i:s'),
+                $endDateTime->format('H:i:s'),
+                $startTimestamp,
+                $endTimestamp,
+                $nowTimestamp,
+                ($nowTimestamp >= $startTimestamp && $nowTimestamp <= $endTimestamp) ? 'true' : 'false'
+            ));
+
+            return $nowTimestamp >= $startTimestamp && $nowTimestamp <= $endTimestamp;
+        } catch (\Exception $e) {
+            $logger->warning('Statistics - Error processing schedule ID ' . $schedule->getIdSchedule() . ': ' . $e->getMessage());
+            return false;
         }
-    
-        // Venue distribution (from Espacesportif::nomEspace)
-        $venueDistribution = [];
-        foreach ($allSchedules as $schedule) {
-            $venue = $schedule->getEspaceSportif() ? $schedule->getEspaceSportif()->getNomEspace() : 'N/A';
-            $venueDistribution[$venue] = ($venueDistribution[$venue] ?? 0) + 1;
-        }
-    
-        return $this->render('schedule/statistics.html.twig', [
-            'totalSchedules' => count($allSchedules),
-            'ongoingMatches' => count($ongoingMatches),
-            'completedMatches' => count($completedMatches),
-            'sportDistribution' => $sportDistribution,
-            'venueDistribution' => $venueDistribution,
-            'allSchedules' => $allSchedules,
-        ]);
+    });
+
+    $logger->info('Statistics - Ongoing matches count: ' . count($ongoingMatches));
+
+    // Completed matches
+    $completedMatches = array_filter($allSchedules, function (Schedule $schedule) use ($now) {
+        $endDateTime = (clone $schedule->getDateMatch())->setTime(
+            (int) $schedule->getEndTime()->format('H'),
+            (int) $schedule->getEndTime()->format('i'),
+            (int) $schedule->getEndTime()->format('s')
+        );
+        return $now > $endDateTime;
+    });
+
+    // Sport distribution (from MatchEntity::sportType)
+    $sportDistribution = [];
+    foreach ($allSchedules as $schedule) {
+        $sport = $schedule->getMatchEntity() ? $schedule->getMatchEntity()->getSportType() : 'Unknown';
+        $sportDistribution[$sport] = ($sportDistribution[$sport] ?? 0) + 1;
     }
 
+    // Venue distribution (from Espacesportif::nomEspace)
+    $venueDistribution = [];
+    foreach ($allSchedules as $schedule) {
+        $venue = $schedule->getEspaceSportif() ? $schedule->getEspaceSportif()->getNomEspace() : 'N/A';
+        $venueDistribution[$venue] = ($venueDistribution[$venue] ?? 0) + 1;
+    }
+
+    return $this->render('schedule/statistics.html.twig', [
+        'totalSchedules' => count($allSchedules),
+        'ongoingMatches' => $ongoingMatches,
+        'completedMatches' => count($completedMatches),
+        'sportDistribution' => $sportDistribution,
+        'venueDistribution' => $venueDistribution,
+        'allSchedules' => $allSchedules,
+    ]);
+}
     #[Route('/search', name: 'schedule_search', methods: ['GET'])]
     public function search(Request $request, ScheduleRepository $scheduleRepository, CsrfTokenManagerInterface $csrfTokenManager): JsonResponse
     {
@@ -288,17 +352,35 @@ public function main(ScheduleRepository $scheduleRepository): Response
     }
     
     #[Route('/{idSchedule}/showF', name: 'schedule_showF', methods: ['GET'], requirements: ['idSchedule' => '\d+'])]
-    public function showF(int $idSchedule, ScheduleRepository $scheduleRepository): Response
+    public function showF(int $idSchedule, ScheduleRepository $scheduleRepository, LoggerInterface $logger): Response
     {
         $schedule = $scheduleRepository->find($idSchedule);
-
+    
         if (!$schedule) {
             $this->addFlash('error', "L'horaire demandé n'existe pas ou a été supprimé.");
             return $this->redirectToRoute('schedule_mainF');
         }
-
+    
+        $now = new \DateTime('now');
+        $startDateTime = (clone $schedule->getDateMatch())->setTime(
+            (int) $schedule->getStartTime()->format('H'),
+            (int) $schedule->getStartTime()->format('i'),
+            (int) $schedule->getStartTime()->format('s')
+        );
+    
+        $isFutureMatch = $now < $startDateTime;
+    
+        $logger->info(sprintf(
+            'Schedule ID %d: Checking if match is in the future - now=%s, startDateTime=%s, isFutureMatch=%s',
+            $schedule->getIdSchedule(),
+            $now->format('Y-m-d H:i:s'),
+            $startDateTime->format('Y-m-d H:i:s'),
+            $isFutureMatch ? 'true' : 'false'
+        ));
+    
         return $this->render('schedule/showF.html.twig', [
             'schedule' => $schedule,
+            'isFutureMatch' => $isFutureMatch,
         ]);
     }
 
@@ -528,4 +610,179 @@ public function exportExcel(ScheduleRepository $scheduleRepository): Response
     return $response;
 }
 
+#[Route('/{idSchedule}/add-to-google-calendar', name: 'schedule_add_to_google_calendar', methods: ['GET'], requirements: ['idSchedule' => '\d+'])]
+    public function addToGoogleCalendar(int $idSchedule, ScheduleRepository $scheduleRepository, LoggerInterface $logger, SessionInterface $session): Response
+    {
+        $schedule = $scheduleRepository->find($idSchedule);
+
+        if (!$schedule) {
+            $session->getFlashBag()->add('error', "L'horaire demandé n'existe pas ou a été supprimé.");
+            return $this->redirectToRoute('schedule_mainF');
+        }
+
+        $client = new Google_Client();
+        $client->setApplicationName('Matchupz');
+        $client->setScopes(Google_Service_Calendar::CALENDAR);
+        $client->setAuthConfig($this->getParameter('kernel.project_dir') . '/config/secrets/client_secret_409921140476-h8u0n3e36lkkoq46ku6785d6opilm0p6.apps.googleusercontent.com.json');
+        $client->setAccessType('offline');
+        $client->setPrompt('select_account consent');
+        $client->setRedirectUri('http://127.0.0.1:8000/schedule/google-callback');
+        $client->setState((string) $idSchedule);
+
+        // Log session contents for debugging
+        $logger->info('Session contents before processing: ' . json_encode($session->all()));
+
+        // Load previously authorized token from session, if it exists
+        $accessToken = $session->get('google_access_token');
+        $logger->info('Access token from session: ' . ($accessToken ? json_encode($accessToken) : 'null'));
+
+        if (!$accessToken) {
+            // Clear any stale session data to prevent loops
+            $session->remove('google_access_token');
+            $authUrl = $client->createAuthUrl();
+            $logger->info('No access token found, redirecting to Google for authentication: ' . $authUrl);
+            return new RedirectResponse($authUrl);
+        }
+
+        $client->setAccessToken($accessToken);
+
+        // Check if access token is expired and refresh if necessary
+        if ($client->isAccessTokenExpired()) {
+            $logger->info('Access token expired, attempting to refresh.');
+            if (isset($accessToken['refresh_token'])) {
+                try {
+                    $newAccessToken = $client->fetchAccessTokenWithRefreshToken($accessToken['refresh_token']);
+                    if (isset($newAccessToken['error'])) {
+                        $logger->error('Error refreshing access token: ' . json_encode($newAccessToken));
+                        $session->getFlashBag()->add('error', 'Erreur lors du rafraîchissement du jeton d\'accès : ' . $newAccessToken['error_description']);
+                        $session->remove('google_access_token');
+                        return $this->redirectToRoute('schedule_showF', ['idSchedule' => $schedule->getIdSchedule()]);
+                    }
+                    $session->set('google_access_token', $newAccessToken);
+                    $logger->info('Google Calendar access token refreshed and stored in session: ' . json_encode($newAccessToken));
+                } catch (\Exception $e) {
+                    $logger->error('Exception while refreshing access token: ' . $e->getMessage());
+                    $session->getFlashBag()->add('error', 'Erreur lors du rafraîchissement du jeton d\'accès : ' . $e->getMessage());
+                    $session->remove('google_access_token');
+                    $authUrl = $client->createAuthUrl();
+                    $logger->info('Redirecting to Google for re-authentication: ' . $authUrl);
+                    return new RedirectResponse($authUrl);
+                }
+            } else {
+                $session->remove('google_access_token');
+                $authUrl = $client->createAuthUrl();
+                $logger->info('No refresh token available, redirecting to Google for re-authentication: ' . $authUrl);
+                return new RedirectResponse($authUrl);
+            }
+        }
+
+        // Create the calendar event (aligned with JavaFX logic)
+        $service = new Google_Service_Calendar($client);
+
+        $startDateTime = (clone $schedule->getDateMatch())->setTime(
+            (int) $schedule->getStartTime()->format('H'),
+            (int) $schedule->getStartTime()->format('i'),
+            (int) $schedule->getStartTime()->format('s')
+        );
+        $endDateTime = (clone $schedule->getDateMatch())->setTime(
+            (int) $schedule->getEndTime()->format('H'),
+            (int) $schedule->getEndTime()->format('i'),
+            (int) $schedule->getEndTime()->format('s')
+        );
+
+        $eventTitle = $schedule->getMatchEntity() ? 
+            "{$schedule->getMatchEntity()->getC1()} vs {$schedule->getMatchEntity()->getC2()}" : 
+            'Match à déterminer';
+        $location = $schedule->getEspaceSportif() ? $schedule->getEspaceSportif()->getNomEspace() : 'N/A';
+        $description = $schedule->getMatchEntity() && $schedule->getMatchEntity()->getSportType() ?
+            "Sport: {$schedule->getMatchEntity()->getSportType()}" : '';
+
+        $event = new Google_Service_Calendar_Event([
+            'summary' => $eventTitle,
+            'location' => $location,
+            'description' => $description,
+            'start' => [
+                'dateTime' => $startDateTime->format(\DateTime::RFC3339),
+                'timeZone' => date_default_timezone_get(),
+            ],
+            'end' => [
+                'dateTime' => $endDateTime->format(\DateTime::RFC3339),
+                'timeZone' => date_default_timezone_get(),
+            ],
+        ]);
+
+        try {
+            $calendarId = 'primary';
+            $createdEvent = $service->events->insert($calendarId, $event);
+            $logger->info('Google Calendar event created: ' . $createdEvent->getId());
+            $session->getFlashBag()->add('success', 'Match ajouté à votre Google Calendar avec succès !');
+        } catch (\Exception $e) {
+            $logger->error('Error creating Google Calendar event: ' . $e->getMessage());
+            $session->getFlashBag()->add('error', 'Erreur lors de l\'ajout à Google Calendar : ' . $e->getMessage());
+        }
+
+        return $this->redirectToRoute('schedule_showF', ['idSchedule' => $schedule->getIdSchedule()]);
+    }
+
+    #[Route('/google-callback', name: 'schedule_google_callback', methods: ['GET'])]
+    public function googleCallback(Request $request, ScheduleRepository $scheduleRepository, LoggerInterface $logger, SessionInterface $session): Response
+    {
+        $logger->info('Google callback received with query: ' . json_encode($request->query->all()));
+        $scheduleId = $request->query->get('state');
+        if (!$scheduleId) {
+            $logger->error('Schedule ID not provided in state parameter.');
+            $session->getFlashBag()->add('error', 'Schedule ID not provided in state parameter.');
+            return $this->redirectToRoute('schedule_mainF');
+        }
+
+        $schedule = $scheduleRepository->find($scheduleId);
+        if (!$schedule) {
+            $session->getFlashBag()->add('error', "L'horaire demandé n'existe pas ou a été supprimé.");
+            return $this->redirectToRoute('schedule_mainF');
+        }
+
+        if (isset($request->query->all()['error'])) {
+            $logger->error('Google OAuth error: ' . $request->query->get('error'));
+            $session->getFlashBag()->add('error', 'Google OAuth error: ' . $request->query->get('error'));
+            return $this->redirectToRoute('schedule_showF', ['idSchedule' => $scheduleId]);
+        }
+
+        $code = $request->query->get('code');
+        if (!$code) {
+            $logger->error('No authorization code provided in callback.');
+            $session->getFlashBag()->add('error', 'No authorization code provided by Google.');
+            return $this->redirectToRoute('schedule_showF', ['idSchedule' => $scheduleId]);
+        }
+
+        // Set up the Google Client
+        $client = new Google_Client();
+        $client->setApplicationName('Matchupz');
+        $client->setScopes(Google_Service_Calendar::CALENDAR);
+        $client->setAuthConfig($this->getParameter('kernel.project_dir') . '/config/secrets/client_secret_409921140476-h8u0n3e36lkkoq46ku6785d6opilm0p6.apps.googleusercontent.com.json');
+        $client->setAccessType('offline');
+        $client->setPrompt('select_account consent');
+        $client->setRedirectUri('http://127.0.0.1:8000/schedule/google-callback');
+
+        // Exchange the code for an access token
+        try {
+            $accessToken = $client->fetchAccessTokenWithAuthCode($code);
+            if (isset($accessToken['error'])) {
+                $logger->error('Error fetching access token: ' . json_encode($accessToken));
+                $session->getFlashBag()->add('error', 'Erreur lors de l\'authentification avec Google : ' . $accessToken['error_description']);
+                $session->remove('google_access_token');
+                return $this->redirectToRoute('schedule_showF', ['idSchedule' => $scheduleId]);
+            }
+            $session->set('google_access_token', $accessToken);
+            $logger->info('Google Calendar access token obtained and stored in session: ' . json_encode($accessToken));
+        } catch (\Exception $e) {
+            $logger->error('Exception while fetching access token: ' . $e->getMessage());
+            $session->getFlashBag()->add('error', 'Erreur lors de l\'authentification avec Google : ' . $e->getMessage());
+            $session->remove('google_access_token');
+            return $this->redirectToRoute('schedule_showF', ['idSchedule' => $scheduleId]);
+        }
+
+        // Redirect to addToGoogleCalendar to create the event
+        $logger->info('Redirecting to add-to-google-calendar with schedule ID: ' . $scheduleId);
+        return $this->redirectToRoute('schedule_add_to_google_calendar', ['idSchedule' => $scheduleId]);
+    }
 }

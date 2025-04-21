@@ -70,6 +70,7 @@ return [
         '/schedule/export/pdf' => [[['_route' => 'schedule_export_pdf', '_controller' => 'App\\Controller\\ScheduleController::exportPdf'], null, ['GET' => 0], null, false, false, null]],
         '/schedule/export/csv' => [[['_route' => 'schedule_export_csv', '_controller' => 'App\\Controller\\ScheduleController::exportCsv'], null, ['GET' => 0], null, false, false, null]],
         '/schedule/export/excel' => [[['_route' => 'schedule_export_excel', '_controller' => 'App\\Controller\\ScheduleController::exportExcel'], null, ['GET' => 0], null, false, false, null]],
+        '/schedule/google-callback' => [[['_route' => 'schedule_google_callback', '_controller' => 'App\\Controller\\ScheduleController::googleCallback'], null, ['GET' => 0], null, false, false, null]],
         '/sport' => [[['_route' => 'sport_index', '_controller' => 'App\\Controller\\SportController::index'], null, ['GET' => 0], null, true, false, null]],
         '/sport/new' => [[['_route' => 'sport_new', '_controller' => 'App\\Controller\\SportController::new'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
         '/sport/statistics' => [[['_route' => 'sport_statistics', '_controller' => 'App\\Controller\\SportController::statistics'], null, ['GET' => 0], null, false, false, null]],
@@ -154,11 +155,12 @@ return [
                         .'|(\\d+)/showF(*:806)'
                         .'|(\\d+)/edit(*:824)'
                         .'|(\\d+)/delete(*:844)'
+                        .'|(\\d+)/add\\-to\\-google\\-calendar(*:883)'
                     .')'
                     .'|port/(?'
-                        .'|(\\d+)(*:866)'
-                        .'|(\\d+)/edit(*:884)'
-                        .'|(\\d+)(*:897)'
+                        .'|(\\d+)(*:905)'
+                        .'|(\\d+)/edit(*:923)'
+                        .'|(\\d+)(*:936)'
                     .')'
                 .')'
             .')/?$}sDu',
@@ -203,9 +205,10 @@ return [
         806 => [[['_route' => 'schedule_showF', '_controller' => 'App\\Controller\\ScheduleController::showF'], ['idSchedule'], ['GET' => 0], null, false, false, null]],
         824 => [[['_route' => 'schedule_edit', '_controller' => 'App\\Controller\\ScheduleController::edit'], ['idSchedule'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
         844 => [[['_route' => 'schedule_delete', '_controller' => 'App\\Controller\\ScheduleController::delete'], ['idSchedule'], ['POST' => 0], null, false, false, null]],
-        866 => [[['_route' => 'sport_show', '_controller' => 'App\\Controller\\SportController::show'], ['idSport'], ['GET' => 0], null, false, true, null]],
-        884 => [[['_route' => 'sport_edit', '_controller' => 'App\\Controller\\SportController::edit'], ['idSport'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        897 => [
+        883 => [[['_route' => 'schedule_add_to_google_calendar', '_controller' => 'App\\Controller\\ScheduleController::addToGoogleCalendar'], ['idSchedule'], ['GET' => 0], null, false, false, null]],
+        905 => [[['_route' => 'sport_show', '_controller' => 'App\\Controller\\SportController::show'], ['idSport'], ['GET' => 0], null, false, true, null]],
+        923 => [[['_route' => 'sport_edit', '_controller' => 'App\\Controller\\SportController::edit'], ['idSport'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        936 => [
             [['_route' => 'sport_delete', '_controller' => 'App\\Controller\\SportController::delete'], ['idSport'], ['POST' => 0], null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],

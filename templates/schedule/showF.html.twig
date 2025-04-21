@@ -34,16 +34,18 @@
             transform: scale(1.1); /* Slightly larger scale */
             margin: 20px 0; /* Extra spacing */
         }
-        .video-placeholder::before {
-            content: '\25B6'; /* Play button Unicode */
+        .video-placeholder-text {
             position: absolute;
-            top: 50%;
+            top: 50%; /* Center vertically */
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: 80px; /* Larger play button */
             color: #fff;
-            opacity: 0.8;
-            text-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
+            font-size: 1.2rem;
+            font-weight: 500;
+            text-align: center;
+            opacity: 0.9;
+            text-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+            padding: 0 20px;
         }
     </style>
 {% endblock %}
@@ -109,12 +111,23 @@
                             <a href="{{ path('schedule_mainF') }}" class="btn btn-primary py-3 px-5 ms-2">
                                 <span>Retour aux horaires</span>
                             </a>
+                            {% if isFutureMatch %}
+                                <a href="{{ path('schedule_add_to_google_calendar', {'idSchedule': schedule.idSchedule}) }}" class="btn btn-primary py-3 px-5 ms-2">
+                                    <span>Sauvegarder dans Google Calendar</span>
+                                </a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-6 wow fadeInRight" data-wow-delay="0.2s">
                     <div class="h-100">
-                        <div class="video-placeholder"></div>
+                        <div class="video-placeholder">
+                            {% if isFutureMatch %}
+                                <div class="video-placeholder-text">
+                                    Le match n'a pas encore commencé, vous pouvez être rappelé lorsqu'il aura lieu via Google Calendar.
+                                </div>
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
             </div>

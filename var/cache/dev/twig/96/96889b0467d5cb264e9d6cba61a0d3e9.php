@@ -114,7 +114,7 @@ class __TwigTemplate_0be41395e8e8e5b996f1ad46ccac4bf8 extends Template
         <div class=\"container d-flex align-items-center\">
             <div class=\"d-flex align-items-center h-100\">
                 <a href=\"#\" class=\"navbar-brand\" style=\"height: 125px;\">
-                    <h1 class=\"text-primary mb-0\"><i class=\"fas fa-hand-rock me-2\"></i>Fitness</h1>
+                    <h1 class=\"text-primary mb-0\"><i class=\"fas fa-hand-rock me-2\"></i>Matchupz</h1>
                 </a>
             </div>
             <div class=\"w-100 h-100\">
@@ -586,7 +586,7 @@ class __TwigTemplate_0be41395e8e8e5b996f1ad46ccac4bf8 extends Template
         <div class=\"container d-flex align-items-center\">
             <div class=\"d-flex align-items-center h-100\">
                 <a href=\"#\" class=\"navbar-brand\" style=\"height: 125px;\">
-                    <h1 class=\"text-primary mb-0\"><i class=\"fas fa-hand-rock me-2\"></i>Fitness</h1>
+                    <h1 class=\"text-primary mb-0\"><i class=\"fas fa-hand-rock me-2\"></i>Matchupz</h1>
                 </a>
             </div>
             <div class=\"w-100 h-100\">

@@ -131,16 +131,18 @@ class __TwigTemplate_a491b30f51facc10b8275406a0cb5903 extends Template
             transform: scale(1.1); /* Slightly larger scale */
             margin: 20px 0; /* Extra spacing */
         }
-        .video-placeholder::before {
-            content: '\\25B6'; /* Play button Unicode */
+        .video-placeholder-text {
             position: absolute;
-            top: 50%;
+            top: 50%; /* Center vertically */
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: 80px; /* Larger play button */
             color: #fff;
-            opacity: 0.8;
-            text-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
+            font-size: 1.2rem;
+            font-weight: 500;
+            text-align: center;
+            opacity: 0.9;
+            text-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+            padding: 0 20px;
         }
     </style>
 ";
@@ -153,7 +155,7 @@ class __TwigTemplate_a491b30f51facc10b8275406a0cb5903 extends Template
         yield from [];
     }
 
-    // line 51
+    // line 53
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -166,18 +168,18 @@ class __TwigTemplate_a491b30f51facc10b8275406a0cb5903 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
 
-        // line 52
+        // line 54
         yield "    <!-- Header Start -->
     <div class=\"container-fluid bg-breadcrumb\">
         <div class=\"container text-center py-5\" style=\"max-width: 900px;\">
             <h4 class=\"text-white display-4 mb-4 wow fadeInDown\" data-wow-delay=\"0.1s\">Détails de l'horaire</h4>
             <ol class=\"breadcrumb d-flex justify-content-center mb-0 wow fadeInDown\" data-wow-delay=\"0.3s\">
                 <li class=\"breadcrumb-item\"><a href=\"";
-        // line 57
+        // line 59
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_home");
         yield "\">Accueil</a></li>
                 <li class=\"breadcrumb-item\"><a href=\"";
-        // line 58
+        // line 60
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("schedule_mainF");
         yield "\">Horaires</a></li>
                 <li class=\"breadcrumb-item active text-primary\">Détails</li>
@@ -195,27 +197,27 @@ class __TwigTemplate_a491b30f51facc10b8275406a0cb5903 extends Template
                         <h4 class=\"text-primary\">Détails du match</h4>
                         <h1 class=\"display-4 mb-4\">
                             ";
-        // line 73
-        if (CoreExtension::getAttribute($this->env, $this->source, (isset($context["schedule"]) || array_key_exists("schedule", $context) ? $context["schedule"] : (function () { throw new RuntimeError('Variable "schedule" does not exist.', 73, $this->source); })()), "matchEntity", [], "any", false, false, false, 73)) {
-            // line 74
+        // line 75
+        if (CoreExtension::getAttribute($this->env, $this->source, (isset($context["schedule"]) || array_key_exists("schedule", $context) ? $context["schedule"] : (function () { throw new RuntimeError('Variable "schedule" does not exist.', 75, $this->source); })()), "matchEntity", [], "any", false, false, false, 75)) {
+            // line 76
             yield "                                <span class=\"vibrant-team\">";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["schedule"]) || array_key_exists("schedule", $context) ? $context["schedule"] : (function () { throw new RuntimeError('Variable "schedule" does not exist.', 74, $this->source); })()), "matchEntity", [], "any", false, false, false, 74), "c1", [], "any", false, false, false, 74), "html", null, true);
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["schedule"]) || array_key_exists("schedule", $context) ? $context["schedule"] : (function () { throw new RuntimeError('Variable "schedule" does not exist.', 76, $this->source); })()), "matchEntity", [], "any", false, false, false, 76), "c1", [], "any", false, false, false, 76), "html", null, true);
             yield "</span> contre <span class=\"vibrant-team\">";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["schedule"]) || array_key_exists("schedule", $context) ? $context["schedule"] : (function () { throw new RuntimeError('Variable "schedule" does not exist.', 74, $this->source); })()), "matchEntity", [], "any", false, false, false, 74), "c2", [], "any", false, false, false, 74), "html", null, true);
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["schedule"]) || array_key_exists("schedule", $context) ? $context["schedule"] : (function () { throw new RuntimeError('Variable "schedule" does not exist.', 76, $this->source); })()), "matchEntity", [], "any", false, false, false, 76), "c2", [], "any", false, false, false, 76), "html", null, true);
             yield "</span>
                             ";
         } else {
-            // line 76
+            // line 78
             yield "                                Match à déterminer
                             ";
         }
-        // line 78
+        // line 80
         yield "                        </h1>
                         <div class=\"goal-item d-flex p-4\">
                             <div class=\"d-flex me-4\">
                                 <div class=\"bg-primary d-inline p-3\" style=\"width: 80px; height: 80px;\">
                                     <img src=\"";
-        // line 82
+        // line 84
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("img/icon-1.png"), "html", null, true);
         yield "\" class=\"img-fluid\" alt=\"\">
                                 </div>
@@ -224,12 +226,12 @@ class __TwigTemplate_a491b30f51facc10b8275406a0cb5903 extends Template
                                 <h4>Date et heure</h4>
                                 <p class=\"text-white mb-0\">
                                     ";
-        // line 88
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, (isset($context["schedule"]) || array_key_exists("schedule", $context) ? $context["schedule"] : (function () { throw new RuntimeError('Variable "schedule" does not exist.', 88, $this->source); })()), "dateMatch", [], "any", false, false, false, 88), "Y-m-d"), "html", null, true);
+        // line 90
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, (isset($context["schedule"]) || array_key_exists("schedule", $context) ? $context["schedule"] : (function () { throw new RuntimeError('Variable "schedule" does not exist.', 90, $this->source); })()), "dateMatch", [], "any", false, false, false, 90), "Y-m-d"), "html", null, true);
         yield " de ";
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, (isset($context["schedule"]) || array_key_exists("schedule", $context) ? $context["schedule"] : (function () { throw new RuntimeError('Variable "schedule" does not exist.', 88, $this->source); })()), "startTime", [], "any", false, false, false, 88), "H:i"), "html", null, true);
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, (isset($context["schedule"]) || array_key_exists("schedule", $context) ? $context["schedule"] : (function () { throw new RuntimeError('Variable "schedule" does not exist.', 90, $this->source); })()), "startTime", [], "any", false, false, false, 90), "H:i"), "html", null, true);
         yield " à ";
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, (isset($context["schedule"]) || array_key_exists("schedule", $context) ? $context["schedule"] : (function () { throw new RuntimeError('Variable "schedule" does not exist.', 88, $this->source); })()), "endTime", [], "any", false, false, false, 88), "H:i"), "html", null, true);
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, (isset($context["schedule"]) || array_key_exists("schedule", $context) ? $context["schedule"] : (function () { throw new RuntimeError('Variable "schedule" does not exist.', 90, $this->source); })()), "endTime", [], "any", false, false, false, 90), "H:i"), "html", null, true);
         yield "
                                 </p>
                             </div>
@@ -238,7 +240,7 @@ class __TwigTemplate_a491b30f51facc10b8275406a0cb5903 extends Template
                             <div class=\"d-flex me-4\">
                                 <div class=\"bg-primary d-inline p-3\" style=\"width: 80px; height: 80px;\">
                                     <img src=\"";
-        // line 95
+        // line 97
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("img/icon-6.png"), "html", null, true);
         yield "\" class=\"img-fluid\" alt=\"\">
                                 </div>
@@ -247,35 +249,58 @@ class __TwigTemplate_a491b30f51facc10b8275406a0cb5903 extends Template
                                 <h4>Lieu et sport</h4>
                                 <p class=\"text-white mb-0\">
                                     <strong>Lieu :</strong> ";
-        // line 101
-        yield ((CoreExtension::getAttribute($this->env, $this->source, (isset($context["schedule"]) || array_key_exists("schedule", $context) ? $context["schedule"] : (function () { throw new RuntimeError('Variable "schedule" does not exist.', 101, $this->source); })()), "espaceSportif", [], "any", false, false, false, 101)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["schedule"]) || array_key_exists("schedule", $context) ? $context["schedule"] : (function () { throw new RuntimeError('Variable "schedule" does not exist.', 101, $this->source); })()), "espaceSportif", [], "any", false, false, false, 101), "nomEspace", [], "any", false, false, false, 101), "html", null, true)) : ("N/A"));
+        // line 103
+        yield ((CoreExtension::getAttribute($this->env, $this->source, (isset($context["schedule"]) || array_key_exists("schedule", $context) ? $context["schedule"] : (function () { throw new RuntimeError('Variable "schedule" does not exist.', 103, $this->source); })()), "espaceSportif", [], "any", false, false, false, 103)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["schedule"]) || array_key_exists("schedule", $context) ? $context["schedule"] : (function () { throw new RuntimeError('Variable "schedule" does not exist.', 103, $this->source); })()), "espaceSportif", [], "any", false, false, false, 103), "nomEspace", [], "any", false, false, false, 103), "html", null, true)) : ("N/A"));
         yield "<br>
                                     ";
-        // line 102
-        if ((CoreExtension::getAttribute($this->env, $this->source, (isset($context["schedule"]) || array_key_exists("schedule", $context) ? $context["schedule"] : (function () { throw new RuntimeError('Variable "schedule" does not exist.', 102, $this->source); })()), "matchEntity", [], "any", false, false, false, 102) && CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["schedule"]) || array_key_exists("schedule", $context) ? $context["schedule"] : (function () { throw new RuntimeError('Variable "schedule" does not exist.', 102, $this->source); })()), "matchEntity", [], "any", false, false, false, 102), "sportType", [], "any", false, false, false, 102))) {
-            // line 103
+        // line 104
+        if ((CoreExtension::getAttribute($this->env, $this->source, (isset($context["schedule"]) || array_key_exists("schedule", $context) ? $context["schedule"] : (function () { throw new RuntimeError('Variable "schedule" does not exist.', 104, $this->source); })()), "matchEntity", [], "any", false, false, false, 104) && CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["schedule"]) || array_key_exists("schedule", $context) ? $context["schedule"] : (function () { throw new RuntimeError('Variable "schedule" does not exist.', 104, $this->source); })()), "matchEntity", [], "any", false, false, false, 104), "sportType", [], "any", false, false, false, 104))) {
+            // line 105
             yield "                                        <strong>Sport :</strong> ";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["schedule"]) || array_key_exists("schedule", $context) ? $context["schedule"] : (function () { throw new RuntimeError('Variable "schedule" does not exist.', 103, $this->source); })()), "matchEntity", [], "any", false, false, false, 103), "sportType", [], "any", false, false, false, 103), "html", null, true);
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["schedule"]) || array_key_exists("schedule", $context) ? $context["schedule"] : (function () { throw new RuntimeError('Variable "schedule" does not exist.', 105, $this->source); })()), "matchEntity", [], "any", false, false, false, 105), "sportType", [], "any", false, false, false, 105), "html", null, true);
             yield "
                                     ";
         }
-        // line 105
+        // line 107
         yield "                                </p>
                             </div>
                         </div>
                         <div class=\"ms-1\">
                             <a href=\"";
-        // line 109
+        // line 111
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("schedule_mainF");
         yield "\" class=\"btn btn-primary py-3 px-5 ms-2\">
                                 <span>Retour aux horaires</span>
                             </a>
-                        </div>
+                            ";
+        // line 114
+        if ((isset($context["isFutureMatch"]) || array_key_exists("isFutureMatch", $context) ? $context["isFutureMatch"] : (function () { throw new RuntimeError('Variable "isFutureMatch" does not exist.', 114, $this->source); })())) {
+            // line 115
+            yield "                                <a href=\"";
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("schedule_add_to_google_calendar", ["idSchedule" => CoreExtension::getAttribute($this->env, $this->source, (isset($context["schedule"]) || array_key_exists("schedule", $context) ? $context["schedule"] : (function () { throw new RuntimeError('Variable "schedule" does not exist.', 115, $this->source); })()), "idSchedule", [], "any", false, false, false, 115)]), "html", null, true);
+            yield "\" class=\"btn btn-primary py-3 px-5 ms-2\">
+                                    <span>Sauvegarder dans Google Calendar</span>
+                                </a>
+                            ";
+        }
+        // line 119
+        yield "                        </div>
                     </div>
                 </div>
                 <div class=\"col-lg-6 wow fadeInRight\" data-wow-delay=\"0.2s\">
                     <div class=\"h-100\">
-                        <div class=\"video-placeholder\"></div>
+                        <div class=\"video-placeholder\">
+                            ";
+        // line 125
+        if ((isset($context["isFutureMatch"]) || array_key_exists("isFutureMatch", $context) ? $context["isFutureMatch"] : (function () { throw new RuntimeError('Variable "isFutureMatch" does not exist.', 125, $this->source); })())) {
+            // line 126
+            yield "                                <div class=\"video-placeholder-text\">
+                                    Le match n'a pas encore commencé, vous pouvez être rappelé lorsqu'il aura lieu via Google Calendar.
+                                </div>
+                            ";
+        }
+        // line 130
+        yield "                        </div>
                     </div>
                 </div>
             </div>
@@ -313,7 +338,7 @@ class __TwigTemplate_a491b30f51facc10b8275406a0cb5903 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  269 => 109,  263 => 105,  257 => 103,  255 => 102,  251 => 101,  242 => 95,  228 => 88,  219 => 82,  213 => 78,  209 => 76,  201 => 74,  199 => 73,  181 => 58,  177 => 57,  170 => 52,  157 => 51,  101 => 6,  88 => 5,  65 => 3,  42 => 1,);
+        return array (  303 => 130,  297 => 126,  295 => 125,  287 => 119,  279 => 115,  277 => 114,  271 => 111,  265 => 107,  259 => 105,  257 => 104,  253 => 103,  244 => 97,  230 => 90,  221 => 84,  215 => 80,  211 => 78,  203 => 76,  201 => 75,  183 => 60,  179 => 59,  172 => 54,  159 => 53,  101 => 6,  88 => 5,  65 => 3,  42 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -354,16 +379,18 @@ class __TwigTemplate_a491b30f51facc10b8275406a0cb5903 extends Template
             transform: scale(1.1); /* Slightly larger scale */
             margin: 20px 0; /* Extra spacing */
         }
-        .video-placeholder::before {
-            content: '\\25B6'; /* Play button Unicode */
+        .video-placeholder-text {
             position: absolute;
-            top: 50%;
+            top: 50%; /* Center vertically */
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: 80px; /* Larger play button */
             color: #fff;
-            opacity: 0.8;
-            text-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
+            font-size: 1.2rem;
+            font-weight: 500;
+            text-align: center;
+            opacity: 0.9;
+            text-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+            padding: 0 20px;
         }
     </style>
 {% endblock %}
@@ -429,12 +456,23 @@ class __TwigTemplate_a491b30f51facc10b8275406a0cb5903 extends Template
                             <a href=\"{{ path('schedule_mainF') }}\" class=\"btn btn-primary py-3 px-5 ms-2\">
                                 <span>Retour aux horaires</span>
                             </a>
+                            {% if isFutureMatch %}
+                                <a href=\"{{ path('schedule_add_to_google_calendar', {'idSchedule': schedule.idSchedule}) }}\" class=\"btn btn-primary py-3 px-5 ms-2\">
+                                    <span>Sauvegarder dans Google Calendar</span>
+                                </a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
                 <div class=\"col-lg-6 wow fadeInRight\" data-wow-delay=\"0.2s\">
                     <div class=\"h-100\">
-                        <div class=\"video-placeholder\"></div>
+                        <div class=\"video-placeholder\">
+                            {% if isFutureMatch %}
+                                <div class=\"video-placeholder-text\">
+                                    Le match n'a pas encore commencé, vous pouvez être rappelé lorsqu'il aura lieu via Google Calendar.
+                                </div>
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
             </div>

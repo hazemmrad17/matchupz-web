@@ -47,14 +47,11 @@ class __TwigTemplate_8bc74283d83098d4a998c3921dc2c4fd extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "schedule/statistics.html.twig"));
 
         // line 1
-        yield "
-";
-        // line 2
         yield from $this->unwrap()->yieldBlock('body', $context, $blocks);
-        // line 83
+        // line 82
         yield "
 ";
-        // line 84
+        // line 83
         yield from $this->unwrap()->yieldBlock('javascripts', $context, $blocks);
         
         $__internal_5a27a8ba21ca79b61932376b2fa922d2->leave($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof);
@@ -65,7 +62,7 @@ class __TwigTemplate_8bc74283d83098d4a998c3921dc2c4fd extends Template
         yield from [];
     }
 
-    // line 2
+    // line 1
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -78,8 +75,8 @@ class __TwigTemplate_8bc74283d83098d4a998c3921dc2c4fd extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
 
-        // line 3
-        yield "    <h4 class=\"fw-bold py-3 mb-4 text-center\">Statesiques des plannings</h4>
+        // line 2
+        yield "    <h4 class=\"fw-bold py-3 mb-4 text-center\">Statistiques des plannings</h4>
 
     <!-- Summary Cards -->
     <div class=\"row justify-content-center mb-4\">
@@ -90,15 +87,15 @@ class __TwigTemplate_8bc74283d83098d4a998c3921dc2c4fd extends Template
                     <div class=\"d-flex justify-content-center mb-3\">
                         <div class=\"avatar flex-shrink-0\">
                             <img src=\"";
-        // line 13
+        // line 12
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("img/icons/unicons/chart-success.png"), "html", null, true);
         yield "\" alt=\"Schedules\" class=\"rounded\" />
                         </div>
                     </div>
                     <span class=\"fw-semibold d-block mb-1\">Total Schedules</span>
                     <h3 class=\"card-title mb-2\">";
-        // line 17
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["totalSchedules"]) || array_key_exists("totalSchedules", $context) ? $context["totalSchedules"] : (function () { throw new RuntimeError('Variable "totalSchedules" does not exist.', 17, $this->source); })()), "html", null, true);
+        // line 16
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["totalSchedules"]) || array_key_exists("totalSchedules", $context) ? $context["totalSchedules"] : (function () { throw new RuntimeError('Variable "totalSchedules" does not exist.', 16, $this->source); })()), "html", null, true);
         yield "</h3>
                     <small class=\"text-success fw-semibold\"><i class=\"bx bx-up-arrow-alt\"></i> Updated Today</small>
                 </div>
@@ -112,15 +109,15 @@ class __TwigTemplate_8bc74283d83098d4a998c3921dc2c4fd extends Template
                     <div class=\"d-flex justify-content-center mb-3\">
                         <div class=\"avatar flex-shrink-0\">
                             <img src=\"";
-        // line 29
+        // line 28
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("img/icons/unicons/clock.png"), "html", null, true);
         yield "\" alt=\"Ongoing\" class=\"rounded\" />
                         </div>
                     </div>
                     <span class=\"fw-semibold d-block mb-1\">Ongoing Matches</span>
                     <h3 class=\"card-title mb-2\">";
-        // line 33
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["ongoingMatches"]) || array_key_exists("ongoingMatches", $context) ? $context["ongoingMatches"] : (function () { throw new RuntimeError('Variable "ongoingMatches" does not exist.', 33, $this->source); })()), "html", null, true);
+        // line 32
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::length($this->env->getCharset(), (isset($context["ongoingMatches"]) || array_key_exists("ongoingMatches", $context) ? $context["ongoingMatches"] : (function () { throw new RuntimeError('Variable "ongoingMatches" does not exist.', 32, $this->source); })())), "html", null, true);
         yield "</h3>
                     <small class=\"text-warning fw-semibold\">Currently Active</small>
                 </div>
@@ -134,15 +131,15 @@ class __TwigTemplate_8bc74283d83098d4a998c3921dc2c4fd extends Template
                     <div class=\"d-flex justify-content-center mb-3\">
                         <div class=\"avatar flex-shrink-0\">
                             <img src=\"";
-        // line 45
+        // line 44
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("img/icons/unicons/times.png"), "html", null, true);
         yield "\" alt=\"Completed\" class=\"rounded\" />
                         </div>
                     </div>
                     <span class=\"fw-semibold d-block mb-1\">Completed Matches</span>
                     <h3 class=\"card-title mb-2\">";
-        // line 49
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["completedMatches"]) || array_key_exists("completedMatches", $context) ? $context["completedMatches"] : (function () { throw new RuntimeError('Variable "completedMatches" does not exist.', 49, $this->source); })()), "html", null, true);
+        // line 48
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["completedMatches"]) || array_key_exists("completedMatches", $context) ? $context["completedMatches"] : (function () { throw new RuntimeError('Variable "completedMatches" does not exist.', 48, $this->source); })()), "html", null, true);
         yield "</h3>
                     <small class=\"text-muted fw-semibold\">Finished Matches</small>
                 </div>
@@ -186,7 +183,7 @@ class __TwigTemplate_8bc74283d83098d4a998c3921dc2c4fd extends Template
         yield from [];
     }
 
-    // line 84
+    // line 83
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -199,16 +196,16 @@ class __TwigTemplate_8bc74283d83098d4a998c3921dc2c4fd extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "javascripts"));
 
-        // line 85
+        // line 84
         yield "    <script>
         document.addEventListener('DOMContentLoaded', function () {
             // Sport Distribution
             new ApexCharts(document.querySelector(\"#sportDistributionChart\"), {
                 chart: { type: 'pie', height: 350 },
                 series: [";
-        // line 90
+        // line 89
         $context['_parent'] = $context;
-        $context['_seq'] = CoreExtension::ensureTraversable(((array_key_exists("sportDistribution", $context)) ? (Twig\Extension\CoreExtension::default((isset($context["sportDistribution"]) || array_key_exists("sportDistribution", $context) ? $context["sportDistribution"] : (function () { throw new RuntimeError('Variable "sportDistribution" does not exist.', 90, $this->source); })()), [])) : ([])));
+        $context['_seq'] = CoreExtension::ensureTraversable(((array_key_exists("sportDistribution", $context)) ? (Twig\Extension\CoreExtension::default((isset($context["sportDistribution"]) || array_key_exists("sportDistribution", $context) ? $context["sportDistribution"] : (function () { throw new RuntimeError('Variable "sportDistribution" does not exist.', 89, $this->source); })()), [])) : ([])));
         foreach ($context['_seq'] as $context["_key"] => $context["count"]) {
             yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($context["count"], "html", null, true);
             yield ",";
@@ -218,9 +215,9 @@ class __TwigTemplate_8bc74283d83098d4a998c3921dc2c4fd extends Template
         $context = array_intersect_key($context, $_parent) + $_parent;
         yield "],
                 labels: [";
-        // line 91
+        // line 90
         $context['_parent'] = $context;
-        $context['_seq'] = CoreExtension::ensureTraversable(Twig\Extension\CoreExtension::default(Twig\Extension\CoreExtension::keys((isset($context["sportDistribution"]) || array_key_exists("sportDistribution", $context) ? $context["sportDistribution"] : (function () { throw new RuntimeError('Variable "sportDistribution" does not exist.', 91, $this->source); })())), []));
+        $context['_seq'] = CoreExtension::ensureTraversable(Twig\Extension\CoreExtension::default(Twig\Extension\CoreExtension::keys((isset($context["sportDistribution"]) || array_key_exists("sportDistribution", $context) ? $context["sportDistribution"] : (function () { throw new RuntimeError('Variable "sportDistribution" does not exist.', 90, $this->source); })())), []));
         foreach ($context['_seq'] as $context["_key"] => $context["sport"]) {
             yield "'";
             yield (((true &&  !(null === $context["sport"]))) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($context["sport"], "html", null, true)) : ("Unknown"));
@@ -238,9 +235,9 @@ class __TwigTemplate_8bc74283d83098d4a998c3921dc2c4fd extends Template
                 series: [{
                     name: \"Number of Schedules\",
                     data: [";
-        // line 99
+        // line 98
         $context['_parent'] = $context;
-        $context['_seq'] = CoreExtension::ensureTraversable(((array_key_exists("venueDistribution", $context)) ? (Twig\Extension\CoreExtension::default((isset($context["venueDistribution"]) || array_key_exists("venueDistribution", $context) ? $context["venueDistribution"] : (function () { throw new RuntimeError('Variable "venueDistribution" does not exist.', 99, $this->source); })()), [])) : ([])));
+        $context['_seq'] = CoreExtension::ensureTraversable(((array_key_exists("venueDistribution", $context)) ? (Twig\Extension\CoreExtension::default((isset($context["venueDistribution"]) || array_key_exists("venueDistribution", $context) ? $context["venueDistribution"] : (function () { throw new RuntimeError('Variable "venueDistribution" does not exist.', 98, $this->source); })()), [])) : ([])));
         foreach ($context['_seq'] as $context["_key"] => $context["count"]) {
             yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($context["count"], "html", null, true);
             yield ",";
@@ -252,9 +249,9 @@ class __TwigTemplate_8bc74283d83098d4a998c3921dc2c4fd extends Template
                 }],
                 xaxis: {
                     categories: [";
-        // line 102
+        // line 101
         $context['_parent'] = $context;
-        $context['_seq'] = CoreExtension::ensureTraversable(Twig\Extension\CoreExtension::default(Twig\Extension\CoreExtension::keys((isset($context["venueDistribution"]) || array_key_exists("venueDistribution", $context) ? $context["venueDistribution"] : (function () { throw new RuntimeError('Variable "venueDistribution" does not exist.', 102, $this->source); })())), []));
+        $context['_seq'] = CoreExtension::ensureTraversable(Twig\Extension\CoreExtension::default(Twig\Extension\CoreExtension::keys((isset($context["venueDistribution"]) || array_key_exists("venueDistribution", $context) ? $context["venueDistribution"] : (function () { throw new RuntimeError('Variable "venueDistribution" does not exist.', 101, $this->source); })())), []));
         foreach ($context['_seq'] as $context["_key"] => $context["venue"]) {
             yield "'";
             yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($context["venue"], "html", null, true);
@@ -292,14 +289,13 @@ class __TwigTemplate_8bc74283d83098d4a998c3921dc2c4fd extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  256 => 102,  242 => 99,  222 => 91,  210 => 90,  203 => 85,  190 => 84,  145 => 49,  138 => 45,  123 => 33,  116 => 29,  101 => 17,  94 => 13,  82 => 3,  69 => 2,  58 => 84,  55 => 83,  53 => 2,  50 => 1,);
+        return array (  253 => 101,  239 => 98,  219 => 90,  207 => 89,  200 => 84,  187 => 83,  142 => 48,  135 => 44,  120 => 32,  113 => 28,  98 => 16,  91 => 12,  79 => 2,  66 => 1,  55 => 83,  52 => 82,  50 => 1,);
     }
 
     public function getSourceContext(): Source
     {
-        return new Source("
-{% block body %}
-    <h4 class=\"fw-bold py-3 mb-4 text-center\">Statesiques des plannings</h4>
+        return new Source("{% block body %}
+    <h4 class=\"fw-bold py-3 mb-4 text-center\">Statistiques des plannings</h4>
 
     <!-- Summary Cards -->
     <div class=\"row justify-content-center mb-4\">
@@ -329,7 +325,7 @@ class __TwigTemplate_8bc74283d83098d4a998c3921dc2c4fd extends Template
                         </div>
                     </div>
                     <span class=\"fw-semibold d-block mb-1\">Ongoing Matches</span>
-                    <h3 class=\"card-title mb-2\">{{ ongoingMatches }}</h3>
+                    <h3 class=\"card-title mb-2\">{{ ongoingMatches|length }}</h3>
                     <small class=\"text-warning fw-semibold\">Currently Active</small>
                 </div>
             </div>
