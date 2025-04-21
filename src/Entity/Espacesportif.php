@@ -5,7 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-
+use Symfony\Component\Validator\Constraints as Assert;
 use App\Repository\EspacesportifRepository;
 
 #[ORM\Entity(repositoryClass: EspacesportifRepository::class)]
@@ -16,6 +16,37 @@ class Espacesportif
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
     private ?int $id_lieu = null;
+
+    #[ORM\Column(type: 'string', nullable: false)]
+    #[Assert\NotBlank(message: "Le nom de l'espace est requis.")]
+    #[Assert\Length(max: 250, maxMessage: "Le nom de l'espace ne peut pas dépasser {{ limit }} caractères.")]
+    private ?string $nom_espace = null;
+
+    #[ORM\Column(type: 'string', nullable: false)]
+    #[Assert\NotBlank(message: "L'adresse est requise.")]
+    #[Assert\Length(max: 250, maxMessage: "L'adresse ne peut pas dépasser {{ limit }} caractères.")]
+    private ?string $adresse = null;
+
+    #[ORM\Column(type: 'string', nullable: false)]
+    #[Assert\NotBlank(message: "La catégorie est requise.")]
+    #[Assert\Choice(
+        choices: ['terrain foot', 'terrain basket', 'salle gym', 'football', 'Football\''],
+        message: "La catégorie doit être l'une des suivantes : terrain foot, terrain basket, salle gym, football."
+    )]
+    private ?string $categorie = null;
+
+    #[ORM\Column(type: 'float', nullable: false)]
+    #[Assert\NotBlank(message: "La capacité est requise.")]
+    #[Assert\GreaterThanOrEqual(value: 0, message: "La capacité doit être supérieure ou égale à 0.")]
+    private ?float $capacite = null;
+
+    #[ORM\OneToMany(targetEntity: Reservation::class, mappedBy: 'espacesportif')]
+    private Collection $reservations;
+
+    public function __construct()
+    {
+        $this->reservations = new ArrayCollection();
+    }
 
     public function getId_lieu(): ?int
     {
@@ -28,9 +59,6 @@ class Espacesportif
         return $this;
     }
 
-    #[ORM\Column(type: 'string', nullable: false)]
-    private ?string $nom_espace = null;
-
     public function getNom_espace(): ?string
     {
         return $this->nom_espace;
@@ -41,9 +69,6 @@ class Espacesportif
         $this->nom_espace = $nom_espace;
         return $this;
     }
-
-    #[ORM\Column(type: 'string', nullable: false)]
-    private ?string $adresse = null;
 
     public function getAdresse(): ?string
     {
@@ -56,9 +81,6 @@ class Espacesportif
         return $this;
     }
 
-    #[ORM\Column(type: 'string', nullable: false)]
-    private ?string $categorie = null;
-
     public function getCategorie(): ?string
     {
         return $this->categorie;
@@ -70,9 +92,6 @@ class Espacesportif
         return $this;
     }
 
-    #[ORM\Column(type: 'float', nullable: false)]
-    private ?float $capacite = null;
-
     public function getCapacite(): ?float
     {
         return $this->capacite;
@@ -82,14 +101,6 @@ class Espacesportif
     {
         $this->capacite = $capacite;
         return $this;
-    }
-
-    #[ORM\OneToMany(targetEntity: Reservation::class, mappedBy: 'espacesportif')]
-    private Collection $reservations;
-
-    public function __construct()
-    {
-        $this->reservations = new ArrayCollection();
     }
 
     /**
@@ -130,8 +141,11 @@ class Espacesportif
     public function setNomEspace(string $nom_espace): static
     {
         $this->nom_espace = $nom_espace;
-
         return $this;
     }
 
+    public function __toString(): string
+    {
+        return $this->nom_espace ?? '';
+    }
 }

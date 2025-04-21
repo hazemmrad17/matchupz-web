@@ -1,0 +1,96 @@
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="row">
+            <!-- Evaluated Players Widget -->
+            <div class="col-lg-3 col-md-12 col-6 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-title d-flex align-items-start justify-content-between">
+                            <div class="avatar flex-shrink-0">
+                                <span class="avatar-initial rounded bg-label-primary">
+                                    <i class="bx bx-user-check"></i>
+                                </span>
+                            </div>
+                            <div class="dropdown">
+                                <button class="btn p-0" type="button" data-bs-toggle="dropdown">
+                                    <i class="bx bx-dots-vertical-rounded"></i>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-end">
+                                    <a class="dropdown-item" href="{{ path('app_evaluation_physique_index') }}">Voir Tous</a>
+                                </div>
+                            </div>
+                        </div>
+                        <span>Joueurs Évalués</span>
+                        <h3 class="card-title text-nowrap mb-1">{{ stats.players_evaluated }}</h3>
+                        <small class="text-muted">
+                            Sur {{ stats.total_players }} 
+                            ({% if stats.total_players > 0 %}
+                                {{ (stats.players_evaluated / stats.total_players * 100)|round(1) }}
+                            {% else %}0{% endif %}%)
+                        </small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Average Endurance Widget -->
+            <div class="col-lg-3 col-md-6 col-6 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-title d-flex align-items-start justify-content-between">
+                            <div class="avatar flex-shrink-0">
+                                <span class="avatar-initial rounded bg-label-success">
+                                    <i class="bx bx-timer"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <span>Endurance Moyenne</span>
+                        <h3 class="card-title text-nowrap mb-1">
+                            {{ stats.avg_endurance|round(1) }}/10
+                        </h3>
+                        <small class="text-muted">Sur {{ enduranceScores|length }} évaluations</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Average Force Widget -->
+            <div class="col-lg-3 col-md-6 col-6 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-title d-flex align-items-start justify-content-between">
+                            <div class="avatar flex-shrink-0">
+                                <span class="avatar-initial rounded bg-label-danger">
+                                    <i class="bx bx-dumbbell"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <span>Force Moyenne</span>
+                        <h3 class="card-title text-nowrap mb-1">
+                            {{ stats.avg_force|round(1) }}/10
+                        </h3>
+                        <small class="text-muted">Sur {{ forceScores|length }} évaluations</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Average Speed Widget -->
+            <div class="col-lg-3 col-md-6 col-6 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-title d-flex align-items-start justify-content-between">
+                            <div class="avatar flex-shrink-0">
+                                <span class="avatar-initial rounded bg-label-info">
+                                    <i class="bx bx-run"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <span>Vitesse Moyenne</span>
+                        <h3 class="card-title text-nowrap mb-1">
+                            {{ stats.avg_vitesse|round(1) }}/10
+                        </h3>
+                        <small class="text-muted">Sur {{ vitesseScores|length }} évaluations</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

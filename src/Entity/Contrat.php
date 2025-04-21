@@ -51,17 +51,10 @@ class Contrat
     #[Assert\NotBlank(message: "Vous devez sélectionner un sponsor.")]
     private ?Sponsor $sponsor = null;
 
-    #[ORM\OneToMany(targetEntity: Transaction::class, mappedBy: 'contrat')]
-    private Collection $transactions;
-
     #[ORM\Column(type: 'string', nullable: false)]
     private ?string $signature = null;
 
-    public function __construct()
-    {
-        $this->transactions = new ArrayCollection();
-    }
-
+   
     public function getIdContrat(): ?int
     {
         return $this->Id_Contrat;

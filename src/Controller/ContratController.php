@@ -20,6 +20,9 @@ use Dompdf\Dompdf;
 use Dompdf\Options;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\Filesystem\Filesystem;
+use Twilio\Rest\Client;
+use Twilio\Exceptions\TwilioException;
+use Knp\Snappy\Pdf;
 
 #[Route('/contrat')]
 class ContratController extends AbstractController
@@ -99,64 +102,126 @@ class ContratController extends AbstractController
     #[Route('/new', name: 'contrat_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $contrat = new Contrat();
-        $form = $this->createForm(ContratType::class, $contrat);
-        $form->handleRequest($request);
+    $contrat = new Contrat();
+    $form = $this->createForm(ContratType::class, $contrat);
+    $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            try {
-                // Log form data
-                $this->logger->info('Form submitted with data:', [
-                    'Titre' => $contrat->getTitre(),
-                    'DateDebut' => $contrat->getDateDebut() ? $contrat->getDateDebut()->format('Y-m-d') : null,
-                    'DateFin' => $contrat->getDateFin() ? $contrat->getDateFin()->format('Y-m-d') : null,
-                    'Montant' => $contrat->getMontant(),
-                    'Id_sponsor' => $contrat->getSponsor() ? $contrat->getSponsor()->getNom() : null,
-                ]);
+    if ($form->isSubmitted() && $form->isValid()) {
+        try {
+            // Log form data
+            $this->logger->info('Form submitted with data:', [
+                'Titre' => $contrat->getTitre(),
+                'DateDebut' => $contrat->getDateDebut() ? $contrat->getDateDebut()->format('Y-m-d') : null,
+                'DateFin' => $contrat->getDateFin() ? $contrat->getDateFin()->format('Y-m-d') : null,
+                'Montant' => $contrat->getMontant(),
+                'Id_sponsor' => $contrat->getSponsor() ? $contrat->getSponsor()->getNom() : null,
+            ]);
 
-                // Handle signature
-                $signatureData = $form->get('signature')->getData();
-                if (!$signatureData) {
-                    $this->logger->error('No signature data received');
-                    $this->addFlash('error', 'Veuillez fournir une signature.');
-                    return $this->render('contrat/new.html.twig', [
-                        'form' => $form->createView(),
-                    ]);
-                }
-                $this->logger->info('Signature data: ' . substr($signatureData, 0, 50) . '...');
+            // Handle signature
+            $signatureData = $form->get('signature')->getData();
+            $this->logger->info('Signature data: ' . (is_string($signatureData) ? substr($signatureData, 0, 50) . '...' : 'No signature data'));
 
-                if (strpos($signatureData, 'data:image/png;base64,') !== 0) {
+            if ($signatureData) {
+                // Check if the signature is the default placeholder
+                if ($signatureData === 'signatures/signature_contrat_1741119108385.png') {
+                    // Treat as no signature
+                    $contrat->setSignature(null);
+                    $this->logger->info('Default signature placeholder detected; signature field set to null');
+                } elseif (strpos($signatureData, 'data:image/png;base64,') === 0) {
+                    // Valid base64 signature; save it
+                    $titre = $contrat->getTitre() ?: 'Untitled';
+                    $filePath = $this->saveSignature($signatureData, $titre);
+                    $contrat->setSignature($filePath);
+                    $this->logger->info('Signature saved at: ' . $filePath);
+                } else {
                     $this->logger->error('Invalid signature format');
                     $this->addFlash('error', 'Format de signature invalide.');
                     return $this->render('contrat/new.html.twig', [
                         'form' => $form->createView(),
                     ]);
                 }
-
-                // Save signature
-                $titre = $contrat->getTitre() ?: 'Untitled';
-                $filePath = $this->saveSignature($signatureData, $titre);
-                $contrat->setSignature($filePath);
-                $this->logger->info('Signature saved at: ' . $filePath);
-
-                // Persist contract
-                $entityManager->persist($contrat);
-                $entityManager->flush();
-
-                $this->addFlash('success', 'Contrat créé avec succès.');
-                return $this->redirectToRoute('contrat_main');
-            } catch (\Exception $e) {
-                $this->logger->error('Error saving contract: ' . $e->getMessage());
-                $this->addFlash('error', 'Erreur lors de la création du contrat : ' . $e->getMessage());
+            } else {
+                // No signature provided; set to null
+                $contrat->setSignature(null);
+                $this->logger->info('No signature provided; signature field set to null');
             }
-        } else {
-            $this->logger->info('Form invalid', ['errors' => (string) $form->getErrors(true, true)]);
-            $this->addFlash('error', 'Veuillez corriger les erreurs dans le formulaire.');
-        }
 
-        return $this->render('contrat/new.html.twig', [
-            'form' => $form->createView(),
-        ]);
+            // Persist contract
+            $entityManager->persist($contrat);
+            $entityManager->flush();
+
+            // Send Twilio SMS
+            $this->logger->info('Preparing to send Twilio SMS for contract: ' . $contrat->getIdContrat());
+
+            // Extract data for SMS
+            $contratId = $contrat->getIdContrat();
+            $titre = $contrat->getTitre();
+            $sponsorNom = $contrat->getSponsor() ? $contrat->getSponsor()->getNom() : 'Unknown Sponsor';
+            $dateDebut = $contrat->getDateDebut() ? $contrat->getDateDebut()->format('Y-m-d') : null;
+            $dateFin = $contrat->getDateFin() ? $contrat->getDateFin()->format('Y-m-d') : null;
+            $montant = $contrat->getMontant() ?? 0.0;
+
+            // Format dates
+            try {
+                $dateDebutFormatted = $dateDebut ? \DateTime::createFromFormat('Y-m-d', $dateDebut)->format('d/m/Y') : 'N/A';
+                $dateFinFormatted = $dateFin ? \DateTime::createFromFormat('Y-m-d', $dateFin)->format('d/m/Y') : 'N/A';
+            } catch (\Exception $e) {
+                $this->logger->error('Date formatting error: ' . $e->getMessage());
+                $this->addFlash('error', 'Erreur lors du formatage des dates : ' . $e->getMessage());
+                return $this->redirectToRoute('contrat_main');
+            }
+
+            // Twilio credentials
+            $accountSid = $this->getParameter('twilio_account_sid');
+            $authToken = $this->getParameter('twilio_auth_token');
+            $toNumber = $this->getParameter('twilio_to_number');
+            $fromNumber = $this->getParameter('twilio_from_number');
+
+            // Message body
+            $body = "Contract titled $titre with sponsor $sponsorNom from $dateDebutFormatted to $dateFinFormatted with amount " . number_format($montant, 2) . " has been registered.";
+
+            try {
+                $this->logger->info('Initializing Twilio with credentials...');
+                $twilio = new Client($accountSid, $authToken);
+
+                $this->logger->info("Attempting to send message to $toNumber from $fromNumber");
+
+                $message = $twilio->messages->create(
+                    $toNumber,
+                    [
+                        'from' => $fromNumber,
+                        'body' => $body,
+                    ]
+                );
+
+                $this->logger->info('Message sent successfully', [
+                    'sid' => $message->sid,
+                    'status' => $message->status,
+                    'dateCreated' => $message->dateCreated,
+                ]);
+
+                $this->addFlash('success', 'Contrat créé et SMS envoyé avec succès.');
+            } catch (TwilioException $e) {
+                $this->logger->error('Twilio Error sending message: ' . $e->getMessage());
+                $this->addFlash('warning', 'Contrat créé, mais échec de l\'envoi du SMS : ' . $e->getMessage());
+            } catch (\Exception $e) {
+                $this->logger->error('Error sending message: ' . $e->getMessage());
+                $this->addFlash('warning', 'Contrat créé, mais une erreur s\'est produite lors de l\'envoi du SMS : ' . $e->getMessage());
+            }
+
+            return $this->redirectToRoute('contrat_main');
+        } catch (\Exception $e) {
+            $this->logger->error('Error saving contract: ' . $e->getMessage());
+            $this->addFlash('error', 'Erreur lors de la création du contrat : ' . $e->getMessage());
+        }
+    } else {
+        $this->logger->info('Form invalid', ['errors' => (string) $form->getErrors(true, true)]);
+        $this->addFlash('error', 'Veuillez corriger les erreurs dans le formulaire.');
+    }
+
+    return $this->render('contrat/new.html.twig', [
+        'form' => $form->createView(),
+    ]);
     }
 
     #[Route('/{idContrat}', name: 'contrat_show', methods: ['GET'], requirements: ['idContrat' => '\d+'])]
@@ -276,123 +341,125 @@ class ContratController extends AbstractController
     }
 
     #[Route('/export/{format}', name: 'contrat_export', defaults: ['format' => 'xlsx'])]
-    public function export(string $format, ContratRepository $contratRepository): Response
+    public function export(string $format, ContratRepository $contratRepository, Pdf $knpSnappyPdf): Response
     {
-        $contrats = $contratRepository->findAll();
+    $contrats = $contratRepository->findAll();
 
-        switch ($format) {
-            case 'csv':
-                $spreadsheet = new Spreadsheet();
-                $sheet = $spreadsheet->getActiveSheet();
+    switch ($format) {
+        case 'csv':
+            $spreadsheet = new Spreadsheet();
+            $sheet = $spreadsheet->getActiveSheet();
 
-                $sheet->fromArray(['Titre', 'DateDebut', 'DateFin', 'Montant', 'Sponsor', 'Signature'], null, 'A1');
-                $row = 2;
-                foreach ($contrats as $contrat) {
-                    $sheet->setCellValue('A' . $row, $contrat->getTitre());
-                    $sheet->setCellValue('B' . $row, $contrat->getDateDebut() ? $contrat->getDateDebut()->format('Y-m-d') : '');
-                    $sheet->setCellValue('C' . $row, $contrat->getDateFin() ? $contrat->getDateFin()->format('Y-m-d') : '');
-                    $sheet->setCellValue('D' . $row, $contrat->getMontant());
-                    $sheet->setCellValue('E' . $row, $contrat->getSponsor() ? $contrat->getSponsor()->getNom() : 'N/A');
-                    $sheet->setCellValue('F' . $row, $contrat->getSignature());
-                    $row++;
-                }
+            $sheet->fromArray(['Titre', 'DateDebut', 'DateFin', 'Montant', 'Sponsor', 'Signature'], null, 'A1');
+            $row = 2;
+            foreach ($contrats as $contrat) {
+                $sheet->setCellValue('A' . $row, $contrat->getTitre());
+                $sheet->setCellValue('B' . $row, $contrat->getDateDebut() ? $contrat->getDateDebut()->format('Y-m-d') : '');
+                $sheet->setCellValue('C' . $row, $contrat->getDateFin() ? $contrat->getDateFin()->format('Y-m-d') : '');
+                $sheet->setCellValue('D' . $row, $contrat->getMontant());
+                $sheet->setCellValue('E' . $row, $contrat->getSponsor() ? $contrat->getSponsor()->getNom() : 'N/A');
+                $sheet->setCellValue('F' . $row, $contrat->getSignature());
+                $row++;
+            }
 
-                $writer = new Csv($spreadsheet);
-                $fileName = 'contrats_export_' . date('Y-m-d') . '.csv';
-                break;
+            $writer = new Csv($spreadsheet);
+            $fileName = 'contrats_export_' . date('Y-m-d') . '.csv';
+            break;
 
-            case 'pdf':
-                $html = '<h2>Liste des Contrats</h2><table border="1" cellpadding="5" cellspacing="0"><thead><tr><th>Titre</th><th>DateDébut</th><th>DateFin</th><th>Montant</th><th>Sponsor</th><th>Signature</th></tr></thead><tbody>';
-                foreach ($contrats as $contrat) {
-                    $sponsorName = $contrat->getSponsor() ? $contrat->getSponsor()->getNom() : 'N/A';
-                    $html .= '<tr>';
-                    $html .= '<td>' . htmlspecialchars($contrat->getTitre()) . '</td>';
-                    $html .= '<td>' . ($contrat->getDateDebut() ? $contrat->getDateDebut()->format('Y-m-d') : '') . '</td>';
-                    $html .= '<td>' . ($contrat->getDateFin() ? $contrat->getDateFin()->format('Y-m-d') : '') . '</td>';
-                    $html .= '<td>' . htmlspecialchars($contrat->getMontant()) . '</td>';
-                    $html .= '<td>' . htmlspecialchars($sponsorName) . '</td>';
-                    $html .= '<td>' . htmlspecialchars($contrat->getSignature()) . '</td>';
-                    $html .= '</tr>';
-                }
-                $html .= '</tbody></table>';
+        case 'pdf':
+            // Render the Twig template with contract data
+            $html = $this->renderView('contrat/export_pdf.html.twig', [
+                'contrats' => $contrats,
+                'logo_path' => $this->getParameter('kernel.project_dir') . '/public/img/logo_white.png'
+            ]);
 
-                $options = new Options();
-                $options->set('defaultFont', 'Arial');
-                $dompdf = new Dompdf($options);
-                $dompdf->loadHtml($html);
-                $dompdf->setPaper('A4', 'portrait');
-                $dompdf->render();
+            // PDF options
+            $pdfOptions = [
+                'enable-local-file-access' => true,
+                'encoding' => 'UTF-8',
+                'margin-top' => 10,
+                'margin-bottom' => 10,
+                'margin-left' => 10,
+                'margin-right' => 10,
+                'no-stop-slow-scripts' => true,
+                'orientation' => 'landscape', 
+            ];
 
-                return new Response(
-                    $dompdf->output(),
-                    200,
-                    [
-                        'Content-Type' => 'application/pdf',
-                        'Content-Disposition' => 'attachment; filename="contrats_export_' . date('Y-m-d') . '.pdf"',
-                    ]
-                );
+            // Generate PDF using KnpSnappy
+            $pdfContent = $knpSnappyPdf->getOutputFromHtml($html, $pdfOptions);
 
-            case 'sql':
-                $content = '';
-                foreach ($contrats as $contrat) {
-                    $titre = addslashes($contrat->getTitre());
-                    $dateDebut = $contrat->getDateDebut() ? $contrat->getDateDebut()->format('Y-m-d') : 'NULL';
-                    $dateFin = $contrat->getDateFin() ? $contrat->getDateFin()->format('Y-m-d') : 'NULL';
-                    $montant = $contrat->getMontant();
-                    $sponsorId = $contrat->getSponsor() ? $contrat->getSponsor()->getIdSponsor() : 'NULL';
-                    $signature = addslashes($contrat->getSignature());
-                    $content .= "INSERT INTO contrat (titre, date_debut, date_fin, montant, sponsor_id, signature) VALUES ('$titre', '$dateDebut', '$dateFin', $montant, $sponsorId, '$signature');\n";
-                }
+            // Create response
+            $response = new Response($pdfContent);
+            $disposition = $response->headers->makeDisposition(
+                ResponseHeaderBag::DISPOSITION_ATTACHMENT,
+                'contrats_export_' . date('Y-m-d') . '.pdf'
+            );
+            $response->headers->set('Content-Type', 'application/pdf');
+            $response->headers->set('Content-Disposition', $disposition);
 
-                return new Response(
-                    $content,
-                    200,
-                    [
-                        'Content-Type' => 'text/sql',
-                        'Content-Disposition' => 'attachment; filename="contrats_export_' . date('Y-m-d') . '.sql"',
-                    ]
-                );
+            return $response;
 
-            case 'xlsx':
-            default:
-                $spreadsheet = new Spreadsheet();
-                $sheet = $spreadsheet->getActiveSheet();
+        case 'sql':
+            $content = '';
+            foreach ($contrats as $contrat) {
+                $titre = addslashes($contrat->getTitre());
+                $dateDebut = $contrat->getDateDebut() ? $contrat->getDateDebut()->format('Y-m-d') : 'NULL';
+                $dateFin = $contrat->getDateFin() ? $contrat->getDateFin()->format('Y-m-d') : 'NULL';
+                $montant = $contrat->getMontant();
+                $sponsorId = $contrat->getSponsor() ? $contrat->getSponsor()->getIdSponsor() : 'NULL';
+                $signature = addslashes($contrat->getSignature());
+                $content .= "INSERT INTO contrat (titre, date_debut, date_fin, montant, sponsor_id, signature) VALUES ('$titre', '$dateDebut', '$dateFin', $montant, $sponsorId, '$signature');\n";
+            }
 
-                $sheet->setCellValue('A1', 'Liste des Contrats - Export personnalisé');
-                $sheet->mergeCells('A1:F1');
-                $sheet->getStyle('A1')->getFont()->setBold(true)->setSize(14);
-                $sheet->getStyle('A1')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+            return new Response(
+                $content,
+                200,
+                [
+                    'Content-Type' => 'text/sql',
+                    'Content-Disposition' => 'attachment; filename="contrats_export_' . date('Y-m-d') . '.sql"',
+                ]
+            );
 
-                $sheet->fromArray(['Titre', 'DateDebut', 'DateFin', 'Montant', 'Sponsor', 'Signature'], null, 'A3');
-                $row = 4;
-                foreach ($contrats as $contrat) {
-                    $sheet->setCellValue('A' . $row, $contrat->getTitre());
-                    $sheet->setCellValue('B' . $row, $contrat->getDateDebut() ? $contrat->getDateDebut()->format('Y-m-d') : '');
-                    $sheet->setCellValue('C' . $row, $contrat->getDateFin() ? $contrat->getDateFin()->format('Y-m-d') : '');
-                    $sheet->setCellValue('D' . $row, $contrat->getMontant());
-                    $sheet->setCellValue('E' . $row, $contrat->getSponsor() ? $contrat->getSponsor()->getNom() : 'N/A');
-                    $sheet->setCellValue('F' . $row, $contrat->getSignature());
-                    $row++;
-                }
+        case 'xlsx':
+        default:
+            $spreadsheet = new Spreadsheet();
+            $sheet = $spreadsheet->getActiveSheet();
 
-                $writer = new Xlsx($spreadsheet);
-                $fileName = 'contrats_export_' . date('Y-m-d') . '.xlsx';
-                break;
-        }
+            $sheet->setCellValue('A1', 'Liste des Contrats - Export personnalisé');
+            $sheet->mergeCells('A1:F1');
+            $sheet->getStyle('A1')->getFont()->setBold(true)->setSize(14);
+            $sheet->getStyle('A1')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
 
-        // Save temporary file
-        $tempFile = tempnam(sys_get_temp_dir(), 'contrat_export');
-        $writer->save($tempFile);
+            $sheet->fromArray(['Titre', 'DateDebut', 'DateFin', 'Montant', 'Sponsor', 'Signature'], null, 'A3');
+            $row = 4;
+            foreach ($contrats as $contrat) {
+                $sheet->setCellValue('A' . $row, $contrat->getTitre());
+                $sheet->setCellValue('B' . $row, $contrat->getDateDebut() ? $contrat->getDateDebut()->format('Y-m-d') : '');
+                $sheet->setCellValue('C' . $row, $contrat->getDateFin() ? $contrat->getDateFin()->format('Y-m-d') : '');
+                $sheet->setCellValue('D' . $row, $contrat->getMontant());
+                $sheet->setCellValue('E' . $row, $contrat->getSponsor() ? $contrat->getSponsor()->getNom() : 'N/A');
+                $sheet->setCellValue('F' . $row, $contrat->getSignature());
+                $row++;
+            }
 
-        $response = new BinaryFileResponse($tempFile);
-        $response->setContentDisposition(
-            ResponseHeaderBag::DISPOSITION_ATTACHMENT,
-            $fileName
-        );
-        $response->deleteFileAfterSend(true);
-        $response->headers->set('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+            $writer = new Xlsx($spreadsheet);
+            $fileName = 'contrats_export_' . date('Y-m-d') . '.xlsx';
+            break;
+    }
 
-        return $response;
+    // Save temporary file for non-PDF formats
+    $tempFile = tempnam(sys_get_temp_dir(), 'contrat_export');
+    $writer->save($tempFile);
+
+    $response = new BinaryFileResponse($tempFile);
+    $response->setContentDisposition(
+        ResponseHeaderBag::DISPOSITION_ATTACHMENT,
+        $fileName
+    );
+    $response->deleteFileAfterSend(true);
+    $response->headers->set('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+
+    return $response;
     }
 
     private function saveSignature(string $base64Data, string $titre): string
@@ -492,5 +559,76 @@ class ContratController extends AbstractController
     return $this->render('contrat/contrat_front.html.twig', [
         'contrats' => $contrats,
     ]);
+    }
+
+    #[Route('/contrat/send-sms', name: 'contrat_send_sms', methods: ['POST'])]
+    public function sendTwilioSms(Request $request): JsonResponse
+    {
+        $data = json_decode($request->getContent(), true);
+
+        // Extract data from the request
+        $contratId = $data['contratId'] ?? null;
+        $titre = $data['titre'] ?? 'Unknown Contract';
+        $sponsorNom = $data['sponsorNom'] ?? 'Unknown Sponsor';
+        $dateDebut = $data['dateDebut'] ?? null;
+        $dateFin = $data['dateFin'] ?? null;
+        $montant = $data['montant'] ?? 0.0;
+
+        // Log the received data for debugging
+        $this->get('logger')->info('Received SMS request', [
+            'contratId' => $contratId,
+            'titre' => $titre,
+            'sponsorNom' => $sponsorNom,
+            'dateDebut' => $dateDebut,
+            'dateFin' => $dateFin,
+            'montant' => $montant,
+        ]);
+
+        // Format dates
+        try {
+            $dateDebutFormatted = $dateDebut ? \DateTime::createFromFormat('Y-m-d', $dateDebut)->format('d/m/Y') : 'N/A';
+            $dateFinFormatted = $dateFin ? \DateTime::createFromFormat('Y-m-d', $dateFin)->format('d/m/Y') : 'N/A';
+        } catch (\Exception $e) {
+            $this->get('logger')->error('Date formatting error: ' . $e->getMessage());
+            return new JsonResponse(['status' => 'error', 'message' => 'Invalid date format'], 400);
+        }
+
+        // Twilio credentials (store these in environment variables or config)
+        $accountSid = $this->getParameter('twilio_account_sid');
+        $authToken = $this->getParameter('twilio_auth_token');
+        $toNumber = $this->getParameter('twilio_to_number');
+        $fromNumber = $this->getParameter('twilio_from_number');                        
+
+        // Message body
+        $body = "Contract titled $titre with sponsor $sponsorNom from $dateDebutFormatted to $dateFinFormatted with amount " . number_format($montant, 2) . " has been registered.";
+
+        try {
+            $this->get('logger')->info('Initializing Twilio with credentials...');
+            $twilio = new Client($accountSid, $authToken);
+
+            $this->get('logger')->info("Attempting to send message to $toNumber from $fromNumber");
+
+            $message = $twilio->messages->create(
+                $toNumber,
+                [
+                    'from' => $fromNumber,
+                    'body' => $body,
+                ]
+            );
+
+            $this->get('logger')->info('Message sent successfully', [
+                'sid' => $message->sid,
+                'status' => $message->status,
+                'dateCreated' => $message->dateCreated,
+            ]);
+
+            return new JsonResponse(['status' => 'success', 'message' => 'SMS sent successfully', 'sid' => $message->sid]);
+        } catch (TwilioException $e) {
+            $this->get('logger')->error('Twilio Error sending message: ' . $e->getMessage());
+            return new JsonResponse(['status' => 'error', 'message' => 'Failed to send SMS: ' . $e->getMessage()], 500);
+        } catch (\Exception $e) {
+            $this->get('logger')->error('Error sending message: ' . $e->getMessage());
+            return new JsonResponse(['status' => 'error', 'message' => 'An unexpected error occurred: ' . $e->getMessage()], 500);
+        }
     }
 }

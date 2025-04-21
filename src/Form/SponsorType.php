@@ -16,6 +16,7 @@ class SponsorType extends AbstractType
         $builder
             ->add('nom', TextType::class, [
                 'label' => 'Nom',
+                'empty_data' => '',
                 'attr' => [
                     'placeholder' => 'Entrer le nom du sponsor',
                     'class' => 'form-control',
@@ -23,6 +24,7 @@ class SponsorType extends AbstractType
             ])
             ->add('contact', TextType::class, [
                 'label' => 'Contact',
+                'empty_data' => '',
                 'attr' => [
                     'placeholder' => 'Entrer le numéro du sponsor',
                     'class' => 'form-control',

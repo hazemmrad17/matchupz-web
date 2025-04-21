@@ -29,10 +29,7 @@ class Sponsor
 
     #[ORM\Column(type: 'string', nullable: false)]
     #[Assert\NotBlank(message: "Le contact est obligatoire.")]
-    #[Assert\Length(
-        exactly: 8,
-        exactMessage: "Le contact doit contenir exactement 8 chiffres."
-    )]
+    
     #[Assert\Regex(
         pattern: '/^\d{8}$/',
         message: "Le contact doit contenir uniquement 8 chiffres."

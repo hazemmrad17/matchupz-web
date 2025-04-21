@@ -16,7 +16,7 @@
     <title>Matchupz Dashboard</title>
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="{{ asset('/img/favicon/favicon.ico') }}" />
+    <link rel="icon" type="image/x-icon" href="{{ asset('/img/favicon/icon.svg') }}" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -41,6 +41,80 @@
     <!-- Helpers -->
     <script src="{{ asset('/vendor/js/helpers.js') }}"></script>
     <script src="{{ asset('/js/config.js') }}"></script>
+    <style>
+      /* Ensure proper footer placement */
+      html, body {
+        height: 100%;
+      }
+      .layout-wrapper {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+      .content-wrapper {
+        flex: 1;
+      }
+      /* Your original footer styles */
+      .footer {
+        background-color: #f8f9fa !important;
+      }
+
+
+      .custom-pagination {
+            display: flex;
+            justify-content: center; /* Centre la pagination horizontalement */
+        }
+
+        .pagination {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            display: inline-flex;
+            gap: 5px; /* Espacement entre les éléments */
+        }
+
+        .pagination li {
+            display: inline-block;
+        }
+        .pagination .page-item .page-link {
+            min-width: 40px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            padding: 0;
+            border-radius: 50%; /* Boutons ronds */
+            background-color: #f8f9fa; /* Fond clair par défaut */
+            color: #007bff; /* Couleur du texte */
+            border: none;
+            font-weight: bold;
+            transition: all 0.3s ease; /* Animation fluide */
+        }
+
+        .pagination .page-item.active .page-link {
+            background-color: #007bff; /* Fond bleu pour la page active */
+            color: white; /* Texte blanc */
+            border: none;
+        }
+        .pagination .page-item .page-link:hover {
+            background-color: #0056b3; /* Fond plus foncé au survol */
+            color: white;
+            text-decoration: none;
+        }
+
+        .pagination .page-item.disabled .page-link {
+            background-color: #e9ecef; /* Fond gris pour les boutons désactivés */
+            color: #6c757d;
+            cursor: not-allowed;
+        }
+
+        /* Style spécifique pour les flèches */
+        .pagination .page-item:first-child .page-link,
+        .pagination .page-item:last-child .page-link {
+            border-radius: 50%;
+            font-size: 1.2rem;
+            padding: 0 10px;
+        }
+    </style>
   </head>
 
   <body>
@@ -70,6 +144,30 @@
         </div>
       </div>
 
+      <!-- Your exact footer code -->
+      <footer class="footer bg-light">
+        <div class="container-fluid d-flex flex-md-row flex-column justify-content-between align-items-md-center gap-1 container-p-x py-3">
+          <div>
+            <a href="https://themeselection.com/demo/sneat-bootstrap-html-admin-template/landing/" target="_blank" class="footer-text fw-bolder">MatchupZ</a>
+            ©
+          </div>
+          <div>
+            <div class="dropdown dropup footer-link me-3">
+              <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Language
+              </button>
+              <div class="dropdown-menu dropdown-menu-end">
+                <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-dollar"></i> Francais</a>
+                <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-euro"></i> English</a>
+                <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-pound"></i> Espanol</a>
+              </div>
+            </div>
+            
+            <a href="{{ path('app_user_logout') }}" class="btn btn-sm btn-outline-danger"><i class="bx bx-log-out-circle"></i> Logout</a>
+          </div>
+        </div>
+      </footer>
+
       <!-- Buy Now Button -->
       <div class="buy-now">
         <a
@@ -79,7 +177,7 @@
         >Upgrade to Pro</a>
       </div>
     </div>
-
+    
     <!-- Core JS -->
     <script src="{{ asset('/vendor/libs/jquery/jquery.js') }}"></script>
     <script src="{{ asset('/vendor/libs/popper/popper.js') }}"></script>
@@ -100,5 +198,6 @@
 
     <!-- GitHub Buttons -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </body>
 </html>

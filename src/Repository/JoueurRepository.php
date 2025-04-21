@@ -36,4 +36,10 @@ class JoueurRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    // Simple count of all players
+    public function countAllPlayers(): int
+    {
+        return $this->count([]);
+    }
 }

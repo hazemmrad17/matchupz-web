@@ -20,6 +20,7 @@ class ContratType extends AbstractType
         $builder
             ->add('Titre', TextType::class, [
                 'label' => 'Titre du contrat',
+                'empty_data' => '',
                 'attr' => [
                     'placeholder' => 'Entrer le titre du contrat',
                     'class' => 'form-control'],
@@ -51,6 +52,7 @@ class ContratType extends AbstractType
             ])
             ->add('Montant', NumberType::class, [
                 'label' => 'Montant',
+                'empty_data' => 0,
                 'attr' => [
                     'placeholder' => 'Entrer le montant du contrat',
                     'class' => 'form-control',

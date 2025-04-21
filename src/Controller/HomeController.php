@@ -10,21 +10,11 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class HomeController extends AbstractController
 {
-    #[Route('/baseM', name: 'app_home')]
+    #[Route('/', name: 'app_home')]
     public function index(): Response
     {
-        return $this->render('/front/baseM.html.twig', [
+        return $this->render('/baseM.html.twig', [
             'controller_name' => 'HomeController',
         ]);
     }
-
-    #[Route('/front', name: 'sponsor_front')]
-    public function blog(): Response
-    {
-        return $this->render('/sponsor/{idSponsor}/front.twig', [
-            'controller_name' => 'HomeController',
-        ]);
-    }
-
-    
 }

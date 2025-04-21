@@ -11,10 +11,21 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use Knp\Snappy\Pdf;
 
 #[Route('/sport')]
 class SportController extends AbstractController
 {
+    private EntityManagerInterface $entityManager;
+
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
     #[Route('/', name: 'sport_index', methods: ['GET'])]
     public function index(SportRepository $sportRepository, JoueurRepository $joueurRepository): Response
     {
@@ -47,7 +58,6 @@ class SportController extends AbstractController
         ]);
     }
 
-    // Moved statistics route before show/edit/delete to ensure it takes precedence
     #[Route('/statistics', name: 'sport_statistics', methods: ['GET'])]
     public function statistics(SportRepository $sportRepository): Response
     {
@@ -126,5 +136,108 @@ class SportController extends AbstractController
         }
 
         return $this->redirectToRoute('sport_index');
+    }
+
+    #[Route('/export/csv', name: 'sport_export_csv')]
+    public function exportCsv(SportRepository $sportRepository): Response
+    {
+        $sports = $sportRepository->findAll();
+
+        $output = fopen('php://memory', 'w');
+
+        fputcsv($output, [
+            'Nom du Sport',
+            'Description',
+        ]);
+
+        foreach ($sports as $sport) {
+            fputcsv($output, [
+                $sport->getNomSport(),
+                $sport->getDescription() ?? 'N/A',
+            ]);
+        }
+
+        fseek($output, 0);
+
+        $response = new Response(stream_get_contents($output));
+        fclose($output);
+
+        $disposition = $response->headers->makeDisposition(
+            ResponseHeaderBag::DISPOSITION_ATTACHMENT,
+            'sports_export_' . date('Y-m-d') . '.csv'
+        );
+        $response->headers->set('Content-Type', 'text/csv');
+        $response->headers->set('Content-Disposition', $disposition);
+
+        return $response;
+    }
+
+    #[Route('/export/pdf', name: 'sport_export_pdf')]
+    public function exportPdf(SportRepository $sportRepository, Pdf $knpSnappyPdf): Response
+    {
+        $sports = $sportRepository->findAll();
+
+        $html = $this->renderView('sport/export_pdf.html.twig', [
+            'sports' => $sports,
+            'logo_path' => $this->getParameter('kernel.project_dir').'/public/img/logo_white.png'
+        ]);
+
+        $pdfOptions = [
+            'enable-local-file-access' => true,
+            'encoding' => 'UTF-8',
+            'margin-top' => 10,
+            'margin-bottom' => 10,
+            'margin-left' => 10,
+            'margin-right' => 10,
+            'no-stop-slow-scripts' => true,
+        ];
+
+        $pdfContent = $knpSnappyPdf->getOutputFromHtml($html, $pdfOptions);
+
+        $response = new Response($pdfContent);
+        $disposition = $response->headers->makeDisposition(
+            ResponseHeaderBag::DISPOSITION_ATTACHMENT,
+            'sports_export_' . date('Y-m-d') . '.pdf'
+        );
+        $response->headers->set('Content-Type', 'application/pdf');
+        $response->headers->set('Content-Disposition', $disposition);
+
+        return $response;
+    }
+
+    #[Route('/export/excel', name: 'sport_export_excel')]
+    public function exportExcel(SportRepository $sportRepository): Response
+    {
+        $sports = $sportRepository->findAll();
+
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+
+        $sheet->setCellValue('A1', 'Nom du Sport');
+        $sheet->setCellValue('B1', 'Description');
+
+        $row = 2;
+        foreach ($sports as $sport) {
+            $sheet->setCellValue('A' . $row, $sport->getNomSport());
+            $sheet->setCellValue('B' . $row, $sport->getDescription() ?? 'N/A');
+            $row++;
+        }
+
+        $writer = new Xlsx($spreadsheet);
+        $fileName = 'sports_export_' . date('Y-m-d') . '.xlsx';
+        $tempFile = tempnam(sys_get_temp_dir(), 'sports_export');
+        $writer->save($tempFile);
+
+        $response = new Response(file_get_contents($tempFile));
+        unlink($tempFile);
+
+        $disposition = $response->headers->makeDisposition(
+            ResponseHeaderBag::DISPOSITION_ATTACHMENT,
+            $fileName
+        );
+        $response->headers->set('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        $response->headers->set('Content-Disposition', $disposition);
+
+        return $response;
     }
 }

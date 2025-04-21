@@ -156,7 +156,7 @@ class User
     }
 
     #[ORM\Column(type: 'integer', nullable: false)]
-    private ?int $reset_code = null;
+    private ?int $reset_code = 0;
 
     public function getReset_code(): ?int
     {

@@ -2,47 +2,8 @@
   <div class="app-brand demo">
     <a href="{{ path('joueur_main') }}" class="app-brand-link">
       <span class="app-brand-logo demo">
-        <svg
-          width="25"
-          viewBox="0 0 25 42"
-          version="1.1"
-          xmlns="http://www.w3.org/2000/svg"
-          xmlns:xlink="http://www.w3.org/1999/xlink"
-        >
-          <!-- SVG content remains unchanged -->
-          <defs>
-            <path d="..." id="path-1"></path>
-            <path d="..." id="path-3"></path>
-            <path d="..." id="path-4"></path>
-            <path d="..." id="path-5"></path>
-          </defs>
-          <g id="g-app-brand" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-            <g id="Brand-Logo" transform="translate(-27.000000, -15.000000)">
-              <g id="Icon" transform="translate(27.000000, 15.000000)">
-                <g id="Mask" transform="translate(0.000000, 8.000000)">
-                  <mask id="mask-2" fill="white">
-                    <use xlink:href="#path-1"></use>
-                  </mask>
-                  <use fill="#696cff" xlink:href="#path-1"></use>
-                  <g id="Path-3" mask="url(#mask-2)">
-                    <use fill="#696cff" xlink:href="#path-3"></use>
-                    <use fill-opacity="0.2" fill="#FFFFFF" xlink:href="#path-3"></use>
-                  </g>
-                  <g id="Path-4" mask="url(#mask-2)">
-                    <use fill="#696cff" xlink:href="#path-4"></use>
-                    <use fill-opacity="0.2" fill="#FFFFFF" xlink:href="#path-4"></use>
-                  </g>
-                </g>
-                <g id="Triangle" transform="translate(19.000000, 11.000000) rotate(-300.000000) translate(-19.000000, -11.000000)">
-                  <use fill="#696cff" xlink:href="#path-5"></use>
-                  <use fill-opacity="0.2" fill="#FFFFFF" xlink:href="#path-5"></use>
-                </g>
-              </g>
-            </g>
-          </g>
-        </svg>
+        <img src="{{ asset('img/logo_white.svg') }}" alt="Your App Name" width="200" height="200">
       </span>
-      <span class="app-brand-text demo menu-text fw-bolder ms-2">Sneat</span>
     </a>
     <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
       <i class="bx bx-chevron-left bx-sm align-middle"></i>
@@ -53,7 +14,7 @@
 
   <ul class="menu-inner py-1">
     <!-- Dashboard -->
-    <li class="menu-item {% if app.request.attributes.get('_route') == 'app_dashboard' %}active{% endif %}">
+    <li class="menu-item {% if app.request.attributes.get('_route') == 'joueur_main' %}active{% endif %}">
       <a href="{{ path('joueur_main') }}" class="menu-link">
         <i class="menu-icon tf-icons bx bx-home-circle"></i>
         <div data-i18n="Dashboard">Dashboard</div>
@@ -65,58 +26,51 @@
       <span class="menu-header-text">Users Section</span>
     </li>
     <!-- Users -->
-    <li class="menu-item {% if app.request.attributes.get('_route') == 'app_users' %}active{% endif %}">
-      <a href="{{ path('joueur_main') }}" class="menu-link">
+    <li class="menu-item {% if app.request.attributes.get('_route') == 'joueur_main' %}active{% endif %}">
+      <a href="{{ path('app_user_index') }}" class="menu-link">
         <i class="menu-icon tf-icons bx bx-user"></i>
         <div data-i18n="Users">Users</div>
       </a>
     </li>
 
-    <!-- Under Team Management section -->
-    <li class="menu-item {% if app.request.attributes.get('_route') starts with 'joueur_' or app.request.attributes.get('_route') starts with 'sport_' or app.request.attributes.get('_route') starts with 'club_' %}active open{% endif %}">
-      <a href="javascript:void(0);" class="menu-link menu-toggle">
-        <i class="menu-icon tf-icons bx bx-group"></i>
-        <div data-i18n="Equipes">Equipes</div>
-      </a>
-      <ul class="menu-sub">
-        <li class="menu-item {% if app.request.attributes.get('_route') == 'joueur_main' %}active{% endif %}">
-          <a href="{{ path('joueur_main') }}" class="menu-link">
-            <div data-i18n="Joueurs">Joueurs</div>
-          </a>
+      <!-- Spacer: Players Section -->
+        <li class="menu-header small text-uppercase">
+            <span class="menu-header-text">Section Staff Technique</span>
         </li>
-        <li class="menu-item">
-          <a href="{{ path('joueur_main') }}" class="menu-link">
-            <div data-i18n="EvaluationPhysique">Evaluation Physique</div>
-          </a>
+        <!-- Team Management -->
+        <li class="menu-item {% if app.request.attributes.get('_route') starts with 'joueur_' or app.request.attributes.get('_route') starts with 'sport_' or app.request.attributes.get('_route') starts with 'club_' or app.request.attributes.get('_route') starts with 'performance_joueur_' or app.request.attributes.get('_route') starts with 'app_historique_club_' or app.request.attributes.get('_route') starts with 'app_evaluation_physique_' %}active open{% endif %}">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-group"></i>
+                <div data-i18n="Equipes">Joueurs</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item {% if app.request.attributes.get('_route') starts with 'joueur_' %}active{% endif %}">
+                    <a href="{{ path('joueur_main') }}" class="menu-link">
+                        <div data-i18n="Joueurs">Joueurs</div>
+                    </a>
+                </li>
+                <li class="menu-item {% if app.request.attributes.get('_route') starts with 'club_' %}active{% endif %}">
+                    <a href="{{ path('club_index') }}" class="menu-link">
+                        <div data-i18n="Club">Club</div>
+                    </a>
+                </li>
+                <li class="menu-item {% if app.request.attributes.get('_route') starts with 'sport_' %}active{% endif %}">
+                    <a href="{{ path('sport_index') }}" class="menu-link">
+                        <div data-i18n="Sport">Sport</div>
+                    </a>
+                </li>
+                <li class="menu-item {% if app.request.attributes.get('_route') starts with 'app_historique_club_' %}active{% endif %}">
+                    <a href="{{ path('app_historique_club_index') }}" class="menu-link">
+                        <div data-i18n="HistoriqueClub">Historique Transferts</div>
+                    </a>
+                </li>
+            </ul>
         </li>
-        <li class="menu-item {% if app.request.attributes.get('_route') starts with 'club_' %}active{% endif %}">
-          <a href="{{ path('club_index') }}" class="menu-link">
-            <div data-i18n="Club">Club</div>
-          </a>
-        </li>
-        <li class="menu-item {% if app.request.attributes.get('_route') starts with 'sport_' %}active{% endif %}">
-          <a href="{{ path('sport_index') }}" class="menu-link">
-            <div data-i18n="Sport">Sport</div>
-          </a>
-        </li>
-        <li class="menu-item">
-          <a href="{{ path('joueur_main') }}" class="menu-link">
-            <div data-i18n="PerformanceJoueur">Performance Joueur</div>
-          </a>
-        </li>
-        <li class="menu-item">
-          <a href="{{ path('joueur_main') }}" class="menu-link">
-            <div data-i18n="HistoriqueClub">Historique Club</div>
-          </a>
-        </li>
-      </ul>
-    </li>
-
     <!-- Spacer: Match Management -->
     <li class="menu-header small text-uppercase">
       <span class="menu-header-text">Match Management</span>
     </li>
-    <!-- Matchs (Scrollable with 2 items) -->
+    <!-- Matchs -->
     <li class="menu-item {% if app.request.attributes.get('_route') starts with 'app_matchs_' %}active open{% endif %}">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon tf-icons bx bx-football"></i>
@@ -124,13 +78,42 @@
       </a>
       <ul class="menu-sub">
         <li class="menu-item {% if app.request.attributes.get('_route') == 'app_matchs_upcoming' %}active{% endif %}">
-          <a href="{{ path('joueur_main') }}" class="menu-link">
-            <div data-i18n="Upcoming">Upcoming</div>
+          <a href="{{ path('match_main') }}" class="menu-link">
+            <div data-i18n="Upcoming">Matches</div>
           </a>
         </li>
         <li class="menu-item {% if app.request.attributes.get('_route') == 'app_matchs_past' %}active{% endif %}">
-          <a href="{{ path('joueur_main') }}" class="menu-link">
-            <div data-i18n="Past">Past</div>
+          <a href="{{ path('schedule_main') }}" class="menu-link">
+            <div data-i18n="Past">Planning </div>
+          </a>
+        </li>
+      </ul>
+    </li>
+
+    <!-- Spacer: Sports Space -->
+    <li class="menu-header small text-uppercase">
+      <span class="menu-header-text">Section Espace</span>
+    </li>
+    <!-- Espace Sportif -->
+    <li class="menu-item {% if app.request.attributes.get('_route') starts with 'espace_' or app.request.attributes.get('_route') starts with 'reservation_' or app.request.attributes.get('_route') starts with 'abonnement_' %}active open{% endif %}">
+      <a href="javascript:void(0);" class="menu-link menu-toggle">
+        <i class="menu-icon tf-icons bx bx-stadium"></i>
+        <div data-i18n="EspaceSportif">Espace Sportif</div>
+      </a>
+      <ul class="menu-sub">
+        <li class="menu-item {% if app.request.attributes.get('_route') == 'espace_index' %}active{% endif %}">
+          <a href="{{ path('espace_index') }}" class="menu-link">
+            <div data-i18n="Facilities">Facilités</div>
+          </a>
+        </li>
+        <li class="menu-item {% if app.request.attributes.get('_route') starts with 'reservation_' %}active{% endif %}">
+          <a href="{{ path('reservation_index') }}" class="menu-link">
+            <div data-i18n="Statistics">Réservation</div>
+          </a>
+        </li>
+        <li class="menu-item {% if app.request.attributes.get('_route') starts with 'abonnement_' %}active{% endif %}">
+          <a href="{{ path('abonnement_index') }}" class="menu-link">
+            <div data-i18n="Abonnement">Abonnement</div>
           </a>
         </li>
       </ul>
@@ -140,7 +123,7 @@
     <li class="menu-header small text-uppercase">
       <span class="menu-header-text">Logistics</span>
     </li>
-    <!-- Logistique (Scrollable with 2 items) -->
+    <!-- Logistique -->
     <li class="menu-item {% if app.request.attributes.get('_route') starts with 'app_logistique_' %}active open{% endif %}">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon tf-icons bx bx-truck"></i>
@@ -148,13 +131,13 @@
       </a>
       <ul class="menu-sub">
         <li class="menu-item {% if app.request.attributes.get('_route') == 'app_logistique_transport' %}active{% endif %}">
-          <a href="{{ path('joueur_main') }}" class="menu-link">
-            <div data-i18n="Transport">Transport</div>
+          <a href="{{ path('app_fournisseur_index') }}" class="menu-link">
+            <div data-i18n="Fournisseur">Fournisseur</div>
           </a>
         </li>
         <li class="menu-item {% if app.request.attributes.get('_route') == 'app_logistique_equipment' %}active{% endif %}">
-          <a href="{{ path('joueur_main') }}" class="menu-link">
-            <div data-i18n="Equipment">Equipment</div>
+          <a href="{{ path('app_materiel_index') }}" class="menu-link">
+            <div data-i18n="materiel">Materiel</div>
           </a>
         </li>
       </ul>
@@ -164,7 +147,7 @@
     <li class="menu-header small text-uppercase">
       <span class="menu-header-text">Sponsorship</span>
     </li>
-    <!-- Sponsoring (Scrollable with 2 items) -->
+    <!-- Sponsoring -->
     <li class="menu-item {% if app.request.attributes.get('_route') starts with 'app_sponsoring_' %}active open{% endif %}">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon tf-icons bx bx-money"></i>
@@ -184,28 +167,6 @@
       </ul>
     </li>
 
-    <!-- Spacer: Sports Space -->
-    <li class="menu-header small text-uppercase">
-      <span class="menu-header-text">Sports Space</span>
-    </li>
-    <!-- Espace Sportif (Scrollable with 2 items) -->
-    <li class="menu-item {% if app.request.attributes.get('_route') starts with 'app_espace_' %}active open{% endif %}">
-      <a href="javascript:void(0);" class="menu-link menu-toggle">
-        <i class="menu-icon tf-icons bx bx-stadium"></i>
-        <div data-i18n="EspaceSportif">Espace Sportif</div>
-      </a>
-      <ul class="menu-sub">
-        <li class="menu-item {% if app.request.attributes.get('_route') == 'app_espace_facilities' %}active{% endif %}">
-          <a href="{{ path('joueur_main') }}" class="menu-link">
-            <div data-i18n="Facilities">Facilities</div>
-          </a>
-        </li>
-        <li class="menu-item {% if app.request.attributes.get('_route') == 'app_espace_events' %}active{% endif %}">
-          <a href="{{ path('joueur_main') }}" class="menu-link">
-            <div data-i18n="Events">Events</div>
-          </a>
-        </li>
-      </ul>
-    </li>
+
   </ul>
 </aside>

@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails du Matériel #{{ materiel.id }}{% endblock %}
+
+{% block content %}
+<div class="content-wrapper">
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <h4 class="fw-bold py-3 mb-4">
+            <span class="text-muted fw-light">Matériel /</span> Détails
+        </h4>
+
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="card-title mb-0">Matériel #{{ materiel.id }}</h5>
+                <div>
+                    <a href="{{ path('app_materiel_edit', {'id': materiel.id}) }}" class="btn btn-sm btn-primary">Modifier</a>
+                    <a href="{{ path('app_materiel_index') }}" class="btn btn-sm btn-secondary">Retour</a>
+                    <form method="post" action="{{ path('app_materiel_delete', {'id': materiel.id}) }}" style="display:inline;" onsubmit="return confirm('Confirmer la suppression?');">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ materiel.id) }}">
+                        <button class="btn btn-sm btn-danger" type="submit">Supprimer</button>
+                    </form>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6>Nom</h6>
+                        <p>{{ materiel.nom }}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <h6>Type</h6>
+                        <p>
+                            <span class="badge bg-label-{{ 
+                                materiel.type == 'EQUIPEMENT_SPORTIF' ? 'primary' : 
+                                (materiel.type == 'ACCESSOIRE' ? 'info' :
+                                (materiel.type == 'VETEMENT' ? 'success' : 'warning')) 
+                            }}">
+                                {{ materiel.type|replace({'_': ' '}) }}
+                            </span>
+                        </p>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-6">
+                        <h6>Quantité</h6>
+                        <p>{{ materiel.quantite }}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <h6>État</h6>
+                        <p>
+                            <span class="badge bg-label-{{ 
+                                materiel.etat == 'NEUF' ? 'primary' : 
+                                (materiel.etat == 'BON_ETAT' ? 'success' :
+                                (materiel.etat == 'USAGE' ? 'warning' : 'danger')) 
+                            }}">
+                                {{ materiel.etat|replace({'_': ' '}) }}
+                            </span>
+                        </p>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-6">
+                        <h6>Prix Unitaire</h6>
+                        <p>{{ materiel.prix | number_format(2, '.', ',') }} €</p>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-12">
+                        <h6>Fournisseur</h6>
+                        <p>
+                            {% if materiel.fournisseur %}
+                                <a href="{{ path('app_fournisseur_show', {'id_fournisseur': materiel.fournisseur.id_fournisseur}) }}">
+                                    {{ materiel.fournisseur.nom }}
+                                </a>
+                            {% else %}
+                                <span class="text-muted">Aucun fournisseur associé</span>
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

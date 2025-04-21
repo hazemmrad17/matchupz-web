@@ -1,0 +1,179 @@
+{% extends 'base.html.twig' %}
+
+{% block searchbar %}
+    {% include 'searchbar.html.twig' %}
+{% endblock %}
+
+{% block title %}Liste des Abonnements{% endblock %}
+
+{% block content %}
+    <div class="content-wrapper">
+        <div class="container-xxl flex-grow-1 container-p-y">
+            {% for message in app.flashes('success') %}
+                <div class="alert alert-success">{{ message }}</div>
+            {% endfor %}
+            {% for message in app.flashes('error') %}
+                <div class="alert alert-danger">{{ message }}</div>
+            {% endfor %}
+
+            {% include 'abonnement/abonnement_widgets.html.twig' %}
+            <div class="card">
+                <h5 class="card-header d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center">
+                        <span>Liste des Abonnements</span>
+                        <div class="navbar-nav align-items-center ms-3">
+                            <div class="nav-item d-flex align-items-center">
+                                <i class="bx bx-search fs-4 lh-0"></i>
+                                <form method="get" action="{{ path('abonnement_index') }}" id="searchForm">
+                                    <input
+                                        type="text"
+                                        name="search"
+                                        id="searchInput"
+                                        class="form-control border-0 shadow-none"
+                                        placeholder="Rechercher un abonnement..."
+                                        aria-label="Rechercher un abonnement..."
+                                        value="{{ searchTerm|default('') }}"
+                                    />
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <a href="{{ path('abonnement_new') }}" class="btn btn-primary me-2">Ajouter un Abonnement</a>
+                        <div class="dropdown">
+                            <button type="button" class="btn dropdown-toggle btn-yellow" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bx bx-export me-1"></i> Exporter
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{{ path('abonnement_export_csv') }}">Exporter en CSV</a></li>
+                                <li><a class="dropdown-item" href="{{ path('abonnement_export_pdf') }}">Exporter en PDF</a></li>
+                                <li><a class="dropdown-item" href="{{ path('abonnement_export_excel') }}">Exporter en Excel</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </h5>
+                <div class="table-responsive text-nowrap">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Club</th>
+                                <th>Type d'Abonnement</th>
+                                <th>Date de Début</th>
+                                <th>Date de Fin</th>
+                                <th>Tarif</th>
+                                <th>État</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-border-bottom-0">
+                            {% for abonnement in abonnements %}
+                                <tr class="table-default">
+                                    <td>
+                                        <i class="fab fa-sketch fa-lg text-warning me-3"></i>
+                                        <strong>{{ abonnement.club.nomClub }}</strong>
+                                    </td>
+                                    <td>{{ abonnement.typeAbonnement }}</td>
+                                    <td>{{ abonnement.dateDebut|date('d/m/Y') }}</td>
+                                    <td>{{ abonnement.dateFin|date('d/m/Y') }}</td>
+                                    <td>{{ abonnement.tarif }}</td>
+                                    <td>{{ abonnement.etat }}</td>
+                                    <td>
+                                        <div class="dropdown">
+                                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                                <i class="bx bx-dots-vertical-rounded"></i>
+                                            </button>
+                                            <div class="dropdown-menu">
+                                                <a class="dropdown-item" href="{{ path('abonnement_show', {'idAbonnement': abonnement.idAbonnement}) }}">
+                                                    <i class="bx bx-show me-1"></i> Voir
+                                                </a>
+                                                <a class="dropdown-item" href="{{ path('abonnement_edit', {'idAbonnement': abonnement.idAbonnement}) }}">
+                                                    <i class="bx bx-edit-alt me-1"></i> Modifier
+                                                </a>
+                                                <form method="post" action="{{ path('abonnement_delete', {'idAbonnement': abonnement.idAbonnement}) }}" style="display:inline;" onsubmit="return confirm('Confirmer la suppression?');">
+                                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ abonnement.idAbonnement) }}">
+                                                    <button class="dropdown-item" type="submit">
+                                                        <i class="bx bx-trash me-1"></i> Supprimer
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="7" class="text-center">Aucun abonnement trouvé</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer">
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item {{ abonnements.currentPageNumber == 1 ? 'disabled' : '' }}">
+                                <a class="page-link" href="{{ path('abonnement_index', {'page': abonnements.currentPageNumber - 1, 'search': searchTerm|default('')}) }}" aria-label="Previous">
+                                    <span aria-hidden="true">«</span>
+                                </a>
+                            </li>
+                            {% for i in 1..abonnements.pageCount %}
+                                <li class="page-item {{ abonnements.currentPageNumber == i ? 'active' : '' }}">
+                                    <a class="page-link" href="{{ path('abonnement_index', {'page': i, 'search': searchTerm|default('')}) }}">{{ i }}</a>
+                                </li>
+                            {% endfor %}
+                            <li class="page-item {{ abonnements.currentPageNumber == abonnements.pageCount ? 'disabled' : '' }}">
+                                <a class="page-link" href="{{ path('abonnement_index', {'page': abonnements.currentPageNumber + 1, 'search': searchTerm|default('')}) }}" aria-label="Next">
+                                    <span aria-hidden="true">»</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+
+            <h5 class="mt-4">Abonnements Actifs</h5>
+            <div class="card">
+                <div class="card-body">
+                    <ul class="p-0 m-0">
+                        {% for abonnement in active_abonnements %}
+                            <li class="d-flex mb-4 pb-1">
+                                <div class="avatar flex-shrink-0 me-3">
+                                    <img src="{{ asset('img/icons/unicons/chart.png') }}" alt="Abonnement" class="rounded" />
+                                </div>
+                                <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                                    <div class="me-2">
+                                        <h6 class="mb-0">{{ abonnement.club.nomClub }}</h6>
+                                        <small class="text-muted">{{ abonnement.dateDebut|date('d/m/Y') }} - {{ abonnement.typeAbonnement }}</small>
+                                    </div>
+                                    <div class="user-progress">
+                                        <small class="fw-semibold">{{ abonnement.etat }}</small>
+                                    </div>
+                                </div>
+                            </li>
+                        {% else %}
+                            <li>Aucun abonnement actif.</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const searchInput = document.getElementById('searchInput');
+            const searchForm = document.getElementById('searchForm');
+
+            function debounce(func, wait) {
+                let timeout;
+                return function (...args) {
+                    clearTimeout(timeout);
+                    timeout = setTimeout(() => func.apply(this, args), wait);
+                };
+            }
+
+            searchInput.addEventListener('input', debounce(function () {
+                searchForm.submit();
+            }, 300));
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+    {% block searchbar %}
+        {% include 'searchbar.html.twig' %}
+    {% endblock %}
+
+{% block title %}Liste des Matchs{% endblock %}
+
+{% block content %}
+
+    <div class="content-wrapper">
+        <div class="container-xxl flex-grow-1 container-p-y">
+                {% block widgets %}
+                          {% include 'match/widgets.html.twig' %}
+                {% endblock %}
+                <div class="card">
+                    <h5 class="card-header d-flex justify-content-between align-items-center">
+                        Liste des Matchs
+                        <a href="{{ path('match_new') }}" class="btn btn-primary">Ajouter un match</a>
+                    </h5>
+                    <div class="table-responsive text-nowrap">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Compétiteur 1</th>
+                                    <th>Compétiteur 2</th>
+                                    <th>Type du sport</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-border-bottom-0">
+                                {% for match in matches %}
+                                    <tr class="table-default">
+                                        <td>
+                                            <i class="fab fa-sketch fa-lg text-warning me-3"></i>
+                                            <strong>{{ match.c1 }}</strong>
+                                        </td>
+                                        <td>
+                                            <i class="fab fa-sketch fa-lg text-warning me-3"></i>
+                                            <strong>{{ match.c2 }}</strong>
+                                        </td>
+                                        <td>{{ match.sportType ?? 'N/A' }}</td>
+                                        <td>
+                                            <div class="dropdown">
+                                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                                    <i class="bx bx-dots-vertical-rounded"></i>
+                                                </button>
+                                                <div class="dropdown-menu">
+                                                    <a class="dropdown-item" href="{{ path('match_show', {'id': match.idMatch}) }}">
+                                                        <i class="bx bx-show me-1"></i> Voir
+                                                    </a>
+                                                    <a class="dropdown-item" href="{{ path('match_edit', {'id': match.idMatch}) }}">
+                                                        <i class="bx bx-edit-alt me-1"></i> Modifier
+                                                    </a>
+                                                    <form method="post" action="{{ path('match_delete', {'id': match.idMatch}) }}" style="display:inline;" onsubmit="return confirm('Confirmer la suppression?');">
+                                                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ match.idMatch) }}">
+                                                        <button class="dropdown-item" type="submit">
+                                                            <i class="bx bx-trash me-1"></i> Supprimer
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                {% else %}
+                                    <tr>
+                                        <td colspan="4" class="text-center">Aucun match trouvé</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

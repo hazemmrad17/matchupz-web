@@ -235,12 +235,22 @@ class SponsorController extends AbstractController
             break;
 
         case 'pdf':
-            $html = '<h2>Liste des Sponsors</h2><table border="1" cellpadding="5" cellspacing="0"><thead><tr><th>Nom</th><th>Contact</th><th>Pack</th></tr></thead><tbody>';
-            foreach ($sponsors as $sponsor) {
-                $html .= '<tr><td>' . $sponsor->getNom() . '</td><td>' . $sponsor->getContact() . '</td><td>' . $sponsor->getPack() . '</td></tr>';
-            }
-            $html .= '</tbody></table>';
-
+            $html = $this->renderView('sponsor/export_pdf.html.twig', [
+                'sponsors' => $sponsors,
+                'logo_path' => $this->getParameter('kernel.project_dir') . '/public/img/logo_white.png'
+            ]);
+            
+            $pdfOptions = [
+                'enable-local-file-access' => true,
+                'encoding' => 'UTF-8',
+                'margin-top' => 10,
+                'margin-bottom' => 10,
+                'margin-left' => 10,
+                'margin-right' => 10,
+                'no-stop-slow-scripts' => true,
+                'orientation' => 'landscape', 
+            ];
+            
             $options = new Options();
             $options->set('defaultFont', 'Arial');
             $dompdf = new Dompdf($options);
