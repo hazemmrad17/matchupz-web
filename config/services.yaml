@@ -7,6 +7,7 @@ parameters:
     profile_pictures_directory: '%kernel.project_dir%/public/uploads/profile_pictures'
     club_photos_directory: '%kernel.project_dir%/public/uploads/club_photos'
     photos_directory: '%kernel.project_dir%/public/uploads/photos'
+    app.api_ninja_key: '%env(API_NINJA_KEY)%'  # Added for GeocodingService
 services:
     # default configuration for services in *this* file
     _defaults:
@@ -24,3 +25,6 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    App\Service\GeocodingService:
+        arguments:
+            $apiKey: '%app.api_ninja_key%'

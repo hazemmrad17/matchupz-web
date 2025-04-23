@@ -150,9 +150,9 @@ class __TwigTemplate_c3aa4f8d3f3417a08ba224bf198ee9a7 extends Template
 </head>
 <body>
     <div class=\"header\">
-        <img src=\"file:///";
+        <img src=\"";
         // line 106
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::urlencode((isset($context["logo_path"]) || array_key_exists("logo_path", $context) ? $context["logo_path"] : (function () { throw new RuntimeError('Variable "logo_path" does not exist.', 106, $this->source); })())), "html", null, true);
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["logo_path"]) || array_key_exists("logo_path", $context) ? $context["logo_path"] : (function () { throw new RuntimeError('Variable "logo_path" does not exist.', 106, $this->source); })()), "html", null, true);
         yield "\" alt=\"MatchupZ Logo\">
         <h1>Espaces Sportifs Export</h1>
         <div class=\"subtitle\">Generated on ";
@@ -364,7 +364,7 @@ class __TwigTemplate_c3aa4f8d3f3417a08ba224bf198ee9a7 extends Template
 </head>
 <body>
     <div class=\"header\">
-        <img src=\"file:///{{ logo_path|url_encode }}\" alt=\"MatchupZ Logo\">
+        <img src=\"{{ logo_path }}\" alt=\"MatchupZ Logo\">
         <h1>Espaces Sportifs Export</h1>
         <div class=\"subtitle\">Generated on {{ \"now\"|date(\"d/m/Y H:i\") }}</div>
     </div>

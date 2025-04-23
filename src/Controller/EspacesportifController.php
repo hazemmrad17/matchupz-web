@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Espacesportif;
 use App\Form\EspacesportifType;
 use App\Repository\EspacesportifRepository;
+use App\Service\GeocodingService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,9 +14,9 @@ use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Knp\Component\Pager\PaginatorInterface;
-use Knp\Snappy\Pdf; // For PDF export
-use PhpOffice\PhpSpreadsheet\Spreadsheet; // For Excel export
-use PhpOffice\PhpSpreadsheet\Writer\Xlsx; // For Excel export
+use Knp\Snappy\Pdf;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 #[Route('/espace')]
 class EspacesportifController extends AbstractController
@@ -25,10 +26,8 @@ class EspacesportifController extends AbstractController
     {
         $topCapacite = $espaceSportifRepository->findTopCapacite(5);
 
-        // Data for widgets
         $totalEspaces = $espaceSportifRepository->countTotalEspaces();
 
-        // Calculate espaces with reservations
         $espacesWithReservations = $espaceSportifRepository->createQueryBuilder('e')
             ->select('COUNT(DISTINCT e.id_lieu)')
             ->leftJoin('e.reservations', 'r')
@@ -36,14 +35,11 @@ class EspacesportifController extends AbstractController
             ->getQuery()
             ->getSingleScalarResult();
 
-        // Get the search term from the query parameters
         $searchTerm = $request->query->get('search', '');
 
-        // Create query for pagination with search filter
         $queryBuilder = $espaceSportifRepository->createQueryBuilder('e')
             ->orderBy('e.nom_espace', 'ASC');
 
-        // Apply search filter if a search term is provided
         if ($searchTerm) {
             $queryBuilder
                 ->where('e.nom_espace LIKE :searchTerm')
@@ -54,7 +50,6 @@ class EspacesportifController extends AbstractController
 
         $query = $queryBuilder->getQuery();
 
-        // Paginate the results (5 espaces per page)
         $espaces = $paginator->paginate(
             $query,
             $request->query->getInt('page', 1),
@@ -75,10 +70,8 @@ class EspacesportifController extends AbstractController
     {
         $espaces = $espaceSportifRepository->findAll();
 
-        // Create a CSV file in memory
         $output = fopen('php://memory', 'w');
 
-        // Add headers
         fputcsv($output, [
             'Nom',
             'Adresse',
@@ -86,7 +79,6 @@ class EspacesportifController extends AbstractController
             'Capacité',
         ]);
 
-        // Add data
         foreach ($espaces as $espace) {
             fputcsv($output, [
                 $espace->getNomEspace(),
@@ -96,14 +88,11 @@ class EspacesportifController extends AbstractController
             ]);
         }
 
-        // Rewind the file pointer to the beginning
         fseek($output, 0);
 
-        // Create the response with the CSV content
         $response = new Response(stream_get_contents($output));
         fclose($output);
 
-        // Set headers for download
         $disposition = $response->headers->makeDisposition(
             ResponseHeaderBag::DISPOSITION_ATTACHMENT,
             'espaces_export_' . date('Y-m-d') . '.csv'
@@ -152,17 +141,14 @@ class EspacesportifController extends AbstractController
     {
         $espaces = $espaceSportifRepository->findAll();
 
-        // Create a new Spreadsheet object
         $spreadsheet = new Spreadsheet();
         $sheet = $spreadsheet->getActiveSheet();
 
-        // Set headers
         $sheet->setCellValue('A1', 'Nom');
         $sheet->setCellValue('B1', 'Adresse');
         $sheet->setCellValue('C1', 'Catégorie');
         $sheet->setCellValue('D1', 'Capacité');
 
-        // Add data
         $row = 2;
         foreach ($espaces as $espace) {
             $sheet->setCellValue('A' . $row, $espace->getNomEspace());
@@ -172,17 +158,14 @@ class EspacesportifController extends AbstractController
             $row++;
         }
 
-        // Create the Excel file in memory
         $writer = new Xlsx($spreadsheet);
         $fileName = 'espaces_export_' . date('Y-m-d') . '.xlsx';
         $tempFile = tempnam(sys_get_temp_dir(), 'espaces_export');
         $writer->save($tempFile);
 
-        // Create the response with the Excel content
         $response = new Response(file_get_contents($tempFile));
         unlink($tempFile);
 
-        // Set headers for download
         $disposition = $response->headers->makeDisposition(
             ResponseHeaderBag::DISPOSITION_ATTACHMENT,
             $fileName
@@ -287,23 +270,18 @@ class EspacesportifController extends AbstractController
 
         $allEspaces = $espaceSportifRepository->findAll();
 
-        // Total number of espaces
         $totalEspaces = $espaceSportifRepository->countTotalEspaces();
 
-        // Average capacity
         $averageCapacite = $espaceSportifRepository->averageCapacite();
 
-        // Category distribution
         $categories = ['terrain foot', 'terrain basket', 'salle gym', 'football', 'Football\''];
         $categorieDistribution = [];
         foreach ($categories as $categorie) {
             $categorieDistribution[$categorie] = count($espaceSportifRepository->findByCategorie($categorie));
         }
 
-        // Reservations per espace
         $reservationDistribution = $espaceSportifRepository->getReservationDistribution();
 
-        // Espaces with vs without reservations
         $reservationStatusDistribution = $espaceSportifRepository->getReservationStatusDistribution();
 
         return $this->render('espace/statistics.html.twig', [
@@ -316,15 +294,28 @@ class EspacesportifController extends AbstractController
         ]);
     }
 
-    // New route for the front-end display of espaces using espaceF.html.twig
     #[Route('/front', name: 'app_espace_sportifs', methods: ['GET'])]
-    public function front(EspacesportifRepository $espaceSportifRepository): Response
+    public function front(EspacesportifRepository $espaceSportifRepository, GeocodingService $geocodingService): Response
     {
-        // Fetch all espaces for the front-end display
         $espaces = $espaceSportifRepository->findAll();
 
+        $espacesWithCoordsAndWeather = [];
+        foreach ($espaces as $espace) {
+            $coords = $geocodingService->getCoordinates($espace->getAdresse());
+            $weather = null;
+            if ($coords && isset($coords['latitude'], $coords['longitude'])) {
+                $weather = $geocodingService->getWeather($coords['latitude'], $coords['longitude']);
+            }
+            $espacesWithCoordsAndWeather[] = [
+                'espace' => $espace,
+                'latitude' => $coords['latitude'] ?? null,
+                'longitude' => $coords['longitude'] ?? null,
+                'weather' => $weather,
+            ];
+        }
+
         return $this->render('espace/espaceF.html.twig', [
-            'espaces' => $espaces,
+            'espacesWithCoords' => $espacesWithCoordsAndWeather,
             'espaces_description' => 'Découvrez nos espaces sportifs pour vos activités préférées.',
             'social_media' => [
                 ['url' => '#', 'icon' => 'fab fa-facebook-f'],
