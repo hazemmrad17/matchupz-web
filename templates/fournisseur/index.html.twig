@@ -1,0 +1,253 @@
+{# templates/fournisseur/index.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block searchbar %}
+    {% include 'searchbar.html.twig' %}
+{% endblock %}
+
+{% block title %}Liste des Fournisseurs{% endblock %}
+
+{% block body %}
+    <div class="content-wrapper">
+        <div class="container-xxl flex-grow-1 container-p-y">
+            <h4 class="fw-bold py-3 mb-4">
+                <span class="text-muted fw-light">Fournisseurs /</span> Tableau de Bord
+            </h4>
+
+            <div class="card">
+                <h5 class="card-header d-flex justify-content-between align-items-center">
+                    <!-- Title and Search Bar -->
+                    <div class="d-flex align-items-center">
+                        <span>Liste des Fournisseurs</span>
+                        <div class="navbar-nav align-items-center ms-3">
+                            <div class="nav-item d-flex align-items-center">
+                                <i class="bx bx-search fs-4 lh-0"></i>
+                                <input
+                                    type="text"
+                                    class="form-control border-0 shadow-none"
+                                    placeholder="Rechercher un fournisseur..."
+                                    aria-label="Rechercher un fournisseur..."
+                                    id="searchInput"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Buttons -->
+                    <div>
+                        <a href="{{ path('app_fournisseur_new') }}" class="btn btn-primary me-2">
+                            <i class="bx bx-plus"></i> Nouveau Fournisseur
+                        </a>
+                        <a href="{{ path('app_fournisseur_stats') }}" class="btn btn-primary me-2">
+                            <i class="bx bx-stats"></i> Statistiques
+                        </a>
+                        <div class="btn-group">
+                            <button type="button" class="btn dropdown-toggle btn-yellow" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bx bx-export me-1"></i> Exporter
+                            </button>
+                        </div>
+                    </div>
+                </h5>
+                <div class="table-responsive text-nowrap">
+                    <table class="table" id="fournisseursTable">
+                        <thead>
+                            <tr>
+                                <th>Nom</th>
+                                <th>Email</th>
+                                <th>Adresse</th>
+                                <th>Catégorie Produit</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-border-bottom-0">
+                            {% for fournisseur in pagination %}
+                                <tr class="table-default">
+                                    <td><i class="bx bx-store fa-lg text-warning me-3"></i><strong>{{ fournisseur.nom }}</strong></td>
+                                    <td>{{ fournisseur.email ?: 'N/A' }}</td>
+                                    <td>{{ fournisseur.adresse ?: 'N/A' }}</td>
+                                    <td>{{ fournisseur.categorie_produit ?: 'N/A' }}</td>
+                                    <td>
+                                        <div class="dropdown">
+                                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                                <i class="bx bx-dots-vertical-rounded"></i>
+                                            </button>
+                                            <div class="dropdown-menu">
+                                                <a class="dropdown-item" href="{{ path('app_fournisseur_show', {'id_fournisseur': fournisseur.id_fournisseur}) }}">
+                                                    <i class="bx bx-show me-1"></i> Voir
+                                                </a>
+                                                <a class="dropdown-item" href="{{ path('app_fournisseur_edit', {'id_fournisseur': fournisseur.id_fournisseur}) }}">
+                                                    <i class="bx bx-edit-alt me-1"></i> Modifier
+                                                </a>
+                                                <form method="post" action="{{ path('app_fournisseur_delete', {'id_fournisseur': fournisseur.id_fournisseur}) }}" style="display:inline;" onsubmit="return confirm('Confirmer la suppression ?');">
+                                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ fournisseur.id_fournisseur) }}">
+                                                    <button class="dropdown-item" type="submit">
+                                                        <i class="bx bx-trash me-1"></i> Supprimer
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="5" class="text-center">Aucun fournisseur trouvé</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Pagination -->
+                <div class="card-footer">
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item {{ pagination.currentPageNumber == 1 ? 'disabled' : '' }}">
+                                <a class="page-link" href="{{ path('app_fournisseur_index', {'page': pagination.currentPageNumber - 1}) }}" aria-label="Previous">
+                                    <span aria-hidden="true">«</span>
+                                </a>
+                            </li>
+                            {% for i in 1..pagination.pageCount %}
+                                <li class="page-item {{ pagination.currentPageNumber == i ? 'active' : '' }}">
+                                    <a class="page-link" href="{{ path('app_fournisseur_index', {'page': i}) }}">{{ i }}</a>
+                                </li>
+                            {% endfor %}
+                            <li class="page-item {{ pagination.currentPageNumber == pagination.pageCount ? 'disabled' : '' }}">
+                                <a class="page-link" href="{{ path('app_fournisseur_index', {'page': pagination.currentPageNumber + 1}) }}" aria-label="Next">
+                                    <span aria-hidden="true">»</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Statistics Section -->
+            <div class="row mt-4">
+                <!-- Summary Cards -->
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Total Suppliers</h5>
+                            <p class="card-text display-4">{{ totalSuppliers }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Unique Categories</h5>
+                            <p class="card-text display-4">{{ categoriesCount }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Email Coverage</h5>
+                            <p class="card-text display-4">{{ emailCoverage }}%</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts -->
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Category Distribution</h5>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="categoryDistributionChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Top 5 Locations</h5>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="locationDistributionChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Search functionality
+            const searchInput = document.getElementById('searchInput');
+            const table = document.getElementById('fournisseursTable');
+            const rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+
+            searchInput.addEventListener('input', function () {
+                const searchText = searchInput.value.toLowerCase();
+                for (let i = 0; i < rows.length; i++) {
+                    const row = rows[i];
+                    const cells = row.getElementsByTagName('td');
+                    let match = false;
+                    for (let j = 0; j < cells.length; j++) {
+                        const cellText = cells[j].textContent.toLowerCase();
+                        if (cellText.includes(searchText)) {
+                            match = true;
+                            break;
+                        }
+                    }
+                    row.style.display = match ? '' : 'none';
+                }
+            });
+
+            // Category Distribution Chart
+            const categoryCtx = document.getElementById('categoryDistributionChart').getContext('2d');
+            new Chart(categoryCtx, {
+                type: 'pie',
+                data: {
+                    labels: [{% for category in categoryDistribution|keys %}'{{ category }}',{% endfor %}],
+                    datasets: [{
+                        data: [{% for count in categoryDistribution %}{{ count }},{% endfor %}],
+                        backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { position: 'top' }
+                    }
+                }
+            });
+
+            // Location Distribution Chart
+            const locationCtx = document.getElementById('locationDistributionChart').getContext('2d');
+            new Chart(locationCtx, {
+                type: 'bar',
+                data: {
+                    labels: [{% for location in locationDistribution|keys %}'{{ location }}',{% endfor %}],
+                    datasets: [{
+                        label: 'Suppliers',
+                        data: [{% for count in locationDistribution %}{{ count }},{% endfor %}],
+                        backgroundColor: '#36A2EB'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: { display: true, text: 'Number of Suppliers' }
+                        },
+                        x: {
+                            title: { display: true, text: 'City' }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false }
+                    }
+                }
+            });
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,77 @@
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-6 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-title d-flex align-items-start justify-content-between">
+                            <div class="avatar flex-shrink-0">
+                                <span class="avatar-initial rounded bg-label-primary">
+                                    <i class="bx bx-user widget-icon"></i>
+                                </span>
+                            </div>
+                            <div class="dropdown">
+                                <button class="btn p-0" type="button" data-bs-toggle="dropdown">
+                                    <i class="bx bx-dots-vertical-rounded"></i>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-end">
+                                    <a class="dropdown-item" href="{{ path('performance_joueur_index') }}">Voir Tous</a>
+                                </div>
+                            </div>
+                        </div>
+                        <span>Performances Total</span>
+                        <h3 class="card-title text-nowrap mb-1">{{ stats.total_performances }}</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 col-6 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-title d-flex align-items-start justify-content-between">
+                            <div class="avatar flex-shrink-0">
+                                <span class="avatar-initial rounded bg-label-success">
+                                    <i class="bx bx-football widget-icon"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <span>Matches Joués</span>
+                        <h3 class="card-title text-nowrap mb-1">{{ stats.total_matches }}</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 col-6 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-title d-flex align-items-start justify-content-between">
+                            <div class="avatar flex-shrink-0">
+                                <span class="avatar-initial rounded bg-label-warning">
+                                    <i class="bx bx-target-lock widget-icon"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <span>Buts Totaux</span>
+                        <h3 class="card-title text-nowrap mb-1">{{ stats.total_goals }}</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 col-6 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-title d-flex align-items-start justify-content-between">
+                            <div class="avatar flex-shrink-0">
+                                <span class="avatar-initial rounded bg-label-info">
+                                    <i class="bx bx-pass widget-icon"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <span>Passes Décisives</span>
+                        <h3 class="card-title text-nowrap mb-1">{{ stats.total_assists }}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,95 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier Fournisseur{% endblock %}
+
+{% block searchbar %}
+    {% include 'searchbar.html.twig' %}
+{% endblock %}
+
+{% block content %}
+    <div class="content-wrapper">
+        <div class="container-xxl flex-grow-1 container-p-y">
+            <h4 class="fw-bold py-3 mb-4">
+                <span class="text-muted fw-light">Fournisseurs /</span> Modifier Fournisseur
+            </h4>
+
+            <div class="col-xl">
+                <div class="card mb-4">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">Modifier le Fournisseur #{{ fournisseur.id_fournisseur }}</h5>
+                        <small class="text-muted float-end">Tous les champs sont obligatoires</small>
+                    </div>
+                    <div class="card-body">
+                        {{ form_start(form, {'attr': {'class': 'needs-validation', 'novalidate': false}}) }}
+                            <div class="row">
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label">Nom du Fournisseur</label>
+                                    <div class="input-group input-group-merge">
+                                        <span class="input-group-text"><i class="bx bx-building"></i></span>
+                                        {{ form_widget(form.nom, {
+                                            'attr': {
+                                                'class': 'form-control',
+                                                'placeholder': 'Nom du fournisseur'
+                                            }
+                                        }) }}
+                                    </div>
+                                    {{ form_errors(form.nom) }}
+                                </div>
+
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label">Email</label>
+                                    <div class="input-group input-group-merge">
+                                        <span class="input-group-text"><i class="bx bx-envelope"></i></span>
+                                        {{ form_widget(form.email, {
+                                            'attr': {
+                                                'class': 'form-control',
+                                                'placeholder': 'email@exemple.com'
+                                            }
+                                        }) }}
+                                    </div>
+                                    {{ form_errors(form.email) }}
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Adresse</label>
+                                <div class="input-group input-group-merge">
+                                    <span class="input-group-text"><i class="bx bx-map"></i></span>
+                                    {{ form_widget(form.adresse, {
+                                        'attr': {
+                                            'class': 'form-control',
+                                            'placeholder': 'Adresse complète'
+                                        }
+                                    }) }}
+                                </div>
+                                {{ form_errors(form.adresse) }}
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Catégorie de Produit</label>
+                                <div class="input-group input-group-merge">
+                                    <span class="input-group-text"><i class="bx bx-category"></i></span>
+                                    {{ form_widget(form.categorie_produit, {
+                                        'attr': {
+                                            'class': 'form-select'
+                                        }
+                                    }) }}
+                                </div>
+                                {{ form_errors(form.categorie_produit) }}
+                            </div>
+
+                            <div class="mt-4">
+                                <button type="submit" class="btn btn-primary me-2">
+                                    <i class="bx bx-save me-1"></i> Enregistrer
+                                </button>
+                                <a href="{{ path('app_fournisseur_index') }}" class="btn btn-outline-secondary">
+                                    <i class="bx bx-arrow-back me-1"></i> Annuler
+                                </a>
+                            </div>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

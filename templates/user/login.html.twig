@@ -1,0 +1,160 @@
+{% extends 'baseF.html.twig' %}
+
+{% block title %}Login - MatchupZ{% endblock %}
+
+{% block body %}
+    <div class="container-fluid py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-4 col-md-6 col-sm-8">
+                    <div class="card p-4 shadow-sm" style="max-width: 400px; margin: 0 auto;">
+                        <h2 class="text-center mb-4">Login to MatchupZ</h2>
+
+                        <!-- Affichage des messages flash -->
+                        {% for label, messages in app.flashes %}
+                            {% for message in messages %}
+                                <div class="alert alert-{{ label }} alert-dismissible fade show" role="alert">
+                                    {{ message }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
+
+                        <!-- Toast container -->
+                        <div class="position-fixed top-0 end-0 p-3" style="z-index: 1050;" id="toast-container"></div>
+
+                        <form id="formAuthentication" action="{{ path('app_verif_userF') }}" method="post">
+                            <!-- Email -->
+                            <div class="mb-3">
+                                <label for="username" class="form-label">Email</label>
+                                <div class="input-group input-group-merge">
+                                    <span class="input-group-text"><i class="bx bx-envelope"></i></span>
+                                    <input
+                                        type="email"
+                                        id="username"
+                                        name="_username"
+                                        class="form-control"
+                                        placeholder="Entrez votre email"
+                                    />
+                                </div>
+                            </div>
+
+                            <!-- Password -->
+                            <div class="mb-3 form-password-toggle">
+                                <label for="password" class="form-label">Mot de passe</label>
+                                <div class="input-group input-group-merge">
+                                    <span class="input-group-text"><i class="bx bx-lock-alt"></i></span>
+                                    <input
+                                        type="password"
+                                        id="password"
+                                        name="_password"
+                                        class="form-control"
+                                        placeholder="············"
+                                    />
+                                    <span class="input-group-text cursor-pointer toggle-password"><i class="bx bx-hide"></i></span>
+                                </div>
+                            </div>
+
+                            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <button type="submit" class="btn btn-primary">Login</button>
+                                <a href="#" class="text-muted small">Forgot Password?</a>
+                            </div>
+                        </form>
+                        <div class="text-center">
+                            <p class="small">Don't have an account? <a href="{{ path('app_registerF') }}">Register</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <!-- Ensure Boxicons is included -->
+    <link rel="stylesheet" href="{{ asset('assets/vendor/fonts/boxicons.css') }}" />
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <!-- Core JS -->
+    <script src="{{ asset('assets/vendor/libs/jquery/jquery.js') }}"></script>
+    <script src="{{ asset('assets/vendor/libs/popper/popper.js') }}"></script>
+    <script src="{{ asset('assets/vendor/js/bootstrap.js') }}"></script>
+    <script src="{{ asset('assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js') }}"></script>
+    <script src="{{ asset('assets/vendor/js/menu.js') }}"></script>
+
+    <!-- Main JS -->
+    <script src="{{ asset('assets/js/main.js') }}"></script>
+
+    <!-- Validation Script -->
+    <script>
+        document.getElementById('formAuthentication').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const toastContainer = document.getElementById('toast-container');
+            toastContainer.innerHTML = ''; // Clear previous toasts
+
+            // Get form field values
+            const email = document.getElementById('username')?.value.trim() || '';
+            const password = document.getElementById('password')?.value || '';
+
+            // Validation des champs
+            if (!email) {
+                addToast('Erreur Email', 'Veuillez entrer un email.');
+            } else if (!/^[^\s@]+@gmail\.com$/.test(email)) {
+                addToast('Erreur Email', 'L\'email doit être de la forme nom@gmail.com.');
+            }
+
+            if (!password) {
+                addToast('Erreur Mot de passe', 'Veuillez entrer un mot de passe.');
+            } else if (password.length < 6) {
+                addToast('Erreur Mot de passe', 'Le mot de passe doit contenir au moins 6 caractères.');
+            }
+
+            // Submit if no errors
+            if (toastContainer.children.length === 0) {
+                this.submit();
+            } else {
+                const toastElements = toastContainer.querySelectorAll('.toast');
+                toastElements.forEach(toast => new bootstrap.Toast(toast, { autohide: true, delay: 5000 }).show());
+            }
+        });
+
+        // Fonction pour ajouter un toast
+        function addToast(title, message) {
+            const toastContainer = document.getElementById('toast-container');
+            const toastId = 'toast-' + Date.now();
+            const toastHTML = `
+                <div id="${toastId}" class="bs-toast toast fade bg-danger" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="toast-header">
+                        <i class="bx bx-bell me-2"></i>
+                        <div class="me-auto fw-semibold">${title}</div>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">${message}</div>
+                </div>
+            `;
+            toastContainer.innerHTML += toastHTML;
+        }
+
+        // Gestion du toggle password
+        document.addEventListener('DOMContentLoaded', function() {
+            const togglePassword = document.querySelector('.toggle-password');
+            const passwordInput = document.getElementById('password');
+            const icon = togglePassword ? togglePassword.querySelector('i') : null;
+
+            if (togglePassword && passwordInput && icon) {
+                togglePassword.addEventListener('click', function() {
+                    const isPassword = passwordInput.getAttribute('type') === 'password';
+                    passwordInput.setAttribute('type', isPassword ? 'text' : 'password');
+                    icon.classList.toggle('bx-hide');
+                    icon.classList.toggle('bx-show');
+                });
+            }
+        });
+    </script>
+{% endblock %}

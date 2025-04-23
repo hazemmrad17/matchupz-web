@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Stripe Payment{% endblock %}
+
+{% block body %}
+<div class="container mt-5" style="max-width: 500px;">
+    {% for message in app.flashes('success') %}
+        <div 
+            style="color: green;
+                   border: 2px green solid;
+                   text-align: center;
+                   padding: 10px;
+                   margin-bottom: 15px;
+                   border-radius: 4px;">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    <form id="payment-form" method="post" action="{{ path('app_stripe_charge') }}">
+        <label for="card-element" class="form-label mb-2">Card Details</label>
+        <div id="card-element" style="padding: 10px; border: 1px solid #ccc; border-radius: 4px; margin-bottom: 15px;"></div>
+        
+        <input type="hidden" name="stripeToken" id="stripe-token-id">
+        <input type="hidden" id="contractTitle" name="contractTitle" value="">
+        <input type="hidden" id="amount" name="amount" value="">
+
+        <button id="submit" class="btn btn-primary w-100">Submit Payment</button>
+        <div id="error-message" class="mt-2" style="color: red;"></div>
+    </form>
+</div>
+
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+    const stripe = Stripe("{{ stripe_key }}");
+    const elements = stripe.elements();
+    const cardElement = elements.create('card');
+    cardElement.mount('#card-element');
+
+    const form = document.getElementById('payment-form');
+    const submitButton = document.getElementById('submit');
+    const errorMessage = document.getElementById('error-message');
+
+    form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        submitButton.disabled = true;
+
+        try {
+            const {token, error} = await stripe.createToken(cardElement);
+            if (error) {
+                errorMessage.textContent = error.message;
+                submitButton.disabled = false;
+                return;
+            }
+
+            document.getElementById("stripe-token-id").value = token.id;
+            form.submit();
+        } catch (err) {
+            errorMessage.textContent = err.message;
+            submitButton.disabled = false;
+        }
+    });
+
+    function setContractDetails(title, amount) {
+        document.getElementById('contractTitle').value = title;
+        document.getElementById('amount').value = amount;
+    }
+</script>
+{% endblock %}

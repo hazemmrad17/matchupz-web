@@ -1,0 +1,113 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Club{% endblock %}
+
+{% block content %}
+    <div class="content-wrapper">
+        <div class="container-xxl flex-grow-1 container-p-y">
+            <h4 class="fw-bold py-3 mb-4">
+                <span class="text-muted fw-light">Clubs /</span> Edit Club
+            </h4>
+
+            <div class="col-md-12">
+                <ul class="nav nav-pills flex-column flex-md-row mb-3">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="javascript:void(0);"><i class="bx bx-building me-1"></i> Club Details</a>
+                    </li>
+                </ul>
+
+                <div class="card mb-4">
+                    <h5 class="card-header">Update Club</h5>
+                    {{ form_start(form, {
+                        'method': 'POST',
+                        'action': path('club_edit', {'idClub': club.idClub}),
+                        'attr': {
+                            'novalidate': 'novalidate',
+                            'id': 'formClubSettings'
+                        }
+                    }) }}
+                    <div class="card-body">
+                        <div class="d-flex align-items-start align-items-sm-center gap-4">
+                            <img
+                                src="{{ club.photoUrl ? asset(club.photoUrl) : asset('/img/avatars/default-club.png') }}"
+                                alt="Club Avatar"
+                                class="d-block rounded"
+                                height="100"
+                                width="100"
+                                id="uploadedAvatar"
+                            />
+                            <div class="button-wrapper">
+                                <label for="club_photoUrl" class="btn btn-primary me-2 mb-4" tabindex="0">
+                                    <span class="d-none d-sm-block">Upload new photo</span>
+                                    <i class="bx bx-upload d-block d-sm-none"></i>
+                                </label>
+                                {{ form_widget(form.photoUrl, {
+                                    'attr': {
+                                        'id': 'club_photoUrl',
+                                        'class': 'account-file-input',
+                                        'style': 'display: none;',
+                                        'accept': 'image/png, image/jpeg'
+                                    }
+                                }) }}
+                                <button type="button" class="btn btn-outline-secondary account-image-reset mb-4">
+                                    <i class="bx bx-reset d-block d-sm-none"></i>
+                                    <span class="d-none d-sm-block">Reset</span>
+                                </button>
+                                <p class="text-muted mb-0">Allowed JPG or PNG. Max size of 800K</p>
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="my-0" />
+                    <div class="card-body">
+                        <div class="row">
+                            {% for child in form.children %}
+                                {% if child.vars.name != 'submit' and child.vars.name != '_token' and child.vars.name != 'photoUrl' %}
+                                    <div class="mb-3 col-md-6">
+                                        {{ form_label(child) }}
+                                        {{ form_widget(child, {'attr': {'class': 'form-control'}}) }}
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                            {{ form_widget(form._token) }}
+                        </div>
+                        <div class="mt-2">
+                            <button type="submit" class="btn btn-primary me-2">Update</button>
+                            <a href="{{ path('club_index') }}" class="btn btn-outline-secondary">Cancel</a>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const uploadInput = document.getElementById('club_photoUrl');
+            const uploadedAvatar = document.getElementById('uploadedAvatar');
+            const resetButton = document.querySelector('.account-image-reset');
+            const form = document.getElementById('formClubSettings');
+            const originalImage = uploadedAvatar.src;
+
+            uploadInput.addEventListener('change', function (e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        uploadedAvatar.src = e.target.result;
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            resetButton.addEventListener('click', function () {
+                uploadedAvatar.src = originalImage;
+                uploadInput.value = '';
+            });
+
+            form.addEventListener('submit', function (e) {
+                console.log('Form submitted');
+            });
+        });
+    </script>
+{% endblock %}

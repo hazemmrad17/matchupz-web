@@ -1,0 +1,49 @@
+# config/services.yaml
+
+# This file is the entry point to configure your own services.
+# Files in the packages/ subdirectory configure your dependencies.
+
+parameters:
+    profile_pictures_directory: '%kernel.project_dir%/public/uploads/profile_pictures'
+    club_photos_directory: '%kernel.project_dir%/public/uploads/club_photos'
+    photos_directory: '%kernel.project_dir%/public/uploads/photos'
+    users_image_directory: '%kernel.project_dir%/public/uploads/users'
+    signatures_directory: '%kernel.project_dir%/public/signatures'
+    materiels_directory: '%kernel.project_dir%/public/uploads/materiels'
+    twilio_account_sid: '%env(TWILIO_ACCOUNT_SID)%'
+    twilio_auth_token: '%env(TWILIO_AUTH_TOKEN)%'
+    twilio_to_number: '%env(TWILIO_TO_NUMBER)%'
+    twilio_from_number: '%env(TWILIO_FROM_NUMBER)%'
+    parameters:
+    stripe_public_key: '%env(STRIPE_KEY)%'
+    stripe_secret_key: '%env(STRIPE_SECRET)%'
+    
+
+services:
+    # Configure KnpSnappyPdf service with the binary path from environment variable
+    Knp\Snappy\Pdf:
+        arguments:
+            $binary: '%env(WKHTMLTOPDF_PATH)%'
+    Stripe\StripeClient:
+        arguments:
+            - '%env(STRIPE_SECRET_KEY)%'
+    # AppExtension for Twig
+    App\Twig\AppExtension:
+        tags: ['twig.extension']
+
+    # Default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+    # Make classes in src/ available to be used as services
+    # This creates a service per class whose id is the fully-qualified class name
+    App\:
+        resource: '../src/'
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Entity/'
+            - '../src/Kernel.php'
+
+    # Add more service definitions when explicit configuration is needed
+    # Please note that last definitions always *replace* previous ones
