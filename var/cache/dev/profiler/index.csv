@@ -48,3 +48,12 @@ f3fb9b,127.0.0.1,GET,https://127.0.0.1:8000/reservation/,1745578384,,200,request
 d2a656,127.0.0.1,GET,https://127.0.0.1:8000/espace/,1745578528,,200,request
 b6a6e7,127.0.0.1,GET,https://127.0.0.1:8000/espace/export/pdf,1745578533,cfe618,500,request
 cfe618,127.0.0.1,GET,https://127.0.0.1:8000/espace/export/pdf,1745578533,,500,request
+888f85,127.0.0.1,GET,https://127.0.0.1:8001/,1745593821,,200,request
+551a8b,127.0.0.1,GET,https://127.0.0.1:8001/espace/front,1745593843,,200,request
+b47918,127.0.0.1,GET,https://127.0.0.1:8001/espace/,1745593865,,200,request
+84e18b,127.0.0.1,GET,https://127.0.0.1:8001/reservation/,1745593868,,200,request
+931f16,127.0.0.1,GET,https://127.0.0.1:8001/reservation/export/pdf,1745593874,757e68,500,request
+757e68,127.0.0.1,GET,https://127.0.0.1:8001/reservation/export/pdf,1745593874,,500,request
+e1b695,127.0.0.1,GET,https://127.0.0.1:8001/reservation/new,1745593877,,200,request
+98b054,127.0.0.1,GET,https://127.0.0.1:8001/reservation/new,1745593882,,200,request
+dbcb81,127.0.0.1,GET,https://127.0.0.1:8001/reservation/36,1745593884,,200,request
