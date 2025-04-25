@@ -11,7 +11,17 @@ use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Form\ForgotPasswordType;
 use App\Form\ResetPasswordType;
+use Symfony\Component\HttpFoundation\JsonResponse;
+
+use Aws\Rekognition\RekognitionClient;
+ 
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Process\Process;
+use Symfony\Component\Process\Exception\ProcessFailedException;
+use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\Mime\Email;
@@ -36,46 +46,46 @@ final class UserController extends AbstractController
     {
         // Get the search query from the request
         $searchQuery = $request->query->get('search', '');
-    
+
         // Build the query with search filtering
         $queryBuilder = $userRepository->createQueryBuilder('u');
-    
+
         if ($searchQuery) {
             $queryBuilder
-                ->where('u.nom LIKE :search')
-                ->orWhere('u.prenom LIKE :search')
-                ->orWhere('u.email LIKE :search')
-                ->setParameter('search', '%' . $searchQuery . '%');
+                ->where('LOWER(u.nom) LIKE :search')
+                ->orWhere('LOWER(u.prenom) LIKE :search')
+                ->orWhere('LOWER(u.email) LIKE :search')
+                ->setParameter('search', '%' . strtolower($searchQuery) . '%');
         }
-    
+
         $query = $queryBuilder->getQuery();
         $pagination = $paginator->paginate($query, $request->query->getInt('page', 1), 6);
-    
+
         // Statistiques par genre
         $users = $userRepository->findAll();
         $total = count($users);
         $men = count(array_filter($users, fn($user) => $user->getGenre() === 'Homme'));
         $women = $total - $men;
-    
+
         $stats = [
             'total' => $total,
             'percentMen' => $total > 0 ? round(($men / $total) * 100) : 0,
             'percentWomen' => $total > 0 ? round(($women / $total) * 100) : 0,
         ];
-    
+
         // Statistiques par âge (18-30, 31-50, 51+)
         $ageStats = [
             '18-30' => 0,
             '31-50' => 0,
             '51+' => 0,
         ];
-    
+
         $currentYear = (int) date('Y');
         foreach ($users as $user) {
             if ($user->getDateDeNaissance()) {
                 $birthYear = (int) $user->getDateDeNaissance()->format('Y');
                 $age = $currentYear - $birthYear;
-    
+
                 if ($age >= 18 && $age <= 30) {
                     $ageStats['18-30']++;
                 } elseif ($age >= 31 && $age <= 50) {
@@ -85,8 +95,35 @@ final class UserController extends AbstractController
                 }
             }
         }
-        
-    
+
+        // Handle AJAX request
+        if ($request->isXmlHttpRequest()) {
+            $userData = [];
+            foreach ($pagination as $user) {
+                $userData[] = [
+                    'id_user' => $user->getId_user(),
+                    'nom' => $user->getNom() ?? '',
+                    'prenom' => $user->getPrenom() ?? '',
+                    'email' => $user->getEmail() ?? '',
+                    'role' => $user->getRole() ?? '',
+                    'image' => $user->getImage(),
+                    'dateDeNaissance' => $user->getDateDeNaissance() ? $user->getDateDeNaissance()->format('d/m/Y') : null,
+                    'numTelephone' => $user->getNumTelephone(),
+                    'genre' => $user->getGenre() ?? '',
+                ];
+            }
+
+            // Render pagination HTML
+            $paginationHtml = $this->renderView('user/_pagination.html.twig', [
+                'users' => $pagination,
+            ]);
+
+            return new JsonResponse([
+                'users' => $userData,
+                'pagination' => $paginationHtml,
+            ]);
+        }
+
         return $this->render('user/index.html.twig', [
             'users' => $pagination,
             'stats' => $stats,
@@ -95,6 +132,10 @@ final class UserController extends AbstractController
         ]);
     }
 
+
+
+
+    
    
     #[Route('/registerF', name: 'app_registerF', methods: ['GET', 'POST'])]
     public function registerF(Request $request, EntityManagerInterface $em, LoggerInterface $logger): Response
@@ -255,16 +296,11 @@ final class UserController extends AbstractController
 
 
 
-
-
-    #[Route('/acceuil', name: 'app_acceuil')]
-    public function acceuil(Request $request, SessionInterface $session): Response
-    {
-        // Get the last username (email) from the session if available
-       
-
-        return $this->render('@templates/baseM.html.twig');
-    }
+#[Route('/acceuil', name: 'app_acceuil')]
+public function acceuil(Request $request, SessionInterface $session): Response
+{
+    return $this->render('baseM.html.twig'); // Assurez-vous que le fichier est dans templates/baseM.html.twig
+}
     #[Route('/export-pdf', name: 'app_user_export_pdf', methods: ['GET'])]
     public function exportPdf(Request $request, UserRepository $userRepository, PaginatorInterface $paginator): Response
     {
@@ -929,4 +965,8 @@ public function logoutF(SessionInterface $session): Response
             'form' => $form->createView(),
         ]);
     }
+
+
+    
+   
 }

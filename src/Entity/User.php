@@ -6,15 +6,16 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: 'user')]
-class User
+class User implements UserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private ?int $id_user  =null;
+    private ?int $id_user = null;
 
     #[ORM\Column(type: 'string', nullable: false)]
     #[Assert\NotBlank(message: "Le nom est obligatoire")]
@@ -37,16 +38,7 @@ class User
     #[Assert\Email(message: "L'email doit être valide")]
     private ?string $email = null;
 
-    #[ORM\Column(type: 'string', nullable: false)]
-    #[Assert\NotBlank(message: "Le mot de passe est obligatoire")]
-    #[Assert\Length(
-        min: 8,
-        minMessage: "Le mot de passe doit contenir au moins 8 caractères"
-    )]
-    #[Assert\Regex(
-        pattern: "/^(?=.*[a-zA-Z])(?=.*\d)/",
-        message: "Le mot de passe doit contenir des lettres et des chiffres"
-    )]
+    #[ORM\Column(type: 'string', nullable: true)] // Nullable pour Google auth
     private ?string $password = null;
 
     #[ORM\Column(type: 'string', length: 8, nullable: false)]
@@ -79,14 +71,51 @@ class User
 
     #[ORM\Column(type: 'string', nullable: false)]
     #[Assert\NotBlank(message: "Le rôle est obligatoire")]
-    private string $role = 'Utilisateur';
+    private string $role = 'ROLE_USER'; // Utilisation du format Symfony pour les rôles
+
     #[ORM\Column(type: 'string', nullable: true)]
     private ?string $image = null;
 
     #[ORM\Column(type: 'integer', nullable: false)]
     private ?int $reset_code = 0;
 
-    // Getters et Setters (inchangés, sauf pour num_telephone)
+    // Implémentation de UserInterface
+
+    public function getRoles(): array
+    {
+        // Convertir le rôle en tableau pour respecter le format attendu par Symfony
+        return [$this->role];
+    }
+
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
+
+    public function getSalt(): ?string
+    {
+        // Pas nécessaire si vous utilisez bcrypt ou un algorithme moderne
+        return null;
+    }
+
+    public function eraseCredentials(): void
+    {
+        // Supprimer les données sensibles si nécessaire (par exemple, mot de passe temporaire)
+    }
+
+    public function getUsername(): string
+    {
+        // Retourner l'email comme identifiant unique
+        return $this->email;
+    }
+
+    // Pour Symfony 5.3+ (optionnel, remplace getUsername)
+    public function getUserIdentifier(): string
+    {
+        return $this->email;
+    }
+
+    // Getters et Setters (inchangés, sauf pour ceux nécessaires)
     public function getId_user(): ?int
     {
         return $this->id_user;
@@ -131,12 +160,7 @@ class User
         return $this;
     }
 
-    public function getPassword(): ?string
-    {
-        return $this->password;
-    }
-
-    public function setPassword(string $password): self
+    public function setPassword(?string $password): self
     {
         $this->password = $password;
         return $this;
@@ -218,7 +242,7 @@ class User
         return $this->num_telephone;
     }
 
-    public function setNumTelephone(string $num_telephone): static
+    public function setNumTelephone(string $num_telephone): self
     {
         $this->num_telephone = $num_telephone;
         return $this;
@@ -229,7 +253,7 @@ class User
         return $this->date_de_naissance;
     }
 
-    public function setDateDeNaissance(\DateTimeInterface $date_de_naissance): static
+    public function setDateDeNaissance(\DateTimeInterface $date_de_naissance): self
     {
         $this->date_de_naissance = $date_de_naissance;
         return $this;
@@ -240,7 +264,7 @@ class User
         return $this->reset_code;
     }
 
-    public function setResetCode(int $reset_code): static
+    public function setResetCode(int $reset_code): self
     {
         $this->reset_code = $reset_code;
         return $this;

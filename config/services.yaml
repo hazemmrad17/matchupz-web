@@ -13,6 +13,9 @@ parameters:
 
     recaptcha_site_key: '%env(RECAPTCHA_SITE_KEY)%'
     recaptcha_secret_key: '%env(RECAPTCHA_SECRET_KEY)%'
+    google_client_id: '%env(GOOGLE_ID)%'
+    google_client_secret: '%env(GOOGLE_SECRET)%'
+    
 services:
     # Configure KnpSnappyPdf service with the binary path from environment variable
     Knp\Snappy\Pdf:

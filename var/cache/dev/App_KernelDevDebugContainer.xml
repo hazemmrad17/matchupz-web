@@ -27,6 +27,7 @@
       <parameter key="MakerBundle">Symfony\Bundle\MakerBundle\MakerBundle</parameter>
       <parameter key="KnpPaginatorBundle">Knp\Bundle\PaginatorBundle\KnpPaginatorBundle</parameter>
       <parameter key="SymfonyCastsResetPasswordBundle">SymfonyCasts\Bundle\ResetPassword\SymfonyCastsResetPasswordBundle</parameter>
+      <parameter key="KnpUOAuth2ClientBundle">KnpU\OAuth2ClientBundle\KnpUOAuth2ClientBundle</parameter>
     </parameter>
     <parameter key="kernel.bundles_metadata" type="collection">
       <parameter key="FrameworkBundle" type="collection">
@@ -85,6 +86,10 @@
         <parameter key="path">C:\Users\MSI\Desktop\matchupz-web-0\vendor\symfonycasts\reset-password-bundle\src</parameter>
         <parameter key="namespace">SymfonyCasts\Bundle\ResetPassword</parameter>
       </parameter>
+      <parameter key="KnpUOAuth2ClientBundle" type="collection">
+        <parameter key="path">C:\Users\MSI\Desktop\matchupz-web-0\vendor\knpuniversity\oauth2-client-bundle\src</parameter>
+        <parameter key="namespace">KnpU\OAuth2ClientBundle</parameter>
+      </parameter>
     </parameter>
     <parameter key="kernel.charset">UTF-8</parameter>
     <parameter key="kernel.container_class">App_KernelDevDebugContainer</parameter>
@@ -96,6 +101,8 @@
     <parameter key="materiels_directory">C:\Users\MSI\Desktop\matchupz-web-0/public/uploads/materiels</parameter>
     <parameter key="recaptcha_site_key">%env(RECAPTCHA_SITE_KEY)%</parameter>
     <parameter key="recaptcha_secret_key">%env(RECAPTCHA_SECRET_KEY)%</parameter>
+    <parameter key="google_client_id">%env(GOOGLE_ID)%</parameter>
+    <parameter key="google_client_secret">%env(GOOGLE_SECRET)%</parameter>
     <parameter key="event_dispatcher.event_aliases" type="collection">
       <parameter key="Symfony\Component\Console\Event\ConsoleCommandEvent">console.command</parameter>
       <parameter key="Symfony\Component\Console\Event\ConsoleErrorEvent">console.error</parameter>
@@ -246,7 +253,6 @@
     <parameter key="security.authentication.session_strategy.strategy">migrate</parameter>
     <parameter key="security.authentication.hide_user_not_found">true</parameter>
     <parameter key="security.firewalls" type="collection">
-      <parameter>dev</parameter>
       <parameter>main</parameter>
     </parameter>
     <parameter key="security.logout_uris" type="collection"/>
@@ -504,6 +510,13 @@
         <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\ScheduleController"/>
       </call>
     </service>
+    <service id="App\Controller\SecurityController" class="App\Controller\SecurityController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="container.service_subscriber"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\SecurityController"/>
+      </call>
+    </service>
     <service id="App\Controller\SponsorController" class="App\Controller\SponsorController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
@@ -518,6 +531,13 @@
       <argument type="service" id="doctrine.orm.default_entity_manager"/>
       <call method="setContainer">
         <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\SportController"/>
+      </call>
+    </service>
+    <service id="App\Controller\TestController" class="App\Controller\TestController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="container.service_subscriber"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\TestController"/>
       </call>
     </service>
     <service id="App\Controller\UserController" class="App\Controller\UserController" public="true" autowire="true" autoconfigure="true">
@@ -659,6 +679,19 @@
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
     </service>
+    <service id="App\Security\CustomUserProvider" class="App\Security\CustomUserProvider" autowire="true" autoconfigure="true">
+      <argument type="service" id="doctrine.orm.default_entity_manager"/>
+    </service>
+    <service id="App\Security\FaceRecognitionAuthenticator" class="App\Security\FaceRecognitionAuthenticator" autowire="true" autoconfigure="true">
+      <argument type="service" id="doctrine"/>
+      <argument type="service" id="monolog.logger"/>
+    </service>
+    <service id="App\Security\GoogleAuthenticator" class="App\Security\GoogleAuthenticator" autowire="true" autoconfigure="true">
+      <argument type="service" id="knpu.oauth2.registry"/>
+      <argument type="service" id="doctrine.orm.default_entity_manager"/>
+      <argument type="service" id="router.default"/>
+      <argument type="service" id="monolog.logger"/>
+    </service>
     <service id="argument_metadata_factory" class="Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadataFactory"/>
     <service id="argument_resolver.backed_enum_resolver" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\BackedEnumValueResolver">
       <tag priority="100" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\BackedEnumValueResolver">controller.argument_value_resolver</tag>
@@ -686,7 +719,7 @@
     </service>
     <service id="argument_resolver.service" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
       <tag priority="-50" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">controller.argument_value_resolver</tag>
-      <argument type="service" id=".service_locator.qQ4Drao"/>
+      <argument type="service" id=".service_locator.Bnjq0RY"/>
     </service>
     <service id="argument_resolver.default" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">
       <tag priority="-100" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">controller.argument_value_resolver</tag>
@@ -2686,6 +2719,7 @@
           <argument>C:\Users\MSI\Desktop\matchupz-web-0\vendor\symfony\security-bundle/translations</argument>
           <argument>C:\Users\MSI\Desktop\matchupz-web-0\vendor\symfony\monolog-bundle/translations</argument>
           <argument>C:\Users\MSI\Desktop\matchupz-web-0\vendor\symfony\maker-bundle/translations</argument>
+          <argument>C:\Users\MSI\Desktop\matchupz-web-0\vendor\knpuniversity\oauth2-client-bundle\src/translations</argument>
         </argument>
         <argument key="cache_vary" type="collection">
           <argument key="scanned_directories" type="collection">
@@ -2707,6 +2741,7 @@
             <argument>C:\Users\MSI\Desktop\matchupz-web-0\vendor\symfony\security-bundle/translations</argument>
             <argument>C:\Users\MSI\Desktop\matchupz-web-0\vendor\symfony\monolog-bundle/translations</argument>
             <argument>C:\Users\MSI\Desktop\matchupz-web-0\vendor\symfony\maker-bundle/translations</argument>
+            <argument>C:\Users\MSI\Desktop\matchupz-web-0\vendor\knpuniversity\oauth2-client-bundle\src/translations</argument>
           </argument>
         </argument>
       </argument>
@@ -3676,7 +3711,7 @@
     </service>
     <service id="argument_resolver.not_tagged_controller" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
       <tag name="controller.argument_value_resolver" priority="-200"/>
-      <argument type="service" id=".service_locator.qQ4Drao"/>
+      <argument type="service" id=".service_locator.Bnjq0RY"/>
     </service>
     <service id="debug.log_processor" class="Symfony\Bridge\Monolog\Processor\DebugProcessor">
       <tag name="kernel.reset" method="reset"/>
@@ -6541,8 +6576,7 @@
     <service id="security.helper" class="Symfony\Bundle\SecurityBundle\Security">
       <argument type="service" id=".service_locator.e_.xxAP"/>
       <argument type="collection">
-        <argument key="dev">null</argument>
-        <argument key="main">null</argument>
+        <argument key="main" type="service" id=".service_locator.PKM7nLz"/>
       </argument>
     </service>
     <service id="security.user_value_resolver" class="Symfony\Component\Security\Http\Controller\UserValueResolver">
@@ -6596,9 +6630,8 @@
       <argument type="service" id="security.token_storage"/>
     </service>
     <service id="security.firewall.map" class="Symfony\Bundle\SecurityBundle\Security\FirewallMap">
-      <argument type="service" id=".service_locator.zJyh7qS"/>
+      <argument type="service" id=".service_locator.TLRF7BM"/>
       <argument type="iterator">
-        <argument key="security.firewall.map.context.dev" type="service" id=".security.request_matcher.kLbKLHa"/>
         <argument key="security.firewall.map.context.main">null</argument>
       </argument>
     </service>
@@ -6687,20 +6720,7 @@
       <argument type="service" id="cache.security_is_granted_attribute_expression_language.recorder_inner"/>
     </service>
     <service id="security.password_hasher_factory" class="Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactory">
-      <argument type="collection">
-        <argument key="Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface" type="collection">
-          <argument key="algorithm">auto</argument>
-          <argument key="migrate_from" type="collection"/>
-          <argument key="hash_algorithm">sha512</argument>
-          <argument key="key_length">40</argument>
-          <argument key="ignore_case">false</argument>
-          <argument key="encode_as_base64">true</argument>
-          <argument key="iterations">5000</argument>
-          <argument key="cost">null</argument>
-          <argument key="memory_cost">null</argument>
-          <argument key="time_cost">null</argument>
-        </argument>
-      </argument>
+      <argument type="collection"/>
     </service>
     <service id="security.user_password_hasher" class="Symfony\Component\PasswordHasher\Hasher\UserPasswordHasher">
       <argument type="service" id="security.password_hasher_factory"/>
@@ -6737,7 +6757,8 @@
       <tag name="monolog.logger" channel="security"/>
       <argument type="service" id="security.untracked_token_storage"/>
       <argument type="iterator">
-        <argument type="service" id="security.user.provider.concrete.users_in_memory"/>
+        <argument type="service" id="App\Security\CustomUserProvider"/>
+        <argument type="service" id="knpu.oauth2.user_provider"/>
       </argument>
       <argument type="abstract">Provider Key</argument>
       <argument type="service" id="monolog.logger.security" on-invalid="null"/>
@@ -6864,7 +6885,7 @@
     </service>
     <service id="security.listener.user_provider" class="Symfony\Component\Security\Http\EventListener\UserProviderListener">
       <tag name="kernel.event_listener" event="Symfony\Component\Security\Http\Event\CheckPassportEvent" priority="1024" method="checkPassport"/>
-      <argument type="service" id="security.user.provider.concrete.users_in_memory"/>
+      <argument type="service" id="security.user_providers"/>
     </service>
     <service id="security.listener.user_provider.abstract" class="Symfony\Component\Security\Http\EventListener\UserProviderListener" abstract="true">
       <argument type="abstract">user provider</argument>
@@ -7016,10 +7037,13 @@
       <tag name="console.command" command="debug:firewall"/>
       <tag name="container.no_preload"/>
       <argument>%security.firewalls%</argument>
-      <argument type="service" id=".service_locator.zJyh7qS"/>
+      <argument type="service" id=".service_locator.TLRF7BM"/>
       <argument type="service" id=".service_locator._1SGciK"/>
       <argument type="collection">
-        <argument key="main" type="collection"/>
+        <argument key="main" type="collection">
+          <argument type="service" id="App\Security\GoogleAuthenticator"/>
+          <argument type="service" id="App\Security\FaceRecognitionAuthenticator"/>
+        </argument>
       </argument>
       <argument>false</argument>
       <call method="setName">
@@ -7029,37 +7053,11 @@
         <argument>Display information about your security firewall(s)</argument>
       </call>
     </service>
-    <service id="security.user.provider.concrete.users_in_memory" class="Symfony\Component\Security\Core\User\InMemoryUserProvider">
-      <argument type="collection"/>
-    </service>
-    <service id="security.firewall.map.config.dev" class="Symfony\Bundle\SecurityBundle\Security\FirewallConfig">
-      <argument>dev</argument>
-      <argument>security.user_checker</argument>
-      <argument>.security.request_matcher.kLbKLHa</argument>
-      <argument>false</argument>
-      <argument>false</argument>
-      <argument>null</argument>
-      <argument>null</argument>
-      <argument>null</argument>
-      <argument>null</argument>
-      <argument>null</argument>
-      <argument type="collection"/>
-      <argument>null</argument>
-      <argument>null</argument>
-    </service>
-    <service id=".security.request_matcher.q1UFWmc" class="Symfony\Component\HttpFoundation\RequestMatcher\PathRequestMatcher">
-      <argument>^/(_(profiler|wdt)|css|images|js)/</argument>
-    </service>
-    <service id=".security.request_matcher.kLbKLHa" class="Symfony\Component\HttpFoundation\ChainRequestMatcher">
-      <argument type="collection">
-        <argument type="service" id=".security.request_matcher.q1UFWmc"/>
+    <service id="security.user_providers" class="Symfony\Component\Security\Core\User\ChainUserProvider">
+      <argument type="iterator">
+        <argument type="service" id="App\Security\CustomUserProvider"/>
+        <argument type="service" id="knpu.oauth2.user_provider"/>
       </argument>
-    </service>
-    <service id="security.firewall.map.context.dev" class="Symfony\Bundle\SecurityBundle\Security\FirewallContext">
-      <argument type="iterator"/>
-      <argument>null</argument>
-      <argument>null</argument>
-      <argument type="service" id="security.firewall.map.config.dev"/>
     </service>
     <service id="security.firewall.map.config.main" class="Symfony\Bundle\SecurityBundle\Security\FirewallConfig">
       <argument>main</argument>
@@ -7067,18 +7065,21 @@
       <argument>null</argument>
       <argument>true</argument>
       <argument>false</argument>
-      <argument>security.user.provider.concrete.users_in_memory</argument>
+      <argument>App\Security\CustomUserProvider</argument>
       <argument>main</argument>
       <argument>null</argument>
       <argument>null</argument>
       <argument>null</argument>
-      <argument type="collection"/>
+      <argument type="collection">
+        <argument>App\Security\GoogleAuthenticator</argument>
+        <argument>App\Security\FaceRecognitionAuthenticator</argument>
+      </argument>
       <argument>null</argument>
       <argument>null</argument>
     </service>
     <service id="security.listener.main.user_provider" class="Symfony\Component\Security\Http\EventListener\UserProviderListener">
       <tag name="kernel.event_listener" dispatcher="debug.security.event_dispatcher.main" event="Symfony\Component\Security\Http\Event\CheckPassportEvent" priority="2048" method="checkPassport"/>
-      <argument type="service" id="security.user.provider.concrete.users_in_memory"/>
+      <argument type="service" id="App\Security\CustomUserProvider"/>
     </service>
     <service id="security.user_checker.chain.main" class="Symfony\Component\Security\Core\User\ChainUserChecker">
       <argument type="tagged_iterator" tag="security.user_checker.main"/>
@@ -7088,7 +7089,8 @@
       <tag name="container.hot_path"/>
       <argument type="service" id="security.untracked_token_storage"/>
       <argument type="iterator">
-        <argument type="service" id="security.user.provider.concrete.users_in_memory"/>
+        <argument type="service" id="App\Security\CustomUserProvider"/>
+        <argument type="service" id="knpu.oauth2.user_provider"/>
       </argument>
       <argument>main</argument>
       <argument type="service" id="monolog.logger.security" on-invalid="null"/>
@@ -7105,7 +7107,10 @@
     </service>
     <service id="security.authenticator.manager.main" class="Symfony\Component\Security\Http\Authentication\AuthenticatorManager">
       <tag name="monolog.logger" channel="security"/>
-      <argument type="collection"/>
+      <argument type="collection">
+        <argument type="service" id="App\Security\GoogleAuthenticator"/>
+        <argument type="service" id="App\Security\FaceRecognitionAuthenticator"/>
+      </argument>
       <argument type="service" id="security.token_storage"/>
       <argument type="service" id="debug.security.event_dispatcher.main"/>
       <argument>main</argument>
@@ -7134,7 +7139,14 @@
       <argument type="service" id="monolog.logger.security" on-invalid="null"/>
       <argument>false</argument>
     </service>
-    <service id="security.firewall.map.context.main" class="Symfony\Bundle\SecurityBundle\Security\LazyFirewallContext">
+    <service id=".service_locator.PKM7nLz" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="App\Security\FaceRecognitionAuthenticator" type="service_closure" id="App\Security\FaceRecognitionAuthenticator"/>
+        <argument key="App\Security\GoogleAuthenticator" type="service_closure" id="App\Security\GoogleAuthenticator"/>
+      </argument>
+    </service>
+    <service id="security.firewall.map.context.main" class="Symfony\Bundle\SecurityBundle\Security\FirewallContext">
       <argument type="iterator">
         <argument type="service" id="security.channel_listener"/>
         <argument type="service" id="security.context_listener.0"/>
@@ -7144,12 +7156,10 @@
       <argument type="service" id="security.exception_listener.main"/>
       <argument>null</argument>
       <argument type="service" id="security.firewall.map.config.main"/>
-      <argument type="service" id="security.untracked_token_storage"/>
     </service>
-    <service id=".service_locator.zJyh7qS" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.TLRF7BM" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
-        <argument key="security.firewall.map.context.dev" type="service_closure" id="security.firewall.map.context.dev"/>
         <argument key="security.firewall.map.context.main" type="service_closure" id="security.firewall.map.context.main"/>
       </argument>
     </service>
@@ -7157,9 +7167,7 @@
       <tag name="console.command"/>
       <tag name="container.no_preload"/>
       <argument type="service" id="security.password_hasher_factory"/>
-      <argument type="collection">
-        <argument>Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface</argument>
-      </argument>
+      <argument type="collection"/>
       <call method="setName">
         <argument>security:hash-password</argument>
       </call>
@@ -7507,6 +7515,31 @@
       <argument>3600</argument>
       <argument>3600</argument>
     </service>
+    <service id="knpu.oauth2.provider_factory" class="KnpU\OAuth2ClientBundle\DependencyInjection\ProviderFactory">
+      <argument type="service" id="router.default"/>
+    </service>
+    <service id="knpu.oauth2.registry" class="KnpU\OAuth2ClientBundle\Client\ClientRegistry" public="true">
+      <argument type="service" id="service_container"/>
+      <argument type="collection">
+        <argument key="google">knpu.oauth2.client.google</argument>
+      </argument>
+    </service>
+    <service id="knpu.oauth2.user_provider" class="KnpU\OAuth2ClientBundle\Security\User\OAuthUserProvider"/>
+    <service id="knpu.oauth2.provider.google" class="League\OAuth2\Client\Provider\Google">
+      <argument>League\OAuth2\Client\Provider\Google</argument>
+      <argument type="collection">
+        <argument key="clientId">%env(GOOGLE_CLIENT_ID)%</argument>
+        <argument key="clientSecret">%env(GOOGLE_CLIENT_SECRET)%</argument>
+      </argument>
+      <argument>connect_google_check</argument>
+      <argument type="collection"/>
+      <argument type="collection"/>
+      <factory service="knpu.oauth2.provider_factory" method="createProvider"/>
+    </service>
+    <service id="knpu.oauth2.client.google" class="KnpU\OAuth2ClientBundle\Client\Provider\GoogleClient" public="true">
+      <argument type="service" id="knpu.oauth2.provider.google"/>
+      <argument type="service" id="request_stack"/>
+    </service>
     <service id=".instanceof.Psr\Log\LoggerAwareInterface.0.Knp\Snappy\Pdf" class="Knp\Snappy\Pdf" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.Knp\Snappy\Pdf" class="Knp\Snappy\Pdf" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Twig\Extension\ExtensionInterface.0.App\Twig\AppExtension" class="App\Twig\AppExtension" autowire="true" abstract="true"/>
@@ -7556,12 +7589,18 @@
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\ScheduleController" class="App\Controller\ScheduleController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\ScheduleController" class="App\Controller\ScheduleController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\ScheduleController" class="App\Controller\ScheduleController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\SecurityController" class="App\Controller\SecurityController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\SecurityController" class="App\Controller\SecurityController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\SecurityController" class="App\Controller\SecurityController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\SponsorController" class="App\Controller\SponsorController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\SponsorController" class="App\Controller\SponsorController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\SponsorController" class="App\Controller\SponsorController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\SportController" class="App\Controller\SportController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\SportController" class="App\Controller\SportController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\SportController" class="App\Controller\SportController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\TestController" class="App\Controller\TestController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\TestController" class="App\Controller\TestController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\TestController" class="App\Controller\TestController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\UserController" class="App\Controller\UserController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\UserController" class="App\Controller\UserController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\UserController" class="App\Controller\UserController" autowire="true" autoconfigure="true" abstract="true"/>
@@ -8436,6 +8475,12 @@
       <tag name="container.service_locator"/>
       <argument type="collection"/>
     </service>
+    <service id=".service_locator.hokdgZZ" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="clientRegistry" type="service_closure" id="knpu.oauth2.registry"/>
+      </argument>
+    </service>
     <service id=".service_locator.MPUuYf0" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -8470,6 +8515,12 @@
       <argument type="collection">
         <argument key="knpSnappyPdf" type="service_closure" id="Knp\Snappy\Pdf"/>
         <argument key="sportRepository" type="service_closure" id="App\Repository\SportRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.YgYapZ6" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="security" type="service_closure" id="security.helper"/>
       </argument>
     </service>
     <service id=".service_locator.lDw5jgg" class="Symfony\Component\DependencyInjection\ServiceLocator">
@@ -8521,7 +8572,7 @@
         <argument key="mailer" type="service_closure" id="mailer.mailer"/>
       </argument>
     </service>
-    <service id=".service_locator.qQ4Drao" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.Bnjq0RY" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\AbonnementController::delete" type="service_closure" id=".service_locator.RsAjdld"/>
@@ -8619,6 +8670,7 @@
         <argument key="App\Controller\ScheduleController::show" type="service_closure" id=".service_locator.Z3Oe1ma"/>
         <argument key="App\Controller\ScheduleController::showF" type="service_closure" id=".service_locator.Z3Oe1ma"/>
         <argument key="App\Controller\ScheduleController::statistics" type="service_closure" id=".service_locator.Z3Oe1ma"/>
+        <argument key="App\Controller\SecurityController::connectGoogle" type="service_closure" id=".service_locator.hokdgZZ"/>
         <argument key="App\Controller\SponsorController::delete" type="service_closure" id=".service_locator.CsMkqUa"/>
         <argument key="App\Controller\SponsorController::edit" type="service_closure" id=".service_locator.CsMkqUa"/>
         <argument key="App\Controller\SponsorController::export" type="service_closure" id=".service_locator.MPUuYf0"/>
@@ -8633,6 +8685,7 @@
         <argument key="App\Controller\SportController::index" type="service_closure" id=".service_locator.jpL5_4q"/>
         <argument key="App\Controller\SportController::new" type="service_closure" id=".service_locator.CsMkqUa"/>
         <argument key="App\Controller\SportController::statistics" type="service_closure" id=".service_locator.cX9LP_Y"/>
+        <argument key="App\Controller\TestController::testAuth" type="service_closure" id=".service_locator.YgYapZ6"/>
         <argument key="App\Controller\UserController::delete" type="service_closure" id=".service_locator.rvMNZGh"/>
         <argument key="App\Controller\UserController::edit" type="service_closure" id=".service_locator..2mlXMl"/>
         <argument key="App\Controller\UserController::editFront" type="service_closure" id=".service_locator..2mlXMl"/>
@@ -8747,6 +8800,7 @@
         <argument key="App\Controller\ScheduleController:show" type="service_closure" id=".service_locator.Z3Oe1ma"/>
         <argument key="App\Controller\ScheduleController:showF" type="service_closure" id=".service_locator.Z3Oe1ma"/>
         <argument key="App\Controller\ScheduleController:statistics" type="service_closure" id=".service_locator.Z3Oe1ma"/>
+        <argument key="App\Controller\SecurityController:connectGoogle" type="service_closure" id=".service_locator.hokdgZZ"/>
         <argument key="App\Controller\SponsorController:delete" type="service_closure" id=".service_locator.CsMkqUa"/>
         <argument key="App\Controller\SponsorController:edit" type="service_closure" id=".service_locator.CsMkqUa"/>
         <argument key="App\Controller\SponsorController:export" type="service_closure" id=".service_locator.MPUuYf0"/>
@@ -8761,6 +8815,7 @@
         <argument key="App\Controller\SportController:index" type="service_closure" id=".service_locator.jpL5_4q"/>
         <argument key="App\Controller\SportController:new" type="service_closure" id=".service_locator.CsMkqUa"/>
         <argument key="App\Controller\SportController:statistics" type="service_closure" id=".service_locator.cX9LP_Y"/>
+        <argument key="App\Controller\TestController:testAuth" type="service_closure" id=".service_locator.YgYapZ6"/>
         <argument key="App\Controller\UserController:delete" type="service_closure" id=".service_locator.rvMNZGh"/>
         <argument key="App\Controller\UserController:edit" type="service_closure" id=".service_locator..2mlXMl"/>
         <argument key="App\Controller\UserController:editFront" type="service_closure" id=".service_locator..2mlXMl"/>
@@ -9510,6 +9565,12 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.O2p6Lk7" method="withContext"/>
     </service>
+    <service id=".service_locator.O2p6Lk7.App\Controller\SecurityController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\SecurityController"/>
+      <argument>App\Controller\SecurityController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.O2p6Lk7" method="withContext"/>
+    </service>
     <service id=".service_locator.O2p6Lk7.App\Controller\SponsorController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\SponsorController"/>
       <argument>App\Controller\SponsorController</argument>
@@ -9519,6 +9580,12 @@
     <service id=".service_locator.O2p6Lk7.App\Controller\SportController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\SportController"/>
       <argument>App\Controller\SportController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.O2p6Lk7" method="withContext"/>
+    </service>
+    <service id=".service_locator.O2p6Lk7.App\Controller\TestController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\TestController"/>
+      <argument>App\Controller\TestController</argument>
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.O2p6Lk7" method="withContext"/>
     </service>
@@ -9713,8 +9780,10 @@
           <argument>App\Controller\PerformanceJoueurController</argument>
           <argument>App\Controller\ReservationController</argument>
           <argument>App\Controller\ScheduleController</argument>
+          <argument>App\Controller\SecurityController</argument>
           <argument>App\Controller\SponsorController</argument>
           <argument>App\Controller\SportController</argument>
+          <argument>App\Controller\TestController</argument>
           <argument>App\Controller\UserController</argument>
           <argument>Doctrine\Bundle\DoctrineBundle\Controller\ProfilerController</argument>
         </argument>
@@ -11104,20 +11173,23 @@
     <service id="Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface" alias="security.user_password_hasher"/>
     <service id="Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface" alias="security.user_authenticator"/>
     <service id="security.firewall" alias="debug.security.firewall"/>
-    <service id="security.user_providers" alias="security.user.provider.concrete.users_in_memory"/>
-    <service id="Symfony\Component\Security\Core\User\UserProviderInterface" alias="security.user.provider.concrete.users_in_memory"/>
+    <service id="security.user.provider.concrete.custom_user_provider" alias="App\Security\CustomUserProvider"/>
+    <service id="security.user.provider.concrete.oauth" alias="knpu.oauth2.user_provider"/>
     <service id="security.authentication.session_strategy.main" alias="security.authentication.session_strategy"/>
     <service id="security.user_checker.main" alias="security.user_checker"/>
-    <service id="security.firewall.context_locator" alias=".service_locator.zJyh7qS"/>
+    <service id="security.firewall.context_locator" alias=".service_locator.TLRF7BM"/>
     <service id="Symfony\Component\Security\Core\User\UserCheckerInterface" alias="security.user_checker"/>
     <service id="logger" alias="monolog.logger"/>
     <service id="Psr\Log\LoggerInterface" alias="monolog.logger"/>
     <service id="Knp\Component\Pager\PaginatorInterface" alias="knp_paginator"/>
     <service id="Knp\Component\Pager\ArgumentAccess\ArgumentAccessInterface" alias="Knp\Component\Pager\ArgumentAccess\RequestArgumentAccess"/>
     <service id="SymfonyCasts\Bundle\ResetPassword\ResetPasswordHelperInterface" alias="symfonycasts.reset_password.helper"/>
+    <service id="KnpU\OAuth2ClientBundle\Client\ClientRegistry" alias="knpu.oauth2.registry"/>
+    <service id="oauth2.registry" alias="knpu.oauth2.registry" public="true"/>
+    <service id="KnpU\OAuth2ClientBundle\Client\Provider\GoogleClient" alias="knpu.oauth2.client.google"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.w7.f4fT" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.qQ4Drao"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.Bnjq0RY"/>
     <service id="doctrine.id_generator_locator" alias=".service_locator.KLVvNIq"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface $requestLogger" alias="monolog.logger.request"/>
@@ -11140,6 +11212,7 @@
     <service id="Psr\Log\LoggerInterface $deprecationLogger" alias="monolog.logger.deprecation"/>
     <service id=".service_locator.80edgLI" alias="messenger.receiver_locator"/>
     <service id=".service_locator.h8Jkkd2" alias="messenger.retry_strategy_locator"/>
+    <service id=".service_locator.Y.MTxc9" alias=".service_locator.PKM7nLz"/>
     <service id=".service_locator.bJ.4HC5" alias=".service_locator.w7.f4fT"/>
     <service id=".service_locator.Ecpu4I3" alias=".service_locator.8H.sdZM"/>
     <service id=".service_locator.U1vYzKJ" alias=".service_locator.rCZqcqr"/>
@@ -11167,7 +11240,7 @@
     <service id=".service_locator.R0Sb2kd" alias=".service_locator.rvMNZGh"/>
     <service id=".service_locator.BlYcpAP" alias=".service_locator..2mlXMl"/>
     <service id=".service_locator.A2Zxe2u" alias=".service_locator.cprxzUU"/>
-    <service id=".service_locator.t7ygi8z" alias=".service_locator.qQ4Drao"/>
+    <service id=".service_locator.t6SIans" alias=".service_locator.Bnjq0RY"/>
     <service id=".service_locator.BFrsqsn" alias=".service_locator.F9PKc.7"/>
     <service id=".service_locator.apSoDyL" alias=".service_locator.cTSAUcy"/>
     <service id=".service_locator.XtmiKbi" alias=".service_locator.MfxSDRP"/>
@@ -11241,11 +11314,13 @@
     <service id=".service_locator.Egb5n_m" alias=".service_locator.Lt49UVm"/>
     <service id=".service_locator.sdWL846" alias=".service_locator.Z3Oe1ma"/>
     <service id=".service_locator.deNQON3" alias=".service_locator.VA.oRVl"/>
+    <service id=".service_locator.Yc1mPPx" alias=".service_locator.hokdgZZ"/>
     <service id=".service_locator..KBaod7" alias=".service_locator.MPUuYf0"/>
     <service id=".service_locator.W_TcJ7V" alias=".service_locator.jpL5_4q"/>
     <service id=".service_locator.vtj.h5i" alias=".service_locator.cX9LP_Y"/>
     <service id=".service_locator.0VPh.hj" alias=".service_locator.geVFa8t"/>
     <service id=".service_locator.pHhadZw" alias=".service_locator.s2P9uaA"/>
+    <service id=".service_locator.R82pv.c" alias=".service_locator.YgYapZ6"/>
     <service id=".service_locator.EwtfK4Y" alias=".service_locator.lDw5jgg"/>
     <service id=".service_locator.USpvWCd" alias=".service_locator.qWLXMoh"/>
     <service id=".service_locator.gaTSUXr" alias=".service_locator.9kKwU2t"/>

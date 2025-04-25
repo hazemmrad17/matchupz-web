@@ -39,7 +39,7 @@ class __TwigTemplate_0e5f41fc77c9eaa18a196bb783dae8bd extends Template
 
     protected function doGetParent(array $context): bool|string|Template|TemplateWrapper
     {
-        // line 1
+        // line 2
         return "baseF.html.twig";
     }
 
@@ -52,7 +52,7 @@ class __TwigTemplate_0e5f41fc77c9eaa18a196bb783dae8bd extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "user/login.html.twig"));
 
-        $this->parent = $this->loadTemplate("baseF.html.twig", "user/login.html.twig", 1);
+        $this->parent = $this->loadTemplate("baseF.html.twig", "user/login.html.twig", 2);
         yield from $this->parent->unwrap()->yield($context, array_merge($this->blocks, $blocks));
         
         $__internal_5a27a8ba21ca79b61932376b2fa922d2->leave($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof);
@@ -62,7 +62,7 @@ class __TwigTemplate_0e5f41fc77c9eaa18a196bb783dae8bd extends Template
 
     }
 
-    // line 3
+    // line 4
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -85,7 +85,7 @@ class __TwigTemplate_0e5f41fc77c9eaa18a196bb783dae8bd extends Template
         yield from [];
     }
 
-    // line 5
+    // line 6
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -98,7 +98,7 @@ class __TwigTemplate_0e5f41fc77c9eaa18a196bb783dae8bd extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
 
-        // line 6
+        // line 7
         yield "    <div class=\"container-fluid py-5\">
         <div class=\"container\">
             <div class=\"row justify-content-center\">
@@ -108,21 +108,21 @@ class __TwigTemplate_0e5f41fc77c9eaa18a196bb783dae8bd extends Template
 
                         <!-- Affichage des messages flash -->
                         ";
-        // line 14
+        // line 15
         $context['_parent'] = $context;
-        $context['_seq'] = CoreExtension::ensureTraversable(CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 14, $this->source); })()), "flashes", [], "any", false, false, false, 14));
+        $context['_seq'] = CoreExtension::ensureTraversable(CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 15, $this->source); })()), "flashes", [], "any", false, false, false, 15));
         foreach ($context['_seq'] as $context["label"] => $context["messages"]) {
-            // line 15
+            // line 16
             yield "                            ";
             $context['_parent'] = $context;
             $context['_seq'] = CoreExtension::ensureTraversable($context["messages"]);
             foreach ($context['_seq'] as $context["_key"] => $context["message"]) {
-                // line 16
+                // line 17
                 yield "                                <div class=\"alert alert-";
                 yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($context["label"], "html", null, true);
                 yield " alert-dismissible fade show\" role=\"alert\">
                                     ";
-                // line 17
+                // line 18
                 yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($context["message"], "html", null, true);
                 yield "
                                     <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button>
@@ -132,16 +132,29 @@ class __TwigTemplate_0e5f41fc77c9eaa18a196bb783dae8bd extends Template
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_key'], $context['message'], $context['_parent']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 21
+            // line 22
             yield "                        ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['label'], $context['messages'], $context['_parent']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 22
-        yield "
-                        <form id=\"formAuthentication\" action=\"";
         // line 23
+        yield "
+                        <!-- Bouton Google -->
+                        <div class=\"mb-3 text-center\">
+                            <a href=\"";
+        // line 26
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("connect_google");
+        yield "\" class=\"btn btn-outline-primary w-100\">
+                                <i class=\"bx bxl-google\"></i> Connexion avec Google
+                            </a>
+                        </div>
+
+                        <hr>
+
+                        <!-- Formulaire classique -->
+                        <form id=\"formAuthentication\" action=\"";
+        // line 34
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_verif_userF");
         yield "\" method=\"post\" novalidate>
                             <!-- Email -->
@@ -178,37 +191,37 @@ class __TwigTemplate_0e5f41fc77c9eaa18a196bb783dae8bd extends Template
                             <!-- reCAPTCHA -->
                             <div class=\"mb-3\">
                                 ";
-        // line 57
-        if ((array_key_exists("recaptcha_site_key", $context) &&  !Twig\Extension\CoreExtension::testEmpty((isset($context["recaptcha_site_key"]) || array_key_exists("recaptcha_site_key", $context) ? $context["recaptcha_site_key"] : (function () { throw new RuntimeError('Variable "recaptcha_site_key" does not exist.', 57, $this->source); })())))) {
-            // line 58
+        // line 68
+        if ((array_key_exists("recaptcha_site_key", $context) &&  !Twig\Extension\CoreExtension::testEmpty((isset($context["recaptcha_site_key"]) || array_key_exists("recaptcha_site_key", $context) ? $context["recaptcha_site_key"] : (function () { throw new RuntimeError('Variable "recaptcha_site_key" does not exist.', 68, $this->source); })())))) {
+            // line 69
             yield "                                    <div class=\"g-recaptcha\" data-sitekey=\"";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["recaptcha_site_key"]) || array_key_exists("recaptcha_site_key", $context) ? $context["recaptcha_site_key"] : (function () { throw new RuntimeError('Variable "recaptcha_site_key" does not exist.', 58, $this->source); })()), "html", null, true);
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["recaptcha_site_key"]) || array_key_exists("recaptcha_site_key", $context) ? $context["recaptcha_site_key"] : (function () { throw new RuntimeError('Variable "recaptcha_site_key" does not exist.', 69, $this->source); })()), "html", null, true);
             yield "\" data-callback=\"onRecaptchaSuccess\"></div>
                                 ";
         } else {
-            // line 60
+            // line 71
             yield "                                    <p style=\"color: red;\">Erreur : Clé de site reCAPTCHA non définie.</p>
                                 ";
         }
-        // line 62
+        // line 73
         yield "                            </div>
 
                             <input type=\"hidden\" name=\"_csrf_token\" value=\"";
-        // line 64
+        // line 75
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderCsrfToken("authenticate"), "html", null, true);
         yield "\">
 
                             <div class=\"d-flex justify-content-between align-items-center mb-3\">
                                 <button type=\"submit\" class=\"btn btn-primary\">Login</button>
                                 <a href=\"";
-        // line 68
+        // line 79
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_forgot_password");
         yield "\" class=\"text-muted small\">Forgot Password?</a>
                             </div>
                         </form>
                         <div class=\"text-center\">
                             <p class=\"small\">Don't have an account? <a href=\"";
-        // line 72
+        // line 83
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_registerF");
         yield "\">Register</a></p>
                         </div>
@@ -227,7 +240,7 @@ class __TwigTemplate_0e5f41fc77c9eaa18a196bb783dae8bd extends Template
         yield from [];
     }
 
-    // line 81
+    // line 92
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -240,13 +253,13 @@ class __TwigTemplate_0e5f41fc77c9eaa18a196bb783dae8bd extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "stylesheets"));
 
-        // line 82
+        // line 93
         yield "    ";
         yield from $this->yieldParentBlock("stylesheets", $context, $blocks);
         yield "
     <!-- Ensure Boxicons is included -->
     <link rel=\"stylesheet\" href=\"";
-        // line 84
+        // line 95
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/vendor/fonts/boxicons.css"), "html", null, true);
         yield "\" />
     <style>
@@ -266,7 +279,7 @@ class __TwigTemplate_0e5f41fc77c9eaa18a196bb783dae8bd extends Template
         yield from [];
     }
 
-    // line 94
+    // line 105
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -279,36 +292,36 @@ class __TwigTemplate_0e5f41fc77c9eaa18a196bb783dae8bd extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "javascripts"));
 
-        // line 95
+        // line 106
         yield "    ";
         yield from $this->yieldParentBlock("javascripts", $context, $blocks);
         yield "
 
     <!-- Core JS -->
     <script src=\"";
-        // line 98
+        // line 109
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/vendor/libs/jquery/jquery.js"), "html", null, true);
         yield "\"></script>
     <script src=\"";
-        // line 99
+        // line 110
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/vendor/libs/popper/popper.js"), "html", null, true);
         yield "\"></script>
     <script src=\"";
-        // line 100
+        // line 111
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/vendor/js/bootstrap.js"), "html", null, true);
         yield "\"></script>
     <script src=\"";
-        // line 101
+        // line 112
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"), "html", null, true);
         yield "\"></script>
     <script src=\"";
-        // line 102
+        // line 113
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/vendor/js/menu.js"), "html", null, true);
         yield "\"></script>
 
     <!-- Main JS -->
     <script src=\"";
-        // line 105
+        // line 116
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/js/main.js"), "html", null, true);
         yield "\"></script>
 
@@ -368,12 +381,13 @@ class __TwigTemplate_0e5f41fc77c9eaa18a196bb783dae8bd extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  312 => 105,  306 => 102,  302 => 101,  298 => 100,  294 => 99,  290 => 98,  283 => 95,  270 => 94,  250 => 84,  244 => 82,  231 => 81,  212 => 72,  205 => 68,  198 => 64,  194 => 62,  190 => 60,  184 => 58,  182 => 57,  145 => 23,  142 => 22,  136 => 21,  126 => 17,  121 => 16,  116 => 15,  112 => 14,  102 => 6,  89 => 5,  66 => 3,  43 => 1,);
+        return array (  325 => 116,  319 => 113,  315 => 112,  311 => 111,  307 => 110,  303 => 109,  296 => 106,  283 => 105,  263 => 95,  257 => 93,  244 => 92,  225 => 83,  218 => 79,  211 => 75,  207 => 73,  203 => 71,  197 => 69,  195 => 68,  158 => 34,  147 => 26,  142 => 23,  136 => 22,  126 => 18,  121 => 17,  116 => 16,  112 => 15,  102 => 7,  89 => 6,  66 => 4,  43 => 2,);
     }
 
     public function getSourceContext(): Source
     {
-        return new Source("{% extends 'baseF.html.twig' %}
+        return new Source("
+{% extends 'baseF.html.twig' %}
 
 {% block title %}Login - MatchupZ{% endblock %}
 
@@ -395,6 +409,16 @@ class __TwigTemplate_0e5f41fc77c9eaa18a196bb783dae8bd extends Template
                             {% endfor %}
                         {% endfor %}
 
+                        <!-- Bouton Google -->
+                        <div class=\"mb-3 text-center\">
+                            <a href=\"{{ path('connect_google') }}\" class=\"btn btn-outline-primary w-100\">
+                                <i class=\"bx bxl-google\"></i> Connexion avec Google
+                            </a>
+                        </div>
+
+                        <hr>
+
+                        <!-- Formulaire classique -->
                         <form id=\"formAuthentication\" action=\"{{ path('app_verif_userF') }}\" method=\"post\" novalidate>
                             <!-- Email -->
                             <div class=\"mb-3\">

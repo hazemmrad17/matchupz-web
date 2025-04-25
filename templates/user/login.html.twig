@@ -1,3 +1,4 @@
+
 {% extends 'baseF.html.twig' %}
 
 {% block title %}Login - MatchupZ{% endblock %}
@@ -20,6 +21,16 @@
                             {% endfor %}
                         {% endfor %}
 
+                        <!-- Bouton Google -->
+                        <div class="mb-3 text-center">
+                            <a href="{{ path('connect_google') }}" class="btn btn-outline-primary w-100">
+                                <i class="bx bxl-google"></i> Connexion avec Google
+                            </a>
+                        </div>
+
+                        <hr>
+
+                        <!-- Formulaire classique -->
                         <form id="formAuthentication" action="{{ path('app_verif_userF') }}" method="post" novalidate>
                             <!-- Email -->
                             <div class="mb-3">
