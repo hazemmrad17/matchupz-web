@@ -74,10 +74,8 @@ class __TwigTemplate_79d2a0acde299fa87f368b8004d9329a extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "searchbar"));
 
         // line 3
-        yield "        ";
-        yield from $this->loadTemplate("searchbar.html.twig", "schedule/new.html.twig", 3)->unwrap()->yield($context);
-        // line 4
         yield "    ";
+        yield from $this->loadTemplate("searchbar.html.twig", "schedule/new.html.twig", 3)->unwrap()->yield($context);
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
 
@@ -198,14 +196,54 @@ class __TwigTemplate_79d2a0acde299fa87f368b8004d9329a extends Template
         yield "
                                 </div>
                             </div>
+                            <div class=\"mb-3\">
+                                <label class=\"form-label\" for=\"schedule_URL\">URL de la vidéo YouTube (embed)</label>
+                                <div class=\"input-group input-group-merge\">
+                                    <span class=\"input-group-text\"><i class=\"bx bx-video\"></i></span>
+                                    ";
+        // line 75
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 75, $this->source); })()), "URL", [], "any", false, false, false, 75), 'widget', ["attr" => ["class" => "form-control", "id" => "schedule_URL"]]);
+        yield "
+                                </div>
+                                <small class=\"form-text text-muted\">";
+        // line 77
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 77, $this->source); })()), "URL", [], "any", false, false, false, 77), 'help');
+        yield "</small>
+                                <div class=\"text-danger mt-1\" id=\"URLError\">
+                                    ";
+        // line 79
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 79, $this->source); })()), "URL", [], "any", false, false, false, 79), 'errors');
+        yield "
+                                </div>
+                            </div>
+                            <div class=\"mb-3\">
+                                <label class=\"form-label\" for=\"schedule_streamURL\">URL de la diffusion en direct YouTube (embed)</label>
+                                <div class=\"input-group input-group-merge\">
+                                    <span class=\"input-group-text\"><i class=\"bx bx-video-recording\"></i></span>
+                                    ";
+        // line 86
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 86, $this->source); })()), "streamURL", [], "any", false, false, false, 86), 'widget', ["attr" => ["class" => "form-control", "id" => "schedule_streamURL"]]);
+        yield "
+                                </div>
+                                <small class=\"form-text text-muted\">";
+        // line 88
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 88, $this->source); })()), "streamURL", [], "any", false, false, false, 88), 'help');
+        yield "</small>
+                                <div class=\"text-danger mt-1\" id=\"streamURLError\">
+                                    ";
+        // line 90
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 90, $this->source); })()), "streamURL", [], "any", false, false, false, 90), 'errors');
+        yield "
+                                </div>
+                            </div>
                             <button type=\"submit\" class=\"btn btn-primary\">Créer</button>
                             <a href=\"";
-        // line 72
+        // line 94
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("schedule_main");
         yield "\" class=\"btn btn-secondary\">Annuler</a>
                         ";
-        // line 73
-        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 73, $this->source); })()), 'form_end');
+        // line 95
+        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 95, $this->source); })()), 'form_end');
         yield "
                     </div>
                 </div>
@@ -221,19 +259,23 @@ class __TwigTemplate_79d2a0acde299fa87f368b8004d9329a extends Template
             const endTimeInput = document.getElementById('schedule_endTime');
             const matchEntityInput = document.getElementById('schedule_matchEntity');
             const espaceSportifInput = document.getElementById('schedule_espaceSportif');
+            const URLInput = document.getElementById('schedule_URL');
+            const streamURLInput = document.getElementById('schedule_streamURL');
             const dateMatchError = document.getElementById('dateMatchError');
             const startTimeError = document.getElementById('startTimeError');
             const endTimeError = document.getElementById('endTimeError');
             const matchEntityError = document.getElementById('matchEntityError');
             const espaceSportifError = document.getElementById('espaceSportifError');
+            const URLError = document.getElementById('URLError');
+            const streamURLError = document.getElementById('streamURLError');
 
             // Function to validate a single field (required fields)
-            function validateField(input, errorElement, fieldName) {
+            function validateField(input, errorElement, fieldName, isRequired = true) {
                 let hasError = false;
                 errorElement.textContent = errorElement.textContent || '';
                 input.classList.remove('is-invalid');
 
-                if (!input.value.trim()) {
+                if (isRequired && !input.value.trim()) {
                     errorElement.textContent = `Le champ \${fieldName} ne peut pas être vide.`;
                     input.classList.add('is-invalid');
                     hasError = true;
@@ -278,6 +320,38 @@ class __TwigTemplate_79d2a0acde299fa87f368b8004d9329a extends Template
                 return false;
             }
 
+            // Function to validate URL (optional, must contain /embed/ if provided)
+            function validateURL() {
+                URLError.textContent = URLError.textContent || '';
+                URLInput.classList.remove('is-invalid');
+
+                if (URLInput.value.trim()) {
+                    const embedPattern = /\\/embed\\//;
+                    if (!embedPattern.test(URLInput.value)) {
+                        URLError.textContent = \"L'URL doit être une URL YouTube au format embed (par exemple, https://www.youtube.com/embed/VIDEO_ID).\";
+                        URLInput.classList.add('is-invalid');
+                        return true;
+                    }
+                }
+                return false;
+            }
+
+            // Function to validate streamURL (optional, must contain /embed/ if provided)
+            function validateStreamURL() {
+                streamURLError.textContent = streamURLError.textContent || '';
+                streamURLInput.classList.remove('is-invalid');
+
+                if (streamURLInput.value.trim()) {
+                    const embedPattern = /\\/embed\\//;
+                    if (!embedPattern.test(streamURLInput.value)) {
+                        streamURLError.textContent = \"L'URL de diffusion en direct doit être une URL YouTube au format embed (par exemple, https://www.youtube.com/embed/VIDEO_ID).\";
+                        streamURLInput.classList.add('is-invalid');
+                        return true;
+                    }
+                }
+                return false;
+            }
+
             // Real-time validation on input/change
             dateMatchInput.addEventListener('input', function () {
                 validateField(dateMatchInput, dateMatchError, 'Date du Match');
@@ -302,6 +376,16 @@ class __TwigTemplate_79d2a0acde299fa87f368b8004d9329a extends Template
                 validateField(espaceSportifInput, espaceSportifError, 'Espace Sportif');
             });
 
+            URLInput.addEventListener('input', function () {
+                validateField(URLInput, URLError, 'URL de la vidéo YouTube', false); // Not required
+                validateURL();
+            });
+
+            streamURLInput.addEventListener('input', function () {
+                validateField(streamURLInput, streamURLError, 'URL de la diffusion en direct YouTube', false); // Not required
+                validateStreamURL();
+            });
+
             // Validate on form submission
             form.addEventListener('submit', function (event) {
                 let hasError = false;
@@ -322,10 +406,22 @@ class __TwigTemplate_79d2a0acde299fa87f368b8004d9329a extends Template
                 if (validateField(espaceSportifInput, espaceSportifError, 'Espace Sportif')) {
                     hasError = true;
                 }
+                if (validateField(URLInput, URLError, 'URL de la vidéo YouTube', false)) {
+                    hasError = true;
+                }
+                if (validateField(streamURLInput, streamURLError, 'URL de la diffusion en direct YouTube', false)) {
+                    hasError = true;
+                }
                 if (validateDateMatch()) {
                     hasError = true;
                 }
                 if (validateTimeRange()) {
+                    hasError = true;
+                }
+                if (validateURL()) {
+                    hasError = true;
+                }
+                if (validateStreamURL()) {
                     hasError = true;
                 }
 
@@ -367,15 +463,15 @@ class __TwigTemplate_79d2a0acde299fa87f368b8004d9329a extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  208 => 73,  204 => 72,  197 => 68,  191 => 65,  181 => 58,  175 => 55,  165 => 48,  159 => 45,  149 => 38,  143 => 35,  133 => 28,  127 => 25,  119 => 20,  104 => 7,  91 => 6,  80 => 4,  77 => 3,  64 => 2,  41 => 1,);
+        return array (  246 => 95,  242 => 94,  235 => 90,  230 => 88,  225 => 86,  215 => 79,  210 => 77,  205 => 75,  195 => 68,  189 => 65,  179 => 58,  173 => 55,  163 => 48,  157 => 45,  147 => 38,  141 => 35,  131 => 28,  125 => 25,  117 => 20,  102 => 7,  89 => 6,  77 => 3,  64 => 2,  41 => 1,);
     }
 
     public function getSourceContext(): Source
     {
         return new Source("{% extends 'base.html.twig' %}
-    {% block searchbar %}
-        {% include 'searchbar.html.twig' %}
-    {% endblock %}
+{% block searchbar %}
+    {% include 'searchbar.html.twig' %}
+{% endblock %}
 
 {% block content %}
     <div class=\"content-wrapper\">
@@ -442,6 +538,28 @@ class __TwigTemplate_79d2a0acde299fa87f368b8004d9329a extends Template
                                     {{ form_errors(form.espaceSportif) }}
                                 </div>
                             </div>
+                            <div class=\"mb-3\">
+                                <label class=\"form-label\" for=\"schedule_URL\">URL de la vidéo YouTube (embed)</label>
+                                <div class=\"input-group input-group-merge\">
+                                    <span class=\"input-group-text\"><i class=\"bx bx-video\"></i></span>
+                                    {{ form_widget(form.URL, {'attr': {'class': 'form-control', 'id': 'schedule_URL'}}) }}
+                                </div>
+                                <small class=\"form-text text-muted\">{{ form_help(form.URL) }}</small>
+                                <div class=\"text-danger mt-1\" id=\"URLError\">
+                                    {{ form_errors(form.URL) }}
+                                </div>
+                            </div>
+                            <div class=\"mb-3\">
+                                <label class=\"form-label\" for=\"schedule_streamURL\">URL de la diffusion en direct YouTube (embed)</label>
+                                <div class=\"input-group input-group-merge\">
+                                    <span class=\"input-group-text\"><i class=\"bx bx-video-recording\"></i></span>
+                                    {{ form_widget(form.streamURL, {'attr': {'class': 'form-control', 'id': 'schedule_streamURL'}}) }}
+                                </div>
+                                <small class=\"form-text text-muted\">{{ form_help(form.streamURL) }}</small>
+                                <div class=\"text-danger mt-1\" id=\"streamURLError\">
+                                    {{ form_errors(form.streamURL) }}
+                                </div>
+                            </div>
                             <button type=\"submit\" class=\"btn btn-primary\">Créer</button>
                             <a href=\"{{ path('schedule_main') }}\" class=\"btn btn-secondary\">Annuler</a>
                         {{ form_end(form) }}
@@ -459,19 +577,23 @@ class __TwigTemplate_79d2a0acde299fa87f368b8004d9329a extends Template
             const endTimeInput = document.getElementById('schedule_endTime');
             const matchEntityInput = document.getElementById('schedule_matchEntity');
             const espaceSportifInput = document.getElementById('schedule_espaceSportif');
+            const URLInput = document.getElementById('schedule_URL');
+            const streamURLInput = document.getElementById('schedule_streamURL');
             const dateMatchError = document.getElementById('dateMatchError');
             const startTimeError = document.getElementById('startTimeError');
             const endTimeError = document.getElementById('endTimeError');
             const matchEntityError = document.getElementById('matchEntityError');
             const espaceSportifError = document.getElementById('espaceSportifError');
+            const URLError = document.getElementById('URLError');
+            const streamURLError = document.getElementById('streamURLError');
 
             // Function to validate a single field (required fields)
-            function validateField(input, errorElement, fieldName) {
+            function validateField(input, errorElement, fieldName, isRequired = true) {
                 let hasError = false;
                 errorElement.textContent = errorElement.textContent || '';
                 input.classList.remove('is-invalid');
 
-                if (!input.value.trim()) {
+                if (isRequired && !input.value.trim()) {
                     errorElement.textContent = `Le champ \${fieldName} ne peut pas être vide.`;
                     input.classList.add('is-invalid');
                     hasError = true;
@@ -516,6 +638,38 @@ class __TwigTemplate_79d2a0acde299fa87f368b8004d9329a extends Template
                 return false;
             }
 
+            // Function to validate URL (optional, must contain /embed/ if provided)
+            function validateURL() {
+                URLError.textContent = URLError.textContent || '';
+                URLInput.classList.remove('is-invalid');
+
+                if (URLInput.value.trim()) {
+                    const embedPattern = /\\/embed\\//;
+                    if (!embedPattern.test(URLInput.value)) {
+                        URLError.textContent = \"L'URL doit être une URL YouTube au format embed (par exemple, https://www.youtube.com/embed/VIDEO_ID).\";
+                        URLInput.classList.add('is-invalid');
+                        return true;
+                    }
+                }
+                return false;
+            }
+
+            // Function to validate streamURL (optional, must contain /embed/ if provided)
+            function validateStreamURL() {
+                streamURLError.textContent = streamURLError.textContent || '';
+                streamURLInput.classList.remove('is-invalid');
+
+                if (streamURLInput.value.trim()) {
+                    const embedPattern = /\\/embed\\//;
+                    if (!embedPattern.test(streamURLInput.value)) {
+                        streamURLError.textContent = \"L'URL de diffusion en direct doit être une URL YouTube au format embed (par exemple, https://www.youtube.com/embed/VIDEO_ID).\";
+                        streamURLInput.classList.add('is-invalid');
+                        return true;
+                    }
+                }
+                return false;
+            }
+
             // Real-time validation on input/change
             dateMatchInput.addEventListener('input', function () {
                 validateField(dateMatchInput, dateMatchError, 'Date du Match');
@@ -540,6 +694,16 @@ class __TwigTemplate_79d2a0acde299fa87f368b8004d9329a extends Template
                 validateField(espaceSportifInput, espaceSportifError, 'Espace Sportif');
             });
 
+            URLInput.addEventListener('input', function () {
+                validateField(URLInput, URLError, 'URL de la vidéo YouTube', false); // Not required
+                validateURL();
+            });
+
+            streamURLInput.addEventListener('input', function () {
+                validateField(streamURLInput, streamURLError, 'URL de la diffusion en direct YouTube', false); // Not required
+                validateStreamURL();
+            });
+
             // Validate on form submission
             form.addEventListener('submit', function (event) {
                 let hasError = false;
@@ -560,10 +724,22 @@ class __TwigTemplate_79d2a0acde299fa87f368b8004d9329a extends Template
                 if (validateField(espaceSportifInput, espaceSportifError, 'Espace Sportif')) {
                     hasError = true;
                 }
+                if (validateField(URLInput, URLError, 'URL de la vidéo YouTube', false)) {
+                    hasError = true;
+                }
+                if (validateField(streamURLInput, streamURLError, 'URL de la diffusion en direct YouTube', false)) {
+                    hasError = true;
+                }
                 if (validateDateMatch()) {
                     hasError = true;
                 }
                 if (validateTimeRange()) {
+                    hasError = true;
+                }
+                if (validateURL()) {
+                    hasError = true;
+                }
+                if (validateStreamURL()) {
                     hasError = true;
                 }
 

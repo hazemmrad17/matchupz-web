@@ -24,6 +24,7 @@ use Google_Service_Calendar;
 use Google_Service_Calendar_Event;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 
 
@@ -31,11 +32,15 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 class ScheduleController extends AbstractController
 {
     private EntityManagerInterface $entityManager;
+    private $newsApiKey;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(EntityManagerInterface $entityManager, string $newsApiKey)
     {
         $this->entityManager = $entityManager;
+        $this->newsApiKey = $newsApiKey;
     }
+
+
     #[Route('/mainF', name: 'schedule_mainF', methods: ['GET'])]
 public function mainF(ScheduleRepository $scheduleRepository): Response
 {
@@ -352,38 +357,60 @@ public function statistics(ScheduleRepository $scheduleRepository, LoggerInterfa
     }
     
     #[Route('/{idSchedule}/showF', name: 'schedule_showF', methods: ['GET'], requirements: ['idSchedule' => '\d+'])]
-    public function showF(int $idSchedule, ScheduleRepository $scheduleRepository, LoggerInterface $logger): Response
-    {
-        $schedule = $scheduleRepository->find($idSchedule);
-    
-        if (!$schedule) {
-            $this->addFlash('error', "L'horaire demandé n'existe pas ou a été supprimé.");
-            return $this->redirectToRoute('schedule_mainF');
-        }
-    
-        $now = new \DateTime('now');
-        $startDateTime = (clone $schedule->getDateMatch())->setTime(
-            (int) $schedule->getStartTime()->format('H'),
-            (int) $schedule->getStartTime()->format('i'),
-            (int) $schedule->getStartTime()->format('s')
-        );
-    
-        $isFutureMatch = $now < $startDateTime;
-    
-        $logger->info(sprintf(
-            'Schedule ID %d: Checking if match is in the future - now=%s, startDateTime=%s, isFutureMatch=%s',
-            $schedule->getIdSchedule(),
-            $now->format('Y-m-d H:i:s'),
-            $startDateTime->format('Y-m-d H:i:s'),
-            $isFutureMatch ? 'true' : 'false'
-        ));
-    
-        return $this->render('schedule/showF.html.twig', [
-            'schedule' => $schedule,
-            'isFutureMatch' => $isFutureMatch,
-        ]);
+public function showF(int $idSchedule, ScheduleRepository $scheduleRepository, LoggerInterface $logger): Response
+{
+    $schedule = $scheduleRepository->find($idSchedule);
+
+    if (!$schedule) {
+        $this->addFlash('error', "L'horaire demandé n'existe pas ou a été supprimé.");
+        return $this->redirectToRoute('schedule_mainF');
     }
 
+    $now = new \DateTime('now', new \DateTimeZone('Europe/Paris')); // Ensure timezone matches your app
+
+    // Combine dateMatch with startTime
+    $startDateTime = (clone $schedule->getDateMatch())->setTime(
+        (int) $schedule->getStartTime()->format('H'),
+        (int) $schedule->getStartTime()->format('i'),
+        (int) $schedule->getStartTime()->format('s')
+    );
+
+    // Combine dateMatch with endTime
+    $endDateTime = (clone $schedule->getDateMatch())->setTime(
+        (int) $schedule->getEndTime()->format('H'),
+        (int) $schedule->getEndTime()->format('i'),
+        (int) $schedule->getEndTime()->format('s')
+    );
+
+    // Calculate isFutureMatch and isOngoing
+    $isFutureMatch = $now < $startDateTime;
+    $isOngoing = $now >= $startDateTime && $now <= $endDateTime;
+
+    // Debug logging
+    $logger->info(sprintf(
+        'Schedule ID %d: Checking match status - now=%s, startDateTime=%s, endDateTime=%s, isFutureMatch=%s, isOngoing=%s',
+        $schedule->getIdSchedule(),
+        $now->format('Y-m-d H:i:s'),
+        $startDateTime->format('Y-m-d H:i:s'),
+        $endDateTime->format('Y-m-d H:i:s'),
+        $isFutureMatch ? 'true' : 'false',
+        $isOngoing ? 'true' : 'false'
+    ));
+
+    // Additional debug: Log streamURL and URL
+    $logger->info(sprintf(
+        'Schedule ID %d: Stream URL=%s, URL=%s',
+        $schedule->getIdSchedule(),
+        $schedule->getStreamURL() ?? 'null',
+        $schedule->getURL() ?? 'null'
+    ));
+
+    return $this->render('schedule/showF.html.twig', [
+        'schedule' => $schedule,
+        'isFutureMatch' => $isFutureMatch,
+        'isOngoing' => $isOngoing, // Add this
+    ]);
+}
     #[Route('/{idSchedule}/edit', name: 'schedule_edit', methods: ['GET', 'POST'], requirements: ['idSchedule' => '\d+'])]
     public function edit(Request $request, string $idSchedule, ScheduleRepository $scheduleRepository): Response
     {
@@ -784,5 +811,194 @@ public function exportExcel(ScheduleRepository $scheduleRepository): Response
         // Redirect to addToGoogleCalendar to create the event
         $logger->info('Redirecting to add-to-google-calendar with schedule ID: ' . $scheduleId);
         return $this->redirectToRoute('schedule_add_to_google_calendar', ['idSchedule' => $scheduleId]);
+    }
+
+    #[Route('/{idSchedule}/news', name: 'schedule_news', methods: ['GET'], requirements: ['idSchedule' => '\d+'])]
+    public function news(int $idSchedule, ScheduleRepository $scheduleRepository, HttpClientInterface $httpClient, LoggerInterface $logger): Response
+    {
+        $schedule = $scheduleRepository->find($idSchedule);
+    
+        if (!$schedule) {
+            $this->addFlash('error', "L'horaire demandé n'existe pas ou a été supprimé.");
+            return $this->redirectToRoute('schedule_mainF');
+        }
+    
+        if (!$schedule->getMatchEntity() || !$schedule->getMatchEntity()->getC1() || !$schedule->getMatchEntity()->getC2()) {
+            $this->addFlash('error', "Les équipes ne sont pas définies pour ce match.");
+            return $this->redirectToRoute('schedule_mainF');
+        }
+    
+        $c1 = $schedule->getMatchEntity()->getC1();
+        $c2 = $schedule->getMatchEntity()->getC2();
+        $sportType = $schedule->getMatchEntity()->getSportType() ?? 'sport';
+    
+        // Warn if sportType is missing
+        if (!$schedule->getMatchEntity()->getSportType()) {
+            $this->addFlash('warning', "Le type de sport n'est pas défini pour ce match, les résultats de recherche peuvent être moins précis.");
+        }
+    
+        // Map team abbreviations to full names
+        $teamNameMapping = [
+            'USA' => 'United States',
+            'CAN' => 'Canada',
+            'FCB' => 'FC Barcelona',
+            'RMD' => 'Real Madrid',
+            'ATM' => 'Atlético Madrid',
+            'PSG' => 'Paris Saint-Germain',
+            'LIV' => 'Liverpool',
+            'MCI' => 'Manchester City',
+            'MUN' => 'Manchester United',
+        ];
+    
+        // Expand team names if they exist in the mapping, otherwise use the original
+        $c1Expanded = $teamNameMapping[$c1] ?? $c1;
+        $c2Expanded = $teamNameMapping[$c2] ?? $c2;
+    
+        // Function to fetch articles for a given query and language
+        $fetchArticles = function (string $query, string $language) use ($httpClient, $logger): array {
+            $logger->info("Fetching articles for query: $query, language: $language");
+            try {
+                $response = $httpClient->request('GET', 'https://newsapi.org/v2/everything', [
+                    'query' => [
+                        'q' => $query,
+                        'apiKey' => $this->newsApiKey,
+                        'language' => $language,
+                        'sortBy' => 'publishedAt',
+                        'pageSize' => 10,
+                    ],
+                ]);
+                $data = $response->toArray();
+    
+                // Check for NewsAPI errors
+                if ($data['status'] !== 'ok') {
+                    $errorMessage = $data['message'] ?? 'Unknown error';
+                    $logger->warning("NewsAPI error for language $language: " . $errorMessage);
+                    $logger->debug("NewsAPI response: " . json_encode($data));
+                    if (stripos($errorMessage, 'rate limit') !== false) {
+                        throw new \Exception("NewsAPI rate limit exceeded. Please try again later or upgrade your plan.");
+                    }
+                    if (stripos($errorMessage, 'api key') !== false) {
+                        throw new \Exception("Invalid NewsAPI key. Please check your API key in the configuration.");
+                    }
+                    return [];
+                }
+    
+                $articleCount = count($data['articles']);
+                $logger->info("Found $articleCount articles for query '$query' in language $language");
+                if ($articleCount === 0) {
+                    $logger->debug("NewsAPI response (no articles): " . json_encode($data));
+                }
+                return $data['articles'];
+            } catch (\Exception $e) {
+                $logger->error("Error fetching news for query '$query' in language $language: " . $e->getMessage());
+                throw $e;
+            }
+        };
+    
+        // Function to combine and sort articles by publication date
+        $combineAndSortArticles = function (array $englishArticles, array $frenchArticles) use ($logger): array {
+            $allArticles = array_merge($englishArticles, $frenchArticles);
+            usort($allArticles, function ($a, $b) {
+                return strtotime($b['publishedAt']) - strtotime($a['publishedAt']);
+            });
+            $logger->info("Combined and sorted " . count($allArticles) . " articles");
+            return $allArticles;
+        };
+    
+        // Initial query: C1 AND C2 AND sportType
+        $query = "$c1Expanded AND $c2Expanded AND $sportType";
+        $logger->info("NewsAPI initial query: $query");
+    
+        try {
+            // Fetch articles in English and French
+            $englishArticles = $fetchArticles($query, 'en');
+            $frenchArticles = $fetchArticles($query, 'fr');
+            $articles = $combineAndSortArticles($englishArticles, $frenchArticles);
+    
+            // Fallback queries by removing one criterion at a time
+            if (empty($articles)) {
+                // Fallback 1: C1 AND C2
+                $logger->warning("No articles found for query: $query, trying C1 AND C2...");
+                $query = "$c1Expanded AND $c2Expanded";
+                $englishArticles = $fetchArticles($query, 'en');
+                $frenchArticles = $fetchArticles($query, 'fr');
+                $articles = $combineAndSortArticles($englishArticles, $frenchArticles);
+    
+                if (empty($articles)) {
+                    // Fallback 2: C1 AND sportType
+                    $logger->warning("No articles found for query: $query, trying C1 AND sportType...");
+                    $query = "$c1Expanded AND $sportType";
+                    $englishArticles = $fetchArticles($query, 'en');
+                    $frenchArticles = $fetchArticles($query, 'fr');
+                    $articles = $combineAndSortArticles($englishArticles, $frenchArticles);
+    
+                    if (empty($articles)) {
+                        // Fallback 3: C2 AND sportType
+                        $logger->warning("No articles found for query: $query, trying C2 AND sportType...");
+                        $query = "$c2Expanded AND $sportType";
+                        $englishArticles = $fetchArticles($query, 'en');
+                        $frenchArticles = $fetchArticles($query, 'fr');
+                        $articles = $combineAndSortArticles($englishArticles, $frenchArticles);
+    
+                        if (empty($articles)) {
+                            // Fallback 4: Just C1
+                            $logger->warning("No articles found for query: $query, trying just C1...");
+                            $query = "$c1Expanded";
+                            $englishArticles = $fetchArticles($query, 'en');
+                            $frenchArticles = $fetchArticles($query, 'fr');
+                            $articles = $combineAndSortArticles($englishArticles, $frenchArticles);
+    
+                            if (empty($articles)) {
+                                // Fallback 5: Just C2
+                                $logger->warning("No articles found for query: $query, trying just C2...");
+                                $query = "$c2Expanded";
+                                $englishArticles = $fetchArticles($query, 'en');
+                                $frenchArticles = $fetchArticles($query, 'fr');
+                                $articles = $combineAndSortArticles($englishArticles, $frenchArticles);
+    
+                                if (empty($articles)) {
+                                    // Fallback 6: Just sportType
+                                    $logger->warning("No articles found for query: $query, trying just sportType...");
+                                    $query = "$sportType";
+                                    $englishArticles = $fetchArticles($query, 'en');
+                                    $frenchArticles = $fetchArticles($query, 'fr');
+                                    $articles = $combineAndSortArticles($englishArticles, $frenchArticles);
+    
+                                    if (empty($articles)) {
+                                        // Final Fallback: General "sports" query
+                                        $logger->warning("No articles found for query: $query, trying general sports query...");
+                                        $query = "sports";
+                                        $englishArticles = $fetchArticles($query, 'en');
+                                        $frenchArticles = $fetchArticles($query, 'fr');
+                                        $articles = $combineAndSortArticles($englishArticles, $frenchArticles);
+    
+                                        if (empty($articles)) {
+                                            $logger->warning("No articles found for query: $query");
+                                            $this->addFlash('error', "Aucune actualité trouvée, même avec des critères très élargis.");
+                                            return $this->redirectToRoute('schedule_mainF');
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+    
+            // Log the number of articles found
+            $articleCount = count($articles);
+            $logger->info("Found $articleCount articles for query '$query'");
+    
+            // Get the URL of the first article (most recent)
+            $articleUrl = $articles[0]['url'];
+            $articleLanguage = stripos($articleUrl, 'lang=fr') !== false || stripos($articles[0]['description'] ?? '', 'français') !== false ? 'French' : 'English';
+            $logger->info("Redirecting to news article for query '$query': $articleUrl (Language: $articleLanguage)");
+    
+            return new RedirectResponse($articleUrl);
+        } catch (\Exception $e) {
+            $logger->error("Error fetching news for query '$query': " . $e->getMessage());
+            $this->addFlash('error', $e->getMessage() ?: "Erreur lors de la récupération des actualités.");
+            return $this->redirectToRoute('schedule_mainF');
+        }
     }
 }

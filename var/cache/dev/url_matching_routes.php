@@ -156,11 +156,12 @@ return [
                         .'|(\\d+)/edit(*:824)'
                         .'|(\\d+)/delete(*:844)'
                         .'|(\\d+)/add\\-to\\-google\\-calendar(*:883)'
+                        .'|(\\d+)/news(*:901)'
                     .')'
                     .'|port/(?'
-                        .'|(\\d+)(*:905)'
-                        .'|(\\d+)/edit(*:923)'
-                        .'|(\\d+)(*:936)'
+                        .'|(\\d+)(*:923)'
+                        .'|(\\d+)/edit(*:941)'
+                        .'|(\\d+)(*:954)'
                     .')'
                 .')'
             .')/?$}sDu',
@@ -206,9 +207,10 @@ return [
         824 => [[['_route' => 'schedule_edit', '_controller' => 'App\\Controller\\ScheduleController::edit'], ['idSchedule'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
         844 => [[['_route' => 'schedule_delete', '_controller' => 'App\\Controller\\ScheduleController::delete'], ['idSchedule'], ['POST' => 0], null, false, false, null]],
         883 => [[['_route' => 'schedule_add_to_google_calendar', '_controller' => 'App\\Controller\\ScheduleController::addToGoogleCalendar'], ['idSchedule'], ['GET' => 0], null, false, false, null]],
-        905 => [[['_route' => 'sport_show', '_controller' => 'App\\Controller\\SportController::show'], ['idSport'], ['GET' => 0], null, false, true, null]],
-        923 => [[['_route' => 'sport_edit', '_controller' => 'App\\Controller\\SportController::edit'], ['idSport'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        936 => [
+        901 => [[['_route' => 'schedule_news', '_controller' => 'App\\Controller\\ScheduleController::news'], ['idSchedule'], ['GET' => 0], null, false, false, null]],
+        923 => [[['_route' => 'sport_show', '_controller' => 'App\\Controller\\SportController::show'], ['idSport'], ['GET' => 0], null, false, true, null]],
+        941 => [[['_route' => 'sport_edit', '_controller' => 'App\\Controller\\SportController::edit'], ['idSport'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        954 => [
             [['_route' => 'sport_delete', '_controller' => 'App\\Controller\\SportController::delete'], ['idSport'], ['POST' => 0], null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],

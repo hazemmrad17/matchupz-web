@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
-    {% block searchbar %}
-        {% include 'searchbar.html.twig' %}
-    {% endblock %}
+{% block searchbar %}
+    {% include 'searchbar.html.twig' %}
+{% endblock %}
 
 {% block content %}
     <div class="content-wrapper">
@@ -68,6 +68,28 @@
                                     {{ form_errors(form.espaceSportif) }}
                                 </div>
                             </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="schedule_URL">URL de la vidéo YouTube (embed)</label>
+                                <div class="input-group input-group-merge">
+                                    <span class="input-group-text"><i class="bx bx-video"></i></span>
+                                    {{ form_widget(form.URL, {'attr': {'class': 'form-control', 'id': 'schedule_URL'}}) }}
+                                </div>
+                                <small class="form-text text-muted">{{ form_help(form.URL) }}</small>
+                                <div class="text-danger mt-1" id="URLError">
+                                    {{ form_errors(form.URL) }}
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="schedule_streamURL">URL de la diffusion en direct YouTube (embed)</label>
+                                <div class="input-group input-group-merge">
+                                    <span class="input-group-text"><i class="bx bx-video-recording"></i></span>
+                                    {{ form_widget(form.streamURL, {'attr': {'class': 'form-control', 'id': 'schedule_streamURL'}}) }}
+                                </div>
+                                <small class="form-text text-muted">{{ form_help(form.streamURL) }}</small>
+                                <div class="text-danger mt-1" id="streamURLError">
+                                    {{ form_errors(form.streamURL) }}
+                                </div>
+                            </div>
                             <button type="submit" class="btn btn-primary">Mettre à Jour</button>
                             <a href="{{ path('schedule_show', {'idSchedule': schedule.idSchedule}) }}" class="btn btn-secondary">Annuler</a>
                         {{ form_end(form) }}
@@ -85,19 +107,23 @@
             const endTimeInput = document.getElementById('schedule_endTime');
             const matchEntityInput = document.getElementById('schedule_matchEntity');
             const espaceSportifInput = document.getElementById('schedule_espaceSportif');
+            const URLInput = document.getElementById('schedule_URL');
+            const streamURLInput = document.getElementById('schedule_streamURL');
             const dateMatchError = document.getElementById('dateMatchError');
             const startTimeError = document.getElementById('startTimeError');
             const endTimeError = document.getElementById('endTimeError');
             const matchEntityError = document.getElementById('matchEntityError');
             const espaceSportifError = document.getElementById('espaceSportifError');
+            const URLError = document.getElementById('URLError');
+            const streamURLError = document.getElementById('streamURLError');
 
             // Function to validate a single field (required fields)
-            function validateField(input, errorElement, fieldName) {
+            function validateField(input, errorElement, fieldName, isRequired = true) {
                 let hasError = false;
                 errorElement.textContent = errorElement.textContent || '';
                 input.classList.remove('is-invalid');
 
-                if (!input.value.trim()) {
+                if (isRequired && !input.value.trim()) {
                     errorElement.textContent = `Le champ ${fieldName} ne peut pas être vide.`;
                     input.classList.add('is-invalid');
                     hasError = true;
@@ -142,6 +168,38 @@
                 return false;
             }
 
+            // Function to validate URL (optional, must contain /embed/ if provided)
+            function validateURL() {
+                URLError.textContent = URLError.textContent || '';
+                URLInput.classList.remove('is-invalid');
+
+                if (URLInput.value.trim()) {
+                    const embedPattern = /\/embed\//;
+                    if (!embedPattern.test(URLInput.value)) {
+                        URLError.textContent = "L'URL doit être une URL YouTube au format embed (par exemple, https://www.youtube.com/embed/VIDEO_ID).";
+                        URLInput.classList.add('is-invalid');
+                        return true;
+                    }
+                }
+                return false;
+            }
+
+            // Function to validate streamURL (optional, must contain /embed/ if provided)
+            function validateStreamURL() {
+                streamURLError.textContent = streamURLError.textContent || '';
+                streamURLInput.classList.remove('is-invalid');
+
+                if (streamURLInput.value.trim()) {
+                    const embedPattern = /\/embed\//;
+                    if (!embedPattern.test(streamURLInput.value)) {
+                        streamURLError.textContent = "L'URL de diffusion en direct doit être une URL YouTube au format embed (par exemple, https://www.youtube.com/embed/VIDEO_ID).";
+                        streamURLInput.classList.add('is-invalid');
+                        return true;
+                    }
+                }
+                return false;
+            }
+
             // Real-time validation on input/change
             dateMatchInput.addEventListener('input', function () {
                 validateField(dateMatchInput, dateMatchError, 'Date du Match');
@@ -166,6 +224,16 @@
                 validateField(espaceSportifInput, espaceSportifError, 'Espace Sportif');
             });
 
+            URLInput.addEventListener('input', function () {
+                validateField(URLInput, URLError, 'URL de la vidéo YouTube', false); // Not required
+                validateURL();
+            });
+
+            streamURLInput.addEventListener('input', function () {
+                validateField(streamURLInput, streamURLError, 'URL de la diffusion en direct YouTube', false); // Not required
+                validateStreamURL();
+            });
+
             // Validate on form submission
             form.addEventListener('submit', function (event) {
                 let hasError = false;
@@ -186,10 +254,22 @@
                 if (validateField(espaceSportifInput, espaceSportifError, 'Espace Sportif')) {
                     hasError = true;
                 }
+                if (validateField(URLInput, URLError, 'URL de la vidéo YouTube', false)) {
+                    hasError = true;
+                }
+                if (validateField(streamURLInput, streamURLError, 'URL de la diffusion en direct YouTube', false)) {
+                    hasError = true;
+                }
                 if (validateDateMatch()) {
                     hasError = true;
                 }
                 if (validateTimeRange()) {
+                    hasError = true;
+                }
+                if (validateURL()) {
+                    hasError = true;
+                }
+                if (validateStreamURL()) {
                     hasError = true;
                 }
 

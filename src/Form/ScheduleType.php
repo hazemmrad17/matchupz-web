@@ -11,8 +11,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TimeType;
-use Symfony\Component\Validator\Constraints\Callback;
-use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class ScheduleType extends AbstractType
 {
@@ -49,6 +48,22 @@ class ScheduleType extends AbstractType
                 'choice_label' => 'nomEspace',
                 'required' => false,
                 'placeholder' => 'Sélectionnez un espace sportif',
+            ])
+            ->add('URL', TextType::class, [
+                'label' => 'URL de la vidéo YouTube (embed)',
+                'required' => false,
+                'attr' => [
+                    'placeholder' => 'Exemple : https://www.youtube.com/embed/VIDEO_ID',
+                ],
+                'help' => 'Entrez une URL YouTube au format embed (par exemple, https://www.youtube.com/embed/VIDEO_ID). Ce champ est facultatif.',
+            ])
+            ->add('streamURL', TextType::class, [
+                'label' => 'URL de la diffusion en direct YouTube (embed)',
+                'required' => false,
+                'attr' => [
+                    'placeholder' => 'Exemple : https://www.youtube.com/embed/VIDEO_ID',
+                ],
+                'help' => 'Entrez une URL YouTube au format embed pour la diffusion en direct (par exemple, https://www.youtube.com/embed/VIDEO_ID). Ce champ est facultatif.',
             ])
         ;
 

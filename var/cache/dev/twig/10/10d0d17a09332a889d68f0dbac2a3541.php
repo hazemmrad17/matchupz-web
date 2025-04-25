@@ -110,7 +110,7 @@ class __TwigTemplate_8bc74283d83098d4a998c3921dc2c4fd extends Template
                         <div class=\"avatar flex-shrink-0\">
                             <img src=\"";
         // line 28
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("img/icons/unicons/clock.png"), "html", null, true);
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("img/icons/unicons/ongoing.png"), "html", null, true);
         yield "\" alt=\"Ongoing\" class=\"rounded\" />
                         </div>
                     </div>
@@ -321,7 +321,7 @@ class __TwigTemplate_8bc74283d83098d4a998c3921dc2c4fd extends Template
                 <div class=\"card-body text-center\">
                     <div class=\"d-flex justify-content-center mb-3\">
                         <div class=\"avatar flex-shrink-0\">
-                            <img src=\"{{ asset('img/icons/unicons/clock.png') }}\" alt=\"Ongoing\" class=\"rounded\" />
+                            <img src=\"{{ asset('img/icons/unicons/ongoing.png') }}\" alt=\"Ongoing\" class=\"rounded\" />
                         </div>
                     </div>
                     <span class=\"fw-semibold d-block mb-1\">Ongoing Matches</span>

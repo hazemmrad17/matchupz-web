@@ -7,14 +7,16 @@ parameters:
     profile_pictures_directory: '%kernel.project_dir%/public/uploads/profile_pictures'
     club_photos_directory: '%kernel.project_dir%/public/uploads/club_photos'
     photos_directory: '%kernel.project_dir%/public/uploads/photos'
+    app.news_api_key: 'API MTE3AK YA LOUAY'
+
 services:
-    # default configuration for services in *this* file
+    # Default configuration for services in *this* file
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
 
-    # makes classes in src/ available to be used as services
-    # this creates a service per class whose id is the fully-qualified class name
+    # Makes classes in src/ available to be used as services
+    # This creates a service per class whose id is the fully-qualified class name
     App\:
         resource: '../src/'
         exclude:
@@ -22,5 +24,8 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
 
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
+    # Explicitly configure ScheduleController to inject both $entityManager and $newsApiKey
+    App\Controller\ScheduleController:
+        arguments:
+            $entityManager: '@doctrine.orm.entity_manager'
+            $newsApiKey: '%app.news_api_key%'
