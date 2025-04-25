@@ -28,7 +28,7 @@ return [
         '/club/export/excel' => [[['_route' => 'club_export_excel', '_controller' => 'App\\Controller\\ClubController::exportExcel'], null, null, null, false, false, null]],
         '/espace' => [[['_route' => 'espace_index', '_controller' => 'App\\Controller\\EspacesportifController::index'], null, ['GET' => 0], null, true, false, null]],
         '/espace/export/csv' => [[['_route' => 'espace_export_csv', '_controller' => 'App\\Controller\\EspacesportifController::exportCsv'], null, null, null, false, false, null]],
-        '/espace/export/pdf' => [[['_route' => 'espace_export_pdf', '_controller' => 'App\\Controller\\EspacesportifController::exportPdf'], null, null, null, false, false, null]],
+        '/espace/export/pdf' => [[['_route' => 'espace_export_pdf', '_controller' => 'App\\Controller\\EspacesportifController::exportPdf'], null, ['GET' => 0], null, false, false, null]],
         '/espace/export/excel' => [[['_route' => 'espace_export_excel', '_controller' => 'App\\Controller\\EspacesportifController::exportExcel'], null, null, null, false, false, null]],
         '/espace/new' => [[['_route' => 'espace_new', '_controller' => 'App\\Controller\\EspacesportifController::new'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
         '/espace/statistics' => [[['_route' => 'espace_statistics', '_controller' => 'App\\Controller\\EspacesportifController::statistics'], null, ['GET' => 0], null, false, false, null]],
@@ -60,6 +60,9 @@ return [
         '/reservation/export/excel' => [[['_route' => 'reservation_export_excel', '_controller' => 'App\\Controller\\ReservationController::exportExcel'], null, null, null, false, false, null]],
         '/reservation/new' => [[['_route' => 'reservation_new', '_controller' => 'App\\Controller\\ReservationController::new'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
         '/reservation/statistics' => [[['_route' => 'reservation_statistics', '_controller' => 'App\\Controller\\ReservationController::statistics'], null, ['GET' => 0], null, false, false, null]],
+        '/reservation/google-auth' => [[['_route' => 'google_auth', '_controller' => 'App\\Controller\\ReservationController::googleAuth'], null, ['GET' => 0], null, false, false, null]],
+        '/reservation/google-logout' => [[['_route' => 'google_logout', '_controller' => 'App\\Controller\\ReservationController::googleLogout'], null, ['GET' => 0], null, false, false, null]],
+        '/reservation/google-callback' => [[['_route' => 'google_callback', '_controller' => 'App\\Controller\\ReservationController::googleCallback'], null, ['GET' => 0], null, false, false, null]],
         '/sport' => [[['_route' => 'sport_index', '_controller' => 'App\\Controller\\SportController::index'], null, ['GET' => 0], null, true, false, null]],
         '/sport/new' => [[['_route' => 'sport_new', '_controller' => 'App\\Controller\\SportController::new'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
         '/sport/statistics' => [[['_route' => 'sport_statistics', '_controller' => 'App\\Controller\\SportController::statistics'], null, ['GET' => 0], null, false, false, null]],
@@ -140,11 +143,12 @@ return [
                     .'|(\\d+)(*:738)'
                     .'|(\\d+)/edit(*:756)'
                     .'|(\\d+)(*:769)'
+                    .'|(\\d+)/add\\-to\\-google\\-calendar(*:808)'
                 .')'
                 .'|/sport/(?'
-                    .'|(\\d+)(*:793)'
-                    .'|(\\d+)/edit(*:811)'
-                    .'|(\\d+)(*:824)'
+                    .'|(\\d+)(*:832)'
+                    .'|(\\d+)/edit(*:850)'
+                    .'|(\\d+)(*:863)'
                 .')'
             .')/?$}sDu',
     ],
@@ -185,9 +189,10 @@ return [
         738 => [[['_route' => 'reservation_show', '_controller' => 'App\\Controller\\ReservationController::show'], ['id_reservation'], ['GET' => 0], null, false, true, null]],
         756 => [[['_route' => 'reservation_edit', '_controller' => 'App\\Controller\\ReservationController::edit'], ['id_reservation'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
         769 => [[['_route' => 'reservation_delete', '_controller' => 'App\\Controller\\ReservationController::delete'], ['id_reservation'], ['POST' => 0], null, false, true, null]],
-        793 => [[['_route' => 'sport_show', '_controller' => 'App\\Controller\\SportController::show'], ['idSport'], ['GET' => 0], null, false, true, null]],
-        811 => [[['_route' => 'sport_edit', '_controller' => 'App\\Controller\\SportController::edit'], ['idSport'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        824 => [
+        808 => [[['_route' => 'reservation_add_to_google_calendar', '_controller' => 'App\\Controller\\ReservationController::addToGoogleCalendar'], ['id_reservation'], ['GET' => 0], null, false, false, null]],
+        832 => [[['_route' => 'sport_show', '_controller' => 'App\\Controller\\SportController::show'], ['idSport'], ['GET' => 0], null, false, true, null]],
+        850 => [[['_route' => 'sport_edit', '_controller' => 'App\\Controller\\SportController::edit'], ['idSport'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        863 => [
             [['_route' => 'sport_delete', '_controller' => 'App\\Controller\\SportController::delete'], ['idSport'], ['POST' => 0], null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],

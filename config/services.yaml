@@ -8,7 +8,20 @@ parameters:
     club_photos_directory: '%kernel.project_dir%/public/uploads/club_photos'
     photos_directory: '%kernel.project_dir%/public/uploads/photos'
     app.api_ninja_key: '%env(API_NINJA_KEY)%'  # Added for GeocodingService
+    google_credentials_path: '%kernel.project_dir%/config/secrets/google_credentials.json'
+    google_token_path: '%kernel.project_dir%/config/secrets/google_token.json'
+    google_calendar_id: 'primary'
+    event_id_storage_path: '%kernel.project_dir%/var/event_ids.json'
 services:
+
+services:
+    Knp\Snappy\Pdf:
+        arguments:
+            $binary: '%env(WKHTMLTOPDF_PATH)%'
+
+    App\Twig\AppExtension:
+        tags: ['twig.extension']
+
     # default configuration for services in *this* file
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
@@ -28,3 +41,13 @@ services:
     App\Service\GeocodingService:
         arguments:
             $apiKey: '%app.api_ninja_key%'
+
+    App\Service\GoogleCalendarService:
+        arguments:
+            $params: '@parameter_bag'
+            $logger: '@logger'
+
+    App\Service\EventIdStorage:
+        arguments:
+            $params: '@parameter_bag'
+            $logger: '@logger'

@@ -1,0 +1,3 @@
+<?php //2cb743934075f4a9916d244587c3e395
+
+return [PHP_INT_MAX, 'vendor/css/theme-default.css'];
