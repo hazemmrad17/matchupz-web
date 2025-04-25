@@ -249,83 +249,114 @@
                 <table class="table" id="materielsTable">
                     <thead>
                         <tr>
-                            <th>Image</th>
+                            <th>Image Du Matériel</th>
                             <th>Nom</th>
                             <th>Type</th>
                             <th>Quantité</th>
                             <th>État</th>
-                            <th>Prix unitaire</th>
+                            <th>Prix</th>
                             <th>Code-barres</th>
                             <th>Fournisseur</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
-                    <tbody class="table-border-bottom-0">
-                        {% if pagination is defined and pagination|length > 0 %}
-                            {% for materiel in pagination %}
-                                <tr class="table-default {% if materiel.quantite is not null and materiel.quantite < 5 %}low-quantity{% endif %}" data-quantity="{{ materiel.quantite|default('N/A') }}">
-                                    <td>
-                                        {% if materiel.image %}
-                                            <img src="{{ asset('Uploads/materiels/' ~ materiel.image) }}" width="50" height="50" class="rounded-circle" alt="Image matériel">
-                                        {% else %}
-                                            <span class="text-muted">N/A</span>
-                                        {% endif %}
-                                    </td>
-                                    <td>
-                                        <i class="bx bx-package fa-lg text-primary me-3"></i>
-                                        <strong>{{ materiel.nom }}</strong>
-                                    </td>
-                                    <td>{{ materiel.type|default('N/A') }}</td>
-                                    <td>{{ materiel.quantite|default('N/A') }}</td>
-                                    <td>{{ materiel.etat|default('N/A') }}</td>
-                                    <td>{{ materiel.prix|number_format(2, ',', ' ')|default('N/A') }} €</td>
-                                    <td>{{ materiel.barcode|default('N/A') }}</td>
-                                    <td>
-                                        {% if materiel.fournisseur %}
-                                            <a href="{{ path('app_fournisseur_show', {'id_fournisseur': materiel.fournisseur.id_fournisseur}) }}">
-                                                {{ materiel.fournisseur.nom }}
+                    <tbody>
+                        {% for materiel in pagination %}
+                            <tr class="{% if materiel.etat == 'ENDOMMAGE' %}materiel-endommage{% endif %}">
+                                <td class="text-center align-middle">
+                                    {% if materiel.image %}
+                                        <img src="{{ asset('uploads/materiels/' ~ materiel.image) }}" alt="{{ materiel.nom }}" class="rounded-circle mx-auto d-block" style="width: 45px; height: 45px; object-fit: cover;">
+                                    {% else %}
+                                        <img src="{{ asset('img/default-material.png') }}" alt="Image par défaut" class="rounded-circle mx-auto d-block" style="width: 45px; height: 45px; object-fit: cover;">
+                                    {% endif %}
+                                </td>
+                                <td>{{ materiel.nom }}</td>
+                                <td>
+                                    <i class="bx bx-category me-1"></i>
+                                    {{ materiel.type }}
+                                </td>
+                                <td>
+                                    <i class="bx bx-package me-1"></i>
+                                    {{ materiel.quantite }}
+                                </td>
+                                <td>
+                                    <span class="badge {% if materiel.etat == 'NEUF' %}bg-success{% elseif materiel.etat == 'USÉ' %}bg-warning{% else %}bg-danger{% endif %}">
+                                        <i class="bx {% if materiel.etat == 'NEUF' %}bx-check-circle{% elseif materiel.etat == 'USÉ' %}bx-time{% else %}bx-error-circle{% endif %} me-1"></i>
+                                        {{ materiel.etat }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <i class="bx bx-euro me-1"></i>
+                                    {{ materiel.prix|number_format(2, ',', ' ') }} €
+                                </td>
+                                <td>
+                                    <i class="bx bx-barcode me-1"></i>
+                                    {{ materiel.barcode }}
+                                </td>
+                                <td>
+                                    <i class="bx bx-store me-1"></i>
+                                    {{ materiel.fournisseur ? materiel.fournisseur.nom : 'N/A' }}
+                                </td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                            <i class="bx bx-dots-vertical-rounded"></i>
+                                        </button>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item" href="{{ path('app_materiel_show', {'id': materiel.id}) }}">
+                                                <i class="bx bx-show me-1"></i> Voir
                                             </a>
-                                        {% else %}
-                                            <span class="text-muted">N/A</span>
-                                        {% endif %}
-                                    </td>
-                                    <td>
-                                        <div class="dropdown">
-                                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                                <i class="bx bx-dots-vertical-rounded"></i>
-                                            </button>
-                                            <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="{{ path('app_materiel_show', {'id': materiel.id}) }}">
-                                                    <i class="bx bx-show me-1"></i> Voir
-                                                </a>
-                                                <a class="dropdown-item" href="{{ path('app_materiel_edit', {'id': materiel.id}) }}">
-                                                    <i class="bx bx-edit-alt me-1"></i> Modifier
-                                                </a>
-                                                <form method="post" action="{{ path('app_materiel_delete', {'id': materiel.id}) }}" style="display:inline;" onsubmit="return confirm('Confirmer la suppression ?');">
-                                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ materiel.id) }}">
-                                                    <button class="dropdown-item" type="submit">
-                                                        <i class="bx bx-trash me-1"></i> Supprimer
-                                                    </button>
-                                                </form>
-                                            </div>
+                                            <a class="dropdown-item" href="{{ path('app_materiel_edit', {'id': materiel.id}) }}">
+                                                <i class="bx bx-edit-alt me-1"></i> Modifier
+                                            </a>
+                                            <form method="post" action="{{ path('app_materiel_delete', {'id': materiel.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce matériel ?');">
+                                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ materiel.id) }}">
+                                                <button type="submit" class="dropdown-item text-danger">
+                                                    <i class="bx bx-trash me-1"></i> Supprimer
+                                                </button>
+                                            </form>
                                         </div>
-                                    </td>
-                                </tr>
-                            {% endfor %}
+                                    </div>
+                                </td>
+                            </tr>
                         {% else %}
                             <tr>
                                 <td colspan="9" class="text-center">Aucun matériel trouvé</td>
                             </tr>
-                        {% endif %}
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>
 
             {# Pagination #}
             <div class="card-footer">
-                {{ knp_pagination_render(pagination) }}
-                <div class="text-center">
-                    <small>
+                <nav aria-label="Page navigation">
+                    <ul class="pagination justify-content-center">
+                        {% if pagination.currentPageNumber > 1 %}
+                            <li class="page-item">
+                                <a class="page-link" href="{{ path('app_materiel_index', {'page': pagination.currentPageNumber - 1}) }}" aria-label="Previous">
+                                    <i class="bx bx-chevron-left"></i>
+                                </a>
+                            </li>
+                        {% endif %}
+                        
+                        {% for i in 1..pagination.getPageCount() %}
+                            <li class="page-item {% if i == pagination.currentPageNumber %}active{% endif %}">
+                                <a class="page-link" href="{{ path('app_materiel_index', {'page': i}) }}">{{ i }}</a>
+                            </li>
+                        {% endfor %}
+                        
+                        {% if pagination.currentPageNumber < pagination.getPageCount() %}
+                            <li class="page-item">
+                                <a class="page-link" href="{{ path('app_materiel_index', {'page': pagination.currentPageNumber + 1}) }}" aria-label="Next">
+                                    <i class="bx bx-chevron-right"></i>
+                                </a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+                <div class="text-center mt-2">
+                    <small class="text-muted">
                         Page {{ pagination.currentPageNumber }} sur {{ pagination.getPageCount() }} |
                         Total Matériels : {{ pagination.totalItemCount }}
                     </small>
@@ -337,34 +368,70 @@
 {% endblock %}
 
 {% block javascripts %}
-    {{ parent() }}
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Debug: Log low quantity rows
-            const lowQuantityRows = document.querySelectorAll('.low-quantity');
-            console.log('Low quantity rows found:', lowQuantityRows.length);
-            lowQuantityRows.forEach(row => {
-                console.log('Row Name:', row.querySelector('td:nth-child(2)').textContent, 'Quantity:', row.getAttribute('data-quantity'));
+  {{ parent() }}
+  <script>
+    console.log('AJAX search script loaded');
+    const baseUrl = "{{ path('app_materiel_search') }}";
+    console.log('Base search URL:', baseUrl);
+    const input = document.querySelector('input[name="search"]');
+    const tbody = document.querySelector('#materielsTable tbody');
+    if (input && tbody) {
+      let timeout;
+      input.addEventListener('input', e => {
+        clearTimeout(timeout);
+        timeout = setTimeout(async () => {
+          const term = e.target.value.trim();
+          console.log('Recherche AJAX:', term);
+          try {
+            const res = await fetch(baseUrl + "?term=" + encodeURIComponent(term), {
+              headers: { 'X-Requested-With': 'XMLHttpRequest', 'Accept': 'application/json' }
             });
-
-            // Show toast if low quantity rows exist
-            if (lowQuantityRows.length > 0) {
-                const toastElement = document.getElementById('lowQuantityToast');
-                const toast = new bootstrap.Toast(toastElement);
-                toast.show();
-            }
-
-            // Barcode scanner modal logic
-            const scannerModal = document.getElementById('barcodeScannerModal');
-            scannerModal.addEventListener('shown.bs.modal', function () {
-                initScanner('scanner-video', 'scanner-result');
-            });
-            scannerModal.addEventListener('hidden.bs.modal', function () {
-                Quagga.stop();
-                document.getElementById('scanner-result').innerText = '';
-            });
-        });
-    </script>
+            if (!res.ok) throw new Error(`HTTP status ${res.status}`);
+            const data = await res.json();
+            tbody.innerHTML = data.length
+              ? data.map(m => `
+                  <tr>
+                    <td class="text-center align-middle">
+                      <img src="${m.image?'/uploads/materiels/'+m.image:'/img/default-material.png'}" class="rounded-circle mx-auto d-block" style="width:45px;height:45px;object-fill:cover;">
+                    </td>
+                    <td>${m.nom}</td>
+                    <td><i class="bx bx-category me-1"></i>${m.type}</td>
+                    <td><i class="bx bx-package me-1"></i>${m.quantite}</td>
+                    <td><span class="badge ${m.etat==='NEUF'?'bg-success':m.etat==='USÉ'?'bg-warning':'bg-danger'}"><i class="bx ${m.etat==='NEUF'?'bx-check-circle':m.etat==='USÉ'?'bx-time':'bx-error-circle'} me-1"></i>${m.etat}</span></td>
+                    <td><i class="bx bx-euro me-1"></i>${parseFloat(m.prix).toFixed(2)} €</td>
+                    <td><i class="bx bx-barcode me-1"></i>${m.barcode}</td>
+                    <td><i class="bx bx-store me-1"></i>${m.fournisseur||'N/A'}</td>
+                    <td>
+                        <div class="dropdown">
+                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                <i class="bx bx-dots-vertical-rounded"></i>
+                            </button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="/materiel/${m.id}">
+                                    <i class="bx bx-show me-1"></i> Voir
+                                </a>
+                                <a class="dropdown-item" href="/materiel/${m.id}/edit">
+                                    <i class="bx bx-edit-alt me-1"></i> Modifier
+                                </a>
+                                <form method="post" action="/materiel/${m.id}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce matériel ?');">
+                                    <input type="hidden" name="_token" value="${m._token}">
+                                    <button type="submit" class="dropdown-item text-danger">
+                                        <i class="bx bx-trash me-1"></i> Supprimer
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </td>
+                  </tr>
+                `).join('')
+              : `<tr><td colspan="9" class="text-center">Aucun résultat</td></tr>`;
+          } catch (err) {
+            console.error('Erreur AJAX:', err);
+          }
+        }, 300);
+      });
+    }
+  </script>
 {% endblock %}
 
 {% block stylesheets %}
@@ -376,19 +443,110 @@
             width: auto;
         }
         .table#materielsTable th:first-child, .table#materielsTable td:first-child {
-            width: 70px; /* Fixed width for image column */
+            width: 50px;
             text-align: center;
+            padding: 2px;
+            vertical-align: middle;
         }
-        .table#materielsTable tbody tr.low-quantity,
-        .table#materielsTable tbody tr.low-quantity td {
-            background-color: rgba(255, 0, 0, 0.2) !important;
-            border: 2px solid red !important;
-            animation: blink 1s infinite !important;
+        
+        /* Style pour les matériels endommagés */
+        .materiel-endommage {
+            background-color: #ffebee !important;
+            animation: blinkRed 1s infinite;
         }
-        @keyframes blink {
-            0% { background-color: rgba(255, 0, 0, 0.2); }
-            50% { background-color: rgba(255, 0, 0, 0.5); }
-            100% { background-color: rgba(255, 0, 0, 0.2); }
+        
+        .materiel-endommage td {
+            background-color: #ffebee !important;
+            border: 2px solid #f44336 !important;
+        }
+        
+        .materiel-endommage:hover {
+            background-color: #ffcdd2 !important;
+        }
+        
+        .materiel-endommage:hover td {
+            background-color: #ffcdd2 !important;
+        }
+        
+        /* Effet de survol sur les lignes */
+        .table#materielsTable tbody tr:hover {
+            background-color: rgba(0,0,0,.03);
+            transition: background-color 0.2s ease;
+        }
+        
+        /* Style pour les badges */
+        .badge {
+            padding: 0.5em 0.8em;
+            font-weight: 500;
+        }
+        
+        /* Style pour le bouton d'actions */
+        .btn-icon {
+            padding: 0.25rem;
+            line-height: 1;
+        }
+        
+        /* Blinking animation */
+        @keyframes blinkRed {
+            0% {
+                background-color: #ffebee;
+                border-color: #f44336;
+            }
+            50% {
+                background-color: #f44336;
+                border-color: #d32f2f;
+            }
+            100% {
+                background-color: #ffebee;
+                border-color: #f44336;
+            }
+        }
+        
+        /* Style pour la pagination */
+        .pagination {
+            margin: 1rem 0;
+        }
+        
+        .pagination .page-item .page-link {
+            color: #566a7f;
+            border: 1px solid #d9dee3;
+            padding: 0.5rem 0.75rem;
+            margin: 0 2px;
+            border-radius: 0.375rem;
+            transition: all 0.2s ease;
+            background-color: #fff;
+        }
+        
+        .pagination .page-item.active .page-link {
+            background-color: #696cff;
+            border-color: #696cff;
+            color: #fff;
+            box-shadow: 0 2px 4px rgba(105, 108, 255, 0.2);
+        }
+        
+        .pagination .page-item .page-link:hover {
+            background-color: #f5f5f9;
+            border-color: #696cff;
+            color: #696cff;
+            transform: translateY(-1px);
+        }
+        
+        .pagination .page-item.disabled .page-link {
+            color: #a3a4cc;
+            pointer-events: none;
+            background-color: #fff;
+            border-color: #d9dee3;
+        }
+        
+        .card-footer {
+            background-color: #fff;
+            border-top: 1px solid #d9dee3;
+            padding: 1rem;
+        }
+        
+        .card-footer .text-center small {
+            color: #566a7f;
+            font-size: 0.875rem;
         }
     </style>
 {% endblock %}

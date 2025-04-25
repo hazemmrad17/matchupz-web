@@ -129,19 +129,21 @@ class FournisseurRepository extends ServiceEntityRepository
 
     public function getLocationDistribution(): array
     {
+        // Récupérer toutes les adresses non vides
         $results = $this->createQueryBuilder('f')
-            ->select("SUBSTRING(f.adresse, 1, LOCATE(',', f.adresse)) AS region, COUNT(f.id_fournisseur) AS count")
+            ->select('f.adresse AS adresse')
             ->where('f.adresse IS NOT NULL')
             ->andWhere('f.adresse != :empty')
             ->setParameter('empty', '')
-            ->groupBy('region')
             ->getQuery()
-            ->getResult();
+            ->getScalarResult();
 
         $distribution = [];
-        foreach ($results as $result) {
-            $region = $result['region'] ?: 'Non défini';
-            $distribution[$region] = (int) $result['count'];
+        foreach ($results as $row) {
+            $adresse = $row['adresse'] ?? '';
+            $parts = explode(',', $adresse);
+            $ville = trim(end($parts)) ?: 'Non défini';
+            $distribution[$ville] = ($distribution[$ville] ?? 0) + 1;
         }
 
         return $distribution;
@@ -171,6 +173,68 @@ class FournisseurRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('f')
             ->orderBy('f.id_fournisseur', 'DESC')
+            ->setMaxResults(5)
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * Distribution des domaines d'email (après @)
+     */
+    public function getEmailDomainDistribution(): array
+    {
+        // Récupère tous les emails non vides
+        $emails = $this->createQueryBuilder('f')
+            ->select('f.email')
+            ->where('f.email IS NOT NULL')
+            ->andWhere('f.email != :empty')
+            ->setParameter('empty', '')
+            ->getQuery()
+            ->getScalarResult();
+
+        $distribution = [];
+        foreach ($emails as $row) {
+            $email = $row['email'] ?? '';
+            // Extraire la partie après '@'
+            [$local, $domain] = array_pad(explode('@', $email), 2, '');
+            $domain = trim($domain) ?: 'Non défini';
+            $distribution[$domain] = ($distribution[$domain] ?? 0) + 1;
+        }
+
+        return $distribution;
+    }
+
+    /**
+     * Moyenne de matériels par fournisseur
+     */
+    public function getAverageMaterialsPerSupplier(): float
+    {
+        $results = $this->createQueryBuilder('f')
+            ->select('COUNT(m.id) AS materialCount')
+            ->leftJoin('f.materiels', 'm')
+            ->groupBy('f.id_fournisseur')
+            ->getQuery()
+            ->getScalarResult();
+
+        $total = 0;
+        foreach ($results as $row) {
+            $total += (int) ($row['materialCount'] ?? 0);
+        }
+        $count = count($results);
+
+        return $count > 0 ? $total / $count : 0;
+    }
+
+    /**
+     * Top 5 des fournisseurs par nombre de matériels
+     */
+    public function getTopSuppliersByMaterialCount(): array
+    {
+        return $this->createQueryBuilder('f')
+            ->select('f.id_fournisseur, f.nom, COUNT(m.id) AS materialCount')
+            ->leftJoin('f.materiels', 'm')
+            ->groupBy('f.id_fournisseur')
+            ->orderBy('materialCount', 'DESC')
             ->setMaxResults(5)
             ->getQuery()
             ->getResult();

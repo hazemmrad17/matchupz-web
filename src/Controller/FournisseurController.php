@@ -233,99 +233,33 @@ public function showF(Fournisseur $fournisseur = null): Response
     #[Route('/fournisseur/stats', name: 'app_fournisseur_stats')]
     public function stats(FournisseurRepository $fournisseurRepository): Response
     {
-        // Fetch all suppliers
-        $allSuppliers = $fournisseurRepository->findAll();
-
         // Total suppliers
-        $totalSuppliers = count($allSuppliers);
-
-        // Categories count (distinct product categories)
-        $categories = $fournisseurRepository->createQueryBuilder('f')
-            ->select('DISTINCT f.categorie_produit')
-            ->getQuery()
-            ->getResult();
-        $categoriesCount = count(array_filter($categories, fn($cat) => $cat['categorie_produit'] !== null));
-
-        // Suppliers with email
-        $suppliersWithEmailList = $fournisseurRepository->createQueryBuilder('f')
-            ->where('f.email IS NOT NULL')
-            ->getQuery()
-            ->getResult();
-        $suppliersWithEmail = count($suppliersWithEmailList);
-
-        // Email coverage
-        $emailCoverage = $totalSuppliers > 0 ? ($suppliersWithEmail / $totalSuppliers) * 100 : 0;
-
-        // Regions count (distinct addresses/localizations)
-        $regions = $fournisseurRepository->createQueryBuilder('f')
-            ->select('DISTINCT f.adresse')
-            ->getQuery()
-            ->getResult();
-        $regionsCount = count(array_filter($regions, fn($region) => $region['adresse'] !== null));
-
-        // Average name length
-        $totalNameLength = array_reduce($allSuppliers, fn($carry, $fournisseur) => $carry + strlen($fournisseur->getNom() ?? ''), 0);
-        $averageNameLength = $totalSuppliers > 0 ? $totalNameLength / $totalSuppliers : 0;
-
-        // Suppliers with address
-        $suppliersWithAddressList = $fournisseurRepository->createQueryBuilder('f')
-            ->where('f.adresse IS NOT NULL')
-            ->getQuery()
-            ->getResult();
-        $suppliersWithAddress = count($suppliersWithAddressList);
-
-        // Address coverage
-        $addressCoverage = $totalSuppliers > 0 ? ($suppliersWithAddress / $totalSuppliers) * 100 : 0;
+        $totalSuppliers = $fournisseurRepository->count([]);
 
         // Category distribution
-        $categoryDistribution = $fournisseurRepository->createQueryBuilder('f')
-            ->select('f.categorie_produit, COUNT(f.id_fournisseur) as count')
-            ->groupBy('f.categorie_produit')
-            ->getQuery()
-            ->getResult();
-        $categoryDistribution = array_reduce($categoryDistribution, function ($carry, $item) {
-            $category = $item['categorie_produit'] ?? 'Non défini';
-            $carry[$category] = (int)$item['count'];
-            return $carry;
-        }, []);
+        $categoryDistribution = $fournisseurRepository->getCategoryDistribution();
+        $categoriesCount = count($categoryDistribution);
 
-        // Location distribution
-        $locationDistribution = $fournisseurRepository->createQueryBuilder('f')
-            ->select('f.adresse, COUNT(f.id_fournisseur) as count')
-            ->groupBy('f.adresse')
-            ->getQuery()
-            ->getResult();
-        $locationDistribution = array_reduce($locationDistribution, function ($carry, $item) {
-            $location = $item['adresse'] ?? 'Non défini';
-            $carry[$location] = (int)$item['count'];
-            return $carry;
-        }, []);
+        // Location distribution (cities)
+        $locationDistribution = $fournisseurRepository->getLocationDistribution();
+        $citiesCount = count($locationDistribution);
 
-        // Top suppliers by name length
-        $topSuppliersByNameLength = array_map(function ($fournisseur) {
-            return [
-                'id_fournisseur' => $fournisseur->getIdFournisseur(),
-                'nom' => $fournisseur->getNom(),
-                'nameLength' => strlen($fournisseur->getNom() ?? ''),
-            ];
-        }, $allSuppliers);
-        usort($topSuppliersByNameLength, fn($a, $b) => $b['nameLength'] <=> $a['nameLength']);
-        $topSuppliersByNameLength = array_slice($topSuppliersByNameLength, 0, 5); // Top 5
+        // Distribution des domaines email
+        $emailDomainDistribution = $fournisseurRepository->getEmailDomainDistribution();
+        // Moyenne de matériels par fournisseur
+        $averageMaterialsPerSupplier = $fournisseurRepository->getAverageMaterialsPerSupplier();
+        // Top 5 fournisseurs par nombre de matériels
+        $topSuppliersByMaterialCount = $fournisseurRepository->getTopSuppliersByMaterialCount();
 
         return $this->render('fournisseur/statistics.html.twig', [
             'totalSuppliers' => $totalSuppliers,
             'categoriesCount' => $categoriesCount,
-            'suppliersWithEmail' => $suppliersWithEmail,
-            'emailCoverage' => $emailCoverage,
-            'regionsCount' => $regionsCount,
-            'averageNameLength' => $averageNameLength,
-            'suppliersWithAddress' => $suppliersWithAddress,
-            'addressCoverage' => $addressCoverage,
+            'citiesCount' => $citiesCount,
             'categoryDistribution' => $categoryDistribution,
             'locationDistribution' => $locationDistribution,
-            'topSuppliersByNameLength' => $topSuppliersByNameLength,
-            'suppliersWithEmailList' => $suppliersWithEmailList,
-            'allSuppliers' => $allSuppliers,
+            'emailDomainDistribution' => $emailDomainDistribution,
+            'averageMaterialsPerSupplier' => $averageMaterialsPerSupplier,
+            'topSuppliersByMaterialCount' => $topSuppliersByMaterialCount,
         ]);
     }
 

@@ -6,6 +6,8 @@ use App\Entity\Materiel;
 use App\Entity\Fournisseur;
 use App\Form\MaterielType;
 use App\Repository\MaterielRepository;
+use Symfony\UX\Chartjs\Builder\ChartBuilderInterface;
+use Symfony\UX\Chartjs\Model\Chart;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,6 +22,7 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use GuzzleHttp\Client;
 
 #[Route('/materiel')]
 final class MaterielController extends AbstractController
@@ -237,70 +240,89 @@ final class MaterielController extends AbstractController
     }
 
     #[Route('/statistics', name: 'app_materiel_statistics', methods: ['GET'])]
-    public function statistics(MaterielRepository $repository): Response
+    public function statistics(ChartBuilderInterface $chartBuilder): Response
     {
-        $allMaterials = $repository->findAll();
-        $totalMaterials = count($allMaterials);
-    
-        if ($totalMaterials === 0) {
-            return $this->render('materiel/statistics.html.twig', [
-                'totalMateriels' => 0,
-                'typesCount' => 0,
-                'materialsWithBarcode' => 0,
-                'barcodeCoverage' => 0,
-                'averageNameLength' => 0,
-                'typeDistribution' => [],
-                'stateDistribution' => [],
-                'inventoryValue' => 0,
-                'materialsWithBarcodeList' => [],
-                'topMaterialsByNameLength' => [],
-                'allMaterials' => []
-            ]);
-        }
-    
-        // Type distribution
-        $typeDistribution = array_count_values(
-            array_map(fn($m) => $m->getType(), $allMaterials)
-        );
-        $typesCount = count($typeDistribution);
-    
-        // State distribution
-        $stateDistribution = array_count_values(
-            array_map(fn($m) => $m->getEtat(), $allMaterials)
-        );
-    
-        // Inventory value
-        $inventoryValue = array_reduce(
-            $allMaterials,
-            fn($carry, $m) => $carry + ($m->getPrix() * $m->getQuantite()),
-            0
-        );
-    
-        // Barcode coverage
-        $materialsWithBarcode = count(array_filter($allMaterials, fn($m) => $m->getBarcode() !== null));
-        $barcodeCoverage = ($totalMaterials > 0) ? ($materialsWithBarcode / $totalMaterials) * 100 : 0;
-    
-        // Average name length
-        $totalNameLength = array_reduce($allMaterials, fn($carry, $m) => $carry + strlen($m->getNom()), 0);
-        $averageNameLength = ($totalMaterials > 0) ? $totalNameLength / $totalMaterials : 0;
-    
-        // Materials with barcode
-        $materialsWithBarcodeList = array_filter($allMaterials, fn($m) => $m->getBarcode() !== null);
-    
-        // Top materials by name length
-        $materialsWithNameLength = array_map(function($m) {
+        $allMaterials = $this->materielRepository->findAll();
+        $totalMateriels = count($allMaterials);
+
+        // Ne garder que les matériels ayant un état non vide pour les stats
+        $materialsWithEtat = array_filter($allMaterials, function($m) {
+            $etat = $m->getEtat();
+            return $etat !== null && trim($etat) !== '';
+        });
+
+        // Types uniques
+        $types = array_unique(array_map(fn($m) => $m->getType(), $materialsWithEtat));
+        $typesCount = count($types);
+
+        // Matériels avec barcode
+        $materialsWithBarcodeList = array_filter($allMaterials, fn($m) => $m->getBarcode());
+        $materialsWithBarcode = count($materialsWithBarcodeList);
+        $barcodeCoverage = $totalMateriels > 0 ? ($materialsWithBarcode / $totalMateriels) * 100 : 0;
+
+        // Longueur moyenne du nom
+        $averageNameLength = $totalMateriels > 0 ? array_sum(array_map(fn($m) => strlen($m->getNom()), $allMaterials)) / $totalMateriels : 0;
+
+        // Distribution des types (seulement pour matériels avec état)
+        $typeDistribution = array_count_values(array_map(fn($m) => $m->getType() ?: 'Non défini', $materialsWithEtat));
+        // Distribution des états (seulement pour matériels avec état)
+        $stateDistribution = array_count_values(array_map(fn($m) => $m->getEtat() ?: 'Non défini', $materialsWithEtat));
+
+        // Valeur d'inventaire
+        $inventoryValue = array_reduce($allMaterials, fn($carry, $m) => $carry + ($m->getPrix() * $m->getQuantite()), 0);
+
+        // Top matériels par longueur de nom
+        usort($allMaterials, fn($a, $b) => strlen($b->getNom()) <=> strlen($a->getNom()));
+        $topMaterialsByNameLength = array_map(function ($m) {
             return [
-                'id' => $m->getId(),
                 'nom' => $m->getNom(),
-                'type' => $m->getType(),
+                'id' => $m->getId(),
                 'nameLength' => strlen($m->getNom())
             ];
-        }, $allMaterials);
-        usort($materialsWithNameLength, fn($a, $b) => $b['nameLength'] <=> $a['nameLength']);
-        $topMaterialsByNameLength = array_slice($materialsWithNameLength, 0, 5); // Top 5
-    
+        }, array_slice($allMaterials, 0, 5));
+
+        // Chart.js - Distribution des types
+        $typeChart = $chartBuilder->createChart(Chart::TYPE_PIE);
+        $typeChart->setData([
+            'labels' => array_keys($typeDistribution),
+            'datasets' => [[
+                'label' => 'Répartition des types',
+                'backgroundColor' => ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40'],
+                'data' => array_values($typeDistribution),
+            ]],
+        ]);
+        $typeChart->setOptions([
+            'plugins' => [
+                'legend' => ['position' => 'bottom'],
+            ],
+        ]);
+
+        // Chart.js - Distribution des états
+        $stateChart = $chartBuilder->createChart(Chart::TYPE_BAR);
+        $stateChart->setData([
+            'labels' => array_keys($stateDistribution),
+            'datasets' => [[
+                'label' => 'Nombre de matériels',
+                'backgroundColor' => '#36A2EB',
+                'data' => array_values($stateDistribution),
+            ]],
+        ]);
+        $stateChart->setOptions([
+            'plugins' => [
+                'legend' => ['display' => false],
+            ],
+            'scales' => [
+                'x' => [
+                    'ticks' => ['font' => ['size' => 12]],
+                ],
+                'y' => [
+                    'title' => ['display' => true, 'text' => 'Nombre de matériels'],
+                ],
+            ],
+        ]);
+
         return $this->render('materiel/statistics.html.twig', [
-            'totalMateriels' => $totalMaterials,
+            'totalMateriels' => $totalMateriels,
             'typesCount' => $typesCount,
             'materialsWithBarcode' => $materialsWithBarcode,
             'barcodeCoverage' => $barcodeCoverage,
@@ -310,7 +332,9 @@ final class MaterielController extends AbstractController
             'inventoryValue' => $inventoryValue,
             'materialsWithBarcodeList' => $materialsWithBarcodeList,
             'topMaterialsByNameLength' => $topMaterialsByNameLength,
-            'allMaterials' => $allMaterials
+            'allMaterials' => $allMaterials,
+            'typeChart' => $typeChart,
+            'stateChart' => $stateChart
         ]);
     }
 
@@ -536,4 +560,107 @@ final class MaterielController extends AbstractController
 
         return $response;
     }
+
+    #[Route('/search', name: 'app_materiel_search', methods: ['GET'])]
+    public function search(Request $request): JsonResponse
+    {
+        $term = $request->query->get('term', '');
+        $materiels = $this->materielRepository->findBySearchTerm($term);
+        $data = array_map(fn(Materiel $m) => [
+            'id' => $m->getId(),
+            'nom' => $m->getNom(),
+            'type' => $m->getType(),
+            'etat' => $m->getEtat(),
+            'quantite' => $m->getQuantite(),
+            'prix' => $m->getPrix(),
+            'barcode' => $m->getBarcode(),
+            'image' => $m->getImage(),
+            'fournisseur' => $m->getFournisseur()?->getNom(),
+        ], $materiels);
+
+        return new JsonResponse($data);
+    }
+
+    #[Route('/materiel/analyze-image', name: 'app_materiel_analyze_image', methods: ['POST'])]
+    public function analyzeImage(Request $request): JsonResponse
+    {
+        try {
+            $imageFile = $request->files->get('image');
+            if (!$imageFile) {
+                return new JsonResponse(['error' => 'Aucune image fournie'], 400);
+            }
+
+            // Préparer la requête vers Hugging Face
+            $client = new Client();
+            $response = $client->post('https://api-inference.huggingface.co/models/google/vit-base-patch16-224', [
+                'headers' => [
+                    'Authorization' => 'Bearer ' . $_ENV['HUGGINGFACE_TOKEN'],
+                    'Content-Type' => 'application/octet-stream',
+                ],
+                'body' => fopen($imageFile->getPathname(), 'r'),
+            ]);
+
+            $result = json_decode($response->getBody()->getContents(), true);
+
+            // Extraire les labels et scores
+            $labels = array_map(fn($item) => [
+                'label' => $item['label'],
+                'score' => $item['score'],
+            ], $result);
+
+            // Suggérer un type basé sur les labels
+            $suggestedType = $this->mapLabelsToType($labels);
+
+            return new JsonResponse([
+                'labels' => $labels,
+                'suggestedType' => $suggestedType,
+            ]);
+        } catch (\GuzzleHttp\Exception\RequestException $e) {
+            return new JsonResponse(['error' => 'Erreur API: ' . $e->getMessage()], 500);
+        } catch (\Exception $e) {
+            return new JsonResponse(['error' => 'Erreur générale: ' . $e->getMessage()], 500);
+        }
+    }
+
+    private function mapLabelsToType(array $labels): string
+{
+    error_log('Labels reçus: ' . json_encode($labels)); // Log pour déboguer
+    foreach ($labels as $item) {
+        $label = strtolower($item['label']);
+        $score = $item['score'];
+        error_log("Analyse label: $label, score: $score"); // Log chaque label
+
+        // Réduire le seuil pour plus de flexibilité
+        if ($score < 0.1) { // Abaissé de 0.3 à 0.1
+            continue;
+        }
+
+        // Matériel de jeu (ballons, raquettes, etc.)
+        if (str_contains($label, 'ball') || str_contains($label, 'sports equipment') || str_contains($label, 'racket')) {
+            return 'MATERIEL_JEU';
+        }
+        // Tenue sportive (t-shirts, maillots, etc.)
+        elseif (str_contains($label, 'clothing') || str_contains($label, 'jersey') || str_contains($label, 'shirt') || str_contains($label, 't-shirt') || str_contains($label, 'uniform')) {
+            return 'TENUE_SPORTIVE';
+        }
+        // Équipement de protection
+        elseif (str_contains($label, 'helmet') || str_contains($label, 'protective') || str_contains($label, 'pad') || str_contains($label, 'guard')) {
+            return 'EQUIPEMENT_PROTECTION';
+        }
+        // Accessoires d'entraînement (cônes, sifflets, etc.)
+        elseif (str_contains($label, 'training') || str_contains($label, 'cone') || str_contains($label, 'agility') || str_contains($label, 'whistle') || str_contains($label, 'stopwatch')) {
+            return 'ACCESSOIRE_ENTRAINEMENT';
+        }
+        // Équipement sportif (machines, poids, etc.)
+        elseif (str_contains($label, 'gym') || str_contains($label, 'weight') || str_contains($label, 'machine') || str_contains($label, 'treadmill')) {
+            return 'EQUIPEMENT_SPORTIF';
+        }
+        // Infrastructure
+        elseif (str_contains($label, 'field') || str_contains($label, 'stadium') || str_contains($label, 'structure') || str_contains($label, 'goalpost')) {
+            return 'INFRASTRUCTURE';
+        }
+    }
+    return ''; // Type non déterminé
+}
+    
 }

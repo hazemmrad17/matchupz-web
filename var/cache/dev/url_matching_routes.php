@@ -142,21 +142,23 @@ return [
                         .'|/edit(*:786)'
                         .'|(*:794)'
                     .')'
+                    .'|search(*:809)'
+                    .'|materiel/analyze\\-image(*:840)'
                 .')'
                 .'|/performance_joueur/([^/]++)(?'
-                    .'|(*:835)'
-                    .'|/edit(*:848)'
-                    .'|(*:856)'
+                    .'|(*:880)'
+                    .'|/edit(*:893)'
+                    .'|(*:901)'
                 .')'
                 .'|/reservation/(?'
-                    .'|(\\d+)(*:886)'
-                    .'|(\\d+)/edit(*:904)'
-                    .'|(\\d+)(*:917)'
+                    .'|(\\d+)(*:931)'
+                    .'|(\\d+)/edit(*:949)'
+                    .'|(\\d+)(*:962)'
                 .')'
                 .'|/sport/(?'
-                    .'|(\\d+)(*:941)'
-                    .'|(\\d+)/edit(*:959)'
-                    .'|(\\d+)(*:972)'
+                    .'|(\\d+)(*:986)'
+                    .'|(\\d+)/edit(*:1004)'
+                    .'|(\\d+)(*:1018)'
                 .')'
             .')/?$}sDu',
     ],
@@ -197,15 +199,17 @@ return [
         762 => [[['_route' => 'app_materiel_showF', '_controller' => 'App\\Controller\\MaterielController::showF'], ['id'], ['GET' => 0], null, false, true, null]],
         786 => [[['_route' => 'app_materiel_edit', '_controller' => 'App\\Controller\\MaterielController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
         794 => [[['_route' => 'app_materiel_delete', '_controller' => 'App\\Controller\\MaterielController::delete'], ['id'], ['POST' => 0], null, false, true, null]],
-        835 => [[['_route' => 'performance_joueur_show', '_controller' => 'App\\Controller\\PerformanceJoueurController::show'], ['idPerformance'], ['GET' => 0], null, false, true, null]],
-        848 => [[['_route' => 'performance_joueur_edit', '_controller' => 'App\\Controller\\PerformanceJoueurController::edit'], ['idPerformance'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        856 => [[['_route' => 'performance_joueur_delete', '_controller' => 'App\\Controller\\PerformanceJoueurController::delete'], ['idPerformance'], ['POST' => 0], null, false, true, null]],
-        886 => [[['_route' => 'reservation_show', '_controller' => 'App\\Controller\\ReservationController::show'], ['id_reservation'], ['GET' => 0], null, false, true, null]],
-        904 => [[['_route' => 'reservation_edit', '_controller' => 'App\\Controller\\ReservationController::edit'], ['id_reservation'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        917 => [[['_route' => 'reservation_delete', '_controller' => 'App\\Controller\\ReservationController::delete'], ['id_reservation'], ['POST' => 0], null, false, true, null]],
-        941 => [[['_route' => 'sport_show', '_controller' => 'App\\Controller\\SportController::show'], ['idSport'], ['GET' => 0], null, false, true, null]],
-        959 => [[['_route' => 'sport_edit', '_controller' => 'App\\Controller\\SportController::edit'], ['idSport'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        972 => [
+        809 => [[['_route' => 'app_materiel_search', '_controller' => 'App\\Controller\\MaterielController::search'], [], ['GET' => 0], null, false, false, null]],
+        840 => [[['_route' => 'app_materiel_analyze_image', '_controller' => 'App\\Controller\\MaterielController::analyzeImage'], [], ['POST' => 0], null, false, false, null]],
+        880 => [[['_route' => 'performance_joueur_show', '_controller' => 'App\\Controller\\PerformanceJoueurController::show'], ['idPerformance'], ['GET' => 0], null, false, true, null]],
+        893 => [[['_route' => 'performance_joueur_edit', '_controller' => 'App\\Controller\\PerformanceJoueurController::edit'], ['idPerformance'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        901 => [[['_route' => 'performance_joueur_delete', '_controller' => 'App\\Controller\\PerformanceJoueurController::delete'], ['idPerformance'], ['POST' => 0], null, false, true, null]],
+        931 => [[['_route' => 'reservation_show', '_controller' => 'App\\Controller\\ReservationController::show'], ['id_reservation'], ['GET' => 0], null, false, true, null]],
+        949 => [[['_route' => 'reservation_edit', '_controller' => 'App\\Controller\\ReservationController::edit'], ['id_reservation'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        962 => [[['_route' => 'reservation_delete', '_controller' => 'App\\Controller\\ReservationController::delete'], ['id_reservation'], ['POST' => 0], null, false, true, null]],
+        986 => [[['_route' => 'sport_show', '_controller' => 'App\\Controller\\SportController::show'], ['idSport'], ['GET' => 0], null, false, true, null]],
+        1004 => [[['_route' => 'sport_edit', '_controller' => 'App\\Controller\\SportController::edit'], ['idSport'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        1018 => [
             [['_route' => 'sport_delete', '_controller' => 'App\\Controller\\SportController::delete'], ['idSport'], ['POST' => 0], null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],

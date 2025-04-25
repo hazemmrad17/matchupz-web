@@ -269,4 +269,23 @@ class MaterielRepository extends ServiceEntityRepository
 
         return $qb;
     }
+
+    /**
+     * Recherche dynamique des matériels par terme via AJAX.
+     *
+     * @param string $term
+     * @return Materiel[]
+     */
+    public function findBySearchTerm(string $term): array
+    {
+        return $this->createQueryBuilder('m')
+            ->where('m.nom LIKE :term')
+            ->orWhere('m.type LIKE :term')
+            ->orWhere('m.etat LIKE :term')
+            ->orWhere('m.barcode LIKE :term')
+            ->setParameter('term', '%'.$term.'%')
+            ->orderBy('m.id', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
 }

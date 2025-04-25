@@ -7,99 +7,55 @@
 <h4 class="fw-bold py-3 mb-4">Statistiques des Fournisseurs</h4>
 
 <div class="row">
-
     <!-- Total Fournisseurs -->
     <div class="col-lg-4 col-md-6 mb-4">
-        <div class="card">
+        <div class="card text-center shadow-sm">
             <div class="card-body">
-                <div class="card-title d-flex align-items-start justify-content-between">
-                    <div class="avatar flex-shrink-0">
-                        <img src="{{ asset('img/icons/unicons/building.png') }}" alt="Fournisseurs" class="rounded" />
-                    </div>
-                </div>
                 <span class="fw-semibold d-block mb-1">Total Fournisseurs</span>
                 <h3 class="card-title mb-2">{{ totalSuppliers }}</h3>
-                <small class="text-muted">Fournisseurs enregistrés</small>
+                <small class="text-muted">Enregistrés</small>
             </div>
         </div>
     </div>
-
     <!-- Catégories Uniques -->
     <div class="col-lg-4 col-md-6 mb-4">
-        <div class="card">
+        <div class="card text-center shadow-sm">
             <div class="card-body">
-                <div class="card-title d-flex align-items-start justify-content-between">
-                    <div class="avatar flex-shrink-0">
-                        <img src="{{ asset('img/icons/unicons/category.png') }}" alt="Catégories" class="rounded" />
-                    </div>
-                </div>
                 <span class="fw-semibold d-block mb-1">Catégories Uniques</span>
                 <h3 class="card-title mb-2">{{ categoriesCount }}</h3>
-                <small class="text-muted">Types de produits distincts</small>
+                <small class="text-muted">Types distincts</small>
             </div>
         </div>
     </div>
-
-    <!-- Couverture Email -->
+    <!-- Villes Distinctes -->
     <div class="col-lg-4 col-md-6 mb-4">
-        <div class="card">
+        <div class="card text-center shadow-sm">
             <div class="card-body">
-                <div class="card-title d-flex align-items-start justify-content-between">
-                    <div class="avatar flex-shrink-0">
-                        <img src="{{ asset('img/icons/unicons/email.png') }}" alt="Email" class="rounded" />
-                    </div>
-                </div>
-                <span class="fw-semibold d-block mb-1">Couverture Email</span>
-                <h3 class="card-title mb-2">{{ suppliersWithEmail }}/{{ totalSuppliers }}</h3>
-                <small class="text-success fw-semibold">{{ emailCoverage|round(1) }}% Couverture</small>
+                <span class="fw-semibold d-block mb-1">Villes Distinctes</span>
+                <h3 class="card-title mb-2">{{ citiesCount }}</h3>
+                <small class="text-muted">Localisations uniques</small>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- Fournisseurs par Région -->
+<!-- Advanced metrics row -->
+<div class="row mt-4">
     <div class="col-lg-4 col-md-6 mb-4">
-        <div class="card">
+        <div class="card text-center shadow-sm">
             <div class="card-body">
-                <div class="card-title d-flex align-items-start justify-content-between">
-                    <div class="avatar flex-shrink-0">
-                        <img src="{{ asset('img/icons/unicons/map.png') }}" alt="Régions" class="rounded" />
-                    </div>
-                </div>
-                <span class="fw-semibold d-block mb-1">Fournisseurs par Région</span>
-                <h3 class="card-title mb-2">{{ regionsCount }}</h3>
-                <small class="text-muted">Régions géographiques distinctes</small>
+                <span class="fw-semibold d-block mb-1">Domaines Email Uniques</span>
+                <h3 class="card-title mb-2">{{ emailDomainDistribution|keys|length }}</h3>
+                <small class="text-muted">Domaines distincts</small>
             </div>
         </div>
     </div>
-
-    <!-- Longueur Moyenne Nom -->
     <div class="col-lg-4 col-md-6 mb-4">
-        <div class="card">
+        <div class="card text-center shadow-sm">
             <div class="card-body">
-                <div class="card-title d-flex align-items-start justify-content-between">
-                    <div class="avatar flex-shrink-0">
-                        <img src="{{ asset('img/icons/unicons/text.png') }}" alt="Nom" class="rounded" />
-                    </div>
-                </div>
-                <span class="fw-semibold d-block mb-1">Longueur Moyenne Nom</span>
-                <h3 class="card-title mb-2">{{ averageNameLength|round(1) }} chars</h3>
-                <small class="text-muted">Basé sur les noms des fournisseurs</small>
-            </div>
-        </div>
-    </div>
-
-    <!-- Adresses Remplies -->
-    <div class="col-lg-4 col-md-6 mb-4">
-        <div class="card">
-            <div class="card-body">
-                <div class="card-title d-flex align-items-start justify-content-between">
-                    <div class="avatar flex-shrink-0">
-                        <img src="{{ asset('img/icons/unicons/address.png') }}" alt="Adresse" class="rounded" />
-                    </div>
-                </div>
-                <span class="fw-semibold d-block mb-1">Adresses Remplies</span>
-                <h3 class="card-title mb-2">{{ suppliersWithAddress }}/{{ totalSuppliers }}</h3>
-                <small class="text-success fw-semibold">{{ addressCoverage|round(1) }}% Couverture</small>
+                <span class="fw-semibold d-block mb-1">Moyenne Matériels / Fournisseur</span>
+                <h3 class="card-title mb-2">{{ averageMaterialsPerSupplier|round(2) }}</h3>
+                <small class="text-muted">Matériels moyens</small>
             </div>
         </div>
     </div>
@@ -110,7 +66,7 @@
     <div class="col-12 col-lg-6 mb-4">
         <div class="card">
             <div class="card-header"><h5 class="card-title m-0 me-2">Distribution des Catégories</h5></div>
-            <div class="card-body"><div id="categoryDistributionChart"></div></div>
+            <div class="card-body"><canvas id="categoryChartCanvas" class="w-100" style="max-height:300px;"></canvas></div>
         </div>
     </div>
 
@@ -118,137 +74,103 @@
     <div class="col-12 col-lg-6 mb-4">
         <div class="card">
             <div class="card-header"><h5 class="card-title m-0 me-2">Distribution par Localisation</h5></div>
-            <div class="card-body"><div id="locationDistributionChart"></div></div>
+            <div class="card-body"><canvas id="locationChartCanvas" class="w-100" style="max-height:300px;"></canvas></div>
         </div>
     </div>
+</div>
 
-    <!-- Top Fournisseurs par Nom Table -->
-    <div class="col-12 col-lg-6 mb-4">
-        <div class="card">
-            <div class="card-header"><h5 class="card-title m-0 me-2">Fournisseurs par Longueur de Nom</h5></div>
+<!-- Top 5 fournisseurs par nombre de matériels -->
+<div class="row mt-4">
+    <div class="col-12 mb-4">
+        <div class="card shadow-sm">
+            <div class="card-header bg-light"><h5 class="m-0">Top 5 Fournisseurs par Nombre de Matériels</h5></div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Fournisseur</th>
-                                <th>Longueur Nom</th>
-                                <th>Détails</th>
-                            </tr>
+                    <table class="table table-striped table-hover align-middle mb-0">
+                        <thead class="table-light">
+                            <tr><th>Fournisseur</th><th>Matériels</th></tr>
                         </thead>
                         <tbody>
-                            {% for fournisseur in topSuppliersByNameLength %}
-                                <tr>
-                                    <td>{{ fournisseur.nom }}</td>
-                                    <td>{{ fournisseur.nameLength }} chars</td>
-                                    <td>
-                                        <a href="{{ path('app_fournisseur_show', {'id_fournisseur': fournisseur.id_fournisseur}) }}"
-                                           class="btn btn-sm btn-outline-primary">Voir</a>
-                                    </td>
-                                </tr>
+                            {% for supplier in topSuppliersByMaterialCount %}
+                            <tr><td>{{ supplier.nom }}</td><td>{{ supplier.materialCount }}</td></tr>
                             {% else %}
-                                <tr>
-                                    <td colspan="3">Aucun fournisseur disponible.</td>
-                                </tr>
+                            <tr><td colspan="2">Aucun résultat</td></tr>
                             {% endfor %}
                         </tbody>
                     </table>
                 </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Fournisseurs avec Email Table -->
-    <div class="col-12 col-lg-6 mb-4">
-        <div class="card">
-            <div class="card-header"><h5 class="card-title m-0 me-2">Fournisseurs avec Email</h5></div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Fournisseur</th>
-                                <th>Email</th>
-                                <th>Catégorie</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for fournisseur in suppliersWithEmailList %}
-                                <tr>
-                                    <td>{{ fournisseur.nom }}</td>
-                                    <td>{{ fournisseur.email }}</td>
-                                    <td>{{ fournisseur.categorie_produit|default('N/A') }}</td>
-                                </tr>
-                            {% else %}
-                                <tr>
-                                    <td colspan="3">Aucun fournisseur avec email.</td>
-                                </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Tous les Fournisseurs List -->
-    <div class="col-12 col-lg-6 mb-4">
-        <div class="card">
-            <div class="card-header"><h5 class="card-title m-0 me-2">Tous les Fournisseurs</h5></div>
-            <div class="card-body" style="max-height: 400px; overflow-y: auto;">
-                <ul class="p-0 m-0">
-                    {% for fournisseur in allSuppliers %}
-                        <li class="d-flex mb-4 pb-1">
-                            <div class="avatar flex-shrink-0 me-3">
-                                <img src="{{ asset('img/icons/unicons/building.png') }}"
-                                     alt="Fournisseur" class="rounded" />
-                            </div>
-                            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                                <div class="me-2">
-                                    <h6 class="mb-0">{{ fournisseur.nom }}</h6>
-                                    <small class="text-muted">{{ fournisseur.categorie_produit|default('N/A') }}</small>
-                                </div>
-                                <div class="user-progress">
-                                    <small class="fw-semibold">{{ fournisseur.email ? 'Avec Email' : 'Sans Email' }}</small>
-                                </div>
-                            </div>
-                        </li>
-                    {% else %}
-                        <li>Aucun fournisseur trouvé.</li>
-                    {% endfor %}
-                </ul>
             </div>
         </div>
     </div>
 </div>
+
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Category Distribution Chart
-            new ApexCharts(document.querySelector("#categoryDistributionChart"), {
-                chart: { type: 'pie', height: 350 },
-                series: [{% for category, count in categoryDistribution %}{{ count }},{% endfor %}],
-                labels: [{% for category in categoryDistribution|keys %}'{{ category|default('Non défini') }}',{% endfor %}],
-                colors: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40']
-            }).render();
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    // Couleurs Sneat Bootstrap 5
+    const sneatColors = [
+        '#696cff', // primary
+        '#71dd37', // success
+        '#ffab00', // warning
+        '#ff3e1d', // danger
+        '#03c3ec', // info
+        '#8592a3', // secondary
+        '#e7e7ff', // light
+        '#233446', // dark
+        '#ffb400', // orange
+        '#6f42c1', // purple
+        '#00bfa6'  // teal
+    ];
 
-            // Location Distribution Chart
-            new ApexCharts(document.querySelector("#locationDistributionChart"), {
-                chart: { type: 'bar', height: 350 },
-                series: [{
-                    name: "Nombre de fournisseurs",
-                    data: [{% for location, count in locationDistribution %}{{ count }},{% endfor %}]
-                }],
-                xaxis: {
-                    categories: [{% for location in locationDistribution|keys %}'{{ location|default('Non défini') }}',{% endfor %}],
-                    labels: { rotate: -45 }
-                },
-                colors: ['#36A2EB']
-            }).render();
-        });
-    </script>
+    // Category Distribution Chart (Pie)
+    const categoryData = {{ categoryDistribution|json_encode|raw }};
+    const categoryLabels = Object.keys(categoryData);
+    const categoryCounts = Object.values(categoryData);
+    const categoryColors = categoryLabels.map((_, i) => sneatColors[i % sneatColors.length]);
+    const ctxCategory = document.getElementById('categoryChartCanvas').getContext('2d');
+    new Chart(ctxCategory, {
+        type: 'pie',
+        data: {
+            labels: categoryLabels,
+            datasets: [{
+                data: categoryCounts,
+                backgroundColor: categoryColors,
+                borderColor: '#fff',
+                borderWidth: 2
+            }]
+        },
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } } }
+    });
+
+    // Location Distribution Chart (Bar)
+    const locationData = {{ locationDistribution|json_encode|raw }};
+    const locationLabels = Object.keys(locationData);
+    const locationCounts = Object.values(locationData);
+    const locationColors = locationLabels.map((_, i) => sneatColors[i % sneatColors.length]);
+    const ctxLocation = document.getElementById('locationChartCanvas').getContext('2d');
+    new Chart(ctxLocation, {
+        type: 'bar',
+        data: {
+            labels: locationLabels,
+            datasets: [{
+                label: 'Nombre de fournisseurs',
+                data: locationCounts,
+                backgroundColor: locationColors,
+                borderColor: locationColors,
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: { x: { ticks: { maxRotation: 45, minRotation: 45 } } }
+        }
+    });
+});
+</script>
 {% endblock %}

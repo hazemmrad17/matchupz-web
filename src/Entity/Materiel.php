@@ -5,8 +5,10 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use App\Repository\MaterielRepository;
 
+#[UniqueEntity(fields: ['barcode'], errorPath: 'barcode', message: "Le code-barres existe déjà.")]
 #[ORM\Entity(repositoryClass: MaterielRepository::class)]
 #[ORM\Table(name: 'materiel')]
 class Materiel
@@ -60,7 +62,7 @@ class Materiel
     #[Assert\Positive(message: "Le prix unitaire doit être un nombre positif.")]
     private float $prix = 0.0;
 
-    #[ORM\Column(type: 'string', length: 200)]
+    #[ORM\Column(type: 'string', length: 200, unique: true)]
     #[Assert\NotBlank(message: "Le code-barres ne peut pas être vide.")]
     #[Assert\Length(
         min: 2,

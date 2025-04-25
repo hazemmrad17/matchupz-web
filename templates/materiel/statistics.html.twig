@@ -113,19 +113,31 @@
 </div>
 
 <div class="row">
-    <!-- Type Distribution Chart -->
+    <!-- Type Distribution Chart (Chart.js) -->
     <div class="col-12 col-lg-6 mb-4">
         <div class="card h-100">
             <div class="card-header"><h5 class="card-title m-0 me-2">Distribution des Types</h5></div>
-            <div class="card-body"><div id="typeDistributionChart"></div></div>
+            <div class="card-body">
+                <canvas id="typeChartCanvas" class="w-100" style="max-height:300px;"></canvas>
+                {% if typeDistribution|length > 0 %}
+                {% else %}
+                <p class="text-muted">Aucune donnée disponible.</p>
+                {% endif %}
+            </div>
         </div>
     </div>
 
-    <!-- State Distribution Chart -->
+    <!-- State Distribution Chart (Chart.js) -->
     <div class="col-12 col-lg-6 mb-4">
         <div class="card h-100">
-            <div class="card-header"><h5 class="card-title m-0 me-2">Distribution par État</h5></div>
-            <div class="card-body"><div id="stateDistributionChart"></div></div>
+            <div class="card-header"><h5 class="card-title m-0 me-2">Distribution des États</h5></div>
+            <div class="card-body">
+                <canvas id="stateChartCanvas" class="w-100" style="max-height:300px;"></canvas>
+                {% if stateDistribution|length > 0 %}
+                {% else %}
+                <p class="text-muted">Aucune donnée disponible.</p>
+                {% endif %}
+            </div>
         </div>
     </div>
 
@@ -146,10 +158,10 @@
                         <tbody>
                             {% for material in topMaterialsByNameLength %}
                                 <tr>
-                                    <td>{{ material.nom }}</td>
-                                    <td>{{ material.nameLength }} chars</td>
+                                    <td>{{ material['nom'] }}</td>
+                                    <td>{{ material['nameLength'] }} chars</td>
                                     <td>
-                                        <a href="{{ path('app_materiel_showF', {'id': material.id}) }}"
+                                        <a href="{{ path('app_materiel_showF', {'id': material['id']}) }}"
                                            class="btn btn-sm btn-outline-primary">Voir</a>
                                     </td>
                                 </tr>
@@ -202,111 +214,75 @@
 
 {% block javascripts %}
     {{ parent() }}
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts@3.37.0/dist/apexcharts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // Prepare data for Type Distribution Chart
-            const typeLabels = [
-                {% for type, count in typeDistribution %}
-                    '{{ type|default('Non défini')|e('js') }}'{% if not loop.last %},{% endif %}
-                {% endfor %}
-            ];
-            const typeSeries = [
-                {% for type, count in typeDistribution %}
-                    {{ count }}{% if not loop.last %},{% endif %}
-                {% endfor %}
-            ];
+    // Couleurs Sneat Bootstrap 5
+    const sneatColors = [
+        '#696cff', // primary
+        '#71dd37', // success
+        '#ffab00', // warning
+        '#ff3e1d', // danger
+        '#03c3ec', // info
+        '#8592a3', // secondary
+        '#e7e7ff', // light
+        '#233446', // dark
+        '#ffb400', // orange
+        '#6f42c1', // purple
+        '#00bfa6'  // teal
+    ];
+    // Couleurs d'état (vert, orange, rouge, gris)
+    const statePalette = [
+        '#71dd37', // neuf/success
+        '#ffab00', // use/warning
+        '#ff3e1d', // endommagé/danger
+        '#8592a3'  // autre/secondary
+    ];
 
-            // Type Distribution Chart
-            if (typeSeries.length > 0) {
-                new ApexCharts(document.querySelector("#typeDistributionChart"), {
-                    chart: {
-                        type: 'pie',
-                        height: 350
+            const typeData = {{ typeDistribution|json_encode|raw }};
+            if (Object.keys(typeData).length) {
+                // Génère les couleurs pour chaque label
+                const typeLabels = Object.keys(typeData);
+                const typeColors = typeLabels.map((_, i) => sneatColors[i % sneatColors.length]);
+                const typeBorderColors = typeLabels.map((_, i) => sneatColors[i % sneatColors.length]);
+                const ctxType = document.getElementById('typeChartCanvas').getContext('2d');
+                new Chart(ctxType, {
+                    type: 'bar',
+                    data: {
+                        labels: typeLabels,
+                        datasets: [{
+                            label: 'Nombre',
+                            data: Object.values(typeData),
+                            backgroundColor: typeColors,
+                            borderColor: typeBorderColors,
+                            borderWidth: 1
+                        }]
                     },
-                    series: typeSeries,
-                    labels: typeLabels,
-                    colors: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40'],
-                    legend: {
-                        position: 'bottom'
-                    },
-                    dataLabels: {
-                        enabled: true
-                    },
-                    responsive: [{
-                        breakpoint: 480,
-                        options: {
-                            chart: {
-                                height: 300
-                            },
-                            legend: {
-                                position: 'bottom'
-                            }
-                        }
-                    }]
-                }).render();
+                    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+                });
             }
 
-            // Prepare data for State Distribution Chart
-            const stateLabels = [
-                {% for state, count in stateDistribution %}
-                    '{{ state|default('Non défini')|e('js') }}'{% if not loop.last %},{% endif %}
-                {% endfor %}
-            ];
-            const stateSeries = [
-                {% for state, count in stateDistribution %}
-                    {{ count }}{% if not loop.last %},{% endif %}
-                {% endfor %}
-            ];
-
-            // State Distribution Chart
-            if (stateSeries.length > 0) {
-                new ApexCharts(document.querySelector("#stateDistributionChart"), {
-                    chart: {
-                        type: 'bar',
-                        height: 350
+            const stateData = {{ stateDistribution|json_encode|raw }};
+            if (Object.keys(stateData).length) {
+                // Génère les couleurs pour chaque label
+                const stateLabels = Object.keys(stateData);
+                const stateColors = stateLabels.map((_, i) => statePalette[i % statePalette.length]);
+                const stateBorderColors = stateLabels.map((_, i) => statePalette[i % statePalette.length]);
+                const ctxState = document.getElementById('stateChartCanvas').getContext('2d');
+                new Chart(ctxState, {
+                    type: 'bar',
+                    data: {
+                        labels: stateLabels,
+                        datasets: [{
+                            label: 'Nombre',
+                            data: Object.values(stateData),
+                            backgroundColor: stateColors,
+                            borderColor: stateBorderColors,
+                            borderWidth: 1
+                        }]
                     },
-                    series: [{
-                        name: 'Nombre de matériels',
-                        data: stateSeries
-                    }],
-                    xaxis: {
-                        categories: stateLabels,
-                        labels: {
-                            rotate: -45,
-                            style: {
-                                fontSize: '12px'
-                            }
-                        }
-                    },
-                    colors: ['#36A2EB'],
-                    plotOptions: {
-                        bar: {
-                            horizontal: false,
-                            columnWidth: '55%',
-                            endingShape: 'rounded'
-                        }
-                    },
-                    dataLabels: {
-                        enabled: false
-                    },
-                    grid: {
-                        borderColor: '#e7e7e7'
-                    },
-                    yaxis: {
-                        title: {
-                            text: 'Nombre de matériels'
-                        }
-                    },
-                    responsive: [{
-                        breakpoint: 480,
-                        options: {
-                            chart: {
-                                height: 300
-                            }
-                        }
-                    }]
-                }).render();
+                    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+                });
             }
         });
     </script>

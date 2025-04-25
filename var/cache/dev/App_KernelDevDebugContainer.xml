@@ -27,6 +27,7 @@
       <parameter key="MakerBundle">Symfony\Bundle\MakerBundle\MakerBundle</parameter>
       <parameter key="KnpSnappyBundle">Knp\Bundle\SnappyBundle\KnpSnappyBundle</parameter>
       <parameter key="KnpPaginatorBundle">Knp\Bundle\PaginatorBundle\KnpPaginatorBundle</parameter>
+      <parameter key="ChartjsBundle">Symfony\UX\Chartjs\ChartjsBundle</parameter>
     </parameter>
     <parameter key="kernel.bundles_metadata" type="collection">
       <parameter key="FrameworkBundle" type="collection">
@@ -84,6 +85,10 @@
       <parameter key="KnpPaginatorBundle" type="collection">
         <parameter key="path">C:\Users\ibtis\Downloads\matchupz-web-joueur\matchupz-web-joueur\vendor\knplabs\knp-paginator-bundle</parameter>
         <parameter key="namespace">Knp\Bundle\PaginatorBundle</parameter>
+      </parameter>
+      <parameter key="ChartjsBundle" type="collection">
+        <parameter key="path">C:\Users\ibtis\Downloads\matchupz-web-joueur\matchupz-web-joueur\vendor\symfony\ux-chartjs</parameter>
+        <parameter key="namespace">Symfony\UX\Chartjs</parameter>
       </parameter>
     </parameter>
     <parameter key="kernel.charset">UTF-8</parameter>
@@ -601,7 +606,7 @@
     </service>
     <service id="argument_resolver.service" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
       <tag priority="-50" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">controller.argument_value_resolver</tag>
-      <argument type="service" id=".service_locator.CtjTo1s"/>
+      <argument type="service" id=".service_locator.oTEPoHC"/>
     </service>
     <service id="argument_resolver.default" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">
       <tag priority="-100" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">controller.argument_value_resolver</tag>
@@ -1889,6 +1894,7 @@
     </service>
     <service id="asset_mapper.repository" class="Symfony\Component\AssetMapper\AssetMapperRepository">
       <argument type="collection">
+        <argument key="C:\Users\ibtis\Downloads\matchupz-web-joueur\matchupz-web-joueur\vendor\symfony\ux-chartjs\src\DependencyInjection/../../assets/dist">@symfony/ux-chartjs</argument>
         <argument key="C:\Users\ibtis\Downloads\matchupz-web-joueur\matchupz-web-joueur\vendor\symfony\ux-turbo\src\DependencyInjection/../../assets/dist">@symfony/ux-turbo</argument>
         <argument key="C:\Users\ibtis\Downloads\matchupz-web-joueur\matchupz-web-joueur\vendor\symfony\stimulus-bundle\src\DependencyInjection/../../assets/dist">@symfony/stimulus-bundle</argument>
         <argument key="assets/"></argument>
@@ -2595,6 +2601,7 @@
           <argument>C:\Users\ibtis\Downloads\matchupz-web-joueur\matchupz-web-joueur\vendor\symfony\monolog-bundle/translations</argument>
           <argument>C:\Users\ibtis\Downloads\matchupz-web-joueur\matchupz-web-joueur\vendor\symfony\maker-bundle/translations</argument>
           <argument>C:/Users/ibtis/Downloads/matchupz-web-joueur/matchupz-web-joueur/vendor/knplabs/knp-snappy-bundle/src/translations</argument>
+          <argument>C:\Users\ibtis\Downloads\matchupz-web-joueur\matchupz-web-joueur\vendor\symfony\ux-chartjs/translations</argument>
         </argument>
         <argument key="cache_vary" type="collection">
           <argument key="scanned_directories" type="collection">
@@ -2616,6 +2623,7 @@
             <argument>C:\Users\ibtis\Downloads\matchupz-web-joueur\matchupz-web-joueur\vendor\symfony\monolog-bundle/translations</argument>
             <argument>C:\Users\ibtis\Downloads\matchupz-web-joueur\matchupz-web-joueur\vendor\symfony\maker-bundle/translations</argument>
             <argument>C:/Users/ibtis/Downloads/matchupz-web-joueur/matchupz-web-joueur/vendor/knplabs/knp-snappy-bundle/src/translations</argument>
+            <argument>C:\Users\ibtis\Downloads\matchupz-web-joueur\matchupz-web-joueur\vendor\symfony\ux-chartjs/translations</argument>
           </argument>
         </argument>
       </argument>
@@ -3593,7 +3601,7 @@
     </service>
     <service id="argument_resolver.not_tagged_controller" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
       <tag name="controller.argument_value_resolver" priority="-200"/>
-      <argument type="service" id=".service_locator.CtjTo1s"/>
+      <argument type="service" id=".service_locator.oTEPoHC"/>
     </service>
     <service id="debug.log_processor" class="Symfony\Bridge\Monolog\Processor\DebugProcessor">
       <tag name="kernel.reset" method="reset"/>
@@ -6017,6 +6025,9 @@
         <argument type="service" id="knp_paginator.twig.extension.pagination"/>
       </call>
       <call method="addExtension">
+        <argument type="service" id="chartjs.twig_extension"/>
+      </call>
+      <call method="addExtension">
         <argument type="service" id="stimulus.twig_extension"/>
       </call>
       <call method="addGlobal">
@@ -7425,6 +7436,11 @@
       <argument>page</argument>
       <argument>false</argument>
     </service>
+    <service id="chartjs.builder" class="Symfony\UX\Chartjs\Builder\ChartBuilder"/>
+    <service id="chartjs.twig_extension" class="Symfony\UX\Chartjs\Twig\ChartExtension">
+      <tag name="twig.extension"/>
+      <argument type="service" id="stimulus.helper"/>
+    </service>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\ClubController" class="App\Controller\ClubController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\ClubController" class="App\Controller\ClubController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\ClubController" class="App\Controller\ClubController" autowire="true" autoconfigure="true" abstract="true"/>
@@ -8150,6 +8166,12 @@
         <argument key="slugger" type="service_closure" id="slugger"/>
       </argument>
     </service>
+    <service id=".service_locator.5CHJ4Li" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="chartBuilder" type="service_closure" id="chartjs.builder"/>
+      </argument>
+    </service>
     <service id=".service_locator.p._PKR9" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection"/>
@@ -8234,7 +8256,7 @@
         <argument key="sportRepository" type="service_closure" id="App\Repository\SportRepository"/>
       </argument>
     </service>
-    <service id=".service_locator.CtjTo1s" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.oTEPoHC" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\ClubController::exportCsv" type="service_closure" id=".service_locator.eOJlB0r"/>
@@ -8290,7 +8312,7 @@
         <argument key="App\Controller\MaterielController::indexF" type="service_closure" id=".service_locator.RCuzfnb"/>
         <argument key="App\Controller\MaterielController::new" type="service_closure" id=".service_locator.LNwsF6h"/>
         <argument key="App\Controller\MaterielController::scan" type="service_closure" id=".service_locator.jnu2S_s"/>
-        <argument key="App\Controller\MaterielController::statistics" type="service_closure" id=".service_locator.jnu2S_s"/>
+        <argument key="App\Controller\MaterielController::statistics" type="service_closure" id=".service_locator.5CHJ4Li"/>
         <argument key="App\Controller\PerformanceJoueurController::delete" type="service_closure" id=".service_locator.PNlbJGO"/>
         <argument key="App\Controller\PerformanceJoueurController::edit" type="service_closure" id=".service_locator.PNlbJGO"/>
         <argument key="App\Controller\PerformanceJoueurController::index" type="service_closure" id=".service_locator.CrEgygo"/>
@@ -8367,7 +8389,7 @@
         <argument key="App\Controller\MaterielController:indexF" type="service_closure" id=".service_locator.RCuzfnb"/>
         <argument key="App\Controller\MaterielController:new" type="service_closure" id=".service_locator.LNwsF6h"/>
         <argument key="App\Controller\MaterielController:scan" type="service_closure" id=".service_locator.jnu2S_s"/>
-        <argument key="App\Controller\MaterielController:statistics" type="service_closure" id=".service_locator.jnu2S_s"/>
+        <argument key="App\Controller\MaterielController:statistics" type="service_closure" id=".service_locator.5CHJ4Li"/>
         <argument key="App\Controller\PerformanceJoueurController:delete" type="service_closure" id=".service_locator.PNlbJGO"/>
         <argument key="App\Controller\PerformanceJoueurController:edit" type="service_closure" id=".service_locator.PNlbJGO"/>
         <argument key="App\Controller\PerformanceJoueurController:index" type="service_closure" id=".service_locator.CrEgygo"/>
@@ -10704,9 +10726,10 @@
     <service id="Knp\Snappy\Image" alias="knp_snappy.image"/>
     <service id="Knp\Component\Pager\PaginatorInterface" alias="knp_paginator"/>
     <service id="Knp\Component\Pager\ArgumentAccess\ArgumentAccessInterface" alias="Knp\Component\Pager\ArgumentAccess\RequestArgumentAccess"/>
+    <service id="Symfony\UX\Chartjs\Builder\ChartBuilderInterface" alias="chartjs.builder"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.w7.f4fT" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.CtjTo1s"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.oTEPoHC"/>
     <service id="doctrine.id_generator_locator" alias=".service_locator.KLVvNIq"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface $requestLogger" alias="monolog.logger.request"/>
@@ -10749,7 +10772,7 @@
     <service id=".service_locator.vYOHL0D" alias=".service_locator.jpL5_4q"/>
     <service id=".service_locator.X9gG0Wi" alias=".service_locator.geVFa8t"/>
     <service id=".service_locator.RwykrWv" alias=".service_locator.s2P9uaA"/>
-    <service id=".service_locator.x1BFIO9" alias=".service_locator.CtjTo1s"/>
+    <service id=".service_locator._7LMcZO" alias=".service_locator.oTEPoHC"/>
     <service id=".service_locator.BFrsqsn" alias=".service_locator.F9PKc.7"/>
     <service id=".service_locator.I5D3BSa" alias=".service_locator.qLN7qz3"/>
     <service id=".service_locator.XtmiKbi" alias=".service_locator.MfxSDRP"/>
@@ -10802,6 +10825,7 @@
     <service id=".service_locator.QyKL_NR" alias=".service_locator.jnu2S_s"/>
     <service id=".service_locator.Y5_X5BF" alias=".service_locator.RCuzfnb"/>
     <service id=".service_locator.lUJI3Z8" alias=".service_locator.LNwsF6h"/>
+    <service id=".service_locator.UUkkutG" alias=".service_locator.5CHJ4Li"/>
     <service id=".service_locator.W17v7YY" alias=".service_locator.DBl8PzK"/>
     <service id=".service_locator.sZiCqRZ" alias=".service_locator.NgvlNzc"/>
     <service id=".service_locator.LXe3GOx" alias=".service_locator.CrEgygo"/>
