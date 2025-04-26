@@ -32,6 +32,7 @@ class __TwigTemplate_8a343a44601c68e081c748e7336279a5 extends Template
         $this->blocks = [
             'searchbar' => [$this, 'block_searchbar'],
             'title' => [$this, 'block_title'],
+            'head' => [$this, 'block_head'],
             'content' => [$this, 'block_content'],
             'widgets' => [$this, 'block_widgets'],
             'javascripts' => [$this, 'block_javascripts'],
@@ -112,7 +113,38 @@ class __TwigTemplate_8a343a44601c68e081c748e7336279a5 extends Template
         yield from [];
     }
 
-    // line 9
+    // line 8
+    /**
+     * @return iterable<null|scalar|\Stringable>
+     */
+    public function block_head(array $context, array $blocks = []): iterable
+    {
+        $macros = $this->macros;
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2 = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->enter($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "head"));
+
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "head"));
+
+        // line 9
+        yield "    ";
+        yield from $this->yieldParentBlock("head", $context, $blocks);
+        yield "
+    <meta name=\"csrf-token\" content=\"";
+        // line 10
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderCsrfToken("slack_notify"), "html", null, true);
+        yield "\">
+";
+        
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
+
+        
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->leave($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof);
+
+        yield from [];
+    }
+
+    // line 13
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -125,7 +157,7 @@ class __TwigTemplate_8a343a44601c68e081c748e7336279a5 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "content"));
 
-        // line 10
+        // line 14
         yield "<div class=\"content-wrapper\">
     <div class=\"container-xxl flex-grow-1 container-p-y\">
         <!-- Congratulatory and Moyenne par Type Widgets -->
@@ -139,8 +171,8 @@ class __TwigTemplate_8a343a44601c68e081c748e7336279a5 extends Template
                                 <h5 class=\"card-title text-primary\">Félicitations Cher Responsable Logistique ! 🎉</h5>
                                 <p class=\"mb-4\">
                                     Vous avez ajouté <span class=\"fw-bold\">";
-        // line 22
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["totalMateriels"]) || array_key_exists("totalMateriels", $context) ? $context["totalMateriels"] : (function () { throw new RuntimeError('Variable "totalMateriels" does not exist.', 22, $this->source); })()), "html", null, true);
+        // line 26
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["totalMateriels"]) || array_key_exists("totalMateriels", $context) ? $context["totalMateriels"] : (function () { throw new RuntimeError('Variable "totalMateriels" does not exist.', 26, $this->source); })()), "html", null, true);
         yield "</span> matériels aujourd'hui. Consultez votre profil pour les mises à jour.
                                 </p>
                                 <a href=\"javascript:;\" class=\"btn btn-sm btn-outline-primary\">Voir Profil</a>
@@ -150,7 +182,7 @@ class __TwigTemplate_8a343a44601c68e081c748e7336279a5 extends Template
                             <div class=\"card-body pb-0 px-0 px-md-4\">
                                 <img
                                     src=\"";
-        // line 30
+        // line 34
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("img/illustrations/man-with-laptop-light.png"), "html", null, true);
         yield "\"
                                     height=\"140\"
@@ -171,7 +203,7 @@ class __TwigTemplate_8a343a44601c68e081c748e7336279a5 extends Template
                             <div class=\"avatar flex-shrink-0\">
                                 <img
                                     src=\"";
-        // line 48
+        // line 52
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("img/icons/unicons/chart.png"), "html", null, true);
         yield "\"
                                     alt=\"Average per Type\"
@@ -181,8 +213,8 @@ class __TwigTemplate_8a343a44601c68e081c748e7336279a5 extends Template
                         </div>
                         <span class=\"fw-semibold d-block mb-1\">Moyenne par Type</span>
                         <h3 class=\"card-title mb-2\">";
-        // line 55
-        yield (((Twig\Extension\CoreExtension::length($this->env->getCharset(), (isset($context["typeDistribution"]) || array_key_exists("typeDistribution", $context) ? $context["typeDistribution"] : (function () { throw new RuntimeError('Variable "typeDistribution" does not exist.', 55, $this->source); })())) > 0)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::round(((isset($context["totalMateriels"]) || array_key_exists("totalMateriels", $context) ? $context["totalMateriels"] : (function () { throw new RuntimeError('Variable "totalMateriels" does not exist.', 55, $this->source); })()) / Twig\Extension\CoreExtension::length($this->env->getCharset(), (isset($context["typeDistribution"]) || array_key_exists("typeDistribution", $context) ? $context["typeDistribution"] : (function () { throw new RuntimeError('Variable "typeDistribution" does not exist.', 55, $this->source); })()))), 1), "html", null, true)) : (0));
+        // line 59
+        yield (((Twig\Extension\CoreExtension::length($this->env->getCharset(), (isset($context["typeDistribution"]) || array_key_exists("typeDistribution", $context) ? $context["typeDistribution"] : (function () { throw new RuntimeError('Variable "typeDistribution" does not exist.', 59, $this->source); })())) > 0)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::round(((isset($context["totalMateriels"]) || array_key_exists("totalMateriels", $context) ? $context["totalMateriels"] : (function () { throw new RuntimeError('Variable "totalMateriels" does not exist.', 59, $this->source); })()) / Twig\Extension\CoreExtension::length($this->env->getCharset(), (isset($context["typeDistribution"]) || array_key_exists("typeDistribution", $context) ? $context["typeDistribution"] : (function () { throw new RuntimeError('Variable "typeDistribution" does not exist.', 59, $this->source); })()))), 1), "html", null, true)) : (0));
         yield "</h3>
                         <small class=\"text-muted\">Matériels par type</small>
                     </div>
@@ -191,20 +223,20 @@ class __TwigTemplate_8a343a44601c68e081c748e7336279a5 extends Template
         </div>
 
         ";
-        // line 62
+        // line 66
         yield from $this->unwrap()->yieldBlock('widgets', $context, $blocks);
-        // line 138
+        // line 142
         yield "
-        <!-- Toast Notification for Low Quantity -->
+        <!-- Slack Notification Toast -->
         <div class=\"position-fixed top-0 end-0 p-3\" style=\"z-index: 1050;\">
-            <div id=\"lowQuantityToast\" class=\"toast hide bg-danger text-white\" role=\"alert\" aria-live=\"assertive\" aria-atomic=\"true\" data-bs-delay=\"5000\">
-                <div class=\"toast-header bg-danger text-white\">
-                    <i class=\"bx bx-bell me-2\"></i>
-                    <strong class=\"me-auto\">Alerte Stock</strong>
+            <div id=\"slackNotificationToast\" class=\"toast hide\" role=\"alert\" aria-live=\"assertive\" aria-atomic=\"true\" data-bs-delay=\"5000\">
+                <div class=\"toast-header bg-success text-white\">
+                    <i class=\"bx bx-check-circle me-2\"></i>
+                    <strong class=\"me-auto\">Notification envoyée</strong>
                     <button type=\"button\" class=\"btn-close btn-close-white\" data-bs-dismiss=\"toast\" aria-label=\"Close\"></button>
                 </div>
                 <div class=\"toast-body\">
-                    La quantité de certains matériels est inférieure à 5. Veuillez commander de nouveaux matériaux.
+                    La notification Slack a été envoyée avec succès !
                 </div>
             </div>
         </div>
@@ -217,24 +249,23 @@ class __TwigTemplate_8a343a44601c68e081c748e7336279a5 extends Template
                         <h5 class=\"modal-title\" id=\"barcodeScannerModalLabel\">Scanner Code-barres</h5>
                         <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"modal\" aria-label=\"Close\"></button>
                     </div>
-                    <!-- Dans votre modal -->
-<div class=\"modal-body\">
-    <div class=\"scanner-container\">
-        <div id=\"scanner-video\"></div>
-        <div class=\"scanner-overlay\"></div>
-    </div>
-    <div id=\"scanner-result\">
-        <div class=\"placeholder-text\">
-            <i class=\"bx bx-barcode\"></i> Positionnez le code-barres dans le cadre
-        </div>
-    </div>
-</div>
-<div class=\"modal-footer\">
-    <button type=\"button\" class=\"btn btn-secondary\" data-bs-dismiss=\"modal\">Fermer</button>
-    <button type=\"button\" class=\"btn btn-primary\" onclick=\"resetScanner()\">
-        <i class=\"bx bx-refresh\"></i> Nouveau scan
-    </button>
-</div>
+                    <div class=\"modal-body\">
+                        <div class=\"scanner-container\">
+                            <div id=\"scanner-video\"></div>
+                            <div class=\"scanner-overlay\"></div>
+                        </div>
+                        <div id=\"scanner-result\">
+                            <div class=\"placeholder-text\">
+                                <i class=\"bx bx-barcode\"></i> Positionnez le code-barres dans le cadre
+                            </div>
+                        </div>
+                    </div>
+                    <div class=\"modal-footer\">
+                        <button type=\"button\" class=\"btn btn-secondary\" data-bs-dismiss=\"modal\">Fermer</button>
+                        <button type=\"button\" class=\"btn btn-primary\" onclick=\"resetScanner()\">
+                            <i class=\"bx bx-refresh\"></i> Nouveau scan
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -243,15 +274,15 @@ class __TwigTemplate_8a343a44601c68e081c748e7336279a5 extends Template
             <h5 class=\"card-header d-flex justify-content-between align-items-center\">
                 <div class=\"d-flex align-items-center\">
                     ";
-        // line 187
+        // line 190
         yield "                    <form class=\"d-flex\" method=\"get\" action=\"";
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_materiel_index");
         yield "\">
                         <div class=\"input-group\">
                             <span class=\"input-group-text\"><i class=\"bx bx-search\"></i></span>
                             <input type=\"text\" class=\"form-control\" name=\"search\" placeholder=\"Rechercher nom, type, état...\" value=\"";
-        // line 190
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["searchTerm"]) || array_key_exists("searchTerm", $context) ? $context["searchTerm"] : (function () { throw new RuntimeError('Variable "searchTerm" does not exist.', 190, $this->source); })()), "html", null, true);
+        // line 193
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["searchTerm"]) || array_key_exists("searchTerm", $context) ? $context["searchTerm"] : (function () { throw new RuntimeError('Variable "searchTerm" does not exist.', 193, $this->source); })()), "html", null, true);
         yield "\">
                         </div>
                     </form>
@@ -259,34 +290,34 @@ class __TwigTemplate_8a343a44601c68e081c748e7336279a5 extends Template
 
                 <div class=\"d-flex align-items-center\">
                     ";
-        // line 197
+        // line 200
         yield "                    <button type=\"button\" class=\"btn btn-primary me-2\" data-bs-toggle=\"modal\" data-bs-target=\"#barcodeScannerModal\">
                         <i class=\"bx bx-barcode me-1\"></i> Scanner
                     </button>
                     ";
-        // line 201
+        // line 204
         yield "                    <div class=\"btn-group me-2\">
                         <button type=\"button\" class=\"btn btn-outline-secondary dropdown-toggle\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\">
                             Filtrer
                         </button>
                         <ul class=\"dropdown-menu\">
                             <li><a class=\"dropdown-item\" href=\"";
-        // line 206
+        // line 209
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_materiel_index", ["filter" => "nom"]);
         yield "\">Par Nom</a></li>
                             <li><a class=\"dropdown-item\" href=\"";
-        // line 207
+        // line 210
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_materiel_index", ["filter" => "type"]);
         yield "\">Par Type</a></li>
                             <li><a class=\"dropdown-item\" href=\"";
-        // line 208
+        // line 211
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_materiel_index", ["filter" => "etat"]);
         yield "\">Par État</a></li>
                         </ul>
                     </div>
 
                     ";
-        // line 213
+        // line 216
         yield "                    <a href=\"";
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_materiel_statistics");
         yield "\" class=\"btn btn-dark me-2\">
@@ -294,7 +325,7 @@ class __TwigTemplate_8a343a44601c68e081c748e7336279a5 extends Template
                     </a>
 
                     ";
-        // line 218
+        // line 221
         yield "                    <a href=\"";
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_materiel_new");
         yield "\" class=\"btn btn-success me-2\">
@@ -302,7 +333,7 @@ class __TwigTemplate_8a343a44601c68e081c748e7336279a5 extends Template
                     </a>
 
                     ";
-        // line 223
+        // line 226
         yield "                    <div class=\"btn-group\">
                         <button type=\"button\" class=\"btn btn-warning dropdown-toggle\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\">
                             <i class=\"bx bx-download me-1\"></i> Exporter
@@ -310,7 +341,7 @@ class __TwigTemplate_8a343a44601c68e081c748e7336279a5 extends Template
                         <ul class=\"dropdown-menu dropdown-menu-end\" style=\"max-height: 200px; overflow-y: auto;\">
                             <li>
                                 <a class=\"dropdown-item\" href=\"";
-        // line 229
+        // line 232
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_materiel_export_excel");
         yield "\">
                                     <i class=\"bx bx-file me-1\"></i> Excel
@@ -318,7 +349,7 @@ class __TwigTemplate_8a343a44601c68e081c748e7336279a5 extends Template
                             </li>
                             <li>
                                 <a class=\"dropdown-item\" href=\"";
-        // line 234
+        // line 237
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_materiel_export_csv");
         yield "\">
                                     <i class=\"bx bx-file me-1\"></i> CSV
@@ -326,7 +357,7 @@ class __TwigTemplate_8a343a44601c68e081c748e7336279a5 extends Template
                             </li>
                             <li>
                                 <a class=\"dropdown-item\" href=\"";
-        // line 239
+        // line 242
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_materiel_export_pdf");
         yield "\">
                                     <i class=\"bx bx-file me-1\"></i> PDF
@@ -354,101 +385,112 @@ class __TwigTemplate_8a343a44601c68e081c748e7336279a5 extends Template
                     </thead>
                     <tbody>
                         ";
-        // line 264
+        // line 267
         $context['_parent'] = $context;
-        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["pagination"]) || array_key_exists("pagination", $context) ? $context["pagination"] : (function () { throw new RuntimeError('Variable "pagination" does not exist.', 264, $this->source); })()));
+        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["pagination"]) || array_key_exists("pagination", $context) ? $context["pagination"] : (function () { throw new RuntimeError('Variable "pagination" does not exist.', 267, $this->source); })()));
         $context['_iterated'] = false;
         foreach ($context['_seq'] as $context["_key"] => $context["materiel"]) {
-            // line 265
+            // line 268
             yield "                            <tr class=\"";
-            if ((CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "etat", [], "any", false, false, false, 265) == "ENDOMMAGE")) {
+            if ((CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "etat", [], "any", false, false, false, 268) == "ENDOMMAGE")) {
                 yield "materiel-endommage";
             }
-            yield "\">
+            if ((CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "quantite", [], "any", false, false, false, 268) < 5)) {
+                yield " low-stock blinking";
+            }
+            yield "\"";
+            if ((CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "quantite", [], "any", false, false, false, 268) < 5)) {
+                yield " style=\"background-color: #ffb3b3 !important; color: #a30000 !important; animation: blink-pastel 1s linear infinite !important;\"";
+            }
+            yield ">
                                 <td class=\"text-center align-middle\">
                                     ";
-            // line 267
-            if (CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "image", [], "any", false, false, false, 267)) {
-                // line 268
+            // line 270
+            if (CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "image", [], "any", false, false, false, 270)) {
+                // line 271
                 yield "                                        <img src=\"";
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("uploads/materiels/" . CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "image", [], "any", false, false, false, 268))), "html", null, true);
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("Uploads/materiels/" . CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "image", [], "any", false, false, false, 271))), "html", null, true);
                 yield "\" alt=\"";
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "nom", [], "any", false, false, false, 268), "html", null, true);
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "nom", [], "any", false, false, false, 271), "html", null, true);
                 yield "\" class=\"rounded-circle mx-auto d-block\" style=\"width: 45px; height: 45px; object-fit: cover;\">
                                     ";
             } else {
-                // line 270
+                // line 273
                 yield "                                        <img src=\"";
                 yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("img/default-material.png"), "html", null, true);
                 yield "\" alt=\"Image par défaut\" class=\"rounded-circle mx-auto d-block\" style=\"width: 45px; height: 45px; object-fit: cover;\">
                                     ";
             }
-            // line 272
+            // line 275
             yield "                                </td>
                                 <td>";
-            // line 273
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "nom", [], "any", false, false, false, 273), "html", null, true);
+            // line 276
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "nom", [], "any", false, false, false, 276), "html", null, true);
             yield "</td>
                                 <td>
                                     <i class=\"bx bx-category me-1\"></i>
                                     ";
-            // line 276
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "type", [], "any", false, false, false, 276), "html", null, true);
+            // line 279
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "type", [], "any", false, false, false, 279), "html", null, true);
             yield "
                                 </td>
                                 <td>
                                     <i class=\"bx bx-package me-1\"></i>
                                     ";
-            // line 280
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "quantite", [], "any", false, false, false, 280), "html", null, true);
+            // line 283
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "quantite", [], "any", false, false, false, 283), "html", null, true);
             yield "
                                 </td>
                                 <td>
                                     <span class=\"badge ";
-            // line 283
-            if ((CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "etat", [], "any", false, false, false, 283) == "NEUF")) {
+            // line 286
+            if ((CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "etat", [], "any", false, false, false, 286) == "NEUF")) {
                 yield "bg-success";
-            } elseif ((CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "etat", [], "any", false, false, false, 283) == "USÉ")) {
+            } elseif ((CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "etat", [], "any", false, false, false, 286) == "USÉ")) {
                 yield "bg-warning";
             } else {
                 yield "bg-danger";
             }
-            yield "\">
+            yield "\"";
+            if ((CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "quantite", [], "any", false, false, false, 286) < 5)) {
+                yield " style=\"background: none !important; color: #a30000 !important; animation: none !important;\"";
+            }
+            yield ">
                                         <i class=\"bx ";
-            // line 284
-            if ((CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "etat", [], "any", false, false, false, 284) == "NEUF")) {
+            // line 287
+            if ((CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "etat", [], "any", false, false, false, 287) == "NEUF")) {
                 yield "bx-check-circle";
-            } elseif ((CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "etat", [], "any", false, false, false, 284) == "USÉ")) {
+            } elseif ((CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "etat", [], "any", false, false, false, 287) == "USÉ")) {
                 yield "bx-time";
             } else {
                 yield "bx-error-circle";
             }
             yield " me-1\"></i>
                                         ";
-            // line 285
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "etat", [], "any", false, false, false, 285), "html", null, true);
+            // line 288
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "etat", [], "any", false, false, false, 288), "html", null, true);
             yield "
                                     </span>
                                 </td>
                                 <td>
                                     <i class=\"bx bx-euro me-1\"></i>
                                     ";
-            // line 290
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatNumber(CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "prix", [], "any", false, false, false, 290), 2, ",", " "), "html", null, true);
+            // line 293
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatNumber(CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "prix", [], "any", false, false, false, 293), 2, ",", " "), "html", null, true);
             yield " €
                                 </td>
                                 <td>
                                     <i class=\"bx bx-barcode me-1\"></i>
                                     ";
-            // line 294
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "barcode", [], "any", false, false, false, 294), "html", null, true);
+            // line 297
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "barcode", [], "any", false, false, false, 297), "html", null, true);
             yield "
                                 </td>
                                 <td>
                                     <i class=\"bx bx-store me-1\"></i>
                                     ";
-            // line 298
-            yield ((CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "fournisseur", [], "any", false, false, false, 298)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "fournisseur", [], "any", false, false, false, 298), "nom", [], "any", false, false, false, 298), "html", null, true)) : ("N/A"));
+            // line 301
+            yield ((CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "fournisseur", [], "any", false, false, false, 301)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "fournisseur", [], "any", false, false, false, 301), "nom", [], "any", false, false, false, 301), "html", null, true)) : ("N/A"));
             yield "
                                 </td>
                                 <td>
@@ -458,24 +500,35 @@ class __TwigTemplate_8a343a44601c68e081c748e7336279a5 extends Template
                                         </button>
                                         <div class=\"dropdown-menu\">
                                             <a class=\"dropdown-item\" href=\"";
-            // line 306
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_materiel_show", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "id", [], "any", false, false, false, 306)]), "html", null, true);
+            // line 309
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_materiel_show", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "id", [], "any", false, false, false, 309)]), "html", null, true);
             yield "\">
                                                 <i class=\"bx bx-show me-1\"></i> Voir
                                             </a>
                                             <a class=\"dropdown-item\" href=\"";
-            // line 309
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_materiel_edit", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "id", [], "any", false, false, false, 309)]), "html", null, true);
+            // line 312
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_materiel_edit", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "id", [], "any", false, false, false, 312)]), "html", null, true);
             yield "\">
                                                 <i class=\"bx bx-edit-alt me-1\"></i> Modifier
                                             </a>
-                                            <form method=\"post\" action=\"";
-            // line 312
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_materiel_delete", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "id", [], "any", false, false, false, 312)]), "html", null, true);
+                                            ";
+            // line 315
+            if ((CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "quantite", [], "any", false, false, false, 315) < 5)) {
+                // line 316
+                yield "                                                <button class=\"dropdown-item notify-slack\" data-material-id=\"";
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "id", [], "any", false, false, false, 316), "html", null, true);
+                yield "\">
+                                                    <i class=\"bx bx-bell me-1\"></i> Notifier Slack
+                                                </button>
+                                            ";
+            }
+            // line 320
+            yield "                                            <form method=\"post\" action=\"";
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_materiel_delete", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "id", [], "any", false, false, false, 320)]), "html", null, true);
             yield "\" onsubmit=\"return confirm('Êtes-vous sûr de vouloir supprimer ce matériel ?');\">
                                                 <input type=\"hidden\" name=\"_token\" value=\"";
-            // line 313
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderCsrfToken(("delete" . CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "id", [], "any", false, false, false, 313))), "html", null, true);
+            // line 321
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderCsrfToken(("delete" . CoreExtension::getAttribute($this->env, $this->source, $context["materiel"], "id", [], "any", false, false, false, 321))), "html", null, true);
             yield "\">
                                                 <button type=\"submit\" class=\"dropdown-item text-danger\">
                                                     <i class=\"bx bx-trash me-1\"></i> Supprimer
@@ -488,9 +541,9 @@ class __TwigTemplate_8a343a44601c68e081c748e7336279a5 extends Template
                         ";
             $context['_iterated'] = true;
         }
-        // line 322
+        // line 330
         if (!$context['_iterated']) {
-            // line 323
+            // line 331
             yield "                            <tr>
                                 <td colspan=\"9\" class=\"text-center\">Aucun matériel trouvé</td>
                             </tr>
@@ -499,45 +552,45 @@ class __TwigTemplate_8a343a44601c68e081c748e7336279a5 extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_key'], $context['materiel'], $context['_parent'], $context['_iterated']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 327
+        // line 335
         yield "                    </tbody>
                 </table>
             </div>
 
             ";
-        // line 332
+        // line 340
         yield "            <div class=\"card-footer\">
                 <nav aria-label=\"Page navigation\">
                     <ul class=\"pagination justify-content-center\">
                         ";
-        // line 335
-        if ((CoreExtension::getAttribute($this->env, $this->source, (isset($context["pagination"]) || array_key_exists("pagination", $context) ? $context["pagination"] : (function () { throw new RuntimeError('Variable "pagination" does not exist.', 335, $this->source); })()), "currentPageNumber", [], "any", false, false, false, 335) > 1)) {
-            // line 336
+        // line 343
+        if ((CoreExtension::getAttribute($this->env, $this->source, (isset($context["pagination"]) || array_key_exists("pagination", $context) ? $context["pagination"] : (function () { throw new RuntimeError('Variable "pagination" does not exist.', 343, $this->source); })()), "currentPageNumber", [], "any", false, false, false, 343) > 1)) {
+            // line 344
             yield "                            <li class=\"page-item\">
                                 <a class=\"page-link\" href=\"";
-            // line 337
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_materiel_index", ["page" => (CoreExtension::getAttribute($this->env, $this->source, (isset($context["pagination"]) || array_key_exists("pagination", $context) ? $context["pagination"] : (function () { throw new RuntimeError('Variable "pagination" does not exist.', 337, $this->source); })()), "currentPageNumber", [], "any", false, false, false, 337) - 1)]), "html", null, true);
+            // line 345
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_materiel_index", ["page" => (CoreExtension::getAttribute($this->env, $this->source, (isset($context["pagination"]) || array_key_exists("pagination", $context) ? $context["pagination"] : (function () { throw new RuntimeError('Variable "pagination" does not exist.', 345, $this->source); })()), "currentPageNumber", [], "any", false, false, false, 345) - 1)]), "html", null, true);
             yield "\" aria-label=\"Previous\">
                                     <i class=\"bx bx-chevron-left\"></i>
                                 </a>
                             </li>
                         ";
         }
-        // line 342
+        // line 350
         yield "                        
                         ";
-        // line 343
+        // line 351
         $context['_parent'] = $context;
-        $context['_seq'] = CoreExtension::ensureTraversable(range(1, CoreExtension::getAttribute($this->env, $this->source, (isset($context["pagination"]) || array_key_exists("pagination", $context) ? $context["pagination"] : (function () { throw new RuntimeError('Variable "pagination" does not exist.', 343, $this->source); })()), "getPageCount", [], "method", false, false, false, 343)));
+        $context['_seq'] = CoreExtension::ensureTraversable(range(1, CoreExtension::getAttribute($this->env, $this->source, (isset($context["pagination"]) || array_key_exists("pagination", $context) ? $context["pagination"] : (function () { throw new RuntimeError('Variable "pagination" does not exist.', 351, $this->source); })()), "getPageCount", [], "method", false, false, false, 351)));
         foreach ($context['_seq'] as $context["_key"] => $context["i"]) {
-            // line 344
+            // line 352
             yield "                            <li class=\"page-item ";
-            if (($context["i"] == CoreExtension::getAttribute($this->env, $this->source, (isset($context["pagination"]) || array_key_exists("pagination", $context) ? $context["pagination"] : (function () { throw new RuntimeError('Variable "pagination" does not exist.', 344, $this->source); })()), "currentPageNumber", [], "any", false, false, false, 344))) {
+            if (($context["i"] == CoreExtension::getAttribute($this->env, $this->source, (isset($context["pagination"]) || array_key_exists("pagination", $context) ? $context["pagination"] : (function () { throw new RuntimeError('Variable "pagination" does not exist.', 352, $this->source); })()), "currentPageNumber", [], "any", false, false, false, 352))) {
                 yield "active";
             }
             yield "\">
                                 <a class=\"page-link\" href=\"";
-            // line 345
+            // line 353
             yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_materiel_index", ["page" => $context["i"]]), "html", null, true);
             yield "\">";
             yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($context["i"], "html", null, true);
@@ -548,38 +601,38 @@ class __TwigTemplate_8a343a44601c68e081c748e7336279a5 extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_key'], $context['i'], $context['_parent']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 348
+        // line 356
         yield "                        
                         ";
-        // line 349
-        if ((CoreExtension::getAttribute($this->env, $this->source, (isset($context["pagination"]) || array_key_exists("pagination", $context) ? $context["pagination"] : (function () { throw new RuntimeError('Variable "pagination" does not exist.', 349, $this->source); })()), "currentPageNumber", [], "any", false, false, false, 349) < CoreExtension::getAttribute($this->env, $this->source, (isset($context["pagination"]) || array_key_exists("pagination", $context) ? $context["pagination"] : (function () { throw new RuntimeError('Variable "pagination" does not exist.', 349, $this->source); })()), "getPageCount", [], "method", false, false, false, 349))) {
-            // line 350
+        // line 357
+        if ((CoreExtension::getAttribute($this->env, $this->source, (isset($context["pagination"]) || array_key_exists("pagination", $context) ? $context["pagination"] : (function () { throw new RuntimeError('Variable "pagination" does not exist.', 357, $this->source); })()), "currentPageNumber", [], "any", false, false, false, 357) < CoreExtension::getAttribute($this->env, $this->source, (isset($context["pagination"]) || array_key_exists("pagination", $context) ? $context["pagination"] : (function () { throw new RuntimeError('Variable "pagination" does not exist.', 357, $this->source); })()), "getPageCount", [], "method", false, false, false, 357))) {
+            // line 358
             yield "                            <li class=\"page-item\">
                                 <a class=\"page-link\" href=\"";
-            // line 351
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_materiel_index", ["page" => (CoreExtension::getAttribute($this->env, $this->source, (isset($context["pagination"]) || array_key_exists("pagination", $context) ? $context["pagination"] : (function () { throw new RuntimeError('Variable "pagination" does not exist.', 351, $this->source); })()), "currentPageNumber", [], "any", false, false, false, 351) + 1)]), "html", null, true);
+            // line 359
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_materiel_index", ["page" => (CoreExtension::getAttribute($this->env, $this->source, (isset($context["pagination"]) || array_key_exists("pagination", $context) ? $context["pagination"] : (function () { throw new RuntimeError('Variable "pagination" does not exist.', 359, $this->source); })()), "currentPageNumber", [], "any", false, false, false, 359) + 1)]), "html", null, true);
             yield "\" aria-label=\"Next\">
                                     <i class=\"bx bx-chevron-right\"></i>
                                 </a>
                             </li>
                         ";
         }
-        // line 356
+        // line 364
         yield "                    </ul>
                 </nav>
                 <div class=\"text-center mt-2\">
                     <small class=\"text-muted\">
                         Page ";
-        // line 360
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["pagination"]) || array_key_exists("pagination", $context) ? $context["pagination"] : (function () { throw new RuntimeError('Variable "pagination" does not exist.', 360, $this->source); })()), "currentPageNumber", [], "any", false, false, false, 360), "html", null, true);
+        // line 368
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["pagination"]) || array_key_exists("pagination", $context) ? $context["pagination"] : (function () { throw new RuntimeError('Variable "pagination" does not exist.', 368, $this->source); })()), "currentPageNumber", [], "any", false, false, false, 368), "html", null, true);
         yield " sur ";
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["pagination"]) || array_key_exists("pagination", $context) ? $context["pagination"] : (function () { throw new RuntimeError('Variable "pagination" does not exist.', 360, $this->source); })()), "getPageCount", [], "method", false, false, false, 360), "html", null, true);
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["pagination"]) || array_key_exists("pagination", $context) ? $context["pagination"] : (function () { throw new RuntimeError('Variable "pagination" does not exist.', 368, $this->source); })()), "getPageCount", [], "method", false, false, false, 368), "html", null, true);
         yield " |
                         Total Matériels : ";
-        // line 361
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["pagination"]) || array_key_exists("pagination", $context) ? $context["pagination"] : (function () { throw new RuntimeError('Variable "pagination" does not exist.', 361, $this->source); })()), "totalItemCount", [], "any", false, false, false, 361), "html", null, true);
+        // line 369
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["pagination"]) || array_key_exists("pagination", $context) ? $context["pagination"] : (function () { throw new RuntimeError('Variable "pagination" does not exist.', 369, $this->source); })()), "totalItemCount", [], "any", false, false, false, 369), "html", null, true);
         yield "
-                    </small>
+                    </div>
                 </div>
             </div>
         </div>
@@ -595,7 +648,7 @@ class __TwigTemplate_8a343a44601c68e081c748e7336279a5 extends Template
         yield from [];
     }
 
-    // line 62
+    // line 66
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -608,7 +661,7 @@ class __TwigTemplate_8a343a44601c68e081c748e7336279a5 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "widgets"));
 
-        // line 63
+        // line 67
         yield "            <!-- Existing Widgets Section -->
             <div class=\"row\">
                 <!-- Total Materials Widget -->
@@ -624,8 +677,8 @@ class __TwigTemplate_8a343a44601c68e081c748e7336279a5 extends Template
                             </div>
                             <span class=\"fw-semibold d-block mb-1\">Total Matériels</span>
                             <h3 class=\"card-title mb-2\">";
-        // line 77
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["totalMateriels"]) || array_key_exists("totalMateriels", $context) ? $context["totalMateriels"] : (function () { throw new RuntimeError('Variable "totalMateriels" does not exist.', 77, $this->source); })()), "html", null, true);
+        // line 81
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["totalMateriels"]) || array_key_exists("totalMateriels", $context) ? $context["totalMateriels"] : (function () { throw new RuntimeError('Variable "totalMateriels" does not exist.', 81, $this->source); })()), "html", null, true);
         yield "</h3>
                             <small class=\"text-success fw-semibold\"><i class=\"bx bx-up-arrow-alt\"></i> Mis à jour aujourd'hui</small>
                         </div>
@@ -645,8 +698,8 @@ class __TwigTemplate_8a343a44601c68e081c748e7336279a5 extends Template
                             </div>
                             <span class=\"fw-semibold d-block mb-1\">Types uniques</span>
                             <h3 class=\"card-title mb-2\">";
-        // line 95
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::length($this->env->getCharset(), (isset($context["typeDistribution"]) || array_key_exists("typeDistribution", $context) ? $context["typeDistribution"] : (function () { throw new RuntimeError('Variable "typeDistribution" does not exist.', 95, $this->source); })())), "html", null, true);
+        // line 99
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::length($this->env->getCharset(), (isset($context["typeDistribution"]) || array_key_exists("typeDistribution", $context) ? $context["typeDistribution"] : (function () { throw new RuntimeError('Variable "typeDistribution" does not exist.', 99, $this->source); })())), "html", null, true);
         yield "</h3>
                             <small class=\"text-muted\">Catégories de matériel</small>
                         </div>
@@ -666,8 +719,8 @@ class __TwigTemplate_8a343a44601c68e081c748e7336279a5 extends Template
                             </div>
                             <span class=\"fw-semibold d-block mb-1\">Matériels neufs</span>
                             <h3 class=\"card-title mb-2\">";
-        // line 113
-        yield (((CoreExtension::getAttribute($this->env, $this->source, ($context["stateDistribution"] ?? null), "NEUF", [], "array", true, true, false, 113) &&  !(null === CoreExtension::getAttribute($this->env, $this->source, (isset($context["stateDistribution"]) || array_key_exists("stateDistribution", $context) ? $context["stateDistribution"] : (function () { throw new RuntimeError('Variable "stateDistribution" does not exist.', 113, $this->source); })()), "NEUF", [], "array", false, false, false, 113)))) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["stateDistribution"]) || array_key_exists("stateDistribution", $context) ? $context["stateDistribution"] : (function () { throw new RuntimeError('Variable "stateDistribution" does not exist.', 113, $this->source); })()), "NEUF", [], "array", false, false, false, 113), "html", null, true)) : (0));
+        // line 117
+        yield (((CoreExtension::getAttribute($this->env, $this->source, ($context["stateDistribution"] ?? null), "NEUF", [], "array", true, true, false, 117) &&  !(null === CoreExtension::getAttribute($this->env, $this->source, (isset($context["stateDistribution"]) || array_key_exists("stateDistribution", $context) ? $context["stateDistribution"] : (function () { throw new RuntimeError('Variable "stateDistribution" does not exist.', 117, $this->source); })()), "NEUF", [], "array", false, false, false, 117)))) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["stateDistribution"]) || array_key_exists("stateDistribution", $context) ? $context["stateDistribution"] : (function () { throw new RuntimeError('Variable "stateDistribution" does not exist.', 117, $this->source); })()), "NEUF", [], "array", false, false, false, 117), "html", null, true)) : (0));
         yield "</h3>
                             <small class=\"text-muted\">En parfait état</small>
                         </div>
@@ -687,8 +740,8 @@ class __TwigTemplate_8a343a44601c68e081c748e7336279a5 extends Template
                             </div>
                             <span class=\"fw-semibold d-block mb-1\">Valeur totale</span>
                             <h3 class=\"card-title mb-2\">";
-        // line 131
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatNumber((isset($context["inventoryValue"]) || array_key_exists("inventoryValue", $context) ? $context["inventoryValue"] : (function () { throw new RuntimeError('Variable "inventoryValue" does not exist.', 131, $this->source); })()), 2, ",", " "), "html", null, true);
+        // line 135
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatNumber((isset($context["inventoryValue"]) || array_key_exists("inventoryValue", $context) ? $context["inventoryValue"] : (function () { throw new RuntimeError('Variable "inventoryValue" does not exist.', 135, $this->source); })()), 2, ",", " "), "html", null, true);
         yield " €</h3>
                             <small class=\"text-muted\">Valeur du stock</small>
                         </div>
@@ -705,7 +758,7 @@ class __TwigTemplate_8a343a44601c68e081c748e7336279a5 extends Template
         yield from [];
     }
 
-    // line 370
+    // line 378
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -718,76 +771,131 @@ class __TwigTemplate_8a343a44601c68e081c748e7336279a5 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "javascripts"));
 
-        // line 371
-        yield "  ";
+        // line 379
+        yield "    ";
         yield from $this->yieldParentBlock("javascripts", $context, $blocks);
         yield "
-  <script>
-    console.log('AJAX search script loaded');
-    const baseUrl = \"";
-        // line 374
+    <script>
+        console.log('AJAX search script loaded');
+        const baseUrl = \"";
+        // line 382
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_materiel_search");
         yield "\";
-    console.log('Base search URL:', baseUrl);
-    const input = document.querySelector('input[name=\"search\"]');
-    const tbody = document.querySelector('#materielsTable tbody');
-    if (input && tbody) {
-      let timeout;
-      input.addEventListener('input', e => {
-        clearTimeout(timeout);
-        timeout = setTimeout(async () => {
-          const term = e.target.value.trim();
-          console.log('Recherche AJAX:', term);
-          try {
-            const res = await fetch(baseUrl + \"?term=\" + encodeURIComponent(term), {
-              headers: { 'X-Requested-With': 'XMLHttpRequest', 'Accept': 'application/json' }
+        console.log('Base search URL:', baseUrl);
+        const input = document.querySelector('input[name=\"search\"]');
+        const tbody = document.querySelector('#materielsTable tbody');
+        if (input && tbody) {
+            let timeout;
+            input.addEventListener('input', e => {
+                clearTimeout(timeout);
+                timeout = setTimeout(async () => {
+                    const term = e.target.value.trim();
+                    console.log('Recherche AJAX:', term);
+                    try {
+                        const res = await fetch(baseUrl + \"?term=\" + encodeURIComponent(term), {
+                            headers: { 'X-Requested-With': 'XMLHttpRequest', 'Accept': 'application/json' }
+                        });
+                        if (!res.ok) throw new Error(`HTTP status \${res.status}`);
+                        const data = await res.json();
+                        ";
+        // line 438
+        yield "
+                        tbody.innerHTML = data.length
+                            ? data.map(m => `
+                                <tr class=\"\${m.etat === 'ENDOMMAGE' ? 'materiel-endommage' : ''} \${m.quantite < 5 ? 'low-stock' : ''}\">
+                                    <td class=\"text-center align-middle\">
+                                        <img src=\"\${m.image ? '/Uploads/materiels/' + m.image : '/img/default-material.png'}\" alt=\"\${m.nom}\" class=\"rounded-circle mx-auto d-block\" style=\"width:45px;height:45px;object-fit:cover;\">
+                                    </td>
+                                    <td>\${m.nom}</td>
+                                    <td><i class=\"bx bx-category me-1\"></i>\${m.type}</td>
+                                    <td><i class=\"bx bx-package me-1\"></i>\${m.quantite}</td>
+                                    <td><span class=\"badge \${m.etat === 'NEUF' ? 'bg-success' : m.etat === 'USÉ' ? 'bg-warning' : 'bg-danger'}\"><i class=\"bx \${m.etat === 'NEUF' ? 'bx-check-circle' : m.etat === 'USÉ' ? 'bx-time' : 'bx-error-circle'} me-1\"></i>\${m.etat}</span></td>
+                                    <td><i class=\"bx bx-euro me-1\"></i>\${parseFloat(m.prix).toFixed(2)} €</td>
+                                    <td><i class=\"bx bx-barcode me-1\"></i>\${m.barcode}</td>
+                                    <td><i class=\"bx bx-store me-1\"></i>\${m.fournisseur || 'N/A'}</td>
+                                    <td>
+                                        <div class=\"dropdown\">
+                                            <button type=\"button\" class=\"btn p-0 dropdown-toggle hide-arrow\" data-bs-toggle=\"dropdown\">
+                                                <i class=\"bx bx-dots-vertical-rounded\"></i>
+                                            </button>
+                                            <div class=\"dropdown-menu\">
+                                                <a class=\"dropdown-item\" href=\"/materiel/\${m.id}\">
+                                                    <i class=\"bx bx-show me-1\"></i> Voir
+                                                </a>
+                                                <a class=\"dropdown-item\" href=\"/materiel/\${m.id}/edit\">
+                                                    <i class=\"bx bx-edit-alt me-1\"></i> Modifier
+                                                </a>
+                                                \${m.quantite < 5 ? `<button class=\"dropdown-item notify-slack\" data-material-id=\"\${m.id}\"><i class=\"bx bx-bell me-1\"></i> Notifier Slack</button>` : ''}
+                                                <form method=\"post\" action=\"/materiel/\${m.id}\" onsubmit=\"return confirm('Êtes-vous sûr de vouloir supprimer ce matériel ?');\">
+                                                    <input type=\"hidden\" name=\"_token\" value=\"\${m.deleteToken}\">
+                                                    <button type=\"submit\" class=\"dropdown-item text-danger\">
+                                                        <i class=\"bx bx-trash me-1\"></i> Supprimer
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            `).join('')
+                            : `<tr><td colspan=\"9\" class=\"text-center\">Aucun résultat</td></tr>`;
+                        ";
+        yield "
+                    } catch (err) {
+                        console.error('Erreur AJAX:', err);
+                        tbody.innerHTML = `<tr><td colspan=\"9\" class=\"text-center\">Erreur lors de la recherche</td></tr>`;
+                    }
+                }, 300);
             });
-            if (!res.ok) throw new Error(`HTTP status \${res.status}`);
-            const data = await res.json();
-            tbody.innerHTML = data.length
-              ? data.map(m => `
-                  <tr>
-                    <td class=\"text-center align-middle\">
-                      <img src=\"\${m.image?'/uploads/materiels/'+m.image:'/img/default-material.png'}\" class=\"rounded-circle mx-auto d-block\" style=\"width:45px;height:45px;object-fill:cover;\">
-                    </td>
-                    <td>\${m.nom}</td>
-                    <td><i class=\"bx bx-category me-1\"></i>\${m.type}</td>
-                    <td><i class=\"bx bx-package me-1\"></i>\${m.quantite}</td>
-                    <td><span class=\"badge \${m.etat==='NEUF'?'bg-success':m.etat==='USÉ'?'bg-warning':'bg-danger'}\"><i class=\"bx \${m.etat==='NEUF'?'bx-check-circle':m.etat==='USÉ'?'bx-time':'bx-error-circle'} me-1\"></i>\${m.etat}</span></td>
-                    <td><i class=\"bx bx-euro me-1\"></i>\${parseFloat(m.prix).toFixed(2)} €</td>
-                    <td><i class=\"bx bx-barcode me-1\"></i>\${m.barcode}</td>
-                    <td><i class=\"bx bx-store me-1\"></i>\${m.fournisseur||'N/A'}</td>
-                    <td>
-                        <div class=\"dropdown\">
-                            <button type=\"button\" class=\"btn p-0 dropdown-toggle hide-arrow\" data-bs-toggle=\"dropdown\">
-                                <i class=\"bx bx-dots-vertical-rounded\"></i>
-                            </button>
-                            <div class=\"dropdown-menu\">
-                                <a class=\"dropdown-item\" href=\"/materiel/\${m.id}\">
-                                    <i class=\"bx bx-show me-1\"></i> Voir
-                                </a>
-                                <a class=\"dropdown-item\" href=\"/materiel/\${m.id}/edit\">
-                                    <i class=\"bx bx-edit-alt me-1\"></i> Modifier
-                                </a>
-                                <form method=\"post\" action=\"/materiel/\${m.id}\" onsubmit=\"return confirm('Êtes-vous sûr de vouloir supprimer ce matériel ?');\">
-                                    <input type=\"hidden\" name=\"_token\" value=\"\${m._token}\">
-                                    <button type=\"submit\" class=\"dropdown-item text-danger\">
-                                        <i class=\"bx bx-trash me-1\"></i> Supprimer
-                                    </button>
-                                </form>
-                            </div>
-                        </div>
-                    </td>
-                  </tr>
-                `).join('')
-              : `<tr><td colspan=\"9\" class=\"text-center\">Aucun résultat</td></tr>`;
-          } catch (err) {
-            console.error('Erreur AJAX:', err);
-          }
-        }, 300);
-      });
-    }
-  </script>
+        }
+
+        // Slack notification handler
+document.querySelectorAll('.notify-slack').forEach(button => {
+    button.addEventListener('click', async function() {
+        const materialId = this.dataset.materialId;
+        const toast = new bootstrap.Toast(document.getElementById('slackNotificationToast'));
+        const csrfTokenElement = document.querySelector('meta[name=\"csrf-token\"]');
+
+        if (!csrfTokenElement) {
+            console.error('CSRF token meta tag is missing');
+            alert('Error: Missing CSRF token. Please reload the page.');
+            return;
+        }
+
+        try {
+            const response = await fetch(`/materiel/\${materialId}/notify-slack`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-Token': csrfTokenElement.content,
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            });
+            
+            const data = await response.json();
+            
+            if (!response.ok) {
+                console.error('Slack notification failed:', data);
+                alert(`Error: \${data.message || 'Unknown error'}`);
+                return;
+            }
+            
+            toast.show();
+        } catch (error) {
+            console.error('Network error:', error);
+            alert('Network error while sending notification');
+        }
+    });
+    // Barcode scanner modal logic
+            const scannerModal = document.getElementById('barcodeScannerModal');
+            scannerModal.addEventListener('shown.bs.modal', function () {
+                initScanner('scanner-video', 'scanner-result');
+            });
+            scannerModal.addEventListener('hidden.bs.modal', function () {
+                Quagga.stop();
+                document.getElementById('scanner-result').innerText = '';
+            });
+});
+    </script>
 ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -798,7 +906,7 @@ class __TwigTemplate_8a343a44601c68e081c748e7336279a5 extends Template
         yield from [];
     }
 
-    // line 437
+    // line 497
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -811,16 +919,24 @@ class __TwigTemplate_8a343a44601c68e081c748e7336279a5 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "stylesheets"));
 
-        // line 438
+        // line 498
         yield "    ";
         yield from $this->yieldParentBlock("stylesheets", $context, $blocks);
         yield "
     <link rel=\"stylesheet\" href=\"";
-        // line 439
+        // line 499
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("css/low_quantity.css"), "html", null, true);
         yield "\">
     <style>
-        /* Fallback inline CSS */
+        /* Blinking pastel red animation for low stock */
+        @keyframes blink-pastel {
+            0%, 100% { background-color: #ffb3b3; }
+            50% { background-color: #ffdddd; }
+        }
+        tr.blinking, tr.blinking td {
+            animation: blink-pastel 1s linear infinite !important;
+        }
+    </style>
         .table#materielsTable th, .table#materielsTable td {
             width: auto;
         }
@@ -930,6 +1046,33 @@ class __TwigTemplate_8a343a44601c68e081c748e7336279a5 extends Template
             color: #566a7f;
             font-size: 0.875rem;
         }
+        
+        /* Low stock styling */
+        .low-stock {
+            background-color: #fff0f0 !important;
+            animation: pulseWarning 2s infinite;
+        }
+        
+        .low-stock:hover {
+            background-color: #ffe0e0 !important;
+        }
+        
+        @keyframes pulseWarning {
+            0% { background-color: #fff0f0; }
+            50% { background-color: #ffd0d0; }
+            100% { background-color: #fff0f0; }
+        }
+        
+        /* Slack notification button */
+        .notify-slack {
+            color: #e01e5a;
+            transition: all 0.3s;
+        }
+        
+        .notify-slack:hover {
+            background-color: #f8f1f4;
+            transform: scale(1.02);
+        }
     </style>
 ";
         
@@ -962,7 +1105,7 @@ class __TwigTemplate_8a343a44601c68e081c748e7336279a5 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  820 => 439,  815 => 438,  802 => 437,  729 => 374,  722 => 371,  709 => 370,  691 => 131,  670 => 113,  649 => 95,  628 => 77,  612 => 63,  599 => 62,  580 => 361,  574 => 360,  568 => 356,  560 => 351,  557 => 350,  555 => 349,  552 => 348,  541 => 345,  534 => 344,  530 => 343,  527 => 342,  519 => 337,  516 => 336,  514 => 335,  509 => 332,  503 => 327,  494 => 323,  492 => 322,  478 => 313,  474 => 312,  468 => 309,  462 => 306,  451 => 298,  444 => 294,  437 => 290,  429 => 285,  419 => 284,  409 => 283,  403 => 280,  396 => 276,  390 => 273,  387 => 272,  381 => 270,  373 => 268,  371 => 267,  363 => 265,  358 => 264,  330 => 239,  322 => 234,  314 => 229,  306 => 223,  298 => 218,  290 => 213,  283 => 208,  279 => 207,  275 => 206,  268 => 201,  263 => 197,  254 => 190,  247 => 187,  197 => 138,  195 => 62,  185 => 55,  175 => 48,  154 => 30,  143 => 22,  129 => 10,  116 => 9,  93 => 7,  81 => 4,  68 => 3,  45 => 1,);
+        return array (  928 => 499,  923 => 498,  910 => 497,  802 => 438,  782 => 382,  775 => 379,  762 => 378,  744 => 135,  723 => 117,  702 => 99,  681 => 81,  665 => 67,  652 => 66,  633 => 369,  627 => 368,  621 => 364,  613 => 359,  610 => 358,  608 => 357,  605 => 356,  594 => 353,  587 => 352,  583 => 351,  580 => 350,  572 => 345,  569 => 344,  567 => 343,  562 => 340,  556 => 335,  547 => 331,  545 => 330,  531 => 321,  526 => 320,  518 => 316,  516 => 315,  510 => 312,  504 => 309,  493 => 301,  486 => 297,  479 => 293,  471 => 288,  461 => 287,  447 => 286,  441 => 283,  434 => 279,  428 => 276,  425 => 275,  419 => 273,  411 => 271,  409 => 270,  394 => 268,  389 => 267,  361 => 242,  353 => 237,  345 => 232,  337 => 226,  329 => 221,  321 => 216,  314 => 211,  310 => 210,  306 => 209,  299 => 204,  294 => 200,  285 => 193,  278 => 190,  229 => 142,  227 => 66,  217 => 59,  207 => 52,  186 => 34,  175 => 26,  161 => 14,  148 => 13,  135 => 10,  130 => 9,  117 => 8,  94 => 7,  82 => 4,  69 => 3,  46 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -974,6 +1117,10 @@ class __TwigTemplate_8a343a44601c68e081c748e7336279a5 extends Template
 {% endblock %}
 
 {% block title %}Liste des Matériels{% endblock %}
+{% block head %}
+    {{ parent() }}
+    <meta name=\"csrf-token\" content=\"{{ csrf_token('slack_notify') }}\">
+{% endblock %}
 
 {% block content %}
 <div class=\"content-wrapper\">
@@ -1105,16 +1252,16 @@ class __TwigTemplate_8a343a44601c68e081c748e7336279a5 extends Template
             </div>
         {% endblock %}
 
-        <!-- Toast Notification for Low Quantity -->
+        <!-- Slack Notification Toast -->
         <div class=\"position-fixed top-0 end-0 p-3\" style=\"z-index: 1050;\">
-            <div id=\"lowQuantityToast\" class=\"toast hide bg-danger text-white\" role=\"alert\" aria-live=\"assertive\" aria-atomic=\"true\" data-bs-delay=\"5000\">
-                <div class=\"toast-header bg-danger text-white\">
-                    <i class=\"bx bx-bell me-2\"></i>
-                    <strong class=\"me-auto\">Alerte Stock</strong>
+            <div id=\"slackNotificationToast\" class=\"toast hide\" role=\"alert\" aria-live=\"assertive\" aria-atomic=\"true\" data-bs-delay=\"5000\">
+                <div class=\"toast-header bg-success text-white\">
+                    <i class=\"bx bx-check-circle me-2\"></i>
+                    <strong class=\"me-auto\">Notification envoyée</strong>
                     <button type=\"button\" class=\"btn-close btn-close-white\" data-bs-dismiss=\"toast\" aria-label=\"Close\"></button>
                 </div>
                 <div class=\"toast-body\">
-                    La quantité de certains matériels est inférieure à 5. Veuillez commander de nouveaux matériaux.
+                    La notification Slack a été envoyée avec succès !
                 </div>
             </div>
         </div>
@@ -1127,24 +1274,23 @@ class __TwigTemplate_8a343a44601c68e081c748e7336279a5 extends Template
                         <h5 class=\"modal-title\" id=\"barcodeScannerModalLabel\">Scanner Code-barres</h5>
                         <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"modal\" aria-label=\"Close\"></button>
                     </div>
-                    <!-- Dans votre modal -->
-<div class=\"modal-body\">
-    <div class=\"scanner-container\">
-        <div id=\"scanner-video\"></div>
-        <div class=\"scanner-overlay\"></div>
-    </div>
-    <div id=\"scanner-result\">
-        <div class=\"placeholder-text\">
-            <i class=\"bx bx-barcode\"></i> Positionnez le code-barres dans le cadre
-        </div>
-    </div>
-</div>
-<div class=\"modal-footer\">
-    <button type=\"button\" class=\"btn btn-secondary\" data-bs-dismiss=\"modal\">Fermer</button>
-    <button type=\"button\" class=\"btn btn-primary\" onclick=\"resetScanner()\">
-        <i class=\"bx bx-refresh\"></i> Nouveau scan
-    </button>
-</div>
+                    <div class=\"modal-body\">
+                        <div class=\"scanner-container\">
+                            <div id=\"scanner-video\"></div>
+                            <div class=\"scanner-overlay\"></div>
+                        </div>
+                        <div id=\"scanner-result\">
+                            <div class=\"placeholder-text\">
+                                <i class=\"bx bx-barcode\"></i> Positionnez le code-barres dans le cadre
+                            </div>
+                        </div>
+                    </div>
+                    <div class=\"modal-footer\">
+                        <button type=\"button\" class=\"btn btn-secondary\" data-bs-dismiss=\"modal\">Fermer</button>
+                        <button type=\"button\" class=\"btn btn-primary\" onclick=\"resetScanner()\">
+                            <i class=\"bx bx-refresh\"></i> Nouveau scan
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1231,10 +1377,10 @@ class __TwigTemplate_8a343a44601c68e081c748e7336279a5 extends Template
                     </thead>
                     <tbody>
                         {% for materiel in pagination %}
-                            <tr class=\"{% if materiel.etat == 'ENDOMMAGE' %}materiel-endommage{% endif %}\">
+                            <tr class=\"{% if materiel.etat == 'ENDOMMAGE' %}materiel-endommage{% endif %}{% if materiel.quantite < 5 %} low-stock blinking{% endif %}\"{% if materiel.quantite < 5 %} style=\"background-color: #ffb3b3 !important; color: #a30000 !important; animation: blink-pastel 1s linear infinite !important;\"{% endif %}>
                                 <td class=\"text-center align-middle\">
                                     {% if materiel.image %}
-                                        <img src=\"{{ asset('uploads/materiels/' ~ materiel.image) }}\" alt=\"{{ materiel.nom }}\" class=\"rounded-circle mx-auto d-block\" style=\"width: 45px; height: 45px; object-fit: cover;\">
+                                        <img src=\"{{ asset('Uploads/materiels/' ~ materiel.image) }}\" alt=\"{{ materiel.nom }}\" class=\"rounded-circle mx-auto d-block\" style=\"width: 45px; height: 45px; object-fit: cover;\">
                                     {% else %}
                                         <img src=\"{{ asset('img/default-material.png') }}\" alt=\"Image par défaut\" class=\"rounded-circle mx-auto d-block\" style=\"width: 45px; height: 45px; object-fit: cover;\">
                                     {% endif %}
@@ -1249,7 +1395,7 @@ class __TwigTemplate_8a343a44601c68e081c748e7336279a5 extends Template
                                     {{ materiel.quantite }}
                                 </td>
                                 <td>
-                                    <span class=\"badge {% if materiel.etat == 'NEUF' %}bg-success{% elseif materiel.etat == 'USÉ' %}bg-warning{% else %}bg-danger{% endif %}\">
+                                    <span class=\"badge {% if materiel.etat == 'NEUF' %}bg-success{% elseif materiel.etat == 'USÉ' %}bg-warning{% else %}bg-danger{% endif %}\"{% if materiel.quantite < 5 %} style=\"background: none !important; color: #a30000 !important; animation: none !important;\"{% endif %}>
                                         <i class=\"bx {% if materiel.etat == 'NEUF' %}bx-check-circle{% elseif materiel.etat == 'USÉ' %}bx-time{% else %}bx-error-circle{% endif %} me-1\"></i>
                                         {{ materiel.etat }}
                                     </span>
@@ -1278,6 +1424,11 @@ class __TwigTemplate_8a343a44601c68e081c748e7336279a5 extends Template
                                             <a class=\"dropdown-item\" href=\"{{ path('app_materiel_edit', {'id': materiel.id}) }}\">
                                                 <i class=\"bx bx-edit-alt me-1\"></i> Modifier
                                             </a>
+                                            {% if materiel.quantite < 5 %}
+                                                <button class=\"dropdown-item notify-slack\" data-material-id=\"{{ materiel.id }}\">
+                                                    <i class=\"bx bx-bell me-1\"></i> Notifier Slack
+                                                </button>
+                                            {% endif %}
                                             <form method=\"post\" action=\"{{ path('app_materiel_delete', {'id': materiel.id}) }}\" onsubmit=\"return confirm('Êtes-vous sûr de vouloir supprimer ce matériel ?');\">
                                                 <input type=\"hidden\" name=\"_token\" value=\"{{ csrf_token('delete' ~ materiel.id) }}\">
                                                 <button type=\"submit\" class=\"dropdown-item text-danger\">
@@ -1328,7 +1479,7 @@ class __TwigTemplate_8a343a44601c68e081c748e7336279a5 extends Template
                     <small class=\"text-muted\">
                         Page {{ pagination.currentPageNumber }} sur {{ pagination.getPageCount() }} |
                         Total Matériels : {{ pagination.totalItemCount }}
-                    </small>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1337,77 +1488,137 @@ class __TwigTemplate_8a343a44601c68e081c748e7336279a5 extends Template
 {% endblock %}
 
 {% block javascripts %}
-  {{ parent() }}
-  <script>
-    console.log('AJAX search script loaded');
-    const baseUrl = \"{{ path('app_materiel_search') }}\";
-    console.log('Base search URL:', baseUrl);
-    const input = document.querySelector('input[name=\"search\"]');
-    const tbody = document.querySelector('#materielsTable tbody');
-    if (input && tbody) {
-      let timeout;
-      input.addEventListener('input', e => {
-        clearTimeout(timeout);
-        timeout = setTimeout(async () => {
-          const term = e.target.value.trim();
-          console.log('Recherche AJAX:', term);
-          try {
-            const res = await fetch(baseUrl + \"?term=\" + encodeURIComponent(term), {
-              headers: { 'X-Requested-With': 'XMLHttpRequest', 'Accept': 'application/json' }
+    {{ parent() }}
+    <script>
+        console.log('AJAX search script loaded');
+        const baseUrl = \"{{ path('app_materiel_search') }}\";
+        console.log('Base search URL:', baseUrl);
+        const input = document.querySelector('input[name=\"search\"]');
+        const tbody = document.querySelector('#materielsTable tbody');
+        if (input && tbody) {
+            let timeout;
+            input.addEventListener('input', e => {
+                clearTimeout(timeout);
+                timeout = setTimeout(async () => {
+                    const term = e.target.value.trim();
+                    console.log('Recherche AJAX:', term);
+                    try {
+                        const res = await fetch(baseUrl + \"?term=\" + encodeURIComponent(term), {
+                            headers: { 'X-Requested-With': 'XMLHttpRequest', 'Accept': 'application/json' }
+                        });
+                        if (!res.ok) throw new Error(`HTTP status \${res.status}`);
+                        const data = await res.json();
+                        {% verbatim %}
+                        tbody.innerHTML = data.length
+                            ? data.map(m => `
+                                <tr class=\"\${m.etat === 'ENDOMMAGE' ? 'materiel-endommage' : ''} \${m.quantite < 5 ? 'low-stock' : ''}\">
+                                    <td class=\"text-center align-middle\">
+                                        <img src=\"\${m.image ? '/Uploads/materiels/' + m.image : '/img/default-material.png'}\" alt=\"\${m.nom}\" class=\"rounded-circle mx-auto d-block\" style=\"width:45px;height:45px;object-fit:cover;\">
+                                    </td>
+                                    <td>\${m.nom}</td>
+                                    <td><i class=\"bx bx-category me-1\"></i>\${m.type}</td>
+                                    <td><i class=\"bx bx-package me-1\"></i>\${m.quantite}</td>
+                                    <td><span class=\"badge \${m.etat === 'NEUF' ? 'bg-success' : m.etat === 'USÉ' ? 'bg-warning' : 'bg-danger'}\"><i class=\"bx \${m.etat === 'NEUF' ? 'bx-check-circle' : m.etat === 'USÉ' ? 'bx-time' : 'bx-error-circle'} me-1\"></i>\${m.etat}</span></td>
+                                    <td><i class=\"bx bx-euro me-1\"></i>\${parseFloat(m.prix).toFixed(2)} €</td>
+                                    <td><i class=\"bx bx-barcode me-1\"></i>\${m.barcode}</td>
+                                    <td><i class=\"bx bx-store me-1\"></i>\${m.fournisseur || 'N/A'}</td>
+                                    <td>
+                                        <div class=\"dropdown\">
+                                            <button type=\"button\" class=\"btn p-0 dropdown-toggle hide-arrow\" data-bs-toggle=\"dropdown\">
+                                                <i class=\"bx bx-dots-vertical-rounded\"></i>
+                                            </button>
+                                            <div class=\"dropdown-menu\">
+                                                <a class=\"dropdown-item\" href=\"/materiel/\${m.id}\">
+                                                    <i class=\"bx bx-show me-1\"></i> Voir
+                                                </a>
+                                                <a class=\"dropdown-item\" href=\"/materiel/\${m.id}/edit\">
+                                                    <i class=\"bx bx-edit-alt me-1\"></i> Modifier
+                                                </a>
+                                                \${m.quantite < 5 ? `<button class=\"dropdown-item notify-slack\" data-material-id=\"\${m.id}\"><i class=\"bx bx-bell me-1\"></i> Notifier Slack</button>` : ''}
+                                                <form method=\"post\" action=\"/materiel/\${m.id}\" onsubmit=\"return confirm('Êtes-vous sûr de vouloir supprimer ce matériel ?');\">
+                                                    <input type=\"hidden\" name=\"_token\" value=\"\${m.deleteToken}\">
+                                                    <button type=\"submit\" class=\"dropdown-item text-danger\">
+                                                        <i class=\"bx bx-trash me-1\"></i> Supprimer
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            `).join('')
+                            : `<tr><td colspan=\"9\" class=\"text-center\">Aucun résultat</td></tr>`;
+                        {% endverbatim %}
+                    } catch (err) {
+                        console.error('Erreur AJAX:', err);
+                        tbody.innerHTML = `<tr><td colspan=\"9\" class=\"text-center\">Erreur lors de la recherche</td></tr>`;
+                    }
+                }, 300);
             });
-            if (!res.ok) throw new Error(`HTTP status \${res.status}`);
-            const data = await res.json();
-            tbody.innerHTML = data.length
-              ? data.map(m => `
-                  <tr>
-                    <td class=\"text-center align-middle\">
-                      <img src=\"\${m.image?'/uploads/materiels/'+m.image:'/img/default-material.png'}\" class=\"rounded-circle mx-auto d-block\" style=\"width:45px;height:45px;object-fill:cover;\">
-                    </td>
-                    <td>\${m.nom}</td>
-                    <td><i class=\"bx bx-category me-1\"></i>\${m.type}</td>
-                    <td><i class=\"bx bx-package me-1\"></i>\${m.quantite}</td>
-                    <td><span class=\"badge \${m.etat==='NEUF'?'bg-success':m.etat==='USÉ'?'bg-warning':'bg-danger'}\"><i class=\"bx \${m.etat==='NEUF'?'bx-check-circle':m.etat==='USÉ'?'bx-time':'bx-error-circle'} me-1\"></i>\${m.etat}</span></td>
-                    <td><i class=\"bx bx-euro me-1\"></i>\${parseFloat(m.prix).toFixed(2)} €</td>
-                    <td><i class=\"bx bx-barcode me-1\"></i>\${m.barcode}</td>
-                    <td><i class=\"bx bx-store me-1\"></i>\${m.fournisseur||'N/A'}</td>
-                    <td>
-                        <div class=\"dropdown\">
-                            <button type=\"button\" class=\"btn p-0 dropdown-toggle hide-arrow\" data-bs-toggle=\"dropdown\">
-                                <i class=\"bx bx-dots-vertical-rounded\"></i>
-                            </button>
-                            <div class=\"dropdown-menu\">
-                                <a class=\"dropdown-item\" href=\"/materiel/\${m.id}\">
-                                    <i class=\"bx bx-show me-1\"></i> Voir
-                                </a>
-                                <a class=\"dropdown-item\" href=\"/materiel/\${m.id}/edit\">
-                                    <i class=\"bx bx-edit-alt me-1\"></i> Modifier
-                                </a>
-                                <form method=\"post\" action=\"/materiel/\${m.id}\" onsubmit=\"return confirm('Êtes-vous sûr de vouloir supprimer ce matériel ?');\">
-                                    <input type=\"hidden\" name=\"_token\" value=\"\${m._token}\">
-                                    <button type=\"submit\" class=\"dropdown-item text-danger\">
-                                        <i class=\"bx bx-trash me-1\"></i> Supprimer
-                                    </button>
-                                </form>
-                            </div>
-                        </div>
-                    </td>
-                  </tr>
-                `).join('')
-              : `<tr><td colspan=\"9\" class=\"text-center\">Aucun résultat</td></tr>`;
-          } catch (err) {
-            console.error('Erreur AJAX:', err);
-          }
-        }, 300);
-      });
-    }
-  </script>
+        }
+
+        // Slack notification handler
+document.querySelectorAll('.notify-slack').forEach(button => {
+    button.addEventListener('click', async function() {
+        const materialId = this.dataset.materialId;
+        const toast = new bootstrap.Toast(document.getElementById('slackNotificationToast'));
+        const csrfTokenElement = document.querySelector('meta[name=\"csrf-token\"]');
+
+        if (!csrfTokenElement) {
+            console.error('CSRF token meta tag is missing');
+            alert('Error: Missing CSRF token. Please reload the page.');
+            return;
+        }
+
+        try {
+            const response = await fetch(`/materiel/\${materialId}/notify-slack`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-Token': csrfTokenElement.content,
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            });
+            
+            const data = await response.json();
+            
+            if (!response.ok) {
+                console.error('Slack notification failed:', data);
+                alert(`Error: \${data.message || 'Unknown error'}`);
+                return;
+            }
+            
+            toast.show();
+        } catch (error) {
+            console.error('Network error:', error);
+            alert('Network error while sending notification');
+        }
+    });
+    // Barcode scanner modal logic
+            const scannerModal = document.getElementById('barcodeScannerModal');
+            scannerModal.addEventListener('shown.bs.modal', function () {
+                initScanner('scanner-video', 'scanner-result');
+            });
+            scannerModal.addEventListener('hidden.bs.modal', function () {
+                Quagga.stop();
+                document.getElementById('scanner-result').innerText = '';
+            });
+});
+    </script>
 {% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
     <link rel=\"stylesheet\" href=\"{{ asset('css/low_quantity.css') }}\">
     <style>
-        /* Fallback inline CSS */
+        /* Blinking pastel red animation for low stock */
+        @keyframes blink-pastel {
+            0%, 100% { background-color: #ffb3b3; }
+            50% { background-color: #ffdddd; }
+        }
+        tr.blinking, tr.blinking td {
+            animation: blink-pastel 1s linear infinite !important;
+        }
+    </style>
         .table#materielsTable th, .table#materielsTable td {
             width: auto;
         }
@@ -1516,6 +1727,33 @@ class __TwigTemplate_8a343a44601c68e081c748e7336279a5 extends Template
         .card-footer .text-center small {
             color: #566a7f;
             font-size: 0.875rem;
+        }
+        
+        /* Low stock styling */
+        .low-stock {
+            background-color: #fff0f0 !important;
+            animation: pulseWarning 2s infinite;
+        }
+        
+        .low-stock:hover {
+            background-color: #ffe0e0 !important;
+        }
+        
+        @keyframes pulseWarning {
+            0% { background-color: #fff0f0; }
+            50% { background-color: #ffd0d0; }
+            100% { background-color: #fff0f0; }
+        }
+        
+        /* Slack notification button */
+        .notify-slack {
+            color: #e01e5a;
+            transition: all 0.3s;
+        }
+        
+        .notify-slack:hover {
+            background-color: #f8f1f4;
+            transform: scale(1.02);
         }
     </style>
 {% endblock %}", "materiel/index.html.twig", "C:\\Users\\ibtis\\Downloads\\matchupz-web-joueur\\matchupz-web-joueur\\templates\\materiel\\index.html.twig");

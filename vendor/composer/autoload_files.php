@@ -17,6 +17,8 @@ return array(
     'f844ccf1d25df8663951193c3fc307c8' => $vendorDir . '/twig/twig/src/Resources/string_loader.php',
     '8825ede83f2f289127722d4e842cf7e8' => $vendorDir . '/symfony/polyfill-intl-grapheme/bootstrap.php',
     'b6b991a57620e2fb6b2f66f03fe9ddc2' => $vendorDir . '/symfony/string/Resources/functions.php',
+    '9c67151ae59aff4788964ce8eb2a0f43' => $vendorDir . '/clue/stream-filter/src/functions_include.php',
+    '8cff32064859f4559445b89279f3199c' => $vendorDir . '/php-http/message/src/filters.php',
     'f598d06aa772fa33d905e87be6398fb1' => $vendorDir . '/symfony/polyfill-intl-idn/bootstrap.php',
     '2203a247e6fda86070a5e4e07aed533a' => $vendorDir . '/symfony/clock/Resources/now.php',
     '7b11c4dc42b3b3023073cb14e519683c' => $vendorDir . '/ralouphie/getallheaders/src/getallheaders.php',

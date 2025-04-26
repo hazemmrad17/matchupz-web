@@ -18,6 +18,8 @@ class ComposerStaticIniteb2b2b308665f84e2e46c12f80a9462b
         'f844ccf1d25df8663951193c3fc307c8' => __DIR__ . '/..' . '/twig/twig/src/Resources/string_loader.php',
         '8825ede83f2f289127722d4e842cf7e8' => __DIR__ . '/..' . '/symfony/polyfill-intl-grapheme/bootstrap.php',
         'b6b991a57620e2fb6b2f66f03fe9ddc2' => __DIR__ . '/..' . '/symfony/string/Resources/functions.php',
+        '9c67151ae59aff4788964ce8eb2a0f43' => __DIR__ . '/..' . '/clue/stream-filter/src/functions_include.php',
+        '8cff32064859f4559445b89279f3199c' => __DIR__ . '/..' . '/php-http/message/src/filters.php',
         'f598d06aa772fa33d905e87be6398fb1' => __DIR__ . '/..' . '/symfony/polyfill-intl-idn/bootstrap.php',
         '2203a247e6fda86070a5e4e07aed533a' => __DIR__ . '/..' . '/symfony/clock/Resources/now.php',
         '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
@@ -142,6 +144,10 @@ class ComposerStaticIniteb2b2b308665f84e2e46c12f80a9462b
             'PhpOffice\\PhpSpreadsheet\\' => 25,
             'PHPStan\\PhpDocParser\\' => 21,
         ),
+        'N' => 
+        array (
+            'Nyholm\\Psr7\\' => 12,
+        ),
         'M' => 
         array (
             'Monolog\\' => 8,
@@ -150,6 +156,7 @@ class ComposerStaticIniteb2b2b308665f84e2e46c12f80a9462b
         ),
         'L' => 
         array (
+            'League\\Uri\\' => 11,
             'League\\Csv\\' => 11,
         ),
         'K' => 
@@ -158,6 +165,22 @@ class ComposerStaticIniteb2b2b308665f84e2e46c12f80a9462b
             'Knp\\Component\\' => 14,
             'Knp\\Bundle\\SnappyBundle\\' => 24,
             'Knp\\Bundle\\PaginatorBundle\\' => 27,
+        ),
+        'J' => 
+        array (
+            'JoliCode\\Slack\\Api\\' => 19,
+            'JoliCode\\Slack\\' => 15,
+            'Jane\\Component\\OpenApiRuntime\\' => 30,
+            'Jane\\Component\\JsonSchemaRuntime\\' => 33,
+        ),
+        'H' => 
+        array (
+            'Http\\Promise\\' => 13,
+            'Http\\Message\\MultipartStream\\' => 29,
+            'Http\\Message\\' => 13,
+            'Http\\Discovery\\' => 15,
+            'Http\\Client\\Common\\' => 19,
+            'Http\\Client\\' => 12,
         ),
         'G' => 
         array (
@@ -191,6 +214,7 @@ class ComposerStaticIniteb2b2b308665f84e2e46c12f80a9462b
         array (
             'Composer\\Semver\\' => 16,
             'Complex\\' => 8,
+            'Clue\\StreamFilter\\' => 18,
         ),
         'A' => 
         array (
@@ -567,6 +591,10 @@ class ComposerStaticIniteb2b2b308665f84e2e46c12f80a9462b
         array (
             0 => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src',
         ),
+        'Nyholm\\Psr7\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/nyholm/psr7/src',
+        ),
         'Monolog\\' => 
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
@@ -578,6 +606,11 @@ class ComposerStaticIniteb2b2b308665f84e2e46c12f80a9462b
         'Masterminds\\' => 
         array (
             0 => __DIR__ . '/..' . '/masterminds/html5/src',
+        ),
+        'League\\Uri\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/league/uri-interfaces',
+            1 => __DIR__ . '/..' . '/league/uri',
         ),
         'League\\Csv\\' => 
         array (
@@ -598,6 +631,46 @@ class ComposerStaticIniteb2b2b308665f84e2e46c12f80a9462b
         'Knp\\Bundle\\PaginatorBundle\\' => 
         array (
             0 => __DIR__ . '/..' . '/knplabs/knp-paginator-bundle/src',
+        ),
+        'JoliCode\\Slack\\Api\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/jolicode/slack-php-api/generated',
+        ),
+        'JoliCode\\Slack\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/jolicode/slack-php-api/src',
+        ),
+        'Jane\\Component\\OpenApiRuntime\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/jane-php/open-api-runtime',
+        ),
+        'Jane\\Component\\JsonSchemaRuntime\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/jane-php/json-schema-runtime',
+        ),
+        'Http\\Promise\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/php-http/promise/src',
+        ),
+        'Http\\Message\\MultipartStream\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/php-http/multipart-stream-builder/src',
+        ),
+        'Http\\Message\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/php-http/message/src',
+        ),
+        'Http\\Discovery\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/php-http/discovery/src',
+        ),
+        'Http\\Client\\Common\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/php-http/client-common/src',
+        ),
+        'Http\\Client\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/php-http/httplug/src',
         ),
         'GuzzleHttp\\Psr7\\' => 
         array (
@@ -683,6 +756,10 @@ class ComposerStaticIniteb2b2b308665f84e2e46c12f80a9462b
         array (
             0 => __DIR__ . '/..' . '/markbaker/complex/classes/src',
         ),
+        'Clue\\StreamFilter\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/clue/stream-filter/src',
+        ),
         'App\\Tests\\' => 
         array (
             0 => __DIR__ . '/../..' . '/tests',
@@ -694,6 +771,13 @@ class ComposerStaticIniteb2b2b308665f84e2e46c12f80a9462b
     );
 
     public static $prefixesPsr0 = array (
+        'R' => 
+        array (
+            'Rs\\Json' => 
+            array (
+                0 => __DIR__ . '/..' . '/php-jsonpointer/php-jsonpointer/src',
+            ),
+        ),
         'H' => 
         array (
             'HTMLPurifier' => 

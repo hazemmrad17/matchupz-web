@@ -97,6 +97,8 @@
     <parameter key="club_photos_directory">C:\Users\ibtis\Downloads\matchupz-web-joueur\matchupz-web-joueur/public/uploads/club_photos</parameter>
     <parameter key="photos_directory">C:\Users\ibtis\Downloads\matchupz-web-joueur\matchupz-web-joueur/public/uploads/photos</parameter>
     <parameter key="materiels_directory">C:\Users\ibtis\Downloads\matchupz-web-joueur\matchupz-web-joueur/public/uploads/materiels</parameter>
+    <parameter key="slack.webhook_url">%env(SLACK_WEBHOOK_URL)%</parameter>
+    <parameter key="app.base_url">%env(APP_BASE_URL)%</parameter>
     <parameter key="event_dispatcher.event_aliases" type="collection">
       <parameter key="Symfony\Component\Console\Event\ConsoleCommandEvent">console.command</parameter>
       <parameter key="Symfony\Component\Console\Event\ConsoleErrorEvent">console.error</parameter>
@@ -390,6 +392,7 @@
       <tag name="controller.service_arguments"/>
       <tag name="routing.route_loader"/>
     </service>
+    <service id="http_discovery.psr17_factory" class="Http\Discovery\Psr17Factory"/>
     <service id="App\Entity" class="App\Entity" abstract="true">
       <tag name="container.excluded" source="in &quot;config/services.yaml&quot;"/>
     </service>
@@ -398,21 +401,21 @@
       <tag name="container.service_subscriber"/>
       <argument type="service" id="doctrine.orm.default_entity_manager"/>
       <call method="setContainer">
-        <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\ClubController"/>
+        <argument type="service" id=".service_locator.Jk7HJNj.App\Controller\ClubController"/>
       </call>
     </service>
     <service id="App\Controller\EspacesportifController" class="App\Controller\EspacesportifController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
       <call method="setContainer">
-        <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\EspacesportifController"/>
+        <argument type="service" id=".service_locator.Jk7HJNj.App\Controller\EspacesportifController"/>
       </call>
     </service>
     <service id="App\Controller\EvaluationPhysiqueController" class="App\Controller\EvaluationPhysiqueController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
       <call method="setContainer">
-        <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\EvaluationPhysiqueController"/>
+        <argument type="service" id=".service_locator.Jk7HJNj.App\Controller\EvaluationPhysiqueController"/>
       </call>
     </service>
     <service id="App\Controller\FournisseurController" class="App\Controller\FournisseurController" public="true" autowire="true" autoconfigure="true">
@@ -420,7 +423,7 @@
       <tag name="container.service_subscriber"/>
       <argument type="service" id="doctrine.orm.default_entity_manager"/>
       <call method="setContainer">
-        <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\FournisseurController"/>
+        <argument type="service" id=".service_locator.Jk7HJNj.App\Controller\FournisseurController"/>
       </call>
     </service>
     <service id="App\Controller\HistoriqueClubController" class="App\Controller\HistoriqueClubController" public="true" autowire="true" autoconfigure="true">
@@ -428,14 +431,14 @@
       <tag name="container.service_subscriber"/>
       <argument type="service" id="doctrine.orm.default_entity_manager"/>
       <call method="setContainer">
-        <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\HistoriqueClubController"/>
+        <argument type="service" id=".service_locator.Jk7HJNj.App\Controller\HistoriqueClubController"/>
       </call>
     </service>
     <service id="App\Controller\HomeController" class="App\Controller\HomeController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
       <call method="setContainer">
-        <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\HomeController"/>
+        <argument type="service" id=".service_locator.Jk7HJNj.App\Controller\HomeController"/>
       </call>
     </service>
     <service id="App\Controller\JoueurController" class="App\Controller\JoueurController" public="true" autowire="true" autoconfigure="true">
@@ -443,7 +446,7 @@
       <tag name="container.service_subscriber"/>
       <argument type="service" id="doctrine.orm.default_entity_manager"/>
       <call method="setContainer">
-        <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\JoueurController"/>
+        <argument type="service" id=".service_locator.Jk7HJNj.App\Controller\JoueurController"/>
       </call>
     </service>
     <service id="App\Controller\MaterielController" class="App\Controller\MaterielController" public="true" autowire="true" autoconfigure="true">
@@ -451,22 +454,23 @@
       <tag name="container.service_subscriber"/>
       <argument type="service" id="App\Repository\MaterielRepository"/>
       <argument type="service" id="knp_paginator"/>
+      <argument type="service" id="monolog.logger"/>
       <call method="setContainer">
-        <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\MaterielController"/>
+        <argument type="service" id=".service_locator.Jk7HJNj.App\Controller\MaterielController"/>
       </call>
     </service>
     <service id="App\Controller\PerformanceJoueurController" class="App\Controller\PerformanceJoueurController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
       <call method="setContainer">
-        <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\PerformanceJoueurController"/>
+        <argument type="service" id=".service_locator.Jk7HJNj.App\Controller\PerformanceJoueurController"/>
       </call>
     </service>
     <service id="App\Controller\ReservationController" class="App\Controller\ReservationController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
       <call method="setContainer">
-        <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\ReservationController"/>
+        <argument type="service" id=".service_locator.Jk7HJNj.App\Controller\ReservationController"/>
       </call>
     </service>
     <service id="App\Controller\SportController" class="App\Controller\SportController" public="true" autowire="true" autoconfigure="true">
@@ -474,7 +478,7 @@
       <tag name="container.service_subscriber"/>
       <argument type="service" id="doctrine.orm.default_entity_manager"/>
       <call method="setContainer">
-        <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\SportController"/>
+        <argument type="service" id=".service_locator.Jk7HJNj.App\Controller\SportController"/>
       </call>
     </service>
     <service id="App\Doctrine\DBAL\Types\EnumType" class="App\Doctrine\DBAL\Types\EnumType" autowire="true" autoconfigure="true"/>
@@ -579,6 +583,11 @@
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
     </service>
+    <service id="App\Service\SlackNotifier" class="App\Service\SlackNotifier" autowire="true" autoconfigure="true">
+      <argument>%env(SLACK_BOT_TOKEN)%</argument>
+      <argument type="service" id="monolog.logger"/>
+      <argument>#logistique</argument>
+    </service>
     <service id="argument_metadata_factory" class="Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadataFactory"/>
     <service id="argument_resolver.backed_enum_resolver" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\BackedEnumValueResolver">
       <tag priority="100" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\BackedEnumValueResolver">controller.argument_value_resolver</tag>
@@ -606,7 +615,7 @@
     </service>
     <service id="argument_resolver.service" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
       <tag priority="-50" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">controller.argument_value_resolver</tag>
-      <argument type="service" id=".service_locator.oTEPoHC"/>
+      <argument type="service" id=".service_locator.dhP8mHT"/>
     </service>
     <service id="argument_resolver.default" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">
       <tag priority="-100" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">controller.argument_value_resolver</tag>
@@ -2110,8 +2119,13 @@
     </service>
     <service id="psr18.http_client" class="Symfony\Component\HttpClient\Psr18Client">
       <argument type="service" id=".debug.http_client"/>
-      <argument>null</argument>
-      <argument>null</argument>
+      <argument type="service" id="http_discovery.psr17_factory" on-invalid="ignore"/>
+      <argument type="service" id="http_discovery.psr17_factory" on-invalid="ignore"/>
+    </service>
+    <service id="httplug.http_client" class="Symfony\Component\HttpClient\HttplugClient">
+      <argument type="service" id=".debug.http_client"/>
+      <argument type="service" id="http_discovery.psr17_factory" on-invalid="ignore"/>
+      <argument type="service" id="http_discovery.psr17_factory" on-invalid="ignore"/>
     </service>
     <service id="http_client.abstract_retry_strategy" class="Symfony\Component\HttpClient\Retry\GenericRetryStrategy" abstract="true">
       <argument type="abstract">http codes</argument>
@@ -3601,7 +3615,7 @@
     </service>
     <service id="argument_resolver.not_tagged_controller" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
       <tag name="controller.argument_value_resolver" priority="-200"/>
-      <argument type="service" id=".service_locator.oTEPoHC"/>
+      <argument type="service" id=".service_locator.dhP8mHT"/>
     </service>
     <service id="debug.log_processor" class="Symfony\Bridge\Monolog\Processor\DebugProcessor">
       <tag name="kernel.reset" method="reset"/>
@@ -3701,7 +3715,7 @@
     <service id="router.default" class="Symfony\Bundle\FrameworkBundle\Routing\Router">
       <tag name="monolog.logger" channel="router"/>
       <tag name="container.service_subscriber" id="routing.loader"/>
-      <argument type="service" id=".service_locator.bN.V_Nq.router.default"/>
+      <argument type="service" id=".service_locator.LjVnriP.router.default"/>
       <argument>kernel::loadRoutes</argument>
       <argument type="collection">
         <argument key="cache_dir">C:\Users\ibtis\Downloads\matchupz-web-joueur\matchupz-web-joueur\var\cache\dev</argument>
@@ -8191,6 +8205,13 @@
         <argument key="materiel" type="service_closure" id=".errored..service_locator.NgvlNzc.App\Entity\Materiel"/>
       </argument>
     </service>
+    <service id=".service_locator.7H5ns5m" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="materiel" type="service_closure" id=".errored..service_locator.7H5ns5m.App\Entity\Materiel"/>
+        <argument key="slackNotifier" type="service_closure" id="App\Service\SlackNotifier"/>
+      </argument>
+    </service>
     <service id=".service_locator.CrEgygo" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -8256,7 +8277,7 @@
         <argument key="sportRepository" type="service_closure" id="App\Repository\SportRepository"/>
       </argument>
     </service>
-    <service id=".service_locator.oTEPoHC" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.dhP8mHT" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\ClubController::exportCsv" type="service_closure" id=".service_locator.eOJlB0r"/>
@@ -8311,6 +8332,7 @@
         <argument key="App\Controller\MaterielController::exportPdf" type="service_closure" id=".service_locator.jnu2S_s"/>
         <argument key="App\Controller\MaterielController::indexF" type="service_closure" id=".service_locator.RCuzfnb"/>
         <argument key="App\Controller\MaterielController::new" type="service_closure" id=".service_locator.LNwsF6h"/>
+        <argument key="App\Controller\MaterielController::notifySlack" type="service_closure" id=".service_locator.7H5ns5m"/>
         <argument key="App\Controller\MaterielController::scan" type="service_closure" id=".service_locator.jnu2S_s"/>
         <argument key="App\Controller\MaterielController::statistics" type="service_closure" id=".service_locator.5CHJ4Li"/>
         <argument key="App\Controller\PerformanceJoueurController::delete" type="service_closure" id=".service_locator.PNlbJGO"/>
@@ -8388,6 +8410,7 @@
         <argument key="App\Controller\MaterielController:exportPdf" type="service_closure" id=".service_locator.jnu2S_s"/>
         <argument key="App\Controller\MaterielController:indexF" type="service_closure" id=".service_locator.RCuzfnb"/>
         <argument key="App\Controller\MaterielController:new" type="service_closure" id=".service_locator.LNwsF6h"/>
+        <argument key="App\Controller\MaterielController:notifySlack" type="service_closure" id=".service_locator.7H5ns5m"/>
         <argument key="App\Controller\MaterielController:scan" type="service_closure" id=".service_locator.jnu2S_s"/>
         <argument key="App\Controller\MaterielController:statistics" type="service_closure" id=".service_locator.5CHJ4Li"/>
         <argument key="App\Controller\PerformanceJoueurController:delete" type="service_closure" id=".service_locator.PNlbJGO"/>
@@ -9039,7 +9062,7 @@
         <argument>0</argument>
       </call>
     </service>
-    <service id=".service_locator.O2p6Lk7" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.Jk7HJNj" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="form.factory" type="service_closure" id="form.factory" on-invalid="ignore"/>
@@ -9055,71 +9078,71 @@
         <argument key="web_link.http_header_serializer" type="service_closure" id="web_link.http_header_serializer" on-invalid="ignore"/>
       </argument>
     </service>
-    <service id=".service_locator.O2p6Lk7.App\Controller\ClubController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.Jk7HJNj.App\Controller\ClubController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\ClubController"/>
       <argument>App\Controller\ClubController</argument>
       <argument type="service" id="service_container"/>
-      <factory service=".service_locator.O2p6Lk7" method="withContext"/>
+      <factory service=".service_locator.Jk7HJNj" method="withContext"/>
     </service>
-    <service id=".service_locator.O2p6Lk7.App\Controller\EspacesportifController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.Jk7HJNj.App\Controller\EspacesportifController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\EspacesportifController"/>
       <argument>App\Controller\EspacesportifController</argument>
       <argument type="service" id="service_container"/>
-      <factory service=".service_locator.O2p6Lk7" method="withContext"/>
+      <factory service=".service_locator.Jk7HJNj" method="withContext"/>
     </service>
-    <service id=".service_locator.O2p6Lk7.App\Controller\EvaluationPhysiqueController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.Jk7HJNj.App\Controller\EvaluationPhysiqueController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\EvaluationPhysiqueController"/>
       <argument>App\Controller\EvaluationPhysiqueController</argument>
       <argument type="service" id="service_container"/>
-      <factory service=".service_locator.O2p6Lk7" method="withContext"/>
+      <factory service=".service_locator.Jk7HJNj" method="withContext"/>
     </service>
-    <service id=".service_locator.O2p6Lk7.App\Controller\FournisseurController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.Jk7HJNj.App\Controller\FournisseurController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\FournisseurController"/>
       <argument>App\Controller\FournisseurController</argument>
       <argument type="service" id="service_container"/>
-      <factory service=".service_locator.O2p6Lk7" method="withContext"/>
+      <factory service=".service_locator.Jk7HJNj" method="withContext"/>
     </service>
-    <service id=".service_locator.O2p6Lk7.App\Controller\HistoriqueClubController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.Jk7HJNj.App\Controller\HistoriqueClubController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\HistoriqueClubController"/>
       <argument>App\Controller\HistoriqueClubController</argument>
       <argument type="service" id="service_container"/>
-      <factory service=".service_locator.O2p6Lk7" method="withContext"/>
+      <factory service=".service_locator.Jk7HJNj" method="withContext"/>
     </service>
-    <service id=".service_locator.O2p6Lk7.App\Controller\HomeController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.Jk7HJNj.App\Controller\HomeController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\HomeController"/>
       <argument>App\Controller\HomeController</argument>
       <argument type="service" id="service_container"/>
-      <factory service=".service_locator.O2p6Lk7" method="withContext"/>
+      <factory service=".service_locator.Jk7HJNj" method="withContext"/>
     </service>
-    <service id=".service_locator.O2p6Lk7.App\Controller\JoueurController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.Jk7HJNj.App\Controller\JoueurController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\JoueurController"/>
       <argument>App\Controller\JoueurController</argument>
       <argument type="service" id="service_container"/>
-      <factory service=".service_locator.O2p6Lk7" method="withContext"/>
+      <factory service=".service_locator.Jk7HJNj" method="withContext"/>
     </service>
-    <service id=".service_locator.O2p6Lk7.App\Controller\MaterielController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.Jk7HJNj.App\Controller\MaterielController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\MaterielController"/>
       <argument>App\Controller\MaterielController</argument>
       <argument type="service" id="service_container"/>
-      <factory service=".service_locator.O2p6Lk7" method="withContext"/>
+      <factory service=".service_locator.Jk7HJNj" method="withContext"/>
     </service>
-    <service id=".service_locator.O2p6Lk7.App\Controller\PerformanceJoueurController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.Jk7HJNj.App\Controller\PerformanceJoueurController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\PerformanceJoueurController"/>
       <argument>App\Controller\PerformanceJoueurController</argument>
       <argument type="service" id="service_container"/>
-      <factory service=".service_locator.O2p6Lk7" method="withContext"/>
+      <factory service=".service_locator.Jk7HJNj" method="withContext"/>
     </service>
-    <service id=".service_locator.O2p6Lk7.App\Controller\ReservationController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.Jk7HJNj.App\Controller\ReservationController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\ReservationController"/>
       <argument>App\Controller\ReservationController</argument>
       <argument type="service" id="service_container"/>
-      <factory service=".service_locator.O2p6Lk7" method="withContext"/>
+      <factory service=".service_locator.Jk7HJNj" method="withContext"/>
     </service>
-    <service id=".service_locator.O2p6Lk7.App\Controller\SportController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.Jk7HJNj.App\Controller\SportController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\SportController"/>
       <argument>App\Controller\SportController</argument>
       <argument type="service" id="service_container"/>
-      <factory service=".service_locator.O2p6Lk7" method="withContext"/>
+      <factory service=".service_locator.Jk7HJNj" method="withContext"/>
     </service>
     <service id=".service_locator.fuYM_Z." class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
@@ -9133,17 +9156,17 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.fuYM_Z." method="withContext"/>
     </service>
-    <service id=".service_locator.bN.V_Nq" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.LjVnriP" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="routing.loader" type="service_closure" id="routing.loader"/>
       </argument>
     </service>
-    <service id=".service_locator.bN.V_Nq.router.default" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.LjVnriP.router.default" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="router.default"/>
       <argument>router.default</argument>
       <argument type="service" id="service_container"/>
-      <factory service=".service_locator.bN.V_Nq" method="withContext"/>
+      <factory service=".service_locator.LjVnriP" method="withContext"/>
     </service>
     <service id=".service_locator.cUcW89y" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
@@ -9530,6 +9553,9 @@
     </service>
     <service id=".errored..service_locator.NgvlNzc.App\Entity\Materiel" class="App\Entity\Materiel">
       <tag name="container.error" message="Cannot autowire service &quot;.service_locator.NgvlNzc&quot;: it needs an instance of &quot;App\Entity\Materiel&quot; but this type has been excluded in &quot;config/services.yaml&quot;."/>
+    </service>
+    <service id=".errored..service_locator.7H5ns5m.App\Entity\Materiel" class="App\Entity\Materiel">
+      <tag name="container.error" message="Cannot autowire service &quot;.service_locator.7H5ns5m&quot;: it needs an instance of &quot;App\Entity\Materiel&quot; but this type has been excluded in &quot;config/services.yaml&quot;."/>
     </service>
     <service id=".errored..service_locator.z4JrMru.App\Entity\PerformanceJoueur" class="App\Entity\PerformanceJoueur">
       <tag name="container.error" message="Cannot autowire service &quot;.service_locator.z4JrMru&quot;: it needs an instance of &quot;App\Entity\PerformanceJoueur&quot; but this type has been excluded in &quot;config/services.yaml&quot;."/>
@@ -10556,6 +10582,12 @@
         <argument key="Knp\Bundle\PaginatorBundle\Twig\Extension\PaginationRuntime" type="service_closure" id="Knp\Bundle\PaginatorBundle\Twig\Extension\PaginationRuntime"/>
       </argument>
     </service>
+    <service id="Psr\Http\Message\RequestFactoryInterface" alias="http_discovery.psr17_factory"/>
+    <service id="Psr\Http\Message\ResponseFactoryInterface" alias="http_discovery.psr17_factory"/>
+    <service id="Psr\Http\Message\ServerRequestFactoryInterface" alias="http_discovery.psr17_factory"/>
+    <service id="Psr\Http\Message\StreamFactoryInterface" alias="http_discovery.psr17_factory"/>
+    <service id="Psr\Http\Message\UploadedFileFactoryInterface" alias="http_discovery.psr17_factory"/>
+    <service id="Psr\Http\Message\UriFactoryInterface" alias="http_discovery.psr17_factory"/>
     <service id="App\Kernel" alias="kernel" public="true"/>
     <service id="Symfony\Component\DependencyInjection\ParameterBag\ContainerBagInterface" alias="parameter_bag"/>
     <service id="Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface" alias="parameter_bag"/>
@@ -10593,6 +10625,10 @@
     <service id="Symfony\Component\AssetMapper\ImportMap\ImportMapManager" alias="asset_mapper.importmap.manager"/>
     <service id="Symfony\Contracts\HttpClient\HttpClientInterface" alias=".debug.http_client"/>
     <service id="Psr\Http\Client\ClientInterface" alias="psr18.http_client"/>
+    <service id="Http\Client\HttpAsyncClient" alias="httplug.http_client"/>
+    <service id="Http\Client\HttpClient" alias="httplug.http_client">
+      <deprecated package="symfony/framework-bundle" version="6.3">The "%alias_id%" service is deprecated, use "Psr\Http\Client\ClientInterface" instead.</deprecated>
+    </service>
     <service id="mailer" alias="mailer.mailer"/>
     <service id="Symfony\Component\Mailer\MailerInterface" alias="mailer.mailer"/>
     <service id="mailer.default_transport" alias="mailer.transports"/>
@@ -10729,7 +10765,7 @@
     <service id="Symfony\UX\Chartjs\Builder\ChartBuilderInterface" alias="chartjs.builder"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.w7.f4fT" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.oTEPoHC"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.dhP8mHT"/>
     <service id="doctrine.id_generator_locator" alias=".service_locator.KLVvNIq"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface $requestLogger" alias="monolog.logger.request"/>
@@ -10772,12 +10808,12 @@
     <service id=".service_locator.vYOHL0D" alias=".service_locator.jpL5_4q"/>
     <service id=".service_locator.X9gG0Wi" alias=".service_locator.geVFa8t"/>
     <service id=".service_locator.RwykrWv" alias=".service_locator.s2P9uaA"/>
-    <service id=".service_locator._7LMcZO" alias=".service_locator.oTEPoHC"/>
+    <service id=".service_locator.y9NHIPP" alias=".service_locator.dhP8mHT"/>
     <service id=".service_locator.BFrsqsn" alias=".service_locator.F9PKc.7"/>
     <service id=".service_locator.I5D3BSa" alias=".service_locator.qLN7qz3"/>
     <service id=".service_locator.XtmiKbi" alias=".service_locator.MfxSDRP"/>
     <service id=".service_locator.O24_MAy" alias=".service_locator.yY.p4P7"/>
-    <service id=".service_locator.jUv.zyj" alias=".service_locator.O2p6Lk7"/>
+    <service id=".service_locator.5r9vSSF" alias=".service_locator.Jk7HJNj"/>
     <service id="validator" alias="debug.validator"/>
     <service id="http_client" alias=".debug.http_client"/>
     <service id=".debug.http_client.inner" alias="http_client.uri_template"/>
@@ -10828,6 +10864,7 @@
     <service id=".service_locator.UUkkutG" alias=".service_locator.5CHJ4Li"/>
     <service id=".service_locator.W17v7YY" alias=".service_locator.DBl8PzK"/>
     <service id=".service_locator.sZiCqRZ" alias=".service_locator.NgvlNzc"/>
+    <service id=".service_locator.0A6vDKP" alias=".service_locator.7H5ns5m"/>
     <service id=".service_locator.LXe3GOx" alias=".service_locator.CrEgygo"/>
     <service id=".service_locator.5TBLhhJ" alias=".service_locator.z4JrMru"/>
     <service id=".service_locator.4AVqgs9" alias=".service_locator.PNlbJGO"/>
@@ -10837,7 +10874,7 @@
     <service id=".service_locator.vtj.h5i" alias=".service_locator.cX9LP_Y"/>
     <service id=".service_locator.0VPh.hj" alias=".service_locator.geVFa8t"/>
     <service id=".service_locator.pHhadZw" alias=".service_locator.s2P9uaA"/>
-    <service id=".service_locator.Q1z.f9O" alias=".service_locator.O2p6Lk7"/>
+    <service id=".service_locator.eSZ4zlG" alias=".service_locator.Jk7HJNj"/>
     <service id=".service_locator.dGUCsbe" alias=".service_locator.oR77BOj"/>
     <service id=".service_locator._kIAbz1" alias=".service_locator.TpoC7U9"/>
     <service id=".service_locator.hnz5ZNh" alias=".service_locator.0TACwl3"/>

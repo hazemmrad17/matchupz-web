@@ -5,6 +5,10 @@
 {% endblock %}
 
 {% block title %}Liste des Matériels{% endblock %}
+{% block head %}
+    {{ parent() }}
+    <meta name="csrf-token" content="{{ csrf_token('slack_notify') }}">
+{% endblock %}
 
 {% block content %}
 <div class="content-wrapper">
@@ -136,16 +140,16 @@
             </div>
         {% endblock %}
 
-        <!-- Toast Notification for Low Quantity -->
+        <!-- Slack Notification Toast -->
         <div class="position-fixed top-0 end-0 p-3" style="z-index: 1050;">
-            <div id="lowQuantityToast" class="toast hide bg-danger text-white" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000">
-                <div class="toast-header bg-danger text-white">
-                    <i class="bx bx-bell me-2"></i>
-                    <strong class="me-auto">Alerte Stock</strong>
+            <div id="slackNotificationToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000">
+                <div class="toast-header bg-success text-white">
+                    <i class="bx bx-check-circle me-2"></i>
+                    <strong class="me-auto">Notification envoyée</strong>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
                 </div>
                 <div class="toast-body">
-                    La quantité de certains matériels est inférieure à 5. Veuillez commander de nouveaux matériaux.
+                    La notification Slack a été envoyée avec succès !
                 </div>
             </div>
         </div>
@@ -158,24 +162,23 @@
                         <h5 class="modal-title" id="barcodeScannerModalLabel">Scanner Code-barres</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <!-- Dans votre modal -->
-<div class="modal-body">
-    <div class="scanner-container">
-        <div id="scanner-video"></div>
-        <div class="scanner-overlay"></div>
-    </div>
-    <div id="scanner-result">
-        <div class="placeholder-text">
-            <i class="bx bx-barcode"></i> Positionnez le code-barres dans le cadre
-        </div>
-    </div>
-</div>
-<div class="modal-footer">
-    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-    <button type="button" class="btn btn-primary" onclick="resetScanner()">
-        <i class="bx bx-refresh"></i> Nouveau scan
-    </button>
-</div>
+                    <div class="modal-body">
+                        <div class="scanner-container">
+                            <div id="scanner-video"></div>
+                            <div class="scanner-overlay"></div>
+                        </div>
+                        <div id="scanner-result">
+                            <div class="placeholder-text">
+                                <i class="bx bx-barcode"></i> Positionnez le code-barres dans le cadre
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                        <button type="button" class="btn btn-primary" onclick="resetScanner()">
+                            <i class="bx bx-refresh"></i> Nouveau scan
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -262,10 +265,10 @@
                     </thead>
                     <tbody>
                         {% for materiel in pagination %}
-                            <tr class="{% if materiel.etat == 'ENDOMMAGE' %}materiel-endommage{% endif %}">
+                            <tr class="{% if materiel.etat == 'ENDOMMAGE' %}materiel-endommage{% endif %}{% if materiel.quantite < 5 %} low-stock blinking{% endif %}"{% if materiel.quantite < 5 %} style="background-color: #ffb3b3 !important; color: #a30000 !important; animation: blink-pastel 1s linear infinite !important;"{% endif %}>
                                 <td class="text-center align-middle">
                                     {% if materiel.image %}
-                                        <img src="{{ asset('uploads/materiels/' ~ materiel.image) }}" alt="{{ materiel.nom }}" class="rounded-circle mx-auto d-block" style="width: 45px; height: 45px; object-fit: cover;">
+                                        <img src="{{ asset('Uploads/materiels/' ~ materiel.image) }}" alt="{{ materiel.nom }}" class="rounded-circle mx-auto d-block" style="width: 45px; height: 45px; object-fit: cover;">
                                     {% else %}
                                         <img src="{{ asset('img/default-material.png') }}" alt="Image par défaut" class="rounded-circle mx-auto d-block" style="width: 45px; height: 45px; object-fit: cover;">
                                     {% endif %}
@@ -280,7 +283,7 @@
                                     {{ materiel.quantite }}
                                 </td>
                                 <td>
-                                    <span class="badge {% if materiel.etat == 'NEUF' %}bg-success{% elseif materiel.etat == 'USÉ' %}bg-warning{% else %}bg-danger{% endif %}">
+                                    <span class="badge {% if materiel.etat == 'NEUF' %}bg-success{% elseif materiel.etat == 'USÉ' %}bg-warning{% else %}bg-danger{% endif %}"{% if materiel.quantite < 5 %} style="background: none !important; color: #a30000 !important; animation: none !important;"{% endif %}>
                                         <i class="bx {% if materiel.etat == 'NEUF' %}bx-check-circle{% elseif materiel.etat == 'USÉ' %}bx-time{% else %}bx-error-circle{% endif %} me-1"></i>
                                         {{ materiel.etat }}
                                     </span>
@@ -309,6 +312,11 @@
                                             <a class="dropdown-item" href="{{ path('app_materiel_edit', {'id': materiel.id}) }}">
                                                 <i class="bx bx-edit-alt me-1"></i> Modifier
                                             </a>
+                                            {% if materiel.quantite < 5 %}
+                                                <button class="dropdown-item notify-slack" data-material-id="{{ materiel.id }}">
+                                                    <i class="bx bx-bell me-1"></i> Notifier Slack
+                                                </button>
+                                            {% endif %}
                                             <form method="post" action="{{ path('app_materiel_delete', {'id': materiel.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce matériel ?');">
                                                 <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ materiel.id) }}">
                                                 <button type="submit" class="dropdown-item text-danger">
@@ -359,7 +367,7 @@
                     <small class="text-muted">
                         Page {{ pagination.currentPageNumber }} sur {{ pagination.getPageCount() }} |
                         Total Matériels : {{ pagination.totalItemCount }}
-                    </small>
+                    </div>
                 </div>
             </div>
         </div>
@@ -368,77 +376,137 @@
 {% endblock %}
 
 {% block javascripts %}
-  {{ parent() }}
-  <script>
-    console.log('AJAX search script loaded');
-    const baseUrl = "{{ path('app_materiel_search') }}";
-    console.log('Base search URL:', baseUrl);
-    const input = document.querySelector('input[name="search"]');
-    const tbody = document.querySelector('#materielsTable tbody');
-    if (input && tbody) {
-      let timeout;
-      input.addEventListener('input', e => {
-        clearTimeout(timeout);
-        timeout = setTimeout(async () => {
-          const term = e.target.value.trim();
-          console.log('Recherche AJAX:', term);
-          try {
-            const res = await fetch(baseUrl + "?term=" + encodeURIComponent(term), {
-              headers: { 'X-Requested-With': 'XMLHttpRequest', 'Accept': 'application/json' }
+    {{ parent() }}
+    <script>
+        console.log('AJAX search script loaded');
+        const baseUrl = "{{ path('app_materiel_search') }}";
+        console.log('Base search URL:', baseUrl);
+        const input = document.querySelector('input[name="search"]');
+        const tbody = document.querySelector('#materielsTable tbody');
+        if (input && tbody) {
+            let timeout;
+            input.addEventListener('input', e => {
+                clearTimeout(timeout);
+                timeout = setTimeout(async () => {
+                    const term = e.target.value.trim();
+                    console.log('Recherche AJAX:', term);
+                    try {
+                        const res = await fetch(baseUrl + "?term=" + encodeURIComponent(term), {
+                            headers: { 'X-Requested-With': 'XMLHttpRequest', 'Accept': 'application/json' }
+                        });
+                        if (!res.ok) throw new Error(`HTTP status ${res.status}`);
+                        const data = await res.json();
+                        {% verbatim %}
+                        tbody.innerHTML = data.length
+                            ? data.map(m => `
+                                <tr class="${m.etat === 'ENDOMMAGE' ? 'materiel-endommage' : ''} ${m.quantite < 5 ? 'low-stock' : ''}">
+                                    <td class="text-center align-middle">
+                                        <img src="${m.image ? '/Uploads/materiels/' + m.image : '/img/default-material.png'}" alt="${m.nom}" class="rounded-circle mx-auto d-block" style="width:45px;height:45px;object-fit:cover;">
+                                    </td>
+                                    <td>${m.nom}</td>
+                                    <td><i class="bx bx-category me-1"></i>${m.type}</td>
+                                    <td><i class="bx bx-package me-1"></i>${m.quantite}</td>
+                                    <td><span class="badge ${m.etat === 'NEUF' ? 'bg-success' : m.etat === 'USÉ' ? 'bg-warning' : 'bg-danger'}"><i class="bx ${m.etat === 'NEUF' ? 'bx-check-circle' : m.etat === 'USÉ' ? 'bx-time' : 'bx-error-circle'} me-1"></i>${m.etat}</span></td>
+                                    <td><i class="bx bx-euro me-1"></i>${parseFloat(m.prix).toFixed(2)} €</td>
+                                    <td><i class="bx bx-barcode me-1"></i>${m.barcode}</td>
+                                    <td><i class="bx bx-store me-1"></i>${m.fournisseur || 'N/A'}</td>
+                                    <td>
+                                        <div class="dropdown">
+                                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                                <i class="bx bx-dots-vertical-rounded"></i>
+                                            </button>
+                                            <div class="dropdown-menu">
+                                                <a class="dropdown-item" href="/materiel/${m.id}">
+                                                    <i class="bx bx-show me-1"></i> Voir
+                                                </a>
+                                                <a class="dropdown-item" href="/materiel/${m.id}/edit">
+                                                    <i class="bx bx-edit-alt me-1"></i> Modifier
+                                                </a>
+                                                ${m.quantite < 5 ? `<button class="dropdown-item notify-slack" data-material-id="${m.id}"><i class="bx bx-bell me-1"></i> Notifier Slack</button>` : ''}
+                                                <form method="post" action="/materiel/${m.id}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce matériel ?');">
+                                                    <input type="hidden" name="_token" value="${m.deleteToken}">
+                                                    <button type="submit" class="dropdown-item text-danger">
+                                                        <i class="bx bx-trash me-1"></i> Supprimer
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            `).join('')
+                            : `<tr><td colspan="9" class="text-center">Aucun résultat</td></tr>`;
+                        {% endverbatim %}
+                    } catch (err) {
+                        console.error('Erreur AJAX:', err);
+                        tbody.innerHTML = `<tr><td colspan="9" class="text-center">Erreur lors de la recherche</td></tr>`;
+                    }
+                }, 300);
             });
-            if (!res.ok) throw new Error(`HTTP status ${res.status}`);
-            const data = await res.json();
-            tbody.innerHTML = data.length
-              ? data.map(m => `
-                  <tr>
-                    <td class="text-center align-middle">
-                      <img src="${m.image?'/uploads/materiels/'+m.image:'/img/default-material.png'}" class="rounded-circle mx-auto d-block" style="width:45px;height:45px;object-fill:cover;">
-                    </td>
-                    <td>${m.nom}</td>
-                    <td><i class="bx bx-category me-1"></i>${m.type}</td>
-                    <td><i class="bx bx-package me-1"></i>${m.quantite}</td>
-                    <td><span class="badge ${m.etat==='NEUF'?'bg-success':m.etat==='USÉ'?'bg-warning':'bg-danger'}"><i class="bx ${m.etat==='NEUF'?'bx-check-circle':m.etat==='USÉ'?'bx-time':'bx-error-circle'} me-1"></i>${m.etat}</span></td>
-                    <td><i class="bx bx-euro me-1"></i>${parseFloat(m.prix).toFixed(2)} €</td>
-                    <td><i class="bx bx-barcode me-1"></i>${m.barcode}</td>
-                    <td><i class="bx bx-store me-1"></i>${m.fournisseur||'N/A'}</td>
-                    <td>
-                        <div class="dropdown">
-                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                <i class="bx bx-dots-vertical-rounded"></i>
-                            </button>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="/materiel/${m.id}">
-                                    <i class="bx bx-show me-1"></i> Voir
-                                </a>
-                                <a class="dropdown-item" href="/materiel/${m.id}/edit">
-                                    <i class="bx bx-edit-alt me-1"></i> Modifier
-                                </a>
-                                <form method="post" action="/materiel/${m.id}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce matériel ?');">
-                                    <input type="hidden" name="_token" value="${m._token}">
-                                    <button type="submit" class="dropdown-item text-danger">
-                                        <i class="bx bx-trash me-1"></i> Supprimer
-                                    </button>
-                                </form>
-                            </div>
-                        </div>
-                    </td>
-                  </tr>
-                `).join('')
-              : `<tr><td colspan="9" class="text-center">Aucun résultat</td></tr>`;
-          } catch (err) {
-            console.error('Erreur AJAX:', err);
-          }
-        }, 300);
-      });
-    }
-  </script>
+        }
+
+        // Slack notification handler
+document.querySelectorAll('.notify-slack').forEach(button => {
+    button.addEventListener('click', async function() {
+        const materialId = this.dataset.materialId;
+        const toast = new bootstrap.Toast(document.getElementById('slackNotificationToast'));
+        const csrfTokenElement = document.querySelector('meta[name="csrf-token"]');
+
+        if (!csrfTokenElement) {
+            console.error('CSRF token meta tag is missing');
+            alert('Error: Missing CSRF token. Please reload the page.');
+            return;
+        }
+
+        try {
+            const response = await fetch(`/materiel/${materialId}/notify-slack`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-Token': csrfTokenElement.content,
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            });
+            
+            const data = await response.json();
+            
+            if (!response.ok) {
+                console.error('Slack notification failed:', data);
+                alert(`Error: ${data.message || 'Unknown error'}`);
+                return;
+            }
+            
+            toast.show();
+        } catch (error) {
+            console.error('Network error:', error);
+            alert('Network error while sending notification');
+        }
+    });
+    // Barcode scanner modal logic
+            const scannerModal = document.getElementById('barcodeScannerModal');
+            scannerModal.addEventListener('shown.bs.modal', function () {
+                initScanner('scanner-video', 'scanner-result');
+            });
+            scannerModal.addEventListener('hidden.bs.modal', function () {
+                Quagga.stop();
+                document.getElementById('scanner-result').innerText = '';
+            });
+});
+    </script>
 {% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
     <link rel="stylesheet" href="{{ asset('css/low_quantity.css') }}">
     <style>
-        /* Fallback inline CSS */
+        /* Blinking pastel red animation for low stock */
+        @keyframes blink-pastel {
+            0%, 100% { background-color: #ffb3b3; }
+            50% { background-color: #ffdddd; }
+        }
+        tr.blinking, tr.blinking td {
+            animation: blink-pastel 1s linear infinite !important;
+        }
+    </style>
         .table#materielsTable th, .table#materielsTable td {
             width: auto;
         }
@@ -547,6 +615,33 @@
         .card-footer .text-center small {
             color: #566a7f;
             font-size: 0.875rem;
+        }
+        
+        /* Low stock styling */
+        .low-stock {
+            background-color: #fff0f0 !important;
+            animation: pulseWarning 2s infinite;
+        }
+        
+        .low-stock:hover {
+            background-color: #ffe0e0 !important;
+        }
+        
+        @keyframes pulseWarning {
+            0% { background-color: #fff0f0; }
+            50% { background-color: #ffd0d0; }
+            100% { background-color: #fff0f0; }
+        }
+        
+        /* Slack notification button */
+        .notify-slack {
+            color: #e01e5a;
+            transition: all 0.3s;
+        }
+        
+        .notify-slack:hover {
+            background-color: #f8f1f4;
+            transform: scale(1.02);
         }
     </style>
 {% endblock %}

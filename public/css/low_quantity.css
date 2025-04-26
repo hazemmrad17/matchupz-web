@@ -1,14 +1,9 @@
 css
 /* public/css/low_quantity.css */
-.table#materielsTable.table.table-responsive tbody tr.low-quantity,
-.table#materielsTable.table.table-responsive tbody tr.low-quantity td {
-    background-color: rgba(255, 0, 0, 0.2) !important;
-    border: 2px solid red !important;
-    animation: blink 1s infinite !important;
+tr.low-stock, tr.low-stock td {
+    background-color: #ffdddd !important;
+    color: #a30000 !important;
 }
-
-@keyframes blink {
-    0% { background-color: rgba(255, 0, 0, 0.2); }
-    50% { background-color: rgba(255, 0, 0, 0.5); }
-    100% { background-color: rgba(255, 0, 0, 0.2); }
+tr.low-stock:hover {
+    background-color: #ffbbbb !important;
 }

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+
 use App\Entity\Materiel;
 use App\Entity\Fournisseur;
 use App\Form\MaterielType;
@@ -23,17 +24,20 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use GuzzleHttp\Client;
+use App\Service\SlackNotifier;
 
 #[Route('/materiel')]
 final class MaterielController extends AbstractController
 {
     private $materielRepository;
     private $paginator;
+    private $logger;
 
-    public function __construct(MaterielRepository $materielRepository, PaginatorInterface $paginator)
+    public function __construct(MaterielRepository $materielRepository, PaginatorInterface $paginator, \Psr\Log\LoggerInterface $logger)
     {
         $this->materielRepository = $materielRepository;
         $this->paginator = $paginator;
+        $this->logger = $logger;
     }
 
     #[Route('/', name: 'app_materiel_index')]
@@ -662,5 +666,44 @@ final class MaterielController extends AbstractController
     }
     return ''; // Type non déterminé
 }
+
+#[Route('/{id}/notify-slack', name: 'app_materiel_notify_slack', methods: ['POST'])]
+public function notifySlack(Request $request, Materiel $materiel, SlackNotifier $slackNotifier): JsonResponse
+{
+    try {
+        if (!$this->isCsrfTokenValid('slack_notify', $request->headers->get('X-CSRF-Token'))) {
+            $this->logger->warning('Invalid CSRF token for Slack notification', [
+                'material_id' => $materiel->getId(),
+                'received_token' => $request->headers->get('X-CSRF-Token'),
+                'expected_token' => $this->container->get('security.csrf.token_manager')->getToken('slack_notify')->getValue()
+            ]);
+            return new JsonResponse(['status' => 'error', 'message' => 'Invalid CSRF token'], 403);
+        }
+
+        if ($materiel->getQuantite() >= 5) {
+            return new JsonResponse([
+                'status' => 'error', 
+                'message' => 'Notification not sent: Quantity is not low enough'
+            ], 400);
+        }
+
+        $slackNotifier->sendLowStockNotification($materiel);
+        return new JsonResponse(['status' => 'success']);
+        
+    } catch (\Throwable $e) {
+        $this->logger->error('Slack notification failed', [
+            'error' => $e->getMessage(),
+            'trace' => $e->getTraceAsString(),
+            'material_id' => $materiel->getId()
+        ]);
+        
+        return new JsonResponse([
+            'status' => 'error',
+            'message' => 'Failed to send notification: ' . $e->getMessage(),
+            'details' => $e instanceof HttpExceptionInterface ? $e->getResponse()->getContent(false) : null
+        ], 500);
+    }
+}
+
     
 }
