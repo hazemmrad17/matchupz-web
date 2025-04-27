@@ -10,6 +10,7 @@ parameters:
     users_image_directory: '%kernel.project_dir%/public/uploads/users'
     signatures_directory: '%kernel.project_dir%/public/signatures'
     materiels_directory: '%kernel.project_dir%/public/uploads/materiels'
+    sponsor_pictures_directory: '%kernel.project_dir%/public/uploads/sponsor_pictures'
     twilio_account_sid: '%env(TWILIO_ACCOUNT_SID)%'
     twilio_auth_token: '%env(TWILIO_AUTH_TOKEN)%'
     twilio_to_number: '%env(TWILIO_TO_NUMBER)%'
@@ -46,4 +47,7 @@ services:
             - '../src/Kernel.php'
 
     # Add more service definitions when explicit configuration is needed
+    App\Controller\GeminiController:
+        arguments:
+            $geminiApiKey: '%env(GEMINI_API_KEY)%'
     # Please note that last definitions always *replace* previous ones

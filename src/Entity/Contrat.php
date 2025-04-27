@@ -54,6 +54,11 @@ class Contrat
     #[ORM\Column(type: 'string', nullable: false)]
     private ?string $signature = null;
 
+    #[ORM\Column(type: 'text', nullable: false)]
+    #[Assert\NotBlank(message: "L'article du contrat est obligatoire.")]
+    private string $article = '';
+
+
    
     public function getIdContrat(): ?int
     {
@@ -129,6 +134,17 @@ class Contrat
     public function setSignature(string $signature): self
     {
         $this->signature = $signature;
+        return $this;
+    }
+
+    public function getArticle(): string
+    {
+        return $this->article;
+    }
+
+    public function setArticle(string $article): self
+    {
+        $this->article = $article;
         return $this;
     }
 }

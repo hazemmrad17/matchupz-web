@@ -135,6 +135,25 @@ class __TwigTemplate_c2b0baba693b7416a024f99b409bdd25 extends Template
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["sponsor"]) || array_key_exists("sponsor", $context) ? $context["sponsor"] : (function () { throw new RuntimeError('Variable "sponsor" does not exist.', 40, $this->source); })()), "pack", [], "any", false, false, false, 40), "html", null, true);
         yield "</p>
                         </div>
+                        <div class=\"col-md-6\">
+                            <h6>Image</h6>
+                            ";
+        // line 44
+        if (CoreExtension::getAttribute($this->env, $this->source, (isset($context["sponsor"]) || array_key_exists("sponsor", $context) ? $context["sponsor"] : (function () { throw new RuntimeError('Variable "sponsor" does not exist.', 44, $this->source); })()), "sponsorPicture", [], "any", false, false, false, 44)) {
+            // line 45
+            yield "                                <img src=\"";
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("uploads/sponsor_pictures/" . CoreExtension::getAttribute($this->env, $this->source, (isset($context["sponsor"]) || array_key_exists("sponsor", $context) ? $context["sponsor"] : (function () { throw new RuntimeError('Variable "sponsor" does not exist.', 45, $this->source); })()), "sponsorPicture", [], "any", false, false, false, 45))), "html", null, true);
+            yield "\" alt=\"";
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["sponsor"]) || array_key_exists("sponsor", $context) ? $context["sponsor"] : (function () { throw new RuntimeError('Variable "sponsor" does not exist.', 45, $this->source); })()), "nom", [], "any", false, false, false, 45), "html", null, true);
+            yield "\" style=\"max-width: 200px; max-height: 200px;\">
+                            ";
+        } else {
+            // line 47
+            yield "                                <p>Aucune image disponible</p>
+                            ";
+        }
+        // line 49
+        yield "                        </div>
                     </div>
                 </div>
             </div>
@@ -171,7 +190,7 @@ class __TwigTemplate_c2b0baba693b7416a024f99b409bdd25 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  135 => 40,  126 => 34,  119 => 30,  105 => 19,  100 => 18,  95 => 15,  91 => 14,  86 => 12,  76 => 4,  63 => 3,  40 => 1,);
+        return array (  156 => 49,  152 => 47,  144 => 45,  142 => 44,  135 => 40,  126 => 34,  119 => 30,  105 => 19,  100 => 18,  95 => 15,  91 => 14,  86 => 12,  76 => 4,  63 => 3,  40 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -216,6 +235,14 @@ class __TwigTemplate_c2b0baba693b7416a024f99b409bdd25 extends Template
                         <div class=\"col-md-6\">
                             <h6>Pack</h6>
                             <p>{{ sponsor.pack }}</p>
+                        </div>
+                        <div class=\"col-md-6\">
+                            <h6>Image</h6>
+                            {% if sponsor.sponsorPicture %}
+                                <img src=\"{{ asset('uploads/sponsor_pictures/' ~ sponsor.sponsorPicture) }}\" alt=\"{{ sponsor.nom }}\" style=\"max-width: 200px; max-height: 200px;\">
+                            {% else %}
+                                <p>Aucune image disponible</p>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

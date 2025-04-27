@@ -131,12 +131,12 @@ class __TwigTemplate_ad0c86e6cc616f58e069a880dc4bd363 extends Template
         border-radius: 2px;
     }
 
-    /* Smaller Flip Card */
     .flip-card {
         background-color: transparent;
         width: 100%;
-        height: 260px;
+        height: 340px;
         perspective: 1000px;
+        position: relative;
     }
 
     .flip-card-inner {
@@ -147,7 +147,7 @@ class __TwigTemplate_ad0c86e6cc616f58e069a880dc4bd363 extends Template
         transform-style: preserve-3d;
     }
 
-    .flip-card.dblclick .flip-card-inner {
+    .flip-card.flipped .flip-card-inner {
         transform: rotateY(180deg);
     }
 
@@ -210,7 +210,6 @@ class __TwigTemplate_ad0c86e6cc616f58e069a880dc4bd363 extends Template
         border: 3px solid #CD7F32;
     }
 
-    /* Floating Stars */
     .floating-stars {
         position: absolute;
         top: 0;
@@ -240,13 +239,75 @@ class __TwigTemplate_ad0c86e6cc616f58e069a880dc4bd363 extends Template
         50%  { transform: translateY(-20px) scale(1.3); opacity: 1; }
         100% { transform: translateY(0) scale(1);   opacity: 0.8; }
     }
+
+    #card-element {
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        background: #fff;
+        margin-bottom: 10px;
+    }
+
+    .btn-success {
+        width: 100%;
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+
+    .btn-success:disabled {
+        background-color: #6c757d;
+        border-color: #6c757d;
+        cursor: not-allowed;
+    }
+
+    .mb-3 {
+        margin-bottom: 0.75rem !important;
+    }
+
+    .form-label {
+        font-size: 0.9rem;
+        margin-bottom: 0.25rem;
+    }
+
+    .form-control, .form-select {
+        font-size: 0.9rem;
+        padding: 8px;
+    }
+
+    .flip-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background-color: rgba(0, 123, 255, 0.8);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        z-index: 3;
+        font-size: 0.9rem;
+    }
+
+    .flip-card:hover .flip-btn,
+    .flip-card.touched .flip-btn {
+        opacity: 1;
+    }
+
+    .flip-btn:hover {
+        background-color: rgba(0, 123, 255, 1);
+    }
 </style>
 
 <div class=\"container-fluid bg-breadcrumb\">
     <div class=\"container text-center py-5\" style=\"max-width: 900px;\">
         <h4 class=\"text-white display-4 mb-4 wow fadeInDown\" data-wow-delay=\"0.1s\">Nos Sponsors</h4>
         <ol class=\"breadcrumb d-flex justify-content-center mb-0 wow fadeInDown\" data-wow-delay=\"0.3s\">
-            <!-- Breadcrumb content can be added here if needed -->
         </ol>    
     </div>
 </div>
@@ -254,9 +315,9 @@ class __TwigTemplate_ad0c86e6cc616f58e069a880dc4bd363 extends Template
 <div class=\"container py-5\">
     <div class=\"row\">
         ";
-        // line 159
+        // line 220
         $context['_parent'] = $context;
-        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["sponsors"]) || array_key_exists("sponsors", $context) ? $context["sponsors"] : (function () { throw new RuntimeError('Variable "sponsors" does not exist.', 159, $this->source); })()));
+        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["sponsors"]) || array_key_exists("sponsors", $context) ? $context["sponsors"] : (function () { throw new RuntimeError('Variable "sponsors" does not exist.', 220, $this->source); })()));
         $context['_iterated'] = false;
         $context['loop'] = [
           'parent' => $context['_parent'],
@@ -272,40 +333,43 @@ class __TwigTemplate_ad0c86e6cc616f58e069a880dc4bd363 extends Template
             $context['loop']['last'] = 1 === $length;
         }
         foreach ($context['_seq'] as $context["_key"] => $context["sponsor"]) {
-            // line 160
+            // line 221
             yield "            ";
-            $context["pack"] = Twig\Extension\CoreExtension::lower($this->env->getCharset(), CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "pack", [], "any", false, false, false, 160));
-            // line 161
+            $context["pack"] = Twig\Extension\CoreExtension::lower($this->env->getCharset(), CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "pack", [], "any", false, false, false, 221));
+            // line 222
             yield "            <div class=\"col-md-6 col-lg-4 mb-4 wow fadeInUp\" data-wow-delay=\"";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((0.2 + (CoreExtension::getAttribute($this->env, $this->source, $context["loop"], "index0", [], "any", false, false, false, 161) * 0.2)), "html", null, true);
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((0.2 + (CoreExtension::getAttribute($this->env, $this->source, $context["loop"], "index0", [], "any", false, false, false, 222) * 0.2)), "html", null, true);
             yield "s\">
                 <div class=\"flip-card\" data-id=\"flip-";
-            // line 162
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "Id_sponsor", [], "any", false, false, false, 162), "html", null, true);
+            // line 223
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "Id_sponsor", [], "any", false, false, false, 223), "html", null, true);
             yield "\">
+                    <button class=\"flip-btn\" title=\"Flip Card\">
+                        <i class=\"fa fa-sync-alt\"></i>
+                    </button>
                     <div class=\"flip-card-inner\">
                         <div class=\"flip-card-front sponsor-card 
                             ";
-            // line 165
-            if (((isset($context["pack"]) || array_key_exists("pack", $context) ? $context["pack"] : (function () { throw new RuntimeError('Variable "pack" does not exist.', 165, $this->source); })()) == "gold")) {
+            // line 229
+            if (((isset($context["pack"]) || array_key_exists("pack", $context) ? $context["pack"] : (function () { throw new RuntimeError('Variable "pack" does not exist.', 229, $this->source); })()) == "gold")) {
                 yield "sponsor-border-gold
                             ";
-            } elseif ((            // line 166
-(isset($context["pack"]) || array_key_exists("pack", $context) ? $context["pack"] : (function () { throw new RuntimeError('Variable "pack" does not exist.', 166, $this->source); })()) == "silver")) {
+            } elseif ((            // line 230
+(isset($context["pack"]) || array_key_exists("pack", $context) ? $context["pack"] : (function () { throw new RuntimeError('Variable "pack" does not exist.', 230, $this->source); })()) == "silver")) {
                 yield "sponsor-border-silver
                             ";
-            } elseif ((            // line 167
-(isset($context["pack"]) || array_key_exists("pack", $context) ? $context["pack"] : (function () { throw new RuntimeError('Variable "pack" does not exist.', 167, $this->source); })()) == "bronze")) {
+            } elseif ((            // line 231
+(isset($context["pack"]) || array_key_exists("pack", $context) ? $context["pack"] : (function () { throw new RuntimeError('Variable "pack" does not exist.', 231, $this->source); })()) == "bronze")) {
                 yield "sponsor-border-bronze
                             ";
             }
-            // line 168
+            // line 232
             yield "\">
 
                             ";
-            // line 170
-            if (((isset($context["pack"]) || array_key_exists("pack", $context) ? $context["pack"] : (function () { throw new RuntimeError('Variable "pack" does not exist.', 170, $this->source); })()) == "gold")) {
-                // line 171
+            // line 234
+            if (((isset($context["pack"]) || array_key_exists("pack", $context) ? $context["pack"] : (function () { throw new RuntimeError('Variable "pack" does not exist.', 234, $this->source); })()) == "gold")) {
+                // line 235
                 yield "                                <div class=\"floating-stars\">
                                     <span>★</span>
                                     <span>★</span>
@@ -314,20 +378,20 @@ class __TwigTemplate_ad0c86e6cc616f58e069a880dc4bd363 extends Template
                                 </div>
                             ";
             }
-            // line 178
+            // line 242
             yield "
                             <div class=\"sponsor-content\">
                                 <div class=\"blog-comment d-flex justify-content-between py-1 px-2 mb-2\">
                                     <div class=\"small\">
                                         <span class=\"fa fa-user text-primary me-2\"></span> ";
-            // line 182
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "nom", [], "any", false, false, false, 182), "html", null, true);
+            // line 246
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "nom", [], "any", false, false, false, 246), "html", null, true);
             yield "
                                     </div>
                                     <div class=\"small\">
                                         <span class=\"fa fa-box text-primary me-2\"></span> ";
-            // line 185
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "pack", [], "any", false, false, false, 185), "html", null, true);
+            // line 249
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "pack", [], "any", false, false, false, 249), "html", null, true);
             yield "
                                     </div>
                                 </div>
@@ -335,39 +399,98 @@ class __TwigTemplate_ad0c86e6cc616f58e069a880dc4bd363 extends Template
                                 <div class=\"d-flex align-items-center mb-2\">
                                     <i class=\"fa fa-handshake fa-lg text-primary me-2\"></i>
                                     <a href=\"#\" class=\"h5 d-inline-block mb-0\">";
-            // line 191
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "nom", [], "any", false, false, false, 191), "html", null, true);
+            // line 255
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "nom", [], "any", false, false, false, 255), "html", null, true);
             yield "</a>
                                 </div>
 
                                 <p class=\"mb-2\" style=\"font-size: 0.9rem;\"><strong>Contact:</strong> ";
-            // line 194
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "contact", [], "any", false, false, false, 194), "html", null, true);
+            // line 258
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "contact", [], "any", false, false, false, 258), "html", null, true);
             yield "</p>
 
-                                <!-- Add the \"Payer\" button and Stripe form -->
-                                <form id=\"payment-form-";
-            // line 197
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "Id_sponsor", [], "any", false, false, false, 197), "html", null, true);
+                                <!-- Payment Form -->
+                                <form id=\"checkout-form-";
+            // line 261
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "Id_sponsor", [], "any", false, false, false, 261), "html", null, true);
             yield "\" method=\"post\" action=\"";
-            yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_stripe_charge");
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("sponsor_stripe_charge", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "Id_sponsor", [], "any", false, false, false, 261)]), "html", null, true);
             yield "\">
                                     <input type=\"hidden\" name=\"stripeToken\" id=\"stripe-token-id-";
-            // line 198
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "Id_sponsor", [], "any", false, false, false, 198), "html", null, true);
+            // line 262
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "Id_sponsor", [], "any", false, false, false, 262), "html", null, true);
             yield "\">
-                                    <input type=\"hidden\" id=\"contractTitle-";
-            // line 199
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "Id_sponsor", [], "any", false, false, false, 199), "html", null, true);
-            yield "\" name=\"contractTitle\" value=\"";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "nom", [], "any", false, false, false, 199), "html", null, true);
+                                    <input type=\"hidden\" name=\"_token\" value=\"";
+            // line 263
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderCsrfToken(("stripe_payment_" . CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "Id_sponsor", [], "any", false, false, false, 263))), "html", null, true);
             yield "\">
-                                    <input type=\"hidden\" id=\"amount-";
-            // line 200
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "Id_sponsor", [], "any", false, false, false, 200), "html", null, true);
-            yield "\" name=\"amount\" value=\"1000\">  <!-- Replace 1000 with dynamic amount if needed -->
+                                    <input type=\"hidden\" name=\"customerName\" value=\"";
+            // line 264
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "nom", [], "any", false, false, false, 264), "html", null, true);
+            yield "\">
 
-                                    <button type=\"submit\" class=\"btn btn-primary btn-sm mt-2\">
+                                    <!-- Contract Selection -->
+                                    <div class=\"mb-3\">
+                                        <label for=\"contract-";
+            // line 268
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "Id_sponsor", [], "any", false, false, false, 268), "html", null, true);
+            yield "\" class=\"form-label\">Sélectionner un Contrat</label>
+                                        <select id=\"contract-";
+            // line 269
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "Id_sponsor", [], "any", false, false, false, 269), "html", null, true);
+            yield "\" name=\"contractId\" class=\"form-select\" required>
+                                            <option value=\"\" disabled selected>Choisir un contrat</option>
+                                            ";
+            // line 271
+            $context['_parent'] = $context;
+            $context['_seq'] = CoreExtension::ensureTraversable(CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "contrats", [], "any", false, false, false, 271));
+            foreach ($context['_seq'] as $context["_key"] => $context["contract"]) {
+                // line 272
+                yield "                                                <option value=\"";
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["contract"], "Id_Contrat", [], "any", false, false, false, 272), "html", null, true);
+                yield "\">";
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["contract"], "Titre", [], "any", false, false, false, 272), "html", null, true);
+                yield " (";
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatNumber(CoreExtension::getAttribute($this->env, $this->source, $context["contract"], "Montant", [], "any", false, false, false, 272), 2, ".", ","), "html", null, true);
+                yield " \$)</option>
+                                            ";
+            }
+            $_parent = $context['_parent'];
+            unset($context['_seq'], $context['_key'], $context['contract'], $context['_parent']);
+            $context = array_intersect_key($context, $_parent) + $_parent;
+            // line 274
+            yield "                                        </select>
+                                    </div>
+
+                                    <!-- Card Element -->
+                                    <label for=\"card-element-";
+            // line 278
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "Id_sponsor", [], "any", false, false, false, 278), "html", null, true);
+            yield "\" class=\"form-label\">Détails de la Carte</label>
+                                    <div id=\"card-element-";
+            // line 279
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "Id_sponsor", [], "any", false, false, false, 279), "html", null, true);
+            yield "\" class=\"form-control\"></div>
+
+                                    <!-- Pay Button -->
+                                    <button 
+                                        id=\"pay-btn-";
+            // line 283
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "Id_sponsor", [], "any", false, false, false, 283), "html", null, true);
+            yield "\"
+                                        class=\"btn btn-success mt-2\"
+                                        type=\"button\"
+                                        onclick=\"createToken(";
+            // line 286
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "Id_sponsor", [], "any", false, false, false, 286), "html", null, true);
+            yield ")\"
+                                        ";
+            // line 287
+            if ( !Twig\Extension\CoreExtension::length($this->env->getCharset(), CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "contrats", [], "any", false, false, false, 287))) {
+                yield "disabled";
+            }
+            // line 288
+            yield "                                    >
                                         <i class=\"fa fa-credit-card me-1\"></i> Payer
                                     </button>
                                 </form>
@@ -376,26 +499,26 @@ class __TwigTemplate_ad0c86e6cc616f58e069a880dc4bd363 extends Template
 
                         <div class=\"flip-card-back 
                             ";
-            // line 210
-            if (((isset($context["pack"]) || array_key_exists("pack", $context) ? $context["pack"] : (function () { throw new RuntimeError('Variable "pack" does not exist.', 210, $this->source); })()) == "gold")) {
+            // line 296
+            if (((isset($context["pack"]) || array_key_exists("pack", $context) ? $context["pack"] : (function () { throw new RuntimeError('Variable "pack" does not exist.', 296, $this->source); })()) == "gold")) {
                 yield "sponsor-border-gold
                             ";
-            } elseif ((            // line 211
-(isset($context["pack"]) || array_key_exists("pack", $context) ? $context["pack"] : (function () { throw new RuntimeError('Variable "pack" does not exist.', 211, $this->source); })()) == "silver")) {
+            } elseif ((            // line 297
+(isset($context["pack"]) || array_key_exists("pack", $context) ? $context["pack"] : (function () { throw new RuntimeError('Variable "pack" does not exist.', 297, $this->source); })()) == "silver")) {
                 yield "sponsor-border-silver
                             ";
-            } elseif ((            // line 212
-(isset($context["pack"]) || array_key_exists("pack", $context) ? $context["pack"] : (function () { throw new RuntimeError('Variable "pack" does not exist.', 212, $this->source); })()) == "bronze")) {
+            } elseif ((            // line 298
+(isset($context["pack"]) || array_key_exists("pack", $context) ? $context["pack"] : (function () { throw new RuntimeError('Variable "pack" does not exist.', 298, $this->source); })()) == "bronze")) {
                 yield "sponsor-border-bronze
                             ";
             }
-            // line 213
+            // line 299
             yield "\">
                             <p style=\"font-size: 0.95rem;\">Merci à ";
-            // line 214
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "nom", [], "any", false, false, false, 214), "html", null, true);
+            // line 300
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "nom", [], "any", false, false, false, 300), "html", null, true);
             yield " pour leur soutien précieux en tant que sponsor ";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::capitalize($this->env->getCharset(), CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "pack", [], "any", false, false, false, 214)), "html", null, true);
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::capitalize($this->env->getCharset(), CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "pack", [], "any", false, false, false, 300)), "html", null, true);
             yield " !</p>
                         </div>
                     </div>
@@ -412,9 +535,9 @@ class __TwigTemplate_ad0c86e6cc616f58e069a880dc4bd363 extends Template
                 $context['loop']['last'] = 0 === $context['loop']['revindex0'];
             }
         }
-        // line 219
+        // line 305
         if (!$context['_iterated']) {
-            // line 220
+            // line 306
             yield "            <div class=\"text-center\">
                 <p>Aucun sponsor trouvé.</p>
             </div>
@@ -423,92 +546,152 @@ class __TwigTemplate_ad0c86e6cc616f58e069a880dc4bd363 extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_key'], $context['sponsor'], $context['_parent'], $context['_iterated'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 224
+        // line 310
         yield "    </div>
 </div>
 
 <script src=\"https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js\"></script>
 <script src=\"https://js.stripe.com/v3/\"></script>
-
 <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const stripe = Stripe(\"";
+        // line 317
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["stripe_public_key"]) || array_key_exists("stripe_public_key", $context) ? $context["stripe_public_key"] : (function () { throw new RuntimeError('Variable "stripe_public_key" does not exist.', 317, $this->source); })()), "html", null, true);
+        yield "\");
+        const elements = stripe.elements();
 
-    // Crée un élément de carte pour chaque sponsor
-    ";
-        // line 233
+        // Object to store card elements for each sponsor
+        const cardElements = {};
+
+        // Initialize Stripe card elements for each sponsor
+        ";
+        // line 324
         $context['_parent'] = $context;
-        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["sponsors"]) || array_key_exists("sponsors", $context) ? $context["sponsors"] : (function () { throw new RuntimeError('Variable "sponsors" does not exist.', 233, $this->source); })()));
+        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["sponsors"]) || array_key_exists("sponsors", $context) ? $context["sponsors"] : (function () { throw new RuntimeError('Variable "sponsors" does not exist.', 324, $this->source); })()));
         foreach ($context['_seq'] as $context["_key"] => $context["sponsor"]) {
-            // line 234
-            yield "        const cardElement";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "Id_sponsor", [], "any", false, false, false, 234), "html", null, true);
-            yield " = elements.create('card');
-        cardElement";
-            // line 235
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "Id_sponsor", [], "any", false, false, false, 235), "html", null, true);
-            yield ".mount('#card-element-";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "Id_sponsor", [], "any", false, false, false, 235), "html", null, true);
+            // line 325
+            yield "            try {
+                console.log(`Initializing card element for sponsor \${ ";
+            // line 326
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "Id_sponsor", [], "any", false, false, false, 326), "html", null, true);
+            yield " }`);
+                const cardElement = elements.create('card', {
+                    style: {
+                        base: {
+                            fontSize: '14px',
+                            color: '#32325d',
+                            '::placeholder': { color: '#aab7c4' },
+                        },
+                        invalid: { color: '#fa755a' },
+                    },
+                });
+                const cardElementContainer = document.getElementById('card-element-";
+            // line 337
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "Id_sponsor", [], "any", false, false, false, 337), "html", null, true);
             yield "');
-
-        const form";
-            // line 237
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "Id_sponsor", [], "any", false, false, false, 237), "html", null, true);
-            yield " = document.getElementById('payment-form-";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "Id_sponsor", [], "any", false, false, false, 237), "html", null, true);
+                if (!cardElementContainer) {
+                    throw new Error(`Card element container not found for sponsor \${ ";
+            // line 339
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "Id_sponsor", [], "any", false, false, false, 339), "html", null, true);
+            yield " }`);
+                }
+                cardElement.mount('#card-element-";
+            // line 341
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "Id_sponsor", [], "any", false, false, false, 341), "html", null, true);
             yield "');
-        const submitButton";
-            // line 238
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "Id_sponsor", [], "any", false, false, false, 238), "html", null, true);
-            yield " = form";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "Id_sponsor", [], "any", false, false, false, 238), "html", null, true);
-            yield ".querySelector('button');
-        const errorMessage";
-            // line 239
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "Id_sponsor", [], "any", false, false, false, 239), "html", null, true);
-            yield " = form";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "Id_sponsor", [], "any", false, false, false, 239), "html", null, true);
-            yield ".querySelector('.error-message');
-
-    
-    const stripe = Stripe(\"";
-            // line 242
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["stripe_key"]) || array_key_exists("stripe_key", $context) ? $context["stripe_key"] : (function () { throw new RuntimeError('Variable "stripe_key" does not exist.', 242, $this->source); })()), "html", null, true);
-            yield "\");
-    const elements = stripe.elements();
-    const cardElement = elements.create('card');
-    cardElement.mount('#card-element');
-
-    const form = document.getElementById('payment-form');
-    const submitButton = document.getElementById('submit');
-    const errorMessage = document.getElementById('error-message');
-
-    form.addEventListener('submit', async (event) => {
-        event.preventDefault();
-        submitButton.disabled = true;
-
-        try {
-            const {token, error} = await stripe.createToken(cardElement);
-            if (error) {
-                errorMessage.textContent = error.message;
-                submitButton.disabled = false;
-                return;
+                cardElements[";
+            // line 342
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "Id_sponsor", [], "any", false, false, false, 342), "html", null, true);
+            yield "] = cardElement;
+                console.log(`Card element mounted for sponsor \${ ";
+            // line 343
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "Id_sponsor", [], "any", false, false, false, 343), "html", null, true);
+            yield " }`);
+            } catch (error) {
+                console.error(`Error initializing card element for sponsor \${ ";
+            // line 345
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "Id_sponsor", [], "any", false, false, false, 345), "html", null, true);
+            yield " }:`, error.message);
             }
-
-            document.getElementById(\"stripe-token-id\").value = token.id;
-            form.submit();
-        } catch (err) {
-            errorMessage.textContent = err.message;
-            submitButton.disabled = false;
-        }
-        });
-    ";
+        ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_key'], $context['sponsor'], $context['_parent']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 271
-        yield "</script>
+        // line 348
+        yield "
+        // Function to create token and submit form
+        window.createToken = function(sponsorId) {
+            try {
+                console.log(`Creating token for sponsor \${sponsorId}`);
+                const payBtn = document.getElementById(`pay-btn-\${sponsorId}`);
+                const form = document.getElementById(`checkout-form-\${sponsorId}`);
+                const contractSelect = document.getElementById(`contract-\${sponsorId}`);
 
+                if (!payBtn || !form || !contractSelect) {
+                    throw new Error(`Form elements not found for sponsor \${sponsorId}`);
+                }
 
+                if (!contractSelect.value) {
+                    alert('Veuillez sélectionner un contrat.');
+                    return;
+                }
+
+                const cardElement = cardElements[sponsorId];
+                if (!cardElement) {
+                    throw new Error(`Card element not found for sponsor \${sponsorId}`);
+                }
+
+                payBtn.disabled = true;
+
+                stripe.createToken(cardElement).then(function(result) {
+                    if (result.error) {
+                        payBtn.disabled = false;
+                        alert(result.error.message);
+                    } else if (result.token) {
+                        document.getElementById(`stripe-token-id-\${sponsorId}`).value = result.token.id;
+                        form.submit();
+                    }
+                }).catch(function(error) {
+                    payBtn.disabled = false;
+                    console.error(`Error creating token for sponsor \${sponsorId}:`, error.message);
+                    alert('Une erreur est survenue : ' + error.message);
+                });
+            } catch (error) {
+                console.error(`Error in createToken for sponsor \${sponsorId}:`, error.message);
+                alert('Une erreur est survenue lors de la soumission du paiement.');
+            }
+        };
+
+        // Handle card flipping with flip button
+        document.querySelectorAll('.flip-card').forEach(card => {
+            const flipBtn = card.querySelector('.flip-btn');
+
+            card.addEventListener('mouseenter', () => {
+                flipBtn.style.opacity = '1';
+            });
+            card.addEventListener('mouseleave', () => {
+                if (!card.classList.contains('flipped')) {
+                    flipBtn.style.opacity = '0';
+                }
+            });
+
+            card.addEventListener('touchstart', () => {
+                card.classList.add('touched');
+            });
+
+            flipBtn.addEventListener('click', () => {
+                card.classList.toggle('flipped');
+                if (card.classList.contains('flipped')) {
+                    flipBtn.style.opacity = '1';
+                }
+            });
+        });
+
+        // Initialize WOW.js for animations
+        new WOW().init();
+    });
+</script>
 ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -540,7 +723,7 @@ class __TwigTemplate_ad0c86e6cc616f58e069a880dc4bd363 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  509 => 271,  474 => 242,  466 => 239,  460 => 238,  454 => 237,  447 => 235,  442 => 234,  438 => 233,  427 => 224,  418 => 220,  416 => 219,  396 => 214,  393 => 213,  388 => 212,  384 => 211,  380 => 210,  367 => 200,  361 => 199,  357 => 198,  351 => 197,  345 => 194,  339 => 191,  330 => 185,  324 => 182,  318 => 178,  309 => 171,  307 => 170,  303 => 168,  298 => 167,  294 => 166,  290 => 165,  284 => 162,  279 => 161,  276 => 160,  258 => 159,  105 => 9,  100 => 6,  87 => 5,  64 => 3,  41 => 1,);
+        return array (  622 => 348,  613 => 345,  608 => 343,  604 => 342,  600 => 341,  595 => 339,  590 => 337,  576 => 326,  573 => 325,  569 => 324,  559 => 317,  550 => 310,  541 => 306,  539 => 305,  519 => 300,  516 => 299,  511 => 298,  507 => 297,  503 => 296,  493 => 288,  489 => 287,  485 => 286,  479 => 283,  472 => 279,  468 => 278,  462 => 274,  449 => 272,  445 => 271,  440 => 269,  436 => 268,  429 => 264,  425 => 263,  421 => 262,  415 => 261,  409 => 258,  403 => 255,  394 => 249,  388 => 246,  382 => 242,  373 => 235,  371 => 234,  367 => 232,  362 => 231,  358 => 230,  354 => 229,  345 => 223,  340 => 222,  337 => 221,  319 => 220,  105 => 9,  100 => 6,  87 => 5,  64 => 3,  41 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -581,12 +764,12 @@ class __TwigTemplate_ad0c86e6cc616f58e069a880dc4bd363 extends Template
         border-radius: 2px;
     }
 
-    /* Smaller Flip Card */
     .flip-card {
         background-color: transparent;
         width: 100%;
-        height: 260px;
+        height: 340px;
         perspective: 1000px;
+        position: relative;
     }
 
     .flip-card-inner {
@@ -597,7 +780,7 @@ class __TwigTemplate_ad0c86e6cc616f58e069a880dc4bd363 extends Template
         transform-style: preserve-3d;
     }
 
-    .flip-card.dblclick .flip-card-inner {
+    .flip-card.flipped .flip-card-inner {
         transform: rotateY(180deg);
     }
 
@@ -660,7 +843,6 @@ class __TwigTemplate_ad0c86e6cc616f58e069a880dc4bd363 extends Template
         border: 3px solid #CD7F32;
     }
 
-    /* Floating Stars */
     .floating-stars {
         position: absolute;
         top: 0;
@@ -690,13 +872,75 @@ class __TwigTemplate_ad0c86e6cc616f58e069a880dc4bd363 extends Template
         50%  { transform: translateY(-20px) scale(1.3); opacity: 1; }
         100% { transform: translateY(0) scale(1);   opacity: 0.8; }
     }
+
+    #card-element {
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        background: #fff;
+        margin-bottom: 10px;
+    }
+
+    .btn-success {
+        width: 100%;
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+
+    .btn-success:disabled {
+        background-color: #6c757d;
+        border-color: #6c757d;
+        cursor: not-allowed;
+    }
+
+    .mb-3 {
+        margin-bottom: 0.75rem !important;
+    }
+
+    .form-label {
+        font-size: 0.9rem;
+        margin-bottom: 0.25rem;
+    }
+
+    .form-control, .form-select {
+        font-size: 0.9rem;
+        padding: 8px;
+    }
+
+    .flip-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background-color: rgba(0, 123, 255, 0.8);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        z-index: 3;
+        font-size: 0.9rem;
+    }
+
+    .flip-card:hover .flip-btn,
+    .flip-card.touched .flip-btn {
+        opacity: 1;
+    }
+
+    .flip-btn:hover {
+        background-color: rgba(0, 123, 255, 1);
+    }
 </style>
 
 <div class=\"container-fluid bg-breadcrumb\">
     <div class=\"container text-center py-5\" style=\"max-width: 900px;\">
         <h4 class=\"text-white display-4 mb-4 wow fadeInDown\" data-wow-delay=\"0.1s\">Nos Sponsors</h4>
         <ol class=\"breadcrumb d-flex justify-content-center mb-0 wow fadeInDown\" data-wow-delay=\"0.3s\">
-            <!-- Breadcrumb content can be added here if needed -->
         </ol>    
     </div>
 </div>
@@ -707,6 +951,9 @@ class __TwigTemplate_ad0c86e6cc616f58e069a880dc4bd363 extends Template
             {% set pack = sponsor.pack|lower %}
             <div class=\"col-md-6 col-lg-4 mb-4 wow fadeInUp\" data-wow-delay=\"{{ 0.2 + loop.index0 * 0.2 }}s\">
                 <div class=\"flip-card\" data-id=\"flip-{{ sponsor.Id_sponsor }}\">
+                    <button class=\"flip-btn\" title=\"Flip Card\">
+                        <i class=\"fa fa-sync-alt\"></i>
+                    </button>
                     <div class=\"flip-card-inner\">
                         <div class=\"flip-card-front sponsor-card 
                             {% if pack == 'gold' %}sponsor-border-gold
@@ -740,13 +987,35 @@ class __TwigTemplate_ad0c86e6cc616f58e069a880dc4bd363 extends Template
 
                                 <p class=\"mb-2\" style=\"font-size: 0.9rem;\"><strong>Contact:</strong> {{ sponsor.contact }}</p>
 
-                                <!-- Add the \"Payer\" button and Stripe form -->
-                                <form id=\"payment-form-{{ sponsor.Id_sponsor }}\" method=\"post\" action=\"{{ path('app_stripe_charge') }}\">
+                                <!-- Payment Form -->
+                                <form id=\"checkout-form-{{ sponsor.Id_sponsor }}\" method=\"post\" action=\"{{ path('sponsor_stripe_charge', {'id': sponsor.Id_sponsor}) }}\">
                                     <input type=\"hidden\" name=\"stripeToken\" id=\"stripe-token-id-{{ sponsor.Id_sponsor }}\">
-                                    <input type=\"hidden\" id=\"contractTitle-{{ sponsor.Id_sponsor }}\" name=\"contractTitle\" value=\"{{ sponsor.nom }}\">
-                                    <input type=\"hidden\" id=\"amount-{{ sponsor.Id_sponsor }}\" name=\"amount\" value=\"1000\">  <!-- Replace 1000 with dynamic amount if needed -->
+                                    <input type=\"hidden\" name=\"_token\" value=\"{{ csrf_token('stripe_payment_' ~ sponsor.Id_sponsor) }}\">
+                                    <input type=\"hidden\" name=\"customerName\" value=\"{{ sponsor.nom }}\">
 
-                                    <button type=\"submit\" class=\"btn btn-primary btn-sm mt-2\">
+                                    <!-- Contract Selection -->
+                                    <div class=\"mb-3\">
+                                        <label for=\"contract-{{ sponsor.Id_sponsor }}\" class=\"form-label\">Sélectionner un Contrat</label>
+                                        <select id=\"contract-{{ sponsor.Id_sponsor }}\" name=\"contractId\" class=\"form-select\" required>
+                                            <option value=\"\" disabled selected>Choisir un contrat</option>
+                                            {% for contract in sponsor.contrats %}
+                                                <option value=\"{{ contract.Id_Contrat }}\">{{ contract.Titre }} ({{ contract.Montant|number_format(2, '.', ',') }} \$)</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+
+                                    <!-- Card Element -->
+                                    <label for=\"card-element-{{ sponsor.Id_sponsor }}\" class=\"form-label\">Détails de la Carte</label>
+                                    <div id=\"card-element-{{ sponsor.Id_sponsor }}\" class=\"form-control\"></div>
+
+                                    <!-- Pay Button -->
+                                    <button 
+                                        id=\"pay-btn-{{ sponsor.Id_sponsor }}\"
+                                        class=\"btn btn-success mt-2\"
+                                        type=\"button\"
+                                        onclick=\"createToken({{ sponsor.Id_sponsor }})\"
+                                        {% if not sponsor.contrats|length %}disabled{% endif %}
+                                    >
                                         <i class=\"fa fa-credit-card me-1\"></i> Payer
                                     </button>
                                 </form>
@@ -773,52 +1042,112 @@ class __TwigTemplate_ad0c86e6cc616f58e069a880dc4bd363 extends Template
 
 <script src=\"https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js\"></script>
 <script src=\"https://js.stripe.com/v3/\"></script>
-
 <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const stripe = Stripe(\"{{ stripe_public_key }}\");
+        const elements = stripe.elements();
 
-    // Crée un élément de carte pour chaque sponsor
-    {% for sponsor in sponsors %}
-        const cardElement{{ sponsor.Id_sponsor }} = elements.create('card');
-        cardElement{{ sponsor.Id_sponsor }}.mount('#card-element-{{ sponsor.Id_sponsor }}');
+        // Object to store card elements for each sponsor
+        const cardElements = {};
 
-        const form{{ sponsor.Id_sponsor }} = document.getElementById('payment-form-{{ sponsor.Id_sponsor }}');
-        const submitButton{{ sponsor.Id_sponsor }} = form{{ sponsor.Id_sponsor }}.querySelector('button');
-        const errorMessage{{ sponsor.Id_sponsor }} = form{{ sponsor.Id_sponsor }}.querySelector('.error-message');
-
-    
-    const stripe = Stripe(\"{{ stripe_key }}\");
-    const elements = stripe.elements();
-    const cardElement = elements.create('card');
-    cardElement.mount('#card-element');
-
-    const form = document.getElementById('payment-form');
-    const submitButton = document.getElementById('submit');
-    const errorMessage = document.getElementById('error-message');
-
-    form.addEventListener('submit', async (event) => {
-        event.preventDefault();
-        submitButton.disabled = true;
-
-        try {
-            const {token, error} = await stripe.createToken(cardElement);
-            if (error) {
-                errorMessage.textContent = error.message;
-                submitButton.disabled = false;
-                return;
+        // Initialize Stripe card elements for each sponsor
+        {% for sponsor in sponsors %}
+            try {
+                console.log(`Initializing card element for sponsor \${ {{ sponsor.Id_sponsor }} }`);
+                const cardElement = elements.create('card', {
+                    style: {
+                        base: {
+                            fontSize: '14px',
+                            color: '#32325d',
+                            '::placeholder': { color: '#aab7c4' },
+                        },
+                        invalid: { color: '#fa755a' },
+                    },
+                });
+                const cardElementContainer = document.getElementById('card-element-{{ sponsor.Id_sponsor }}');
+                if (!cardElementContainer) {
+                    throw new Error(`Card element container not found for sponsor \${ {{ sponsor.Id_sponsor }} }`);
+                }
+                cardElement.mount('#card-element-{{ sponsor.Id_sponsor }}');
+                cardElements[{{ sponsor.Id_sponsor }}] = cardElement;
+                console.log(`Card element mounted for sponsor \${ {{ sponsor.Id_sponsor }} }`);
+            } catch (error) {
+                console.error(`Error initializing card element for sponsor \${ {{ sponsor.Id_sponsor }} }:`, error.message);
             }
+        {% endfor %}
 
-            document.getElementById(\"stripe-token-id\").value = token.id;
-            form.submit();
-        } catch (err) {
-            errorMessage.textContent = err.message;
-            submitButton.disabled = false;
-        }
+        // Function to create token and submit form
+        window.createToken = function(sponsorId) {
+            try {
+                console.log(`Creating token for sponsor \${sponsorId}`);
+                const payBtn = document.getElementById(`pay-btn-\${sponsorId}`);
+                const form = document.getElementById(`checkout-form-\${sponsorId}`);
+                const contractSelect = document.getElementById(`contract-\${sponsorId}`);
+
+                if (!payBtn || !form || !contractSelect) {
+                    throw new Error(`Form elements not found for sponsor \${sponsorId}`);
+                }
+
+                if (!contractSelect.value) {
+                    alert('Veuillez sélectionner un contrat.');
+                    return;
+                }
+
+                const cardElement = cardElements[sponsorId];
+                if (!cardElement) {
+                    throw new Error(`Card element not found for sponsor \${sponsorId}`);
+                }
+
+                payBtn.disabled = true;
+
+                stripe.createToken(cardElement).then(function(result) {
+                    if (result.error) {
+                        payBtn.disabled = false;
+                        alert(result.error.message);
+                    } else if (result.token) {
+                        document.getElementById(`stripe-token-id-\${sponsorId}`).value = result.token.id;
+                        form.submit();
+                    }
+                }).catch(function(error) {
+                    payBtn.disabled = false;
+                    console.error(`Error creating token for sponsor \${sponsorId}:`, error.message);
+                    alert('Une erreur est survenue : ' + error.message);
+                });
+            } catch (error) {
+                console.error(`Error in createToken for sponsor \${sponsorId}:`, error.message);
+                alert('Une erreur est survenue lors de la soumission du paiement.');
+            }
+        };
+
+        // Handle card flipping with flip button
+        document.querySelectorAll('.flip-card').forEach(card => {
+            const flipBtn = card.querySelector('.flip-btn');
+
+            card.addEventListener('mouseenter', () => {
+                flipBtn.style.opacity = '1';
+            });
+            card.addEventListener('mouseleave', () => {
+                if (!card.classList.contains('flipped')) {
+                    flipBtn.style.opacity = '0';
+                }
+            });
+
+            card.addEventListener('touchstart', () => {
+                card.classList.add('touched');
+            });
+
+            flipBtn.addEventListener('click', () => {
+                card.classList.toggle('flipped');
+                if (card.classList.contains('flipped')) {
+                    flipBtn.style.opacity = '1';
+                }
+            });
         });
-    {% endfor %}
+
+        // Initialize WOW.js for animations
+        new WOW().init();
+    });
 </script>
-
-
-{% endblock %}
-", "sponsor/sponsor_front.html.twig", "C:\\Users\\amine\\Downloads\\matchupz-web-integration\\matchupz-web-integration\\templates\\sponsor\\sponsor_front.html.twig");
+{% endblock %}", "sponsor/sponsor_front.html.twig", "C:\\Users\\amine\\Downloads\\matchupz-web-integration\\matchupz-web-integration\\templates\\sponsor\\sponsor_front.html.twig");
     }
 }

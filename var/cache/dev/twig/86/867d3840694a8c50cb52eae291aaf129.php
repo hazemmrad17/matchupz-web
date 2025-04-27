@@ -122,41 +122,74 @@ class __TwigTemplate_272d60fa8712129f9cf9749fe8f311b1 extends Template
             <div class=\"mb-3\">
                 ";
         // line 17
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 17, $this->source); })()), "pack", [], "any", false, false, false, 17), 'label', ["label_attr" => ["class" => "form-label"], "label" => "Pack"]);
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 17, $this->source); })()), "contact", [], "any", false, false, false, 17), 'label', ["label_attr" => ["class" => "form-label"], "label" => "Contact"]);
         yield "
                 ";
         // line 18
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 18, $this->source); })()), "pack", [], "any", false, false, false, 18), 'widget', ["attr" => ["class" => "form-control"]]);
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 18, $this->source); })()), "contact", [], "any", false, false, false, 18), 'widget', ["attr" => ["class" => "form-control"]]);
         yield "
                 ";
         // line 19
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 19, $this->source); })()), "pack", [], "any", false, false, false, 19), 'errors');
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 19, $this->source); })()), "contact", [], "any", false, false, false, 19), 'errors');
         yield "
             </div>
             <div class=\"mb-3\">
                 ";
         // line 22
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 22, $this->source); })()), "contact", [], "any", false, false, false, 22), 'label', ["label_attr" => ["class" => "form-label"], "label" => "Contact"]);
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 22, $this->source); })()), "pack", [], "any", false, false, false, 22), 'label', ["label_attr" => ["class" => "form-label"], "label" => "Pack"]);
         yield "
                 ";
         // line 23
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 23, $this->source); })()), "contact", [], "any", false, false, false, 23), 'widget', ["attr" => ["class" => "form-control"]]);
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 23, $this->source); })()), "pack", [], "any", false, false, false, 23), 'widget', ["attr" => ["class" => "form-control"]]);
         yield "
                 ";
         // line 24
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 24, $this->source); })()), "contact", [], "any", false, false, false, 24), 'errors');
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 24, $this->source); })()), "pack", [], "any", false, false, false, 24), 'errors');
         yield "
             </div>
-            <button type=\"submit\" class=\"btn btn-primary\">Save</button>
-        ";
+            <div class=\"mb-3\">
+                ";
         // line 27
-        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 27, $this->source); })()), 'form_end');
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 27, $this->source); })()), "sponsorPicture", [], "any", false, false, false, 27), 'label', ["label_attr" => ["class" => "form-label"], "label" => "Sponsor Picture"]);
+        yield "
+                ";
+        // line 28
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 28, $this->source); })()), "sponsorPicture", [], "any", false, false, false, 28), 'widget', ["attr" => ["class" => "form-control"]]);
+        yield "
+                ";
+        // line 29
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 29, $this->source); })()), "sponsorPicture", [], "any", false, false, false, 29), 'errors');
+        yield "
+                ";
+        // line 30
+        if (CoreExtension::getAttribute($this->env, $this->source, (isset($context["sponsor"]) || array_key_exists("sponsor", $context) ? $context["sponsor"] : (function () { throw new RuntimeError('Variable "sponsor" does not exist.', 30, $this->source); })()), "sponsorPicture", [], "any", false, false, false, 30)) {
+            // line 31
+            yield "                    <div class=\"mt-2\">
+                        <p>Current Image:</p>
+                        <img src=\"";
+            // line 33
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("uploads/sponsor_pictures/" . CoreExtension::getAttribute($this->env, $this->source, (isset($context["sponsor"]) || array_key_exists("sponsor", $context) ? $context["sponsor"] : (function () { throw new RuntimeError('Variable "sponsor" does not exist.', 33, $this->source); })()), "sponsorPicture", [], "any", false, false, false, 33))), "html", null, true);
+            yield "\" alt=\"";
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["sponsor"]) || array_key_exists("sponsor", $context) ? $context["sponsor"] : (function () { throw new RuntimeError('Variable "sponsor" does not exist.', 33, $this->source); })()), "nom", [], "any", false, false, false, 33), "html", null, true);
+            yield "\" style=\"max-width: 200px; max-height: 200px;\">
+                    </div>
+                ";
+        }
+        // line 36
+        yield "            </div>
+            <div class=\"mb-3\">
+            <button type=\"submit\" class=\"btn btn-primary\">Mettre à jour</button>
+            <a href=\"";
+        // line 39
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("sponsor_main");
+        yield "\" class=\"btn btn-secondary\">Annuler</a>
+            </div>
+        ";
+        // line 41
+        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 41, $this->source); })()), 'form_end');
         yield "
 
-        <a href=\"";
-        // line 29
-        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("sponsor_main");
-        yield "\" class=\"btn btn-secondary mt-3\">Back to List</a>
+        
     </div>
 </div>
 ";
@@ -190,7 +223,7 @@ class __TwigTemplate_272d60fa8712129f9cf9749fe8f311b1 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  158 => 29,  153 => 27,  147 => 24,  143 => 23,  139 => 22,  133 => 19,  129 => 18,  125 => 17,  119 => 14,  115 => 13,  111 => 12,  106 => 10,  100 => 6,  87 => 5,  64 => 3,  41 => 1,);
+        return array (  189 => 41,  184 => 39,  179 => 36,  171 => 33,  167 => 31,  165 => 30,  161 => 29,  157 => 28,  153 => 27,  147 => 24,  143 => 23,  139 => 22,  133 => 19,  129 => 18,  125 => 17,  119 => 14,  115 => 13,  111 => 12,  106 => 10,  100 => 6,  87 => 5,  64 => 3,  41 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -211,19 +244,33 @@ class __TwigTemplate_272d60fa8712129f9cf9749fe8f311b1 extends Template
                 {{ form_errors(form.nom) }}
             </div>
             <div class=\"mb-3\">
+                {{ form_label(form.contact, 'Contact', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.contact, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.contact) }}
+            </div>
+            <div class=\"mb-3\">
                 {{ form_label(form.pack, 'Pack', {'label_attr': {'class': 'form-label'}}) }}
                 {{ form_widget(form.pack, {'attr': {'class': 'form-control'}}) }}
                 {{ form_errors(form.pack) }}
             </div>
             <div class=\"mb-3\">
-                {{ form_label(form.contact, 'Contact', {'label_attr': {'class': 'form-label'}}) }}
-                {{ form_widget(form.contact, {'attr': {'class': 'form-control'}}) }}
-                {{ form_errors(form.contact) }}
+                {{ form_label(form.sponsorPicture, 'Sponsor Picture', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.sponsorPicture, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.sponsorPicture) }}
+                {% if sponsor.sponsorPicture %}
+                    <div class=\"mt-2\">
+                        <p>Current Image:</p>
+                        <img src=\"{{ asset('uploads/sponsor_pictures/' ~ sponsor.sponsorPicture) }}\" alt=\"{{ sponsor.nom }}\" style=\"max-width: 200px; max-height: 200px;\">
+                    </div>
+                {% endif %}
             </div>
-            <button type=\"submit\" class=\"btn btn-primary\">Save</button>
+            <div class=\"mb-3\">
+            <button type=\"submit\" class=\"btn btn-primary\">Mettre à jour</button>
+            <a href=\"{{ path('sponsor_main') }}\" class=\"btn btn-secondary\">Annuler</a>
+            </div>
         {{ form_end(form) }}
 
-        <a href=\"{{ path('sponsor_main') }}\" class=\"btn btn-secondary mt-3\">Back to List</a>
+        
     </div>
 </div>
 {% endblock %}", "sponsor/edit.html.twig", "C:\\Users\\amine\\Downloads\\matchupz-web-integration\\matchupz-web-integration\\templates\\sponsor\\edit.html.twig");

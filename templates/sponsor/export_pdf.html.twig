@@ -115,6 +115,7 @@
                     <th>Nom</th>
                     <th>Contact</th>
                     <th>Pack</th>
+                    <th>Logo</th>
                 </tr>
             </thead>
             <tbody>
@@ -123,6 +124,13 @@
                         <td>{{ sponsor.nom }}</td>
                         <td>{{ sponsor.contact ?? 'N/A' }}</td>
                         <td>{{ sponsor.pack ?? 'N/A' }}</td>
+                        <td>
+                            {% if sponsor.sponsorPicture %}
+                                <img src="{{ asset(sponsor.sponsorPicture)|replace({'http://': 'file:///'}) }}" alt="{{ sponsor.nom }} Logo" />
+                            {% else %}
+                                <span class="no-image">Aucun logo</span>
+                            {% endif %}
+                        </td>
                     </tr>
                 {% else %}
                     <tr>

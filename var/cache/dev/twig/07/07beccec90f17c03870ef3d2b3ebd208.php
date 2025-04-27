@@ -137,54 +137,61 @@ class __TwigTemplate_48978ab8bd31d05ba0f0a56957f118c6 extends Template
         yield "            <div class=\"card\">
                 <h5 class=\"card-header d-flex justify-content-between align-items-center\">
                     <div class=\"d-flex align-items-center\">
-                        ";
-        // line 21
-        yield "                        <form class=\"d-flex\" method=\"get\" action=\"";
-        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("contrat_main");
-        yield "\">
-                            <div class=\"input-group\">
-                                <span class=\"input-group-text\"><i class=\"bx bx-search\"></i></span>
-                                <input type=\"text\" class=\"form-control\" name=\"search\" placeholder=\"Rechercher titre, sponsor ou montant...\" value=\"";
-        // line 24
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(((array_key_exists("searchTerm", $context)) ? (Twig\Extension\CoreExtension::default((isset($context["searchTerm"]) || array_key_exists("searchTerm", $context) ? $context["searchTerm"] : (function () { throw new RuntimeError('Variable "searchTerm" does not exist.', 24, $this->source); })()), "")) : ("")), "html", null, true);
-        yield "\">
+                        <div class=\"navbar-nav align-items-center ms-3\">
+                            <div class=\"nav-item d-flex align-items-center\">
+                                <i class=\"bx bx-search fs-4 lh-0\"></i>
+                                <input
+                                    type=\"text\"
+                                    id=\"searchInput\"
+                                    class=\"form-control border-0 shadow-none\"
+                                    placeholder=\"Rechercher titre, sponsor ou montant...\"
+                                    aria-label=\"Rechercher titre, sponsor ou montant...\"
+                                    value=\"";
+        // line 29
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(((array_key_exists("searchTerm", $context)) ? (Twig\Extension\CoreExtension::default((isset($context["searchTerm"]) || array_key_exists("searchTerm", $context) ? $context["searchTerm"] : (function () { throw new RuntimeError('Variable "searchTerm" does not exist.', 29, $this->source); })()), "")) : ("")), "html", null, true);
+        yield "\"
+                                />
                             </div>
-                        </form>
+                        </div>
                     </div>
 
                     <div class=\"d-flex align-items-center\">
                         ";
-        // line 31
+        // line 37
         yield "                        <div class=\"btn-group me-2\">
                             <button type=\"button\" class=\"btn btn-outline-secondary dropdown-toggle\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\">
                                 Filtrer
                             </button>
                             <ul class=\"dropdown-menu\">
                                 <li><a class=\"dropdown-item\" href=\"";
-        // line 36
+        // line 42
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("contrat_main", ["filter" => "titre"]);
         yield "\">Par Titre</a></li>
                                 <li><a class=\"dropdown-item\" href=\"";
-        // line 37
+        // line 43
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("contrat_main", ["filter" => "datedebut"]);
         yield "\">Par Date de Début</a></li>
                                 <li><a class=\"dropdown-item\" href=\"";
-        // line 38
+        // line 44
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("contrat_main", ["filter" => "datefin"]);
         yield "\">Par Date de Fin</a></li>
                                 <li><a class=\"dropdown-item\" href=\"";
-        // line 39
+        // line 45
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("contrat_main", ["filter" => "montant"]);
         yield "\">Par Montant</a></li>
                                 <li><a class=\"dropdown-item\" href=\"";
-        // line 40
+        // line 46
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("contrat_main", ["filter" => "sponsor"]);
         yield "\">Par Sponsor</a></li>
+                                <li><a class=\"dropdown-item\" href=\"";
+        // line 47
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("contrat_main", ["filter" => "article"]);
+        yield "\">Par Article</a></li>
                             </ul>
                         </div>
 
                         ";
-        // line 45
+        // line 52
         yield "                        <a href=\"";
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("contrat_statistics");
         yield "\" class=\"btn btn-dark me-2\">
@@ -192,7 +199,7 @@ class __TwigTemplate_48978ab8bd31d05ba0f0a56957f118c6 extends Template
                         </a>
 
                         ";
-        // line 50
+        // line 57
         yield "                        <a href=\"";
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("contrat_new");
         yield "\" class=\"btn btn-success me-2\">
@@ -200,7 +207,7 @@ class __TwigTemplate_48978ab8bd31d05ba0f0a56957f118c6 extends Template
                         </a>
 
                         ";
-        // line 55
+        // line 62
         yield "                        <div class=\"btn-group\">
                             <button type=\"button\" class=\"btn btn-warning dropdown-toggle\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\">
                                 <i class=\"bx bx-download me-1\"></i> Exporter
@@ -208,7 +215,7 @@ class __TwigTemplate_48978ab8bd31d05ba0f0a56957f118c6 extends Template
                             <ul class=\"dropdown-menu dropdown-menu-end\" style=\"max-height: 200px; overflow-y: auto;\">
                                 <li>
                                     <a class=\"dropdown-item\" href=\"";
-        // line 61
+        // line 68
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("contrat_export", ["format" => "xlsx"]);
         yield "\">
                                         <i class=\"bx bx-file me-1\"></i> Excel (.xlsx)
@@ -216,7 +223,7 @@ class __TwigTemplate_48978ab8bd31d05ba0f0a56957f118c6 extends Template
                                 </li>
                                 <li>
                                     <a class=\"dropdown-item\" href=\"";
-        // line 66
+        // line 73
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("contrat_export", ["format" => "csv"]);
         yield "\">
                                         <i class=\"bx bx-file me-1\"></i> CSV (.csv)
@@ -224,7 +231,7 @@ class __TwigTemplate_48978ab8bd31d05ba0f0a56957f118c6 extends Template
                                 </li>
                                 <li>
                                     <a class=\"dropdown-item\" href=\"";
-        // line 71
+        // line 78
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("contrat_export", ["format" => "pdf"]);
         yield "\">
                                         <i class=\"bx bx-file me-1\"></i> PDF (.pdf)
@@ -232,7 +239,7 @@ class __TwigTemplate_48978ab8bd31d05ba0f0a56957f118c6 extends Template
                                 </li>
                                 <li>
                                     <a class=\"dropdown-item\" href=\"";
-        // line 76
+        // line 83
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("contrat_export", ["format" => "sql"]);
         yield "\">
                                         <i class=\"bx bx-data me-1\"></i> SQL (.sql)
@@ -243,7 +250,7 @@ class __TwigTemplate_48978ab8bd31d05ba0f0a56957f118c6 extends Template
                     </div>
                 </h5>
                 <div class=\"table-responsive text-nowrap\">
-                    <table class=\"table\">
+                    <table class=\"table modern-table\">
                         <thead>
                             <tr>
                                 <th>Titre</th>
@@ -252,86 +259,113 @@ class __TwigTemplate_48978ab8bd31d05ba0f0a56957f118c6 extends Template
                                 <th>Montant</th>
                                 <th>Sponsor</th>
                                 <th>Signature</th>
+                                <th>Article</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody class=\"table-border-bottom-0\">
                             ";
-        // line 98
+        // line 106
         $context['_parent'] = $context;
-        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["contrats"]) || array_key_exists("contrats", $context) ? $context["contrats"] : (function () { throw new RuntimeError('Variable "contrats" does not exist.', 98, $this->source); })()));
+        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["contrats"]) || array_key_exists("contrats", $context) ? $context["contrats"] : (function () { throw new RuntimeError('Variable "contrats" does not exist.', 106, $this->source); })()));
         $context['_iterated'] = false;
         foreach ($context['_seq'] as $context["_key"] => $context["contrat"]) {
-            // line 99
-            yield "                                <tr class=\"table-default\">
-                                    <td>
+            // line 107
+            yield "                                <tr class=\"table-default contrat-row\">
+                                    <td data-full-description=\"";
+            // line 108
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(((CoreExtension::getAttribute($this->env, $this->source, $context["contrat"], "Titre", [], "any", true, true, false, 108)) ? (Twig\Extension\CoreExtension::default(CoreExtension::getAttribute($this->env, $this->source, $context["contrat"], "Titre", [], "any", false, false, false, 108), "N/A")) : ("N/A")), "html", null, true);
+            yield "\">
                                         <i class=\"fab fa-sketch fa-lg text-warning me-3\"></i>
                                         <strong>";
-            // line 102
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["contrat"], "Titre", [], "any", false, false, false, 102), "html", null, true);
+            // line 110
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(((CoreExtension::getAttribute($this->env, $this->source, $context["contrat"], "Titre", [], "any", true, true, false, 110)) ? (Twig\Extension\CoreExtension::default(CoreExtension::getAttribute($this->env, $this->source, $context["contrat"], "Titre", [], "any", false, false, false, 110), "N/A")) : ("N/A")), "html", null, true);
             yield "</strong>
                                     </td>
-                                    <td>";
-            // line 104
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["contrat"], "DateDebut", [], "any", false, false, false, 104), "Y-m-d"), "html", null, true);
+                                    <td data-full-description=\"";
+            // line 112
+            yield ((CoreExtension::getAttribute($this->env, $this->source, $context["contrat"], "DateDebut", [], "any", false, false, false, 112)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["contrat"], "DateDebut", [], "any", false, false, false, 112), "Y-m-d"), "html", null, true)) : ("N/A"));
+            yield "\">";
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["contrat"], "DateDebut", [], "any", false, false, false, 112), "Y-m-d"), "html", null, true);
             yield "</td>
-                                    <td>";
-            // line 105
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["contrat"], "DateFin", [], "any", false, false, false, 105), "Y-m-d"), "html", null, true);
+                                    <td data-full-description=\"";
+            // line 113
+            yield ((CoreExtension::getAttribute($this->env, $this->source, $context["contrat"], "DateFin", [], "any", false, false, false, 113)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["contrat"], "DateFin", [], "any", false, false, false, 113), "Y-m-d"), "html", null, true)) : ("N/A"));
+            yield "\">";
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["contrat"], "DateFin", [], "any", false, false, false, 113), "Y-m-d"), "html", null, true);
             yield "</td>
-                                    <td>";
-            // line 106
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["contrat"], "Montant", [], "any", false, false, false, 106), "html", null, true);
+                                    <td data-full-description=\"";
+            // line 114
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(((CoreExtension::getAttribute($this->env, $this->source, $context["contrat"], "Montant", [], "any", true, true, false, 114)) ? (Twig\Extension\CoreExtension::default(CoreExtension::getAttribute($this->env, $this->source, $context["contrat"], "Montant", [], "any", false, false, false, 114), "N/A")) : ("N/A")), "html", null, true);
+            yield "\">";
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(((CoreExtension::getAttribute($this->env, $this->source, $context["contrat"], "Montant", [], "any", true, true, false, 114)) ? (Twig\Extension\CoreExtension::default(CoreExtension::getAttribute($this->env, $this->source, $context["contrat"], "Montant", [], "any", false, false, false, 114), "N/A")) : ("N/A")), "html", null, true);
             yield "</td>
-                                    <td>";
-            // line 107
-            yield ((CoreExtension::getAttribute($this->env, $this->source, $context["contrat"], "Sponsor", [], "any", false, false, false, 107)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["contrat"], "Sponsor", [], "any", false, false, false, 107), "nom", [], "any", false, false, false, 107), "html", null, true)) : ("N/A"));
+                                    <td data-full-description=\"";
+            // line 115
+            yield ((CoreExtension::getAttribute($this->env, $this->source, $context["contrat"], "Sponsor", [], "any", false, false, false, 115)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["contrat"], "Sponsor", [], "any", false, false, false, 115), "nom", [], "any", false, false, false, 115), "html", null, true)) : ("N/A"));
+            yield "\">";
+            yield ((CoreExtension::getAttribute($this->env, $this->source, $context["contrat"], "Sponsor", [], "any", false, false, false, 115)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["contrat"], "Sponsor", [], "any", false, false, false, 115), "nom", [], "any", false, false, false, 115), "html", null, true)) : ("N/A"));
             yield "</td>
-                                    <td>
+                                    <td data-full-description=\"";
+            // line 116
+            yield ((CoreExtension::getAttribute($this->env, $this->source, $context["contrat"], "Signature", [], "any", false, false, false, 116)) ? ("Signature disponible") : ("No Signature"));
+            yield "\">
                                         ";
-            // line 109
-            if (CoreExtension::getAttribute($this->env, $this->source, $context["contrat"], "Signature", [], "any", false, false, false, 109)) {
-                // line 110
+            // line 117
+            if (CoreExtension::getAttribute($this->env, $this->source, $context["contrat"], "Signature", [], "any", false, false, false, 117)) {
+                // line 118
                 yield "                                            <img src=\"";
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(CoreExtension::getAttribute($this->env, $this->source, $context["contrat"], "Signature", [], "any", false, false, false, 110)), "html", null, true);
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(CoreExtension::getAttribute($this->env, $this->source, $context["contrat"], "Signature", [], "any", false, false, false, 118)), "html", null, true);
                 yield "\" alt=\"Signature\" style=\"max-width: 100px; max-height: 50px;\" />
                                         ";
             } else {
-                // line 112
+                // line 120
                 yield "                                            No Signature
                                         ";
             }
-            // line 114
+            // line 122
             yield "                                    </td>
+                                    <td data-full-description=\"";
+            // line 123
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(((CoreExtension::getAttribute($this->env, $this->source, $context["contrat"], "article", [], "any", true, true, false, 123)) ? (Twig\Extension\CoreExtension::default(CoreExtension::getAttribute($this->env, $this->source, $context["contrat"], "article", [], "any", false, false, false, 123), "N/A")) : ("N/A")), "html", null, true);
+            yield "\">";
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((Twig\Extension\CoreExtension::slice($this->env->getCharset(), CoreExtension::getAttribute($this->env, $this->source, $context["contrat"], "article", [], "any", false, false, false, 123), 0, 50) . (((Twig\Extension\CoreExtension::length($this->env->getCharset(), CoreExtension::getAttribute($this->env, $this->source, $context["contrat"], "article", [], "any", false, false, false, 123)) > 50)) ? ("...") : (""))), "html", null, true);
+            yield "</td>
                                     <td>
                                         ";
-            // line 116
-            if ( !(null === CoreExtension::getAttribute($this->env, $this->source, $context["contrat"], "idContrat", [], "any", false, false, false, 116))) {
-                // line 117
+            // line 125
+            if ( !(null === CoreExtension::getAttribute($this->env, $this->source, $context["contrat"], "idContrat", [], "any", false, false, false, 125))) {
+                // line 126
                 yield "                                            <div class=\"dropdown\">
                                                 <button type=\"button\" class=\"btn p-0 dropdown-toggle hide-arrow\" data-bs-toggle=\"dropdown\">
                                                     <i class=\"bx bx-dots-vertical-rounded\"></i>
                                                 </button>
                                                 <div class=\"dropdown-menu\">
                                                     <a class=\"dropdown-item\" href=\"";
-                // line 122
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("contrat_show", ["idContrat" => CoreExtension::getAttribute($this->env, $this->source, $context["contrat"], "idContrat", [], "any", false, false, false, 122)]), "html", null, true);
+                // line 131
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("contrat_show", ["idContrat" => CoreExtension::getAttribute($this->env, $this->source, $context["contrat"], "idContrat", [], "any", false, false, false, 131)]), "html", null, true);
                 yield "\">
                                                         <i class=\"bx bx-show me-1\"></i> Voir
                                                     </a>
                                                     <a class=\"dropdown-item\" href=\"";
-                // line 125
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("contrat_edit", ["idContrat" => CoreExtension::getAttribute($this->env, $this->source, $context["contrat"], "idContrat", [], "any", false, false, false, 125)]), "html", null, true);
+                // line 134
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("contrat_edit", ["idContrat" => CoreExtension::getAttribute($this->env, $this->source, $context["contrat"], "idContrat", [], "any", false, false, false, 134)]), "html", null, true);
                 yield "\">
                                                         <i class=\"bx bx-edit-alt me-1\"></i> Modifier
                                                     </a>
+                                                    <a class=\"dropdown-item\" href=\"";
+                // line 137
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("contrat_export", ["format" => "pdf", "idContrat" => CoreExtension::getAttribute($this->env, $this->source, $context["contrat"], "idContrat", [], "any", false, false, false, 137)]), "html", null, true);
+                yield "\">
+                                                        <i class=\"bx bx-file me-1\"></i> Exporter PDF
+                                                    </a>
                                                     <form method=\"post\" action=\"";
-                // line 128
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("contrat_delete", ["idContrat" => CoreExtension::getAttribute($this->env, $this->source, $context["contrat"], "idContrat", [], "any", false, false, false, 128)]), "html", null, true);
+                // line 140
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("contrat_delete", ["idContrat" => CoreExtension::getAttribute($this->env, $this->source, $context["contrat"], "idContrat", [], "any", false, false, false, 140)]), "html", null, true);
                 yield "\" style=\"display:inline;\" onsubmit=\"return confirm('Confirmer la suppression?');\">
                                                         <input type=\"hidden\" name=\"_token\" value=\"";
-                // line 129
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderCsrfToken(("delete" . CoreExtension::getAttribute($this->env, $this->source, $context["contrat"], "idContrat", [], "any", false, false, false, 129))), "html", null, true);
+                // line 141
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderCsrfToken(("delete" . CoreExtension::getAttribute($this->env, $this->source, $context["contrat"], "idContrat", [], "any", false, false, false, 141))), "html", null, true);
                 yield "\">
                                                         <button class=\"dropdown-item\" type=\"submit\">
                                                             <i class=\"bx bx-trash me-1\"></i> Supprimer
@@ -341,100 +375,106 @@ class __TwigTemplate_48978ab8bd31d05ba0f0a56957f118c6 extends Template
                                             </div>
                                         ";
             } else {
-                // line 137
+                // line 149
                 yield "                                            <span class=\"text-muted\">Actions non disponibles</span>
                                         ";
             }
-            // line 139
+            // line 151
             yield "                                    </td>
                                 </tr>
                             ";
             $context['_iterated'] = true;
         }
-        // line 141
+        // line 153
         if (!$context['_iterated']) {
-            // line 142
+            // line 154
             yield "                                <tr>
-                                    <td colspan=\"7\" class=\"text-center\">Aucun contrat trouvé</td>
+                                    <td colspan=\"8\" class=\"text-center\">Aucun contrat trouvé</td>
                                 </tr>
                             ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_key'], $context['contrat'], $context['_parent'], $context['_iterated']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 146
+        // line 158
         yield "                        </tbody>
                     </table>
                 </div>
 
                 ";
-        // line 151
-        yield "                <div class=\"card-footer\">
-                    <nav aria-label=\"Page navigation\">
-                        <ul class=\"pagination justify-content-center\">
-                            <li class=\"page-item ";
-        // line 154
-        if ((CoreExtension::getAttribute($this->env, $this->source, (isset($context["contrats"]) || array_key_exists("contrats", $context) ? $context["contrats"] : (function () { throw new RuntimeError('Variable "contrats" does not exist.', 154, $this->source); })()), "currentPageNumber", [], "any", false, false, false, 154) == 1)) {
-            yield "disabled";
-        }
-        yield "\">
-                                <a class=\"page-link\" href=\"";
-        // line 155
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("contrat_main", ["page" => (CoreExtension::getAttribute($this->env, $this->source, (isset($context["contrats"]) || array_key_exists("contrats", $context) ? $context["contrats"] : (function () { throw new RuntimeError('Variable "contrats" does not exist.', 155, $this->source); })()), "currentPageNumber", [], "any", false, false, false, 155) - 1), "search" => ((array_key_exists("searchTerm", $context)) ? (Twig\Extension\CoreExtension::default((isset($context["searchTerm"]) || array_key_exists("searchTerm", $context) ? $context["searchTerm"] : (function () { throw new RuntimeError('Variable "searchTerm" does not exist.', 155, $this->source); })()), "")) : ("")), "filter" => ((array_key_exists("filter", $context)) ? (Twig\Extension\CoreExtension::default((isset($context["filter"]) || array_key_exists("filter", $context) ? $context["filter"] : (function () { throw new RuntimeError('Variable "filter" does not exist.', 155, $this->source); })()), "")) : (""))]), "html", null, true);
-        yield "\">Previous</a>
-                            </li>
-                            ";
-        // line 157
-        $context['_parent'] = $context;
-        $context['_seq'] = CoreExtension::ensureTraversable(range(1, CoreExtension::getAttribute($this->env, $this->source, (isset($context["contrats"]) || array_key_exists("contrats", $context) ? $context["contrats"] : (function () { throw new RuntimeError('Variable "contrats" does not exist.', 157, $this->source); })()), "getPageCount", [], "method", false, false, false, 157)));
-        foreach ($context['_seq'] as $context["_key"] => $context["page"]) {
-            // line 158
-            yield "                                <li class=\"page-item ";
-            if (($context["page"] == CoreExtension::getAttribute($this->env, $this->source, (isset($context["contrats"]) || array_key_exists("contrats", $context) ? $context["contrats"] : (function () { throw new RuntimeError('Variable "contrats" does not exist.', 158, $this->source); })()), "currentPageNumber", [], "any", false, false, false, 158))) {
-                yield "active";
+        // line 163
+        yield "                ";
+        if (Twig\Extension\CoreExtension::testEmpty((isset($context["searchTerm"]) || array_key_exists("searchTerm", $context) ? $context["searchTerm"] : (function () { throw new RuntimeError('Variable "searchTerm" does not exist.', 163, $this->source); })()))) {
+            // line 164
+            yield "                    <div class=\"card-footer\">
+                        <nav aria-label=\"Page navigation\">
+                            <ul class=\"pagination justify-content-center\">
+                                <li class=\"page-item ";
+            // line 167
+            if ((CoreExtension::getAttribute($this->env, $this->source, (isset($context["contrats"]) || array_key_exists("contrats", $context) ? $context["contrats"] : (function () { throw new RuntimeError('Variable "contrats" does not exist.', 167, $this->source); })()), "currentPageNumber", [], "any", false, false, false, 167) == 1)) {
+                yield "disabled";
             }
             yield "\">
                                     <a class=\"page-link\" href=\"";
-            // line 159
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("contrat_main", ["page" => $context["page"], "search" => ((array_key_exists("searchTerm", $context)) ? (Twig\Extension\CoreExtension::default((isset($context["searchTerm"]) || array_key_exists("searchTerm", $context) ? $context["searchTerm"] : (function () { throw new RuntimeError('Variable "searchTerm" does not exist.', 159, $this->source); })()), "")) : ("")), "filter" => ((array_key_exists("filter", $context)) ? (Twig\Extension\CoreExtension::default((isset($context["filter"]) || array_key_exists("filter", $context) ? $context["filter"] : (function () { throw new RuntimeError('Variable "filter" does not exist.', 159, $this->source); })()), "")) : (""))]), "html", null, true);
-            yield "\">";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($context["page"], "html", null, true);
-            yield "</a>
+            // line 168
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("contrat_main", ["page" => (CoreExtension::getAttribute($this->env, $this->source, (isset($context["contrats"]) || array_key_exists("contrats", $context) ? $context["contrats"] : (function () { throw new RuntimeError('Variable "contrats" does not exist.', 168, $this->source); })()), "currentPageNumber", [], "any", false, false, false, 168) - 1), "search" => ((array_key_exists("searchTerm", $context)) ? (Twig\Extension\CoreExtension::default((isset($context["searchTerm"]) || array_key_exists("searchTerm", $context) ? $context["searchTerm"] : (function () { throw new RuntimeError('Variable "searchTerm" does not exist.', 168, $this->source); })()), "")) : ("")), "filter" => ((array_key_exists("filter", $context)) ? (Twig\Extension\CoreExtension::default((isset($context["filter"]) || array_key_exists("filter", $context) ? $context["filter"] : (function () { throw new RuntimeError('Variable "filter" does not exist.', 168, $this->source); })()), "")) : (""))]), "html", null, true);
+            yield "\"><i class=\"bx bx-chevron-left\"></i></a>
                                 </li>
-                            ";
-        }
-        $_parent = $context['_parent'];
-        unset($context['_seq'], $context['_key'], $context['page'], $context['_parent']);
-        $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 162
-        yield "                            <li class=\"page-item ";
-        if ((CoreExtension::getAttribute($this->env, $this->source, (isset($context["contrats"]) || array_key_exists("contrats", $context) ? $context["contrats"] : (function () { throw new RuntimeError('Variable "contrats" does not exist.', 162, $this->source); })()), "currentPageNumber", [], "any", false, false, false, 162) == CoreExtension::getAttribute($this->env, $this->source, (isset($context["contrats"]) || array_key_exists("contrats", $context) ? $context["contrats"] : (function () { throw new RuntimeError('Variable "contrats" does not exist.', 162, $this->source); })()), "getPageCount", [], "method", false, false, false, 162))) {
-            yield "disabled";
-        }
-        yield "\">
-                                <a class=\"page-link\" href=\"";
-        // line 163
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("contrat_main", ["page" => (CoreExtension::getAttribute($this->env, $this->source, (isset($context["contrats"]) || array_key_exists("contrats", $context) ? $context["contrats"] : (function () { throw new RuntimeError('Variable "contrats" does not exist.', 163, $this->source); })()), "currentPageNumber", [], "any", false, false, false, 163) + 1), "search" => ((array_key_exists("searchTerm", $context)) ? (Twig\Extension\CoreExtension::default((isset($context["searchTerm"]) || array_key_exists("searchTerm", $context) ? $context["searchTerm"] : (function () { throw new RuntimeError('Variable "searchTerm" does not exist.', 163, $this->source); })()), "")) : ("")), "filter" => ((array_key_exists("filter", $context)) ? (Twig\Extension\CoreExtension::default((isset($context["filter"]) || array_key_exists("filter", $context) ? $context["filter"] : (function () { throw new RuntimeError('Variable "filter" does not exist.', 163, $this->source); })()), "")) : (""))]), "html", null, true);
-        yield "\">Next</a>
-                            </li>
-                        </ul>
-                    </nav>
-                    <div class=\"text-center\">
-                        <small>
-                            Page ";
-        // line 169
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["contrats"]) || array_key_exists("contrats", $context) ? $context["contrats"] : (function () { throw new RuntimeError('Variable "contrats" does not exist.', 169, $this->source); })()), "currentPageNumber", [], "any", false, false, false, 169), "html", null, true);
-        yield " sur ";
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["contrats"]) || array_key_exists("contrats", $context) ? $context["contrats"] : (function () { throw new RuntimeError('Variable "contrats" does not exist.', 169, $this->source); })()), "getPageCount", [], "method", false, false, false, 169), "html", null, true);
-        yield " |
-                            Total Contrats : ";
-        // line 170
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["contrats"]) || array_key_exists("contrats", $context) ? $context["contrats"] : (function () { throw new RuntimeError('Variable "contrats" does not exist.', 170, $this->source); })()), "totalItemCount", [], "any", false, false, false, 170), "html", null, true);
-        yield "
-                        </small>
+                                ";
+            // line 170
+            $context['_parent'] = $context;
+            $context['_seq'] = CoreExtension::ensureTraversable(range(1, CoreExtension::getAttribute($this->env, $this->source, (isset($context["contrats"]) || array_key_exists("contrats", $context) ? $context["contrats"] : (function () { throw new RuntimeError('Variable "contrats" does not exist.', 170, $this->source); })()), "getPageCount", [], "method", false, false, false, 170)));
+            foreach ($context['_seq'] as $context["_key"] => $context["page"]) {
+                // line 171
+                yield "                                    <li class=\"page-item ";
+                if (($context["page"] == CoreExtension::getAttribute($this->env, $this->source, (isset($context["contrats"]) || array_key_exists("contrats", $context) ? $context["contrats"] : (function () { throw new RuntimeError('Variable "contrats" does not exist.', 171, $this->source); })()), "currentPageNumber", [], "any", false, false, false, 171))) {
+                    yield "active";
+                }
+                yield "\">
+                                        <a class=\"page-link\" href=\"";
+                // line 172
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("contrat_main", ["page" => $context["page"], "search" => ((array_key_exists("searchTerm", $context)) ? (Twig\Extension\CoreExtension::default((isset($context["searchTerm"]) || array_key_exists("searchTerm", $context) ? $context["searchTerm"] : (function () { throw new RuntimeError('Variable "searchTerm" does not exist.', 172, $this->source); })()), "")) : ("")), "filter" => ((array_key_exists("filter", $context)) ? (Twig\Extension\CoreExtension::default((isset($context["filter"]) || array_key_exists("filter", $context) ? $context["filter"] : (function () { throw new RuntimeError('Variable "filter" does not exist.', 172, $this->source); })()), "")) : (""))]), "html", null, true);
+                yield "\">";
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($context["page"], "html", null, true);
+                yield "</a>
+                                    </li>
+                                ";
+            }
+            $_parent = $context['_parent'];
+            unset($context['_seq'], $context['_key'], $context['page'], $context['_parent']);
+            $context = array_intersect_key($context, $_parent) + $_parent;
+            // line 175
+            yield "                                <li class=\"page-item ";
+            if ((CoreExtension::getAttribute($this->env, $this->source, (isset($context["contrats"]) || array_key_exists("contrats", $context) ? $context["contrats"] : (function () { throw new RuntimeError('Variable "contrats" does not exist.', 175, $this->source); })()), "currentPageNumber", [], "any", false, false, false, 175) == CoreExtension::getAttribute($this->env, $this->source, (isset($context["contrats"]) || array_key_exists("contrats", $context) ? $context["contrats"] : (function () { throw new RuntimeError('Variable "contrats" does not exist.', 175, $this->source); })()), "getPageCount", [], "method", false, false, false, 175))) {
+                yield "disabled";
+            }
+            yield "\">
+                                    <a class=\"page-link\" href=\"";
+            // line 176
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("contrat_main", ["page" => (CoreExtension::getAttribute($this->env, $this->source, (isset($context["contrats"]) || array_key_exists("contrats", $context) ? $context["contrats"] : (function () { throw new RuntimeError('Variable "contrats" does not exist.', 176, $this->source); })()), "currentPageNumber", [], "any", false, false, false, 176) + 1), "search" => ((array_key_exists("searchTerm", $context)) ? (Twig\Extension\CoreExtension::default((isset($context["searchTerm"]) || array_key_exists("searchTerm", $context) ? $context["searchTerm"] : (function () { throw new RuntimeError('Variable "searchTerm" does not exist.', 176, $this->source); })()), "")) : ("")), "filter" => ((array_key_exists("filter", $context)) ? (Twig\Extension\CoreExtension::default((isset($context["filter"]) || array_key_exists("filter", $context) ? $context["filter"] : (function () { throw new RuntimeError('Variable "filter" does not exist.', 176, $this->source); })()), "")) : (""))]), "html", null, true);
+            yield "\"><i class=\"bx bx-chevron-right\"></i></a>
+                                </li>
+                            </ul>
+                        </nav>
+                        <div class=\"text-center\">
+                            <small>
+                                Page ";
+            // line 182
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["contrats"]) || array_key_exists("contrats", $context) ? $context["contrats"] : (function () { throw new RuntimeError('Variable "contrats" does not exist.', 182, $this->source); })()), "currentPageNumber", [], "any", false, false, false, 182), "html", null, true);
+            yield " sur ";
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["contrats"]) || array_key_exists("contrats", $context) ? $context["contrats"] : (function () { throw new RuntimeError('Variable "contrats" does not exist.', 182, $this->source); })()), "getPageCount", [], "method", false, false, false, 182), "html", null, true);
+            yield " |
+                                Total Contrats : ";
+            // line 183
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["contrats"]) || array_key_exists("contrats", $context) ? $context["contrats"] : (function () { throw new RuntimeError('Variable "contrats" does not exist.', 183, $this->source); })()), "totalItemCount", [], "any", false, false, false, 183), "html", null, true);
+            yield "
+                            </small>
+                        </div>
                     </div>
-                </div>
-            </div>
+                ";
+        }
+        // line 188
+        yield "            </div>
         </div>
     </div>
 ";
@@ -474,7 +514,7 @@ class __TwigTemplate_48978ab8bd31d05ba0f0a56957f118c6 extends Template
         yield from [];
     }
 
-    // line 179
+    // line 193
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -487,14 +527,41 @@ class __TwigTemplate_48978ab8bd31d05ba0f0a56957f118c6 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "javascripts"));
 
-        // line 180
+        // line 194
         yield "    ";
         yield from $this->yieldParentBlock("javascripts", $context, $blocks);
         yield "
+    <script async src=\"https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3786755132717331\"
+     crossorigin=\"anonymous\"></script> 
     <script src=\"https://cdn.jsdelivr.net/npm/apexcharts\"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // Placeholder for chart rendering if needed
+            // Dynamic Search
+            const searchInput = document.getElementById('searchInput');
+            const table = document.querySelector('.modern-table');
+            const tbody = table ? table.querySelector('tbody') : null;
+            const rows = tbody ? tbody.querySelectorAll('tr.contrat-row') : [];
+
+            // Recherche dynamique
+            if (searchInput && rows.length) {
+                searchInput.addEventListener('input', () => {
+                    const searchTerm = searchInput.value.toLowerCase();
+
+                    rows.forEach(row => {
+                        const cells = row.querySelectorAll('td');
+                        let match = false;
+
+                        cells.forEach(cell => {
+                            const text = cell.getAttribute('data-full-description') || cell.textContent;
+                            if (text.toLowerCase().includes(searchTerm)) {
+                                match = true;
+                            }
+                        });
+
+                        row.style.display = match ? '' : 'none';
+                    });
+                });
+            }
         });
     </script>
 ";
@@ -528,7 +595,7 @@ class __TwigTemplate_48978ab8bd31d05ba0f0a56957f118c6 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  491 => 180,  478 => 179,  467 => 14,  464 => 13,  451 => 12,  432 => 170,  426 => 169,  417 => 163,  410 => 162,  399 => 159,  392 => 158,  388 => 157,  383 => 155,  377 => 154,  372 => 151,  366 => 146,  357 => 142,  355 => 141,  349 => 139,  345 => 137,  334 => 129,  330 => 128,  324 => 125,  318 => 122,  311 => 117,  309 => 116,  305 => 114,  301 => 112,  295 => 110,  293 => 109,  288 => 107,  284 => 106,  280 => 105,  276 => 104,  271 => 102,  266 => 99,  261 => 98,  236 => 76,  228 => 71,  220 => 66,  212 => 61,  204 => 55,  196 => 50,  188 => 45,  181 => 40,  177 => 39,  173 => 38,  169 => 37,  165 => 36,  158 => 31,  149 => 24,  142 => 21,  137 => 17,  134 => 15,  132 => 12,  128 => 10,  115 => 9,  92 => 7,  80 => 4,  67 => 3,  44 => 1,);
+        return array (  531 => 194,  518 => 193,  507 => 14,  504 => 13,  491 => 12,  477 => 188,  469 => 183,  463 => 182,  454 => 176,  447 => 175,  436 => 172,  429 => 171,  425 => 170,  420 => 168,  414 => 167,  409 => 164,  406 => 163,  400 => 158,  391 => 154,  389 => 153,  383 => 151,  379 => 149,  368 => 141,  364 => 140,  358 => 137,  352 => 134,  346 => 131,  339 => 126,  337 => 125,  330 => 123,  327 => 122,  323 => 120,  317 => 118,  315 => 117,  311 => 116,  305 => 115,  299 => 114,  293 => 113,  287 => 112,  282 => 110,  277 => 108,  274 => 107,  269 => 106,  243 => 83,  235 => 78,  227 => 73,  219 => 68,  211 => 62,  203 => 57,  195 => 52,  188 => 47,  184 => 46,  180 => 45,  176 => 44,  172 => 43,  168 => 42,  161 => 37,  151 => 29,  137 => 17,  134 => 15,  132 => 12,  128 => 10,  115 => 9,  92 => 7,  80 => 4,  67 => 3,  44 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -552,13 +619,19 @@ class __TwigTemplate_48978ab8bd31d05ba0f0a56957f118c6 extends Template
             <div class=\"card\">
                 <h5 class=\"card-header d-flex justify-content-between align-items-center\">
                     <div class=\"d-flex align-items-center\">
-                        {# Search Bar Left-Aligned #}
-                        <form class=\"d-flex\" method=\"get\" action=\"{{ path('contrat_main') }}\">
-                            <div class=\"input-group\">
-                                <span class=\"input-group-text\"><i class=\"bx bx-search\"></i></span>
-                                <input type=\"text\" class=\"form-control\" name=\"search\" placeholder=\"Rechercher titre, sponsor ou montant...\" value=\"{{ searchTerm|default('') }}\">
+                        <div class=\"navbar-nav align-items-center ms-3\">
+                            <div class=\"nav-item d-flex align-items-center\">
+                                <i class=\"bx bx-search fs-4 lh-0\"></i>
+                                <input
+                                    type=\"text\"
+                                    id=\"searchInput\"
+                                    class=\"form-control border-0 shadow-none\"
+                                    placeholder=\"Rechercher titre, sponsor ou montant...\"
+                                    aria-label=\"Rechercher titre, sponsor ou montant...\"
+                                    value=\"{{ searchTerm|default('') }}\"
+                                />
                             </div>
-                        </form>
+                        </div>
                     </div>
 
                     <div class=\"d-flex align-items-center\">
@@ -573,6 +646,7 @@ class __TwigTemplate_48978ab8bd31d05ba0f0a56957f118c6 extends Template
                                 <li><a class=\"dropdown-item\" href=\"{{ path('contrat_main', {'filter': 'datefin'}) }}\">Par Date de Fin</a></li>
                                 <li><a class=\"dropdown-item\" href=\"{{ path('contrat_main', {'filter': 'montant'}) }}\">Par Montant</a></li>
                                 <li><a class=\"dropdown-item\" href=\"{{ path('contrat_main', {'filter': 'sponsor'}) }}\">Par Sponsor</a></li>
+                                <li><a class=\"dropdown-item\" href=\"{{ path('contrat_main', {'filter': 'article'}) }}\">Par Article</a></li>
                             </ul>
                         </div>
 
@@ -617,7 +691,7 @@ class __TwigTemplate_48978ab8bd31d05ba0f0a56957f118c6 extends Template
                     </div>
                 </h5>
                 <div class=\"table-responsive text-nowrap\">
-                    <table class=\"table\">
+                    <table class=\"table modern-table\">
                         <thead>
                             <tr>
                                 <th>Titre</th>
@@ -626,27 +700,29 @@ class __TwigTemplate_48978ab8bd31d05ba0f0a56957f118c6 extends Template
                                 <th>Montant</th>
                                 <th>Sponsor</th>
                                 <th>Signature</th>
+                                <th>Article</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody class=\"table-border-bottom-0\">
                             {% for contrat in contrats %}
-                                <tr class=\"table-default\">
-                                    <td>
+                                <tr class=\"table-default contrat-row\">
+                                    <td data-full-description=\"{{ contrat.Titre|default('N/A') }}\">
                                         <i class=\"fab fa-sketch fa-lg text-warning me-3\"></i>
-                                        <strong>{{ contrat.Titre }}</strong>
+                                        <strong>{{ contrat.Titre|default('N/A') }}</strong>
                                     </td>
-                                    <td>{{ contrat.DateDebut|date('Y-m-d') }}</td>
-                                    <td>{{ contrat.DateFin|date('Y-m-d') }}</td>
-                                    <td>{{ contrat.Montant }}</td>
-                                    <td>{{ contrat.Sponsor ? contrat.Sponsor.nom : 'N/A' }}</td>
-                                    <td>
+                                    <td data-full-description=\"{{ contrat.DateDebut ? contrat.DateDebut|date('Y-m-d') : 'N/A' }}\">{{ contrat.DateDebut|date('Y-m-d') }}</td>
+                                    <td data-full-description=\"{{ contrat.DateFin ? contrat.DateFin|date('Y-m-d') : 'N/A' }}\">{{ contrat.DateFin|date('Y-m-d') }}</td>
+                                    <td data-full-description=\"{{ contrat.Montant|default('N/A') }}\">{{ contrat.Montant|default('N/A') }}</td>
+                                    <td data-full-description=\"{{ contrat.Sponsor ? contrat.Sponsor.nom : 'N/A' }}\">{{ contrat.Sponsor ? contrat.Sponsor.nom : 'N/A' }}</td>
+                                    <td data-full-description=\"{{ contrat.Signature ? 'Signature disponible' : 'No Signature' }}\">
                                         {% if contrat.Signature %}
                                             <img src=\"{{ asset(contrat.Signature) }}\" alt=\"Signature\" style=\"max-width: 100px; max-height: 50px;\" />
                                         {% else %}
                                             No Signature
                                         {% endif %}
                                     </td>
+                                    <td data-full-description=\"{{ contrat.article|default('N/A') }}\">{{ contrat.article|slice(0, 50) ~ (contrat.article|length > 50 ? '...' : '') }}</td>
                                     <td>
                                         {% if contrat.idContrat is not null %}
                                             <div class=\"dropdown\">
@@ -659,6 +735,9 @@ class __TwigTemplate_48978ab8bd31d05ba0f0a56957f118c6 extends Template
                                                     </a>
                                                     <a class=\"dropdown-item\" href=\"{{ path('contrat_edit', {'idContrat': contrat.idContrat}) }}\">
                                                         <i class=\"bx bx-edit-alt me-1\"></i> Modifier
+                                                    </a>
+                                                    <a class=\"dropdown-item\" href=\"{{ path('contrat_export', {'format': 'pdf', 'idContrat': contrat.idContrat}) }}\">
+                                                        <i class=\"bx bx-file me-1\"></i> Exporter PDF
                                                     </a>
                                                     <form method=\"post\" action=\"{{ path('contrat_delete', {'idContrat': contrat.idContrat}) }}\" style=\"display:inline;\" onsubmit=\"return confirm('Confirmer la suppression?');\">
                                                         <input type=\"hidden\" name=\"_token\" value=\"{{ csrf_token('delete' ~ contrat.idContrat) }}\">
@@ -675,37 +754,39 @@ class __TwigTemplate_48978ab8bd31d05ba0f0a56957f118c6 extends Template
                                 </tr>
                             {% else %}
                                 <tr>
-                                    <td colspan=\"7\" class=\"text-center\">Aucun contrat trouvé</td>
+                                    <td colspan=\"8\" class=\"text-center\">Aucun contrat trouvé</td>
                                 </tr>
                             {% endfor %}
                         </tbody>
                     </table>
                 </div>
 
-                {# Pagination #}
-                <div class=\"card-footer\">
-                    <nav aria-label=\"Page navigation\">
-                        <ul class=\"pagination justify-content-center\">
-                            <li class=\"page-item {% if contrats.currentPageNumber == 1 %}disabled{% endif %}\">
-                                <a class=\"page-link\" href=\"{{ path('contrat_main', {'page': contrats.currentPageNumber - 1, 'search': searchTerm|default(''), 'filter': filter|default('')}) }}\">Previous</a>
-                            </li>
-                            {% for page in 1..contrats.getPageCount() %}
-                                <li class=\"page-item {% if page == contrats.currentPageNumber %}active{% endif %}\">
-                                    <a class=\"page-link\" href=\"{{ path('contrat_main', {'page': page, 'search': searchTerm|default(''), 'filter': filter|default('')}) }}\">{{ page }}</a>
+                {# Conditionally hide pagination when searchTerm is not empty #}
+                {% if searchTerm is empty %}
+                    <div class=\"card-footer\">
+                        <nav aria-label=\"Page navigation\">
+                            <ul class=\"pagination justify-content-center\">
+                                <li class=\"page-item {% if contrats.currentPageNumber == 1 %}disabled{% endif %}\">
+                                    <a class=\"page-link\" href=\"{{ path('contrat_main', {'page': contrats.currentPageNumber - 1, 'search': searchTerm|default(''), 'filter': filter|default('')}) }}\"><i class=\"bx bx-chevron-left\"></i></a>
                                 </li>
-                            {% endfor %}
-                            <li class=\"page-item {% if contrats.currentPageNumber == contrats.getPageCount() %}disabled{% endif %}\">
-                                <a class=\"page-link\" href=\"{{ path('contrat_main', {'page': contrats.currentPageNumber + 1, 'search': searchTerm|default(''), 'filter': filter|default('')}) }}\">Next</a>
-                            </li>
-                        </ul>
-                    </nav>
-                    <div class=\"text-center\">
-                        <small>
-                            Page {{ contrats.currentPageNumber }} sur {{ contrats.getPageCount() }} |
-                            Total Contrats : {{ contrats.totalItemCount }}
-                        </small>
+                                {% for page in 1..contrats.getPageCount() %}
+                                    <li class=\"page-item {% if page == contrats.currentPageNumber %}active{% endif %}\">
+                                        <a class=\"page-link\" href=\"{{ path('contrat_main', {'page': page, 'search': searchTerm|default(''), 'filter': filter|default('')}) }}\">{{ page }}</a>
+                                    </li>
+                                {% endfor %}
+                                <li class=\"page-item {% if contrats.currentPageNumber == contrats.getPageCount() %}disabled{% endif %}\">
+                                    <a class=\"page-link\" href=\"{{ path('contrat_main', {'page': contrats.currentPageNumber + 1, 'search': searchTerm|default(''), 'filter': filter|default('')}) }}\"><i class=\"bx bx-chevron-right\"></i></a>
+                                </li>
+                            </ul>
+                        </nav>
+                        <div class=\"text-center\">
+                            <small>
+                                Page {{ contrats.currentPageNumber }} sur {{ contrats.getPageCount() }} |
+                                Total Contrats : {{ contrats.totalItemCount }}
+                            </small>
+                        </div>
                     </div>
-                </div>
+                {% endif %}
             </div>
         </div>
     </div>
@@ -713,10 +794,37 @@ class __TwigTemplate_48978ab8bd31d05ba0f0a56957f118c6 extends Template
 
 {% block javascripts %}
     {{ parent() }}
+    <script async src=\"https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3786755132717331\"
+     crossorigin=\"anonymous\"></script> 
     <script src=\"https://cdn.jsdelivr.net/npm/apexcharts\"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // Placeholder for chart rendering if needed
+            // Dynamic Search
+            const searchInput = document.getElementById('searchInput');
+            const table = document.querySelector('.modern-table');
+            const tbody = table ? table.querySelector('tbody') : null;
+            const rows = tbody ? tbody.querySelectorAll('tr.contrat-row') : [];
+
+            // Recherche dynamique
+            if (searchInput && rows.length) {
+                searchInput.addEventListener('input', () => {
+                    const searchTerm = searchInput.value.toLowerCase();
+
+                    rows.forEach(row => {
+                        const cells = row.querySelectorAll('td');
+                        let match = false;
+
+                        cells.forEach(cell => {
+                            const text = cell.getAttribute('data-full-description') || cell.textContent;
+                            if (text.toLowerCase().includes(searchTerm)) {
+                                match = true;
+                            }
+                        });
+
+                        row.style.display = match ? '' : 'none';
+                    });
+                });
+            }
         });
     </script>
 {% endblock %}", "contrat/main.html.twig", "C:\\Users\\amine\\Downloads\\matchupz-web-integration\\matchupz-web-integration\\templates\\contrat\\main.html.twig");

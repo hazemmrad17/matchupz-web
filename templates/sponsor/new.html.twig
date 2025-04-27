@@ -24,7 +24,15 @@
                             {{ form_widget(form.pack) }}
                             {{ form_errors(form.pack) }}
                         </div>
+                        <div class="mb-3">
+                            {{ form_label(form.sponsorPicture, 'Sponsor Picture') }}
+                            {{ form_widget(form.sponsorPicture) }}
+                            {{ form_errors(form.sponsorPicture) }}
+                        </div>
+                        <div class="mb-3">
                         <button type="submit" class="btn btn-primary">Ajouter</button>
+                        <a href="{{ path('sponsor_main') }}" class="btn btn-secondary">Annuler</a>
+                        </div>
                     {{ form_end(form) }}
                 </div>
             </div>

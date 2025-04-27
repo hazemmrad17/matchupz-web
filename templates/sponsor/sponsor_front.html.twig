@@ -34,12 +34,12 @@
         border-radius: 2px;
     }
 
-    /* Smaller Flip Card */
     .flip-card {
         background-color: transparent;
         width: 100%;
-        height: 260px;
+        height: 340px;
         perspective: 1000px;
+        position: relative;
     }
 
     .flip-card-inner {
@@ -50,7 +50,7 @@
         transform-style: preserve-3d;
     }
 
-    .flip-card.dblclick .flip-card-inner {
+    .flip-card.flipped .flip-card-inner {
         transform: rotateY(180deg);
     }
 
@@ -113,7 +113,6 @@
         border: 3px solid #CD7F32;
     }
 
-    /* Floating Stars */
     .floating-stars {
         position: absolute;
         top: 0;
@@ -143,13 +142,75 @@
         50%  { transform: translateY(-20px) scale(1.3); opacity: 1; }
         100% { transform: translateY(0) scale(1);   opacity: 0.8; }
     }
+
+    #card-element {
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        background: #fff;
+        margin-bottom: 10px;
+    }
+
+    .btn-success {
+        width: 100%;
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+
+    .btn-success:disabled {
+        background-color: #6c757d;
+        border-color: #6c757d;
+        cursor: not-allowed;
+    }
+
+    .mb-3 {
+        margin-bottom: 0.75rem !important;
+    }
+
+    .form-label {
+        font-size: 0.9rem;
+        margin-bottom: 0.25rem;
+    }
+
+    .form-control, .form-select {
+        font-size: 0.9rem;
+        padding: 8px;
+    }
+
+    .flip-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background-color: rgba(0, 123, 255, 0.8);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        z-index: 3;
+        font-size: 0.9rem;
+    }
+
+    .flip-card:hover .flip-btn,
+    .flip-card.touched .flip-btn {
+        opacity: 1;
+    }
+
+    .flip-btn:hover {
+        background-color: rgba(0, 123, 255, 1);
+    }
 </style>
 
 <div class="container-fluid bg-breadcrumb">
     <div class="container text-center py-5" style="max-width: 900px;">
         <h4 class="text-white display-4 mb-4 wow fadeInDown" data-wow-delay="0.1s">Nos Sponsors</h4>
         <ol class="breadcrumb d-flex justify-content-center mb-0 wow fadeInDown" data-wow-delay="0.3s">
-            <!-- Breadcrumb content can be added here if needed -->
         </ol>    
     </div>
 </div>
@@ -160,6 +221,9 @@
             {% set pack = sponsor.pack|lower %}
             <div class="col-md-6 col-lg-4 mb-4 wow fadeInUp" data-wow-delay="{{ 0.2 + loop.index0 * 0.2 }}s">
                 <div class="flip-card" data-id="flip-{{ sponsor.Id_sponsor }}">
+                    <button class="flip-btn" title="Flip Card">
+                        <i class="fa fa-sync-alt"></i>
+                    </button>
                     <div class="flip-card-inner">
                         <div class="flip-card-front sponsor-card 
                             {% if pack == 'gold' %}sponsor-border-gold
@@ -193,13 +257,35 @@
 
                                 <p class="mb-2" style="font-size: 0.9rem;"><strong>Contact:</strong> {{ sponsor.contact }}</p>
 
-                                <!-- Add the "Payer" button and Stripe form -->
-                                <form id="payment-form-{{ sponsor.Id_sponsor }}" method="post" action="{{ path('app_stripe_charge') }}">
+                                <!-- Payment Form -->
+                                <form id="checkout-form-{{ sponsor.Id_sponsor }}" method="post" action="{{ path('sponsor_stripe_charge', {'id': sponsor.Id_sponsor}) }}">
                                     <input type="hidden" name="stripeToken" id="stripe-token-id-{{ sponsor.Id_sponsor }}">
-                                    <input type="hidden" id="contractTitle-{{ sponsor.Id_sponsor }}" name="contractTitle" value="{{ sponsor.nom }}">
-                                    <input type="hidden" id="amount-{{ sponsor.Id_sponsor }}" name="amount" value="1000">  <!-- Replace 1000 with dynamic amount if needed -->
+                                    <input type="hidden" name="_token" value="{{ csrf_token('stripe_payment_' ~ sponsor.Id_sponsor) }}">
+                                    <input type="hidden" name="customerName" value="{{ sponsor.nom }}">
 
-                                    <button type="submit" class="btn btn-primary btn-sm mt-2">
+                                    <!-- Contract Selection -->
+                                    <div class="mb-3">
+                                        <label for="contract-{{ sponsor.Id_sponsor }}" class="form-label">Sélectionner un Contrat</label>
+                                        <select id="contract-{{ sponsor.Id_sponsor }}" name="contractId" class="form-select" required>
+                                            <option value="" disabled selected>Choisir un contrat</option>
+                                            {% for contract in sponsor.contrats %}
+                                                <option value="{{ contract.Id_Contrat }}">{{ contract.Titre }} ({{ contract.Montant|number_format(2, '.', ',') }} $)</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+
+                                    <!-- Card Element -->
+                                    <label for="card-element-{{ sponsor.Id_sponsor }}" class="form-label">Détails de la Carte</label>
+                                    <div id="card-element-{{ sponsor.Id_sponsor }}" class="form-control"></div>
+
+                                    <!-- Pay Button -->
+                                    <button 
+                                        id="pay-btn-{{ sponsor.Id_sponsor }}"
+                                        class="btn btn-success mt-2"
+                                        type="button"
+                                        onclick="createToken({{ sponsor.Id_sponsor }})"
+                                        {% if not sponsor.contrats|length %}disabled{% endif %}
+                                    >
                                         <i class="fa fa-credit-card me-1"></i> Payer
                                     </button>
                                 </form>
@@ -226,49 +312,110 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
 <script src="https://js.stripe.com/v3/"></script>
-
 <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const stripe = Stripe("{{ stripe_public_key }}");
+        const elements = stripe.elements();
 
-    // Crée un élément de carte pour chaque sponsor
-    {% for sponsor in sponsors %}
-        const cardElement{{ sponsor.Id_sponsor }} = elements.create('card');
-        cardElement{{ sponsor.Id_sponsor }}.mount('#card-element-{{ sponsor.Id_sponsor }}');
+        // Object to store card elements for each sponsor
+        const cardElements = {};
 
-        const form{{ sponsor.Id_sponsor }} = document.getElementById('payment-form-{{ sponsor.Id_sponsor }}');
-        const submitButton{{ sponsor.Id_sponsor }} = form{{ sponsor.Id_sponsor }}.querySelector('button');
-        const errorMessage{{ sponsor.Id_sponsor }} = form{{ sponsor.Id_sponsor }}.querySelector('.error-message');
-
-    
-    const stripe = Stripe("{{ stripe_key }}");
-    const elements = stripe.elements();
-    const cardElement = elements.create('card');
-    cardElement.mount('#card-element');
-
-    const form = document.getElementById('payment-form');
-    const submitButton = document.getElementById('submit');
-    const errorMessage = document.getElementById('error-message');
-
-    form.addEventListener('submit', async (event) => {
-        event.preventDefault();
-        submitButton.disabled = true;
-
-        try {
-            const {token, error} = await stripe.createToken(cardElement);
-            if (error) {
-                errorMessage.textContent = error.message;
-                submitButton.disabled = false;
-                return;
+        // Initialize Stripe card elements for each sponsor
+        {% for sponsor in sponsors %}
+            try {
+                console.log(`Initializing card element for sponsor ${ {{ sponsor.Id_sponsor }} }`);
+                const cardElement = elements.create('card', {
+                    style: {
+                        base: {
+                            fontSize: '14px',
+                            color: '#32325d',
+                            '::placeholder': { color: '#aab7c4' },
+                        },
+                        invalid: { color: '#fa755a' },
+                    },
+                });
+                const cardElementContainer = document.getElementById('card-element-{{ sponsor.Id_sponsor }}');
+                if (!cardElementContainer) {
+                    throw new Error(`Card element container not found for sponsor ${ {{ sponsor.Id_sponsor }} }`);
+                }
+                cardElement.mount('#card-element-{{ sponsor.Id_sponsor }}');
+                cardElements[{{ sponsor.Id_sponsor }}] = cardElement;
+                console.log(`Card element mounted for sponsor ${ {{ sponsor.Id_sponsor }} }`);
+            } catch (error) {
+                console.error(`Error initializing card element for sponsor ${ {{ sponsor.Id_sponsor }} }:`, error.message);
             }
+        {% endfor %}
 
-            document.getElementById("stripe-token-id").value = token.id;
-            form.submit();
-        } catch (err) {
-            errorMessage.textContent = err.message;
-            submitButton.disabled = false;
-        }
+        // Function to create token and submit form
+        window.createToken = function(sponsorId) {
+            try {
+                console.log(`Creating token for sponsor ${sponsorId}`);
+                const payBtn = document.getElementById(`pay-btn-${sponsorId}`);
+                const form = document.getElementById(`checkout-form-${sponsorId}`);
+                const contractSelect = document.getElementById(`contract-${sponsorId}`);
+
+                if (!payBtn || !form || !contractSelect) {
+                    throw new Error(`Form elements not found for sponsor ${sponsorId}`);
+                }
+
+                if (!contractSelect.value) {
+                    alert('Veuillez sélectionner un contrat.');
+                    return;
+                }
+
+                const cardElement = cardElements[sponsorId];
+                if (!cardElement) {
+                    throw new Error(`Card element not found for sponsor ${sponsorId}`);
+                }
+
+                payBtn.disabled = true;
+
+                stripe.createToken(cardElement).then(function(result) {
+                    if (result.error) {
+                        payBtn.disabled = false;
+                        alert(result.error.message);
+                    } else if (result.token) {
+                        document.getElementById(`stripe-token-id-${sponsorId}`).value = result.token.id;
+                        form.submit();
+                    }
+                }).catch(function(error) {
+                    payBtn.disabled = false;
+                    console.error(`Error creating token for sponsor ${sponsorId}:`, error.message);
+                    alert('Une erreur est survenue : ' + error.message);
+                });
+            } catch (error) {
+                console.error(`Error in createToken for sponsor ${sponsorId}:`, error.message);
+                alert('Une erreur est survenue lors de la soumission du paiement.');
+            }
+        };
+
+        // Handle card flipping with flip button
+        document.querySelectorAll('.flip-card').forEach(card => {
+            const flipBtn = card.querySelector('.flip-btn');
+
+            card.addEventListener('mouseenter', () => {
+                flipBtn.style.opacity = '1';
+            });
+            card.addEventListener('mouseleave', () => {
+                if (!card.classList.contains('flipped')) {
+                    flipBtn.style.opacity = '0';
+                }
+            });
+
+            card.addEventListener('touchstart', () => {
+                card.classList.add('touched');
+            });
+
+            flipBtn.addEventListener('click', () => {
+                card.classList.toggle('flipped');
+                if (card.classList.contains('flipped')) {
+                    flipBtn.style.opacity = '1';
+                }
+            });
         });
-    {% endfor %}
+
+        // Initialize WOW.js for animations
+        new WOW().init();
+    });
 </script>
-
-
 {% endblock %}

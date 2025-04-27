@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Sponsor;
 use App\Form\SponsorType;
 use App\Repository\SponsorRepository;
+use App\Repository\ContratRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,6 +23,9 @@ use PhpOffice\PhpSpreadsheet\Writer\Csv;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Stripe;
 
 #[Route('/sponsor')]
@@ -37,57 +41,123 @@ class SponsorController extends AbstractController
     #[Route('/main', name: 'sponsor_main', methods: ['GET'])]
     public function main(Request $request, PaginatorInterface $paginator, EntityManagerInterface $entityManager): Response
     {
-    $searchTerm = $request->query->get('search', '');
-    $filter = $request->query->get('filter', '');
+        try {
+            error_log('Entering sponsor_main');
 
-    $queryBuilder = $this->sponsorRepository->createQueryBuilder('s');
+            $searchTerm = $request->query->get('search', '');
+            $filter = $request->query->get('filter', '');
 
-    if ($searchTerm) {
-        $queryBuilder
-            ->andWhere('s.nom LIKE :term OR s.contact LIKE :term OR s.pack LIKE :term')
-            ->setParameter('term', '%' . $searchTerm . '%');
-    }
+            $queryBuilder = $this->sponsorRepository->createQueryBuilder('s');
 
-    if ($filter === 'nom') {
-        $queryBuilder->orderBy('s.nom', 'ASC');
-    } elseif ($filter === 'contact') {
-        $queryBuilder->orderBy('s.contact', 'ASC');
-    } elseif ($filter === 'pack') {
-        $queryBuilder->orderBy('s.pack', 'ASC');
-    }
+            if ($searchTerm) {
+                $queryBuilder
+                    ->andWhere('s.nom LIKE :term OR s.contact LIKE :term OR s.pack LIKE :term OR s.sponsorPicture LIKE :term')
+                    ->setParameter('term', '%' . $searchTerm . '%');
+            }
 
-    $pagination = $paginator->paginate(
-        $queryBuilder,
-        $request->query->getInt('page', 1),
-        3
-    );
+            if ($filter === 'nom') {
+                $queryBuilder->orderBy('s.nom', 'ASC');
+            } elseif ($filter === 'contact') {
+                $queryBuilder->orderBy('s.contact', 'ASC');
+            } elseif ($filter === 'pack') {
+                $queryBuilder->orderBy('s.pack', 'ASC');
+            } elseif ($filter === 'sponsorPicture') {
+                $queryBuilder->orderBy('s.sponsorPicture', 'ASC');
+            } else {
+                $queryBuilder->orderBy('s.nom', 'ASC');
+            }
 
-    // Fetch all sponsors for stats
-    $allSponsors = $this->sponsorRepository->findAll();
-    $totalSponsors = count($allSponsors);
-    $packDistribution = $this->getPackDistribution($allSponsors);
+            // If there's a search term, fetch all results without pagination
+            if ($searchTerm) {
+                $sponsors = $queryBuilder->getQuery()->getResult();
+            } else {
+                $sponsors = $paginator->paginate(
+                    $queryBuilder,
+                    $request->query->getInt('page', 1),
+                    5
+                );
+            }
 
-    // Calculate active sponsors (sponsors with at least one contract)
-    $activeSponsors = count(array_filter($allSponsors, fn($sponsor) => $sponsor->getContrats()->count() > 0));
+            // Basic stats without contrats
+            $allSponsors = $this->sponsorRepository->findAll();
+            $totalSponsors = count($allSponsors);
+            $packDistribution = $this->getPackDistribution($allSponsors);
+            $activeSponsors = $totalSponsors; // Assume all are active
+            $contractCounts = ['Bronze' => 0, 'Silver' => 0, 'Gold' => 0, 'Platinum' => 0];
 
-    // Calculate total contracts per pack for radar chart
-    $contractCounts = ['Bronze' => 0, 'Silver' => 0, 'Gold' => 0, 'Platinum' => 0];
-    foreach ($allSponsors as $sponsor) {
-        $pack = $sponsor->getPack();
-        if (isset($contractCounts[$pack])) {
-            $contractCounts[$pack] += $sponsor->getContrats()->count();
+            error_log('Rendering main with ' . $totalSponsors . ' sponsors');
+
+            return $this->render('sponsor/main.html.twig', [
+                'sponsors' => $sponsors,
+                'searchTerm' => $searchTerm,
+                'filter' => $filter,
+                'totalSponsors' => $totalSponsors,
+                'activeSponsors' => $activeSponsors,
+                'packDistribution' => $packDistribution,
+                'contractCounts' => $contractCounts,
+            ]);
+        } catch (\Exception $e) {
+            error_log('Main error: ' . $e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine());
+            throw $e;
         }
     }
 
-    return $this->render('sponsor/main.html.twig', [
-        'sponsors' => $pagination,
-        'searchTerm' => $searchTerm,
-        'filter' => $filter,
-        'totalSponsors' => $totalSponsors,
-        'activeSponsors' => $activeSponsors,
-        'packDistribution' => $packDistribution,
-        'contractCounts' => $contractCounts,
-        ]);
+
+    #[Route('/sponsor/search', name: 'sponsor_search', methods: ['GET'])]
+    public function search(Request $request, CsrfTokenManagerInterface $csrfTokenManager): JsonResponse
+    {
+        try {
+            error_log('Entering sponsor_search');
+            error_log('SponsorRepository: ' . (isset($this->sponsorRepository) ? 'Injected' : 'Missing'));
+            error_log('CsrfTokenManager: ' . ($csrfTokenManager ? 'Injected' : 'Missing'));
+
+            $query = $request->query->get('q', '');
+            error_log('Search query: ' . $query);
+
+            $queryBuilder = $this->sponsorRepository->createQueryBuilder('s')
+                ->select('s');
+
+            if ($query) {
+                $queryBuilder->where('s.nom LIKE :query')
+                    ->setParameter('query', '%' . $query . '%');
+                try {
+                    $queryBuilder->orWhere('s.contact LIKE :query');
+                    $queryBuilder->orWhere('s.pack LIKE :query');
+                } catch (\Exception $e) {
+                    error_log('Error adding optional fields in search: ' . $e->getMessage());
+                }
+            }
+
+            $sql = $queryBuilder->getQuery()->getSQL();
+            error_log('SQL Query: ' . $sql);
+
+            $sponsors = $queryBuilder
+                ->orderBy('s.nom', 'ASC')
+                ->getQuery()
+                ->getResult();
+
+            error_log('Found ' . count($sponsors) . ' sponsors');
+
+            $sponsorsData = array_map(function (Sponsor $sponsor) use ($csrfTokenManager) {
+                $csrfToken = $csrfTokenManager->getToken('delete' . $sponsor->getIdSponsor())->getValue();
+                error_log('Generated CSRF token for sponsor ID ' . $sponsor->getIdSponsor() . ': ' . $csrfToken);
+                return [
+                    'idSponsor' => $sponsor->getIdSponsor(),
+                    'nom' => $sponsor->getNom(),
+                    'contact' => $sponsor->getContact(),
+                    'pack' => $sponsor->getPack(),
+                    'sponsorPicture' => $sponsor->getSponsorPicture(),
+                    'csrfToken' => $csrfToken,
+                ];
+            }, $sponsors);
+
+            error_log('Returning ' . count($sponsorsData) . ' sponsors in JSON');
+
+            return new JsonResponse($sponsorsData);
+        } catch (\Exception $e) {
+            error_log('Search error: ' . $e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine());
+            return new JsonResponse(['error' => $e->getMessage()], 500);
+        }
     }
 
 
@@ -102,15 +172,12 @@ class SponsorController extends AbstractController
 
         // Compute pack distribution
         $packDistribution = $this->getPackDistribution($allSponsors);
-
-        // Compute top sponsors (e.g., by number of contracts)
-        $topSponsors = $this->getTopSponsors($allSponsors);
+        
 
         return $this->render('sponsor/statistics.html.twig', [
             'totalSponsors' => $totalSponsors,
             'packDistribution' => $packDistribution,
             'allSponsors' => $allSponsors,
-            'topSponsors' => $topSponsors,
         ]);
     }
 
@@ -126,25 +193,33 @@ class SponsorController extends AbstractController
         return $packs;
     }
 
-    private function getTopSponsors(array $sponsors): array
-    {
-        // Sort sponsors by number of contracts (descending)
-        usort($sponsors, function ($a, $b) {
-            return $b->getContrats()->count() <=> $a->getContrats()->count();
-        });
-
-        // Take the top 5 sponsors
-        return array_slice($sponsors, 0, 5);
-    }
-
     #[Route('/new', name: 'sponsor_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
     {
         $sponsor = new Sponsor();
         $form = $this->createForm(SponsorType::class, $sponsor);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // Handle file upload
+            /** @var UploadedFile $pictureFile */
+            $pictureFile = $form->get('sponsorPicture')->getData();
+            if ($pictureFile) {
+                $originalFilename = pathinfo($pictureFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $pictureFile->guessExtension();
+
+                try {
+                    $pictureFile->move(
+                        $this->getParameter('sponsor_pictures_directory'),
+                        $newFilename
+                    );
+                    $sponsor->setSponsorPicture($newFilename);
+                } catch (FileException $e) {
+                    $this->addFlash('error', 'Erreur lors de l\'upload de l\'image.');
+                }
+            }
+
             $entityManager->persist($sponsor);
             $entityManager->flush();
 
@@ -171,7 +246,7 @@ class SponsorController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'sponsor_edit', methods: ['GET', 'POST'], requirements: ['id' => '\d+'])]
-    public function edit(Request $request, int $id, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, int $id, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
     {
         $sponsor = $this->sponsorRepository->find($id);
 
@@ -183,6 +258,25 @@ class SponsorController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // Handle file upload
+            /** @var UploadedFile $pictureFile */
+            $pictureFile = $form->get('sponsorPicture')->getData();
+            if ($pictureFile) {
+                $originalFilename = pathinfo($pictureFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $pictureFile->guessExtension();
+
+                try {
+                    $pictureFile->move(
+                        $this->getParameter('sponsor_pictures_directory'),
+                        $newFilename
+                    );
+                    $sponsor->setSponsorPicture($newFilename);
+                } catch (FileException $e) {
+                    $this->addFlash('error', 'Erreur lors de l\'upload de l\'image.');
+                }
+            }
+
             $entityManager->flush();
 
             return $this->redirectToRoute('sponsor_main');
@@ -214,143 +308,211 @@ class SponsorController extends AbstractController
     #[Route('/export/{format}', name: 'sponsor_export', defaults: ['format' => 'xlsx'])]
     public function export(string $format, SponsorRepository $sponsorRepository): Response
     {
-    $sponsors = $sponsorRepository->findAll();
+        $sponsors = $sponsorRepository->findAll();
 
-    switch ($format) {
-        case 'csv':
-            $spreadsheet = new Spreadsheet();
-            $sheet = $spreadsheet->getActiveSheet();
+        switch ($format) {
+            case 'csv':
+                $spreadsheet = new Spreadsheet();
+                $sheet = $spreadsheet->getActiveSheet();
 
-            $sheet->fromArray(['Nom', 'Contact', 'Pack'], null, 'A1');
-            $row = 2;
-            foreach ($sponsors as $sponsor) {
-                $sheet->setCellValue('A' . $row, $sponsor->getNom());
-                $sheet->setCellValue('B' . $row, $sponsor->getContact());
-                $sheet->setCellValue('C' . $row, $sponsor->getPack());
-                $row++;
-            }
+                $sheet->fromArray(['Nom', 'Contact', 'Pack', 'Picture'], null, 'A1');
+                $row = 2;
+                foreach ($sponsors as $sponsor) {
+                    $sheet->setCellValue('A' . $row, $sponsor->getNom());
+                    $sheet->setCellValue('B' . $row, $sponsor->getContact());
+                    $sheet->setCellValue('C' . $row, $sponsor->getPack());
+                    $sheet->setCellValue('D' . $row, $sponsor->getSponsorPicture());
+                    $row++;
+                }
 
-            $writer = new Csv($spreadsheet);
-            $fileName = 'sponsors_export_' . date('Y-m-d') . '.csv';
-            break;
+                $writer = new Csv($spreadsheet);
+                $fileName = 'sponsors_export_' . date('Y-m-d') . '.csv';
+                break;
 
-        case 'pdf':
-            $html = $this->renderView('sponsor/export_pdf.html.twig', [
-                'sponsors' => $sponsors,
-                'logo_path' => $this->getParameter('kernel.project_dir') . '/public/img/logo_white.png'
-            ]);
-            
-            $pdfOptions = [
-                'enable-local-file-access' => true,
-                'encoding' => 'UTF-8',
-                'margin-top' => 10,
-                'margin-bottom' => 10,
-                'margin-left' => 10,
-                'margin-right' => 10,
-                'no-stop-slow-scripts' => true,
-                'orientation' => 'landscape', 
-            ];
-            
-            $options = new Options();
-            $options->set('defaultFont', 'Arial');
-            $dompdf = new Dompdf($options);
-            $dompdf->loadHtml($html);
-            $dompdf->setPaper('A4', 'portrait');
-            $dompdf->render();
+            case 'pdf':
+                $html = $this->renderView('sponsor/export_pdf.html.twig', [
+                    'sponsors' => $sponsors,
+                    'logo_path' => $this->getParameter('kernel.project_dir') . '/public/img/logo_white.png'
+                ]);
 
-            return new Response(
-                $dompdf->output(),
-                200,
-                [
-                    'Content-Type' => 'application/pdf',
-                    'Content-Disposition' => 'attachment; filename="sponsors_export_' . date('Y-m-d') . '.pdf"',
-                ]
-            );
+                $pdfOptions = [
+                    'enable-local-file-access' => true,
+                    'encoding' => 'UTF-8',
+                    'margin-top' => 10,
+                    'margin-bottom' => 10,
+                    'margin-left' => 10,
+                    'margin-right' => 10,
+                    'no-stop-slow-scripts' => true,
+                    'orientation' => 'landscape',
+                ];
 
-        case 'sql':
-            $content = '';
-            foreach ($sponsors as $sponsor) {
-                $nom = addslashes($sponsor->getNom());
-                $contact = addslashes($sponsor->getContact());
-                $pack = addslashes($sponsor->getPack());
-                $content .= "INSERT INTO sponsor (nom, contact, pack) VALUES ('$nom', '$contact', '$pack');\n";
-            }
+                $options = new Options();
+                $options->set('defaultFont', 'Arial');
+                $dompdf = new Dompdf($options);
+                $dompdf->loadHtml($html);
+                $dompdf->setPaper('A4', 'portrait');
+                $dompdf->render();
 
-            return new Response(
-                $content,
-                200,
-                [
-                    'Content-Type' => 'text/sql',
-                    'Content-Disposition' => 'attachment; filename="sponsors_export_' . date('Y-m-d') . '.sql"',
-                ]
-            );
+                return new Response(
+                    $dompdf->output(),
+                    200,
+                    [
+                        'Content-Type' => 'application/pdf',
+                        'Content-Disposition' => 'attachment; filename="sponsors_export_' . date('Y-m-d') . '.pdf"',
+                    ]
+                );
 
-        case 'xlsx':
-        default:
-            $spreadsheet = new Spreadsheet();
-            $sheet = $spreadsheet->getActiveSheet();
+            case 'sql':
+                $content = '';
+                foreach ($sponsors as $sponsor) {
+                    $nom = addslashes($sponsor->getNom());
+                    $contact = addslashes($sponsor->getContact());
+                    $pack = addslashes($sponsor->getPack());
+                    $picture = addslashes($sponsor->getSponsorPicture() ?? '');
+                    $content .= "INSERT INTO sponsor (nom, contact, pack, sponsorPicture) VALUES ('$nom', '$contact', '$pack', '$picture');\n";
+                }
 
-            $sheet->setCellValue('A1', 'Liste des Sponsors - Export personnalisé');
-            $sheet->mergeCells('A1:C1');
-            $sheet->getStyle('A1')->getFont()->setBold(true)->setSize(14);
-            $sheet->getStyle('A1')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+                return new Response(
+                    $content,
+                    200,
+                    [
+                        'Content-Type' => 'text/sql',
+                        'Content-Disposition' => 'attachment; filename="sponsors_export_' . date('Y-m-d') . '.sql"',
+                    ]
+                );
 
-            $sheet->fromArray(['Nom', 'Contact', 'Pack'], null, 'A3');
-            $row = 4;
-            foreach ($sponsors as $sponsor) {
-                $sheet->setCellValue('A' . $row, $sponsor->getNom());
-                $sheet->setCellValue('B' . $row, $sponsor->getContact());
-                $sheet->setCellValue('C' . $row, $sponsor->getPack());
-                $row++;
-            }
+            case 'xlsx':
+            default:
+                $spreadsheet = new Spreadsheet();
+                $sheet = $spreadsheet->getActiveSheet();
 
-            $writer = new Xlsx($spreadsheet);
-            $fileName = 'sponsors_export_' . date('Y-m-d') . '.xlsx';
-            break;
-    }
+                $sheet->setCellValue('A1', 'Liste des Sponsors - Export personnalisé');
+                $sheet->mergeCells('A1:D1');
+                $sheet->getStyle('A1')->getFont()->setBold(true)->setSize(14);
+                $sheet->getStyle('A1')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
 
-    // Sauvegarde temporaire du fichier
-    $tempFile = tempnam(sys_get_temp_dir(), 'sponsor_export');
-    $writer->save($tempFile);
+                $sheet->fromArray(['Nom', 'Contact', 'Pack', 'Picture'], null, 'A3');
+                $row = 4;
+                foreach ($sponsors as $sponsor) {
+                    $sheet->setCellValue('A' . $row, $sponsor->getNom());
+                    $sheet->setCellValue('B' . $row, $sponsor->getContact());
+                    $sheet->setCellValue('C' . $row, $sponsor->getPack());
+                    $sheet->setCellValue('D' . $row, $sponsor->getSponsorPicture());
+                    $row++;
+                }
 
-    $response = new BinaryFileResponse($tempFile);
-    $response->setContentDisposition(
-    ResponseHeaderBag::DISPOSITION_ATTACHMENT,
-    $fileName
-    );
-    $response->deleteFileAfterSend(true); // This ensures Symfony deletes the temp file AFTER it's sent
-    $response->headers->set('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+                $writer = new Xlsx($spreadsheet);
+                $fileName = 'sponsors_export_' . date('Y-m-d') . '.xlsx';
+                break;
+        }
 
-    return $response;
+        // Sauvegarde temporaire du fichier
+        $tempFile = tempnam(sys_get_temp_dir(), 'sponsor_export');
+        $writer->save($tempFile);
+
+        $response = new BinaryFileResponse($tempFile);
+        $response->setContentDisposition(
+            ResponseHeaderBag::DISPOSITION_ATTACHMENT,
+            $fileName
+        );
+        $response->deleteFileAfterSend(true);
+        $response->headers->set('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+
+        return $response;
     }
 
     #[Route('/front', name: 'sponsor_front', methods: ['GET'])]
     public function front(SponsorRepository $sponsorRepository): Response
     {
-    $sponsors = $sponsorRepository->findAll();
-    return $this->render('sponsor/sponsor_front.html.twig', [
-        'sponsors' => $sponsors,
-        'stripe_key' => $_ENV["STRIPE_KEY"],
-    ]);
-    }
-
-    #[Route('/stripe/create-charge', name: 'app_stripe_charge', methods: ['POST'])]
-    public function createCharge(Request $request)
-    {
-        Stripe\Stripe::setApiKey($_ENV["STRIPE_SECRET"]);
-        Stripe\Charge::create ([
-                "amount" => 5 * 100,
-                "currency" => "usd",
-                "source" => $request->request->get('stripeToken'),
-                "description" => "Binaryboxtuts Payment Test"
+        $sponsors = $sponsorRepository->findAll();
+        return $this->render('sponsor/sponsor_front.html.twig', [
+            'sponsors' => $sponsors,
+            'stripe_public_key' => $_ENV["STRIPE_KEY"],
         ]);
-        $this->addFlash(
-            'success',
-            'Payment Successful!'
-        );
-        return $this->redirectToRoute('app_stripe', [], Response::HTTP_SEE_OTHER);
     }
+
+    #[Route('/{id}/stripe-charge', name: 'sponsor_stripe_charge', methods: ['POST'], requirements: ['id' => '\d+'])]
+    public function createCharge(int $id, Request $request, SponsorRepository $sponsorRepository, ContratRepository $contratRepository): Response
+    {
+        $sponsor = $sponsorRepository->find($id);
+        if (!$sponsor) {
+            $this->addFlash('error', 'Sponsor non trouvé.');
+            return $this->redirectToRoute('sponsor_front', [], Response::HTTP_SEE_OTHER);
+        }
+
+        // Validate CSRF token
+        if (!$this->isCsrfTokenValid('stripe_payment_' . $sponsor->getIdSponsor(), $request->request->get('_token'))) {
+            $this->addFlash('error', 'Jeton CSRF invalide.');
+            return $this->redirectToRoute('sponsor_front', [], Response::HTTP_SEE_OTHER);
+        }
+
+        // Check if sponsor has at least one contract
+        $contracts = $sponsor->getContrats();
+        if ($contracts->isEmpty()) {
+            $this->addFlash('error', 'Aucun contrat associé à ce sponsor.');
+            return $this->redirectToRoute('sponsor_front', [], Response::HTTP_SEE_OTHER);
+        }
+
+        // Get selected contract ID
+        $contractId = $request->request->get('contractId');
+        if (!$contractId) {
+            $this->addFlash('error', 'Aucun contrat sélectionné.');
+            return $this->redirectToRoute('sponsor_front', [], Response::HTTP_SEE_OTHER);
+        }
+
+        // Fetch the selected contract
+        $contract = $contratRepository->find($contractId);
+        if (!$contract || $contract->getSponsor()->getIdSponsor() !== $sponsor->getIdSponsor()) {
+            $this->addFlash('error', 'Contrat invalide ou non associé à ce sponsor.');
+            return $this->redirectToRoute('sponsor_front', [], Response::HTTP_SEE_OTHER);
+        }
+
+        Stripe\Stripe::setApiKey($_ENV["STRIPE_SECRET"]);
+
+        $customerName = $request->request->get('customerName');
+        $token = $request->request->get('stripeToken');
+
+        if (!$token) {
+            $this->addFlash('error', 'Paiement échoué : jeton manquant.');
+            return $this->redirectToRoute('sponsor_front', [], Response::HTTP_SEE_OTHER);
+        }
+
+        if (!$customerName) {
+            $this->addFlash('error', 'Paiement échoué : nom du client requis.');
+            return $this->redirectToRoute('sponsor_front', [], Response::HTTP_SEE_OTHER);
+        }
+
+        // Get the contract amount and convert to cents
+        $amount = $contract->getMontant();
+        if ($amount <= 0) {
+            $this->addFlash('error', 'Paiement échoué : montant du contrat invalide.');
+            return $this->redirectToRoute('sponsor_front', [], Response::HTTP_SEE_OTHER);
+        }
+        $amountInCents = (int) ($amount * 100); // Convert to cents
+
+        try {
+            Stripe\Charge::create([
+                "amount" => $amountInCents,
+                "currency" => "usd",
+                "source" => $token,
+                "description" => "Paiement pour le contrat #" . $contract->getIdContrat() . " (" . $contract->getTitre() . ") de " . $sponsor->getNom(),
+                "metadata" => [
+                    'customer_name' => $customerName,
+                    'sponsor_id' => $sponsor->getIdSponsor(),
+                    'sponsor_name' => $sponsor->getNom(),
+                    'contract_id' => $contract->getIdContrat(),
+                    'contract_title' => $contract->getTitre(),
+                    'amount' => $amount,
+                ],
+            ]);
+
+            $this->addFlash('success', 'Paiement de $' . number_format($amount, 2) . ' effectué avec succès !');
+        } catch (\Exception $e) {
+            $this->addFlash('error', 'Paiement échoué : ' . $e->getMessage());
+        }
+
+        return $this->redirectToRoute('sponsor_front', [], Response::HTTP_SEE_OTHER);
+    }
+
     
-
-
 }

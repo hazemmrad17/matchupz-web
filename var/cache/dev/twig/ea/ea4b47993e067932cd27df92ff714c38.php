@@ -74,7 +74,7 @@ class __TwigTemplate_bed67d00fa09619efb712ce824ccd66a extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "title"));
 
-        yield "Contract Statistics";
+        yield "Contrat Statistics";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
 
@@ -98,91 +98,32 @@ class __TwigTemplate_bed67d00fa09619efb712ce824ccd66a extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
 
         // line 6
-        yield "<h4 class=\"fw-bold py-3 mb-4\">Contract Statistics</h4>
+        yield "<h4 class=\"fw-bold py-3 mb-4\">Contrat Statistics</h4>
 
 <div class=\"row\">
-    <!-- Total Contracts -->
-    <div class=\"col-lg-4 col-md-6 mb-4\">
-        <div class=\"card\">
-            <div class=\"card-body\">
-                <div class=\"card-title d-flex align-items-start justify-content-between\">
-                    <div class=\"avatar flex-shrink-0\">
-                        <img src=\"";
-        // line 15
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("img/icons/unicons/chart-success.png"), "html", null, true);
-        yield "\" alt=\"Contracts\" class=\"rounded\" />
-                    </div>
-                </div>
-                <span class=\"fw-semibold d-block mb-1\">Total Contracts</span>
-                <h3 class=\"card-title mb-2\">";
-        // line 19
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["totalContracts"]) || array_key_exists("totalContracts", $context) ? $context["totalContracts"] : (function () { throw new RuntimeError('Variable "totalContracts" does not exist.', 19, $this->source); })()), "html", null, true);
-        yield "</h3>
-                <small class=\"text-success fw-semibold\"><i class=\"bx bx-up-arrow-alt\"></i> Updated Today</small>
-            </div>
-        </div>
-    </div>
 
     <!-- Montant Distribution Chart -->
-    <div class=\"col-12 col-lg-6 mb-4\">
+    <div class=\"col-12 col-lg-8 mb-4\"> <!-- Changed col-lg-6 to col-lg-8 to make it wider -->
         <div class=\"card\">
-            <div class=\"card-header\"><h5 class=\"card-title m-0 me-2\">Montant Distribution</h5></div>
-            <div class=\"card-body\"><div id=\"montantDistributionChart\"></div></div>
-        </div>
-    </div>
-
-    <!-- All Contracts List -->
-    <div class=\"col-12 col-lg-6 mb-4\">
-        <div class=\"card\">
-            <div class=\"card-header\"><h5 class=\"card-title m-0 me-2\">All Contracts</h5></div>
-            <div class=\"card-body\" style=\"max-height: 400px; overflow-y: auto;\">
-                <ul class=\"p-0 m-0\">
-                    ";
-        // line 39
-        $context['_parent'] = $context;
-        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["allContracts"]) || array_key_exists("allContracts", $context) ? $context["allContracts"] : (function () { throw new RuntimeError('Variable "allContracts" does not exist.', 39, $this->source); })()));
-        $context['_iterated'] = false;
-        foreach ($context['_seq'] as $context["_key"] => $context["contract"]) {
-            // line 40
-            yield "                        <li class=\"d-flex mb-4 pb-1\">
-                            <div class=\"avatar flex-shrink-0 me-3\">
-                                <img src=\"";
-            // line 42
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("img/default-avatar.png"), "html", null, true);
-            yield "\" alt=\"Contract\" class=\"rounded\" />
-                            </div>
-                            <div class=\"d-flex w-100 flex-wrap align-items-center justify-content-between gap-2\">
-                                <div class=\"me-2\">
-                                    <h6 class=\"mb-0\">";
-            // line 46
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["contract"], "Titre", [], "any", false, false, false, 46), "html", null, true);
-            yield "</h6>
-                                </div>
-                                <div class=\"user-progress\">
-                                    <small class=\"fw-semibold\">";
-            // line 49
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["contract"], "Montant", [], "any", false, false, false, 49), "html", null, true);
-            yield " €</small>
-                                </div>
-                            </div>
-                        </li>
-                    ";
-            $context['_iterated'] = true;
-        }
-        // line 53
-        if (!$context['_iterated']) {
-            // line 54
-            yield "                        <li>No contracts found.</li>
-                    ";
-        }
-        $_parent = $context['_parent'];
-        unset($context['_seq'], $context['_key'], $context['contract'], $context['_parent'], $context['_iterated']);
-        $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 56
-        yield "                </ul>
+            <div class=\"card-header\"><h5 class=\"card-title m-0 me-2\">Distribution des montants</h5></div>
+            <div class=\"card-body\">
+                <canvas id=\"montantDistributionChart\" style=\"min-height: 450px; max-height: 450px; width: 100%; display: block;\"></canvas> <!-- Increased min-height to 450px -->
             </div>
         </div>
     </div>
+
+    <!-- Contract Duration Chart -->
+    <div class=\"col-12 mb-4\">
+        <div class=\"card h-100\">
+            <div class=\"card-header\">
+                <h5 class=\"card-title m-0 me-2\">Durée des contrats</h5>
+            </div>
+            <div class=\"card-body\">
+                <canvas id=\"contractDurationChart\" style=\"min-height: 400px; max-height: 400px; width: 100%; display: block;\"></canvas>
+            </div>
+        </div>
+    </div>
+
 </div>
 ";
         
@@ -194,7 +135,7 @@ class __TwigTemplate_bed67d00fa09619efb712ce824ccd66a extends Template
         yield from [];
     }
 
-    // line 63
+    // line 35
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -207,60 +148,384 @@ class __TwigTemplate_bed67d00fa09619efb712ce824ccd66a extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "javascripts"));
 
-        // line 64
+        // line 36
         yield "    ";
         yield from $this->yieldParentBlock("javascripts", $context, $blocks);
         yield "
+    <script src=\"https://cdn.jsdelivr.net/npm/chart.js\"></script>
+    <script src=\"https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js\"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // Montant Distribution Chart (Histogram)
-            new ApexCharts(document.querySelector(\"#montantDistributionChart\"), {
-                chart: { type: 'histogram', height: 350 },
-                series: [{
-                    name: 'Montant',
-                    data: [
-                        ";
-        // line 73
+            // Check if Chart.js is loaded
+            if (typeof Chart === 'undefined') {
+                console.error('Chart.js is not loaded.');
+                document.getElementById('montantDistributionChart').parentElement.innerHTML = '<p class=\"text-center text-danger\">Error: Chart.js failed to load.</p>';
+                document.getElementById('contractDurationChart').parentElement.innerHTML = '<p class=\"text-center text-danger\">Error: Chart.js failed to load.</p>';
+                return;
+            }
+
+            // Montant Distribution Chart
+            const montantCtx = document.getElementById('montantDistributionChart').getContext('2d');
+            // Generate arrays safely
+            const montantLabels = [";
+        // line 52
         $context['_parent'] = $context;
-        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["montantDistribution"]) || array_key_exists("montantDistribution", $context) ? $context["montantDistribution"] : (function () { throw new RuntimeError('Variable "montantDistribution" does not exist.', 73, $this->source); })()));
-        foreach ($context['_seq'] as $context["_key"] => $context["count"]) {
-            // line 74
-            yield "                            ";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($context["count"], "html", null, true);
-            yield ",
-                        ";
+        $context['_seq'] = CoreExtension::ensureTraversable(Twig\Extension\CoreExtension::keys((isset($context["montantDistribution"]) || array_key_exists("montantDistribution", $context) ? $context["montantDistribution"] : (function () { throw new RuntimeError('Variable "montantDistribution" does not exist.', 52, $this->source); })())));
+        $context['loop'] = [
+          'parent' => $context['_parent'],
+          'index0' => 0,
+          'index'  => 1,
+          'first'  => true,
+        ];
+        if (is_array($context['_seq']) || (is_object($context['_seq']) && $context['_seq'] instanceof \Countable)) {
+            $length = count($context['_seq']);
+            $context['loop']['revindex0'] = $length - 1;
+            $context['loop']['revindex'] = $length;
+            $context['loop']['length'] = $length;
+            $context['loop']['last'] = 1 === $length;
         }
-        $_parent = $context['_parent'];
-        unset($context['_seq'], $context['_key'], $context['count'], $context['_parent']);
-        $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 76
-        yield "                    ]
-                }],
-                xaxis: {
-                    categories: [";
-        // line 79
-        $context['_parent'] = $context;
-        $context['_seq'] = CoreExtension::ensureTraversable(Twig\Extension\CoreExtension::keys((isset($context["montantDistribution"]) || array_key_exists("montantDistribution", $context) ? $context["montantDistribution"] : (function () { throw new RuntimeError('Variable "montantDistribution" does not exist.', 79, $this->source); })())));
         foreach ($context['_seq'] as $context["_key"] => $context["bin"]) {
             yield "'";
             yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($context["bin"], "html", null, true);
-            yield "',";
+            yield "'";
+            if ( !CoreExtension::getAttribute($this->env, $this->source, $context["loop"], "last", [], "any", false, false, false, 52)) {
+                yield ",";
+            }
+            ++$context['loop']['index0'];
+            ++$context['loop']['index'];
+            $context['loop']['first'] = false;
+            if (isset($context['loop']['revindex0'], $context['loop']['revindex'])) {
+                --$context['loop']['revindex0'];
+                --$context['loop']['revindex'];
+                $context['loop']['last'] = 0 === $context['loop']['revindex0'];
+            }
         }
         $_parent = $context['_parent'];
-        unset($context['_seq'], $context['_key'], $context['bin'], $context['_parent']);
+        unset($context['_seq'], $context['_key'], $context['bin'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        yield "],
-                    title: { text: 'Montant Range (€)' }
-                },
-                yaxis: {
-                    title: { text: 'Number of Contracts' }
-                },
-                colors: ['#FF5733'], // Match the orange color from the image
-                title: {
-                    text: 'Distribution des montants des contrats',
-                    align: 'center'
+        yield "];
+            const montantValues = [";
+        // line 53
+        $context['_parent'] = $context;
+        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["montantDistribution"]) || array_key_exists("montantDistribution", $context) ? $context["montantDistribution"] : (function () { throw new RuntimeError('Variable "montantDistribution" does not exist.', 53, $this->source); })()));
+        $context['loop'] = [
+          'parent' => $context['_parent'],
+          'index0' => 0,
+          'index'  => 1,
+          'first'  => true,
+        ];
+        if (is_array($context['_seq']) || (is_object($context['_seq']) && $context['_seq'] instanceof \Countable)) {
+            $length = count($context['_seq']);
+            $context['loop']['revindex0'] = $length - 1;
+            $context['loop']['revindex'] = $length;
+            $context['loop']['length'] = $length;
+            $context['loop']['last'] = 1 === $length;
+        }
+        foreach ($context['_seq'] as $context["_key"] => $context["count"]) {
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($context["count"], "html", null, true);
+            if ( !CoreExtension::getAttribute($this->env, $this->source, $context["loop"], "last", [], "any", false, false, false, 53)) {
+                yield ",";
+            }
+            ++$context['loop']['index0'];
+            ++$context['loop']['index'];
+            $context['loop']['first'] = false;
+            if (isset($context['loop']['revindex0'], $context['loop']['revindex'])) {
+                --$context['loop']['revindex0'];
+                --$context['loop']['revindex'];
+                $context['loop']['last'] = 0 === $context['loop']['revindex0'];
+            }
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_key'], $context['count'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        yield "];
+            const montantDistributionData = {
+                labels: montantLabels,
+                values: montantValues
+            };
+            console.log('Montant Distribution Data:', montantDistributionData);
+
+            if (montantDistributionData.labels.length > 0 && montantDistributionData.values.length > 0) {
+                try {
+                    new Chart(montantCtx, {
+                        type: 'bar',
+                        data: {
+                            labels: montantDistributionData.labels,
+                            datasets: [{
+                                label: 'Nombre des Contrats',
+                                data: montantDistributionData.values,
+                                backgroundColor: '#FF5733',
+                                borderColor: '#FF5733',
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                title: {
+                                    display: true,
+                                    text: 'Distribution des montants des contrats',
+                                    align: 'center',
+                                    font: {
+                                        size: 18 // Increased font size for title to match larger card
+                                    }
+                                },
+                                legend: {
+                                    display: false
+                                }
+                            },
+                            scales: {
+                                x: {
+                                    title: {
+                                        display: true,
+                                        text: 'Montant Range (TND)',
+                                        font: {
+                                            size: 14 // Slightly larger font for axis title
+                                        }
+                                    },
+                                    ticks: {
+                                        autoSkip: false,
+                                        maxRotation: 45,
+                                        minRotation: 45,
+                                        font: {
+                                            size: 12 // Slightly larger font for ticks
+                                        }
+                                    }
+                                },
+                                y: {
+                                    title: {
+                                        display: true,
+                                        text: 'Nombre des Contrats',
+                                        font: {
+                                            size: 14 // Slightly larger font for axis title
+                                        }
+                                    },
+                                    beginAtZero: true,
+                                    ticks: {
+                                        stepSize: 1,
+                                        font: {
+                                            size: 12 // Slightly larger font for ticks
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    });
+                } catch (error) {
+                    console.error('Error rendering Montant Distribution Chart:', error);
+                    document.getElementById('montantDistributionChart').parentElement.innerHTML = '<p class=\"text-center text-danger\">Error rendering chart: ' + error.message + '</p>';
                 }
-            }).render();
+            } else {
+                document.getElementById('montantDistributionChart').parentElement.innerHTML = '<p class=\"text-center text-muted\">No data available for Montant Distribution.</p>';
+            }
+
+            // Contract Duration Chart
+            const durationCtx = document.getElementById('contractDurationChart').getContext('2d');
+            const contractDurationData = {
+                labels: [],
+                startDates: [],
+                durations: []
+            };
+            // Generate arrays from Twig data
+            const rawLabels = [";
+        // line 143
+        $context['_parent'] = $context;
+        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["allContracts"]) || array_key_exists("allContracts", $context) ? $context["allContracts"] : (function () { throw new RuntimeError('Variable "allContracts" does not exist.', 143, $this->source); })()));
+        $context['loop'] = [
+          'parent' => $context['_parent'],
+          'index0' => 0,
+          'index'  => 1,
+          'first'  => true,
+        ];
+        if (is_array($context['_seq']) || (is_object($context['_seq']) && $context['_seq'] instanceof \Countable)) {
+            $length = count($context['_seq']);
+            $context['loop']['revindex0'] = $length - 1;
+            $context['loop']['revindex'] = $length;
+            $context['loop']['length'] = $length;
+            $context['loop']['last'] = 1 === $length;
+        }
+        foreach ($context['_seq'] as $context["_key"] => $context["contract"]) {
+            if ((CoreExtension::getAttribute($this->env, $this->source, $context["contract"], "dateDebut", [], "any", false, false, false, 143) && CoreExtension::getAttribute($this->env, $this->source, $context["contract"], "dateFin", [], "any", false, false, false, 143))) {
+                yield "'";
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(((CoreExtension::getAttribute($this->env, $this->source, $context["contract"], "titre", [], "any", true, true, false, 143)) ? (Twig\Extension\CoreExtension::default(CoreExtension::getAttribute($this->env, $this->source, $context["contract"], "titre", [], "any", false, false, false, 143), ("Contract #" . CoreExtension::getAttribute($this->env, $this->source, $context["contract"], "idContrat", [], "any", false, false, false, 143)))) : (("Contract #" . CoreExtension::getAttribute($this->env, $this->source, $context["contract"], "idContrat", [], "any", false, false, false, 143)))), "js"), "html", null, true);
+                yield "'";
+                if ( !CoreExtension::getAttribute($this->env, $this->source, $context["loop"], "last", [], "any", false, false, false, 143)) {
+                    yield ",";
+                }
+            }
+            ++$context['loop']['index0'];
+            ++$context['loop']['index'];
+            $context['loop']['first'] = false;
+            if (isset($context['loop']['revindex0'], $context['loop']['revindex'])) {
+                --$context['loop']['revindex0'];
+                --$context['loop']['revindex'];
+                $context['loop']['last'] = 0 === $context['loop']['revindex0'];
+            }
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_key'], $context['contract'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        yield "];
+            const rawStartDates = [";
+        // line 144
+        $context['_parent'] = $context;
+        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["allContracts"]) || array_key_exists("allContracts", $context) ? $context["allContracts"] : (function () { throw new RuntimeError('Variable "allContracts" does not exist.', 144, $this->source); })()));
+        $context['loop'] = [
+          'parent' => $context['_parent'],
+          'index0' => 0,
+          'index'  => 1,
+          'first'  => true,
+        ];
+        if (is_array($context['_seq']) || (is_object($context['_seq']) && $context['_seq'] instanceof \Countable)) {
+            $length = count($context['_seq']);
+            $context['loop']['revindex0'] = $length - 1;
+            $context['loop']['revindex'] = $length;
+            $context['loop']['length'] = $length;
+            $context['loop']['last'] = 1 === $length;
+        }
+        foreach ($context['_seq'] as $context["_key"] => $context["contract"]) {
+            if ((CoreExtension::getAttribute($this->env, $this->source, $context["contract"], "dateDebut", [], "any", false, false, false, 144) && CoreExtension::getAttribute($this->env, $this->source, $context["contract"], "dateFin", [], "any", false, false, false, 144))) {
+                yield "'";
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["contract"], "dateDebut", [], "any", false, false, false, 144), "Y-m-d"), "html", null, true);
+                yield "'";
+                if ( !CoreExtension::getAttribute($this->env, $this->source, $context["loop"], "last", [], "any", false, false, false, 144)) {
+                    yield ",";
+                }
+            }
+            ++$context['loop']['index0'];
+            ++$context['loop']['index'];
+            $context['loop']['first'] = false;
+            if (isset($context['loop']['revindex0'], $context['loop']['revindex'])) {
+                --$context['loop']['revindex0'];
+                --$context['loop']['revindex'];
+                $context['loop']['last'] = 0 === $context['loop']['revindex0'];
+            }
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_key'], $context['contract'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        yield "];
+            const rawEndDates = [";
+        // line 145
+        $context['_parent'] = $context;
+        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["allContracts"]) || array_key_exists("allContracts", $context) ? $context["allContracts"] : (function () { throw new RuntimeError('Variable "allContracts" does not exist.', 145, $this->source); })()));
+        $context['loop'] = [
+          'parent' => $context['_parent'],
+          'index0' => 0,
+          'index'  => 1,
+          'first'  => true,
+        ];
+        if (is_array($context['_seq']) || (is_object($context['_seq']) && $context['_seq'] instanceof \Countable)) {
+            $length = count($context['_seq']);
+            $context['loop']['revindex0'] = $length - 1;
+            $context['loop']['revindex'] = $length;
+            $context['loop']['length'] = $length;
+            $context['loop']['last'] = 1 === $length;
+        }
+        foreach ($context['_seq'] as $context["_key"] => $context["contract"]) {
+            if ((CoreExtension::getAttribute($this->env, $this->source, $context["contract"], "dateDebut", [], "any", false, false, false, 145) && CoreExtension::getAttribute($this->env, $this->source, $context["contract"], "dateFin", [], "any", false, false, false, 145))) {
+                yield "'";
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["contract"], "dateFin", [], "any", false, false, false, 145), "Y-m-d"), "html", null, true);
+                yield "'";
+                if ( !CoreExtension::getAttribute($this->env, $this->source, $context["loop"], "last", [], "any", false, false, false, 145)) {
+                    yield ",";
+                }
+            }
+            ++$context['loop']['index0'];
+            ++$context['loop']['index'];
+            $context['loop']['first'] = false;
+            if (isset($context['loop']['revindex0'], $context['loop']['revindex'])) {
+                --$context['loop']['revindex0'];
+                --$context['loop']['revindex'];
+                $context['loop']['last'] = 0 === $context['loop']['revindex0'];
+            }
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_key'], $context['contract'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        yield "];
+
+            // Process dates and calculate durations
+            for (let i = 0; i < rawLabels.length; i++) {
+                const startDate = new Date(rawStartDates[i]);
+                const endDate = new Date(rawEndDates[i]);
+                if (!isNaN(startDate.getTime()) && !isNaN(endDate.getTime()) && endDate >= startDate) {
+                    contractDurationData.labels.push(rawLabels[i]);
+                    contractDurationData.startDates.push(startDate.getTime());
+                    contractDurationData.durations.push((endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24));
+                } else {
+                    console.warn('Skipping contract due to invalid dates:', rawLabels[i], rawStartDates[i], rawEndDates[i]);
+                }
+            }
+            console.log('Contract Duration Data:', contractDurationData);
+
+            if (contractDurationData.labels.length > 0) {
+                try {
+                    new Chart(durationCtx, {
+                        type: 'bar',
+                        data: {
+                            labels: contractDurationData.labels,
+                            datasets: [{
+                                label: 'Contract Duration',
+                                data: contractDurationData.durations.map((duration, index) => ({
+                                    x: duration,
+                                    y: contractDurationData.labels[index]
+                                })),
+                                backgroundColor: '#00B7E8',
+                                borderColor: '#00B7E8',
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            indexAxis: 'y',
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                title: {
+                                    display: true,
+                                    text: 'Durée des contrats (Début à Fin)',
+                                    align: 'center'
+                                },
+                                tooltip: {
+                                    callbacks: {
+                                        label: function(context) {
+                                            const label = context.label || '';
+                                            const duration = context.raw.x;
+                                            const startDate = new Date(contractDurationData.startDates[context.dataIndex]);
+                                            const endDate = new Date(startDate.getTime() + duration * 1000 * 60 * 60 * 24);
+                                            return `\${label}: \${startDate.toLocaleDateString()} - \${endDate.toLocaleDateString()} (\${Math.round(duration)} jours)`;
+                                        }
+                                    }
+                                }
+                            },
+                            scales: {
+                                x: {
+                                    title: {
+                                        display: true,
+                                        text: 'Durée (jours)'
+                                    },
+                                    beginAtZero: true,
+                                    ticks: {
+                                        stepSize: 50
+                                    }
+                                },
+                                y: {
+                                    title: {
+                                        display: true,
+                                        text: 'Contracts'
+                                    }
+                                }
+                            }
+                        }
+                    });
+                } catch (error) {
+                    console.error('Error rendering Contract Duration Chart:', error);
+                    document.getElementById('contractDurationChart').parentElement.innerHTML = '<p class=\"text-center text-danger\">Error rendering chart: ' + error.message + '</p>';
+                }
+            } else {
+                document.getElementById('contractDurationChart').parentElement.innerHTML = '<p class=\"text-center text-muted\">No contracts with valid start and end dates available.</p>';
+            }
         });
     </script>
 ";
@@ -294,101 +559,237 @@ class __TwigTemplate_bed67d00fa09619efb712ce824ccd66a extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  242 => 79,  237 => 76,  228 => 74,  224 => 73,  211 => 64,  198 => 63,  182 => 56,  175 => 54,  173 => 53,  164 => 49,  158 => 46,  151 => 42,  147 => 40,  142 => 39,  119 => 19,  112 => 15,  101 => 6,  88 => 5,  65 => 3,  42 => 1,);
+        return array (  411 => 145,  372 => 144,  333 => 143,  209 => 53,  172 => 52,  152 => 36,  139 => 35,  101 => 6,  88 => 5,  65 => 3,  42 => 1,);
     }
 
     public function getSourceContext(): Source
     {
         return new Source("{% extends 'base.html.twig' %}
 
-{% block title %}Contract Statistics{% endblock %}
+{% block title %}Contrat Statistics{% endblock %}
 
 {% block body %}
-<h4 class=\"fw-bold py-3 mb-4\">Contract Statistics</h4>
+<h4 class=\"fw-bold py-3 mb-4\">Contrat Statistics</h4>
 
 <div class=\"row\">
-    <!-- Total Contracts -->
-    <div class=\"col-lg-4 col-md-6 mb-4\">
-        <div class=\"card\">
-            <div class=\"card-body\">
-                <div class=\"card-title d-flex align-items-start justify-content-between\">
-                    <div class=\"avatar flex-shrink-0\">
-                        <img src=\"{{ asset('img/icons/unicons/chart-success.png') }}\" alt=\"Contracts\" class=\"rounded\" />
-                    </div>
-                </div>
-                <span class=\"fw-semibold d-block mb-1\">Total Contracts</span>
-                <h3 class=\"card-title mb-2\">{{ totalContracts }}</h3>
-                <small class=\"text-success fw-semibold\"><i class=\"bx bx-up-arrow-alt\"></i> Updated Today</small>
-            </div>
-        </div>
-    </div>
 
     <!-- Montant Distribution Chart -->
-    <div class=\"col-12 col-lg-6 mb-4\">
+    <div class=\"col-12 col-lg-8 mb-4\"> <!-- Changed col-lg-6 to col-lg-8 to make it wider -->
         <div class=\"card\">
-            <div class=\"card-header\"><h5 class=\"card-title m-0 me-2\">Montant Distribution</h5></div>
-            <div class=\"card-body\"><div id=\"montantDistributionChart\"></div></div>
-        </div>
-    </div>
-
-    <!-- All Contracts List -->
-    <div class=\"col-12 col-lg-6 mb-4\">
-        <div class=\"card\">
-            <div class=\"card-header\"><h5 class=\"card-title m-0 me-2\">All Contracts</h5></div>
-            <div class=\"card-body\" style=\"max-height: 400px; overflow-y: auto;\">
-                <ul class=\"p-0 m-0\">
-                    {% for contract in allContracts %}
-                        <li class=\"d-flex mb-4 pb-1\">
-                            <div class=\"avatar flex-shrink-0 me-3\">
-                                <img src=\"{{ asset('img/default-avatar.png') }}\" alt=\"Contract\" class=\"rounded\" />
-                            </div>
-                            <div class=\"d-flex w-100 flex-wrap align-items-center justify-content-between gap-2\">
-                                <div class=\"me-2\">
-                                    <h6 class=\"mb-0\">{{ contract.Titre }}</h6>
-                                </div>
-                                <div class=\"user-progress\">
-                                    <small class=\"fw-semibold\">{{ contract.Montant }} €</small>
-                                </div>
-                            </div>
-                        </li>
-                    {% else %}
-                        <li>No contracts found.</li>
-                    {% endfor %}
-                </ul>
+            <div class=\"card-header\"><h5 class=\"card-title m-0 me-2\">Distribution des montants</h5></div>
+            <div class=\"card-body\">
+                <canvas id=\"montantDistributionChart\" style=\"min-height: 450px; max-height: 450px; width: 100%; display: block;\"></canvas> <!-- Increased min-height to 450px -->
             </div>
         </div>
     </div>
+
+    <!-- Contract Duration Chart -->
+    <div class=\"col-12 mb-4\">
+        <div class=\"card h-100\">
+            <div class=\"card-header\">
+                <h5 class=\"card-title m-0 me-2\">Durée des contrats</h5>
+            </div>
+            <div class=\"card-body\">
+                <canvas id=\"contractDurationChart\" style=\"min-height: 400px; max-height: 400px; width: 100%; display: block;\"></canvas>
+            </div>
+        </div>
+    </div>
+
 </div>
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
+    <script src=\"https://cdn.jsdelivr.net/npm/chart.js\"></script>
+    <script src=\"https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js\"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // Montant Distribution Chart (Histogram)
-            new ApexCharts(document.querySelector(\"#montantDistributionChart\"), {
-                chart: { type: 'histogram', height: 350 },
-                series: [{
-                    name: 'Montant',
-                    data: [
-                        {% for count in montantDistribution %}
-                            {{ count }},
-                        {% endfor %}
-                    ]
-                }],
-                xaxis: {
-                    categories: [{% for bin in montantDistribution|keys %}'{{ bin }}',{% endfor %}],
-                    title: { text: 'Montant Range (€)' }
-                },
-                yaxis: {
-                    title: { text: 'Number of Contracts' }
-                },
-                colors: ['#FF5733'], // Match the orange color from the image
-                title: {
-                    text: 'Distribution des montants des contrats',
-                    align: 'center'
+            // Check if Chart.js is loaded
+            if (typeof Chart === 'undefined') {
+                console.error('Chart.js is not loaded.');
+                document.getElementById('montantDistributionChart').parentElement.innerHTML = '<p class=\"text-center text-danger\">Error: Chart.js failed to load.</p>';
+                document.getElementById('contractDurationChart').parentElement.innerHTML = '<p class=\"text-center text-danger\">Error: Chart.js failed to load.</p>';
+                return;
+            }
+
+            // Montant Distribution Chart
+            const montantCtx = document.getElementById('montantDistributionChart').getContext('2d');
+            // Generate arrays safely
+            const montantLabels = [{% for bin in montantDistribution|keys %}'{{ bin }}'{% if not loop.last %},{% endif %}{% endfor %}];
+            const montantValues = [{% for count in montantDistribution %}{{ count }}{% if not loop.last %},{% endif %}{% endfor %}];
+            const montantDistributionData = {
+                labels: montantLabels,
+                values: montantValues
+            };
+            console.log('Montant Distribution Data:', montantDistributionData);
+
+            if (montantDistributionData.labels.length > 0 && montantDistributionData.values.length > 0) {
+                try {
+                    new Chart(montantCtx, {
+                        type: 'bar',
+                        data: {
+                            labels: montantDistributionData.labels,
+                            datasets: [{
+                                label: 'Nombre des Contrats',
+                                data: montantDistributionData.values,
+                                backgroundColor: '#FF5733',
+                                borderColor: '#FF5733',
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                title: {
+                                    display: true,
+                                    text: 'Distribution des montants des contrats',
+                                    align: 'center',
+                                    font: {
+                                        size: 18 // Increased font size for title to match larger card
+                                    }
+                                },
+                                legend: {
+                                    display: false
+                                }
+                            },
+                            scales: {
+                                x: {
+                                    title: {
+                                        display: true,
+                                        text: 'Montant Range (TND)',
+                                        font: {
+                                            size: 14 // Slightly larger font for axis title
+                                        }
+                                    },
+                                    ticks: {
+                                        autoSkip: false,
+                                        maxRotation: 45,
+                                        minRotation: 45,
+                                        font: {
+                                            size: 12 // Slightly larger font for ticks
+                                        }
+                                    }
+                                },
+                                y: {
+                                    title: {
+                                        display: true,
+                                        text: 'Nombre des Contrats',
+                                        font: {
+                                            size: 14 // Slightly larger font for axis title
+                                        }
+                                    },
+                                    beginAtZero: true,
+                                    ticks: {
+                                        stepSize: 1,
+                                        font: {
+                                            size: 12 // Slightly larger font for ticks
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    });
+                } catch (error) {
+                    console.error('Error rendering Montant Distribution Chart:', error);
+                    document.getElementById('montantDistributionChart').parentElement.innerHTML = '<p class=\"text-center text-danger\">Error rendering chart: ' + error.message + '</p>';
                 }
-            }).render();
+            } else {
+                document.getElementById('montantDistributionChart').parentElement.innerHTML = '<p class=\"text-center text-muted\">No data available for Montant Distribution.</p>';
+            }
+
+            // Contract Duration Chart
+            const durationCtx = document.getElementById('contractDurationChart').getContext('2d');
+            const contractDurationData = {
+                labels: [],
+                startDates: [],
+                durations: []
+            };
+            // Generate arrays from Twig data
+            const rawLabels = [{% for contract in allContracts %}{% if contract.dateDebut and contract.dateFin %}'{{ contract.titre|default('Contract #' ~ contract.idContrat)|e('js') }}'{% if not loop.last %},{% endif %}{% endif %}{% endfor %}];
+            const rawStartDates = [{% for contract in allContracts %}{% if contract.dateDebut and contract.dateFin %}'{{ contract.dateDebut|date('Y-m-d') }}'{% if not loop.last %},{% endif %}{% endif %}{% endfor %}];
+            const rawEndDates = [{% for contract in allContracts %}{% if contract.dateDebut and contract.dateFin %}'{{ contract.dateFin|date('Y-m-d') }}'{% if not loop.last %},{% endif %}{% endif %}{% endfor %}];
+
+            // Process dates and calculate durations
+            for (let i = 0; i < rawLabels.length; i++) {
+                const startDate = new Date(rawStartDates[i]);
+                const endDate = new Date(rawEndDates[i]);
+                if (!isNaN(startDate.getTime()) && !isNaN(endDate.getTime()) && endDate >= startDate) {
+                    contractDurationData.labels.push(rawLabels[i]);
+                    contractDurationData.startDates.push(startDate.getTime());
+                    contractDurationData.durations.push((endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24));
+                } else {
+                    console.warn('Skipping contract due to invalid dates:', rawLabels[i], rawStartDates[i], rawEndDates[i]);
+                }
+            }
+            console.log('Contract Duration Data:', contractDurationData);
+
+            if (contractDurationData.labels.length > 0) {
+                try {
+                    new Chart(durationCtx, {
+                        type: 'bar',
+                        data: {
+                            labels: contractDurationData.labels,
+                            datasets: [{
+                                label: 'Contract Duration',
+                                data: contractDurationData.durations.map((duration, index) => ({
+                                    x: duration,
+                                    y: contractDurationData.labels[index]
+                                })),
+                                backgroundColor: '#00B7E8',
+                                borderColor: '#00B7E8',
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            indexAxis: 'y',
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                title: {
+                                    display: true,
+                                    text: 'Durée des contrats (Début à Fin)',
+                                    align: 'center'
+                                },
+                                tooltip: {
+                                    callbacks: {
+                                        label: function(context) {
+                                            const label = context.label || '';
+                                            const duration = context.raw.x;
+                                            const startDate = new Date(contractDurationData.startDates[context.dataIndex]);
+                                            const endDate = new Date(startDate.getTime() + duration * 1000 * 60 * 60 * 24);
+                                            return `\${label}: \${startDate.toLocaleDateString()} - \${endDate.toLocaleDateString()} (\${Math.round(duration)} jours)`;
+                                        }
+                                    }
+                                }
+                            },
+                            scales: {
+                                x: {
+                                    title: {
+                                        display: true,
+                                        text: 'Durée (jours)'
+                                    },
+                                    beginAtZero: true,
+                                    ticks: {
+                                        stepSize: 50
+                                    }
+                                },
+                                y: {
+                                    title: {
+                                        display: true,
+                                        text: 'Contracts'
+                                    }
+                                }
+                            }
+                        }
+                    });
+                } catch (error) {
+                    console.error('Error rendering Contract Duration Chart:', error);
+                    document.getElementById('contractDurationChart').parentElement.innerHTML = '<p class=\"text-center text-danger\">Error rendering chart: ' + error.message + '</p>';
+                }
+            } else {
+                document.getElementById('contractDurationChart').parentElement.innerHTML = '<p class=\"text-center text-muted\">No contracts with valid start and end dates available.</p>';
+            }
         });
     </script>
 {% endblock %}", "contrat/statistics.html.twig", "C:\\Users\\amine\\Downloads\\matchupz-web-integration\\matchupz-web-integration\\templates\\contrat\\statistics.html.twig");

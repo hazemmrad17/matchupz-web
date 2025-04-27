@@ -26,11 +26,13 @@ class Sponsor extends \App\Entity\Sponsor implements \Doctrine\ORM\Proxy\Interna
         "\0".parent::class."\0".'contrats' => [parent::class, 'contrats', null, 16],
         "\0".parent::class."\0".'nom' => [parent::class, 'nom', null, 16],
         "\0".parent::class."\0".'pack' => [parent::class, 'pack', null, 16],
+        "\0".parent::class."\0".'sponsorPicture' => [parent::class, 'sponsorPicture', null, 16],
         'Id_sponsor' => [parent::class, 'Id_sponsor', null, 4],
         'contact' => [parent::class, 'contact', null, 16],
         'contrats' => [parent::class, 'contrats', null, 16],
         'nom' => [parent::class, 'nom', null, 16],
         'pack' => [parent::class, 'pack', null, 16],
+        'sponsorPicture' => [parent::class, 'sponsorPicture', null, 16],
     ];
 
     public function __isInitialized(): bool

@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Check Expiring Contracts{% endblock %}
+
+{% block content %}
+    <div class="content-wrapper">
+        <div class="container-xxl flex-grow-1 container-p-y">
+            <div class="card">
+                <h5 class="card-header">Expiring Contracts Check</h5>
+                <div class="card-body">
+                    {% for flashMessage in app.flashes('success') %}
+                        <div class="alert alert-success" role="alert">
+                            {{ flashMessage }}
+                        </div>
+                    {% endfor %}
+                    {% for flashMessage in app.flashes('warning') %}
+                        <div class="alert alert-warning" role="alert">
+                            {{ flashMessage }}
+                        </div>
+                    {% endfor %}
+
+                    <h6>Summary</h6>
+                    <p><strong>Successful SMS Sent:</strong> {{ successCount }}</p>
+                    <p><strong>Errors Encountered:</strong> {{ errorCount }}</p>
+
+                    {% if results|length > 0 %}
+                        <h6>Detailed Results</h6>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Contract ID</th>
+                                    <th>Status</th>
+                                    <th>Message</th>
+                                    <th>SID (if successful)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for result in results %}
+                                    <tr class="{{ result.status == 'success' ? 'table-success' : 'table-danger' }}">
+                                        <td>{{ result.contractId }}</td>
+                                        <td>{{ result.status|capitalize }}</td>
+                                        <td>{{ result.message }}</td>
+                                        <td>{{ result.sid|default('N/A') }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    {% else %}
+                        <p>No contracts are expiring within the next 3 days.</p>
+                    {% endif %}
+
+                    <a href="{{ path('contrat_main') }}" class="btn btn-secondary mt-3">Back to Contracts</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

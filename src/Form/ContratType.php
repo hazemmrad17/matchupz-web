@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class ContratType extends AbstractType
 {
@@ -67,6 +68,16 @@ class ContratType extends AbstractType
                 'label' => 'Sponsor',
                 'placeholder' => 'Sélectionner un sponsor',
                 'attr' => ['class' => 'form-control'],
+                'required' => true,
+            ])
+            ->add('article', TextareaType::class, [
+                'label' => 'Article du contrat',
+                'empty_data' => '',
+                'attr' => [
+                    'placeholder' => 'Entrer les détails de l\'article du contrat',
+                    'class' => 'form-control',
+                    'rows' => 5,
+                ],
                 'required' => true,
             ])
             ->add('signature', HiddenType::class, [

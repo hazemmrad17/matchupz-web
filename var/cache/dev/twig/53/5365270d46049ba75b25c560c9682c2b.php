@@ -166,64 +166,7 @@ class __TwigTemplate_5ae61f197c27da0d0cf50ae85dc61787 extends Template
         </div>
     </div>
     <!-- Total Revenue -->
-    <div class=\"col-12 col-lg-8 order-2 order-md-3 order-lg-2 mb-4\">
-        <div class=\"card\">
-            <div class=\"row row-bordered g-0\">
-                <div class=\"col-md-8\">
-                    <h5 class=\"card-header m-0 me-2 pb-3\">Sponsor Growth</h5>
-                    <div id=\"totalRevenueChart\" class=\"px-2\"></div>
-                </div>
-                <div class=\"col-md-4\">
-                    <div class=\"card-body\">
-                        <div class=\"text-center\">
-                            <div class=\"dropdown\">
-                                <button
-                                    class=\"btn btn-sm btn-outline-primary dropdown-toggle\"
-                                    type=\"button\"
-                                    id=\"growthReportId\"
-                                    data-bs-toggle=\"dropdown\"
-                                    aria-haspopup=\"true\"
-                                    aria-expanded=\"false\"
-                                >
-                                    2024
-                                </button>
-                                <div class=\"dropdown-menu dropdown-menu-end\" aria-labelledby=\"growthReportId\">
-                                    <a class=\"dropdown-item\" href=\"javascript:void(0);\">2023</a>
-                                    <a class=\"dropdown-item\" href=\"javascript:void(0);\">2022</a>
-                                    <a class=\"dropdown-item\" href=\"javascript:void(0);\">2021</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id=\"growthChart\"></div>
-                    <div class=\"text-center fw-semibold pt-3 mb-2\">Sponsor Registration Trend</div>
-                    <div class=\"d-flex px-xxl-4 px-lg-2 p-4 gap-xxl-3 gap-lg-1 gap-3 justify-content-between\">
-                        <div class=\"d-flex\">
-                            <div class=\"me-2\">
-                                <span class=\"badge bg-label-primary p-2\"><i class=\"bx bx-user text-primary\"></i></span>
-                            </div>
-                            <div class=\"d-flex flex-column\">
-                                <small>2024</small>
-                                <h6 class=\"mb-0\">";
-        // line 139
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::length($this->env->getCharset(), (isset($context["sponsors"]) || array_key_exists("sponsors", $context) ? $context["sponsors"] : (function () { throw new RuntimeError('Variable "sponsors" does not exist.', 139, $this->source); })())), "html", null, true);
-        yield "</h6>
-                            </div>
-                        </div>
-                        <div class=\"d-flex\">
-                            <div class=\"me-2\">
-                                <span class=\"badge bg-label-info p-2\"><i class=\"bx bx-user text-info\"></i></span>
-                            </div>
-                            <div class=\"d-flex flex-column\">
-                                <small>2023</small>
-                                <h6 class=\"mb-0\">N/A</h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    
 </div>
 
 <script>
@@ -236,8 +179,8 @@ class __TwigTemplate_5ae61f197c27da0d0cf50ae85dc61787 extends Template
             series: [{
                 name: 'Sponsors',
                 data: [";
-        // line 167
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::length($this->env->getCharset(), (isset($context["sponsors"]) || array_key_exists("sponsors", $context) ? $context["sponsors"] : (function () { throw new RuntimeError('Variable "sponsors" does not exist.', 167, $this->source); })())), "html", null, true);
+        // line 113
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::length($this->env->getCharset(), (isset($context["sponsors"]) || array_key_exists("sponsors", $context) ? $context["sponsors"] : (function () { throw new RuntimeError('Variable "sponsors" does not exist.', 113, $this->source); })())), "html", null, true);
         yield "]
             }],
             xaxis: {
@@ -278,7 +221,7 @@ class __TwigTemplate_5ae61f197c27da0d0cf50ae85dc61787 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  240 => 167,  209 => 139,  138 => 71,  124 => 60,  116 => 55,  95 => 37,  90 => 35,  69 => 17,  58 => 9,  48 => 1,);
+        return array (  183 => 113,  138 => 71,  124 => 60,  116 => 55,  95 => 37,  90 => 35,  69 => 17,  58 => 9,  48 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -383,61 +326,7 @@ class __TwigTemplate_5ae61f197c27da0d0cf50ae85dc61787 extends Template
         </div>
     </div>
     <!-- Total Revenue -->
-    <div class=\"col-12 col-lg-8 order-2 order-md-3 order-lg-2 mb-4\">
-        <div class=\"card\">
-            <div class=\"row row-bordered g-0\">
-                <div class=\"col-md-8\">
-                    <h5 class=\"card-header m-0 me-2 pb-3\">Sponsor Growth</h5>
-                    <div id=\"totalRevenueChart\" class=\"px-2\"></div>
-                </div>
-                <div class=\"col-md-4\">
-                    <div class=\"card-body\">
-                        <div class=\"text-center\">
-                            <div class=\"dropdown\">
-                                <button
-                                    class=\"btn btn-sm btn-outline-primary dropdown-toggle\"
-                                    type=\"button\"
-                                    id=\"growthReportId\"
-                                    data-bs-toggle=\"dropdown\"
-                                    aria-haspopup=\"true\"
-                                    aria-expanded=\"false\"
-                                >
-                                    2024
-                                </button>
-                                <div class=\"dropdown-menu dropdown-menu-end\" aria-labelledby=\"growthReportId\">
-                                    <a class=\"dropdown-item\" href=\"javascript:void(0);\">2023</a>
-                                    <a class=\"dropdown-item\" href=\"javascript:void(0);\">2022</a>
-                                    <a class=\"dropdown-item\" href=\"javascript:void(0);\">2021</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id=\"growthChart\"></div>
-                    <div class=\"text-center fw-semibold pt-3 mb-2\">Sponsor Registration Trend</div>
-                    <div class=\"d-flex px-xxl-4 px-lg-2 p-4 gap-xxl-3 gap-lg-1 gap-3 justify-content-between\">
-                        <div class=\"d-flex\">
-                            <div class=\"me-2\">
-                                <span class=\"badge bg-label-primary p-2\"><i class=\"bx bx-user text-primary\"></i></span>
-                            </div>
-                            <div class=\"d-flex flex-column\">
-                                <small>2024</small>
-                                <h6 class=\"mb-0\">{{ sponsors|length }}</h6>
-                            </div>
-                        </div>
-                        <div class=\"d-flex\">
-                            <div class=\"me-2\">
-                                <span class=\"badge bg-label-info p-2\"><i class=\"bx bx-user text-info\"></i></span>
-                            </div>
-                            <div class=\"d-flex flex-column\">
-                                <small>2023</small>
-                                <h6 class=\"mb-0\">N/A</h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    
 </div>
 
 <script>

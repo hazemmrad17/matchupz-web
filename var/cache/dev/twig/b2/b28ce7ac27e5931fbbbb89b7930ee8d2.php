@@ -168,36 +168,55 @@ class __TwigTemplate_af1ba4deb8d952aae0488b651309ddf0 extends Template
                     <th>Nom</th>
                     <th>Contact</th>
                     <th>Pack</th>
+                    <th>Logo</th>
                 </tr>
             </thead>
             <tbody>
                 ";
-        // line 121
+        // line 122
         $context['_parent'] = $context;
-        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["sponsors"]) || array_key_exists("sponsors", $context) ? $context["sponsors"] : (function () { throw new RuntimeError('Variable "sponsors" does not exist.', 121, $this->source); })()));
+        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["sponsors"]) || array_key_exists("sponsors", $context) ? $context["sponsors"] : (function () { throw new RuntimeError('Variable "sponsors" does not exist.', 122, $this->source); })()));
         $context['_iterated'] = false;
         foreach ($context['_seq'] as $context["_key"] => $context["sponsor"]) {
-            // line 122
+            // line 123
             yield "                    <tr>
                         <td>";
-            // line 123
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "nom", [], "any", false, false, false, 123), "html", null, true);
-            yield "</td>
-                        <td>";
             // line 124
-            yield (((CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "contact", [], "any", true, true, false, 124) &&  !(null === CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "contact", [], "any", false, false, false, 124)))) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "contact", [], "any", false, false, false, 124), "html", null, true)) : ("N/A"));
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "nom", [], "any", false, false, false, 124), "html", null, true);
             yield "</td>
                         <td>";
             // line 125
-            yield (((CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "pack", [], "any", true, true, false, 125) &&  !(null === CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "pack", [], "any", false, false, false, 125)))) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "pack", [], "any", false, false, false, 125), "html", null, true)) : ("N/A"));
+            yield (((CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "contact", [], "any", true, true, false, 125) &&  !(null === CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "contact", [], "any", false, false, false, 125)))) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "contact", [], "any", false, false, false, 125), "html", null, true)) : ("N/A"));
             yield "</td>
+                        <td>";
+            // line 126
+            yield (((CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "pack", [], "any", true, true, false, 126) &&  !(null === CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "pack", [], "any", false, false, false, 126)))) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "pack", [], "any", false, false, false, 126), "html", null, true)) : ("N/A"));
+            yield "</td>
+                        <td>
+                            ";
+            // line 128
+            if (CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "sponsorPicture", [], "any", false, false, false, 128)) {
+                // line 129
+                yield "                                <img src=\"";
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::replace($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "sponsorPicture", [], "any", false, false, false, 129)), ["http://" => "file:///"]), "html", null, true);
+                yield "\" alt=\"";
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "nom", [], "any", false, false, false, 129), "html", null, true);
+                yield " Logo\" />
+                            ";
+            } else {
+                // line 131
+                yield "                                <span class=\"no-image\">Aucun logo</span>
+                            ";
+            }
+            // line 133
+            yield "                        </td>
                     </tr>
                 ";
             $context['_iterated'] = true;
         }
-        // line 127
+        // line 135
         if (!$context['_iterated']) {
-            // line 128
+            // line 136
             yield "                    <tr>
                         <td colspan=\"3\" style=\"text-align: center; color: #555;\">Aucun sponsor trouvé</td>
                     </tr>
@@ -206,13 +225,13 @@ class __TwigTemplate_af1ba4deb8d952aae0488b651309ddf0 extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_key'], $context['sponsor'], $context['_parent'], $context['_iterated']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 132
+        // line 140
         yield "            </tbody>
         </table>
     </div>
     <div class=\"footer\">
         <p>MatchupZ © ";
-        // line 136
+        // line 144
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate("now", "Y"), "html", null, true);
         yield " | Contact: <a href=\"mailto:support@matchupz.com\">support@matchupz.com</a></p>
         <p>Powered by <span style=\"color: #eab700;\">xAI Technology</span></p>
@@ -249,7 +268,7 @@ class __TwigTemplate_af1ba4deb8d952aae0488b651309ddf0 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  216 => 136,  210 => 132,  201 => 128,  199 => 127,  192 => 125,  188 => 124,  184 => 123,  181 => 122,  176 => 121,  160 => 108,  155 => 106,  48 => 1,);
+        return array (  235 => 144,  229 => 140,  220 => 136,  218 => 135,  212 => 133,  208 => 131,  200 => 129,  198 => 128,  193 => 126,  189 => 125,  185 => 124,  182 => 123,  177 => 122,  160 => 108,  155 => 106,  48 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -371,6 +390,7 @@ class __TwigTemplate_af1ba4deb8d952aae0488b651309ddf0 extends Template
                     <th>Nom</th>
                     <th>Contact</th>
                     <th>Pack</th>
+                    <th>Logo</th>
                 </tr>
             </thead>
             <tbody>
@@ -379,6 +399,13 @@ class __TwigTemplate_af1ba4deb8d952aae0488b651309ddf0 extends Template
                         <td>{{ sponsor.nom }}</td>
                         <td>{{ sponsor.contact ?? 'N/A' }}</td>
                         <td>{{ sponsor.pack ?? 'N/A' }}</td>
+                        <td>
+                            {% if sponsor.sponsorPicture %}
+                                <img src=\"{{ asset(sponsor.sponsorPicture)|replace({'http://': 'file:///'}) }}\" alt=\"{{ sponsor.nom }} Logo\" />
+                            {% else %}
+                                <span class=\"no-image\">Aucun logo</span>
+                            {% endif %}
+                        </td>
                     </tr>
                 {% else %}
                     <tr>

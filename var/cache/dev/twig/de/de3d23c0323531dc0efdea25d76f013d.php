@@ -141,7 +141,7 @@ class __TwigTemplate_98be0b25f9f5350b8fddda5c178737ca extends Template
         yield "
                     ";
         // line 22
-        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 22, $this->source); })()), 'form_start', ["attr" => ["novalidate" => "novalidate", "class" => "form-horizontal", "id" => "contratForm"]]);
+        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 22, $this->source); })()), 'form_start', ["attr" => ["class" => "form-horizontal", "id" => "contratForm"]]);
         yield "
                         ";
         // line 23
@@ -257,52 +257,67 @@ class __TwigTemplate_98be0b25f9f5350b8fddda5c178737ca extends Template
         // line 62
         yield "                        </div>
                         <div class=\"mb-3\">
-                            <label class=\"form-label\">Signature</label>
+                            ";
+        // line 64
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 64, $this->source); })()), "article", [], "any", false, false, false, 64), 'label', ["label_attr" => ["class" => "form-label"], "label" => "Article du contrat"]);
+        yield "
                             ";
         // line 65
-        if (CoreExtension::getAttribute($this->env, $this->source, (isset($context["contrat"]) || array_key_exists("contrat", $context) ? $context["contrat"] : (function () { throw new RuntimeError('Variable "contrat" does not exist.', 65, $this->source); })()), "signature", [], "any", false, false, false, 65)) {
-            // line 66
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 65, $this->source); })()), "article", [], "any", false, false, false, 65), 'widget', ["attr" => ["class" => "form-control w-50", "rows" => "5"]]);
+        yield "
+                            ";
+        // line 66
+        if ($this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 66, $this->source); })()), "article", [], "any", false, false, false, 66), 'errors')) {
+            // line 67
+            yield "                                <div class=\"text-danger small\">";
+            yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 67, $this->source); })()), "article", [], "any", false, false, false, 67), 'errors');
+            yield "</div>
+                            ";
+        }
+        // line 69
+        yield "                        </div>
+                        <div class=\"mb-3\">
+                            <label class=\"form-label\">Signature</label>
+                            ";
+        // line 72
+        if (CoreExtension::getAttribute($this->env, $this->source, (isset($context["contrat"]) || array_key_exists("contrat", $context) ? $context["contrat"] : (function () { throw new RuntimeError('Variable "contrat" does not exist.', 72, $this->source); })()), "signature", [], "any", false, false, false, 72)) {
+            // line 73
             yield "                                <div class=\"mb-2\">
                                     <img src=\"";
-            // line 67
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(CoreExtension::getAttribute($this->env, $this->source, (isset($context["contrat"]) || array_key_exists("contrat", $context) ? $context["contrat"] : (function () { throw new RuntimeError('Variable "contrat" does not exist.', 67, $this->source); })()), "signature", [], "any", false, false, false, 67)), "html", null, true);
+            // line 74
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(CoreExtension::getAttribute($this->env, $this->source, (isset($context["contrat"]) || array_key_exists("contrat", $context) ? $context["contrat"] : (function () { throw new RuntimeError('Variable "contrat" does not exist.', 74, $this->source); })()), "signature", [], "any", false, false, false, 74)), "html", null, true);
             yield "\" alt=\"Signature actuelle\" class=\"img-fluid\" style=\"max-width: 300px;\">
                                 </div>
                             ";
         }
-        // line 70
+        // line 77
         yield "                            <canvas id=\"signatureCanvas\" class=\"form-control\" width=\"300\" height=\"80\" style=\"width: 300px; height: 80px; background-color: #ffffff;\"></canvas>
                             ";
-        // line 71
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 71, $this->source); })()), "signature", [], "any", false, false, false, 71), 'widget', ["attr" => ["id" => "signatureInput", "class" => "d-none"]]);
+        // line 78
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 78, $this->source); })()), "signature", [], "any", false, false, false, 78), 'widget', ["attr" => ["id" => "signatureInput", "class" => "d-none"]]);
         yield "
-                            <!-- Fallback hidden input in case form.signature doesn't render -->
-                            <input type=\"hidden\" id=\"signatureInput\" name=\"contrat[signature]\" class=\"d-none\" value=\"";
-        // line 73
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(((CoreExtension::getAttribute($this->env, $this->source, ($context["contrat"] ?? null), "signature", [], "any", true, true, false, 73)) ? (Twig\Extension\CoreExtension::default(CoreExtension::getAttribute($this->env, $this->source, (isset($context["contrat"]) || array_key_exists("contrat", $context) ? $context["contrat"] : (function () { throw new RuntimeError('Variable "contrat" does not exist.', 73, $this->source); })()), "signature", [], "any", false, false, false, 73), "")) : ("")), "html", null, true);
-        yield "\">
                             ";
-        // line 74
-        if ($this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 74, $this->source); })()), "signature", [], "any", false, false, false, 74), 'errors')) {
-            // line 75
+        // line 79
+        if ($this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 79, $this->source); })()), "signature", [], "any", false, false, false, 79), 'errors')) {
+            // line 80
             yield "                                <div class=\"text-danger small\">";
-            yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 75, $this->source); })()), "signature", [], "any", false, false, false, 75), 'errors');
+            yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 80, $this->source); })()), "signature", [], "any", false, false, false, 80), 'errors');
             yield "</div>
                             ";
         }
-        // line 77
+        // line 82
         yield "                            <button type=\"button\" id=\"clearCanvas\" class=\"btn btn-outline-secondary mt-2\">Effacer</button>
                         </div>
                         <div class=\"mb-3\">
                             <button type=\"submit\" class=\"btn btn-primary me-2\">Mettre à jour</button>
                             <a href=\"";
-        // line 81
+        // line 86
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("contrat_main");
         yield "\" class=\"btn btn-secondary\">Annuler</a>
                         </div>
                     ";
-        // line 83
-        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 83, $this->source); })()), 'form_end');
+        // line 88
+        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 88, $this->source); })()), 'form_end');
         yield "
                 </div>
             </div>
@@ -318,7 +333,7 @@ class __TwigTemplate_98be0b25f9f5350b8fddda5c178737ca extends Template
         yield from [];
     }
 
-    // line 90
+    // line 95
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -331,7 +346,7 @@ class __TwigTemplate_98be0b25f9f5350b8fddda5c178737ca extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "javascripts"));
 
-        // line 91
+        // line 96
         yield "    ";
         yield from $this->yieldParentBlock("javascripts", $context, $blocks);
         yield "
@@ -363,6 +378,27 @@ class __TwigTemplate_98be0b25f9f5350b8fddda5c178737ca extends Template
             ctx.lineWidth = 2;
             ctx.lineCap = 'round';
 
+            // Load existing signature if available
+            ";
+        // line 126
+        if (CoreExtension::getAttribute($this->env, $this->source, (isset($context["contrat"]) || array_key_exists("contrat", $context) ? $context["contrat"] : (function () { throw new RuntimeError('Variable "contrat" does not exist.', 126, $this->source); })()), "signature", [], "any", false, false, false, 126)) {
+            // line 127
+            yield "                const img = new Image();
+                img.src = '";
+            // line 128
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(CoreExtension::getAttribute($this->env, $this->source, (isset($context["contrat"]) || array_key_exists("contrat", $context) ? $context["contrat"] : (function () { throw new RuntimeError('Variable "contrat" does not exist.', 128, $this->source); })()), "signature", [], "any", false, false, false, 128)), "html", null, true);
+            yield "';
+                img.onload = function () {
+                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                    console.log('Loaded existing signature');
+                };
+                img.onerror = function () {
+                    console.error('Failed to load existing signature');
+                };
+            ";
+        }
+        // line 137
+        yield "
             // Drawing events
             canvas.addEventListener('mousedown', startDrawing);
             canvas.addEventListener('mousemove', draw);
@@ -424,7 +460,7 @@ class __TwigTemplate_98be0b25f9f5350b8fddda5c178737ca extends Template
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
                 if (signatureInput) {
                     signatureInput.value = 'signatures/signature_contrat_1741119108385.png';
-                    console.log('Canvas cleared, signature input set to default:', signatureInput.value);
+                    console.log('Canvas cleared, signature input set to placeholder');
                 } else {
                     console.error('Signature input not found when clearing canvas');
                 }
@@ -438,7 +474,7 @@ class __TwigTemplate_98be0b25f9f5350b8fddda5c178737ca extends Template
                 if (signatureInput) {
                     if (isEmpty) {
                         signatureInput.value = 'signatures/signature_contrat_1741119108385.png';
-                        console.log('Canvas is empty, signature input set to default:', signatureInput.value);
+                        console.log('Canvas is empty, signature input set to placeholder');
                     } else {
                         const dataUrl = canvas.toDataURL('image/png');
                         signatureInput.value = dataUrl;
@@ -497,7 +533,7 @@ class __TwigTemplate_98be0b25f9f5350b8fddda5c178737ca extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  335 => 91,  322 => 90,  305 => 83,  300 => 81,  294 => 77,  288 => 75,  286 => 74,  282 => 73,  277 => 71,  274 => 70,  268 => 67,  265 => 66,  263 => 65,  258 => 62,  252 => 60,  250 => 59,  246 => 58,  242 => 57,  238 => 55,  232 => 53,  230 => 52,  226 => 51,  222 => 50,  218 => 48,  212 => 46,  210 => 45,  206 => 44,  202 => 43,  198 => 41,  192 => 39,  190 => 38,  186 => 37,  182 => 36,  178 => 34,  172 => 32,  170 => 31,  166 => 30,  162 => 29,  159 => 28,  153 => 25,  150 => 24,  148 => 23,  144 => 22,  141 => 21,  132 => 18,  129 => 17,  124 => 16,  115 => 13,  112 => 12,  108 => 11,  101 => 6,  88 => 5,  65 => 3,  42 => 1,);
+        return array (  401 => 137,  389 => 128,  386 => 127,  384 => 126,  350 => 96,  337 => 95,  320 => 88,  315 => 86,  309 => 82,  303 => 80,  301 => 79,  297 => 78,  294 => 77,  288 => 74,  285 => 73,  283 => 72,  278 => 69,  272 => 67,  270 => 66,  266 => 65,  262 => 64,  258 => 62,  252 => 60,  250 => 59,  246 => 58,  242 => 57,  238 => 55,  232 => 53,  230 => 52,  226 => 51,  222 => 50,  218 => 48,  212 => 46,  210 => 45,  206 => 44,  202 => 43,  198 => 41,  192 => 39,  190 => 38,  186 => 37,  182 => 36,  178 => 34,  172 => 32,  170 => 31,  166 => 30,  162 => 29,  159 => 28,  153 => 25,  150 => 24,  148 => 23,  144 => 22,  141 => 21,  132 => 18,  129 => 17,  124 => 16,  115 => 13,  112 => 12,  108 => 11,  101 => 6,  88 => 5,  65 => 3,  42 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -523,7 +559,7 @@ class __TwigTemplate_98be0b25f9f5350b8fddda5c178737ca extends Template
                         </div>
                     {% endfor %}
 
-                    {{ form_start(form, {'attr': {'novalidate': 'novalidate', 'class': 'form-horizontal', 'id': 'contratForm'}}) }}
+                    {{ form_start(form, {'attr': {'class': 'form-horizontal', 'id': 'contratForm'}}) }}
                         {% if form_errors(form) %}
                             <div class=\"alert alert-danger\" role=\"alert\">
                                 {{ form_errors(form) }}
@@ -565,6 +601,13 @@ class __TwigTemplate_98be0b25f9f5350b8fddda5c178737ca extends Template
                             {% endif %}
                         </div>
                         <div class=\"mb-3\">
+                            {{ form_label(form.article, 'Article du contrat', {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_widget(form.article, {'attr': {'class': 'form-control w-50', 'rows': '5'}}) }}
+                            {% if form_errors(form.article) %}
+                                <div class=\"text-danger small\">{{ form_errors(form.article) }}</div>
+                            {% endif %}
+                        </div>
+                        <div class=\"mb-3\">
                             <label class=\"form-label\">Signature</label>
                             {% if contrat.signature %}
                                 <div class=\"mb-2\">
@@ -573,8 +616,6 @@ class __TwigTemplate_98be0b25f9f5350b8fddda5c178737ca extends Template
                             {% endif %}
                             <canvas id=\"signatureCanvas\" class=\"form-control\" width=\"300\" height=\"80\" style=\"width: 300px; height: 80px; background-color: #ffffff;\"></canvas>
                             {{ form_widget(form.signature, {'attr': {'id': 'signatureInput', 'class': 'd-none'}}) }}
-                            <!-- Fallback hidden input in case form.signature doesn't render -->
-                            <input type=\"hidden\" id=\"signatureInput\" name=\"contrat[signature]\" class=\"d-none\" value=\"{{ contrat.signature|default('') }}\">
                             {% if form_errors(form.signature) %}
                                 <div class=\"text-danger small\">{{ form_errors(form.signature) }}</div>
                             {% endif %}
@@ -620,6 +661,19 @@ class __TwigTemplate_98be0b25f9f5350b8fddda5c178737ca extends Template
             ctx.strokeStyle = '#000000';
             ctx.lineWidth = 2;
             ctx.lineCap = 'round';
+
+            // Load existing signature if available
+            {% if contrat.signature %}
+                const img = new Image();
+                img.src = '{{ asset(contrat.signature) }}';
+                img.onload = function () {
+                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                    console.log('Loaded existing signature');
+                };
+                img.onerror = function () {
+                    console.error('Failed to load existing signature');
+                };
+            {% endif %}
 
             // Drawing events
             canvas.addEventListener('mousedown', startDrawing);
@@ -682,7 +736,7 @@ class __TwigTemplate_98be0b25f9f5350b8fddda5c178737ca extends Template
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
                 if (signatureInput) {
                     signatureInput.value = 'signatures/signature_contrat_1741119108385.png';
-                    console.log('Canvas cleared, signature input set to default:', signatureInput.value);
+                    console.log('Canvas cleared, signature input set to placeholder');
                 } else {
                     console.error('Signature input not found when clearing canvas');
                 }
@@ -696,7 +750,7 @@ class __TwigTemplate_98be0b25f9f5350b8fddda5c178737ca extends Template
                 if (signatureInput) {
                     if (isEmpty) {
                         signatureInput.value = 'signatures/signature_contrat_1741119108385.png';
-                        console.log('Canvas is empty, signature input set to default:', signatureInput.value);
+                        console.log('Canvas is empty, signature input set to placeholder');
                     } else {
                         const dataUrl = canvas.toDataURL('image/png');
                         signatureInput.value = dataUrl;

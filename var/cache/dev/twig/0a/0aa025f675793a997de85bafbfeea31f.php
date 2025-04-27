@@ -149,10 +149,30 @@ class __TwigTemplate_0bb66ac387b5d5ac789f5cef5dfad066 extends Template
         yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 25, $this->source); })()), "pack", [], "any", false, false, false, 25), 'errors');
         yield "
                         </div>
-                        <button type=\"submit\" class=\"btn btn-primary\">Ajouter</button>
-                    ";
+                        <div class=\"mb-3\">
+                            ";
         // line 28
-        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 28, $this->source); })()), 'form_end');
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 28, $this->source); })()), "sponsorPicture", [], "any", false, false, false, 28), 'label', ["label" => "Sponsor Picture"]);
+        yield "
+                            ";
+        // line 29
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 29, $this->source); })()), "sponsorPicture", [], "any", false, false, false, 29), 'widget');
+        yield "
+                            ";
+        // line 30
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 30, $this->source); })()), "sponsorPicture", [], "any", false, false, false, 30), 'errors');
+        yield "
+                        </div>
+                        <div class=\"mb-3\">
+                        <button type=\"submit\" class=\"btn btn-primary\">Ajouter</button>
+                        <a href=\"";
+        // line 34
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("sponsor_main");
+        yield "\" class=\"btn btn-secondary\">Annuler</a>
+                        </div>
+                    ";
+        // line 36
+        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 36, $this->source); })()), 'form_end');
         yield "
                 </div>
             </div>
@@ -168,7 +188,7 @@ class __TwigTemplate_0bb66ac387b5d5ac789f5cef5dfad066 extends Template
         yield from [];
     }
 
-    // line 34
+    // line 42
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -181,7 +201,7 @@ class __TwigTemplate_0bb66ac387b5d5ac789f5cef5dfad066 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "stylesheets"));
 
-        // line 35
+        // line 43
         yield "    ";
         yield from $this->yieldParentBlock("stylesheets", $context, $blocks);
         yield "
@@ -229,7 +249,7 @@ class __TwigTemplate_0bb66ac387b5d5ac789f5cef5dfad066 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  185 => 35,  172 => 34,  155 => 28,  149 => 25,  145 => 24,  141 => 23,  135 => 20,  131 => 19,  127 => 18,  121 => 15,  117 => 14,  113 => 13,  108 => 11,  101 => 6,  88 => 5,  65 => 3,  42 => 1,);
+        return array (  205 => 43,  192 => 42,  175 => 36,  170 => 34,  163 => 30,  159 => 29,  155 => 28,  149 => 25,  145 => 24,  141 => 23,  135 => 20,  131 => 19,  127 => 18,  121 => 15,  117 => 14,  113 => 13,  108 => 11,  101 => 6,  88 => 5,  65 => 3,  42 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -260,7 +280,15 @@ class __TwigTemplate_0bb66ac387b5d5ac789f5cef5dfad066 extends Template
                             {{ form_widget(form.pack) }}
                             {{ form_errors(form.pack) }}
                         </div>
+                        <div class=\"mb-3\">
+                            {{ form_label(form.sponsorPicture, 'Sponsor Picture') }}
+                            {{ form_widget(form.sponsorPicture) }}
+                            {{ form_errors(form.sponsorPicture) }}
+                        </div>
+                        <div class=\"mb-3\">
                         <button type=\"submit\" class=\"btn btn-primary\">Ajouter</button>
+                        <a href=\"{{ path('sponsor_main') }}\" class=\"btn btn-secondary\">Annuler</a>
+                        </div>
                     {{ form_end(form) }}
                 </div>
             </div>

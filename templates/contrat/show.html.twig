@@ -24,6 +24,10 @@
                         <strong>Sponsor:</strong> {{ contrat.Sponsor ? contrat.Sponsor.nom : 'N/A' }}
                     </div>
                     <div class="mb-3">
+                        <strong>Article:</strong>
+                        <p>{{ contrat.article|nl2br }}</p>
+                    </div>
+                    <div class="mb-3">
                         <strong>Signature:</strong>
                         {% if contrat.Signature %}
                             <img src="{{ asset(contrat.Signature) }}" alt="Signature" style="max-width: 200px; max-height: 100px;" />

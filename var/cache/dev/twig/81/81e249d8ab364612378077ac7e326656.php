@@ -133,29 +133,36 @@ class __TwigTemplate_db5ddccc5c25e21e46e1c153d189563d extends Template
         yield "
                     </div>
                     <div class=\"mb-3\">
+                        <strong>Article:</strong>
+                        <p>";
+        // line 28
+        yield Twig\Extension\CoreExtension::nl2br($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["contrat"]) || array_key_exists("contrat", $context) ? $context["contrat"] : (function () { throw new RuntimeError('Variable "contrat" does not exist.', 28, $this->source); })()), "article", [], "any", false, false, false, 28), "html", null, true));
+        yield "</p>
+                    </div>
+                    <div class=\"mb-3\">
                         <strong>Signature:</strong>
                         ";
-        // line 28
-        if (CoreExtension::getAttribute($this->env, $this->source, (isset($context["contrat"]) || array_key_exists("contrat", $context) ? $context["contrat"] : (function () { throw new RuntimeError('Variable "contrat" does not exist.', 28, $this->source); })()), "Signature", [], "any", false, false, false, 28)) {
-            // line 29
+        // line 32
+        if (CoreExtension::getAttribute($this->env, $this->source, (isset($context["contrat"]) || array_key_exists("contrat", $context) ? $context["contrat"] : (function () { throw new RuntimeError('Variable "contrat" does not exist.', 32, $this->source); })()), "Signature", [], "any", false, false, false, 32)) {
+            // line 33
             yield "                            <img src=\"";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(CoreExtension::getAttribute($this->env, $this->source, (isset($context["contrat"]) || array_key_exists("contrat", $context) ? $context["contrat"] : (function () { throw new RuntimeError('Variable "contrat" does not exist.', 29, $this->source); })()), "Signature", [], "any", false, false, false, 29)), "html", null, true);
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(CoreExtension::getAttribute($this->env, $this->source, (isset($context["contrat"]) || array_key_exists("contrat", $context) ? $context["contrat"] : (function () { throw new RuntimeError('Variable "contrat" does not exist.', 33, $this->source); })()), "Signature", [], "any", false, false, false, 33)), "html", null, true);
             yield "\" alt=\"Signature\" style=\"max-width: 200px; max-height: 100px;\" />
                         ";
         } else {
-            // line 31
+            // line 35
             yield "                            Aucune signature
                         ";
         }
-        // line 33
+        // line 37
         yield "                    </div>
                     <a href=\"";
-        // line 34
+        // line 38
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("contrat_main");
         yield "\" class=\"btn btn-secondary\">Retour à la liste</a>
                     <a href=\"";
-        // line 35
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("contrat_edit", ["idContrat" => CoreExtension::getAttribute($this->env, $this->source, (isset($context["contrat"]) || array_key_exists("contrat", $context) ? $context["contrat"] : (function () { throw new RuntimeError('Variable "contrat" does not exist.', 35, $this->source); })()), "idContrat", [], "any", false, false, false, 35)]), "html", null, true);
+        // line 39
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("contrat_edit", ["idContrat" => CoreExtension::getAttribute($this->env, $this->source, (isset($context["contrat"]) || array_key_exists("contrat", $context) ? $context["contrat"] : (function () { throw new RuntimeError('Variable "contrat" does not exist.', 39, $this->source); })()), "idContrat", [], "any", false, false, false, 39)]), "html", null, true);
         yield "\" class=\"btn btn-primary\">Modifier</a>
                 </div>
             </div>
@@ -192,7 +199,7 @@ class __TwigTemplate_db5ddccc5c25e21e46e1c153d189563d extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  158 => 35,  154 => 34,  151 => 33,  147 => 31,  141 => 29,  139 => 28,  132 => 24,  126 => 21,  120 => 18,  114 => 15,  108 => 12,  100 => 6,  87 => 5,  64 => 3,  41 => 1,);
+        return array (  165 => 39,  161 => 38,  158 => 37,  154 => 35,  148 => 33,  146 => 32,  139 => 28,  132 => 24,  126 => 21,  120 => 18,  114 => 15,  108 => 12,  100 => 6,  87 => 5,  64 => 3,  41 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -221,6 +228,10 @@ class __TwigTemplate_db5ddccc5c25e21e46e1c153d189563d extends Template
                     </div>
                     <div class=\"mb-3\">
                         <strong>Sponsor:</strong> {{ contrat.Sponsor ? contrat.Sponsor.nom : 'N/A' }}
+                    </div>
+                    <div class=\"mb-3\">
+                        <strong>Article:</strong>
+                        <p>{{ contrat.article|nl2br }}</p>
                     </div>
                     <div class=\"mb-3\">
                         <strong>Signature:</strong>
