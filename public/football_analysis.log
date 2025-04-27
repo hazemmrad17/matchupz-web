@@ -1,0 +1,59 @@
+2025-04-27 04:12:09,847 - DEBUG - Input video: C:\Users\Hazem Mrad\Desktop\matchupz-web-integration - Copy - Copy/public/uploads/input_videos\video2-680da082709f7.mp4
+2025-04-27 04:12:09,848 - DEBUG - Output video: C:\Users\Hazem Mrad\Desktop\matchupz-web-integration - Copy - Copy/public/uploads/output_videos\output-video2-680da082709f7.mp4
+2025-04-27 04:12:10,180 - DEBUG - Starting video processing
+2025-04-27 04:12:10,237 - DEBUG - Starting frame capture
+2025-04-27 04:12:10,238 - DEBUG - Starting frame processing
+2025-04-27 04:12:10,240 - DEBUG - Starting frame display
+2025-04-27 04:12:10,413 - DEBUG - Processing batch of 5 frames
+2025-04-27 04:12:16,178 - ERROR - Error processing batch: list index out of range
+2025-04-27 04:12:16,191 - DEBUG - Processing batch of 5 frames
+2025-04-27 04:12:19,516 - DEBUG - Processed 5 frames
+2025-04-27 04:12:19,522 - DEBUG - Processing batch of 5 frames
+2025-04-27 04:12:22,440 - DEBUG - Processed 5 frames
+2025-04-27 04:12:22,445 - DEBUG - Processing batch of 5 frames
+2025-04-27 04:12:24,826 - DEBUG - Processed 5 frames
+2025-04-27 04:12:24,831 - DEBUG - Processing batch of 5 frames
+2025-04-27 04:12:27,482 - DEBUG - Processed 5 frames
+2025-04-27 04:12:27,493 - DEBUG - Processing batch of 5 frames
+2025-04-27 04:12:30,563 - DEBUG - Processed 5 frames
+2025-04-27 04:12:30,574 - DEBUG - Processing batch of 5 frames
+2025-04-27 04:12:33,374 - DEBUG - Processed 5 frames
+2025-04-27 04:12:33,379 - DEBUG - Processing batch of 5 frames
+2025-04-27 04:12:35,919 - DEBUG - Processed 5 frames
+2025-04-27 04:12:35,923 - DEBUG - Processing batch of 5 frames
+2025-04-27 04:12:38,533 - DEBUG - Processed 5 frames
+2025-04-27 04:12:38,540 - DEBUG - Processing batch of 5 frames
+2025-04-27 04:12:41,232 - DEBUG - Processed 5 frames
+2025-04-27 04:12:41,238 - DEBUG - Processing batch of 5 frames
+2025-04-27 04:12:43,955 - DEBUG - Processed 5 frames
+2025-04-27 04:12:43,959 - DEBUG - Processing batch of 5 frames
+2025-04-27 04:12:46,490 - DEBUG - Processed 5 frames
+2025-04-27 04:12:46,496 - DEBUG - Processing batch of 5 frames
+2025-04-27 04:12:49,248 - DEBUG - Processed 5 frames
+2025-04-27 04:12:49,252 - DEBUG - Processing batch of 5 frames
+2025-04-27 04:12:52,019 - DEBUG - Processed 5 frames
+2025-04-27 04:12:52,023 - DEBUG - Processing batch of 5 frames
+2025-04-27 04:12:54,837 - DEBUG - Processed 5 frames
+2025-04-27 04:12:54,841 - DEBUG - Processing batch of 5 frames
+2025-04-27 04:12:57,742 - DEBUG - Processed 5 frames
+2025-04-27 04:12:57,747 - DEBUG - Processing batch of 5 frames
+2025-04-27 04:13:00,875 - DEBUG - Processed 5 frames
+2025-04-27 04:13:00,880 - DEBUG - Processing batch of 5 frames
+2025-04-27 04:13:03,834 - DEBUG - Processed 5 frames
+2025-04-27 04:13:03,838 - DEBUG - Processing batch of 5 frames
+2025-04-27 04:13:06,619 - DEBUG - Processed 5 frames
+2025-04-27 04:13:06,620 - DEBUG - Processing batch of 5 frames
+2025-04-27 04:13:06,849 - INFO - 'q' pressed, initiating shutdown
+2025-04-27 04:13:06,871 - INFO - Stopping threads...
+2025-04-27 04:13:06,888 - DEBUG - Frame display complete
+2025-04-27 04:13:09,412 - DEBUG - Processed 5 frames
+2025-04-27 04:13:09,415 - DEBUG - Frame processing complete
+2025-04-27 04:13:16,879 - WARNING - Thread Capture did not terminate gracefully
+2025-04-27 04:13:16,938 - DEBUG - Frame capture complete
+2025-04-27 04:13:16,966 - DEBUG - All threads have completed.
+2025-04-27 04:13:16,966 - DEBUG - Converting frames to video...
+2025-04-27 04:13:22,164 - DEBUG - Video saved as C:\Users\Hazem Mrad\Desktop\matchupz-web-integration - Copy - Copy/public/uploads/output_videos\output-video2-680da082709f7.mp4
+2025-04-27 04:13:22,165 - DEBUG - Re-encoding video with ffmpeg: C:\Users\Hazem Mrad\Desktop\matchupz-web-integration - Copy - Copy/public/uploads/output_videos\output-video2-680da082709f7.mp4.temp.mp4 -> C:\Users\Hazem Mrad\Desktop\matchupz-web-integration - Copy - Copy/public/uploads/output_videos\output-video2-680da082709f7.mp4
+2025-04-27 04:13:26,639 - DEBUG - Re-encoding completed successfully
+2025-04-27 04:13:26,646 - DEBUG - Tracking data saved to C:\Users\Hazem Mrad\Desktop\matchupz-web-integration - Copy - Copy/public/uploads/output_videos\..\processed_data\output-video2-680da082709f7.json
+2025-04-27 04:13:26,700 - DEBUG - Video processing completed.

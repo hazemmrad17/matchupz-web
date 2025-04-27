@@ -1,0 +1,161 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Évaluations Physiques de {{ joueur.prenom }} {{ joueur.nom }}{% endblock %}
+
+{% block searchbar %}
+    {% include 'searchbar.html.twig' %}
+{% endblock %}
+
+{% block content %}
+    <div class="content-wrapper">
+        <div class="container-xxl flex-grow-1 container-p-y">
+            <h4 class="fw-bold py-3 mb-4">
+                <span class="text-muted fw-light">Évaluations /</span> {{ joueur.prenom }} {{ joueur.nom }}
+            </h4>
+
+            <div class="card mb-4">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">Évaluations Physiques</h5>
+                    <div>
+                        <a href="{{ path('app_evaluation_physique_new') }}" class="btn btn-sm btn-primary">
+                            <i class="bx bx-plus"></i> Nouvelle Évaluation
+                        </a>
+                        <a href="{{ path('app_evaluation_physique_index') }}" class="btn btn-sm btn-secondary">
+                            Retour à la liste
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    {% if evaluations|length > 0 %}
+                        <div class="table-responsive text-nowrap">
+                            <table class="table table-hover" id="evaluationsTable">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Endurance</th>
+                                        <th>Force</th>
+                                        <th>Vitesse</th>
+                                        <th>État de Blessure</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for evaluation in evaluations %}
+                                        <tr>
+                                            <td>{{ evaluation.dateEvaluation ? evaluation.dateEvaluation|date('d/m/Y') : 'N/A' }}</td>
+                                            <td>{{ evaluation.niveauEndurance ?? 'Non évalué' }}</td>
+                                            <td>{{ evaluation.forcePhysique ?? 'Non évalué' }}</td>
+                                            <td>{{ evaluation.vitesse ?? 'Non évalué' }}</td>
+                                            <td>{{ evaluation.etatBlessure ?? 'Aucune blessure' }}</td>
+                                            <td>
+                                                <div class="dropdown">
+                                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                                        <i class="bx bx-dots-vertical-rounded"></i>
+                                                    </button>
+                                                    <div class="dropdown-menu">
+                                                        <a class="dropdown-item" href="{{ path('app_evaluation_physique_show', {'idEvaluation': evaluation.idEvaluation}) }}">
+                                                            <i class="bx bx-show me-1"></i> Détails
+                                                        </a>
+                                                        <a class="dropdown-item" href="{{ path('app_evaluation_physique_edit', {'idEvaluation': evaluation.idEvaluation}) }}">
+                                                            <i class="bx bx-edit-alt me-1"></i> Modifier
+                                                        </a>
+                                                        <form method="post" action="{{ path('app_evaluation_physique_delete', {'idEvaluation': evaluation.idEvaluation}) }}" style="display:inline;" onsubmit="return confirm('Confirmer la suppression ?');">
+                                                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ evaluation.idEvaluation) }}">
+                                                            <button class="dropdown-item" type="submit">
+                                                                <i class="bx bx-trash me-1"></i> Supprimer
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% else %}
+                        <p class="text-muted">Aucune évaluation physique trouvée pour ce joueur.</p>
+                    {% endif %}
+                </div>
+            </div>
+
+            {% if evaluations|length > 0 %}
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0">Tendances de Performance</h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="performanceTrendsChart"></div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Initialize Performance Trends Chart
+            if (document.querySelector("#performanceTrendsChart")) {
+                var options = {
+                    chart: {
+                        type: 'line',
+                        height: 350,
+                        animations: {
+                            enabled: true,
+                            easing: 'easeinout',
+                            speed: 800
+                        }
+                    },
+                    series: [
+                        {
+                            name: 'Endurance',
+                            data: {{ endurance_trend|json_encode|raw }}
+                        },
+                        {
+                            name: 'Force',
+                            data: {{ force_trend|json_encode|raw }}
+                        },
+                        {
+                            name: 'Vitesse',
+                            data: {{ vitesse_trend|json_encode|raw }}
+                        }
+                    ],
+                    xaxis: {
+                        categories: {{ dates|json_encode|raw }},
+                        title: {
+                            text: 'Date d\'Évaluation'
+                        }
+                    },
+                    yaxis: {
+                        min: 0,
+                        max: 10,
+                        title: {
+                            text: 'Score (0-10)'
+                        }
+                    },
+                    tooltip: {
+                        y: {
+                            formatter: function (val) {
+                                return val.toFixed(1) + " / 10"
+                            }
+                        }
+                    },
+                    stroke: {
+                        curve: 'smooth',
+                        width: 2
+                    },
+                    markers: {
+                        size: 4
+                    }
+                };
+
+                var chart = new ApexCharts(document.querySelector("#performanceTrendsChart"), options);
+                chart.render();
+            }
+        });
+    </script>
+{% endblock %}

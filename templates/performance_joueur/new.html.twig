@@ -1,0 +1,182 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvelle Performance{% endblock %}
+
+{% block searchbar %}
+    {% include 'searchbar.html.twig' %}
+{% endblock %}
+
+{% block content %}
+    <div class="content-wrapper">
+        <div class="container-xxl flex-grow-1 container-p-y">
+            <h4 class="fw-bold py-3 mb-4">
+                <span class="text-muted fw-light">Performance Joueur /</span> Nouvelle Performance
+            </h4>
+
+            <!-- Toast container for success and error messages -->
+            <div class="position-fixed top-0 end-0 p-3" style="z-index: 1050;" id="toast-container">
+                {% for label, messages in app.flashes %}
+                    {% for message in messages %}
+                        <div id="toast-{{ loop.index }}" class="bs-toast toast fade {{ label == 'success' ? 'bg-success' : 'bg-danger' }} show" role="alert" aria-live="assertive" aria-atomic="true">
+                            <div class="toast-header">
+                                <i class="bx bx-bell me-2"></i>
+                                <div class="me-auto fw-semibold">{{ label == 'success' ? 'Succès' : 'Erreur de validation' }}</div>
+                                <small>Maintenant</small>
+                                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                            </div>
+                            <div class="toast-body">{{ message }}</div>
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+            </div>
+
+            <div class="col-xl">
+                <div class="card mb-4">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">Ajouter une Nouvelle Performance</h5>
+                        <small class="text-muted float-end">Remplir les détails</small>
+                    </div>
+                    <div class="card-body">
+                        {{ form_start(form, {'attr': {'id': 'performanceForm', 'novalidate': 'novalidate'}}) }}
+                            <div class="mb-3">
+                                <label class="form-label" for="{{ form.joueur.vars.id }}">Joueur</label>
+                                <div class="input-group input-group-merge">
+                                    <span class="input-group-text"><i class="bx bx-user"></i></span>
+                                    {{ form_widget(form.joueur, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                                {% if form.joueur.vars.errors|length > 0 %}
+                                    <div class="invalid-feedback d-block text-danger">
+                                        {% for error in form.joueur.vars.errors %}
+                                            {{ error.message }}<br>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="{{ form.saison.vars.id }}">Saison</label>
+                                <div class="input-group input-group-merge">
+                                    <span class="input-group-text"><i class="bx bx-calendar"></i></span>
+                                    {{ form_widget(form.saison, {'attr': {'class': 'form-control', 'placeholder': 'ex: 2023-2024'}}) }}
+                                </div>
+                                {% if form.saison.vars.errors|length > 0 %}
+                                    <div class="invalid-feedback d-block text-danger">
+                                        {% for error in form.saison.vars.errors %}
+                                            {{ error.message }}<br>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label" for="{{ form.nombreMatches.vars.id }}">Nombre de Matches</label>
+                                    <div class="input-group input-group-merge">
+                                        <span class="input-group-text"><i class="bx bx-football"></i></span>
+                                        {{ form_widget(form.nombreMatches, {'attr': {'class': 'form-control', 'placeholder': 'ex: 10'}}) }}
+                                    </div>
+                                    {% if form.nombreMatches.vars.errors|length > 0 %}
+                                        <div class="invalid-feedback d-block text-danger">
+                                            {% for error in form.nombreMatches.vars.errors %}
+                                                {{ error.message }}<br>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label" for="{{ form.minutesJouees.vars.id }}">Minutes Jouées</label>
+                                    <div class="input-group input-group-merge">
+                                        <span class="input-group-text"><i class="bx bx-time"></i></span>
+                                        {{ form_widget(form.minutesJouees, {'attr': {'class': 'form-control', 'placeholder': 'ex: 900'}}) }}
+                                    </div>
+                                    {% if form.minutesJouees.vars.errors|length > 0 %}
+                                        <div class="invalid-feedback d-block text-danger">
+                                            {% for error in form.minutesJouees.vars.errors %}
+                                                {{ error.message }}<br>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label" for="{{ form.butsMarques.vars.id }}">Buts Marqués</label>
+                                    <div class="input-group input-group-merge">
+                                        <span class="input-group-text"><i class="bx bx-target-lock"></i></span>
+                                        {{ form_widget(form.butsMarques, {'attr': {'class': 'form-control', 'placeholder': 'ex: 5'}}) }}
+                                    </div>
+                                    {% if form.butsMarques.vars.errors|length > 0 %}
+                                        <div class="invalid-feedback d-block text-danger">
+                                            {% for error in form.butsMarques.vars.errors %}
+                                                {{ error.message }}<br>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label" for="{{ form.passesDecisives.vars.id }}">Passes Décisives</label>
+                                    <div class="input-group input-group-merge">
+                                        <span class="input-group-text"><i class="bx bx-pass"></i></span>
+                                        {{ form_widget(form.passesDecisives, {'attr': {'class': 'form-control', 'placeholder': 'ex: 3'}}) }}
+                                    </div>
+                                    {% if form.passesDecisives.vars.errors|length > 0 %}
+                                        <div class="invalid-feedback d-block text-danger">
+                                            {% for error in form.passesDecisives.vars.errors %}
+                                                {{ error.message }}<br>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label" for="{{ form.cartonsJaunes.vars.id }}">Cartons Jaunes</label>
+                                    <div class="input-group input-group-merge">
+                                        <span class="input-group-text"><i class="bx bx-square" style="color: yellow;"></i></span>
+                                        {{ form_widget(form.cartonsJaunes, {'attr': {'class': 'form-control', 'placeholder': 'ex: 2'}}) }}
+                                    </div>
+                                    {% if form.cartonsJaunes.vars.errors|length > 0 %}
+                                        <div class="invalid-feedback d-block text-danger">
+                                            {% for error in form.cartonsJaunes.vars.errors %}
+                                                {{ error.message }}<br>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label" for="{{ form.cartonsRouges.vars.id }}">Cartons Rouges</label>
+                                    <div class="input-group input-group-merge">
+                                        <span class="input-group-text"><i class="bx bx-square" style="color: red;"></i></span>
+                                        {{ form_widget(form.cartonsRouges, {'attr': {'class': 'form-control', 'placeholder': 'ex: 0'}}) }}
+                                    </div>
+                                    {% if form.cartonsRouges.vars.errors|length > 0 %}
+                                        <div class="invalid-feedback d-block text-danger">
+                                            {% for error in form.cartonsRouges.vars.errors %}
+                                                {{ error.message }}<br>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="bx bx-save me-1"></i> Enregistrer
+                                </button>
+                                <a href="{{ path('joueur_main') }}" class="btn btn-secondary">
+                                    <i class="bx bx-arrow-back me-1"></i> Annuler
+                                </a>
+                            </div>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const toasts = document.querySelectorAll('.bs-toast');
+            toasts.forEach(toast => {
+                new bootstrap.Toast(toast, { autohide: true, delay: 5000 }).show();
+            });
+        });
+    </script>
+{% endblock %}

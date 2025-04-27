@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <div class="content-wrapper">
+        <div class="container-xxl flex-grow-1 container-p-y">
+            <h4 class="fw-bold py-3 mb-4">
+                <span class="text-muted fw-light">Espaces Sportifs /</span> Détails de l'Espace
+            </h4>
+
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="card-title mb-0">Espace Sportif #{{ espace.idLieu }}</h5>
+                    <div>
+                        <a href="{{ path('espace_edit', {'id_lieu': espace.idLieu}) }}" class="btn btn-sm btn-primary">Modifier</a>
+                        <a href="{{ path('espace_index') }}" class="btn btn-sm btn-secondary">Retour à la liste</a>
+                        <form method="post" action="{{ path('espace_delete', {'id_lieu': espace.idLieu}) }}" style="display:inline;" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet espace sportif ?');">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ espace.idLieu) }}">
+                            <button class="btn btn-sm btn-danger" type="submit">
+                                Supprimer
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6>Nom de l'Espace</h6>
+                            <p>{{ espace.nom_espace }}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>Adresse</h6>
+                            <p>{{ espace.adresse }}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>Catégorie</h6>
+                            <p>{{ espace.categorie }}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>Capacité</h6>
+                            <p>{{ espace.capacite }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

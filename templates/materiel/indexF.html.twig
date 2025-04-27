@@ -1,0 +1,191 @@
+{% extends 'baseM.html.twig' %}
+
+{% block title %}Liste du Matériel{% endblock %}
+
+{% block body %}
+<style>
+    .materiel-bg {
+        background: url("{{ asset('assets/img/materiel-bg.jpg') }}") no-repeat center center/cover;
+        background-size: cover;
+        padding: 5rem 0;
+        position: relative;
+        color: white;
+    }
+    .materiel-bg::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+    }
+    .materiel-card {
+        transition: all 0.3s ease;
+        border: none;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        height: 100%;
+        background: white;
+    }
+    .materiel-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+    .materiel-img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        background-color: #f8f9fa;
+    }
+    .no-img-placeholder {
+        width: 100%;
+        height: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #f8f9fa;
+    }
+    .type-badge {
+        background: #0d6efd;
+        color: white;
+        padding: 3px 12px;
+        border-radius: 50px;
+        font-size: 0.8rem;
+        display: inline-block;
+        margin-bottom: 1rem;
+    }
+    .etat-badge {
+        padding: 3px 12px;
+        border-radius: 50px;
+        font-size: 0.8rem;
+        display: inline-block;
+    }
+    .position-relative {
+        position: relative;
+    }
+    .z-index-1 {
+        position: relative;
+        z-index: 1;
+    }
+    .card-body {
+        padding: 2rem;
+        text-align: center;
+    }
+    .card-title {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+    }
+    .detail-item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 0.75rem;
+        font-size: 0.95rem;
+    }
+    .detail-item i {
+        font-size: 1rem;
+        color: #0d6efd;
+        margin-right: 0.75rem;
+        width: 20px;
+        text-align: center;
+    }
+    .detail-item p {
+        margin: 0;
+        color: #555;
+    }
+    .btn-details {
+        margin-top: 1rem;
+    }
+</style>
+
+<!-- Hero Section with Background Image -->
+<div class="materiel-bg">
+    <div class="container position-relative z-index-1 text-center">
+        <h1 class="display-4 fw-bold mb-4">Notre Matériel</h1>
+        <p class="lead mb-0">Découvrez notre équipement de qualité professionnelle</p>
+    </div>
+</div>
+
+<!-- Materiel Cards Section -->
+<div class="container py-5">
+    <div class="row g-4">
+        {% for materiel in pagination %}
+        <div class="col-md-6 col-lg-4">
+            <div class="materiel-card card h-100">
+                {% if materiel.image %}
+                <img src="{{ asset('Uploads/materiels/' ~ materiel.image) }}" class="materiel-img" alt="{{ materiel.nom }}">
+                {% else %}
+                <div class="no-img-placeholder">
+                    <i class="fas fa-camera fa-3x text-muted"></i>
+                </div>
+                {% endif %}
+                <div class="card-body">
+                    <span class="type-badge">{{ materiel.type|replace({'_': ' '})|lower|capitalize }}</span>
+                    <h3 class="card-title">{{ materiel.nom }}</h3>
+                    <div class="text-center mt-3">
+                        <div class="detail-item">
+                            <i class="fas fa-boxes"></i>
+                            <p>Quantité: {{ materiel.quantite }}</p>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-check-circle"></i>
+                            <p>
+                                <span class="etat-badge {{ 
+                                    materiel.etat == 'NEUF' ? 'bg-primary' : 
+                                    (materiel.etat == 'USE' ? 'bg-warning' : 'bg-danger') 
+                                }}">
+                                    {{ materiel.etat|replace({'_': ' '})|lower|capitalize }}
+                                </span>
+                            </p>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-barcode"></i>
+                            <p>{{ materiel.barcode }}</p>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-store"></i>
+                            <p>
+                                {% if materiel.fournisseur %}
+                                    <a href="{{ path('app_fournisseur_showF', {'id_fournisseur': materiel.fournisseur.id_fournisseur}) }}">
+                                        {{ materiel.fournisseur.nom }}
+                                    </a>
+                                {% else %}
+                                    Aucun fournisseur
+                                {% endif %}
+                            </p>
+                        </div>
+                    </div>
+                    <a href="{{ path('app_materiel_showF', {'id': materiel.id}) }}" 
+                       class="btn btn-outline-primary btn-details stretched-link">
+                       Voir détails <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="col-12 text-center py-5">
+            <div class="alert alert-info">
+                Aucun matériel disponible pour le moment
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    {% if pagination|length > 0 %}
+    <div class="row mt-5">
+        <div class="col-12 text-center">
+            <div class="navigation">
+                {{ knp_pagination_render(pagination, null, {}, {
+                    'align': 'center',
+                    'rounded': true,
+                    'size': 'sm'
+                }) }}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

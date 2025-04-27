@@ -1,0 +1,266 @@
+{% extends 'base.html.twig' %}
+
+{% block searchbar %}
+    {% include 'searchbar.html.twig' %}
+{% endblock %}
+
+{% block title %}Liste des Espaces Sportifs{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .card-footer .pagination {
+            margin: 0; /* Remove default margins */
+        }
+        .card-footer .pagination .page-item {
+            margin: 0 8px; /* Increase spacing between buttons for clarity */
+        }
+        .card-footer .pagination .page-link {
+            border-radius: 10px; /* More pronounced rounded corners */
+            padding: 12px 18px; /* Larger padding for bigger buttons */
+            color: #1a3c34; /* Dark teal for better contrast */
+            background-color: #ffffff; /* White background for inactive buttons */
+            border: 1px solid #ced4da; /* Slightly darker border for definition */
+            font-size: 16px; /* Larger font for readability */
+            font-weight: 500; /* Medium font weight for clarity */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Subtle shadow for depth */
+            transition: all 0.3s ease; /* Smooth transition for hover effects */
+        }
+        .card-footer .pagination .page-item.active .page-link {
+            background-color: #1a3c34; /* Dark teal for active button */
+            border-color: #1a3c34; /* Match border to background */
+            color: #ffffff; /* White text for active button */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Slightly stronger shadow for active state */
+        }
+        .card-footer .pagination .page-item .page-link:hover:not(.active) {
+            background-color: #f1f3f5; /* Light gray background on hover for inactive buttons */
+            color: #14532d; /* Slightly darker teal on hover */
+            border-color: #b0b8bf; /* Slightly darker border on hover */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Lift effect on hover */
+        }
+        .card-footer .pagination .page-item.disabled .page-link {
+            color: #adb5bd; /* Lighter gray for disabled buttons */
+            background-color: #f8f9fa; /* Very light gray background */
+            border-color: #ced4da; /* Match inactive border */
+            box-shadow: none; /* No shadow for disabled state */
+            pointer-events: none; /* Disable interaction */
+        }
+        /* Style for the search bar */
+        .navbar-nav .nav-item {
+            display: flex;
+            align-items: center;
+        }
+        .navbar-nav .nav-item i {
+            font-size: 1.5rem; /* Size of the search icon */
+            color: #6c757d; /* Gray color for the icon */
+            margin-right: 8px;
+        }
+        .navbar-nav .nav-item input[type="text"] {
+            border: 0; /* Remove default border */
+            box-shadow: none; /* Remove default shadow */
+            padding: 8px 12px;
+            font-size: 14px;
+            width: 200px; /* Adjust width as needed */
+            background-color: #f8f9fa; /* Light background to match card */
+            border-radius: 5px; /* Slight rounding */
+            transition: background-color 0.3s ease;
+        }
+        .navbar-nav .nav-item input[type="text"]:focus {
+            outline: none; /* Remove default outline */
+            background-color: #ffffff; /* White background on focus */
+        }
+        .navbar-nav .nav-item input[type="text"]::placeholder {
+            color: #adb5bd; /* Placeholder color */
+        }
+        /* Style for the export button */
+        .btn-yellow {
+            background-color: #eab700; /* Yellow background */
+            border-color: #eab700;
+            color: #1a1a1a; /* Dark text for contrast */
+        }
+        .btn-yellow:hover {
+            background-color: #d4a600; /* Darker yellow on hover */
+            border-color: #d4a600;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="content-wrapper">
+        <div class="container-xxl flex-grow-1 container-p-y">
+            {% for message in app.flashes('success') %}
+                <div class="alert alert-success">{{ message }}</div>
+            {% endfor %}
+            {% for message in app.flashes('error') %}
+                <div class="alert alert-danger">{{ message }}</div>
+            {% endfor %}
+
+            {% include 'espace/espacesportif_widgets.html.twig' with {
+                'totalEspaces': totalEspaces,
+                'espacesWithReservations': espacesWithReservations
+            } %}
+
+            <div class="card">
+                <h5 class="card-header d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center">
+                        <span>Liste des Espaces Sportifs</span>
+                        <!-- Search Bar -->
+                        <div class="navbar-nav align-items-center ms-3">
+                            <div class="nav-item d-flex align-items-center">
+                                <i class="bx bx-search fs-4 lh-0"></i>
+                                <form method="get" action="{{ path('espace_index') }}" id="searchForm">
+                                    <input
+                                        type="text"
+                                        name="search"
+                                        id="searchInput"
+                                        class="form-control border-0 shadow-none"
+                                        placeholder="Rechercher un espace..."
+                                        aria-label="Rechercher un espace..."
+                                        value="{{ searchTerm|default('') }}"
+                                    />
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <a href="{{ path('espace_new') }}" class="btn btn-primary me-2">Ajouter un Espace</a>
+                        <!-- Export Dropdown -->
+                        <div class="dropdown">
+                            <button type="button" class="btn dropdown-toggle btn-yellow" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bx bx-export me-1"></i> Exporter
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{{ path('espace_export_csv') }}">Exporter en CSV</a></li>
+                                <li><a class="dropdown-item" href="{{ path('espace_export_pdf') }}">Exporter en PDF</a></li>
+                                <li><a class="dropdown-item" href="{{ path('espace_export_excel') }}">Exporter en Excel</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </h5>
+                <div class="table-responsive text-nowrap">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Nom</th>
+                                <th>Adresse</th>
+                                <th>Catégorie</th>
+                                <th>Capacité</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-border-bottom-0">
+                            {% for espace in espaces %}
+                                <tr class="table-default">
+                                    <td>
+                                        <i class="fab fa-sketch fa-lg text-warning me-3"></i>
+                                        <strong>{{ espace.nom_espace }}</strong>
+                                    </td>
+                                    <td>{{ espace.adresse }}</td>
+                                    <td>{{ espace.categorie }}</td>
+                                    <td>{{ espace.capacite }}</td>
+                                    <td>
+                                        <div class="dropdown">
+                                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                                <i class="bx bx-dots-vertical-rounded"></i>
+                                            </button>
+                                            <div class="dropdown-menu">
+                                                <a class="dropdown-item" href="{{ path('espace_show', {'id_lieu': espace.idLieu}) }}">
+                                                    <i class="bx bx-show me-1"></i> Voir
+                                                </a>
+                                                <a class="dropdown-item" href="{{ path('espace_edit', {'id_lieu': espace.idLieu}) }}">
+                                                    <i class="bx bx-edit-alt me-1"></i> Modifier
+                                                </a>
+                                                <form method="post" action="{{ path('espace_delete', {'id_lieu': espace.idLieu}) }}" style="display:inline;" onsubmit="return confirm('Confirmer la suppression?');">
+                                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ espace.idLieu) }}">
+                                                    <button class="dropdown-item" type="submit">
+                                                        <i class="bx bx-trash me-1"></i> Supprimer
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="5" class="text-center">Aucun espace sportif trouvé</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <!-- Pagination -->
+                <div class="card-footer">
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item {{ espaces.currentPageNumber == 1 ? 'disabled' : '' }}">
+                                <a class="page-link" href="{{ path('espace_index', {'page': espaces.currentPageNumber - 1, 'search': searchTerm|default('')}) }}" aria-label="Previous">
+                                    <span aria-hidden="true">«</span>
+                                </a>
+                            </li>
+                            
+                            {% for i in 1..espaces.pageCount %}
+                                <li class="page-item {{ espaces.currentPageNumber == i ? 'active' : '' }}">
+                                    <a class="page-link" href="{{ path('espace_index', {'page': i, 'search': searchTerm|default('')}) }}">{{ i }}</a>
+                                </li>
+                            {% endfor %}
+                            
+                            <li class="page-item {{ espaces.currentPageNumber == espaces.pageCount ? 'disabled' : '' }}">
+                                <a class="page-link" href="{{ path('espace_index', {'page': espaces.currentPageNumber + 1, 'search': searchTerm|default('')}) }}" aria-label="Next">
+                                    <span aria-hidden="true">»</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+
+            <h5 class="mt-4">Top Espaces par Capacité</h5>
+            <div class="card">
+                <div class="card-body">
+                    <ul class="p-0 m-0">
+                        {% for espace in top_capacite %}
+                            <li class="d-flex mb-4 pb-1">
+                                <div class="avatar flex-shrink-0 me-3">
+                                    <img src="{{ asset('img/icons/unicons/building.png') }}" alt="Espace" class="rounded" />
+                                </div>
+                                <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                                    <div class="me-2">
+                                        <h6 class="mb-0">{{ espace.nom_espace }}</h6>
+                                        <small class="text-muted">{{ espace.categorie }} - {{ espace.adresse }}</small>
+                                    </div>
+                                    <div class="user-progress">
+                                        <small class="fw-semibold">Capacité: {{ espace.capacite }}</small>
+                                    </div>
+                                </div>
+                            </li>
+                        {% else %}
+                            <li>Aucun espace sportif trouvé.</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript for dynamic search -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const searchInput = document.getElementById('searchInput');
+            const searchForm = document.getElementById('searchForm');
+
+            // Debounce function to limit how often the form is submitted
+            function debounce(func, wait) {
+                let timeout;
+                return function (...args) {
+                    clearTimeout(timeout);
+                    timeout = setTimeout(() => func.apply(this, args), wait);
+                };
+            }
+
+            // Submit the form when the user types (debounced)
+            searchInput.addEventListener('input', debounce(function () {
+                searchForm.submit();
+            }, 300)); // Wait 300ms after the last keystroke before submitting
+        });
+    </script>
+{% endblock %}

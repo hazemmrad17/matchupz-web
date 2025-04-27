@@ -1,0 +1,40 @@
+# config/services.yaml
+
+parameters:
+    profile_pictures_directory: '%kernel.project_dir%/public/uploads/profile_pictures'
+    club_photos_directory: '%kernel.project_dir%/public/uploads/club_photos'
+    photos_directory: '%kernel.project_dir%/public/uploads/photos'
+    users_image_directory: '%kernel.project_dir%/public/uploads/users'
+    signatures_directory: '%kernel.project_dir%/public/signatures'
+    materiels_directory: '%kernel.project_dir%/public/uploads/materiels'    
+    videos_directory: '%kernel.project_dir%/public/uploads/input_videos'
+    output_videos_directory: '%kernel.project_dir%/public/uploads/output_videos'
+    output_videos_directory_url: '/uploads/output_videos'
+    python_script_path: 'C:\\Users\\Hazem Mrad\\Desktop\\matchupz-web-integration - Copy\\football_analysis-master\\main.py'
+
+services:
+    # Configure KnpSnappyPdf service with the binary path from environment variable
+    Knp\Snappy\Pdf:
+        arguments:
+            $binary: '%env(WKHTMLTOPDF_PATH)%'
+
+    # AppExtension for Twig
+    App\Twig\AppExtension:
+        tags: ['twig.extension']
+
+    # Default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+    # Make classes in src/ available to be used as services
+    # This creates a service per class whose id is the fully-qualified class name
+    App\:
+        resource: '../src/'
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Entity/'
+            - '../src/Kernel.php'
+
+    # Add more service definitions when explicit configuration is needed
+    # Please note that last definitions always *replace* previous ones
