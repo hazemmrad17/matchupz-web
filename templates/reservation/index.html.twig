@@ -10,76 +10,74 @@
     {{ parent() }}
     <style>
         .card-footer .pagination {
-            margin: 0; /* Remove default margins */
+            margin: 0;
         }
         .card-footer .pagination .page-item {
-            margin: 0 8px; /* Increase spacing between buttons for clarity */
+            margin: 0 8px;
         }
         .card-footer .pagination .page-link {
-            border-radius: 10px; /* More pronounced rounded corners */
-            padding: 12px 18px; /* Larger padding for bigger buttons */
-            color: #1a3c34; /* Dark teal for better contrast */
-            background-color: #ffffff; /* White background for inactive buttons */
-            border: 1px solid #ced4da; /* Slightly darker border for definition */
-            font-size: 16px; /* Larger font for readability */
-            font-weight: 500; /* Medium font weight for clarity */
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Subtle shadow for depth */
-            transition: all 0.3s ease; /* Smooth transition for hover effects */
+            border-radius: 10px;
+            padding: 12px 18px;
+            color: #1a3c34;
+            background-color: #ffffff;
+            border: 1px solid #ced4da;
+            font-size: 16px;
+            font-weight: 500;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
         }
         .card-footer .pagination .page-item.active .page-link {
-            background-color: #1a3c34; /* Dark teal for active button */
-            border-color: #1a3c34; /* Match border to background */
-            color: #ffffff; /* White text for active button */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Slightly stronger shadow for active state */
+            background-color: #1a3c34;
+            border-color: #1a3c34;
+            color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
         .card-footer .pagination .page-item .page-link:hover:not(.active) {
-            background-color: #f1f3f5; /* Light gray background on hover for inactive buttons */
-            color: #14532d; /* Slightly darker teal on hover */
-            border-color: #b0b8bf; /* Slightly darker border on hover */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Lift effect on hover */
+            background-color: #f1f3f5;
+            color: #14532d;
+            border-color: #b0b8bf;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
         .card-footer .pagination .page-item.disabled .page-link {
-            color: #adb5bd; /* Lighter gray for disabled buttons */
-            background-color: #f8f9fa; /* Very light gray background */
-            border-color: #ced4da; /* Match inactive border */
-            box-shadow: none; /* No shadow for disabled state */
-            pointer-events: none; /* Disable interaction */
+            color: #adb5bd;
+            background-color: #f8f9fa;
+            border-color: #ced4da;
+            box-shadow: none;
+            pointer-events: none;
         }
-        /* Style for the search bar */
         .navbar-nav .nav-item {
             display: flex;
             align-items: center;
         }
         .navbar-nav .nav-item i {
-            font-size: 1.5rem; /* Size of the search icon */
-            color: #6c757d; /* Gray color for the icon */
+            font-size: 1.5rem;
+            color: #6c757d;
             margin-right: 8px;
         }
         .navbar-nav .nav-item input[type="text"] {
-            border: 0; /* Remove default border */
-            box-shadow: none; /* Remove default shadow */
+            border: 0;
+            box-shadow: none;
             padding: 8px 12px;
             font-size: 14px;
-            width: 200px; /* Adjust width as needed */
-            background-color: #f8f9fa; /* Light background to match card */
-            border-radius: 5px; /* Slight rounding */
+            width: 200px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
             transition: background-color 0.3s ease;
         }
         .navbar-nav .nav-item input[type="text"]:focus {
-            outline: none; /* Remove default outline */
-            background-color: #ffffff; /* White background on focus */
+            outline: none;
+            background-color: #ffffff;
         }
         .navbar-nav .nav-item input[type="text"]::placeholder {
-            color: #adb5bd; /* Placeholder color */
+            color: #adb5bd;
         }
-        /* Style for the export button */
         .btn-yellow {
-            background-color: #eab700; /* Yellow background */
+            background-color: #eab700;
             border-color: #eab700;
-            color: #1a1a1a; /* Dark text for contrast */
+            color: #1a1a1a;
         }
         .btn-yellow:hover {
-            background-color: #d4a600; /* Darker yellow on hover */
+            background-color: #d4a600;
             border-color: #d4a600;
         }
     </style>
@@ -100,27 +98,22 @@
                 <h5 class="card-header d-flex justify-content-between align-items-center">
                     <div class="d-flex align-items-center">
                         <span>Liste des Réservations</span>
-                        <!-- Search Bar -->
                         <div class="navbar-nav align-items-center ms-3">
                             <div class="nav-item d-flex align-items-center">
                                 <i class="bx bx-search fs-4 lh-0"></i>
-                                <form method="get" action="{{ path('reservation_index') }}" id="searchForm">
-                                    <input
-                                        type="text"
-                                        name="search"
-                                        id="searchInput"
-                                        class="form-control border-0 shadow-none"
-                                        placeholder="Rechercher une réservation..."
-                                        aria-label="Rechercher une réservation..."
-                                        value="{{ searchTerm|default('') }}"
-                                    />
-                                </form>
+                                <input
+                                    type="text"
+                                    id="searchInput"
+                                    class="form-control border-0 shadow-none"
+                                    placeholder="Rechercher une réservation..."
+                                    aria-label="Rechercher une réservation..."
+                                    value="{{ searchTerm|default('') }}"
+                                />
                             </div>
                         </div>
                     </div>
                     <div class="d-flex align-items-center">
                         <a href="{{ path('reservation_new') }}" class="btn btn-primary me-2">Ajouter une Réservation</a>
-                        <!-- Export Dropdown -->
                         <div class="dropdown">
                             <button type="button" class="btn dropdown-toggle btn-yellow" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="bx bx-export me-1"></i> Exporter
@@ -134,7 +127,7 @@
                     </div>
                 </h5>
                 <div class="table-responsive text-nowrap">
-                    <table class="table">
+                    <table class="table" id="reservationsTable">
                         <thead>
                             <tr>
                                 <th>Lieu Sportif</th>
@@ -144,7 +137,7 @@
                                 <th>Actions</th>
                             </tr>
                         </thead>
-                        <tbody class="table-border-bottom-0">
+                        <tbody class="table-border-bottom-0" id="reservationsTableBody">
                             {% for reservation in reservations %}
                                 <tr class="table-default">
                                     <td>
@@ -184,29 +177,8 @@
                         </tbody>
                     </table>
                 </div>
-                <!-- Pagination -->
-                <div class="card-footer">
-                    <nav aria-label="Page navigation">
-                        <ul class="pagination justify-content-center">
-                            <li class="page-item {{ reservations.currentPageNumber == 1 ? 'disabled' : '' }}">
-                                <a class="page-link" href="{{ path('reservation_index', {'page': reservations.currentPageNumber - 1, 'search': searchTerm|default('')}) }}" aria-label="Previous">
-                                    <span aria-hidden="true">«</span>
-                                </a>
-                            </li>
-                            
-                            {% for i in 1..reservations.pageCount %}
-                                <li class="page-item {{ reservations.currentPageNumber == i ? 'active' : '' }}">
-                                    <a class="page-link" href="{{ path('reservation_index', {'page': i, 'search': searchTerm|default('')}) }}">{{ i }}</a>
-                                </li>
-                            {% endfor %}
-                            
-                            <li class="page-item {{ reservations.currentPageNumber == reservations.pageCount ? 'disabled' : '' }}">
-                                <a class="page-link" href="{{ path('reservation_index', {'page': reservations.currentPageNumber + 1, 'search': searchTerm|default('')}) }}" aria-label="Next">
-                                    <span aria-hidden="true">»</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
+                <div class="card-footer" id="paginationContainer">
+                    {% include 'reservation/_pagination.html.twig' with {'reservations': reservations, 'searchTerm': searchTerm} %}
                 </div>
             </div>
 
@@ -238,13 +210,13 @@
         </div>
     </div>
 
-    <!-- JavaScript for dynamic search -->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const searchInput = document.getElementById('searchInput');
-            const searchForm = document.getElementById('searchForm');
+            const reservationsTableBody = document.getElementById('reservationsTableBody');
+            const paginationContainer = document.getElementById('paginationContainer');
 
-            // Debounce function to limit how often the form is submitted
+            // Debounce function to limit how often AJAX requests are sent
             function debounce(func, wait) {
                 let timeout;
                 return function (...args) {
@@ -253,10 +225,107 @@
                 };
             }
 
-            // Submit the form when the user types (debounced)
-            searchInput.addEventListener('input', debounce(function () {
-                searchForm.submit();
-            }, 300)); // Wait 300ms after the last keystroke before submitting
+            // Function to fetch and update table content
+            function updateTable(searchTerm = '', page = 1) {
+                fetch(`{{ path('reservation_index') }}?search=${encodeURIComponent(searchTerm)}&page=${page}`, {
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Update table body
+                    reservationsTableBody.innerHTML = '';
+                    if (data.reservations.length === 0) {
+                        reservationsTableBody.innerHTML = `
+                            <tr>
+                                <td colspan="5" class="text-center">Aucune réservation trouvée</td>
+                            </tr>
+                        `;
+                    } else {
+                        data.reservations.forEach(reservation => {
+                            const row = document.createElement('tr');
+                            row.className = 'table-default';
+                            row.innerHTML = `
+                                <td>
+                                    <i class="fab fa-sketch fa-lg text-warning me-3"></i>
+                                    <strong>${reservation.nom_espace}</strong>
+                                </td>
+                                <td>${reservation.date_reservee}</td>
+                                <td>${reservation.motif}</td>
+                                <td>${reservation.status}</td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                            <i class="bx bx-dots-vertical-rounded"></i>
+                                        </button>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item" href="/reservation/${reservation.id_reservation}">
+                                                <i class="bx bx-show me-1"></i> Voir
+                                            </a>
+                                            <a class="dropdown-item" href="/reservation/${reservation.id_reservation}/edit">
+                                                <i class="bx bx-edit-alt me-1"></i> Modifier
+                                            </a>
+                                            <form method="post" action="/reservation/${reservation.id_reservation}" style="display:inline;" onsubmit="return confirm('Confirmer la suppression?');">
+                                                <input type="hidden" name="_token" value="${generateCsrfToken('delete' + reservation.id_reservation)}">
+                                                <input type="hidden" name="_method" value="POST">
+                                                <button class="dropdown-item" type="submit">
+                                                    <i class="bx bx-trash me-1"></i> Supprimer
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </td>
+                            `;
+                            reservationsTableBody.appendChild(row);
+                        });
+                    }
+
+                    // Update pagination
+                    paginationContainer.innerHTML = data.pagination;
+
+                    // Reattach event listeners to new pagination links
+                    attachPaginationListeners();
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                    reservationsTableBody.innerHTML = `
+                        <tr>
+                            <td colspan="5" class="text-center">Erreur lors du chargement des données</td>
+                        </tr>
+                    `;
+                });
+            }
+
+            // Function to generate CSRF token (client-side placeholder)
+            function generateCsrfToken(id) {
+                // In a real application, this would need to be properly implemented
+                return 'dummy-csrf-token-' + id;
+            }
+
+            // Function to handle pagination clicks
+            function attachPaginationListeners() {
+                const paginationLinks = document.querySelectorAll('#paginationContainer .page-link');
+                paginationLinks.forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        if (!this.parentElement.classList.contains('disabled') && !this.parentElement.classList.contains('active')) {
+                            const url = new URL(this.href);
+                            const page = url.searchParams.get('page') || 1;
+                            const search = url.searchParams.get('search') || '';
+                            updateTable(search, page);
+                        }
+                    });
+                });
+            }
+
+            // Initial attachment of pagination listeners
+            attachPaginationListeners();
+
+            // Search input handler (debounced)
+            searchInput.addEventListener('input', debounce(function() {
+                updateTable(this.value, 1);
+            }, 300));
         });
     </script>
 {% endblock %}

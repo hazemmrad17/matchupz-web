@@ -33,6 +33,7 @@ return [
         '/espace/new' => [[['_route' => 'espace_new', '_controller' => 'App\\Controller\\EspacesportifController::new'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
         '/espace/statistics' => [[['_route' => 'espace_statistics', '_controller' => 'App\\Controller\\EspacesportifController::statistics'], null, ['GET' => 0], null, false, false, null]],
         '/espace/front' => [[['_route' => 'app_espace_sportifs', '_controller' => 'App\\Controller\\EspacesportifController::front'], null, ['GET' => 0], null, false, false, null]],
+        '/espace/recommend' => [[['_route' => 'espace_recommend', '_controller' => 'App\\Controller\\EspacesportifController::recommend'], null, ['POST' => 0], null, false, false, null]],
         '/evaluation_physique/statistiques' => [[['_route' => 'app_evaluation_physique_stats', '_controller' => 'App\\Controller\\EvaluationPhysiqueController::statistics'], null, ['GET' => 0], null, false, false, null]],
         '/evaluation_physique/maintenance' => [[['_route' => 'app_maintenance', '_controller' => 'App\\Controller\\EvaluationPhysiqueController::maintenance'], null, null, null, false, false, null]],
         '/evaluation_physique' => [[['_route' => 'app_evaluation_physique_index', '_controller' => 'App\\Controller\\EvaluationPhysiqueController::index'], null, ['GET' => 0], null, true, false, null]],

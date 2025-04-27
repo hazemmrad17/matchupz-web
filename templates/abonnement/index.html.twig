@@ -101,17 +101,14 @@
                         <div class="navbar-nav align-items-center ms-3">
                             <div class="nav-item d-flex align-items-center">
                                 <i class="bx bx-search fs-4 lh-0"></i>
-                                <form method="get" action="{{ path('abonnement_index') }}" id="searchForm">
-                                    <input
-                                        type="text"
-                                        name="search"
-                                        id="searchInput"
-                                        class="form-control border-0 shadow-none"
-                                        placeholder="Rechercher un abonnement..."
-                                        aria-label="Rechercher un abonnement..."
-                                        value="{{ searchTerm|default('') }}"
-                                    />
-                                </form>
+                                <input
+                                    type="text"
+                                    id="searchInput"
+                                    class="form-control border-0 shadow-none"
+                                    placeholder="Rechercher un abonnement..."
+                                    aria-label="Rechercher un abonnement..."
+                                    value="{{ searchTerm|default('') }}"
+                                />
                             </div>
                         </div>
                     </div>
@@ -130,7 +127,7 @@
                     </div>
                 </h5>
                 <div class="table-responsive text-nowrap">
-                    <table class="table">
+                    <table class="table" id="abonnementsTable">
                         <thead>
                             <tr>
                                 <th>Club</th>
@@ -142,7 +139,7 @@
                                 <th>Actions</th>
                             </tr>
                         </thead>
-                        <tbody class="table-border-bottom-0">
+                        <tbody class="table-border-bottom-0" id="abonnementsTableBody">
                             {% for abonnement in abonnements %}
                                 <tr class="table-default">
                                     <td>
@@ -184,26 +181,8 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="card-footer">
-                    <nav aria-label="Page navigation">
-                        <ul class="pagination justify-content-center">
-                            <li class="page-item {{ abonnements.currentPageNumber == 1 ? 'disabled' : '' }}">
-                                <a class="page-link" href="{{ path('abonnement_index', {'page': abonnements.currentPageNumber - 1, 'search': searchTerm|default('')}) }}" aria-label="Previous">
-                                    <span aria-hidden="true">«</span>
-                                </a>
-                            </li>
-                            {% for i in 1..abonnements.pageCount %}
-                                <li class="page-item {{ abonnements.currentPageNumber == i ? 'active' : '' }}">
-                                    <a class="page-link" href="{{ path('abonnement_index', {'page': i, 'search': searchTerm|default('')}) }}">{{ i }}</a>
-                                </li>
-                            {% endfor %}
-                            <li class="page-item {{ abonnements.currentPageNumber == abonnements.pageCount ? 'disabled' : '' }}">
-                                <a class="page-link" href="{{ path('abonnement_index', {'page': abonnements.currentPageNumber + 1, 'search': searchTerm|default('')}) }}" aria-label="Next">
-                                    <span aria-hidden="true">»</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
+                <div class="card-footer" id="paginationContainer">
+                    {% include 'abonnement/_pagination.html.twig' with {'abonnements': abonnements, 'searchTerm': searchTerm} %}
                 </div>
             </div>
 
@@ -238,8 +217,10 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const searchInput = document.getElementById('searchInput');
-            const searchForm = document.getElementById('searchForm');
+            const abonnementsTableBody = document.getElementById('abonnementsTableBody');
+            const paginationContainer = document.getElementById('paginationContainer');
 
+            // Debounce function to limit how often AJAX requests are sent
             function debounce(func, wait) {
                 let timeout;
                 return function (...args) {
@@ -248,8 +229,108 @@
                 };
             }
 
-            searchInput.addEventListener('input', debounce(function () {
-                searchForm.submit();
+            // Function to fetch and update table content
+            function updateTable(searchTerm = '', page = 1) {
+                fetch(`{{ path('abonnement_index') }}?search=${encodeURIComponent(searchTerm)}&page=${page}`, {
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Update table body
+                    abonnementsTableBody.innerHTML = '';
+                    if (data.abonnements.length === 0) {
+                        abonnementsTableBody.innerHTML = `
+                            <tr>
+                                <td colspan="7" class="text-center">Aucun abonnement trouvé</td>
+                            </tr>
+                        `;
+                    } else {
+                        data.abonnements.forEach(abonnement => {
+                            const row = document.createElement('tr');
+                            row.className = 'table-default';
+                            row.innerHTML = `
+                                <td>
+                                    <i class="fab fa-sketch fa-lg text-warning me-3"></i>
+                                    <strong>${abonnement.nom_club}</strong>
+                                </td>
+                                <td>${abonnement.type_abonnement}</td>
+                                <td>${abonnement.date_debut}</td>
+                                <td>${abonnement.date_fin}</td>
+                                <td>${abonnement.tarif}</td>
+                                <td>${abonnement.etat}</td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                            <i class="bx bx-dots-vertical-rounded"></i>
+                                        </button>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item" href="/abonnement/${abonnement.id_abonnement}">
+                                                <i class="bx bx-show me-1"></i> Voir
+                                            </a>
+                                            <a class="dropdown-item" href="/abonnement/${abonnement.id_abonnement}/edit">
+                                                <i class="bx bx-edit-alt me-1"></i> Modifier
+                                            </a>
+                                            <form method="post" action="/abonnement/${abonnement.id_abonnement}" style="display:inline;" onsubmit="return confirm('Confirmer la suppression?');">
+                                                <input type="hidden" name="_token" value="${generateCsrfToken('delete' + abonnement.id_abonnement)}">
+                                                <input type="hidden" name="_method" value="POST">
+                                                <button class="dropdown-item" type="submit">
+                                                    <i class="bx bx-trash me-1"></i> Supprimer
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </td>
+                            `;
+                            abonnementsTableBody.appendChild(row);
+                        });
+                    }
+
+                    // Update pagination
+                    paginationContainer.innerHTML = data.pagination;
+
+                    // Reattach event listeners to new pagination links
+                    attachPaginationListeners();
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                    abonnementsTableBody.innerHTML = `
+                        <tr>
+                            <td colspan="7" class="text-center">Erreur lors du chargement des données</td>
+                        </tr>
+                    `;
+                });
+            }
+
+            // Function to generate CSRF token (client-side placeholder)
+            function generateCsrfToken(id) {
+                // In a real application, this would need to be properly implemented
+                return 'dummy-csrf-token-' + id;
+            }
+
+            // Function to handle pagination clicks
+            function attachPaginationListeners() {
+                const paginationLinks = document.querySelectorAll('#paginationContainer .page-link');
+                paginationLinks.forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        if (!this.parentElement.classList.contains('disabled') && !this.parentElement.classList.contains('active')) {
+                            const url = new URL(this.href);
+                            const page = url.searchParams.get('page') || 1;
+                            const search = url.searchParams.get('search') || '';
+                            updateTable(search, page);
+                        }
+                    });
+                });
+            }
+
+            // Initial attachment of pagination listeners
+            attachPaginationListeners();
+
+            // Search input handler (debounced)
+            searchInput.addEventListener('input', debounce(function() {
+                updateTable(this.value, 1);
             }, 300));
         });
     </script>

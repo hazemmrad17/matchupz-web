@@ -129,76 +129,74 @@ class __TwigTemplate_a5ce221b5392b818165e16f17be17559 extends Template
         yield "
     <style>
         .card-footer .pagination {
-            margin: 0; /* Remove default margins */
+            margin: 0;
         }
         .card-footer .pagination .page-item {
-            margin: 0 8px; /* Increase spacing between buttons for clarity */
+            margin: 0 8px;
         }
         .card-footer .pagination .page-link {
-            border-radius: 10px; /* More pronounced rounded corners */
-            padding: 12px 18px; /* Larger padding for bigger buttons */
-            color: #1a3c34; /* Dark teal for better contrast */
-            background-color: #ffffff; /* White background for inactive buttons */
-            border: 1px solid #ced4da; /* Slightly darker border for definition */
-            font-size: 16px; /* Larger font for readability */
-            font-weight: 500; /* Medium font weight for clarity */
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Subtle shadow for depth */
-            transition: all 0.3s ease; /* Smooth transition for hover effects */
+            border-radius: 10px;
+            padding: 12px 18px;
+            color: #1a3c34;
+            background-color: #ffffff;
+            border: 1px solid #ced4da;
+            font-size: 16px;
+            font-weight: 500;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
         }
         .card-footer .pagination .page-item.active .page-link {
-            background-color: #1a3c34; /* Dark teal for active button */
-            border-color: #1a3c34; /* Match border to background */
-            color: #ffffff; /* White text for active button */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Slightly stronger shadow for active state */
+            background-color: #1a3c34;
+            border-color: #1a3c34;
+            color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
         .card-footer .pagination .page-item .page-link:hover:not(.active) {
-            background-color: #f1f3f5; /* Light gray background on hover for inactive buttons */
-            color: #14532d; /* Slightly darker teal on hover */
-            border-color: #b0b8bf; /* Slightly darker border on hover */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Lift effect on hover */
+            background-color: #f1f3f5;
+            color: #14532d;
+            border-color: #b0b8bf;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
         .card-footer .pagination .page-item.disabled .page-link {
-            color: #adb5bd; /* Lighter gray for disabled buttons */
-            background-color: #f8f9fa; /* Very light gray background */
-            border-color: #ced4da; /* Match inactive border */
-            box-shadow: none; /* No shadow for disabled state */
-            pointer-events: none; /* Disable interaction */
+            color: #adb5bd;
+            background-color: #f8f9fa;
+            border-color: #ced4da;
+            box-shadow: none;
+            pointer-events: none;
         }
-        /* Style for the search bar */
         .navbar-nav .nav-item {
             display: flex;
             align-items: center;
         }
         .navbar-nav .nav-item i {
-            font-size: 1.5rem; /* Size of the search icon */
-            color: #6c757d; /* Gray color for the icon */
+            font-size: 1.5rem;
+            color: #6c757d;
             margin-right: 8px;
         }
         .navbar-nav .nav-item input[type=\"text\"] {
-            border: 0; /* Remove default border */
-            box-shadow: none; /* Remove default shadow */
+            border: 0;
+            box-shadow: none;
             padding: 8px 12px;
             font-size: 14px;
-            width: 200px; /* Adjust width as needed */
-            background-color: #f8f9fa; /* Light background to match card */
-            border-radius: 5px; /* Slight rounding */
+            width: 200px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
             transition: background-color 0.3s ease;
         }
         .navbar-nav .nav-item input[type=\"text\"]:focus {
-            outline: none; /* Remove default outline */
-            background-color: #ffffff; /* White background on focus */
+            outline: none;
+            background-color: #ffffff;
         }
         .navbar-nav .nav-item input[type=\"text\"]::placeholder {
-            color: #adb5bd; /* Placeholder color */
+            color: #adb5bd;
         }
-        /* Style for the export button */
         .btn-yellow {
-            background-color: #eab700; /* Yellow background */
+            background-color: #eab700;
             border-color: #eab700;
-            color: #1a1a1a; /* Dark text for contrast */
+            color: #1a1a1a;
         }
         .btn-yellow:hover {
-            background-color: #d4a600; /* Darker yellow on hover */
+            background-color: #d4a600;
             border-color: #d4a600;
         }
     </style>
@@ -212,7 +210,7 @@ class __TwigTemplate_a5ce221b5392b818165e16f17be17559 extends Template
         yield from [];
     }
 
-    // line 88
+    // line 86
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -225,15 +223,15 @@ class __TwigTemplate_a5ce221b5392b818165e16f17be17559 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "content"));
 
-        // line 89
+        // line 87
         yield "    <div class=\"content-wrapper\">
         <div class=\"container-xxl flex-grow-1 container-p-y\">
             ";
-        // line 91
+        // line 89
         $context['_parent'] = $context;
-        $context['_seq'] = CoreExtension::ensureTraversable(CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 91, $this->source); })()), "flashes", ["success"], "method", false, false, false, 91));
+        $context['_seq'] = CoreExtension::ensureTraversable(CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 89, $this->source); })()), "flashes", ["success"], "method", false, false, false, 89));
         foreach ($context['_seq'] as $context["_key"] => $context["message"]) {
-            // line 92
+            // line 90
             yield "                <div class=\"alert alert-success\">";
             yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($context["message"], "html", null, true);
             yield "</div>
@@ -242,12 +240,12 @@ class __TwigTemplate_a5ce221b5392b818165e16f17be17559 extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_key'], $context['message'], $context['_parent']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 94
+        // line 92
         yield "            ";
         $context['_parent'] = $context;
-        $context['_seq'] = CoreExtension::ensureTraversable(CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 94, $this->source); })()), "flashes", ["error"], "method", false, false, false, 94));
+        $context['_seq'] = CoreExtension::ensureTraversable(CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 92, $this->source); })()), "flashes", ["error"], "method", false, false, false, 92));
         foreach ($context['_seq'] as $context["_key"] => $context["message"]) {
-            // line 95
+            // line 93
             yield "                <div class=\"alert alert-danger\">";
             yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($context["message"], "html", null, true);
             yield "</div>
@@ -256,61 +254,53 @@ class __TwigTemplate_a5ce221b5392b818165e16f17be17559 extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_key'], $context['message'], $context['_parent']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 97
+        // line 95
         yield "
             ";
-        // line 98
-        yield from $this->loadTemplate("reservation/reservation_widgets.html.twig", "reservation/index.html.twig", 98)->unwrap()->yield($context);
-        // line 99
+        // line 96
+        yield from $this->loadTemplate("reservation/reservation_widgets.html.twig", "reservation/index.html.twig", 96)->unwrap()->yield($context);
+        // line 97
         yield "            <div class=\"card\">
                 <h5 class=\"card-header d-flex justify-content-between align-items-center\">
                     <div class=\"d-flex align-items-center\">
                         <span>Liste des Réservations</span>
-                        <!-- Search Bar -->
                         <div class=\"navbar-nav align-items-center ms-3\">
                             <div class=\"nav-item d-flex align-items-center\">
                                 <i class=\"bx bx-search fs-4 lh-0\"></i>
-                                <form method=\"get\" action=\"";
-        // line 107
-        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("reservation_index");
-        yield "\" id=\"searchForm\">
-                                    <input
-                                        type=\"text\"
-                                        name=\"search\"
-                                        id=\"searchInput\"
-                                        class=\"form-control border-0 shadow-none\"
-                                        placeholder=\"Rechercher une réservation...\"
-                                        aria-label=\"Rechercher une réservation...\"
-                                        value=\"";
-        // line 115
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(((array_key_exists("searchTerm", $context)) ? (Twig\Extension\CoreExtension::default((isset($context["searchTerm"]) || array_key_exists("searchTerm", $context) ? $context["searchTerm"] : (function () { throw new RuntimeError('Variable "searchTerm" does not exist.', 115, $this->source); })()), "")) : ("")), "html", null, true);
+                                <input
+                                    type=\"text\"
+                                    id=\"searchInput\"
+                                    class=\"form-control border-0 shadow-none\"
+                                    placeholder=\"Rechercher une réservation...\"
+                                    aria-label=\"Rechercher une réservation...\"
+                                    value=\"";
+        // line 110
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(((array_key_exists("searchTerm", $context)) ? (Twig\Extension\CoreExtension::default((isset($context["searchTerm"]) || array_key_exists("searchTerm", $context) ? $context["searchTerm"] : (function () { throw new RuntimeError('Variable "searchTerm" does not exist.', 110, $this->source); })()), "")) : ("")), "html", null, true);
         yield "\"
-                                    />
-                                </form>
+                                />
                             </div>
                         </div>
                     </div>
                     <div class=\"d-flex align-items-center\">
                         <a href=\"";
-        // line 122
+        // line 116
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("reservation_new");
         yield "\" class=\"btn btn-primary me-2\">Ajouter une Réservation</a>
-                        <!-- Export Dropdown -->
                         <div class=\"dropdown\">
                             <button type=\"button\" class=\"btn dropdown-toggle btn-yellow\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\">
                                 <i class=\"bx bx-export me-1\"></i> Exporter
                             </button>
                             <ul class=\"dropdown-menu\">
                                 <li><a class=\"dropdown-item\" href=\"";
-        // line 129
+        // line 122
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("reservation_export_csv");
         yield "\">Exporter en CSV</a></li>
                                 <li><a class=\"dropdown-item\" href=\"";
-        // line 130
+        // line 123
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("reservation_export_pdf");
         yield "\">Exporter en PDF</a></li>
                                 <li><a class=\"dropdown-item\" href=\"";
-        // line 131
+        // line 124
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("reservation_export_excel");
         yield "\">Exporter en Excel</a></li>
                             </ul>
@@ -318,7 +308,7 @@ class __TwigTemplate_a5ce221b5392b818165e16f17be17559 extends Template
                     </div>
                 </h5>
                 <div class=\"table-responsive text-nowrap\">
-                    <table class=\"table\">
+                    <table class=\"table\" id=\"reservationsTable\">
                         <thead>
                             <tr>
                                 <th>Lieu Sportif</th>
@@ -328,33 +318,33 @@ class __TwigTemplate_a5ce221b5392b818165e16f17be17559 extends Template
                                 <th>Actions</th>
                             </tr>
                         </thead>
-                        <tbody class=\"table-border-bottom-0\">
+                        <tbody class=\"table-border-bottom-0\" id=\"reservationsTableBody\">
                             ";
-        // line 148
+        // line 141
         $context['_parent'] = $context;
-        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["reservations"]) || array_key_exists("reservations", $context) ? $context["reservations"] : (function () { throw new RuntimeError('Variable "reservations" does not exist.', 148, $this->source); })()));
+        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["reservations"]) || array_key_exists("reservations", $context) ? $context["reservations"] : (function () { throw new RuntimeError('Variable "reservations" does not exist.', 141, $this->source); })()));
         $context['_iterated'] = false;
         foreach ($context['_seq'] as $context["_key"] => $context["reservation"]) {
-            // line 149
+            // line 142
             yield "                                <tr class=\"table-default\">
                                     <td>
                                         <i class=\"fab fa-sketch fa-lg text-warning me-3\"></i>
                                         <strong>";
-            // line 152
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["reservation"], "espacesportif", [], "any", false, false, false, 152), "nom_espace", [], "any", false, false, false, 152), "html", null, true);
+            // line 145
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["reservation"], "espacesportif", [], "any", false, false, false, 145), "nom_espace", [], "any", false, false, false, 145), "html", null, true);
             yield "</strong>
                                     </td>
                                     <td>";
-            // line 154
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["reservation"], "dateReservee", [], "any", false, false, false, 154), "d/m/Y H:i"), "html", null, true);
+            // line 147
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["reservation"], "dateReservee", [], "any", false, false, false, 147), "d/m/Y H:i"), "html", null, true);
             yield "</td>
                                     <td>";
-            // line 155
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["reservation"], "motif", [], "any", false, false, false, 155), "html", null, true);
+            // line 148
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["reservation"], "motif", [], "any", false, false, false, 148), "html", null, true);
             yield "</td>
                                     <td>";
-            // line 156
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["reservation"], "status", [], "any", false, false, false, 156), "html", null, true);
+            // line 149
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["reservation"], "status", [], "any", false, false, false, 149), "html", null, true);
             yield "</td>
                                     <td>
                                         <div class=\"dropdown\">
@@ -363,24 +353,24 @@ class __TwigTemplate_a5ce221b5392b818165e16f17be17559 extends Template
                                             </button>
                                             <div class=\"dropdown-menu\">
                                                 <a class=\"dropdown-item\" href=\"";
-            // line 163
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("reservation_show", ["id_reservation" => CoreExtension::getAttribute($this->env, $this->source, $context["reservation"], "idReservation", [], "any", false, false, false, 163)]), "html", null, true);
+            // line 156
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("reservation_show", ["id_reservation" => CoreExtension::getAttribute($this->env, $this->source, $context["reservation"], "idReservation", [], "any", false, false, false, 156)]), "html", null, true);
             yield "\">
                                                     <i class=\"bx bx-show me-1\"></i> Voir
                                                 </a>
                                                 <a class=\"dropdown-item\" href=\"";
-            // line 166
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("reservation_edit", ["id_reservation" => CoreExtension::getAttribute($this->env, $this->source, $context["reservation"], "idReservation", [], "any", false, false, false, 166)]), "html", null, true);
+            // line 159
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("reservation_edit", ["id_reservation" => CoreExtension::getAttribute($this->env, $this->source, $context["reservation"], "idReservation", [], "any", false, false, false, 159)]), "html", null, true);
             yield "\">
                                                     <i class=\"bx bx-edit-alt me-1\"></i> Modifier
                                                 </a>
                                                 <form method=\"post\" action=\"";
-            // line 169
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("reservation_delete", ["id_reservation" => CoreExtension::getAttribute($this->env, $this->source, $context["reservation"], "idReservation", [], "any", false, false, false, 169)]), "html", null, true);
+            // line 162
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("reservation_delete", ["id_reservation" => CoreExtension::getAttribute($this->env, $this->source, $context["reservation"], "idReservation", [], "any", false, false, false, 162)]), "html", null, true);
             yield "\" style=\"display:inline;\" onsubmit=\"return confirm('Confirmer la suppression?');\">
                                                     <input type=\"hidden\" name=\"_token\" value=\"";
-            // line 170
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderCsrfToken(("delete" . CoreExtension::getAttribute($this->env, $this->source, $context["reservation"], "idReservation", [], "any", false, false, false, 170))), "html", null, true);
+            // line 163
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderCsrfToken(("delete" . CoreExtension::getAttribute($this->env, $this->source, $context["reservation"], "idReservation", [], "any", false, false, false, 163))), "html", null, true);
             yield "\">
                                                     <button class=\"dropdown-item\" type=\"submit\">
                                                         <i class=\"bx bx-trash me-1\"></i> Supprimer
@@ -393,9 +383,9 @@ class __TwigTemplate_a5ce221b5392b818165e16f17be17559 extends Template
                             ";
             $context['_iterated'] = true;
         }
-        // line 179
+        // line 172
         if (!$context['_iterated']) {
-            // line 180
+            // line 173
             yield "                                <tr>
                                     <td colspan=\"5\" class=\"text-center\">Aucune réservation trouvée</td>
                                 </tr>
@@ -404,63 +394,16 @@ class __TwigTemplate_a5ce221b5392b818165e16f17be17559 extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_key'], $context['reservation'], $context['_parent'], $context['_iterated']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 184
+        // line 177
         yield "                        </tbody>
                     </table>
                 </div>
-                <!-- Pagination -->
-                <div class=\"card-footer\">
-                    <nav aria-label=\"Page navigation\">
-                        <ul class=\"pagination justify-content-center\">
-                            <li class=\"page-item ";
-        // line 191
-        yield (((CoreExtension::getAttribute($this->env, $this->source, (isset($context["reservations"]) || array_key_exists("reservations", $context) ? $context["reservations"] : (function () { throw new RuntimeError('Variable "reservations" does not exist.', 191, $this->source); })()), "currentPageNumber", [], "any", false, false, false, 191) == 1)) ? ("disabled") : (""));
-        yield "\">
-                                <a class=\"page-link\" href=\"";
-        // line 192
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("reservation_index", ["page" => (CoreExtension::getAttribute($this->env, $this->source, (isset($context["reservations"]) || array_key_exists("reservations", $context) ? $context["reservations"] : (function () { throw new RuntimeError('Variable "reservations" does not exist.', 192, $this->source); })()), "currentPageNumber", [], "any", false, false, false, 192) - 1), "search" => ((array_key_exists("searchTerm", $context)) ? (Twig\Extension\CoreExtension::default((isset($context["searchTerm"]) || array_key_exists("searchTerm", $context) ? $context["searchTerm"] : (function () { throw new RuntimeError('Variable "searchTerm" does not exist.', 192, $this->source); })()), "")) : (""))]), "html", null, true);
-        yield "\" aria-label=\"Previous\">
-                                    <span aria-hidden=\"true\">«</span>
-                                </a>
-                            </li>
-                            
-                            ";
-        // line 197
-        $context['_parent'] = $context;
-        $context['_seq'] = CoreExtension::ensureTraversable(range(1, CoreExtension::getAttribute($this->env, $this->source, (isset($context["reservations"]) || array_key_exists("reservations", $context) ? $context["reservations"] : (function () { throw new RuntimeError('Variable "reservations" does not exist.', 197, $this->source); })()), "pageCount", [], "any", false, false, false, 197)));
-        foreach ($context['_seq'] as $context["_key"] => $context["i"]) {
-            // line 198
-            yield "                                <li class=\"page-item ";
-            yield (((CoreExtension::getAttribute($this->env, $this->source, (isset($context["reservations"]) || array_key_exists("reservations", $context) ? $context["reservations"] : (function () { throw new RuntimeError('Variable "reservations" does not exist.', 198, $this->source); })()), "currentPageNumber", [], "any", false, false, false, 198) == $context["i"])) ? ("active") : (""));
-            yield "\">
-                                    <a class=\"page-link\" href=\"";
-            // line 199
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("reservation_index", ["page" => $context["i"], "search" => ((array_key_exists("searchTerm", $context)) ? (Twig\Extension\CoreExtension::default((isset($context["searchTerm"]) || array_key_exists("searchTerm", $context) ? $context["searchTerm"] : (function () { throw new RuntimeError('Variable "searchTerm" does not exist.', 199, $this->source); })()), "")) : (""))]), "html", null, true);
-            yield "\">";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($context["i"], "html", null, true);
-            yield "</a>
-                                </li>
-                            ";
-        }
-        $_parent = $context['_parent'];
-        unset($context['_seq'], $context['_key'], $context['i'], $context['_parent']);
-        $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 202
-        yield "                            
-                            <li class=\"page-item ";
-        // line 203
-        yield (((CoreExtension::getAttribute($this->env, $this->source, (isset($context["reservations"]) || array_key_exists("reservations", $context) ? $context["reservations"] : (function () { throw new RuntimeError('Variable "reservations" does not exist.', 203, $this->source); })()), "currentPageNumber", [], "any", false, false, false, 203) == CoreExtension::getAttribute($this->env, $this->source, (isset($context["reservations"]) || array_key_exists("reservations", $context) ? $context["reservations"] : (function () { throw new RuntimeError('Variable "reservations" does not exist.', 203, $this->source); })()), "pageCount", [], "any", false, false, false, 203))) ? ("disabled") : (""));
-        yield "\">
-                                <a class=\"page-link\" href=\"";
-        // line 204
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("reservation_index", ["page" => (CoreExtension::getAttribute($this->env, $this->source, (isset($context["reservations"]) || array_key_exists("reservations", $context) ? $context["reservations"] : (function () { throw new RuntimeError('Variable "reservations" does not exist.', 204, $this->source); })()), "currentPageNumber", [], "any", false, false, false, 204) + 1), "search" => ((array_key_exists("searchTerm", $context)) ? (Twig\Extension\CoreExtension::default((isset($context["searchTerm"]) || array_key_exists("searchTerm", $context) ? $context["searchTerm"] : (function () { throw new RuntimeError('Variable "searchTerm" does not exist.', 204, $this->source); })()), "")) : (""))]), "html", null, true);
-        yield "\" aria-label=\"Next\">
-                                    <span aria-hidden=\"true\">»</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
+                <div class=\"card-footer\" id=\"paginationContainer\">
+                    ";
+        // line 181
+        yield from $this->loadTemplate("reservation/_pagination.html.twig", "reservation/index.html.twig", 181)->unwrap()->yield(CoreExtension::merge($context, ["reservations" => (isset($context["reservations"]) || array_key_exists("reservations", $context) ? $context["reservations"] : (function () { throw new RuntimeError('Variable "reservations" does not exist.', 181, $this->source); })()), "searchTerm" => (isset($context["searchTerm"]) || array_key_exists("searchTerm", $context) ? $context["searchTerm"] : (function () { throw new RuntimeError('Variable "searchTerm" does not exist.', 181, $this->source); })())]));
+        // line 182
+        yield "                </div>
             </div>
 
             <h5 class=\"mt-4\">Réservations Confirmées à Venir</h5>
@@ -468,36 +411,36 @@ class __TwigTemplate_a5ce221b5392b818165e16f17be17559 extends Template
                 <div class=\"card-body\">
                     <ul class=\"p-0 m-0\">
                         ";
-        // line 217
+        // line 189
         $context['_parent'] = $context;
-        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["upcoming_reservations"]) || array_key_exists("upcoming_reservations", $context) ? $context["upcoming_reservations"] : (function () { throw new RuntimeError('Variable "upcoming_reservations" does not exist.', 217, $this->source); })()));
+        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["upcoming_reservations"]) || array_key_exists("upcoming_reservations", $context) ? $context["upcoming_reservations"] : (function () { throw new RuntimeError('Variable "upcoming_reservations" does not exist.', 189, $this->source); })()));
         $context['_iterated'] = false;
         foreach ($context['_seq'] as $context["_key"] => $context["reservation"]) {
-            // line 218
+            // line 190
             yield "                            <li class=\"d-flex mb-4 pb-1\">
                                 <div class=\"avatar flex-shrink-0 me-3\">
                                     <img src=\"";
-            // line 220
+            // line 192
             yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("img/icons/unicons/chart.png"), "html", null, true);
             yield "\" alt=\"Reservation\" class=\"rounded\" />
                                 </div>
                                 <div class=\"d-flex w-100 flex-wrap align-items-center justify-content-between gap-2\">
                                     <div class=\"me-2\">
                                         <h6 class=\"mb-0\">";
-            // line 224
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["reservation"], "espacesportif", [], "any", false, false, false, 224), "nom_espace", [], "any", false, false, false, 224), "html", null, true);
+            // line 196
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["reservation"], "espacesportif", [], "any", false, false, false, 196), "nom_espace", [], "any", false, false, false, 196), "html", null, true);
             yield "</h6>
                                         <small class=\"text-muted\">";
-            // line 225
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["reservation"], "dateReservee", [], "any", false, false, false, 225), "d/m/Y H:i"), "html", null, true);
+            // line 197
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["reservation"], "dateReservee", [], "any", false, false, false, 197), "d/m/Y H:i"), "html", null, true);
             yield " - ";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["reservation"], "motif", [], "any", false, false, false, 225), "html", null, true);
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["reservation"], "motif", [], "any", false, false, false, 197), "html", null, true);
             yield "</small>
                                     </div>
                                     <div class=\"user-progress\">
                                         <small class=\"fw-semibold\">";
-            // line 228
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["reservation"], "status", [], "any", false, false, false, 228), "html", null, true);
+            // line 200
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["reservation"], "status", [], "any", false, false, false, 200), "html", null, true);
             yield "</small>
                                     </div>
                                 </div>
@@ -505,29 +448,29 @@ class __TwigTemplate_a5ce221b5392b818165e16f17be17559 extends Template
                         ";
             $context['_iterated'] = true;
         }
-        // line 232
+        // line 204
         if (!$context['_iterated']) {
-            // line 233
+            // line 205
             yield "                            <li>Aucune réservation confirmée à venir.</li>
                         ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_key'], $context['reservation'], $context['_parent'], $context['_iterated']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 235
+        // line 207
         yield "                    </ul>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- JavaScript for dynamic search -->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const searchInput = document.getElementById('searchInput');
-            const searchForm = document.getElementById('searchForm');
+            const reservationsTableBody = document.getElementById('reservationsTableBody');
+            const paginationContainer = document.getElementById('paginationContainer');
 
-            // Debounce function to limit how often the form is submitted
+            // Debounce function to limit how often AJAX requests are sent
             function debounce(func, wait) {
                 let timeout;
                 return function (...args) {
@@ -536,10 +479,110 @@ class __TwigTemplate_a5ce221b5392b818165e16f17be17559 extends Template
                 };
             }
 
-            // Submit the form when the user types (debounced)
-            searchInput.addEventListener('input', debounce(function () {
-                searchForm.submit();
-            }, 300)); // Wait 300ms after the last keystroke before submitting
+            // Function to fetch and update table content
+            function updateTable(searchTerm = '', page = 1) {
+                fetch(`";
+        // line 230
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("reservation_index");
+        yield "?search=\${encodeURIComponent(searchTerm)}&page=\${page}`, {
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Update table body
+                    reservationsTableBody.innerHTML = '';
+                    if (data.reservations.length === 0) {
+                        reservationsTableBody.innerHTML = `
+                            <tr>
+                                <td colspan=\"5\" class=\"text-center\">Aucune réservation trouvée</td>
+                            </tr>
+                        `;
+                    } else {
+                        data.reservations.forEach(reservation => {
+                            const row = document.createElement('tr');
+                            row.className = 'table-default';
+                            row.innerHTML = `
+                                <td>
+                                    <i class=\"fab fa-sketch fa-lg text-warning me-3\"></i>
+                                    <strong>\${reservation.nom_espace}</strong>
+                                </td>
+                                <td>\${reservation.date_reservee}</td>
+                                <td>\${reservation.motif}</td>
+                                <td>\${reservation.status}</td>
+                                <td>
+                                    <div class=\"dropdown\">
+                                        <button type=\"button\" class=\"btn p-0 dropdown-toggle hide-arrow\" data-bs-toggle=\"dropdown\">
+                                            <i class=\"bx bx-dots-vertical-rounded\"></i>
+                                        </button>
+                                        <div class=\"dropdown-menu\">
+                                            <a class=\"dropdown-item\" href=\"/reservation/\${reservation.id_reservation}\">
+                                                <i class=\"bx bx-show me-1\"></i> Voir
+                                            </a>
+                                            <a class=\"dropdown-item\" href=\"/reservation/\${reservation.id_reservation}/edit\">
+                                                <i class=\"bx bx-edit-alt me-1\"></i> Modifier
+                                            </a>
+                                            <form method=\"post\" action=\"/reservation/\${reservation.id_reservation}\" style=\"display:inline;\" onsubmit=\"return confirm('Confirmer la suppression?');\">
+                                                <input type=\"hidden\" name=\"_token\" value=\"\${generateCsrfToken('delete' + reservation.id_reservation)}\">
+                                                <input type=\"hidden\" name=\"_method\" value=\"POST\">
+                                                <button class=\"dropdown-item\" type=\"submit\">
+                                                    <i class=\"bx bx-trash me-1\"></i> Supprimer
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </td>
+                            `;
+                            reservationsTableBody.appendChild(row);
+                        });
+                    }
+
+                    // Update pagination
+                    paginationContainer.innerHTML = data.pagination;
+
+                    // Reattach event listeners to new pagination links
+                    attachPaginationListeners();
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                    reservationsTableBody.innerHTML = `
+                        <tr>
+                            <td colspan=\"5\" class=\"text-center\">Erreur lors du chargement des données</td>
+                        </tr>
+                    `;
+                });
+            }
+
+            // Function to generate CSRF token (client-side placeholder)
+            function generateCsrfToken(id) {
+                // In a real application, this would need to be properly implemented
+                return 'dummy-csrf-token-' + id;
+            }
+
+            // Function to handle pagination clicks
+            function attachPaginationListeners() {
+                const paginationLinks = document.querySelectorAll('#paginationContainer .page-link');
+                paginationLinks.forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        if (!this.parentElement.classList.contains('disabled') && !this.parentElement.classList.contains('active')) {
+                            const url = new URL(this.href);
+                            const page = url.searchParams.get('page') || 1;
+                            const search = url.searchParams.get('search') || '';
+                            updateTable(search, page);
+                        }
+                    });
+                });
+            }
+
+            // Initial attachment of pagination listeners
+            attachPaginationListeners();
+
+            // Search input handler (debounced)
+            searchInput.addEventListener('input', debounce(function() {
+                updateTable(this.value, 1);
+            }, 300));
         });
     </script>
 ";
@@ -573,7 +616,7 @@ class __TwigTemplate_a5ce221b5392b818165e16f17be17559 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  518 => 235,  511 => 233,  509 => 232,  500 => 228,  492 => 225,  488 => 224,  481 => 220,  477 => 218,  472 => 217,  456 => 204,  452 => 203,  449 => 202,  438 => 199,  433 => 198,  429 => 197,  421 => 192,  417 => 191,  408 => 184,  399 => 180,  397 => 179,  383 => 170,  379 => 169,  373 => 166,  367 => 163,  357 => 156,  353 => 155,  349 => 154,  344 => 152,  339 => 149,  334 => 148,  314 => 131,  310 => 130,  306 => 129,  296 => 122,  286 => 115,  275 => 107,  265 => 99,  263 => 98,  260 => 97,  251 => 95,  246 => 94,  237 => 92,  233 => 91,  229 => 89,  216 => 88,  127 => 10,  114 => 9,  91 => 7,  79 => 4,  66 => 3,  43 => 1,);
+        return array (  486 => 230,  461 => 207,  454 => 205,  452 => 204,  443 => 200,  435 => 197,  431 => 196,  424 => 192,  420 => 190,  415 => 189,  406 => 182,  404 => 181,  398 => 177,  389 => 173,  387 => 172,  373 => 163,  369 => 162,  363 => 159,  357 => 156,  347 => 149,  343 => 148,  339 => 147,  334 => 145,  329 => 142,  324 => 141,  304 => 124,  300 => 123,  296 => 122,  287 => 116,  278 => 110,  263 => 97,  261 => 96,  258 => 95,  249 => 93,  244 => 92,  235 => 90,  231 => 89,  227 => 87,  214 => 86,  127 => 10,  114 => 9,  91 => 7,  79 => 4,  66 => 3,  43 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -590,76 +633,74 @@ class __TwigTemplate_a5ce221b5392b818165e16f17be17559 extends Template
     {{ parent() }}
     <style>
         .card-footer .pagination {
-            margin: 0; /* Remove default margins */
+            margin: 0;
         }
         .card-footer .pagination .page-item {
-            margin: 0 8px; /* Increase spacing between buttons for clarity */
+            margin: 0 8px;
         }
         .card-footer .pagination .page-link {
-            border-radius: 10px; /* More pronounced rounded corners */
-            padding: 12px 18px; /* Larger padding for bigger buttons */
-            color: #1a3c34; /* Dark teal for better contrast */
-            background-color: #ffffff; /* White background for inactive buttons */
-            border: 1px solid #ced4da; /* Slightly darker border for definition */
-            font-size: 16px; /* Larger font for readability */
-            font-weight: 500; /* Medium font weight for clarity */
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Subtle shadow for depth */
-            transition: all 0.3s ease; /* Smooth transition for hover effects */
+            border-radius: 10px;
+            padding: 12px 18px;
+            color: #1a3c34;
+            background-color: #ffffff;
+            border: 1px solid #ced4da;
+            font-size: 16px;
+            font-weight: 500;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
         }
         .card-footer .pagination .page-item.active .page-link {
-            background-color: #1a3c34; /* Dark teal for active button */
-            border-color: #1a3c34; /* Match border to background */
-            color: #ffffff; /* White text for active button */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Slightly stronger shadow for active state */
+            background-color: #1a3c34;
+            border-color: #1a3c34;
+            color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
         .card-footer .pagination .page-item .page-link:hover:not(.active) {
-            background-color: #f1f3f5; /* Light gray background on hover for inactive buttons */
-            color: #14532d; /* Slightly darker teal on hover */
-            border-color: #b0b8bf; /* Slightly darker border on hover */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Lift effect on hover */
+            background-color: #f1f3f5;
+            color: #14532d;
+            border-color: #b0b8bf;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
         .card-footer .pagination .page-item.disabled .page-link {
-            color: #adb5bd; /* Lighter gray for disabled buttons */
-            background-color: #f8f9fa; /* Very light gray background */
-            border-color: #ced4da; /* Match inactive border */
-            box-shadow: none; /* No shadow for disabled state */
-            pointer-events: none; /* Disable interaction */
+            color: #adb5bd;
+            background-color: #f8f9fa;
+            border-color: #ced4da;
+            box-shadow: none;
+            pointer-events: none;
         }
-        /* Style for the search bar */
         .navbar-nav .nav-item {
             display: flex;
             align-items: center;
         }
         .navbar-nav .nav-item i {
-            font-size: 1.5rem; /* Size of the search icon */
-            color: #6c757d; /* Gray color for the icon */
+            font-size: 1.5rem;
+            color: #6c757d;
             margin-right: 8px;
         }
         .navbar-nav .nav-item input[type=\"text\"] {
-            border: 0; /* Remove default border */
-            box-shadow: none; /* Remove default shadow */
+            border: 0;
+            box-shadow: none;
             padding: 8px 12px;
             font-size: 14px;
-            width: 200px; /* Adjust width as needed */
-            background-color: #f8f9fa; /* Light background to match card */
-            border-radius: 5px; /* Slight rounding */
+            width: 200px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
             transition: background-color 0.3s ease;
         }
         .navbar-nav .nav-item input[type=\"text\"]:focus {
-            outline: none; /* Remove default outline */
-            background-color: #ffffff; /* White background on focus */
+            outline: none;
+            background-color: #ffffff;
         }
         .navbar-nav .nav-item input[type=\"text\"]::placeholder {
-            color: #adb5bd; /* Placeholder color */
+            color: #adb5bd;
         }
-        /* Style for the export button */
         .btn-yellow {
-            background-color: #eab700; /* Yellow background */
+            background-color: #eab700;
             border-color: #eab700;
-            color: #1a1a1a; /* Dark text for contrast */
+            color: #1a1a1a;
         }
         .btn-yellow:hover {
-            background-color: #d4a600; /* Darker yellow on hover */
+            background-color: #d4a600;
             border-color: #d4a600;
         }
     </style>
@@ -680,27 +721,22 @@ class __TwigTemplate_a5ce221b5392b818165e16f17be17559 extends Template
                 <h5 class=\"card-header d-flex justify-content-between align-items-center\">
                     <div class=\"d-flex align-items-center\">
                         <span>Liste des Réservations</span>
-                        <!-- Search Bar -->
                         <div class=\"navbar-nav align-items-center ms-3\">
                             <div class=\"nav-item d-flex align-items-center\">
                                 <i class=\"bx bx-search fs-4 lh-0\"></i>
-                                <form method=\"get\" action=\"{{ path('reservation_index') }}\" id=\"searchForm\">
-                                    <input
-                                        type=\"text\"
-                                        name=\"search\"
-                                        id=\"searchInput\"
-                                        class=\"form-control border-0 shadow-none\"
-                                        placeholder=\"Rechercher une réservation...\"
-                                        aria-label=\"Rechercher une réservation...\"
-                                        value=\"{{ searchTerm|default('') }}\"
-                                    />
-                                </form>
+                                <input
+                                    type=\"text\"
+                                    id=\"searchInput\"
+                                    class=\"form-control border-0 shadow-none\"
+                                    placeholder=\"Rechercher une réservation...\"
+                                    aria-label=\"Rechercher une réservation...\"
+                                    value=\"{{ searchTerm|default('') }}\"
+                                />
                             </div>
                         </div>
                     </div>
                     <div class=\"d-flex align-items-center\">
                         <a href=\"{{ path('reservation_new') }}\" class=\"btn btn-primary me-2\">Ajouter une Réservation</a>
-                        <!-- Export Dropdown -->
                         <div class=\"dropdown\">
                             <button type=\"button\" class=\"btn dropdown-toggle btn-yellow\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\">
                                 <i class=\"bx bx-export me-1\"></i> Exporter
@@ -714,7 +750,7 @@ class __TwigTemplate_a5ce221b5392b818165e16f17be17559 extends Template
                     </div>
                 </h5>
                 <div class=\"table-responsive text-nowrap\">
-                    <table class=\"table\">
+                    <table class=\"table\" id=\"reservationsTable\">
                         <thead>
                             <tr>
                                 <th>Lieu Sportif</th>
@@ -724,7 +760,7 @@ class __TwigTemplate_a5ce221b5392b818165e16f17be17559 extends Template
                                 <th>Actions</th>
                             </tr>
                         </thead>
-                        <tbody class=\"table-border-bottom-0\">
+                        <tbody class=\"table-border-bottom-0\" id=\"reservationsTableBody\">
                             {% for reservation in reservations %}
                                 <tr class=\"table-default\">
                                     <td>
@@ -764,29 +800,8 @@ class __TwigTemplate_a5ce221b5392b818165e16f17be17559 extends Template
                         </tbody>
                     </table>
                 </div>
-                <!-- Pagination -->
-                <div class=\"card-footer\">
-                    <nav aria-label=\"Page navigation\">
-                        <ul class=\"pagination justify-content-center\">
-                            <li class=\"page-item {{ reservations.currentPageNumber == 1 ? 'disabled' : '' }}\">
-                                <a class=\"page-link\" href=\"{{ path('reservation_index', {'page': reservations.currentPageNumber - 1, 'search': searchTerm|default('')}) }}\" aria-label=\"Previous\">
-                                    <span aria-hidden=\"true\">«</span>
-                                </a>
-                            </li>
-                            
-                            {% for i in 1..reservations.pageCount %}
-                                <li class=\"page-item {{ reservations.currentPageNumber == i ? 'active' : '' }}\">
-                                    <a class=\"page-link\" href=\"{{ path('reservation_index', {'page': i, 'search': searchTerm|default('')}) }}\">{{ i }}</a>
-                                </li>
-                            {% endfor %}
-                            
-                            <li class=\"page-item {{ reservations.currentPageNumber == reservations.pageCount ? 'disabled' : '' }}\">
-                                <a class=\"page-link\" href=\"{{ path('reservation_index', {'page': reservations.currentPageNumber + 1, 'search': searchTerm|default('')}) }}\" aria-label=\"Next\">
-                                    <span aria-hidden=\"true\">»</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
+                <div class=\"card-footer\" id=\"paginationContainer\">
+                    {% include 'reservation/_pagination.html.twig' with {'reservations': reservations, 'searchTerm': searchTerm} %}
                 </div>
             </div>
 
@@ -818,13 +833,13 @@ class __TwigTemplate_a5ce221b5392b818165e16f17be17559 extends Template
         </div>
     </div>
 
-    <!-- JavaScript for dynamic search -->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const searchInput = document.getElementById('searchInput');
-            const searchForm = document.getElementById('searchForm');
+            const reservationsTableBody = document.getElementById('reservationsTableBody');
+            const paginationContainer = document.getElementById('paginationContainer');
 
-            // Debounce function to limit how often the form is submitted
+            // Debounce function to limit how often AJAX requests are sent
             function debounce(func, wait) {
                 let timeout;
                 return function (...args) {
@@ -833,10 +848,107 @@ class __TwigTemplate_a5ce221b5392b818165e16f17be17559 extends Template
                 };
             }
 
-            // Submit the form when the user types (debounced)
-            searchInput.addEventListener('input', debounce(function () {
-                searchForm.submit();
-            }, 300)); // Wait 300ms after the last keystroke before submitting
+            // Function to fetch and update table content
+            function updateTable(searchTerm = '', page = 1) {
+                fetch(`{{ path('reservation_index') }}?search=\${encodeURIComponent(searchTerm)}&page=\${page}`, {
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Update table body
+                    reservationsTableBody.innerHTML = '';
+                    if (data.reservations.length === 0) {
+                        reservationsTableBody.innerHTML = `
+                            <tr>
+                                <td colspan=\"5\" class=\"text-center\">Aucune réservation trouvée</td>
+                            </tr>
+                        `;
+                    } else {
+                        data.reservations.forEach(reservation => {
+                            const row = document.createElement('tr');
+                            row.className = 'table-default';
+                            row.innerHTML = `
+                                <td>
+                                    <i class=\"fab fa-sketch fa-lg text-warning me-3\"></i>
+                                    <strong>\${reservation.nom_espace}</strong>
+                                </td>
+                                <td>\${reservation.date_reservee}</td>
+                                <td>\${reservation.motif}</td>
+                                <td>\${reservation.status}</td>
+                                <td>
+                                    <div class=\"dropdown\">
+                                        <button type=\"button\" class=\"btn p-0 dropdown-toggle hide-arrow\" data-bs-toggle=\"dropdown\">
+                                            <i class=\"bx bx-dots-vertical-rounded\"></i>
+                                        </button>
+                                        <div class=\"dropdown-menu\">
+                                            <a class=\"dropdown-item\" href=\"/reservation/\${reservation.id_reservation}\">
+                                                <i class=\"bx bx-show me-1\"></i> Voir
+                                            </a>
+                                            <a class=\"dropdown-item\" href=\"/reservation/\${reservation.id_reservation}/edit\">
+                                                <i class=\"bx bx-edit-alt me-1\"></i> Modifier
+                                            </a>
+                                            <form method=\"post\" action=\"/reservation/\${reservation.id_reservation}\" style=\"display:inline;\" onsubmit=\"return confirm('Confirmer la suppression?');\">
+                                                <input type=\"hidden\" name=\"_token\" value=\"\${generateCsrfToken('delete' + reservation.id_reservation)}\">
+                                                <input type=\"hidden\" name=\"_method\" value=\"POST\">
+                                                <button class=\"dropdown-item\" type=\"submit\">
+                                                    <i class=\"bx bx-trash me-1\"></i> Supprimer
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </td>
+                            `;
+                            reservationsTableBody.appendChild(row);
+                        });
+                    }
+
+                    // Update pagination
+                    paginationContainer.innerHTML = data.pagination;
+
+                    // Reattach event listeners to new pagination links
+                    attachPaginationListeners();
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                    reservationsTableBody.innerHTML = `
+                        <tr>
+                            <td colspan=\"5\" class=\"text-center\">Erreur lors du chargement des données</td>
+                        </tr>
+                    `;
+                });
+            }
+
+            // Function to generate CSRF token (client-side placeholder)
+            function generateCsrfToken(id) {
+                // In a real application, this would need to be properly implemented
+                return 'dummy-csrf-token-' + id;
+            }
+
+            // Function to handle pagination clicks
+            function attachPaginationListeners() {
+                const paginationLinks = document.querySelectorAll('#paginationContainer .page-link');
+                paginationLinks.forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        if (!this.parentElement.classList.contains('disabled') && !this.parentElement.classList.contains('active')) {
+                            const url = new URL(this.href);
+                            const page = url.searchParams.get('page') || 1;
+                            const search = url.searchParams.get('search') || '';
+                            updateTable(search, page);
+                        }
+                    });
+                });
+            }
+
+            // Initial attachment of pagination listeners
+            attachPaginationListeners();
+
+            // Search input handler (debounced)
+            searchInput.addEventListener('input', debounce(function() {
+                updateTable(this.value, 1);
+            }, 300));
         });
     </script>
 {% endblock %}", "reservation/index.html.twig", "C:\\Users\\Ismail\\Desktop\\matchupz\\templates\\reservation\\index.html.twig");

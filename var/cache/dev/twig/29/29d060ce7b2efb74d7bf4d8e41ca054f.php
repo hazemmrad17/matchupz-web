@@ -267,29 +267,23 @@ class __TwigTemplate_f6761b380940186e0476645273b12981 extends Template
                         <div class=\"navbar-nav align-items-center ms-3\">
                             <div class=\"nav-item d-flex align-items-center\">
                                 <i class=\"bx bx-search fs-4 lh-0\"></i>
-                                <form method=\"get\" action=\"";
-        // line 104
-        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("abonnement_index");
-        yield "\" id=\"searchForm\">
-                                    <input
-                                        type=\"text\"
-                                        name=\"search\"
-                                        id=\"searchInput\"
-                                        class=\"form-control border-0 shadow-none\"
-                                        placeholder=\"Rechercher un abonnement...\"
-                                        aria-label=\"Rechercher un abonnement...\"
-                                        value=\"";
-        // line 112
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(((array_key_exists("searchTerm", $context)) ? (Twig\Extension\CoreExtension::default((isset($context["searchTerm"]) || array_key_exists("searchTerm", $context) ? $context["searchTerm"] : (function () { throw new RuntimeError('Variable "searchTerm" does not exist.', 112, $this->source); })()), "")) : ("")), "html", null, true);
+                                <input
+                                    type=\"text\"
+                                    id=\"searchInput\"
+                                    class=\"form-control border-0 shadow-none\"
+                                    placeholder=\"Rechercher un abonnement...\"
+                                    aria-label=\"Rechercher un abonnement...\"
+                                    value=\"";
+        // line 110
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(((array_key_exists("searchTerm", $context)) ? (Twig\Extension\CoreExtension::default((isset($context["searchTerm"]) || array_key_exists("searchTerm", $context) ? $context["searchTerm"] : (function () { throw new RuntimeError('Variable "searchTerm" does not exist.', 110, $this->source); })()), "")) : ("")), "html", null, true);
         yield "\"
-                                    />
-                                </form>
+                                />
                             </div>
                         </div>
                     </div>
                     <div class=\"d-flex align-items-center\">
                         <a href=\"";
-        // line 119
+        // line 116
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("abonnement_new");
         yield "\" class=\"btn btn-primary me-2\">Ajouter un Abonnement</a>
                         <div class=\"dropdown\">
@@ -298,15 +292,15 @@ class __TwigTemplate_f6761b380940186e0476645273b12981 extends Template
                             </button>
                             <ul class=\"dropdown-menu\">
                                 <li><a class=\"dropdown-item\" href=\"";
-        // line 125
+        // line 122
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("abonnement_export_csv");
         yield "\">Exporter en CSV</a></li>
                                 <li><a class=\"dropdown-item\" href=\"";
-        // line 126
+        // line 123
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("abonnement_export_pdf");
         yield "\">Exporter en PDF</a></li>
                                 <li><a class=\"dropdown-item\" href=\"";
-        // line 127
+        // line 124
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("abonnement_export_excel");
         yield "\">Exporter en Excel</a></li>
                             </ul>
@@ -314,7 +308,7 @@ class __TwigTemplate_f6761b380940186e0476645273b12981 extends Template
                     </div>
                 </h5>
                 <div class=\"table-responsive text-nowrap\">
-                    <table class=\"table\">
+                    <table class=\"table\" id=\"abonnementsTable\">
                         <thead>
                             <tr>
                                 <th>Club</th>
@@ -326,41 +320,41 @@ class __TwigTemplate_f6761b380940186e0476645273b12981 extends Template
                                 <th>Actions</th>
                             </tr>
                         </thead>
-                        <tbody class=\"table-border-bottom-0\">
+                        <tbody class=\"table-border-bottom-0\" id=\"abonnementsTableBody\">
                             ";
-        // line 146
+        // line 143
         $context['_parent'] = $context;
-        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["abonnements"]) || array_key_exists("abonnements", $context) ? $context["abonnements"] : (function () { throw new RuntimeError('Variable "abonnements" does not exist.', 146, $this->source); })()));
+        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["abonnements"]) || array_key_exists("abonnements", $context) ? $context["abonnements"] : (function () { throw new RuntimeError('Variable "abonnements" does not exist.', 143, $this->source); })()));
         $context['_iterated'] = false;
         foreach ($context['_seq'] as $context["_key"] => $context["abonnement"]) {
-            // line 147
+            // line 144
             yield "                                <tr class=\"table-default\">
                                     <td>
                                         <i class=\"fab fa-sketch fa-lg text-warning me-3\"></i>
                                         <strong>";
-            // line 150
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["abonnement"], "club", [], "any", false, false, false, 150), "nomClub", [], "any", false, false, false, 150), "html", null, true);
+            // line 147
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["abonnement"], "club", [], "any", false, false, false, 147), "nomClub", [], "any", false, false, false, 147), "html", null, true);
             yield "</strong>
                                     </td>
                                     <td>";
+            // line 149
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["abonnement"], "typeAbonnement", [], "any", false, false, false, 149), "html", null, true);
+            yield "</td>
+                                    <td>";
+            // line 150
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["abonnement"], "dateDebut", [], "any", false, false, false, 150), "d/m/Y"), "html", null, true);
+            yield "</td>
+                                    <td>";
+            // line 151
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["abonnement"], "dateFin", [], "any", false, false, false, 151), "d/m/Y"), "html", null, true);
+            yield "</td>
+                                    <td>";
             // line 152
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["abonnement"], "typeAbonnement", [], "any", false, false, false, 152), "html", null, true);
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["abonnement"], "tarif", [], "any", false, false, false, 152), "html", null, true);
             yield "</td>
                                     <td>";
             // line 153
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["abonnement"], "dateDebut", [], "any", false, false, false, 153), "d/m/Y"), "html", null, true);
-            yield "</td>
-                                    <td>";
-            // line 154
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["abonnement"], "dateFin", [], "any", false, false, false, 154), "d/m/Y"), "html", null, true);
-            yield "</td>
-                                    <td>";
-            // line 155
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["abonnement"], "tarif", [], "any", false, false, false, 155), "html", null, true);
-            yield "</td>
-                                    <td>";
-            // line 156
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["abonnement"], "etat", [], "any", false, false, false, 156), "html", null, true);
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["abonnement"], "etat", [], "any", false, false, false, 153), "html", null, true);
             yield "</td>
                                     <td>
                                         <div class=\"dropdown\">
@@ -369,24 +363,24 @@ class __TwigTemplate_f6761b380940186e0476645273b12981 extends Template
                                             </button>
                                             <div class=\"dropdown-menu\">
                                                 <a class=\"dropdown-item\" href=\"";
-            // line 163
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("abonnement_show", ["idAbonnement" => CoreExtension::getAttribute($this->env, $this->source, $context["abonnement"], "idAbonnement", [], "any", false, false, false, 163)]), "html", null, true);
+            // line 160
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("abonnement_show", ["idAbonnement" => CoreExtension::getAttribute($this->env, $this->source, $context["abonnement"], "idAbonnement", [], "any", false, false, false, 160)]), "html", null, true);
             yield "\">
                                                     <i class=\"bx bx-show me-1\"></i> Voir
                                                 </a>
                                                 <a class=\"dropdown-item\" href=\"";
-            // line 166
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("abonnement_edit", ["idAbonnement" => CoreExtension::getAttribute($this->env, $this->source, $context["abonnement"], "idAbonnement", [], "any", false, false, false, 166)]), "html", null, true);
+            // line 163
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("abonnement_edit", ["idAbonnement" => CoreExtension::getAttribute($this->env, $this->source, $context["abonnement"], "idAbonnement", [], "any", false, false, false, 163)]), "html", null, true);
             yield "\">
                                                     <i class=\"bx bx-edit-alt me-1\"></i> Modifier
                                                 </a>
                                                 <form method=\"post\" action=\"";
-            // line 169
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("abonnement_delete", ["idAbonnement" => CoreExtension::getAttribute($this->env, $this->source, $context["abonnement"], "idAbonnement", [], "any", false, false, false, 169)]), "html", null, true);
+            // line 166
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("abonnement_delete", ["idAbonnement" => CoreExtension::getAttribute($this->env, $this->source, $context["abonnement"], "idAbonnement", [], "any", false, false, false, 166)]), "html", null, true);
             yield "\" style=\"display:inline;\" onsubmit=\"return confirm('Confirmer la suppression?');\">
                                                     <input type=\"hidden\" name=\"_token\" value=\"";
-            // line 170
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderCsrfToken(("delete" . CoreExtension::getAttribute($this->env, $this->source, $context["abonnement"], "idAbonnement", [], "any", false, false, false, 170))), "html", null, true);
+            // line 167
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderCsrfToken(("delete" . CoreExtension::getAttribute($this->env, $this->source, $context["abonnement"], "idAbonnement", [], "any", false, false, false, 167))), "html", null, true);
             yield "\">
                                                     <button class=\"dropdown-item\" type=\"submit\">
                                                         <i class=\"bx bx-trash me-1\"></i> Supprimer
@@ -399,9 +393,9 @@ class __TwigTemplate_f6761b380940186e0476645273b12981 extends Template
                             ";
             $context['_iterated'] = true;
         }
-        // line 179
+        // line 176
         if (!$context['_iterated']) {
-            // line 180
+            // line 177
             yield "                                <tr>
                                     <td colspan=\"7\" class=\"text-center\">Aucun abonnement trouvé</td>
                                 </tr>
@@ -410,59 +404,16 @@ class __TwigTemplate_f6761b380940186e0476645273b12981 extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_key'], $context['abonnement'], $context['_parent'], $context['_iterated']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 184
+        // line 181
         yield "                        </tbody>
                     </table>
                 </div>
-                <div class=\"card-footer\">
-                    <nav aria-label=\"Page navigation\">
-                        <ul class=\"pagination justify-content-center\">
-                            <li class=\"page-item ";
-        // line 190
-        yield (((CoreExtension::getAttribute($this->env, $this->source, (isset($context["abonnements"]) || array_key_exists("abonnements", $context) ? $context["abonnements"] : (function () { throw new RuntimeError('Variable "abonnements" does not exist.', 190, $this->source); })()), "currentPageNumber", [], "any", false, false, false, 190) == 1)) ? ("disabled") : (""));
-        yield "\">
-                                <a class=\"page-link\" href=\"";
-        // line 191
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("abonnement_index", ["page" => (CoreExtension::getAttribute($this->env, $this->source, (isset($context["abonnements"]) || array_key_exists("abonnements", $context) ? $context["abonnements"] : (function () { throw new RuntimeError('Variable "abonnements" does not exist.', 191, $this->source); })()), "currentPageNumber", [], "any", false, false, false, 191) - 1), "search" => ((array_key_exists("searchTerm", $context)) ? (Twig\Extension\CoreExtension::default((isset($context["searchTerm"]) || array_key_exists("searchTerm", $context) ? $context["searchTerm"] : (function () { throw new RuntimeError('Variable "searchTerm" does not exist.', 191, $this->source); })()), "")) : (""))]), "html", null, true);
-        yield "\" aria-label=\"Previous\">
-                                    <span aria-hidden=\"true\">«</span>
-                                </a>
-                            </li>
-                            ";
-        // line 195
-        $context['_parent'] = $context;
-        $context['_seq'] = CoreExtension::ensureTraversable(range(1, CoreExtension::getAttribute($this->env, $this->source, (isset($context["abonnements"]) || array_key_exists("abonnements", $context) ? $context["abonnements"] : (function () { throw new RuntimeError('Variable "abonnements" does not exist.', 195, $this->source); })()), "pageCount", [], "any", false, false, false, 195)));
-        foreach ($context['_seq'] as $context["_key"] => $context["i"]) {
-            // line 196
-            yield "                                <li class=\"page-item ";
-            yield (((CoreExtension::getAttribute($this->env, $this->source, (isset($context["abonnements"]) || array_key_exists("abonnements", $context) ? $context["abonnements"] : (function () { throw new RuntimeError('Variable "abonnements" does not exist.', 196, $this->source); })()), "currentPageNumber", [], "any", false, false, false, 196) == $context["i"])) ? ("active") : (""));
-            yield "\">
-                                    <a class=\"page-link\" href=\"";
-            // line 197
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("abonnement_index", ["page" => $context["i"], "search" => ((array_key_exists("searchTerm", $context)) ? (Twig\Extension\CoreExtension::default((isset($context["searchTerm"]) || array_key_exists("searchTerm", $context) ? $context["searchTerm"] : (function () { throw new RuntimeError('Variable "searchTerm" does not exist.', 197, $this->source); })()), "")) : (""))]), "html", null, true);
-            yield "\">";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($context["i"], "html", null, true);
-            yield "</a>
-                                </li>
-                            ";
-        }
-        $_parent = $context['_parent'];
-        unset($context['_seq'], $context['_key'], $context['i'], $context['_parent']);
-        $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 200
-        yield "                            <li class=\"page-item ";
-        yield (((CoreExtension::getAttribute($this->env, $this->source, (isset($context["abonnements"]) || array_key_exists("abonnements", $context) ? $context["abonnements"] : (function () { throw new RuntimeError('Variable "abonnements" does not exist.', 200, $this->source); })()), "currentPageNumber", [], "any", false, false, false, 200) == CoreExtension::getAttribute($this->env, $this->source, (isset($context["abonnements"]) || array_key_exists("abonnements", $context) ? $context["abonnements"] : (function () { throw new RuntimeError('Variable "abonnements" does not exist.', 200, $this->source); })()), "pageCount", [], "any", false, false, false, 200))) ? ("disabled") : (""));
-        yield "\">
-                                <a class=\"page-link\" href=\"";
-        // line 201
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("abonnement_index", ["page" => (CoreExtension::getAttribute($this->env, $this->source, (isset($context["abonnements"]) || array_key_exists("abonnements", $context) ? $context["abonnements"] : (function () { throw new RuntimeError('Variable "abonnements" does not exist.', 201, $this->source); })()), "currentPageNumber", [], "any", false, false, false, 201) + 1), "search" => ((array_key_exists("searchTerm", $context)) ? (Twig\Extension\CoreExtension::default((isset($context["searchTerm"]) || array_key_exists("searchTerm", $context) ? $context["searchTerm"] : (function () { throw new RuntimeError('Variable "searchTerm" does not exist.', 201, $this->source); })()), "")) : (""))]), "html", null, true);
-        yield "\" aria-label=\"Next\">
-                                    <span aria-hidden=\"true\">»</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
+                <div class=\"card-footer\" id=\"paginationContainer\">
+                    ";
+        // line 185
+        yield from $this->loadTemplate("abonnement/_pagination.html.twig", "abonnement/index.html.twig", 185)->unwrap()->yield(CoreExtension::merge($context, ["abonnements" => (isset($context["abonnements"]) || array_key_exists("abonnements", $context) ? $context["abonnements"] : (function () { throw new RuntimeError('Variable "abonnements" does not exist.', 185, $this->source); })()), "searchTerm" => (isset($context["searchTerm"]) || array_key_exists("searchTerm", $context) ? $context["searchTerm"] : (function () { throw new RuntimeError('Variable "searchTerm" does not exist.', 185, $this->source); })())]));
+        // line 186
+        yield "                </div>
             </div>
 
             <h5 class=\"mt-4\">Abonnements Actifs</h5>
@@ -470,36 +421,36 @@ class __TwigTemplate_f6761b380940186e0476645273b12981 extends Template
                 <div class=\"card-body\">
                     <ul class=\"p-0 m-0\">
                         ";
-        // line 214
+        // line 193
         $context['_parent'] = $context;
-        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["active_abonnements"]) || array_key_exists("active_abonnements", $context) ? $context["active_abonnements"] : (function () { throw new RuntimeError('Variable "active_abonnements" does not exist.', 214, $this->source); })()));
+        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["active_abonnements"]) || array_key_exists("active_abonnements", $context) ? $context["active_abonnements"] : (function () { throw new RuntimeError('Variable "active_abonnements" does not exist.', 193, $this->source); })()));
         $context['_iterated'] = false;
         foreach ($context['_seq'] as $context["_key"] => $context["abonnement"]) {
-            // line 215
+            // line 194
             yield "                            <li class=\"d-flex mb-4 pb-1\">
                                 <div class=\"avatar flex-shrink-0 me-3\">
                                     <img src=\"";
-            // line 217
+            // line 196
             yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("img/icons/unicons/chart.png"), "html", null, true);
             yield "\" alt=\"Abonnement\" class=\"rounded\" />
                                 </div>
                                 <div class=\"d-flex w-100 flex-wrap align-items-center justify-content-between gap-2\">
                                     <div class=\"me-2\">
                                         <h6 class=\"mb-0\">";
-            // line 221
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["abonnement"], "club", [], "any", false, false, false, 221), "nomClub", [], "any", false, false, false, 221), "html", null, true);
+            // line 200
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["abonnement"], "club", [], "any", false, false, false, 200), "nomClub", [], "any", false, false, false, 200), "html", null, true);
             yield "</h6>
                                         <small class=\"text-muted\">";
-            // line 222
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["abonnement"], "dateDebut", [], "any", false, false, false, 222), "d/m/Y"), "html", null, true);
+            // line 201
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["abonnement"], "dateDebut", [], "any", false, false, false, 201), "d/m/Y"), "html", null, true);
             yield " - ";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["abonnement"], "typeAbonnement", [], "any", false, false, false, 222), "html", null, true);
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["abonnement"], "typeAbonnement", [], "any", false, false, false, 201), "html", null, true);
             yield "</small>
                                     </div>
                                     <div class=\"user-progress\">
                                         <small class=\"fw-semibold\">";
-            // line 225
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["abonnement"], "etat", [], "any", false, false, false, 225), "html", null, true);
+            // line 204
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["abonnement"], "etat", [], "any", false, false, false, 204), "html", null, true);
             yield "</small>
                                     </div>
                                 </div>
@@ -507,16 +458,16 @@ class __TwigTemplate_f6761b380940186e0476645273b12981 extends Template
                         ";
             $context['_iterated'] = true;
         }
-        // line 229
+        // line 208
         if (!$context['_iterated']) {
-            // line 230
+            // line 209
             yield "                            <li>Aucun abonnement actif.</li>
                         ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_key'], $context['abonnement'], $context['_parent'], $context['_iterated']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 232
+        // line 211
         yield "                    </ul>
                 </div>
             </div>
@@ -526,8 +477,10 @@ class __TwigTemplate_f6761b380940186e0476645273b12981 extends Template
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const searchInput = document.getElementById('searchInput');
-            const searchForm = document.getElementById('searchForm');
+            const abonnementsTableBody = document.getElementById('abonnementsTableBody');
+            const paginationContainer = document.getElementById('paginationContainer');
 
+            // Debounce function to limit how often AJAX requests are sent
             function debounce(func, wait) {
                 let timeout;
                 return function (...args) {
@@ -536,8 +489,111 @@ class __TwigTemplate_f6761b380940186e0476645273b12981 extends Template
                 };
             }
 
-            searchInput.addEventListener('input', debounce(function () {
-                searchForm.submit();
+            // Function to fetch and update table content
+            function updateTable(searchTerm = '', page = 1) {
+                fetch(`";
+        // line 234
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("abonnement_index");
+        yield "?search=\${encodeURIComponent(searchTerm)}&page=\${page}`, {
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Update table body
+                    abonnementsTableBody.innerHTML = '';
+                    if (data.abonnements.length === 0) {
+                        abonnementsTableBody.innerHTML = `
+                            <tr>
+                                <td colspan=\"7\" class=\"text-center\">Aucun abonnement trouvé</td>
+                            </tr>
+                        `;
+                    } else {
+                        data.abonnements.forEach(abonnement => {
+                            const row = document.createElement('tr');
+                            row.className = 'table-default';
+                            row.innerHTML = `
+                                <td>
+                                    <i class=\"fab fa-sketch fa-lg text-warning me-3\"></i>
+                                    <strong>\${abonnement.nom_club}</strong>
+                                </td>
+                                <td>\${abonnement.type_abonnement}</td>
+                                <td>\${abonnement.date_debut}</td>
+                                <td>\${abonnement.date_fin}</td>
+                                <td>\${abonnement.tarif}</td>
+                                <td>\${abonnement.etat}</td>
+                                <td>
+                                    <div class=\"dropdown\">
+                                        <button type=\"button\" class=\"btn p-0 dropdown-toggle hide-arrow\" data-bs-toggle=\"dropdown\">
+                                            <i class=\"bx bx-dots-vertical-rounded\"></i>
+                                        </button>
+                                        <div class=\"dropdown-menu\">
+                                            <a class=\"dropdown-item\" href=\"/abonnement/\${abonnement.id_abonnement}\">
+                                                <i class=\"bx bx-show me-1\"></i> Voir
+                                            </a>
+                                            <a class=\"dropdown-item\" href=\"/abonnement/\${abonnement.id_abonnement}/edit\">
+                                                <i class=\"bx bx-edit-alt me-1\"></i> Modifier
+                                            </a>
+                                            <form method=\"post\" action=\"/abonnement/\${abonnement.id_abonnement}\" style=\"display:inline;\" onsubmit=\"return confirm('Confirmer la suppression?');\">
+                                                <input type=\"hidden\" name=\"_token\" value=\"\${generateCsrfToken('delete' + abonnement.id_abonnement)}\">
+                                                <input type=\"hidden\" name=\"_method\" value=\"POST\">
+                                                <button class=\"dropdown-item\" type=\"submit\">
+                                                    <i class=\"bx bx-trash me-1\"></i> Supprimer
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </td>
+                            `;
+                            abonnementsTableBody.appendChild(row);
+                        });
+                    }
+
+                    // Update pagination
+                    paginationContainer.innerHTML = data.pagination;
+
+                    // Reattach event listeners to new pagination links
+                    attachPaginationListeners();
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                    abonnementsTableBody.innerHTML = `
+                        <tr>
+                            <td colspan=\"7\" class=\"text-center\">Erreur lors du chargement des données</td>
+                        </tr>
+                    `;
+                });
+            }
+
+            // Function to generate CSRF token (client-side placeholder)
+            function generateCsrfToken(id) {
+                // In a real application, this would need to be properly implemented
+                return 'dummy-csrf-token-' + id;
+            }
+
+            // Function to handle pagination clicks
+            function attachPaginationListeners() {
+                const paginationLinks = document.querySelectorAll('#paginationContainer .page-link');
+                paginationLinks.forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        if (!this.parentElement.classList.contains('disabled') && !this.parentElement.classList.contains('active')) {
+                            const url = new URL(this.href);
+                            const page = url.searchParams.get('page') || 1;
+                            const search = url.searchParams.get('search') || '';
+                            updateTable(search, page);
+                        }
+                    });
+                });
+            }
+
+            // Initial attachment of pagination listeners
+            attachPaginationListeners();
+
+            // Search input handler (debounced)
+            searchInput.addEventListener('input', debounce(function() {
+                updateTable(this.value, 1);
             }, 300));
         });
     </script>
@@ -572,7 +628,7 @@ class __TwigTemplate_f6761b380940186e0476645273b12981 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  520 => 232,  513 => 230,  511 => 229,  502 => 225,  494 => 222,  490 => 221,  483 => 217,  479 => 215,  474 => 214,  458 => 201,  453 => 200,  442 => 197,  437 => 196,  433 => 195,  426 => 191,  422 => 190,  414 => 184,  405 => 180,  403 => 179,  389 => 170,  385 => 169,  379 => 166,  373 => 163,  363 => 156,  359 => 155,  355 => 154,  351 => 153,  347 => 152,  342 => 150,  337 => 147,  332 => 146,  310 => 127,  306 => 126,  302 => 125,  293 => 119,  283 => 112,  272 => 104,  263 => 97,  261 => 96,  258 => 95,  249 => 93,  244 => 92,  235 => 90,  231 => 89,  227 => 87,  214 => 86,  127 => 10,  114 => 9,  91 => 7,  79 => 4,  66 => 3,  43 => 1,);
+        return array (  496 => 234,  471 => 211,  464 => 209,  462 => 208,  453 => 204,  445 => 201,  441 => 200,  434 => 196,  430 => 194,  425 => 193,  416 => 186,  414 => 185,  408 => 181,  399 => 177,  397 => 176,  383 => 167,  379 => 166,  373 => 163,  367 => 160,  357 => 153,  353 => 152,  349 => 151,  345 => 150,  341 => 149,  336 => 147,  331 => 144,  326 => 143,  304 => 124,  300 => 123,  296 => 122,  287 => 116,  278 => 110,  263 => 97,  261 => 96,  258 => 95,  249 => 93,  244 => 92,  235 => 90,  231 => 89,  227 => 87,  214 => 86,  127 => 10,  114 => 9,  91 => 7,  79 => 4,  66 => 3,  43 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -680,17 +736,14 @@ class __TwigTemplate_f6761b380940186e0476645273b12981 extends Template
                         <div class=\"navbar-nav align-items-center ms-3\">
                             <div class=\"nav-item d-flex align-items-center\">
                                 <i class=\"bx bx-search fs-4 lh-0\"></i>
-                                <form method=\"get\" action=\"{{ path('abonnement_index') }}\" id=\"searchForm\">
-                                    <input
-                                        type=\"text\"
-                                        name=\"search\"
-                                        id=\"searchInput\"
-                                        class=\"form-control border-0 shadow-none\"
-                                        placeholder=\"Rechercher un abonnement...\"
-                                        aria-label=\"Rechercher un abonnement...\"
-                                        value=\"{{ searchTerm|default('') }}\"
-                                    />
-                                </form>
+                                <input
+                                    type=\"text\"
+                                    id=\"searchInput\"
+                                    class=\"form-control border-0 shadow-none\"
+                                    placeholder=\"Rechercher un abonnement...\"
+                                    aria-label=\"Rechercher un abonnement...\"
+                                    value=\"{{ searchTerm|default('') }}\"
+                                />
                             </div>
                         </div>
                     </div>
@@ -709,7 +762,7 @@ class __TwigTemplate_f6761b380940186e0476645273b12981 extends Template
                     </div>
                 </h5>
                 <div class=\"table-responsive text-nowrap\">
-                    <table class=\"table\">
+                    <table class=\"table\" id=\"abonnementsTable\">
                         <thead>
                             <tr>
                                 <th>Club</th>
@@ -721,7 +774,7 @@ class __TwigTemplate_f6761b380940186e0476645273b12981 extends Template
                                 <th>Actions</th>
                             </tr>
                         </thead>
-                        <tbody class=\"table-border-bottom-0\">
+                        <tbody class=\"table-border-bottom-0\" id=\"abonnementsTableBody\">
                             {% for abonnement in abonnements %}
                                 <tr class=\"table-default\">
                                     <td>
@@ -763,26 +816,8 @@ class __TwigTemplate_f6761b380940186e0476645273b12981 extends Template
                         </tbody>
                     </table>
                 </div>
-                <div class=\"card-footer\">
-                    <nav aria-label=\"Page navigation\">
-                        <ul class=\"pagination justify-content-center\">
-                            <li class=\"page-item {{ abonnements.currentPageNumber == 1 ? 'disabled' : '' }}\">
-                                <a class=\"page-link\" href=\"{{ path('abonnement_index', {'page': abonnements.currentPageNumber - 1, 'search': searchTerm|default('')}) }}\" aria-label=\"Previous\">
-                                    <span aria-hidden=\"true\">«</span>
-                                </a>
-                            </li>
-                            {% for i in 1..abonnements.pageCount %}
-                                <li class=\"page-item {{ abonnements.currentPageNumber == i ? 'active' : '' }}\">
-                                    <a class=\"page-link\" href=\"{{ path('abonnement_index', {'page': i, 'search': searchTerm|default('')}) }}\">{{ i }}</a>
-                                </li>
-                            {% endfor %}
-                            <li class=\"page-item {{ abonnements.currentPageNumber == abonnements.pageCount ? 'disabled' : '' }}\">
-                                <a class=\"page-link\" href=\"{{ path('abonnement_index', {'page': abonnements.currentPageNumber + 1, 'search': searchTerm|default('')}) }}\" aria-label=\"Next\">
-                                    <span aria-hidden=\"true\">»</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
+                <div class=\"card-footer\" id=\"paginationContainer\">
+                    {% include 'abonnement/_pagination.html.twig' with {'abonnements': abonnements, 'searchTerm': searchTerm} %}
                 </div>
             </div>
 
@@ -817,8 +852,10 @@ class __TwigTemplate_f6761b380940186e0476645273b12981 extends Template
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const searchInput = document.getElementById('searchInput');
-            const searchForm = document.getElementById('searchForm');
+            const abonnementsTableBody = document.getElementById('abonnementsTableBody');
+            const paginationContainer = document.getElementById('paginationContainer');
 
+            // Debounce function to limit how often AJAX requests are sent
             function debounce(func, wait) {
                 let timeout;
                 return function (...args) {
@@ -827,8 +864,108 @@ class __TwigTemplate_f6761b380940186e0476645273b12981 extends Template
                 };
             }
 
-            searchInput.addEventListener('input', debounce(function () {
-                searchForm.submit();
+            // Function to fetch and update table content
+            function updateTable(searchTerm = '', page = 1) {
+                fetch(`{{ path('abonnement_index') }}?search=\${encodeURIComponent(searchTerm)}&page=\${page}`, {
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Update table body
+                    abonnementsTableBody.innerHTML = '';
+                    if (data.abonnements.length === 0) {
+                        abonnementsTableBody.innerHTML = `
+                            <tr>
+                                <td colspan=\"7\" class=\"text-center\">Aucun abonnement trouvé</td>
+                            </tr>
+                        `;
+                    } else {
+                        data.abonnements.forEach(abonnement => {
+                            const row = document.createElement('tr');
+                            row.className = 'table-default';
+                            row.innerHTML = `
+                                <td>
+                                    <i class=\"fab fa-sketch fa-lg text-warning me-3\"></i>
+                                    <strong>\${abonnement.nom_club}</strong>
+                                </td>
+                                <td>\${abonnement.type_abonnement}</td>
+                                <td>\${abonnement.date_debut}</td>
+                                <td>\${abonnement.date_fin}</td>
+                                <td>\${abonnement.tarif}</td>
+                                <td>\${abonnement.etat}</td>
+                                <td>
+                                    <div class=\"dropdown\">
+                                        <button type=\"button\" class=\"btn p-0 dropdown-toggle hide-arrow\" data-bs-toggle=\"dropdown\">
+                                            <i class=\"bx bx-dots-vertical-rounded\"></i>
+                                        </button>
+                                        <div class=\"dropdown-menu\">
+                                            <a class=\"dropdown-item\" href=\"/abonnement/\${abonnement.id_abonnement}\">
+                                                <i class=\"bx bx-show me-1\"></i> Voir
+                                            </a>
+                                            <a class=\"dropdown-item\" href=\"/abonnement/\${abonnement.id_abonnement}/edit\">
+                                                <i class=\"bx bx-edit-alt me-1\"></i> Modifier
+                                            </a>
+                                            <form method=\"post\" action=\"/abonnement/\${abonnement.id_abonnement}\" style=\"display:inline;\" onsubmit=\"return confirm('Confirmer la suppression?');\">
+                                                <input type=\"hidden\" name=\"_token\" value=\"\${generateCsrfToken('delete' + abonnement.id_abonnement)}\">
+                                                <input type=\"hidden\" name=\"_method\" value=\"POST\">
+                                                <button class=\"dropdown-item\" type=\"submit\">
+                                                    <i class=\"bx bx-trash me-1\"></i> Supprimer
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </td>
+                            `;
+                            abonnementsTableBody.appendChild(row);
+                        });
+                    }
+
+                    // Update pagination
+                    paginationContainer.innerHTML = data.pagination;
+
+                    // Reattach event listeners to new pagination links
+                    attachPaginationListeners();
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                    abonnementsTableBody.innerHTML = `
+                        <tr>
+                            <td colspan=\"7\" class=\"text-center\">Erreur lors du chargement des données</td>
+                        </tr>
+                    `;
+                });
+            }
+
+            // Function to generate CSRF token (client-side placeholder)
+            function generateCsrfToken(id) {
+                // In a real application, this would need to be properly implemented
+                return 'dummy-csrf-token-' + id;
+            }
+
+            // Function to handle pagination clicks
+            function attachPaginationListeners() {
+                const paginationLinks = document.querySelectorAll('#paginationContainer .page-link');
+                paginationLinks.forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        if (!this.parentElement.classList.contains('disabled') && !this.parentElement.classList.contains('active')) {
+                            const url = new URL(this.href);
+                            const page = url.searchParams.get('page') || 1;
+                            const search = url.searchParams.get('search') || '';
+                            updateTable(search, page);
+                        }
+                    });
+                });
+            }
+
+            // Initial attachment of pagination listeners
+            attachPaginationListeners();
+
+            // Search input handler (debounced)
+            searchInput.addEventListener('input', debounce(function() {
+                updateTable(this.value, 1);
             }, 300));
         });
     </script>
