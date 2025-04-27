@@ -102,7 +102,7 @@ class __TwigTemplate_79d2a0acde299fa87f368b8004d9329a extends Template
         yield "    <div class=\"content-wrapper\">
         <div class=\"container-xxl flex-grow-1 container-p-y\">
             <h4 class=\"fw-bold py-3 mb-4\">
-                <span class=\"text-muted fw-light\">Schedules /</span> Nouveau planning
+                <span class=\"text-muted fw-light\">Plannings /</span> Nouveau planning
             </h4>
 
             <div class=\"col-xl\">
@@ -116,19 +116,34 @@ class __TwigTemplate_79d2a0acde299fa87f368b8004d9329a extends Template
         // line 20
         yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 20, $this->source); })()), 'form_start', ["id" => "scheduleForm", "novalidate" => "novalidate"]);
         yield "
+                            ";
+        // line 22
+        yield "                            ";
+        if ($this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 22, $this->source); })()), 'errors')) {
+            // line 23
+            yield "                                <div class=\"alert alert-danger\" role=\"alert\">
+                                    ";
+            // line 24
+            yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 24, $this->source); })()), 'errors');
+            yield "
+                                </div>
+                            ";
+        }
+        // line 27
+        yield "
                             <div class=\"mb-3\">
                                 <label class=\"form-label\" for=\"schedule_dateMatch\">Date du Match</label>
                                 <div class=\"input-group input-group-merge\">
                                     <span class=\"input-group-text\"><i class=\"bx bx-calendar\"></i></span>
                                     ";
-        // line 25
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 25, $this->source); })()), "dateMatch", [], "any", false, false, false, 25), 'widget', ["attr" => ["class" => "form-control", "id" => "schedule_dateMatch"]]);
+        // line 32
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 32, $this->source); })()), "dateMatch", [], "any", false, false, false, 32), 'widget', ["attr" => ["class" => "form-control", "id" => "schedule_dateMatch"]]);
         yield "
                                 </div>
                                 <div class=\"text-danger mt-1\" id=\"dateMatchError\">
                                     ";
-        // line 28
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 28, $this->source); })()), "dateMatch", [], "any", false, false, false, 28), 'errors');
+        // line 35
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 35, $this->source); })()), "dateMatch", [], "any", false, false, false, 35), 'errors');
         yield "
                                 </div>
                             </div>
@@ -137,14 +152,14 @@ class __TwigTemplate_79d2a0acde299fa87f368b8004d9329a extends Template
                                 <div class=\"input-group input-group-merge\">
                                     <span class=\"input-group-text\"><i class=\"bx bx-time\"></i></span>
                                     ";
-        // line 35
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 35, $this->source); })()), "startTime", [], "any", false, false, false, 35), 'widget', ["attr" => ["class" => "form-control", "id" => "schedule_startTime"]]);
+        // line 42
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 42, $this->source); })()), "startTime", [], "any", false, false, false, 42), 'widget', ["attr" => ["class" => "form-control", "id" => "schedule_startTime"]]);
         yield "
                                 </div>
                                 <div class=\"text-danger mt-1\" id=\"startTimeError\">
                                     ";
-        // line 38
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 38, $this->source); })()), "startTime", [], "any", false, false, false, 38), 'errors');
+        // line 45
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 45, $this->source); })()), "startTime", [], "any", false, false, false, 45), 'errors');
         yield "
                                 </div>
                             </div>
@@ -153,14 +168,14 @@ class __TwigTemplate_79d2a0acde299fa87f368b8004d9329a extends Template
                                 <div class=\"input-group input-group-merge\">
                                     <span class=\"input-group-text\"><i class=\"bx bx-time\"></i></span>
                                     ";
-        // line 45
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 45, $this->source); })()), "endTime", [], "any", false, false, false, 45), 'widget', ["attr" => ["class" => "form-control", "id" => "schedule_endTime"]]);
+        // line 52
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 52, $this->source); })()), "endTime", [], "any", false, false, false, 52), 'widget', ["attr" => ["class" => "form-control", "id" => "schedule_endTime"]]);
         yield "
                                 </div>
                                 <div class=\"text-danger mt-1\" id=\"endTimeError\">
                                     ";
-        // line 48
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 48, $this->source); })()), "endTime", [], "any", false, false, false, 48), 'errors');
+        // line 55
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 55, $this->source); })()), "endTime", [], "any", false, false, false, 55), 'errors');
         yield "
                                 </div>
                             </div>
@@ -169,14 +184,14 @@ class __TwigTemplate_79d2a0acde299fa87f368b8004d9329a extends Template
                                 <div class=\"input-group input-group-merge\">
                                     <span class=\"input-group-text\"><i class=\"bx bx-football\"></i></span>
                                     ";
-        // line 55
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 55, $this->source); })()), "matchEntity", [], "any", false, false, false, 55), 'widget', ["attr" => ["class" => "form-control", "id" => "schedule_matchEntity"]]);
+        // line 62
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 62, $this->source); })()), "matchEntity", [], "any", false, false, false, 62), 'widget', ["attr" => ["class" => "form-control", "id" => "schedule_matchEntity"]]);
         yield "
                                 </div>
                                 <div class=\"text-danger mt-1\" id=\"matchEntityError\">
                                     ";
-        // line 58
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 58, $this->source); })()), "matchEntity", [], "any", false, false, false, 58), 'errors');
+        // line 65
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 65, $this->source); })()), "matchEntity", [], "any", false, false, false, 65), 'errors');
         yield "
                                 </div>
                             </div>
@@ -185,14 +200,14 @@ class __TwigTemplate_79d2a0acde299fa87f368b8004d9329a extends Template
                                 <div class=\"input-group input-group-merge\">
                                     <span class=\"input-group-text\"><i class=\"bx bx-map\"></i></span>
                                     ";
-        // line 65
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 65, $this->source); })()), "espaceSportif", [], "any", false, false, false, 65), 'widget', ["attr" => ["class" => "form-control", "id" => "schedule_espaceSportif"]]);
+        // line 72
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 72, $this->source); })()), "espaceSportif", [], "any", false, false, false, 72), 'widget', ["attr" => ["class" => "form-control", "id" => "schedule_espaceSportif"]]);
         yield "
                                 </div>
                                 <div class=\"text-danger mt-1\" id=\"espaceSportifError\">
                                     ";
-        // line 68
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 68, $this->source); })()), "espaceSportif", [], "any", false, false, false, 68), 'errors');
+        // line 75
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 75, $this->source); })()), "espaceSportif", [], "any", false, false, false, 75), 'errors');
         yield "
                                 </div>
                             </div>
@@ -201,18 +216,18 @@ class __TwigTemplate_79d2a0acde299fa87f368b8004d9329a extends Template
                                 <div class=\"input-group input-group-merge\">
                                     <span class=\"input-group-text\"><i class=\"bx bx-video\"></i></span>
                                     ";
-        // line 75
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 75, $this->source); })()), "URL", [], "any", false, false, false, 75), 'widget', ["attr" => ["class" => "form-control", "id" => "schedule_URL"]]);
+        // line 82
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 82, $this->source); })()), "URL", [], "any", false, false, false, 82), 'widget', ["attr" => ["class" => "form-control", "id" => "schedule_URL"]]);
         yield "
                                 </div>
                                 <small class=\"form-text text-muted\">";
-        // line 77
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 77, $this->source); })()), "URL", [], "any", false, false, false, 77), 'help');
+        // line 84
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 84, $this->source); })()), "URL", [], "any", false, false, false, 84), 'help');
         yield "</small>
                                 <div class=\"text-danger mt-1\" id=\"URLError\">
                                     ";
-        // line 79
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 79, $this->source); })()), "URL", [], "any", false, false, false, 79), 'errors');
+        // line 86
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 86, $this->source); })()), "URL", [], "any", false, false, false, 86), 'errors');
         yield "
                                 </div>
                             </div>
@@ -221,29 +236,29 @@ class __TwigTemplate_79d2a0acde299fa87f368b8004d9329a extends Template
                                 <div class=\"input-group input-group-merge\">
                                     <span class=\"input-group-text\"><i class=\"bx bx-video-recording\"></i></span>
                                     ";
-        // line 86
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 86, $this->source); })()), "streamURL", [], "any", false, false, false, 86), 'widget', ["attr" => ["class" => "form-control", "id" => "schedule_streamURL"]]);
+        // line 93
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 93, $this->source); })()), "streamURL", [], "any", false, false, false, 93), 'widget', ["attr" => ["class" => "form-control", "id" => "schedule_streamURL"]]);
         yield "
                                 </div>
                                 <small class=\"form-text text-muted\">";
-        // line 88
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 88, $this->source); })()), "streamURL", [], "any", false, false, false, 88), 'help');
+        // line 95
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 95, $this->source); })()), "streamURL", [], "any", false, false, false, 95), 'help');
         yield "</small>
                                 <div class=\"text-danger mt-1\" id=\"streamURLError\">
                                     ";
-        // line 90
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 90, $this->source); })()), "streamURL", [], "any", false, false, false, 90), 'errors');
+        // line 97
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 97, $this->source); })()), "streamURL", [], "any", false, false, false, 97), 'errors');
         yield "
                                 </div>
                             </div>
                             <button type=\"submit\" class=\"btn btn-primary\">Créer</button>
                             <a href=\"";
-        // line 94
+        // line 101
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("schedule_main");
         yield "\" class=\"btn btn-secondary\">Annuler</a>
                         ";
-        // line 95
-        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 95, $this->source); })()), 'form_end');
+        // line 102
+        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 102, $this->source); })()), 'form_end');
         yield "
                     </div>
                 </div>
@@ -251,7 +266,9 @@ class __TwigTemplate_79d2a0acde299fa87f368b8004d9329a extends Template
         </div>
     </div>
 
-    <script>
+    ";
+        // line 110
+        yield "    <script>
         document.addEventListener('DOMContentLoaded', function () {
             const form = document.getElementById('scheduleForm');
             const dateMatchInput = document.getElementById('schedule_dateMatch');
@@ -463,7 +480,7 @@ class __TwigTemplate_79d2a0acde299fa87f368b8004d9329a extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  246 => 95,  242 => 94,  235 => 90,  230 => 88,  225 => 86,  215 => 79,  210 => 77,  205 => 75,  195 => 68,  189 => 65,  179 => 58,  173 => 55,  163 => 48,  157 => 45,  147 => 38,  141 => 35,  131 => 28,  125 => 25,  117 => 20,  102 => 7,  89 => 6,  77 => 3,  64 => 2,  41 => 1,);
+        return array (  271 => 110,  261 => 102,  257 => 101,  250 => 97,  245 => 95,  240 => 93,  230 => 86,  225 => 84,  220 => 82,  210 => 75,  204 => 72,  194 => 65,  188 => 62,  178 => 55,  172 => 52,  162 => 45,  156 => 42,  146 => 35,  140 => 32,  133 => 27,  127 => 24,  124 => 23,  121 => 22,  117 => 20,  102 => 7,  89 => 6,  77 => 3,  64 => 2,  41 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -477,7 +494,7 @@ class __TwigTemplate_79d2a0acde299fa87f368b8004d9329a extends Template
     <div class=\"content-wrapper\">
         <div class=\"container-xxl flex-grow-1 container-p-y\">
             <h4 class=\"fw-bold py-3 mb-4\">
-                <span class=\"text-muted fw-light\">Schedules /</span> Nouveau planning
+                <span class=\"text-muted fw-light\">Plannings /</span> Nouveau planning
             </h4>
 
             <div class=\"col-xl\">
@@ -488,6 +505,13 @@ class __TwigTemplate_79d2a0acde299fa87f368b8004d9329a extends Template
                     </div>
                     <div class=\"card-body\">
                         {{ form_start(form, {'id': 'scheduleForm', 'novalidate': 'novalidate'}) }}
+                            {# Display form-level errors #}
+                            {% if form_errors(form) %}
+                                <div class=\"alert alert-danger\" role=\"alert\">
+                                    {{ form_errors(form) }}
+                                </div>
+                            {% endif %}
+
                             <div class=\"mb-3\">
                                 <label class=\"form-label\" for=\"schedule_dateMatch\">Date du Match</label>
                                 <div class=\"input-group input-group-merge\">
@@ -569,6 +593,7 @@ class __TwigTemplate_79d2a0acde299fa87f368b8004d9329a extends Template
         </div>
     </div>
 
+    {# Existing JavaScript remains unchanged #}
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const form = document.getElementById('scheduleForm');

@@ -6,36 +6,15 @@
     {{ parent() }}
     <style>
         .courses-item-inner {
-            position: relative; /* Positioning context for the GIF and News button */
+            position: relative; /* Positioning context for the GIF */
         }
         .live-gif {
             position: absolute;
-            bottom: 10px; /* Distance from the bottom */
-            right: 10px; /* Distance from the right */
-            width: 80px; /* Adjust size as needed */
+            top: -90px; /* Position above the News button (button height + spacing) */
+            right: 0;
+            width: 80px; /* Keep size as-is */
             height: 80px;
             z-index: 10; /* Ensure it’s above other content */
-        }
-        .news-button {
-            position: absolute;
-            bottom: 10px; /* Distance from the bottom */
-            right: 10px; /* Distance from the right, same as live-gif */
-            z-index: 10; /* Ensure it’s above other content */
-            background-color: #007bff; /* Primary color to match theme */
-            color: #fff;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 5px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: background-color 0.3s ease;
-        }
-        .news-button:hover {
-            background-color: #0056b3; /* Darker shade on hover */
-        }
-        .news-button:disabled {
-            background-color: #6c757d; /* Grayed out when disabled */
-            cursor: not-allowed;
         }
         .hidden {
             display: none; /* Hide cards that don’t match the filter */
@@ -77,6 +56,19 @@
         .filter-container .dropdown-item:hover {
             background-color: #f8f9fa;
             color: #007bff; /* Primary color on hover */
+        }
+        /* Button container to align buttons on opposite sides */
+        .button-container {
+            display: flex;
+            justify-content: space-between; /* Push buttons to opposite sides */
+            align-items: center; /* Vertically center the buttons */
+            margin-top: 10px; /* Space above the buttons */
+            width: 100%; /* Ensure it takes full width */
+        }
+        /* Container for News button and Live GIF */
+        .news-container {
+            position: relative; /* Positioning context for the Live GIF */
+            display: inline-block; /* Ensure it wraps tightly around the News button */
         }
     </style>
 {% endblock %}
@@ -164,15 +156,20 @@
                                                 <strong>Sport :</strong> Inconnu
                                             {% endif %}
                                         </p>
-                                        <a href="{{ path('schedule_showF', {'idSchedule': schedule.idSchedule}) }}" class="btn btn-primary py-2 px-4">
-                                            <span>Voir les détails</span>
-                                        </a>
-                                        <img src="{{ asset('img/live.gif') }}" alt="Live Indicator" class="live-gif">
-                                        {% if schedule.matchEntity and schedule.matchEntity.c1 and schedule.matchEntity.c2 %}
-                                            <a href="{{ path('schedule_news', {'idSchedule': schedule.idSchedule}) }}" class="news-button">News</a>
-                                        {% else %}
-                                            <button class="news-button" disabled>News</button>
-                                        {% endif %}
+                                        {# Button container to align buttons on opposite sides #}
+                                        <div class="button-container">
+                                            <a href="{{ path('schedule_showF', {'idSchedule': schedule.idSchedule}) }}" class="btn btn-primary py-2 px-4">
+                                                <span>Voir les détails</span>
+                                            </a>
+                                            <div class="news-container">
+                                                <img src="{{ asset('img/live.gif') }}" alt="Live Indicator" class="live-gif">
+                                                {% if schedule.matchEntity and schedule.matchEntity.c1 and schedule.matchEntity.c2 %}
+                                                    <a href="{{ path('schedule_news', {'idSchedule': schedule.idSchedule}) }}" class="btn btn-primary py-2 px-4">News</a>
+                                                {% else %}
+                                                    <button class="btn btn-primary py-2 px-4" disabled>News</button>
+                                                {% endif %}
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -249,14 +246,19 @@
                                                 <strong>Sport :</strong> Inconnu
                                             {% endif %}
                                         </p>
-                                        <a href="{{ path('schedule_showF', {'idSchedule': schedule.idSchedule}) }}" class="btn btn-primary py-2 px-4">
-                                            <span>Voir les détails</span>
-                                        </a>
-                                        {% if schedule.matchEntity and schedule.matchEntity.c1 and schedule.matchEntity.c2 %}
-                                            <a href="{{ path('schedule_news', {'idSchedule': schedule.idSchedule}) }}" class="news-button">News</a>
-                                        {% else %}
-                                            <button class="news-button" disabled>News</button>
-                                        {% endif %}
+                                        {# Button container to align buttons on opposite sides #}
+                                        <div class="button-container">
+                                            <a href="{{ path('schedule_showF', {'idSchedule': schedule.idSchedule}) }}" class="btn btn-primary py-2 px-4">
+                                                <span>Voir les détails</span>
+                                            </a>
+                                            <div class="news-container">
+                                                {% if schedule.matchEntity and schedule.matchEntity.c1 and schedule.matchEntity.c2 %}
+                                                    <a href="{{ path('schedule_news', {'idSchedule': schedule.idSchedule}) }}" class="btn btn-primary py-2 px-4">News</a>
+                                                {% else %}
+                                                    <button class="btn btn-primary py-2 px-4" disabled>News</button>
+                                                {% endif %}
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

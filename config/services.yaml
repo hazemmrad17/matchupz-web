@@ -7,7 +7,7 @@ parameters:
     profile_pictures_directory: '%kernel.project_dir%/public/uploads/profile_pictures'
     club_photos_directory: '%kernel.project_dir%/public/uploads/club_photos'
     photos_directory: '%kernel.project_dir%/public/uploads/photos'
-    app.news_api_key: 'API MTE3AK YA LOUAY'
+    app.news_api_key: '2a65b6315ab7460f97ac49687599263d'
 
 services:
     # Default configuration for services in *this* file
@@ -29,3 +29,8 @@ services:
         arguments:
             $entityManager: '@doctrine.orm.entity_manager'
             $newsApiKey: '%app.news_api_key%'
+
+    App\Validator\NoScheduleOverlapValidator:
+        tags: ['validator.constraint_validator']
+        arguments:
+            $scheduleRepository: '@App\Repository\ScheduleRepository'

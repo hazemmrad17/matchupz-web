@@ -110,7 +110,7 @@ class __TwigTemplate_82a3ade35ef49efd59963d64356bc247 extends Template
             <div class=\"col-xl\">
                 <div class=\"card mb-4\">
                     <div class=\"card-header d-flex justify-content-between align-items-center\">
-                        <h5 class=\"mb-0\">Schedule #";
+                        <h5 class=\"mb-0\">Planning #";
         // line 16
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["schedule"]) || array_key_exists("schedule", $context) ? $context["schedule"] : (function () { throw new RuntimeError('Variable "schedule" does not exist.', 16, $this->source); })()), "idSchedule", [], "any", false, false, false, 16), "html", null, true);
         yield "</h5>
@@ -212,7 +212,7 @@ class __TwigTemplate_82a3ade35ef49efd59963d64356bc247 extends Template
             <div class=\"col-xl\">
                 <div class=\"card mb-4\">
                     <div class=\"card-header d-flex justify-content-between align-items-center\">
-                        <h5 class=\"mb-0\">Schedule #{{ schedule.idSchedule }}</h5>
+                        <h5 class=\"mb-0\">Planning #{{ schedule.idSchedule }}</h5>
                         <small class=\"text-muted float-end\">Détails</small>
                     </div>
                     <div class=\"card-body\">

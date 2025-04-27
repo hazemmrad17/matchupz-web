@@ -7,7 +7,7 @@
     <div class="content-wrapper">
         <div class="container-xxl flex-grow-1 container-p-y">
             <h4 class="fw-bold py-3 mb-4">
-                <span class="text-muted fw-light">Schedules /</span> Nouveau planning
+                <span class="text-muted fw-light">Plannings /</span> Nouveau planning
             </h4>
 
             <div class="col-xl">
@@ -18,6 +18,13 @@
                     </div>
                     <div class="card-body">
                         {{ form_start(form, {'id': 'scheduleForm', 'novalidate': 'novalidate'}) }}
+                            {# Display form-level errors #}
+                            {% if form_errors(form) %}
+                                <div class="alert alert-danger" role="alert">
+                                    {{ form_errors(form) }}
+                                </div>
+                            {% endif %}
+
                             <div class="mb-3">
                                 <label class="form-label" for="schedule_dateMatch">Date du Match</label>
                                 <div class="input-group input-group-merge">
@@ -99,6 +106,7 @@
         </div>
     </div>
 
+    {# Existing JavaScript remains unchanged #}
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const form = document.getElementById('scheduleForm');

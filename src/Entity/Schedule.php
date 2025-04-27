@@ -4,9 +4,11 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use App\Validator\NoScheduleOverlap;
 
 #[ORM\Entity(repositoryClass: \App\Repository\ScheduleRepository::class)]
 #[ORM\Table(name: 'schedules')]
+#[NoScheduleOverlap]
 class Schedule
 {
     #[ORM\Id]
