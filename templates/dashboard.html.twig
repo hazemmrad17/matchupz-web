@@ -1,275 +1,232 @@
-{% extends 'base.html.twig' %}
+{% extends 'baseM.html.twig' %}
 
-{% block title %}Dashboard{% endblock %}
+{% block title %}Matchupz - Tableau de bord{% endblock %}
 
-{% block searchbar %}
-    {% include 'searchbar.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        /* Vibrant team styling (from showF.html.twig) */
+        .vibrant-team {
+            font-weight: bold;
+            background: linear-gradient(45deg, #dc3545, #ff6b6b); /* Vibrant red gradient */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+            animation: flow-glow 2s ease-in-out infinite; /* Flowing animation */
+        }
+        @keyframes flow-glow {
+            0% {
+                filter: brightness(100%) drop-shadow(0 0 5px rgba(220, 53, 69, 0.5));
+            }
+            50% {
+                filter: brightness(120%) drop-shadow(0 0 10px rgba(220, 53, 69, 0.8));
+            }
+            100% {
+                filter: brightness(100%) drop-shadow(0 0 5px rgba(220, 53, 69, 0.5));
+            }
+        }
+
+        /* Video placeholder styling (from showF.html.twig) */
+        .video-placeholder {
+            position: relative;
+            background: #000;
+            width: 100%;
+            padding-top: 56.25%; /* 16:9 aspect ratio */
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 20px 0; /* Extra spacing */
+            z-index: 1; /* Ensure the placeholder is not overlapped */
+        }
+        .video-placeholder iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            z-index: 2; /* Ensure the iframe is clickable */
+        }
+        .video-placeholder-text {
+            position: absolute;
+            top: 50%; /* Center vertically */
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #fff;
+            font-size: 1.5rem; /* Slightly larger text for better visibility */
+            font-weight: 500;
+            text-align: center;
+            opacity: 0.9;
+            text-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+            padding: 0 20px;
+            display: none; /* Hidden by default, shown via JS if video fails */
+            z-index: 3; /* Ensure the text is visible if shown */
+        }
+
+        /* Ensure the goal section matches the styling from showF */
+        .goal-content h1 {
+            font-size: 2.5rem;
+        }
+        .goal-item {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+        }
+
+        /* Adjust video container to be larger */
+        .video-container-wrapper {
+            max-width: 100%;
+        }
+    </style>
 {% endblock %}
 
-{% block content %}
-    <div class="content-wrapper">
-        <div class="container-xxl flex-grow-1 container-p-y">
-            <!-- Header -->
-            <h4 class="fw-bold py-3 mb-4">
-                <span class="text-muted fw-light">Dashboard /</span> Overview
-            </h4>
-
-            <!-- Users Section -->
-            <div class="row mb-5">
-                <div class="col-12">
-                    <h5 class="menu-header-text text-uppercase small mb-3">Users Section</h5>
-                    <div class="row">
-                        <!-- Users Widget -->
-                        <div class="col-md-6 col-lg-4 mb-4">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="card-title d-flex align-items-start justify-content-between">
-                                        <div class="avatar flex-shrink-0">
-                                            <span class="avatar-initial rounded bg-label-primary">
-                                                <i class="bx bx-user widget-icon"></i>
-                                            </span>
-                                        </div>
-                                        <div class="dropdown">
-                                            <button class="btn p-0" type="button" data-bs-toggle="dropdown">
-                                                <i class="bx bx-dots-vertical-rounded"></i>
-                                            </button>
-                                            <div class="dropdown-menu dropdown-menu-end">
-                                                <a class="dropdown-item" href="{{ path('joueur_main') }}">View All</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <span>Total Users</span>
-                                    <h3 class="card-title text-nowrap mb-1">{{ stats.users.total|default(0) }}</h3>
-                                    <small class="text-muted">Active: {{ stats.users.active|default(0) }}</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Section Staff Technique (Joueurs) -->
-            <div class="row mb-5">
-                <div class="col-12">
-                    <h5 class="menu-header-text text-uppercase small mb-3">Section Staff Technique</h5>
-                    <div class="row">
-                        <!-- Joueurs Widget -->
-                        <div class="col-md-6 col-lg-4 mb-4">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="card-title d-flex align-items-start justify-content-between">
-                                        <div class="avatar flex-shrink-0">
-                                            <span class="avatar-initial rounded bg-label-success">
-                                                <i class="bx bx-group widget-icon"></i>
-                                            </span>
-                                        </div>
-                                        <div class="dropdown">
-                                            <button class="btn p-0" type="button" data-bs-toggle="dropdown">
-                                                <i class="bx bx-dots-vertical-rounded"></i>
-                                            </button>
-                                            <div class="dropdown-menu dropdown-menu-end">
-                                                <a class="dropdown-item" href="{{ path('joueur_main') }}">View All</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <span>Joueurs</span>
-                                    <h3 class="card-title text-nowrap mb-1">{{ stats.joueurs.total|default(0) }}</h3>
-                                    <small class="text-muted">Clubs: {{ stats.joueurs.clubs|default(0) }}</small>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Clubs Widget -->
-                        <div class="col-md-6 col-lg-4 mb-4">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="card-title d-flex align-items-start justify-content-between">
-                                        <div class="avatar flex-shrink-0">
-                                            <span class="avatar-initial rounded bg-label-info">
-                                                <i class="bx bx-building widget-icon"></i>
-                                            </span>
-                                        </div>
-                                        <div class="dropdown">
-                                            <button class="btn p-0" type="button" data-bs-toggle="dropdown">
-                                                <i class="bx bx-dots-vertical-rounded"></i>
-                                            </button>
-                                            <div class="dropdown-menu dropdown-menu-end">
-                                                <a class="dropdown-item" href="{{ path('club_index') }}">View All</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <span>Clubs</span>
-                                    <h3 class="card-title text-nowrap mb-1">{{ stats.clubs.total|default(0) }}</h3>
-                                    <small class="text-muted">Active: {{ stats.clubs.active|default(0) }}</small>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Historique Transferts Widget -->
-                        <div class="col-md-6 col-lg-4 mb-4">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="card-title d-flex align-items-start justify-content-between">
-                                        <div class="avatar flex-shrink-0">
-                                            <span class="avatar-initial rounded bg-label-warning">
-                                                <i class="bx bx-transfer widget-icon"></i>
-                                            </span>
-                                        </div>
-                                        <div class="dropdown">
-                                            <button class="btn p-0" type="button" data-bs-toggle="dropdown">
-                                                <i class="bx bx-dots-vertical-rounded"></i>
-                                            </button>
-                                            <div class="dropdown-menu dropdown-menu-end">
-                                                <a class="dropdown-item" href="{{ path('app_historique_club_index') }}">View All</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <span>Historique Transferts</span>
-                                    <h3 class="card-title text-nowrap mb-1">{{ stats.historique.total|default(0) }}</h3>
-                                    <small class="text-muted">Recent: {{ stats.historique.recent|default(0) }}</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Match Management -->
-            <div class="row mb-5">
-                <div class="col-12">
-                    <h5 class="menu-header-text text-uppercase small mb-3">Match Management</h5>
-                    <div class="row">
-                        <!-- Matchs Widget -->
-                        <div class="col-md-6 col-lg-4 mb-4">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="card-title d-flex align-items-start justify-content-between">
-                                        <div class="avatar flex-shrink-0">
-                                            <span class="avatar-initial rounded bg-label-danger">
-                                                <i class="bx bx-football widget-icon"></i>
-                                            </span>
-                                        </div>
-                                        <div class="dropdown">
-                                            <button class="btn p-0" type="button" data-bs-toggle="dropdown">
-                                                <i class="bx bx-dots-vertical-rounded"></i>
-                                            </button>
-                                            <div class="dropdown-menu dropdown-menu-end">
-                                                <a class="dropdown-item">View Upcoming</a>
-                                                <a class="dropdown-item">View Past</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <span>Matchs</span>
-                                    <h3 class="card-title text-nowrap mb-1">{{ stats.matchs.total|default(0) }}</h3>
-                                    <small class="text-muted">Upcoming: {{ stats.matchs.upcoming|default(0) }}</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Section Espace -->
-            <div class="row mb-5">
-                <div class="col-12">
-                    <h5 class="menu-header-text text-uppercase small mb-3">Section Espace</h5>
-                    <div class="row">
-                        <!-- Espace Sportif Widget -->
-                        <div class="col-md-6 col-lg-4 mb-4">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="card-title d-flex align-items-start justify-content-between">
-                                        <div class="avatar flex-shrink-0">
-                                            <span class="avatar-initial rounded bg-label-primary">
-                                                <i class="bx bx-stadium widget-icon"></i>
-                                            </span>
-                                        </div>
-                                        <div class="dropdown">
-                                            <button class="btn p-0" type="button" data-bs-toggle="dropdown">
-                                                <i class="bx bx-dots-vertical-rounded"></i>
-                                            </button>
-                                            <div class="dropdown-menu dropdown-menu-end">
-                                                <a class="dropdown-item" href="{{ path('espace_index') }}">View All</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <span>Espace Sportif</span>
-                                    <h3 class="card-title text-nowrap mb-1">{{ stats.espace.total|default(0) }}</h3>
-                                    <small class="text-muted">Réservations: {{ stats.espace.reservations|default(0) }}</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Logistics -->
-            <div class="row mb-5">
-                <div class="col-12">
-                    <h5 class="menu-header-text text-uppercase small mb-3">Logistics</h5>
-                    <div class="row">
-                        <!-- Logistique Widget -->
-                        <div class="col-md-6 col-lg-4 mb-4">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="card-title d-flex align-items-start justify-content-between">
-                                        <div class="avatar flex-shrink-0">
-                                            <span class="avatar-initial rounded bg-label-success">
-                                                <i class="bx bx-truck widget-icon"></i>
-                                            </span>
-                                        </div>
-                                        <div class="dropdown">
-                                            <button class="btn p-0" type="button" data-bs-toggle="dropdown">
-                                                <i class="bx bx-dots-vertical-rounded"></i>
-                                            </button>
-                                            <div class="dropdown-menu dropdown-menu-end">
-                                                <a class="dropdown-item ">View Transport</a>
-                                                <a class="dropdown-item">View Equipment</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <span>Logistique</span>
-                                    <h3 class="card-title text-nowrap mb-1">{{ stats.logistique.total|default(0) }}</h3>
-                                    <small class="text-muted">Equipment: {{ stats.logistique.equipment|default(0) }}</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Sponsorship -->
-            <div class="row mb-5">
-                <div class="col-12">
-                    <h5 class="menu-header-text text-uppercase small mb-3">Sponsorship</h5>
-                    <div class="row">
-                        <!-- Sponsoring Widget -->
-                        <div class="col-md-6 col-lg-4 mb-4">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="card-title d-flex align-items-start justify-content-between">
-                                        <div class="avatar flex-shrink-0">
-                                            <span class="avatar-initial rounded bg-label-warning">
-                                                <i class="bx bx-money widget-icon"></i>
-                                            </span>
-                                        </div>
-                                        <div class="dropdown">
-                                            <button class="btn p-0" type="button" data-bs-toggle="dropdown">
-                                                <i class="bx bx-dots-vertical-rounded"></i>
-                                            </button>
-                                            <div class="dropdown-menu dropdown-menu-end">
-                                                <a class="dropdown-item">View Partners</a>
-                                                <a class="dropdown-item">View Contracts</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <span>Sponsoring</span>
-                                    <h3 class="card-title text-nowrap mb-1">{{ stats.sponsoring.total|default(0) }}</h3>
-                                    <small class="text-muted">Contracts: {{ stats.sponsoring.contracts|default(0) }}</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+{% block body %}
+    <!-- Header Start -->
+    <div class="container-fluid bg-breadcrumb">
+        <div class="container text-center py-5" style="max-width: 900px;">
+            <h4 class="text-white display-4 mb-4 wow fadeInDown" data-wow-delay="0.1s">Tableau de bord</h4>
+            <ol class="breadcrumb d-flex justify-content-center mb-0 wow fadeInDown" data-wow-delay="0.3s">
+                <li class="breadcrumb-item"><a href="{{ path('app_home') }}">Accueil</a></li>
+                <li class="breadcrumb-item active text-primary">Tableau de bord</li>
+            </ol>
         </div>
     </div>
+    <!-- Header End -->
+
+    <!-- Dashboard Content Start -->
+    <div class="container-fluid goal pt-5">
+        <div class="container pt-5">
+            {% if schedule is null %}
+                <div class="text-center text-white">
+                    <h3>Aucun horaire disponible pour le moment.</h3>
+                    <p>Revenez plus tard pour voir les matchs en cours ou les vidéos récentes.</p>
+                </div>
+            {% else %}
+                <div class="row g-5">
+                    <!-- Video Section -->
+                    <div class="col-lg-7 wow fadeInRight" data-wow-delay="0.2s">
+                        <div class="h-100 video-container-wrapper">
+                            <div class="video-placeholder">
+                                {% if isOngoing and schedule.streamURL is not null %}
+                                    <iframe src="{{ schedule.streamURL|raw }}?autoplay=1&mute=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    <div class="video-placeholder-text video-fallback">
+                                        La diffusion en direct n'a pas pu être chargée.
+                                    </div>
+                                {% elseif not isOngoing and schedule.URL is not null %}
+                                    <iframe src="{{ schedule.URL|raw }}?controls=1" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    <div class="video-placeholder-text video-fallback">
+                                        La vidéo n'a pas pu être chargée.
+                                    </div>
+                                {% else %}
+                                    <div class="video-placeholder-text">
+                                        Aucune vidéo disponible pour ce match.
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Schedule Details Section -->
+                    <div class="col-lg-5 wow fadeInLeft" data-wow-delay="0.2s">
+                        <div class="goal-content">
+                            <h4 class="text-primary">
+                                {% if isOngoing %}
+                                    Match en cours
+                                {% else %}
+                                    Dernier match
+                                {% endif %}
+                            </h4>
+                            <h1 class="display-4 mb-4">
+                                {% if schedule.matchEntity %}
+                                    <span class="vibrant-team">{{ schedule.matchEntity.c1 }}</span> contre <span class="vibrant-team">{{ schedule.matchEntity.c2 }}</span>
+                                {% else %}
+                                    Match à déterminer
+                                {% endif %}
+                            </h1>
+                            <div class="goal-item d-flex p-4">
+                                <div class="d-flex me-4">
+                                    <div class="bg-primary d-inline p-3" style="width: 80px; height: 80px;">
+                                        <img src="{{ asset('img/icon-1.png') }}" class="img-fluid" alt="">
+                                    </div>
+                                </div>
+                                <div>
+                                    <h4>Date et heure</h4>
+                                    <p class="text-white mb-0">
+                                        {{ schedule.dateMatch|date('Y-m-d') }} de {{ schedule.startTime|date('H:i') }} à {{ schedule.endTime|date('H:i') }}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="goal-item d-flex p-4 mb-4">
+                                <div class="d-flex me-4">
+                                    <div class="bg-primary d-inline p-3" style="width: 80px; height: 80px;">
+                                        <img src="{{ asset('img/icon-6.png') }}" class="img-fluid" alt="">
+                                    </div>
+                                </div>
+                                <div>
+                                    <h4>Lieu et sport</h4>
+                                    <p class="text-white mb-0">
+                                        <strong>Lieu :</strong> {{ schedule.espaceSportif ? schedule.espaceSportif.nomEspace : 'N/A' }}<br>
+                                        {% if schedule.matchEntity and schedule.matchEntity.sportType %}
+                                            <strong>Sport :</strong> {{ schedule.matchEntity.sportType }}
+                                        {% endif %}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    <!-- Dashboard Content End -->
+
+    <!-- JavaScript for Video Handling (from showF.html.twig) -->
+    {% block javascripts %}
+        {{ parent() }}
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const iframes = document.querySelectorAll('.video-placeholder iframe');
+                iframes.forEach(iframe => {
+                    // Log the URL for debugging
+                    console.log('Video iframe URL:', iframe.src);
+
+                    // Detect click events on the iframe
+                    iframe.addEventListener('click', function (e) {
+                        console.log('Iframe clicked at coordinates:', e.clientX, e.clientY, '- attempting to interact with video');
+                    });
+
+                    // Check for errors
+                    iframe.addEventListener('error', function (e) {
+                        console.error('Error loading video:', e);
+                        const fallback = iframe.parentElement.querySelector('.video-fallback');
+                        if (fallback) {
+                            iframe.style.display = 'none';
+                            fallback.style.display = 'block';
+                        }
+                    });
+
+                    // Check if the video is unavailable by iframe height
+                    setTimeout(() => {
+                        if (iframe.clientHeight < 50) {
+                            console.warn('Video likely unavailable (iframe height too small)');
+                            const fallback = iframe.parentElement.querySelector('.video-fallback');
+                            if (fallback) {
+                                iframe.style.display = 'none';
+                                fallback.style.display = 'block';
+                            }
+                        }
+                    }, 3000);
+
+                    // Log the DOM hierarchy to check for overlapping elements
+                    console.log('Iframe parent elements:', iframe.parentElement);
+                });
+
+                // Check for overlapping elements
+                const placeholder = document.querySelector('.video-placeholder');
+                if (placeholder) {
+                    const computedStyle = window.getComputedStyle(placeholder);
+                    console.log('Video placeholder z-index:', computedStyle.zIndex);
+                    console.log('Video placeholder pointer-events:', computedStyle.pointerEvents);
+                }
+            });
+        </script>
+    {% endblock %}
 {% endblock %}

@@ -2,29 +2,71 @@
 
 namespace App\Controller;
 
+use App\Repository\ScheduleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 class DashboardController extends AbstractController
 {
-    #[Route('/home', name: 'maintenance')]
-    public function index(): Response
+    #[Route('/dashboard', name: 'dashboard')]
+    public function index(ScheduleRepository $scheduleRepository): Response
     {
-        // Placeholder stats until entities are implemented
-        $stats = [
-            'users' => ['total' => 0, 'active' => 0],
-            'joueurs' => ['total' => 0, 'clubs' => 0],
-            'clubs' => ['total' => 0, 'active' => 0],
-            'historique' => ['total' => 0, 'recent' => 0],
-            'matchs' => ['total' => 0, 'upcoming' => 0],
-            'espace' => ['total' => 0, 'reservations' => 0],
-            'logistique' => ['total' => 0, 'equipment' => 0],
-            'sponsoring' => ['total' => 0, 'contracts' => 0],
-        ];
+        $now = new \DateTime('now');
+        $currentTimestamp = $now->getTimestamp();
+
+        // Fetch all schedules with their related entities
+        $schedules = $scheduleRepository->createQueryBuilder('s')
+            ->leftJoin('s.matchEntity', 'm')
+            ->leftJoin('s.espaceSportif', 'e')
+            ->select('s, m, e')
+            ->orderBy('s.dateMatch', 'DESC') // Most recent first
+            ->addOrderBy('s.endTime', 'DESC')
+            ->getQuery()
+            ->getResult();
+
+        $ongoingSchedule = null;
+        $latestPastSchedule = null;
+
+        // Find ongoing or most recent past schedule
+        foreach ($schedules as $schedule) {
+            $dateMatch = $schedule->getDateMatch();
+            $startTime = clone $dateMatch;
+            $endTime = clone $dateMatch;
+
+            // Set the time part for startTime and endTime
+            $startTime->setTime(
+                (int) $schedule->getStartTime()->format('H'),
+                (int) $schedule->getStartTime()->format('i'),
+                (int) $schedule->getStartTime()->format('s')
+            );
+            $endTime->setTime(
+                (int) $schedule->getEndTime()->format('H'),
+                (int) $schedule->getEndTime()->format('i'),
+                (int) $schedule->getEndTime()->format('s')
+            );
+
+            $startTimestamp = $startTime->getTimestamp();
+            $endTimestamp = $endTime->getTimestamp();
+
+            // Check if the schedule is ongoing
+            if ($currentTimestamp >= $startTimestamp && $currentTimestamp <= $endTimestamp) {
+                $ongoingSchedule = $schedule;
+                break; // Found the ongoing schedule, no need to continue
+            }
+
+            // If no ongoing schedule, keep track of the most recent past schedule
+            if ($currentTimestamp > $endTimestamp && !$latestPastSchedule) {
+                $latestPastSchedule = $schedule;
+            }
+        }
+
+        // Use the ongoing schedule if available, otherwise fall back to the latest past schedule
+        $scheduleToDisplay = $ongoingSchedule ?? $latestPastSchedule;
 
         return $this->render('dashboard.html.twig', [
-            'stats' => $stats,
+            'schedule' => $scheduleToDisplay,
+            'isOngoing' => $ongoingSchedule !== null,
         ]);
     }
 }
