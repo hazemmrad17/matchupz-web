@@ -1,0 +1,145 @@
+lastInsertId called with name: null
+Stack trace: [
+    {
+        "file": "C:\\Users\\MSI\\Desktop\\matchupz-web-0\\vendor\\doctrine\\dbal\\src\\Driver\\Middleware\\AbstractConnectionMiddleware.php",
+        "line": 62,
+        "function": "lastInsertId",
+        "class": "Doctrine\\DBAL\\Driver\\PDO\\Connection",
+        "type": "->"
+    },
+    {
+        "file": "C:\\Users\\MSI\\Desktop\\matchupz-web-0\\vendor\\doctrine\\dbal\\src\\Driver\\Middleware\\AbstractConnectionMiddleware.php",
+        "line": 62,
+        "function": "lastInsertId",
+        "class": "Doctrine\\DBAL\\Driver\\Middleware\\AbstractConnectionMiddleware",
+        "type": "->"
+    },
+    {
+        "file": "C:\\Users\\MSI\\Desktop\\matchupz-web-0\\vendor\\doctrine\\dbal\\src\\Connection.php",
+        "line": 1261,
+        "function": "lastInsertId",
+        "class": "Doctrine\\DBAL\\Driver\\Middleware\\AbstractConnectionMiddleware",
+        "type": "->"
+    },
+    {
+        "file": "C:\\Users\\MSI\\Desktop\\matchupz-web-0\\vendor\\symfony\\doctrine-messenger\\Transport\\Connection.php",
+        "line": 490,
+        "function": "lastInsertId",
+        "class": "Doctrine\\DBAL\\Connection",
+        "type": "->"
+    },
+    {
+        "file": "C:\\Users\\MSI\\Desktop\\matchupz-web-0\\vendor\\symfony\\doctrine-messenger\\Transport\\Connection.php",
+        "line": 147,
+        "function": "executeInsert",
+        "class": "Symfony\\Component\\Messenger\\Bridge\\Doctrine\\Transport\\Connection",
+        "type": "->"
+    },
+    {
+        "file": "C:\\Users\\MSI\\Desktop\\matchupz-web-0\\vendor\\symfony\\doctrine-messenger\\Transport\\DoctrineSender.php",
+        "line": 46,
+        "function": "send",
+        "class": "Symfony\\Component\\Messenger\\Bridge\\Doctrine\\Transport\\Connection",
+        "type": "->"
+    },
+    {
+        "file": "C:\\Users\\MSI\\Desktop\\matchupz-web-0\\vendor\\symfony\\doctrine-messenger\\Transport\\DoctrineTransport.php",
+        "line": 72,
+        "function": "send",
+        "class": "Symfony\\Component\\Messenger\\Bridge\\Doctrine\\Transport\\DoctrineSender",
+        "type": "->"
+    },
+    {
+        "file": "C:\\Users\\MSI\\Desktop\\matchupz-web-0\\vendor\\symfony\\messenger\\Middleware\\SendMessageMiddleware.php",
+        "line": 62,
+        "function": "send",
+        "class": "Symfony\\Component\\Messenger\\Bridge\\Doctrine\\Transport\\DoctrineTransport",
+        "type": "->"
+    },
+    {
+        "file": "C:\\Users\\MSI\\Desktop\\matchupz-web-0\\vendor\\symfony\\messenger\\Middleware\\FailedMessageProcessingMiddleware.php",
+        "line": 34,
+        "function": "handle",
+        "class": "Symfony\\Component\\Messenger\\Middleware\\SendMessageMiddleware",
+        "type": "->"
+    },
+    {
+        "file": "C:\\Users\\MSI\\Desktop\\matchupz-web-0\\vendor\\symfony\\messenger\\Middleware\\DispatchAfterCurrentBusMiddleware.php",
+        "line": 68,
+        "function": "handle",
+        "class": "Symfony\\Component\\Messenger\\Middleware\\FailedMessageProcessingMiddleware",
+        "type": "->"
+    },
+    {
+        "file": "C:\\Users\\MSI\\Desktop\\matchupz-web-0\\vendor\\symfony\\messenger\\Middleware\\RejectRedeliveredMessageMiddleware.php",
+        "line": 41,
+        "function": "handle",
+        "class": "Symfony\\Component\\Messenger\\Middleware\\DispatchAfterCurrentBusMiddleware",
+        "type": "->"
+    },
+    {
+        "file": "C:\\Users\\MSI\\Desktop\\matchupz-web-0\\vendor\\symfony\\messenger\\Middleware\\AddBusNameStampMiddleware.php",
+        "line": 37,
+        "function": "handle",
+        "class": "Symfony\\Component\\Messenger\\Middleware\\RejectRedeliveredMessageMiddleware",
+        "type": "->"
+    },
+    {
+        "file": "C:\\Users\\MSI\\Desktop\\matchupz-web-0\\vendor\\symfony\\messenger\\Middleware\\TraceableMiddleware.php",
+        "line": 40,
+        "function": "handle",
+        "class": "Symfony\\Component\\Messenger\\Middleware\\AddBusNameStampMiddleware",
+        "type": "->"
+    },
+    {
+        "file": "C:\\Users\\MSI\\Desktop\\matchupz-web-0\\vendor\\symfony\\messenger\\MessageBus.php",
+        "line": 70,
+        "function": "handle",
+        "class": "Symfony\\Component\\Messenger\\Middleware\\TraceableMiddleware",
+        "type": "->"
+    },
+    {
+        "file": "C:\\Users\\MSI\\Desktop\\matchupz-web-0\\vendor\\symfony\\messenger\\TraceableMessageBus.php",
+        "line": 38,
+        "function": "dispatch",
+        "class": "Symfony\\Component\\Messenger\\MessageBus",
+        "type": "->"
+    },
+    {
+        "file": "C:\\Users\\MSI\\Desktop\\matchupz-web-0\\vendor\\symfony\\mailer\\Mailer.php",
+        "line": 66,
+        "function": "dispatch",
+        "class": "Symfony\\Component\\Messenger\\TraceableMessageBus",
+        "type": "->"
+    },
+    {
+        "file": "C:\\Users\\MSI\\Desktop\\matchupz-web-0\\src\\Controller\\UserController.php",
+        "line": 622,
+        "function": "send",
+        "class": "Symfony\\Component\\Mailer\\Mailer",
+        "type": "->"
+    },
+    {
+        "file": "C:\\Users\\MSI\\Desktop\\matchupz-web-0\\vendor\\symfony\\http-kernel\\HttpKernel.php",
+        "line": 181,
+        "function": "forgotPassword",
+        "class": "App\\Controller\\UserController",
+        "type": "->"
+    },
+    {
+        "file": "C:\\Users\\MSI\\Desktop\\matchupz-web-0\\vendor\\symfony\\http-kernel\\HttpKernel.php",
+        "line": 76,
+        "function": "handleRaw",
+        "class": "Symfony\\Component\\HttpKernel\\HttpKernel",
+        "type": "->"
+    },
+    {
+        "file": "C:\\Users\\MSI\\Desktop\\matchupz-web-0\\vendor\\symfony\\http-kernel\\Kernel.php",
+        "line": 197,
+        "function": "handle",
+        "class": "Symfony\\Component\\HttpKernel\\HttpKernel",
+        "type": "->"
+    }
+]
+
+lastInsertId result: '0'

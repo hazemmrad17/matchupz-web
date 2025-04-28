@@ -1,0 +1,282 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tableau de Bord Principal{% endblock %}
+
+{% block searchbar %}
+    {% include 'searchbar.html.twig' %}
+{% endblock %}
+
+{% block content %}
+    <div class="content-wrapper">
+        <div class="container-xxl flex-grow-1 container-p-y">
+            <h4 class="fw-bold py-3 mb-4">
+                <span class="text-muted fw-light">Accueil /</span> Tableau de Bord
+            </h4>
+
+            <!-- Summary Cards -->
+            <div class="row">
+                <!-- Joueurs -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="card-title d-flex align-items-start justify-content-between">
+                                <div class="avatar flex-shrink-0">
+                                    <img src="{{ asset('img/icons/unicons/users.png') }}" alt="Joueurs" class="rounded" />
+                                </div>
+                                <div class="dropdown">
+                                    <button class="btn p-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="bx bx-dots-vertical-rounded"></i>
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-end">
+                                        <a class="dropdown-item" href="{{ path('joueur_main') }}">Voir les Joueurs</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <span class="fw-semibold d-block mb-1">Joueurs</span>
+                            <h3 class="card-title mb-2">{{ stats.joueurs.total }}</h3>
+                            <small class="text-success fw-semibold">
+                                <i class="bx bx-up-arrow-alt"></i> {{ stats.joueurs.clubs }} dans les clubs
+                            </small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Clubs -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="card-title d-flex align-items-start justify-content-between">
+                                <div class="avatar flex-shrink-0">
+                                    <img src="{{ asset('img/icons/unicons/building.png') }}" alt="Clubs" class="rounded" />
+                                </div>
+                                <div class="dropdown">
+                                    <button class="btn p-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="bx bx-dots-vertical-rounded"></i>
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-end">
+                                        <a class="dropdown-item" href="{{ path('club_main') }}">Voir les Clubs</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <span class="fw-semibold d-block mb-1">Clubs</span>
+                            <h3 class="card-title mb-2">{{ stats.clubs.total }}</h3>
+                            <small class="text-success fw-semibold">
+                                <i class="bx bx-up-arrow-alt"></i> {{ stats.clubs.active }} actifs
+                            </small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Matchs -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="card-title d-flex align-items-start justify-content-between">
+                                <div class="avatar flex-shrink-0">
+                                    <img src="{{ asset('img/icons/unicons/soccer.png') }}" alt="Matchs" class="rounded" />
+                                </div>
+                                <div class="dropdown">
+                                    <button class="btn p-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="bx bx-dots-vertical-rounded"></i>
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-end">
+                                        <a class="dropdown-item" href="{{ path('match_main') }}">Voir les Matchs</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <span class="fw-semibold d-block mb-1">Matchs</span>
+                            <h3 class="card-title mb-2">{{ stats.matchs.total }}</h3>
+                            <small class="text-success fw-semibold">
+                                <i class="bx bx-up-arrow-alt"></i> {{ stats.matchs.upcoming }} à venir
+                            </small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Espace -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="card-title d-flex align-items-start justify-content-between">
+                                <div class="avatar flex-shrink-0">
+                                    <img src="{{ asset('img/icons/unicons/stadium.png') }}" alt="Espace" class="rounded" />
+                                </div>
+                                <div class="dropdown">
+                                    <button class="btn p-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="bx bx-dots-vertical-rounded"></i>
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-end">
+                                        <a class="dropdown-item" href="{{ path('espace_main') }}">Voir les Espaces</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <span class="fw-semibold d-block mb-1">Espaces</span>
+                            <h3 class="card-title mb-2">{{ stats.espace.total }}</h3>
+                            <small class="text-success fw-semibold">
+                                <i class="bx bx-up-arrow-alt"></i> {{ stats.espace.reservations }} réservations
+                            </small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Logistique -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="card-title d-flex align-items-start justify-content-between">
+                                <div class="avatar flex-shrink-0">
+                                    <img src="{{ asset('img/icons/unicons/truck.png') }}" alt="Logistique" class="rounded" />
+                                </div>
+                                <div class="dropdown">
+                                    <button class="btn p-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="bx bx-dots-vertical-rounded"></i>
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-end">
+                                        <a class="dropdown-item" href="{{ path('logistique_main') }}">Voir la Logistique</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <span class="fw-semibold d-block mb-1">Logistique</span>
+                            <h3 class="card-title mb-2">{{ stats.logistique.total }}</h3>
+                            <small class="text-success fw-semibold">
+                                <i class="bx bx-up-arrow-alt"></i> {{ stats.logistique.equipment }} équipements
+                            </small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sponsoring -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="card-title d-flex align-items-start justify-content-between">
+                                <div class="avatar flex-shrink-0">
+                                    <img src="{{ asset('img/icons/unicons/handshake.png') }}" alt="Sponsoring" class="rounded" />
+                                </div>
+                                <div class="dropdown">
+                                    <button class="btn p-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="bx bx-dots-vertical-rounded"></i>
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-end">
+                                        <a class="dropdown-item" href="{{ path('sponsoring_main') }}">Voir le Sponsoring</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <span class="fw-semibold d-block mb-1">Sponsoring</span>
+                            <h3 class="card-title mb-2">{{ stats.sponsoring.total }}</h3>
+                            <small class="text-success fw-semibold">
+                                <i class="bx bx-up-arrow-alt"></i> {{ stats.sponsoring.contracts }} contrats
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts Section -->
+            <div class="row">
+                <!-- Entity Distribution Chart -->
+                <div class="col-lg-8 mb-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title m-0">Répartition des Entités</h5>
+                        </div>
+                        <div class="card-body">
+                            <div id="entityDistributionChart" style="min-height: 300px;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="col-lg-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-header d-flex align-items-center justify-content-between">
+                            <h5 class="card-title m  m-0 me-2">Activité Récente</h5>
+                            <div class="dropdown">
+                                <button class="btn p-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="bx bx-dots-vertical-rounded"></i>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-end">
+                                    <a class="dropdown-item" href="{{ path('historique_main') }}">Voir l'Historique</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <ul class="p-0 m-0">
+                                {% for activity in stats.historique.recent %}
+                                    <li class="d-flex mb-3">
+                                        <div class="avatar flex-shrink-0 me-3">
+                                            <span class="avatar-initial rounded bg-label-primary">
+                                                <i class="bx bx-history"></i>
+                                            </span>
+                                        </div>
+                                        <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                                            <div class="me-2">
+                                                <small class="text-muted d-block mb-1">{{ activity.type }}</small>
+                                                <h6 class="mb-0">{{ activity.description }}</h6>
+                                            </div>
+                                            <small class="text-muted">{{ activity.date|date('d/m/Y H:i') }}</small>
+                                        </div>
+                                    </li>
+                                {% else %}
+                                    <li class="text-center text-muted">Aucune activité récente.</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript for Charts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            if (window.entityChart) {
+                return;
+            }
+
+            // Entity Distribution Chart (Donut)
+            if (document.querySelector("#entityDistributionChart")) {
+                var entityOptions = {
+                    chart: {
+                        type: 'donut',
+                        height: 300,
+                        animations: {
+                            enabled: true,
+                            easing: 'easeinout',
+                            speed: 800
+                        }
+                    },
+                    series: [
+                        {{ stats.joueurs.total }},
+                        {{ stats.clubs.total }},
+                        {{ stats.matchs.total }},
+                        {{ stats.espace.total }},
+                        {{ stats.logistique.total }},
+                        {{ stats.sponsoring.total }}
+                    ],
+                    labels: ['Joueurs', 'Clubs', 'Matchs', 'Espaces', 'Logistique', 'Sponsoring'],
+                    plotOptions: {
+                        pie: {
+                            donut: {
+                                size: '65%'
+                            }
+                        }
+                    },
+                    dataLabels: {
+                        enabled: true,
+                        formatter: function (val, opts) {
+                            return opts.w.config.series[opts.seriesIndex];
+                        }
+                    },
+                    legend: {
+                        position: 'bottom'
+                    },
+                    colors: ['#008FFB', '#00E396', '#FEB019', '#FF4560', '#775DD0', '#546E7A']
+                };
+                window.entityChart = new ApexCharts(document.querySelector("#entityDistributionChart"), entityOptions);
+                window.entityChart.render();
+            }
+        });
+    </script>
+{% endblock %}

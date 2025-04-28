@@ -1,0 +1,121 @@
+{% extends 'base.html.twig' %}
+
+{% block searchbar %}
+    {% include 'searchbar.html.twig' %}
+{% endblock %}
+
+{% block title %}Nouvel Historique Club{% endblock %}
+
+{% block content %}
+    <div class="content-wrapper">
+        <div class="container-xxl flex-grow-1 container-p-y">
+            <h4 class="fw-bold py-3 mb-4">
+                <span class="text-muted fw-light">Historique Club /</span> Nouvel Historique
+            </h4>
+
+            <div class="col-xl">
+                <div class="card mb-4">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">Ajouter un Nouvel Historique</h5>
+                        <small class="text-muted float-end">Remplir les détails</small>
+                    </div>
+                    <div class="card-body">
+                        {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+                            <div class="mb-3">
+                                {{ form_label(form.joueur, null, {'label_attr': {'class': 'form-label'}}) }}
+                                <div class="input-group input-group-merge {{ form.joueur.vars.errors|length > 0 ? 'is-invalid' : '' }}">
+                                    <span class="input-group-text"><i class="bx bx-user"></i></span>
+                                    {{ form_widget(form.joueur, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                                {% if form.joueur.vars.errors|length > 0 %}
+                                    <div class="form-error-message invalid-feedback">
+                                        {{ form_errors(form.joueur) }}
+                                    </div>
+                                {% endif %}
+                            </div>
+
+                            <div class="mb-3">
+                                {{ form_label(form.nomClub, null, {'label_attr': {'class': 'form-label'}}) }}
+                                <div class="input-group input-group-merge {{ form.nomClub.vars.errors|length > 0 ? 'is-invalid' : '' }}">
+                                    <span class="input-group-text"><i class="bx bx-group"></i></span>
+                                    {{ form_widget(form.nomClub, {'attr': {'class': 'form-control', 'placeholder': 'Nom du club'}}) }}
+                                </div>
+                                {% if form.nomClub.vars.errors|length > 0 %}
+                                    <div class="form-error-message invalid-feedback">
+                                        {{ form_errors(form.nomClub) }}
+                                    </div>
+                                {% endif %}
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    {{ form_label(form.saisonDebut, null, {'label_attr': {'class': 'form-label'}}) }}
+                                    <div class="input-group input-group-merge {{ form.saisonDebut.vars.errors|length > 0 ? 'is-invalid' : '' }}">
+                                        <span class="input-group-text"><i class="bx bx-calendar"></i></span>
+                                        {{ form_widget(form.saisonDebut, {'attr': {'class': 'form-control', 'placeholder': 'AAAA-MM-JJ'}}) }}
+                                    </div>
+                                    {% if form.saisonDebut.vars.errors|length > 0 %}
+                                        <div class="form-error-message invalid-feedback">
+                                            {{ form_errors(form.saisonDebut) }}
+                                        </div>
+                                    {% endif %}
+                                    <small class="text-muted">Format: AAAA-MM-JJ (ex. 1990-01-01)</small>
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    {{ form_label(form.saisonFin, null, {'label_attr': {'class': 'form-label'}}) }}
+                                    <div class="input-group input-group-merge {{ form.saisonFin.vars.errors|length > 0 ? 'is-invalid' : '' }}">
+                                        <span class="input-group-text"><i class="bx bx-calendar"></i></span>
+                                        {{ form_widget(form.saisonFin, {'attr': {'class': 'form-control', 'placeholder': 'AAAA-MM-JJ'}}) }}
+                                    </div>
+                                    {% if form.saisonFin.vars.errors|length > 0 %}
+                                        <div class="form-error-message invalid-feedback">
+                                            {{ form_errors(form.saisonFin) }}
+                                        </div>
+                                    {% endif %}
+                                    <small class="text-muted">Format: AAAA-MM-JJ, laissez vide si toujours en cours</small>
+                                </div>
+                            </div>
+
+                            <div class="d-flex justify-content-between">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="bx bx-save me-1"></i> Créer
+                                </button>
+                                <a href="{{ path('app_historique_club_index') }}" class="btn btn-secondary">
+                                    <i class="bx bx-arrow-back me-1"></i> Annuler
+                                </a>
+                            </div>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const saisonDebutInput = document.getElementById('historique_club_saisonDebut');
+            const saisonFinInput = document.getElementById('historique_club_saisonFin');
+
+            const saisonDebutPicker = flatpickr(saisonDebutInput, {
+                dateFormat: 'Y-m-d',
+                allowInput: true,
+                onChange: function(selectedDates, dateStr) {
+                    if (dateStr) {
+                        saisonFinPicker.set('minDate', dateStr);
+                    }
+                }
+            });
+
+            const saisonFinPicker = flatpickr(saisonFinInput, {
+                dateFormat: 'Y-m-d',
+                allowInput: true,
+                minDate: saisonDebutInput.value || null,
+            });
+        });
+    </script>
+{% endblock %}

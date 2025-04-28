@@ -1,0 +1,186 @@
+2025-04-25 00:52:47: Video processing failed: 'C:\Users\Hazem' is not recognized as an internal or external command,
+operable program or batch file.
+2025-04-25 00:53:04: Video processing failed: 'C:\Users\Hazem' is not recognized as an internal or external command,
+operable program or batch file.
+2025-04-25 01:16:38: Video processing failed: Removed file: output_videos\keypoint_tracks.json
+Removed file: output_videos\object_tracks.json
+Starting frame capture
+Starting frame processing
+Starting frame display
+
+0: 1280x1280 1 ball, 1 goalkeeper, 22 players, 3 referees, 41.6ms
+1: 1280x1280 1 ball, 1 goalkeeper, 21 players, 3 referees, 41.6ms
+2: 1280x1280 1 ball, 1 goalkeeper, 21 players, 3 referees, 41.6ms
+3: 1280x1280 1 ball, 1 goalkeeper, 20 players, 3 referees, 41.6ms
+4: 1280x1280 1 ball, 1 goalkeeper, 20 players, 3 referees, 41.6ms
+5: 1280x1280 1 ball, 1 goalkeeper, 21 players, 3 referees, 41.6ms
+6: 1280x1280 1 ball, 1 goalkeeper, 20 players, 3 referees, 41.6ms
+7: 1280x1280 1 ball, 21 players, 3 referees, 41.6ms
+8: 1280x1280 1 ball, 19 players, 3 referees, 41.6ms
+9: 1280x1280 1 ball, 19 players, 3 referees, 41.6ms
+Speed: 8.7ms preprocess, 41.6ms inference, 7.9ms postprocess per image at shape (1, 3, 1280, 1280)
+
+0: 640x640 1 pitch, 8.3ms
+1: 640x640 1 pitch, 8.3ms
+2: 640x640 1 pitch, 8.3ms
+3: 640x640 1 pitch, 8.3ms
+4: 640x640 1 pitch, 8.3ms
+5: 640x640 1 pitch, 8.3ms
+6: 640x640 1 pitch, 8.3ms
+7: 640x640 1 pitch, 8.3ms
+8: 640x640 1 pitch, 8.3ms
+9: 640x640 1 pitch, 8.3ms
+Speed: 2.8ms preprocess, 8.3ms inference, 1.8ms postprocess per image at shape (1, 3, 640, 640)
+Traceback (most recent call last):
+  File "C:\Users\Hazem Mrad\Desktop\matchupz-web-integration - Copy\football_analysis-master\utils\video_utils.py", line 143, in process_batch
+    processed_batch = processor.process(frames, fps)
+  File "C:\Users\Hazem Mrad\Desktop\matchupz-web-integration - Copy\football_analysis-master\annotation\football_video_processor.py", line 128, in process
+    annotated_frame = self.annotate(frame, all_tracks)
+  File "C:\Users\Hazem Mrad\Desktop\matchupz-web-integration - Copy\football_analysis-master\annotation\football_video_processor.py", line 163, in annotate
+    combined_frame = self._annotate_possession(combined_frame)
+  File "C:\Users\Hazem Mrad\Desktop\matchupz-web-integration - Copy\football_analysis-master\annotation\football_video_processor.py", line 248, in _annotate_possession
+    possession = self.ball_to_player_assigner.get_ball_possessions()[-1]
+IndexError: list index out of range
+Error processing batch: list index out of range
+
+0: 1280x1280 1 ball, 20 players, 3 referees, 37.6ms
+1: 1280x1280 1 ball, 23 players, 3 referees, 37.6ms
+2: 1280x1280 1 ball, 22 players, 3 referees, 37.6ms
+3: 1280x1280 1 ball, 21 players, 3 referees, 37.6ms
+4: 1280x1280 1 ball, 20 players, 3 referees, 37.6ms
+5: 1280x1280 20 players, 3 referees, 37.6ms
+6: 1280x1280 1 ball, 20 players, 3 referees, 37.6ms
+7: 1280x1280 1 ball, 20 players, 3 referees, 37.6ms
+8: 1280x1280 1 ball, 20 players, 3 referees, 37.6ms
+9: 1280x1280 1 ball, 20 players, 3 referees, 37.6ms
+Speed: 11.7ms preprocess, 37.6ms inference, 1.2ms postprocess per image at shape (1, 3, 1280, 1280)
+
+0: 640x640 1 pitch, 5.1ms
+1: 640x640 1 pitch, 5.1ms
+2: 640x640 1 pitch, 5.1ms
+3: 640x640 1 pitch, 5.1ms
+4: 640x640 1 pitch, 5.1ms
+5: 640x640 1 pitch, 5.1ms
+6: 640x640 1 pitch, 5.1ms
+7: 640x640 1 pitch, 5.1ms
+8: 640x640 1 pitch, 5.1ms
+9: 640x640 1 pitch, 5.1ms
+Speed: 2.8ms preprocess, 5.1ms inference, 1.5ms postprocess per image at shape (1, 3, 640, 640)
+
+0: 1280x1280 1 ball, 20 players, 3 referees, 38.1ms
+1: 1280x1280 1 ball, 20 players, 3 referees, 38.1ms
+2: 1280x1280 1 ball, 20 players, 3 referees, 38.1ms
+3: 1280x1280 1 ball, 20 players, 3 referees, 38.1ms
+4: 1280x1280 1 ball, 20 players, 3 referees, 38.1ms
+5: 1280x1280 20 players, 3 referees, 38.1ms
+6: 1280x1280 21 players, 3 referees, 38.1ms
+7: 1280x1280 1 ball, 20 players, 3 referees, 38.1ms
+8: 1280x1280 1 ball, 20 players, 3 referees, 38.1ms
+9: 1280x1280 1 ball, 20 players, 3 referees, 38.1ms
+Speed: 11.6ms preprocess, 38.1ms inference, 1.3ms postprocess per image at shape (1, 3, 1280, 1280)
+
+
+2025-04-25 01:24:02: Video processing failed: Removed file: output_videos\keypoint_tracks.json
+Removed file: output_videos\object_tracks.json
+Starting frame capture
+Starting frame processing
+Starting frame display
+
+0: 1280x1280 1 ball, 1 goalkeeper, 22 players, 3 referees, 41.2ms
+1: 1280x1280 1 ball, 1 goalkeeper, 21 players, 3 referees, 41.2ms
+2: 1280x1280 1 ball, 1 goalkeeper, 21 players, 3 referees, 41.2ms
+3: 1280x1280 1 ball, 1 goalkeeper, 20 players, 3 referees, 41.2ms
+4: 1280x1280 1 ball, 1 goalkeeper, 20 players, 3 referees, 41.2ms
+5: 1280x1280 1 ball, 1 goalkeeper, 21 players, 3 referees, 41.2ms
+6: 1280x1280 1 ball, 1 goalkeeper, 20 players, 3 referees, 41.2ms
+7: 1280x1280 1 ball, 21 players, 3 referees, 41.2ms
+8: 1280x1280 1 ball, 19 players, 3 referees, 41.2ms
+9: 1280x1280 1 ball, 19 players, 3 referees, 41.2ms
+Speed: 8.7ms preprocess, 41.2ms inference, 7.1ms postprocess per image at shape (1, 3, 1280, 1280)
+
+0: 640x640 1 pitch, 8.9ms
+1: 640x640 1 pitch, 8.9ms
+2: 640x640 1 pitch, 8.9ms
+3: 640x640 1 pitch, 8.9ms
+4: 640x640 1 pitch, 8.9ms
+5: 640x640 1 pitch, 8.9ms
+6: 640x640 1 pitch, 8.9ms
+7: 640x640 1 pitch, 8.9ms
+8: 640x640 1 pitch, 8.9ms
+9: 640x640 1 pitch, 8.9ms
+Speed: 3.5ms preprocess, 8.9ms inference, 2.0ms postprocess per image at shape (1, 3, 640, 640)
+Traceback (most recent call last):
+  File "C:\Users\Hazem Mrad\Desktop\matchupz-web-integration - Copy\football_analysis-master\utils\video_utils.py", line 143, in process_batch
+    processed_batch = processor.process(frames, fps)
+  File "C:\Users\Hazem Mrad\Desktop\matchupz-web-integration - Copy\football_analysis-master\annotation\football_video_processor.py", line 128, in process
+    annotated_frame = self.annotate(frame, all_tracks)
+  File "C:\Users\Hazem Mrad\Desktop\matchupz-web-integration - Copy\football_analysis-master\annotation\football_video_processor.py", line 163, in annotate
+    combined_frame = self._annotate_possession(combined_frame)
+  File "C:\Users\Hazem Mrad\Desktop\matchupz-web-integration - Copy\football_analysis-master\annotation\football_video_processor.py", line 248, in _annotate_possession
+    possession = self.ball_to_player_assigner.get_ball_possessions()[-1]
+IndexError: list index out of range
+Error processing batch: list index out of range
+
+0: 1280x1280 1 ball, 20 players, 3 referees, 37.6ms
+1: 1280x1280 1 ball, 23 players, 3 referees, 37.6ms
+2: 1280x1280 1 ball, 22 players, 3 referees, 37.6ms
+3: 1280x1280 1 ball, 21 players, 3 referees, 37.6ms
+4: 1280x1280 1 ball, 20 players, 3 referees, 37.6ms
+5: 1280x1280 20 players, 3 referees, 37.6ms
+6: 1280x1280 1 ball, 20 players, 3 referees, 37.6ms
+7: 1280x1280 1 ball, 20 players, 3 referees, 37.6ms
+8: 1280x1280 1 ball, 20 players, 3 referees, 37.6ms
+9: 1280x1280 1 ball, 20 players, 3 referees, 37.6ms
+Speed: 10.5ms preprocess, 37.6ms inference, 1.3ms postprocess per image at shape (1, 3, 1280, 1280)
+
+0: 640x640 1 pitch, 5.2ms
+1: 640x640 1 pitch, 5.2ms
+2: 640x640 1 pitch, 5.2ms
+3: 640x640 1 pitch, 5.2ms
+4: 640x640 1 pitch, 5.2ms
+5: 640x640 1 pitch, 5.2ms
+6: 640x640 1 pitch, 5.2ms
+7: 640x640 1 pitch, 5.2ms
+8: 640x640 1 pitch, 5.2ms
+9: 640x640 1 pitch, 5.2ms
+Speed: 2.7ms preprocess, 5.2ms inference, 1.6ms postprocess per image at shape (1, 3, 640, 640)
+
+0: 1280x1280 1 ball, 20 players, 3 referees, 38.3ms
+1: 1280x1280 1 ball, 20 players, 3 referees, 38.3ms
+2: 1280x1280 1 ball, 20 players, 3 referees, 38.3ms
+3: 1280x1280 1 ball, 20 players, 3 referees, 38.3ms
+4: 1280x1280 1 ball, 20 players, 3 referees, 38.3ms
+5: 1280x1280 20 players, 3 referees, 38.3ms
+6: 1280x1280 21 players, 3 referees, 38.3ms
+7: 1280x1280 1 ball, 20 players, 3 referees, 38.3ms
+8: 1280x1280 1 ball, 20 players, 3 referees, 38.3ms
+9: 1280x1280 1 ball, 20 players, 3 referees, 38.3ms
+Speed: 11.4ms preprocess, 38.3ms inference, 1.4ms postprocess per image at shape (1, 3, 1280, 1280)
+
+
+2025-04-25 02:03:37: Video processing failed: 'C:\Users\Hazem' is not recognized as an internal or external command,
+operable program or batch file.
+2025-04-25 02:08:46: Video processing failed: 'C:\Users\Hazem' is not recognized as an internal or external command,
+operable program or batch file.
+2025-04-25 02:08:53: Video processing failed: 'C:\Users\Hazem' is not recognized as an internal or external command,
+operable program or batch file.
+2025-04-25 02:11:42: exec failed, trying shell_exec
+2025-04-25 02:11:43: Tracking data not generated at: C:\Users\Hazem Mrad\Desktop\matchupz-web-integration - Copy\football_analysis-master\output_videos\tracking_data.json
+2025-04-25 02:13:52: exec failed, trying shell_exec
+2025-04-25 02:13:52: Tracking data not generated at: C:\Users\Hazem Mrad\Desktop\matchupz-web-integration - Copy\football_analysis-master\output_videos\tracking_data.json
+Main log:
+No main.log found
+2025-04-25 02:18:14: exec failed: 'C:\Users\Hazem' is not recognized as an internal or external command,
+operable program or batch file.
+2025-04-25 02:18:27: exec failed: 'C:\Users\Hazem' is not recognized as an internal or external command,
+operable program or batch file.
+2025-04-25 02:21:18: exec failed: 'C:\Users\Hazem' is not recognized as an internal or external command,
+operable program or batch file.
+2025-04-25 02:24:23: Video processing failed: 'C:\Users\Hazem' is not recognized as an internal or external command,
+operable program or batch file.
+2025-04-25 02:25:07: Video processing failed: 'C:\Users\Hazem' is not recognized as an internal or external command,
+operable program or batch file.
+2025-04-25 02:25:11: Video processing failed: 'C:\Users\Hazem' is not recognized as an internal or external command,
+operable program or batch file.
+2025-04-25 02:32:39: Output video not generated at: C:\Users\Hazem Mrad\Desktop\matchupz-web-integration - Copy\football_analysis-master\output_videos\testx.mp4
+2025-04-25 02:32:55: Output video not generated at: C:\Users\Hazem Mrad\Desktop\matchupz-web-integration - Copy\football_analysis-master\output_videos\testx.mp4

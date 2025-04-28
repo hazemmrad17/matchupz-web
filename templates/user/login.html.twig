@@ -1,0 +1,284 @@
+{% extends 'baseF.html.twig' %}
+
+{% block title %}Login - MatchupZ{% endblock %}
+
+{% block body %}
+<div class="container-fluid py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-4 col-md-6 col-sm-8">
+                <div class="card p-4 shadow-sm" style="max-width: 400px; margin: 0 auto;">
+                    <h2 class="text-center mb-4">Login to MatchupZ</h2>
+
+                    <!-- Flash messages -->
+                    {% for label, messages in app.flashes %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ label }} alert-dismissible fade show" role="alert">
+                                {{ message }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+
+                    <!-- Google login button -->
+                    <div class="mb-3 text-center">
+                        <a href="{{ path('connect_google') }}" class="btn btn-outline-primary w-100">
+                            <i class="bx bxl-google"></i> Connexion avec Google
+                        </a>
+                    </div>
+
+                    <hr>
+
+                    <!-- Standard login form -->
+                    <form id="formAuthentication" action="{{ path('app_verif_userF') }}" method="post" novalidate>
+                        <!-- Email -->
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Email</label>
+                            <div class="input-group input-group-merge">
+                                <span class="input-group-text"><i class="bx bx-envelope"></i></span>
+                                <input
+                                    type="text"
+                                    id="username"
+                                    name="_username"
+                                    class="form-control"
+                                    placeholder="Entrez votre email"
+                                    required
+                                />
+                            </div>
+                        </div>
+
+                        <!-- Face ID Button -->
+                        <div class="mb-3 text-center">
+                            <button id="faceIdBtn" type="button" class="btn btn-outline-success w-100">
+                                <i class="bx bx-face"></i> Se connecter avec Face ID
+                            </button>
+                        </div>
+
+                        <!-- Password -->
+                        <div class="mb-3 form-password-toggle">
+                            <label for="password" class="form-label">Mot de passe</label>
+                            <div class="input-group input-group-merge">
+                                <span class="input-group-text"><i class="bx bx-lock-alt"></i></span>
+                                <input
+                                    type="password"
+                                    id="password"
+                                    name="_password"
+                                    class="form-control"
+                                    placeholder="············"
+                                    required
+                                />
+                                <span class="input-group-text cursor-pointer toggle-password"><i class="bx bx-hide"></i></span>
+                            </div>
+                        </div>
+
+                        <!-- reCAPTCHA -->
+                        <div class="mb-3">
+                            {% if recaptcha_site_key is defined and recaptcha_site_key is not empty %}
+                                <div class="g-recaptcha" data-sitekey="{{ recaptcha_site_key }}" data-callback="onRecaptchaSuccess"></div>
+                            {% else %}
+                                <p style="color: red;">Erreur : Clé de site reCAPTCHA non définie.</p>
+                            {% endif %}
+                        </div>
+
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <button type="submit" class="btn btn-primary">Login</button>
+                            <a href="{{ path('app_forgot_password') }}" class="text-muted small">Forgot Password?</a>
+                        </div>
+                    </form>
+
+                    <div class="text-center">
+                        <p class="small">Don't have an account? <a href="{{ path('app_registerF') }}">Register</a></p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('assets/vendor/fonts/boxicons.css') }}" />
+    <style>
+        .g-recaptcha {
+            display: block !important;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+    </style>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <!-- Core JS -->
+    <script src="{{ asset('assets/vendor/libs/jquery/jquery.js') }}"></script>
+    <script src="{{ asset('assets/vendor/libs/popper/popper.js') }}"></script>
+    <script src="{{ asset('assets/vendor/js/bootstrap.js') }}"></script>
+    <script src="{{ asset('assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js') }}"></script>
+    <script src="{{ asset('assets/vendor/js/menu.js') }}"></script>
+
+    <!-- Main JS -->
+    <script src="{{ asset('assets/js/main.js') }}"></script>
+
+    <!-- reCAPTCHA Script -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+    <!-- face-api.js library -->
+    <script defer src="{{ asset('assets/libs/face-api/face-api.min.js') }}"></script>
+
+    <!-- Password Toggle Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const togglePassword = document.querySelector('.toggle-password');
+            const passwordInput = document.getElementById('password');
+            const icon = togglePassword ? togglePassword.querySelector('i') : null;
+
+            if (togglePassword && passwordInput && icon) {
+                togglePassword.addEventListener('click', function() {
+                    const isPassword = passwordInput.getAttribute('type') === 'password';
+                    passwordInput.setAttribute('type', isPassword ? 'text' : 'password');
+                    icon.classList.toggle('bx-hide');
+                    icon.classList.toggle('bx-show');
+                });
+            }
+        });
+
+        function onRecaptchaSuccess(token) {
+            console.log("reCAPTCHA vérifié avec succès. Jeton :", token);
+        }
+    </script>
+
+    <!-- Face ID Script -->
+    <script>
+        async function initFaceId() {
+            console.log('Waiting for face-api.js...');
+
+            // Wait until faceapi is available
+            while (typeof faceapi === 'undefined') {
+                console.log('face-api.js not loaded yet...');
+                await new Promise(resolve => setTimeout(resolve, 100)); // wait 100ms
+            }
+
+            console.log('face-api.js ready.');
+
+            const faceIdBtn = document.getElementById('faceIdBtn');
+            if (!faceIdBtn) {
+                console.error('Face ID button not found.');
+                return;
+            }
+
+            faceIdBtn.addEventListener('click', async function() {
+                const email = document.getElementById('username').value.trim();
+
+                if (!email) {
+                    alert('Veuillez entrer votre email avant d\'utiliser Face ID.');
+                    return;
+                }
+
+                await Promise.all([
+                    faceapi.nets.tinyFaceDetector.loadFromUri('/models'),
+                    faceapi.nets.faceRecognitionNet.loadFromUri('/models'),
+                    faceapi.nets.faceLandmark68Net.loadFromUri('/models')
+                ]);
+
+                // Create video element to show the camera
+                const video = document.createElement('video');
+                video.setAttribute('autoplay', '');
+                video.setAttribute('muted', '');
+                video.setAttribute('playsinline', '');
+                video.style.width = '320px';
+                video.style.height = '240px';
+                video.style.border = '2px solid #00f';
+                video.style.borderRadius = '8px';
+                video.style.display = 'block';
+                video.style.margin = '20px auto';
+                document.body.appendChild(video);
+
+                try {
+                    const stream = await navigator.mediaDevices.getUserMedia({ video: {} });
+                    video.srcObject = stream;
+
+                    video.addEventListener('loadeddata', async () => {
+                        const detection = await faceapi.detectSingleFace(video, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceDescriptor();
+
+                        if (!detection) {
+                            alert("❌ Aucun visage détecté, veuillez réessayer.");
+                            stream.getTracks().forEach(track => track.stop());
+                            video.remove();
+                            return;
+                        }
+
+                        console.log('Visage détecté ✅');
+
+                        const userFaceDescriptor = detection.descriptor;
+
+                        // Call Symfony to get stored user image and role
+                        const formData = new FormData();
+                        formData.append('email', email);
+
+                        fetch('{{ path('app_face_id_authenticate') }}', {
+                            method: 'POST',
+                            body: formData
+                        })
+                        .then(response => response.json())
+                        .then(async data => {
+                            if (!data.success || !data.image) {
+                                alert('Utilisateur non trouvé ou image manquante.');
+                                stream.getTracks().forEach(track => track.stop());
+                                video.remove();
+                                return;
+                            }
+
+                            const referenceImage = await faceapi.bufferToImage(await fetch(`data:image/jpeg;base64,${data.image}`).then(res => res.blob()));
+
+                            const referenceDetection = await faceapi.detectSingleFace(referenceImage, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceDescriptor();
+
+                            if (!referenceDetection) {
+                                alert('Erreur lors du chargement du visage enregistré.');
+                                stream.getTracks().forEach(track => track.stop());
+                                video.remove();
+                                return;
+                            }
+
+                            const distance = faceapi.euclideanDistance(referenceDetection.descriptor, userFaceDescriptor);
+                            console.log('Distance:', distance);
+
+                            if (distance < 0.6) {
+                                alert('✅ Visage reconnu.');
+
+                                let redirectUrl;
+                                if (data.role === 'ADMIN') {
+                                    redirectUrl = '{{ path('app_user_index') }}';
+                                } else if (data.role === 'Utilisateur') {
+                                    redirectUrl = '{{ path('app_acceuil') }}';
+                                } else {
+                                    alert("Role not recognized, redirecting to default page.");
+                                    redirectUrl = '{{ path('app_acceuil') }}'; // Default fallback
+                                }
+                                window.location.href = redirectUrl;
+                            } else {
+                                alert('❌ Authentification échouée : visage non reconnu.');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Erreur:', error);
+                            alert('Erreur serveur.');
+                        })
+                        .finally(() => {
+                            stream.getTracks().forEach(track => track.stop());
+                            video.remove();
+                        });
+                    });
+                } catch (error) {
+                    console.error('Erreur caméra:', error);
+                    alert('Impossible d\'accéder à la caméra.');
+                }
+            });
+        }
+
+        window.addEventListener('load', initFaceId);
+    </script>
+{% endblock %}

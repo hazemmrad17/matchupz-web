@@ -1,0 +1,186 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvel Utilisateur{% endblock %}
+
+{% block searchbar %}
+    {% include 'searchbar.html.twig' %}
+{% endblock %}
+
+{% block content %}
+    <div class="content-wrapper">
+        <div class="container-xxl flex-grow-1 container-p-y">
+            <h4 class="fw-bold py-3 mb-4">
+                <span class="text-muted fw-light">Utilisateurs /</span> Nouvel Utilisateur
+            </h4>
+
+            <div class="col-xl">
+                <div class="card mb-4">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">Ajouter un Nouvel Utilisateur</h5>
+                        <small class="text-muted float-end">Remplir les détails</small>
+                    </div>
+                    <div class="card-body">
+                        {# Affichage des erreurs globales #}
+                        {% if form.vars.errors|length > 0 %}
+                            <div class="alert alert-danger">
+                                <ul>
+                                    {% for error in form.vars.errors %}
+                                        <li>{{ error.message }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        {% endif %}
+
+                        {{ form_start(form, {'attr': {'enctype': 'multipart/form-data', 'id': 'userForm', 'novalidate': 'novalidate'}}) }}
+                            <div class="mb-3">
+                                <label class="form-label" for="user_nom">Nom*</label>
+                                <div class="input-group input-group-merge">
+                                    <span class="input-group-text"><i class="bx bx-user"></i></span>
+                                    {{ form_widget(form.nom, {'attr': {'class': 'form-control', 'placeholder': 'Nom de l\'utilisateur'}}) }}
+                                </div>
+                                {% if form.nom.vars.errors|length > 0 %}
+                                    <div class="text-danger">
+                                        {% for error in form.nom.vars.errors %}
+                                            {{ error.message }}<br>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label" for="user_prenom">Prénom*</label>
+                                <div class="input-group input-group-merge">
+                                    <span class="input-group-text"><i class="bx bx-user"></i></span>
+                                    {{ form_widget(form.prenom, {'attr': {'class': 'form-control', 'placeholder': 'Prénom de l\'utilisateur'}}) }}
+                                </div>
+                                {% if form.prenom.vars.errors|length > 0 %}
+                                    <div class="text-danger">
+                                        {% for error in form.prenom.vars.errors %}
+                                            {{ error.message }}<br>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label" for="user_email">Email*</label>
+                                <div class="input-group input-group-merge">
+                                    <span class="input-group-text"><i class="bx bx-envelope"></i></span>
+                                    {{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder': 'email@gmail.com'}}) }}
+                                </div>
+                                {% if form.email.vars.errors|length > 0 %}
+                                    <div class="text-danger">
+                                        {% for error in form.email.vars.errors %}
+                                            {{ error.message }}<br>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label" for="user_password">Mot de passe*</label>
+                                <div class="input-group input-group-merge">
+                                    <span class="input-group-text"><i class="bx bx-lock-alt"></i></span>
+                                    {{ form_widget(form.password, {'attr': {
+                                        'class': 'form-control',
+                                        'placeholder': 'Mot de passe sécurisé'
+                                    }}) }}
+                                </div>
+                                {% if form.password.vars.errors|length > 0 %}
+                                    <div class="text-danger">
+                                        {% for error in form.password.vars.errors %}
+                                            {{ error.message }}<br>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label" for="user_num_telephone">Téléphone*</label>
+                                <div class="input-group input-group-merge">
+                                    <span class="input-group-text"><i class="bx bx-phone"></i></span>
+                                    {{ form_widget(form.num_telephone, {'attr': {
+                                        'class': 'form-control',
+                                        'placeholder': '12345678'
+                                    }}) }}
+                                </div>
+                                {% if form.num_telephone.vars.errors|length > 0 %}
+                                    <div class="text-danger">
+                                        {% for error in form.num_telephone.vars.errors %}
+                                            {{ error.message }}<br>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label" for="user_date_de_naissance">Date de naissance*</label>
+                                <div class="input-group input-group-merge">
+                                    <span class="input-group-text"><i class="bx bx-calendar"></i></span>
+                                    {{ form_widget(form.date_de_naissance, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                                {% if form.date_de_naissance.vars.errors|length > 0 %}
+                                    <div class="text-danger">
+                                        {% for error in form.date_de_naissance.vars.errors %}
+                                            {{ error.message }}<br>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Genre*</label>
+                                <div class="d-flex gap-4">
+                                    {% for child in form.genre %}
+                                        <div class="form-check">
+                                            {{ form_widget(child, {'attr': {'class': 'form-check-input'}}) }}
+                                            {{ form_label(child, null, {'label_attr': {'class': 'form-check-label'}}) }}
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                {% if form.genre.vars.errors|length > 0 %}
+                                    <div class="text-danger">
+                                        {% for error in form.genre.vars.errors %}
+                                            {{ error.message }}<br>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label" for="user_role">Rôle*</label>
+                                <div class="input-group input-group-merge">
+                                    <span class="input-group-text"><i class="bx bx-cog"></i></span>
+                                    {{ form_widget(form.role, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                                {% if form.role.vars.errors|length > 0 %}
+                                    <div class="text-danger">
+                                        {% for error in form.role.vars.errors %}
+                                            {{ error.message }}<br>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label" for="user_image">Photo de profil</label>
+                                {{ form_widget(form.image, {'attr': {'class': 'form-control'}}) }}
+                                <small class="text-muted">Formats acceptés: JPG, PNG (max 2MB)</small>
+                                {% if form.image.vars.errors|length > 0 %}
+                                    <div class="text-danger">
+                                        {% for error in form.image.vars.errors %}
+                                            {{ error.message }}<br>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary">Créer</button>
+                            <a href="{{ path('app_user_index') }}" class="btn btn-secondary">Annuler</a>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
