@@ -1,29 +1,3 @@
-2025-04-23 22:45:22,885 - INFO - Starting YOLO model loading...
-2025-04-23 22:45:26,074 - INFO - YOLO model loaded successfully in 3.19 seconds
-2025-04-23 22:45:26,074 - DEBUG - Memory usage: 280.74 MB
-2025-04-23 22:45:26,078 - INFO - Testing with image: public\Uploads\materiels\Capture-d-ecran-2025-02-04-092649-67fc71e91e03a.png
-2025-04-23 22:45:26,082 - INFO - Starting object detection for: public\Uploads\materiels\Capture-d-ecran-2025-02-04-092649-67fc71e91e03a.png
-2025-04-23 22:45:26,105 - DEBUG - STREAM b'IHDR' 16 13
-2025-04-23 22:45:26,106 - DEBUG - STREAM b'sRGB' 41 1
-2025-04-23 22:45:26,108 - DEBUG - STREAM b'gAMA' 54 4
-2025-04-23 22:45:26,108 - DEBUG - STREAM b'pHYs' 70 9
-2025-04-23 22:45:26,109 - DEBUG - STREAM b'IDAT' 91 65445
-2025-04-23 22:45:26,110 - DEBUG - Image size: (1814, 795), mode: RGBA
-2025-04-23 22:45:26,111 - DEBUG - Running YOLO detection...
-2025-04-23 22:45:28,957 - DEBUG - YOLO detection completed. Number of results: 1
-2025-04-23 22:45:28,957 - DEBUG - Processing result 1/1
-2025-04-23 22:45:28,963 - INFO - Object detection completed in 2.88 seconds. Found 0 objects
-2025-04-23 22:45:28,963 - DEBUG - Memory usage: 369.16 MB
-2025-04-23 22:45:28,964 - INFO - Starting embedding computation for: public\Uploads\materiels\Capture-d-ecran-2025-02-04-092649-67fc71e91e03a.png
-2025-04-23 22:45:28,964 - DEBUG - Reading and preprocessing image...
-2025-04-23 22:45:28,965 - DEBUG - STREAM b'IHDR' 16 13
-2025-04-23 22:45:28,965 - DEBUG - STREAM b'sRGB' 41 1
-2025-04-23 22:45:28,965 - DEBUG - STREAM b'gAMA' 54 4
-2025-04-23 22:45:28,966 - DEBUG - STREAM b'pHYs' 70 9
-2025-04-23 22:45:28,966 - DEBUG - STREAM b'IDAT' 91 65445
-2025-04-23 22:45:29,000 - DEBUG - Image array shape: (224, 224, 3)
-2025-04-23 22:45:29,000 - DEBUG - Normalizing image...
-2025-04-23 22:45:29,002 - DEBUG - Computing color histogram...
-2025-04-23 22:45:29,005 - DEBUG - Histogram shape: (32,)
-2025-04-23 22:45:29,005 - INFO - Embedding computation completed in 0.04 seconds
-2025-04-23 22:45:29,005 - DEBUG - Memory usage: 372.05 MB
+version https://git-lfs.github.com/spec/v1
+oid sha256:4ef9c121aec1c5a90cd38aa5bd4ed5c54e4cebaf780aa7b174b3be86431dd171
+size 2066

@@ -212,7 +212,7 @@ class __TwigTemplate_08356665be1bdb2d28ed88d028691a0f extends Template
                                 <span class=\"input-group-text\"><i class=\"bx bx-tag\"></i></span>
                                 ";
         // line 57
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 57, $this->source); })()), "type", [], "any", false, false, false, 57), 'widget', ["attr" => ["class" => "form-select"]]);
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 57, $this->source); })()), "type", [], "any", false, false, false, 57), 'widget', ["attr" => ["class" => "form-select", "id" => "materiel_type"]]);
         yield "
                             </div>
                             ";
@@ -332,7 +332,7 @@ class __TwigTemplate_08356665be1bdb2d28ed88d028691a0f extends Template
                                 <span class=\"input-group-text\"><i class=\"bx bx-building\"></i></span>
                                 ";
         // line 122
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 122, $this->source); })()), "fournisseur", [], "any", false, false, false, 122), 'widget', ["attr" => ["class" => "form-select"]]);
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 122, $this->source); })()), "fournisseur", [], "any", false, false, false, 122), 'widget', ["attr" => ["class" => "form-select", "id" => "materiel_fournisseur"]]);
         yield "
                             </div>
                             ";
@@ -387,7 +387,7 @@ class __TwigTemplate_08356665be1bdb2d28ed88d028691a0f extends Template
         // line 148
         yield "                            <!-- Bouton d'analyse et conteneur pour les résultats -->
                             <div class=\"mt-3\">
-                                <button type=\"button\" class=\"btn btn-outline-info\" id=\"analyzeImage\">
+                                <button type=\"button\" class=\"btn btn-outline-info\" id=\"analyzeImageAI\">
                                     <i class=\"bx bx-brain me-1\"></i> Analyser l'image avec IA
                                 </button>
                                 <div id=\"imageAnalysisResult\" class=\"mt-2\"></div>
@@ -421,38 +421,64 @@ class __TwigTemplate_08356665be1bdb2d28ed88d028691a0f extends Template
     </div>
 </div>
 
+<script>
+// --- AJAX update of fournisseur when type changes ---
+document.addEventListener('DOMContentLoaded', function() {
+    const typeSelect = document.getElementById('materiel_type');
+    const fournisseurSelect = document.getElementById('materiel_fournisseur');
+    if (typeSelect && fournisseurSelect) {
+        typeSelect.addEventListener('change', function() {
+            const selectedType = this.value;
+            if (!selectedType) {
+                fournisseurSelect.innerHTML = '<option value=\"\">Sélectionner un fournisseur</option>';
+                return;
+            }
+            fetch('/materiel/fournisseurs-by-type/' + encodeURIComponent(selectedType))
+                .then(response => response.json())
+                .then(data => {
+                    let options = '<option value=\"\">Sélectionner un fournisseur</option>';
+                    data.forEach(f => {
+                        options += `<option value=\"\${f.id}\">\${f.nom}</option>`;
+                    });
+                    fournisseurSelect.innerHTML = options;
+                });
+        });
+    }
+});
+</script>
+
 <!-- Script JavaScript pour l'analyse d'image -->
 <script>
-    document.getElementById('analyzeImage').addEventListener('click', async () => {
+    document.getElementById('analyzeImageAI').addEventListener('click', async () => {
         const formData = new FormData();
         const imageInput = document.querySelector('input[name=\"materiel[image]\"]');
-        console.log('Input image trouvé:', imageInput); // Log pour déboguer
+        console.log('Input image trouvé:', imageInput);
         if (!imageInput || !imageInput.files[0]) {
             alert('Veuillez sélectionner une image.');
             return;
         }
         formData.append('image', imageInput.files[0]);
-        console.log('Fichier image ajouté:', imageInput.files[0].name); // Log pour déboguer
+        console.log('Fichier image ajouté:', imageInput.files[0].name);
 
-        // Afficher un indicateur de chargement
         const resultDiv = document.getElementById('imageAnalysisResult');
         resultDiv.innerHTML = '<div class=\"spinner-border text-primary\" role=\"status\"><span class=\"visually-hidden\">Chargement...</span></div>';
 
         try {
             console.log('Envoi de la requête à:', '";
-        // line 189
-        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_materiel_analyze_image");
-        yield "'); // Log pour vérifier l'URL
+        // line 214
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_materiel_analyze_image_AI");
+        yield "');
             const response = await fetch('";
-        // line 190
-        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_materiel_analyze_image");
+        // line 215
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_materiel_analyze_image_AI");
         yield "', {
                 method: 'POST',
                 body: formData,
             });
-            console.log('Statut de la réponse:', response.status); // Log pour déboguer
+            console.log('Statut de la réponse:', response.status);
             if (!response.ok) {
-                throw new Error(`Erreur HTTP: \${response.status} \${response.statusText}`);
+                const errorData = await response.json();
+                throw new Error(errorData.error || `Erreur HTTP: \${response.status} \${response.statusText}`);
             }
             const data = await response.json();
             if (data.error) {
@@ -465,11 +491,9 @@ class __TwigTemplate_08356665be1bdb2d28ed88d028691a0f extends Template
                         <strong>Type suggéré :</strong> \${data.suggestedType || 'Non déterminé'}
                     </div>
                 `;
-                // Pré-remplir le champ type si un type est suggéré
                 if (data.suggestedType) {
                     const typeSelect = document.querySelector('select[name=\"materiel[type]\"]');
                     typeSelect.value = data.suggestedType;
-                    // Vérifier si le type sélectionné correspond
                     if (typeSelect.value && data.suggestedType !== typeSelect.value) {
                         resultDiv.innerHTML += `
                             <div class=\"alert alert-warning\">
@@ -518,7 +542,7 @@ class __TwigTemplate_08356665be1bdb2d28ed88d028691a0f extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  448 => 190,  444 => 189,  416 => 164,  411 => 162,  408 => 161,  402 => 160,  388 => 148,  382 => 145,  378 => 143,  375 => 142,  369 => 139,  366 => 138,  364 => 137,  359 => 135,  351 => 129,  345 => 126,  342 => 125,  340 => 124,  335 => 122,  327 => 116,  321 => 113,  318 => 112,  316 => 111,  311 => 109,  303 => 103,  297 => 100,  294 => 99,  292 => 98,  287 => 96,  279 => 90,  273 => 87,  270 => 86,  268 => 85,  263 => 83,  255 => 77,  249 => 74,  246 => 73,  244 => 72,  239 => 70,  231 => 64,  225 => 61,  222 => 60,  220 => 59,  215 => 57,  207 => 51,  201 => 48,  198 => 47,  196 => 46,  191 => 44,  183 => 39,  180 => 38,  174 => 35,  171 => 34,  169 => 33,  162 => 28,  158 => 26,  154 => 24,  152 => 23,  144 => 17,  138 => 16,  132 => 12,  119 => 11,  103 => 8,  90 => 7,  78 => 4,  65 => 3,  42 => 1,);
+        return array (  473 => 215,  469 => 214,  416 => 164,  411 => 162,  408 => 161,  402 => 160,  388 => 148,  382 => 145,  378 => 143,  375 => 142,  369 => 139,  366 => 138,  364 => 137,  359 => 135,  351 => 129,  345 => 126,  342 => 125,  340 => 124,  335 => 122,  327 => 116,  321 => 113,  318 => 112,  316 => 111,  311 => 109,  303 => 103,  297 => 100,  294 => 99,  292 => 98,  287 => 96,  279 => 90,  273 => 87,  270 => 86,  268 => 85,  263 => 83,  255 => 77,  249 => 74,  246 => 73,  244 => 72,  239 => 70,  231 => 64,  225 => 61,  222 => 60,  220 => 59,  215 => 57,  207 => 51,  201 => 48,  198 => 47,  196 => 46,  191 => 44,  183 => 39,  180 => 38,  174 => 35,  171 => 34,  169 => 33,  162 => 28,  158 => 26,  154 => 24,  152 => 23,  144 => 17,  138 => 16,  132 => 12,  119 => 11,  103 => 8,  90 => 7,  78 => 4,  65 => 3,  42 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -579,7 +603,7 @@ class __TwigTemplate_08356665be1bdb2d28ed88d028691a0f extends Template
                             <label class=\"form-label\" for=\"materiel_type\">Type</label>
                             <div class=\"input-group input-group-merge\">
                                 <span class=\"input-group-text\"><i class=\"bx bx-tag\"></i></span>
-                                {{ form_widget(form.type, {'attr': {'class': 'form-select'}}) }}
+                                {{ form_widget(form.type, {'attr': {'class': 'form-select', 'id': 'materiel_type'}}) }}
                             </div>
                             {% if form_errors(form.type) %}
                                 <div class=\"text-danger\">
@@ -644,7 +668,7 @@ class __TwigTemplate_08356665be1bdb2d28ed88d028691a0f extends Template
                             <label class=\"form-label\" for=\"materiel_fournisseur\">Fournisseur</label>
                             <div class=\"input-group input-group-merge\">
                                 <span class=\"input-group-text\"><i class=\"bx bx-building\"></i></span>
-                                {{ form_widget(form.fournisseur, {'attr': {'class': 'form-select'}}) }}
+                                {{ form_widget(form.fournisseur, {'attr': {'class': 'form-select', 'id': 'materiel_fournisseur'}}) }}
                             </div>
                             {% if form_errors(form.fournisseur) %}
                                 <div class=\"text-danger\">
@@ -672,7 +696,7 @@ class __TwigTemplate_08356665be1bdb2d28ed88d028691a0f extends Template
                             {% endif %}
                             <!-- Bouton d'analyse et conteneur pour les résultats -->
                             <div class=\"mt-3\">
-                                <button type=\"button\" class=\"btn btn-outline-info\" id=\"analyzeImage\">
+                                <button type=\"button\" class=\"btn btn-outline-info\" id=\"analyzeImageAI\">
                                     <i class=\"bx bx-brain me-1\"></i> Analyser l'image avec IA
                                 </button>
                                 <div id=\"imageAnalysisResult\" class=\"mt-2\"></div>
@@ -693,32 +717,58 @@ class __TwigTemplate_08356665be1bdb2d28ed88d028691a0f extends Template
     </div>
 </div>
 
+<script>
+// --- AJAX update of fournisseur when type changes ---
+document.addEventListener('DOMContentLoaded', function() {
+    const typeSelect = document.getElementById('materiel_type');
+    const fournisseurSelect = document.getElementById('materiel_fournisseur');
+    if (typeSelect && fournisseurSelect) {
+        typeSelect.addEventListener('change', function() {
+            const selectedType = this.value;
+            if (!selectedType) {
+                fournisseurSelect.innerHTML = '<option value=\"\">Sélectionner un fournisseur</option>';
+                return;
+            }
+            fetch('/materiel/fournisseurs-by-type/' + encodeURIComponent(selectedType))
+                .then(response => response.json())
+                .then(data => {
+                    let options = '<option value=\"\">Sélectionner un fournisseur</option>';
+                    data.forEach(f => {
+                        options += `<option value=\"\${f.id}\">\${f.nom}</option>`;
+                    });
+                    fournisseurSelect.innerHTML = options;
+                });
+        });
+    }
+});
+</script>
+
 <!-- Script JavaScript pour l'analyse d'image -->
 <script>
-    document.getElementById('analyzeImage').addEventListener('click', async () => {
+    document.getElementById('analyzeImageAI').addEventListener('click', async () => {
         const formData = new FormData();
         const imageInput = document.querySelector('input[name=\"materiel[image]\"]');
-        console.log('Input image trouvé:', imageInput); // Log pour déboguer
+        console.log('Input image trouvé:', imageInput);
         if (!imageInput || !imageInput.files[0]) {
             alert('Veuillez sélectionner une image.');
             return;
         }
         formData.append('image', imageInput.files[0]);
-        console.log('Fichier image ajouté:', imageInput.files[0].name); // Log pour déboguer
+        console.log('Fichier image ajouté:', imageInput.files[0].name);
 
-        // Afficher un indicateur de chargement
         const resultDiv = document.getElementById('imageAnalysisResult');
         resultDiv.innerHTML = '<div class=\"spinner-border text-primary\" role=\"status\"><span class=\"visually-hidden\">Chargement...</span></div>';
 
         try {
-            console.log('Envoi de la requête à:', '{{ path('app_materiel_analyze_image') }}'); // Log pour vérifier l'URL
-            const response = await fetch('{{ path('app_materiel_analyze_image') }}', {
+            console.log('Envoi de la requête à:', '{{ path('app_materiel_analyze_image_AI') }}');
+            const response = await fetch('{{ path('app_materiel_analyze_image_AI') }}', {
                 method: 'POST',
                 body: formData,
             });
-            console.log('Statut de la réponse:', response.status); // Log pour déboguer
+            console.log('Statut de la réponse:', response.status);
             if (!response.ok) {
-                throw new Error(`Erreur HTTP: \${response.status} \${response.statusText}`);
+                const errorData = await response.json();
+                throw new Error(errorData.error || `Erreur HTTP: \${response.status} \${response.statusText}`);
             }
             const data = await response.json();
             if (data.error) {
@@ -731,11 +781,9 @@ class __TwigTemplate_08356665be1bdb2d28ed88d028691a0f extends Template
                         <strong>Type suggéré :</strong> \${data.suggestedType || 'Non déterminé'}
                     </div>
                 `;
-                // Pré-remplir le champ type si un type est suggéré
                 if (data.suggestedType) {
                     const typeSelect = document.querySelector('select[name=\"materiel[type]\"]');
                     typeSelect.value = data.suggestedType;
-                    // Vérifier si le type sélectionné correspond
                     if (typeSelect.value && data.suggestedType !== typeSelect.value) {
                         resultDiv.innerHTML += `
                             <div class=\"alert alert-warning\">

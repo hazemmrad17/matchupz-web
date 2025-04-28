@@ -5,15 +5,18 @@ parameters:
     materiels_directory: '%kernel.project_dir%/public/uploads/materiels'
     slack.webhook_url: '%env(SLACK_WEBHOOK_URL)%'
     app.base_url: '%env(APP_BASE_URL)%'
+    roboflow_api_key: '%env(ROBOFLOW_API_KEY)%'
+    roboflow_inference_url: '%env(ROBOFLOW_INFERENCE_URL)%'
 
 services:
-
     _defaults:
         autowire: true
         autoconfigure: true
         bind:
             $botToken: '%env(SLACK_BOT_TOKEN)%'
             $defaultChannel: '#logistique'
+            $roboflowApiKey: '%roboflow_api_key%'
+            $roboflowInferenceUrl: '%roboflow_inference_url%'
 
     App\:
         resource: '../src/'
@@ -21,3 +24,11 @@ services:
             - '../src/DependencyInjection/'
             - '../src/Entity/'
             - '../src/Kernel.php'
+
+    App\EventListener\JsonExceptionListener:
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception }
+            
+    App\Service\RoboflowService:
+        arguments:
+            $httpClient: '@http_client'

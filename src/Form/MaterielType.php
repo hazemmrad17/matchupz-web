@@ -13,11 +13,18 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Validator\Constraints\GreaterThan;
 
 class MaterielType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        // Debug: show what value 'edit' has
+        if (isset($options['edit'])) {
+            \Symfony\Component\VarDumper\VarDumper::dump(['edit' => $options['edit']]);
+        } else {
+            \Symfony\Component\VarDumper\VarDumper::dump(['edit' => 'NOT SET']);
+        }
         $builder
             ->add('nom', TextType::class, [
                 'label' => 'Nom du Matériel',
@@ -43,7 +50,13 @@ class MaterielType extends AbstractType
                 'label' => 'Quantité',
                 'required' => true,
                 'empty_data' => 6,
-                'attr' => ['class' => 'form-control', 'placeholder' => 'Quantité en stock (> 5)'],
+                'attr' => ['class' => 'form-control', 'placeholder' => 'Quantité en stock'],
+                'constraints' => isset($options['edit']) && $options['edit'] ? [] : [
+                    new GreaterThan([
+                        'value' => 5,
+                        'message' => 'La quantité doit être strictement supérieure à 5.'
+                    ])
+                ],
             ])
             ->add('etat', ChoiceType::class, [
                 'label' => 'État',
@@ -97,6 +110,7 @@ class MaterielType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Materiel::class,
+            'edit' => false,
         ]);
     }
 }

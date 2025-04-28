@@ -54,7 +54,7 @@
                             <label class="form-label" for="materiel_type">Type</label>
                             <div class="input-group input-group-merge">
                                 <span class="input-group-text"><i class="bx bx-tag"></i></span>
-                                {{ form_widget(form.type, {'attr': {'class': 'form-select'}}) }}
+                                {{ form_widget(form.type, {'attr': {'class': 'form-select', 'id': 'materiel_type'}}) }}
                             </div>
                             {% if form_errors(form.type) %}
                                 <div class="text-danger">
@@ -119,7 +119,7 @@
                             <label class="form-label" for="materiel_fournisseur">Fournisseur</label>
                             <div class="input-group input-group-merge">
                                 <span class="input-group-text"><i class="bx bx-building"></i></span>
-                                {{ form_widget(form.fournisseur, {'attr': {'class': 'form-select'}}) }}
+                                {{ form_widget(form.fournisseur, {'attr': {'class': 'form-select', 'id': 'materiel_fournisseur'}}) }}
                             </div>
                             {% if form_errors(form.fournisseur) %}
                                 <div class="text-danger">
@@ -147,7 +147,7 @@
                             {% endif %}
                             <!-- Bouton d'analyse et conteneur pour les résultats -->
                             <div class="mt-3">
-                                <button type="button" class="btn btn-outline-info" id="analyzeImage">
+                                <button type="button" class="btn btn-outline-info" id="analyzeImageAI">
                                     <i class="bx bx-brain me-1"></i> Analyser l'image avec IA
                                 </button>
                                 <div id="imageAnalysisResult" class="mt-2"></div>
@@ -168,32 +168,58 @@
     </div>
 </div>
 
+<script>
+// --- AJAX update of fournisseur when type changes ---
+document.addEventListener('DOMContentLoaded', function() {
+    const typeSelect = document.getElementById('materiel_type');
+    const fournisseurSelect = document.getElementById('materiel_fournisseur');
+    if (typeSelect && fournisseurSelect) {
+        typeSelect.addEventListener('change', function() {
+            const selectedType = this.value;
+            if (!selectedType) {
+                fournisseurSelect.innerHTML = '<option value="">Sélectionner un fournisseur</option>';
+                return;
+            }
+            fetch('/materiel/fournisseurs-by-type/' + encodeURIComponent(selectedType))
+                .then(response => response.json())
+                .then(data => {
+                    let options = '<option value="">Sélectionner un fournisseur</option>';
+                    data.forEach(f => {
+                        options += `<option value="${f.id}">${f.nom}</option>`;
+                    });
+                    fournisseurSelect.innerHTML = options;
+                });
+        });
+    }
+});
+</script>
+
 <!-- Script JavaScript pour l'analyse d'image -->
 <script>
-    document.getElementById('analyzeImage').addEventListener('click', async () => {
+    document.getElementById('analyzeImageAI').addEventListener('click', async () => {
         const formData = new FormData();
         const imageInput = document.querySelector('input[name="materiel[image]"]');
-        console.log('Input image trouvé:', imageInput); // Log pour déboguer
+        console.log('Input image trouvé:', imageInput);
         if (!imageInput || !imageInput.files[0]) {
             alert('Veuillez sélectionner une image.');
             return;
         }
         formData.append('image', imageInput.files[0]);
-        console.log('Fichier image ajouté:', imageInput.files[0].name); // Log pour déboguer
+        console.log('Fichier image ajouté:', imageInput.files[0].name);
 
-        // Afficher un indicateur de chargement
         const resultDiv = document.getElementById('imageAnalysisResult');
         resultDiv.innerHTML = '<div class="spinner-border text-primary" role="status"><span class="visually-hidden">Chargement...</span></div>';
 
         try {
-            console.log('Envoi de la requête à:', '{{ path('app_materiel_analyze_image') }}'); // Log pour vérifier l'URL
-            const response = await fetch('{{ path('app_materiel_analyze_image') }}', {
+            console.log('Envoi de la requête à:', '{{ path('app_materiel_analyze_image_AI') }}');
+            const response = await fetch('{{ path('app_materiel_analyze_image_AI') }}', {
                 method: 'POST',
                 body: formData,
             });
-            console.log('Statut de la réponse:', response.status); // Log pour déboguer
+            console.log('Statut de la réponse:', response.status);
             if (!response.ok) {
-                throw new Error(`Erreur HTTP: ${response.status} ${response.statusText}`);
+                const errorData = await response.json();
+                throw new Error(errorData.error || `Erreur HTTP: ${response.status} ${response.statusText}`);
             }
             const data = await response.json();
             if (data.error) {
@@ -206,11 +232,9 @@
                         <strong>Type suggéré :</strong> ${data.suggestedType || 'Non déterminé'}
                     </div>
                 `;
-                // Pré-remplir le champ type si un type est suggéré
                 if (data.suggestedType) {
                     const typeSelect = document.querySelector('select[name="materiel[type]"]');
                     typeSelect.value = data.suggestedType;
-                    // Vérifier si le type sélectionné correspond
                     if (typeSelect.value && data.suggestedType !== typeSelect.value) {
                         resultDiv.innerHTML += `
                             <div class="alert alert-warning">

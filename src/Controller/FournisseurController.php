@@ -110,13 +110,18 @@ public function indexF(
     arsort($locationDistribution);
     $locationDistribution = array_slice($locationDistribution, 0, 5);
     
+    // Trouver le meilleur fournisseur (le plus de matériels)
+    $topSuppliers = $repository->getTopSuppliersByMaterialCount();
+    $bestSupplier = $topSuppliers[0] ?? null;
+
     return $this->render('fournisseur/indexF.html.twig', [
         'pagination' => $pagination,
         'totalSuppliers' => $totalSuppliers,
         'categoriesCount' => count($categoryDistribution),
         'emailCoverage' => $this->calculateEmailCoverage($allSuppliers, $totalSuppliers),
         'categoryDistribution' => $categoryDistribution,
-        'locationDistribution' => $locationDistribution
+        'locationDistribution' => $locationDistribution,
+        'bestSupplier' => $bestSupplier
     ]);
 }
     

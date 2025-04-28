@@ -9,8 +9,8 @@
     <parameter key="kernel.runtime_mode.cli">%env(not:default:kernel.runtime_mode.web:)%</parameter>
     <parameter key="kernel.runtime_mode.worker">%env(bool:default::key:worker:default:kernel.runtime_mode:)%</parameter>
     <parameter key="kernel.debug">true</parameter>
-    <parameter key="kernel.build_dir">C:\Users\ibtis\Downloads\matchupz-web-joueur\matchupz-web-joueur\var\cache\dev</parameter>
-    <parameter key="kernel.cache_dir">C:\Users\ibtis\Downloads\matchupz-web-joueur\matchupz-web-joueur\var\cache\dev</parameter>
+    <parameter key="kernel.build_dir">C:/Users/ibtis/Downloads/matchupz-web-joueur/matchupz-web-joueur/var/cache/dev</parameter>
+    <parameter key="kernel.cache_dir">C:/Users/ibtis/Downloads/matchupz-web-joueur/matchupz-web-joueur/var/cache/dev</parameter>
     <parameter key="kernel.logs_dir">C:\Users\ibtis\Downloads\matchupz-web-joueur\matchupz-web-joueur\var\log</parameter>
     <parameter key="kernel.bundles" type="collection">
       <parameter key="FrameworkBundle">Symfony\Bundle\FrameworkBundle\FrameworkBundle</parameter>
@@ -99,6 +99,8 @@
     <parameter key="materiels_directory">C:\Users\ibtis\Downloads\matchupz-web-joueur\matchupz-web-joueur/public/uploads/materiels</parameter>
     <parameter key="slack.webhook_url">%env(SLACK_WEBHOOK_URL)%</parameter>
     <parameter key="app.base_url">%env(APP_BASE_URL)%</parameter>
+    <parameter key="roboflow_api_key">%env(ROBOFLOW_API_KEY)%</parameter>
+    <parameter key="roboflow_inference_url">%env(ROBOFLOW_INFERENCE_URL)%</parameter>
     <parameter key="event_dispatcher.event_aliases" type="collection">
       <parameter key="Symfony\Component\Console\Event\ConsoleCommandEvent">console.command</parameter>
       <parameter key="Symfony\Component\Console\Event\ConsoleErrorEvent">console.error</parameter>
@@ -136,15 +138,15 @@
     <parameter key="translator.logging">false</parameter>
     <parameter key="translator.default_path">C:\Users\ibtis\Downloads\matchupz-web-joueur\matchupz-web-joueur/translations</parameter>
     <parameter key="debug.error_handler.throw_at">-1</parameter>
-    <parameter key="debug.container.dump">C:\Users\ibtis\Downloads\matchupz-web-joueur\matchupz-web-joueur\var\cache\dev/App_KernelDevDebugContainer.xml</parameter>
+    <parameter key="debug.container.dump">C:/Users/ibtis/Downloads/matchupz-web-joueur/matchupz-web-joueur/var/cache/dev/App_KernelDevDebugContainer.xml</parameter>
     <parameter key="router.request_context.host">localhost</parameter>
     <parameter key="router.request_context.scheme">http</parameter>
     <parameter key="router.request_context.base_url"></parameter>
     <parameter key="router.resource">kernel::loadRoutes</parameter>
-    <parameter key="router.cache_dir">C:\Users\ibtis\Downloads\matchupz-web-joueur\matchupz-web-joueur\var\cache\dev</parameter>
+    <parameter key="router.cache_dir">C:/Users/ibtis/Downloads/matchupz-web-joueur/matchupz-web-joueur/var/cache/dev</parameter>
     <parameter key="request_listener.http_port">80</parameter>
     <parameter key="request_listener.https_port">443</parameter>
-    <parameter key="serializer.mapping.cache.file">C:\Users\ibtis\Downloads\matchupz-web-joueur\matchupz-web-joueur\var\cache\dev/serialization.php</parameter>
+    <parameter key="serializer.mapping.cache.file">C:/Users/ibtis/Downloads/matchupz-web-joueur/matchupz-web-joueur/var/cache/dev/serialization.php</parameter>
     <parameter key="cache.prefix.seed">_C:\Users\ibtis\Downloads\matchupz-web-joueur\matchupz-web-joueur.App_KernelDevDebugContainer</parameter>
     <parameter key="session.metadata.storage_key">_sf2_meta</parameter>
     <parameter key="session.storage.options" type="collection">
@@ -158,11 +160,11 @@
     <parameter key="session.metadata.update_threshold">0</parameter>
     <parameter key="form.type_extension.csrf.enabled">true</parameter>
     <parameter key="form.type_extension.csrf.field_name">_token</parameter>
-    <parameter key="validator.mapping.cache.file">C:\Users\ibtis\Downloads\matchupz-web-joueur\matchupz-web-joueur\var\cache\dev/validation.php</parameter>
+    <parameter key="validator.mapping.cache.file">C:/Users/ibtis/Downloads/matchupz-web-joueur/matchupz-web-joueur/var/cache/dev/validation.php</parameter>
     <parameter key="validator.translation_domain">validators</parameter>
     <parameter key="profiler_listener.only_exceptions">false</parameter>
     <parameter key="profiler_listener.only_main_requests">false</parameter>
-    <parameter key="profiler.storage.dsn">file:C:\Users\ibtis\Downloads\matchupz-web-joueur\matchupz-web-joueur\var\cache\dev/profiler</parameter>
+    <parameter key="profiler.storage.dsn">file:C:/Users/ibtis/Downloads/matchupz-web-joueur/matchupz-web-joueur/var/cache/dev/profiler</parameter>
     <parameter key="doctrine.dbal.configuration.class">Doctrine\DBAL\Configuration</parameter>
     <parameter key="doctrine.data_collector.class">Doctrine\Bundle\DoctrineBundle\DataCollector\DoctrineDataCollector</parameter>
     <parameter key="doctrine.dbal.connection.event_manager.class">Symfony\Bridge\Doctrine\ContainerAwareEventManager</parameter>
@@ -232,7 +234,7 @@
     <parameter key="doctrine.orm.second_level_cache.regions_configuration.class">Doctrine\ORM\Cache\RegionsConfiguration</parameter>
     <parameter key="doctrine.orm.auto_generate_proxy_classes">true</parameter>
     <parameter key="doctrine.orm.enable_lazy_ghost_objects">true</parameter>
-    <parameter key="doctrine.orm.proxy_dir">C:\Users\ibtis\Downloads\matchupz-web-joueur\matchupz-web-joueur\var\cache\dev/doctrine/orm/Proxies</parameter>
+    <parameter key="doctrine.orm.proxy_dir">C:/Users/ibtis/Downloads/matchupz-web-joueur/matchupz-web-joueur/var/cache/dev/doctrine/orm/Proxies</parameter>
     <parameter key="doctrine.orm.proxy_namespace">Proxies</parameter>
     <parameter key="doctrine.migrations.preferred_em">null</parameter>
     <parameter key="doctrine.migrations.preferred_connection">null</parameter>
@@ -401,21 +403,21 @@
       <tag name="container.service_subscriber"/>
       <argument type="service" id="doctrine.orm.default_entity_manager"/>
       <call method="setContainer">
-        <argument type="service" id=".service_locator.Jk7HJNj.App\Controller\ClubController"/>
+        <argument type="service" id=".service_locator.PWcV3ef.App\Controller\ClubController"/>
       </call>
     </service>
     <service id="App\Controller\EspacesportifController" class="App\Controller\EspacesportifController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
       <call method="setContainer">
-        <argument type="service" id=".service_locator.Jk7HJNj.App\Controller\EspacesportifController"/>
+        <argument type="service" id=".service_locator.PWcV3ef.App\Controller\EspacesportifController"/>
       </call>
     </service>
     <service id="App\Controller\EvaluationPhysiqueController" class="App\Controller\EvaluationPhysiqueController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
       <call method="setContainer">
-        <argument type="service" id=".service_locator.Jk7HJNj.App\Controller\EvaluationPhysiqueController"/>
+        <argument type="service" id=".service_locator.PWcV3ef.App\Controller\EvaluationPhysiqueController"/>
       </call>
     </service>
     <service id="App\Controller\FournisseurController" class="App\Controller\FournisseurController" public="true" autowire="true" autoconfigure="true">
@@ -423,7 +425,7 @@
       <tag name="container.service_subscriber"/>
       <argument type="service" id="doctrine.orm.default_entity_manager"/>
       <call method="setContainer">
-        <argument type="service" id=".service_locator.Jk7HJNj.App\Controller\FournisseurController"/>
+        <argument type="service" id=".service_locator.PWcV3ef.App\Controller\FournisseurController"/>
       </call>
     </service>
     <service id="App\Controller\HistoriqueClubController" class="App\Controller\HistoriqueClubController" public="true" autowire="true" autoconfigure="true">
@@ -431,14 +433,14 @@
       <tag name="container.service_subscriber"/>
       <argument type="service" id="doctrine.orm.default_entity_manager"/>
       <call method="setContainer">
-        <argument type="service" id=".service_locator.Jk7HJNj.App\Controller\HistoriqueClubController"/>
+        <argument type="service" id=".service_locator.PWcV3ef.App\Controller\HistoriqueClubController"/>
       </call>
     </service>
     <service id="App\Controller\HomeController" class="App\Controller\HomeController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
       <call method="setContainer">
-        <argument type="service" id=".service_locator.Jk7HJNj.App\Controller\HomeController"/>
+        <argument type="service" id=".service_locator.PWcV3ef.App\Controller\HomeController"/>
       </call>
     </service>
     <service id="App\Controller\JoueurController" class="App\Controller\JoueurController" public="true" autowire="true" autoconfigure="true">
@@ -446,7 +448,7 @@
       <tag name="container.service_subscriber"/>
       <argument type="service" id="doctrine.orm.default_entity_manager"/>
       <call method="setContainer">
-        <argument type="service" id=".service_locator.Jk7HJNj.App\Controller\JoueurController"/>
+        <argument type="service" id=".service_locator.PWcV3ef.App\Controller\JoueurController"/>
       </call>
     </service>
     <service id="App\Controller\MaterielController" class="App\Controller\MaterielController" public="true" autowire="true" autoconfigure="true">
@@ -456,21 +458,21 @@
       <argument type="service" id="knp_paginator"/>
       <argument type="service" id="monolog.logger"/>
       <call method="setContainer">
-        <argument type="service" id=".service_locator.Jk7HJNj.App\Controller\MaterielController"/>
+        <argument type="service" id=".service_locator.PWcV3ef.App\Controller\MaterielController"/>
       </call>
     </service>
     <service id="App\Controller\PerformanceJoueurController" class="App\Controller\PerformanceJoueurController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
       <call method="setContainer">
-        <argument type="service" id=".service_locator.Jk7HJNj.App\Controller\PerformanceJoueurController"/>
+        <argument type="service" id=".service_locator.PWcV3ef.App\Controller\PerformanceJoueurController"/>
       </call>
     </service>
     <service id="App\Controller\ReservationController" class="App\Controller\ReservationController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
       <call method="setContainer">
-        <argument type="service" id=".service_locator.Jk7HJNj.App\Controller\ReservationController"/>
+        <argument type="service" id=".service_locator.PWcV3ef.App\Controller\ReservationController"/>
       </call>
     </service>
     <service id="App\Controller\SportController" class="App\Controller\SportController" public="true" autowire="true" autoconfigure="true">
@@ -478,12 +480,15 @@
       <tag name="container.service_subscriber"/>
       <argument type="service" id="doctrine.orm.default_entity_manager"/>
       <call method="setContainer">
-        <argument type="service" id=".service_locator.Jk7HJNj.App\Controller\SportController"/>
+        <argument type="service" id=".service_locator.PWcV3ef.App\Controller\SportController"/>
       </call>
     </service>
     <service id="App\Doctrine\DBAL\Types\EnumType" class="App\Doctrine\DBAL\Types\EnumType" autowire="true" autoconfigure="true"/>
     <service id="App\Doctrine\TimestampDiffFunction" class="App\Doctrine\TimestampDiffFunction" autowire="true" autoconfigure="true">
       <tag name="container.error" message="Cannot autowire service &quot;App\Doctrine\TimestampDiffFunction&quot;: argument &quot;$name&quot; of method &quot;Doctrine\ORM\Query\AST\Functions\FunctionNode::__construct()&quot; is type-hinted &quot;string&quot;, you should configure its value explicitly."/>
+    </service>
+    <service id="App\EventListener\JsonExceptionListener" class="App\EventListener\JsonExceptionListener" autowire="true" autoconfigure="true">
+      <tag name="kernel.event_listener" event="kernel.exception"/>
     </service>
     <service id="App\Form\ClubType" class="App\Form\ClubType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
@@ -583,6 +588,11 @@
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
     </service>
+    <service id="App\Service\RoboflowService" class="App\Service\RoboflowService" autowire="true" autoconfigure="true">
+      <argument type="service" id=".debug.http_client"/>
+      <argument type="service" id="parameter_bag"/>
+      <argument type="service" id="monolog.logger"/>
+    </service>
     <service id="App\Service\SlackNotifier" class="App\Service\SlackNotifier" autowire="true" autoconfigure="true">
       <argument>%env(SLACK_BOT_TOKEN)%</argument>
       <argument type="service" id="monolog.logger"/>
@@ -615,7 +625,7 @@
     </service>
     <service id="argument_resolver.service" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
       <tag priority="-50" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">controller.argument_value_resolver</tag>
-      <argument type="service" id=".service_locator.dhP8mHT"/>
+      <argument type="service" id=".service_locator.yXMlTUK"/>
     </service>
     <service id="argument_resolver.default" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">
       <tag priority="-100" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">controller.argument_value_resolver</tag>
@@ -698,7 +708,7 @@
       </argument>
     </service>
     <service id="http_cache.store" class="Symfony\Component\HttpKernel\HttpCache\Store">
-      <argument>C:\Users\ibtis\Downloads\matchupz-web-joueur\matchupz-web-joueur\var\cache\dev/http_cache</argument>
+      <argument>C:/Users/ibtis/Downloads/matchupz-web-joueur/matchupz-web-joueur/var/cache/dev/http_cache</argument>
     </service>
     <service id="url_helper" class="Symfony\Component\HttpFoundation\UrlHelper">
       <argument type="service" id="request_stack"/>
@@ -708,7 +718,7 @@
       <tag name="container.no_preload"/>
       <argument type="tagged_iterator" tag="kernel.cache_warmer"/>
       <argument>true</argument>
-      <argument>C:\Users\ibtis\Downloads\matchupz-web-joueur\matchupz-web-joueur\var\cache\dev/App_KernelDevDebugContainerDeprecations.log</argument>
+      <argument>C:/Users/ibtis/Downloads/matchupz-web-joueur/matchupz-web-joueur/var/cache/dev/App_KernelDevDebugContainerDeprecations.log</argument>
     </service>
     <service id="cache_clearer" class="Symfony\Component\HttpKernel\CacheClearer\ChainCacheClearer">
       <argument type="tagged_iterator" tag="kernel.cache_clearer"/>
@@ -1710,7 +1720,7 @@
       <argument></argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>C:\Users\ibtis\Downloads\matchupz-web-joueur\matchupz-web-joueur\var\cache\dev/pools/system</argument>
+      <argument>C:/Users/ibtis/Downloads/matchupz-web-joueur/matchupz-web-joueur/var/cache/dev/pools/system</argument>
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
@@ -1729,7 +1739,7 @@
       <tag name="monolog.logger" channel="cache"/>
       <argument></argument>
       <argument>0</argument>
-      <argument>C:\Users\ibtis\Downloads\matchupz-web-joueur\matchupz-web-joueur\var\cache\dev/pools/app</argument>
+      <argument>C:/Users/ibtis/Downloads/matchupz-web-joueur/matchupz-web-joueur/var/cache/dev/pools/app</argument>
       <argument type="service" id="cache.default_marshaller" on-invalid="ignore"/>
       <call method="setLogger">
         <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
@@ -1898,7 +1908,7 @@
     <service id="asset_mapper.cached_mapped_asset_factory" class="Symfony\Component\AssetMapper\Factory\CachedMappedAssetFactory">
       <tag name="container.decorator" id="asset_mapper.mapped_asset_factory" inner="asset_mapper.cached_mapped_asset_factory.inner"/>
       <argument type="service" id="asset_mapper.cached_mapped_asset_factory.inner"/>
-      <argument>C:\Users\ibtis\Downloads\matchupz-web-joueur\matchupz-web-joueur\var\cache\dev/asset_mapper</argument>
+      <argument>C:/Users/ibtis/Downloads/matchupz-web-joueur/matchupz-web-joueur/var/cache/dev/asset_mapper</argument>
       <argument>true</argument>
     </service>
     <service id="asset_mapper.repository" class="Symfony\Component\AssetMapper\AssetMapperRepository">
@@ -2273,7 +2283,7 @@
         </argument>
       </argument>
       <argument type="collection">
-        <argument key="cache_dir">C:\Users\ibtis\Downloads\matchupz-web-joueur\matchupz-web-joueur\var\cache\dev/translations</argument>
+        <argument key="cache_dir">C:/Users/ibtis/Downloads/matchupz-web-joueur/matchupz-web-joueur/var/cache/dev/translations</argument>
         <argument key="debug">true</argument>
         <argument key="resource_files" type="collection">
           <argument key="af" type="collection">
@@ -2986,6 +2996,14 @@
       <argument type="service" id="monolog.logger.event" on-invalid="null"/>
       <argument type="service" id=".virtual_request_stack" on-invalid="null"/>
       <call method="addListener">
+        <argument>kernel.exception</argument>
+        <argument type="collection">
+          <argument type="service_closure" id="App\EventListener\JsonExceptionListener"/>
+          <argument>onKernelException</argument>
+        </argument>
+        <argument>0</argument>
+      </call>
+      <call method="addListener">
         <argument>kernel.controller</argument>
         <argument type="collection">
           <argument type="service_closure" id="data_collector.router"/>
@@ -3615,7 +3633,7 @@
     </service>
     <service id="argument_resolver.not_tagged_controller" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
       <tag name="controller.argument_value_resolver" priority="-200"/>
-      <argument type="service" id=".service_locator.dhP8mHT"/>
+      <argument type="service" id=".service_locator.yXMlTUK"/>
     </service>
     <service id="debug.log_processor" class="Symfony\Bridge\Monolog\Processor\DebugProcessor">
       <tag name="kernel.reset" method="reset"/>
@@ -3715,10 +3733,10 @@
     <service id="router.default" class="Symfony\Bundle\FrameworkBundle\Routing\Router">
       <tag name="monolog.logger" channel="router"/>
       <tag name="container.service_subscriber" id="routing.loader"/>
-      <argument type="service" id=".service_locator.LjVnriP.router.default"/>
+      <argument type="service" id=".service_locator.b.mdbP7.router.default"/>
       <argument>kernel::loadRoutes</argument>
       <argument type="collection">
-        <argument key="cache_dir">C:\Users\ibtis\Downloads\matchupz-web-joueur\matchupz-web-joueur\var\cache\dev</argument>
+        <argument key="cache_dir">C:/Users/ibtis/Downloads/matchupz-web-joueur/matchupz-web-joueur/var/cache/dev</argument>
         <argument key="debug">true</argument>
         <argument key="generator_class">Symfony\Component\Routing\Generator\CompiledUrlGenerator</argument>
         <argument key="generator_dumper_class">Symfony\Component\Routing\Generator\Dumper\CompiledUrlGeneratorDumper</argument>
@@ -3897,10 +3915,10 @@
           </service>
         </argument>
       </argument>
-      <argument>C:\Users\ibtis\Downloads\matchupz-web-joueur\matchupz-web-joueur\var\cache\dev/serialization.php</argument>
+      <argument>C:/Users/ibtis/Downloads/matchupz-web-joueur/matchupz-web-joueur/var/cache/dev/serialization.php</argument>
     </service>
     <service id="serializer.mapping.cache.symfony" class="Psr\Cache\CacheItemPoolInterface">
-      <argument>C:\Users\ibtis\Downloads\matchupz-web-joueur\matchupz-web-joueur\var\cache\dev/serialization.php</argument>
+      <argument>C:/Users/ibtis/Downloads/matchupz-web-joueur/matchupz-web-joueur/var/cache/dev/serialization.php</argument>
       <argument type="service" id="cache.serializer"/>
       <factory class="Symfony\Component\Cache\Adapter\PhpArrayAdapter" method="create"/>
     </service>
@@ -4036,7 +4054,7 @@
       <argument>true</argument>
     </service>
     <service id="session.storage.factory.mock_file" class="Symfony\Component\HttpFoundation\Session\Storage\MockFileSessionStorageFactory">
-      <argument>C:\Users\ibtis\Downloads\matchupz-web-joueur\matchupz-web-joueur\var\cache\dev/sessions</argument>
+      <argument>C:/Users/ibtis/Downloads/matchupz-web-joueur/matchupz-web-joueur/var/cache/dev/sessions</argument>
       <argument>MOCKSESSID</argument>
       <argument type="service">
         <service class="Symfony\Component\HttpFoundation\Session\Storage\MetadataBag">
@@ -4241,10 +4259,10 @@
     <service id="validator.mapping.cache_warmer" class="Symfony\Bundle\FrameworkBundle\CacheWarmer\ValidatorCacheWarmer">
       <tag name="kernel.cache_warmer"/>
       <argument type="service" id="validator.builder"/>
-      <argument>C:\Users\ibtis\Downloads\matchupz-web-joueur\matchupz-web-joueur\var\cache\dev/validation.php</argument>
+      <argument>C:/Users/ibtis/Downloads/matchupz-web-joueur/matchupz-web-joueur/var/cache/dev/validation.php</argument>
     </service>
     <service id="validator.mapping.cache.adapter" class="Symfony\Component\Cache\Adapter\PhpArrayAdapter" constructor="create">
-      <argument>C:\Users\ibtis\Downloads\matchupz-web-joueur\matchupz-web-joueur\var\cache\dev/validation.php</argument>
+      <argument>C:/Users/ibtis/Downloads/matchupz-web-joueur/matchupz-web-joueur/var/cache/dev/validation.php</argument>
       <argument type="service" id="cache.validator"/>
     </service>
     <service id="validator.validator_factory" class="Symfony\Component\Validator\ContainerConstraintValidatorFactory">
@@ -4904,7 +4922,7 @@
       </call>
     </service>
     <service id="profiler.storage" class="Symfony\Component\HttpKernel\Profiler\FileProfilerStorage">
-      <argument>file:C:\Users\ibtis\Downloads\matchupz-web-joueur\matchupz-web-joueur\var\cache\dev/profiler</argument>
+      <argument>file:C:/Users/ibtis/Downloads/matchupz-web-joueur/matchupz-web-joueur/var/cache/dev/profiler</argument>
     </service>
     <service id="profiler_listener" class="Symfony\Component\HttpKernel\EventListener\ProfilerListener">
       <tag name="kernel.event_subscriber"/>
@@ -4969,7 +4987,7 @@
       <tag name="monolog.logger" channel="profiler"/>
       <tag name="data_collector" template="@WebProfiler/Collector/logger.html.twig" id="logger" priority="300"/>
       <argument type="service" id="monolog.logger.profiler" on-invalid="ignore"/>
-      <argument>C:\Users\ibtis\Downloads\matchupz-web-joueur\matchupz-web-joueur\var\cache\dev/App_KernelDevDebugContainer</argument>
+      <argument>C:/Users/ibtis/Downloads/matchupz-web-joueur/matchupz-web-joueur/var/cache/dev/App_KernelDevDebugContainer</argument>
       <argument type="service" id=".virtual_request_stack" on-invalid="ignore"/>
     </service>
     <service id="data_collector.time" class="Symfony\Component\HttpKernel\DataCollector\TimeDataCollector">
@@ -5543,7 +5561,7 @@
         <argument type="service" id=".doctrine.orm.default_metadata_driver"/>
       </call>
       <call method="setProxyDir">
-        <argument>C:\Users\ibtis\Downloads\matchupz-web-joueur\matchupz-web-joueur\var\cache\dev/doctrine/orm/Proxies</argument>
+        <argument>C:/Users/ibtis/Downloads/matchupz-web-joueur/matchupz-web-joueur/var/cache/dev/doctrine/orm/Proxies</argument>
       </call>
       <call method="setProxyNamespace">
         <argument>Proxies</argument>
@@ -5961,7 +5979,7 @@
       <argument type="service" id="twig.loader.native_filesystem"/>
       <argument type="collection">
         <argument key="autoescape">name</argument>
-        <argument key="cache">C:\Users\ibtis\Downloads\matchupz-web-joueur\matchupz-web-joueur\var\cache\dev/twig</argument>
+        <argument key="cache">C:/Users/ibtis/Downloads/matchupz-web-joueur/matchupz-web-joueur/var/cache/dev/twig</argument>
         <argument key="charset">UTF-8</argument>
         <argument key="debug">true</argument>
         <argument key="strict_variables">true</argument>
@@ -8198,11 +8216,24 @@
         <argument key="slugger" type="service_closure" id="slugger"/>
       </argument>
     </service>
-    <service id=".service_locator.NgvlNzc" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.c2bH70." class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="entityManager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
-        <argument key="materiel" type="service_closure" id=".errored..service_locator.NgvlNzc.App\Entity\Materiel"/>
+      </argument>
+    </service>
+    <service id=".service_locator.Q9_Ua5J" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="logger" type="service_closure" id="monolog.logger"/>
+      </argument>
+    </service>
+    <service id=".service_locator.LqN1any" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="httpClient" type="service_closure" id=".debug.http_client"/>
+        <argument key="logger" type="service_closure" id="monolog.logger"/>
+        <argument key="params" type="service_closure" id="parameter_bag"/>
       </argument>
     </service>
     <service id=".service_locator.7H5ns5m" class="Symfony\Component\DependencyInjection\ServiceLocator">
@@ -8210,6 +8241,12 @@
       <argument type="collection">
         <argument key="materiel" type="service_closure" id=".errored..service_locator.7H5ns5m.App\Entity\Materiel"/>
         <argument key="slackNotifier" type="service_closure" id="App\Service\SlackNotifier"/>
+      </argument>
+    </service>
+    <service id=".service_locator.9kKwU2t" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="em" type="service_closure" id="doctrine.orm.default_entity_manager"/>
       </argument>
     </service>
     <service id=".service_locator.CrEgygo" class="Symfony\Component\DependencyInjection\ServiceLocator">
@@ -8277,7 +8314,7 @@
         <argument key="sportRepository" type="service_closure" id="App\Repository\SportRepository"/>
       </argument>
     </service>
-    <service id=".service_locator.dhP8mHT" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.yXMlTUK" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\ClubController::exportCsv" type="service_closure" id=".service_locator.eOJlB0r"/>
@@ -8325,11 +8362,15 @@
         <argument key="App\Controller\JoueurController::show" type="service_closure" id=".service_locator.HTMJznC"/>
         <argument key="App\Controller\JoueurController::statistics" type="service_closure" id=".service_locator.dvlXw22"/>
         <argument key="App\Controller\JoueurController::test" type="service_closure" id=".service_locator.i0N9PQM"/>
-        <argument key="App\Controller\MaterielController::delete" type="service_closure" id=".service_locator.NgvlNzc"/>
+        <argument key="App\Controller\MaterielController::analyzeImage" type="service_closure" id=".service_locator.LqN1any"/>
+        <argument key="App\Controller\MaterielController::analyzeImageAI" type="service_closure" id=".service_locator.Q9_Ua5J"/>
+        <argument key="App\Controller\MaterielController::delete" type="service_closure" id=".service_locator.c2bH70."/>
+        <argument key="App\Controller\MaterielController::detectObjectWebcam" type="service_closure" id=".service_locator.LqN1any"/>
         <argument key="App\Controller\MaterielController::edit" type="service_closure" id=".service_locator.DBl8PzK"/>
         <argument key="App\Controller\MaterielController::exportCsv" type="service_closure" id=".service_locator.jnu2S_s"/>
         <argument key="App\Controller\MaterielController::exportExcel" type="service_closure" id=".service_locator.jnu2S_s"/>
         <argument key="App\Controller\MaterielController::exportPdf" type="service_closure" id=".service_locator.jnu2S_s"/>
+        <argument key="App\Controller\MaterielController::fournisseursByType" type="service_closure" id=".service_locator.9kKwU2t"/>
         <argument key="App\Controller\MaterielController::indexF" type="service_closure" id=".service_locator.RCuzfnb"/>
         <argument key="App\Controller\MaterielController::new" type="service_closure" id=".service_locator.LNwsF6h"/>
         <argument key="App\Controller\MaterielController::notifySlack" type="service_closure" id=".service_locator.7H5ns5m"/>
@@ -8403,11 +8444,15 @@
         <argument key="App\Controller\JoueurController:show" type="service_closure" id=".service_locator.HTMJznC"/>
         <argument key="App\Controller\JoueurController:statistics" type="service_closure" id=".service_locator.dvlXw22"/>
         <argument key="App\Controller\JoueurController:test" type="service_closure" id=".service_locator.i0N9PQM"/>
-        <argument key="App\Controller\MaterielController:delete" type="service_closure" id=".service_locator.NgvlNzc"/>
+        <argument key="App\Controller\MaterielController:analyzeImage" type="service_closure" id=".service_locator.LqN1any"/>
+        <argument key="App\Controller\MaterielController:analyzeImageAI" type="service_closure" id=".service_locator.Q9_Ua5J"/>
+        <argument key="App\Controller\MaterielController:delete" type="service_closure" id=".service_locator.c2bH70."/>
+        <argument key="App\Controller\MaterielController:detectObjectWebcam" type="service_closure" id=".service_locator.LqN1any"/>
         <argument key="App\Controller\MaterielController:edit" type="service_closure" id=".service_locator.DBl8PzK"/>
         <argument key="App\Controller\MaterielController:exportCsv" type="service_closure" id=".service_locator.jnu2S_s"/>
         <argument key="App\Controller\MaterielController:exportExcel" type="service_closure" id=".service_locator.jnu2S_s"/>
         <argument key="App\Controller\MaterielController:exportPdf" type="service_closure" id=".service_locator.jnu2S_s"/>
+        <argument key="App\Controller\MaterielController:fournisseursByType" type="service_closure" id=".service_locator.9kKwU2t"/>
         <argument key="App\Controller\MaterielController:indexF" type="service_closure" id=".service_locator.RCuzfnb"/>
         <argument key="App\Controller\MaterielController:new" type="service_closure" id=".service_locator.LNwsF6h"/>
         <argument key="App\Controller\MaterielController:notifySlack" type="service_closure" id=".service_locator.7H5ns5m"/>
@@ -9062,7 +9107,7 @@
         <argument>0</argument>
       </call>
     </service>
-    <service id=".service_locator.Jk7HJNj" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.PWcV3ef" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="form.factory" type="service_closure" id="form.factory" on-invalid="ignore"/>
@@ -9078,71 +9123,71 @@
         <argument key="web_link.http_header_serializer" type="service_closure" id="web_link.http_header_serializer" on-invalid="ignore"/>
       </argument>
     </service>
-    <service id=".service_locator.Jk7HJNj.App\Controller\ClubController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.PWcV3ef.App\Controller\ClubController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\ClubController"/>
       <argument>App\Controller\ClubController</argument>
       <argument type="service" id="service_container"/>
-      <factory service=".service_locator.Jk7HJNj" method="withContext"/>
+      <factory service=".service_locator.PWcV3ef" method="withContext"/>
     </service>
-    <service id=".service_locator.Jk7HJNj.App\Controller\EspacesportifController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.PWcV3ef.App\Controller\EspacesportifController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\EspacesportifController"/>
       <argument>App\Controller\EspacesportifController</argument>
       <argument type="service" id="service_container"/>
-      <factory service=".service_locator.Jk7HJNj" method="withContext"/>
+      <factory service=".service_locator.PWcV3ef" method="withContext"/>
     </service>
-    <service id=".service_locator.Jk7HJNj.App\Controller\EvaluationPhysiqueController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.PWcV3ef.App\Controller\EvaluationPhysiqueController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\EvaluationPhysiqueController"/>
       <argument>App\Controller\EvaluationPhysiqueController</argument>
       <argument type="service" id="service_container"/>
-      <factory service=".service_locator.Jk7HJNj" method="withContext"/>
+      <factory service=".service_locator.PWcV3ef" method="withContext"/>
     </service>
-    <service id=".service_locator.Jk7HJNj.App\Controller\FournisseurController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.PWcV3ef.App\Controller\FournisseurController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\FournisseurController"/>
       <argument>App\Controller\FournisseurController</argument>
       <argument type="service" id="service_container"/>
-      <factory service=".service_locator.Jk7HJNj" method="withContext"/>
+      <factory service=".service_locator.PWcV3ef" method="withContext"/>
     </service>
-    <service id=".service_locator.Jk7HJNj.App\Controller\HistoriqueClubController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.PWcV3ef.App\Controller\HistoriqueClubController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\HistoriqueClubController"/>
       <argument>App\Controller\HistoriqueClubController</argument>
       <argument type="service" id="service_container"/>
-      <factory service=".service_locator.Jk7HJNj" method="withContext"/>
+      <factory service=".service_locator.PWcV3ef" method="withContext"/>
     </service>
-    <service id=".service_locator.Jk7HJNj.App\Controller\HomeController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.PWcV3ef.App\Controller\HomeController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\HomeController"/>
       <argument>App\Controller\HomeController</argument>
       <argument type="service" id="service_container"/>
-      <factory service=".service_locator.Jk7HJNj" method="withContext"/>
+      <factory service=".service_locator.PWcV3ef" method="withContext"/>
     </service>
-    <service id=".service_locator.Jk7HJNj.App\Controller\JoueurController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.PWcV3ef.App\Controller\JoueurController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\JoueurController"/>
       <argument>App\Controller\JoueurController</argument>
       <argument type="service" id="service_container"/>
-      <factory service=".service_locator.Jk7HJNj" method="withContext"/>
+      <factory service=".service_locator.PWcV3ef" method="withContext"/>
     </service>
-    <service id=".service_locator.Jk7HJNj.App\Controller\MaterielController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.PWcV3ef.App\Controller\MaterielController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\MaterielController"/>
       <argument>App\Controller\MaterielController</argument>
       <argument type="service" id="service_container"/>
-      <factory service=".service_locator.Jk7HJNj" method="withContext"/>
+      <factory service=".service_locator.PWcV3ef" method="withContext"/>
     </service>
-    <service id=".service_locator.Jk7HJNj.App\Controller\PerformanceJoueurController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.PWcV3ef.App\Controller\PerformanceJoueurController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\PerformanceJoueurController"/>
       <argument>App\Controller\PerformanceJoueurController</argument>
       <argument type="service" id="service_container"/>
-      <factory service=".service_locator.Jk7HJNj" method="withContext"/>
+      <factory service=".service_locator.PWcV3ef" method="withContext"/>
     </service>
-    <service id=".service_locator.Jk7HJNj.App\Controller\ReservationController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.PWcV3ef.App\Controller\ReservationController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\ReservationController"/>
       <argument>App\Controller\ReservationController</argument>
       <argument type="service" id="service_container"/>
-      <factory service=".service_locator.Jk7HJNj" method="withContext"/>
+      <factory service=".service_locator.PWcV3ef" method="withContext"/>
     </service>
-    <service id=".service_locator.Jk7HJNj.App\Controller\SportController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.PWcV3ef.App\Controller\SportController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\SportController"/>
       <argument>App\Controller\SportController</argument>
       <argument type="service" id="service_container"/>
-      <factory service=".service_locator.Jk7HJNj" method="withContext"/>
+      <factory service=".service_locator.PWcV3ef" method="withContext"/>
     </service>
     <service id=".service_locator.fuYM_Z." class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
@@ -9156,17 +9201,17 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.fuYM_Z." method="withContext"/>
     </service>
-    <service id=".service_locator.LjVnriP" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.b.mdbP7" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="routing.loader" type="service_closure" id="routing.loader"/>
       </argument>
     </service>
-    <service id=".service_locator.LjVnriP.router.default" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.b.mdbP7.router.default" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="router.default"/>
       <argument>router.default</argument>
       <argument type="service" id="service_container"/>
-      <factory service=".service_locator.LjVnriP" method="withContext"/>
+      <factory service=".service_locator.b.mdbP7" method="withContext"/>
     </service>
     <service id=".service_locator.cUcW89y" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
@@ -9550,9 +9595,6 @@
     </service>
     <service id=".errored..service_locator.DBl8PzK.App\Entity\Materiel" class="App\Entity\Materiel">
       <tag name="container.error" message="Cannot autowire service &quot;.service_locator.DBl8PzK&quot;: it needs an instance of &quot;App\Entity\Materiel&quot; but this type has been excluded in &quot;config/services.yaml&quot;."/>
-    </service>
-    <service id=".errored..service_locator.NgvlNzc.App\Entity\Materiel" class="App\Entity\Materiel">
-      <tag name="container.error" message="Cannot autowire service &quot;.service_locator.NgvlNzc&quot;: it needs an instance of &quot;App\Entity\Materiel&quot; but this type has been excluded in &quot;config/services.yaml&quot;."/>
     </service>
     <service id=".errored..service_locator.7H5ns5m.App\Entity\Materiel" class="App\Entity\Materiel">
       <tag name="container.error" message="Cannot autowire service &quot;.service_locator.7H5ns5m&quot;: it needs an instance of &quot;App\Entity\Materiel&quot; but this type has been excluded in &quot;config/services.yaml&quot;."/>
@@ -10481,7 +10523,7 @@
     <service id="cache.app.recorder_inner" class="Symfony\Component\Cache\Adapter\FilesystemAdapter">
       <argument>2zE8Tka3OY</argument>
       <argument>0</argument>
-      <argument>C:\Users\ibtis\Downloads\matchupz-web-joueur\matchupz-web-joueur\var\cache\dev/pools/app</argument>
+      <argument>C:/Users/ibtis/Downloads/matchupz-web-joueur/matchupz-web-joueur/var/cache/dev/pools/app</argument>
       <argument type="service" id="cache.default_marshaller" on-invalid="ignore"/>
       <call method="setLogger">
         <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
@@ -10491,7 +10533,7 @@
       <argument>D-Xyl2HAxK</argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>C:\Users\ibtis\Downloads\matchupz-web-joueur\matchupz-web-joueur\var\cache\dev/pools/system</argument>
+      <argument>C:/Users/ibtis/Downloads/matchupz-web-joueur/matchupz-web-joueur/var/cache/dev/pools/system</argument>
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
@@ -10499,7 +10541,7 @@
       <argument>-4h9cXiuCU</argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>C:\Users\ibtis\Downloads\matchupz-web-joueur\matchupz-web-joueur\var\cache\dev/pools/system</argument>
+      <argument>C:/Users/ibtis/Downloads/matchupz-web-joueur/matchupz-web-joueur/var/cache/dev/pools/system</argument>
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
@@ -10507,7 +10549,7 @@
       <argument>uDZ365TAqZ</argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>C:\Users\ibtis\Downloads\matchupz-web-joueur\matchupz-web-joueur\var\cache\dev/pools/system</argument>
+      <argument>C:/Users/ibtis/Downloads/matchupz-web-joueur/matchupz-web-joueur/var/cache/dev/pools/system</argument>
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
@@ -10515,7 +10557,7 @@
       <argument>rdG5wwwCq8</argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>C:\Users\ibtis\Downloads\matchupz-web-joueur\matchupz-web-joueur\var\cache\dev/pools/system</argument>
+      <argument>C:/Users/ibtis/Downloads/matchupz-web-joueur/matchupz-web-joueur/var/cache/dev/pools/system</argument>
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
@@ -10523,7 +10565,7 @@
       <argument>6zpihkzamI</argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>C:\Users\ibtis\Downloads\matchupz-web-joueur\matchupz-web-joueur\var\cache\dev/pools/system</argument>
+      <argument>C:/Users/ibtis/Downloads/matchupz-web-joueur/matchupz-web-joueur/var/cache/dev/pools/system</argument>
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
@@ -10531,14 +10573,14 @@
       <argument>sRVhBvqS8X</argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>C:\Users\ibtis\Downloads\matchupz-web-joueur\matchupz-web-joueur\var\cache\dev/pools/system</argument>
+      <argument>C:/Users/ibtis/Downloads/matchupz-web-joueur/matchupz-web-joueur/var/cache/dev/pools/system</argument>
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
     <service id="cache.messenger.restart_workers_signal.recorder_inner" class="Symfony\Component\Cache\Adapter\FilesystemAdapter">
       <argument>UtmNHo0rq5</argument>
       <argument>0</argument>
-      <argument>C:\Users\ibtis\Downloads\matchupz-web-joueur\matchupz-web-joueur\var\cache\dev/pools/app</argument>
+      <argument>C:/Users/ibtis/Downloads/matchupz-web-joueur/matchupz-web-joueur/var/cache/dev/pools/app</argument>
       <argument type="service" id="cache.default_marshaller" on-invalid="ignore"/>
       <call method="setLogger">
         <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
@@ -10548,7 +10590,7 @@
       <argument>nSO0J0EHPD</argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>C:\Users\ibtis\Downloads\matchupz-web-joueur\matchupz-web-joueur\var\cache\dev/pools/system</argument>
+      <argument>C:/Users/ibtis/Downloads/matchupz-web-joueur/matchupz-web-joueur/var/cache/dev/pools/system</argument>
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
@@ -10558,7 +10600,7 @@
       <argument>tuyIbiXiDg</argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>C:\Users\ibtis\Downloads\matchupz-web-joueur\matchupz-web-joueur\var\cache\dev/pools/system</argument>
+      <argument>C:/Users/ibtis/Downloads/matchupz-web-joueur/matchupz-web-joueur/var/cache/dev/pools/system</argument>
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
@@ -10566,7 +10608,7 @@
       <argument>OlUKou3quQ</argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>C:\Users\ibtis\Downloads\matchupz-web-joueur\matchupz-web-joueur\var\cache\dev/pools/system</argument>
+      <argument>C:/Users/ibtis/Downloads/matchupz-web-joueur/matchupz-web-joueur/var/cache/dev/pools/system</argument>
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
@@ -10765,7 +10807,7 @@
     <service id="Symfony\UX\Chartjs\Builder\ChartBuilderInterface" alias="chartjs.builder"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.w7.f4fT" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.dhP8mHT"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.yXMlTUK"/>
     <service id="doctrine.id_generator_locator" alias=".service_locator.KLVvNIq"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface $requestLogger" alias="monolog.logger.request"/>
@@ -10802,18 +10844,19 @@
     <service id=".service_locator.v_qfomK" alias=".service_locator.HTMJznC"/>
     <service id=".service_locator.wGYfj2p" alias=".service_locator.RCuzfnb"/>
     <service id=".service_locator.COmA09s" alias=".service_locator.DBl8PzK"/>
-    <service id=".service_locator.EETwEHG" alias=".service_locator.NgvlNzc"/>
+    <service id=".service_locator.AdG0bTc" alias=".service_locator.c2bH70."/>
+    <service id=".service_locator.zrFYFxR" alias=".service_locator.LqN1any"/>
     <service id=".service_locator.IcIxi4." alias=".service_locator.PNlbJGO"/>
     <service id=".service_locator.r3wEyuD" alias=".service_locator.Lt49UVm"/>
     <service id=".service_locator.vYOHL0D" alias=".service_locator.jpL5_4q"/>
     <service id=".service_locator.X9gG0Wi" alias=".service_locator.geVFa8t"/>
     <service id=".service_locator.RwykrWv" alias=".service_locator.s2P9uaA"/>
-    <service id=".service_locator.y9NHIPP" alias=".service_locator.dhP8mHT"/>
+    <service id=".service_locator.2j3AW80" alias=".service_locator.yXMlTUK"/>
     <service id=".service_locator.BFrsqsn" alias=".service_locator.F9PKc.7"/>
     <service id=".service_locator.I5D3BSa" alias=".service_locator.qLN7qz3"/>
     <service id=".service_locator.XtmiKbi" alias=".service_locator.MfxSDRP"/>
     <service id=".service_locator.O24_MAy" alias=".service_locator.yY.p4P7"/>
-    <service id=".service_locator.5r9vSSF" alias=".service_locator.Jk7HJNj"/>
+    <service id=".service_locator.0mapQQy" alias=".service_locator.PWcV3ef"/>
     <service id="validator" alias="debug.validator"/>
     <service id="http_client" alias=".debug.http_client"/>
     <service id=".debug.http_client.inner" alias="http_client.uri_template"/>
@@ -10863,8 +10906,11 @@
     <service id=".service_locator.lUJI3Z8" alias=".service_locator.LNwsF6h"/>
     <service id=".service_locator.UUkkutG" alias=".service_locator.5CHJ4Li"/>
     <service id=".service_locator.W17v7YY" alias=".service_locator.DBl8PzK"/>
-    <service id=".service_locator.sZiCqRZ" alias=".service_locator.NgvlNzc"/>
+    <service id=".service_locator.84oI3xI" alias=".service_locator.c2bH70."/>
+    <service id=".service_locator.BEsFY1H" alias=".service_locator.Q9_Ua5J"/>
+    <service id=".service_locator.c4UtX5n" alias=".service_locator.LqN1any"/>
     <service id=".service_locator.0A6vDKP" alias=".service_locator.7H5ns5m"/>
+    <service id=".service_locator.gaTSUXr" alias=".service_locator.9kKwU2t"/>
     <service id=".service_locator.LXe3GOx" alias=".service_locator.CrEgygo"/>
     <service id=".service_locator.5TBLhhJ" alias=".service_locator.z4JrMru"/>
     <service id=".service_locator.4AVqgs9" alias=".service_locator.PNlbJGO"/>
@@ -10874,7 +10920,7 @@
     <service id=".service_locator.vtj.h5i" alias=".service_locator.cX9LP_Y"/>
     <service id=".service_locator.0VPh.hj" alias=".service_locator.geVFa8t"/>
     <service id=".service_locator.pHhadZw" alias=".service_locator.s2P9uaA"/>
-    <service id=".service_locator.eSZ4zlG" alias=".service_locator.Jk7HJNj"/>
+    <service id=".service_locator.xe9cRS9" alias=".service_locator.PWcV3ef"/>
     <service id=".service_locator.dGUCsbe" alias=".service_locator.oR77BOj"/>
     <service id=".service_locator._kIAbz1" alias=".service_locator.TpoC7U9"/>
     <service id=".service_locator.hnz5ZNh" alias=".service_locator.0TACwl3"/>

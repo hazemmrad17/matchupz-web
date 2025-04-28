@@ -181,7 +181,7 @@ class __TwigTemplate_628bfa5245e56f366bbd60f2234f29e8 extends Template
                                         <span class=\"input-group-text\"><i class=\"bx bx-tag\"></i></span>
                                         ";
         // line 45
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 45, $this->source); })()), "type", [], "any", false, false, false, 45), 'widget', ["attr" => ["class" => "form-select"]]);
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 45, $this->source); })()), "type", [], "any", false, false, false, 45), 'widget', ["attr" => ["class" => "form-select", "id" => "materiel_type"]]);
         yield "
                                     </div>
                                     <div class=\"form-text text-danger\">";
@@ -199,7 +199,7 @@ class __TwigTemplate_628bfa5245e56f366bbd60f2234f29e8 extends Template
                                         <span class=\"input-group-text\"><i class=\"bx bx-cube\"></i></span>
                                         ";
         // line 54
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 54, $this->source); })()), "quantite", [], "any", false, false, false, 54), 'widget', ["attr" => ["class" => "form-control", "placeholder" => "Ex: 10"]]);
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 54, $this->source); })()), "quantite", [], "any", false, false, false, 54), 'widget', ["attr" => ["class" => "form-control", "placeholder" => "Ex: 10", "required" => false]]);
         yield "
                                     </div>
                                     <div class=\"form-text text-danger\">";
@@ -273,46 +273,50 @@ class __TwigTemplate_628bfa5245e56f366bbd60f2234f29e8 extends Template
                                         <span class=\"input-group-text\"><i class=\"bx bx-building\"></i></span>
                                         ";
         // line 92
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 92, $this->source); })()), "fournisseur", [], "any", false, false, false, 92), 'widget', ["attr" => ["class" => "form-select"]]);
-        yield "
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 92, $this->source); })()), "fournisseur", [], "any", false, false, false, 92), 'widget', ["attr" => ["class" => "form-select", "id" => "materiel_fournisseur"]]);
+        yield ",
+<div class=\"form-text text-danger\">";
+        // line 93
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 93, $this->source); })()), "fournisseur", [], "any", false, false, false, 93), 'errors');
+        yield "</div>
                                     </div>
                                     <div class=\"form-text text-danger\">";
-        // line 94
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 94, $this->source); })()), "fournisseur", [], "any", false, false, false, 94), 'errors');
+        // line 95
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 95, $this->source); })()), "fournisseur", [], "any", false, false, false, 95), 'errors');
         yield "</div>
                                 </div>
 
                                 <div class=\"mb-3\">
                                     <label class=\"form-label\" for=\"";
-        // line 98
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 98, $this->source); })()), "image", [], "any", false, false, false, 98), "vars", [], "any", false, false, false, 98), "id", [], "any", false, false, false, 98), "html", null, true);
+        // line 99
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 99, $this->source); })()), "image", [], "any", false, false, false, 99), "vars", [], "any", false, false, false, 99), "id", [], "any", false, false, false, 99), "html", null, true);
         yield "\">Image du Matériel</label>
                                     <div class=\"input-group input-group-merge\">
                                         <span class=\"input-group-text\"><i class=\"bx bx-image\"></i></span>
                                         ";
-        // line 101
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 101, $this->source); })()), "image", [], "any", false, false, false, 101), 'widget', ["attr" => ["class" => "form-control"]]);
+        // line 102
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 102, $this->source); })()), "image", [], "any", false, false, false, 102), 'widget', ["attr" => ["class" => "form-control"]]);
         yield "
                                     </div>
                                     <div class=\"form-text text-danger\">";
-        // line 103
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 103, $this->source); })()), "image", [], "any", false, false, false, 103), 'errors');
+        // line 104
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 104, $this->source); })()), "image", [], "any", false, false, false, 104), 'errors');
         yield "</div>
                                     <small class=\"text-muted\">Formats acceptés: JPG, JPEG, PNG (Max 5MB). Laissez vide pour conserver l'image actuelle.</small>
                                     ";
-        // line 105
-        if (CoreExtension::getAttribute($this->env, $this->source, (isset($context["materiel"]) || array_key_exists("materiel", $context) ? $context["materiel"] : (function () { throw new RuntimeError('Variable "materiel" does not exist.', 105, $this->source); })()), "image", [], "any", false, false, false, 105)) {
-            // line 106
+        // line 106
+        if (CoreExtension::getAttribute($this->env, $this->source, (isset($context["materiel"]) || array_key_exists("materiel", $context) ? $context["materiel"] : (function () { throw new RuntimeError('Variable "materiel" does not exist.', 106, $this->source); })()), "image", [], "any", false, false, false, 106)) {
+            // line 107
             yield "                                        <div class=\"mt-2\">
                                             <p>Image actuelle :</p>
                                             <img src=\"";
-            // line 108
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("Uploads/materiels/" . CoreExtension::getAttribute($this->env, $this->source, (isset($context["materiel"]) || array_key_exists("materiel", $context) ? $context["materiel"] : (function () { throw new RuntimeError('Variable "materiel" does not exist.', 108, $this->source); })()), "image", [], "any", false, false, false, 108))), "html", null, true);
+            // line 109
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("Uploads/materiels/" . CoreExtension::getAttribute($this->env, $this->source, (isset($context["materiel"]) || array_key_exists("materiel", $context) ? $context["materiel"] : (function () { throw new RuntimeError('Variable "materiel" does not exist.', 109, $this->source); })()), "image", [], "any", false, false, false, 109))), "html", null, true);
             yield "\" alt=\"Image actuelle\" style=\"max-width: 200px;\">
                                         </div>
                                     ";
         }
-        // line 111
+        // line 112
         yield "                                    <!-- Bouton d'analyse et conteneur pour les résultats -->
                                     <div class=\"mt-3\">
                                         <button type=\"button\" class=\"btn btn-outline-info\" id=\"analyzeImage\">
@@ -329,19 +333,19 @@ class __TwigTemplate_628bfa5245e56f366bbd60f2234f29e8 extends Template
                                 <i class=\"bx bx-save me-1\"></i> Mettre à jour
                             </button>
                             <a href=\"";
-        // line 126
+        // line 127
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_materiel_index");
         yield "\" class=\"btn btn-secondary\">
                                 <i class=\"bx bx-arrow-back me-1\"></i> Annuler
                             </a>
                         </div>
                     ";
-        // line 130
-        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 130, $this->source); })()), 'form_end');
+        // line 131
+        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 131, $this->source); })()), 'form_end');
         yield "
 
                     ";
-        // line 132
+        // line 133
         yield Twig\Extension\CoreExtension::include($this->env, $context, "materiel/_delete_form.html.twig");
         yield "
                 </div>
@@ -350,80 +354,94 @@ class __TwigTemplate_628bfa5245e56f366bbd60f2234f29e8 extends Template
     </div>
 </div>
 
-<!-- Script JavaScript pour l'analyse d'image -->
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        document.getElementById('analyzeImage').addEventListener('click', async function() {
-            const formData = new FormData();
-            const imageInput = document.querySelector('input[name=\"materiel[image]\"]');
-            
-            if (!imageInput || !imageInput.files || !imageInput.files[0]) {
-                alert('Veuillez sélectionner une nouvelle image à analyser.');
+// --- AJAX update of fournisseur when type changes ---
+document.addEventListener('DOMContentLoaded', function() {
+    const typeSelect = document.getElementById('materiel_type');
+    const fournisseurSelect = document.getElementById('materiel_fournisseur');
+    if (typeSelect && fournisseurSelect) {
+        typeSelect.addEventListener('change', function() {
+            const selectedType = this.value;
+            if (!selectedType) {
+                fournisseurSelect.innerHTML = '<option value=\"\">Sélectionner un fournisseur</option>';
                 return;
             }
-            
-            formData.append('image', imageInput.files[0]);
-
-            // Afficher un indicateur de chargement
-            const resultDiv = document.getElementById('imageAnalysisResult');
-            resultDiv.innerHTML = '<div class=\"spinner-border text-primary\" role=\"status\"><span class=\"visually-hidden\">Chargement...</span></div>';
-
-            try {
-                const response = await fetch('";
-        // line 158
-        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_materiel_analyze_image");
-        yield "', {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
+            fetch('/materiel/fournisseurs-by-type/' + encodeURIComponent(selectedType))
+                .then(response => response.json())
+                .then(data => {
+                    let options = '<option value=\"\">Sélectionner un fournisseur</option>';
+                    data.forEach(f => {
+                        options += `<option value=\"\${f.id}\">\${f.nom}</option>`;
+                    });
+                    fournisseurSelect.innerHTML = options;
                 });
+        });
+    }
+});
+</script>
 
-                if (!response.ok) {
-                    throw new Error(`Erreur HTTP: \${response.status}`);
-                }
+    <!-- Script JavaScript pour l'analyse d'image -->
+<script>
+    document.getElementById('analyzeImageAI').addEventListener('click', async () => {
+        const formData = new FormData();
+        const imageInput = document.querySelector('input[name=\"materiel[image]\"]');
+        console.log('Input image trouvé:', imageInput);
+        if (!imageInput || !imageInput.files[0]) {
+            alert('Veuillez sélectionner une image.');
+            return;
+        }
+        formData.append('image', imageInput.files[0]);
+        console.log('Fichier image ajouté:', imageInput.files[0].name);
 
-                const data = await response.json();
-                
-                if (data.error) {
-                    resultDiv.innerHTML = `<div class=\"alert alert-danger\">\${data.error}</div>`;
-                } else {
-                    const labels = data.labels.map(l => `\${l.label} (\${(l.score * 100).toFixed(1)}%)`).join(', ');
-                    resultDiv.innerHTML = `
-                        <div class=\"alert alert-info\">
-                            <strong>Objets détectés :</strong> \${labels}<br>
-                            <strong>Type suggéré :</strong> \${data.suggestedType || 'Non déterminé'}
-                        </div>
-                    `;
-                    
-                    // Pré-remplir le champ type si un type est suggéré
-                    if (data.suggestedType) {
-                        const typeSelect = document.querySelector('select[name=\"materiel[type]\"]');
-                        if (typeSelect) {
-                            typeSelect.value = data.suggestedType;
-                            
-                            // Vérifier si le type sélectionné correspond
-                            if (typeSelect.value && data.suggestedType !== typeSelect.value) {
-                                resultDiv.innerHTML += `
-                                    <div class=\"alert alert-warning mt-2\">
-                                        Attention : Le type sélectionné (\${typeSelect.options[typeSelect.selectedIndex].text}) ne correspond pas au type suggéré (\${data.suggestedType}).
-                                    </div>
-                                `;
-                            }
-                        }
-                    }
-                }
-            } catch (error) {
-                console.error('Erreur:', error);
+        const resultDiv = document.getElementById('imageAnalysisResult');
+        resultDiv.innerHTML = '<div class=\"spinner-border text-primary\" role=\"status\"><span class=\"visually-hidden\">Chargement...</span></div>';
+
+        try {
+            console.log('Envoi de la requête à:', '";
+        // line 183
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_materiel_analyze_image_AI");
+        yield "');
+            const response = await fetch('";
+        // line 184
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_materiel_analyze_image_AI");
+        yield "', {
+                method: 'POST',
+                body: formData,
+            });
+            console.log('Statut de la réponse:', response.status);
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error || `Erreur HTTP: \${response.status} \${response.statusText}`);
+            }
+            const data = await response.json();
+            if (data.error) {
+                resultDiv.innerHTML = `<div class=\"alert alert-danger\">\${data.error}</div>`;
+            } else {
+                const labels = data.labels.map(l => `\${l.label} (\${(l.score * 100).toFixed(1)}%)`).join(', ');
                 resultDiv.innerHTML = `
-                    <div class=\"alert alert-danger\">
-                        Erreur lors de l'analyse de l'image: \${error.message}
-                        <br>Détails: \${error.response ? await error.response.text() : 'Pas de détails supplémentaires'}
+                    <div class=\"alert alert-info\">
+                        <strong>Objets détectés :</strong> \${labels}<br>
+                        <strong>Type suggéré :</strong> \${data.suggestedType || 'Non déterminé'}
                     </div>
                 `;
+                if (data.suggestedType) {
+                    const typeSelect = document.querySelector('select[name=\"materiel[type]\"]');
+                    typeSelect.value = data.suggestedType;
+                    if (typeSelect.value && data.suggestedType !== typeSelect.value) {
+                        resultDiv.innerHTML += `
+                            <div class=\"alert alert-warning\">
+                                Attention : Le type sélectionné (\${typeSelect.options[typeSelect.selectedIndex].text}) ne correspond pas au type suggéré (\${data.suggestedType}).
+                            </div>
+                        `;
+                    }
+                }
             }
-        });
+        } catch (error) {
+            console.error('Erreur:', error);
+            resultDiv.innerHTML = `
+                <div class=\"alert alert-danger\">Erreur lors de l'analyse de l'image: \${error.message}</div>
+            `;
+        }
     });
 </script>
 ";
@@ -457,7 +475,7 @@ class __TwigTemplate_628bfa5245e56f366bbd60f2234f29e8 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  374 => 158,  345 => 132,  340 => 130,  333 => 126,  316 => 111,  310 => 108,  306 => 106,  304 => 105,  299 => 103,  294 => 101,  288 => 98,  281 => 94,  276 => 92,  270 => 89,  263 => 85,  258 => 83,  252 => 80,  245 => 76,  240 => 74,  234 => 71,  225 => 65,  220 => 63,  214 => 60,  207 => 56,  202 => 54,  196 => 51,  189 => 47,  184 => 45,  178 => 42,  171 => 38,  166 => 36,  160 => 33,  153 => 29,  146 => 25,  140 => 21,  134 => 20,  124 => 16,  119 => 15,  114 => 14,  110 => 13,  101 => 6,  88 => 5,  64 => 3,  41 => 1,);
+        return array (  406 => 184,  402 => 183,  349 => 133,  344 => 131,  337 => 127,  320 => 112,  314 => 109,  310 => 107,  308 => 106,  303 => 104,  298 => 102,  292 => 99,  285 => 95,  280 => 93,  276 => 92,  270 => 89,  263 => 85,  258 => 83,  252 => 80,  245 => 76,  240 => 74,  234 => 71,  225 => 65,  220 => 63,  214 => 60,  207 => 56,  202 => 54,  196 => 51,  189 => 47,  184 => 45,  178 => 42,  171 => 38,  166 => 36,  160 => 33,  153 => 29,  146 => 25,  140 => 21,  134 => 20,  124 => 16,  119 => 15,  114 => 14,  110 => 13,  101 => 6,  88 => 5,  64 => 3,  41 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -506,7 +524,7 @@ class __TwigTemplate_628bfa5245e56f366bbd60f2234f29e8 extends Template
                                     <label class=\"form-label\" for=\"{{ form.type.vars.id }}\">Type *</label>
                                     <div class=\"input-group input-group-merge\">
                                         <span class=\"input-group-text\"><i class=\"bx bx-tag\"></i></span>
-                                        {{ form_widget(form.type, {'attr': {'class': 'form-select'}}) }}
+                                        {{ form_widget(form.type, {'attr': {'class': 'form-select', 'id': 'materiel_type'}}) }}
                                     </div>
                                     <div class=\"form-text text-danger\">{{ form_errors(form.type) }}</div>
                                 </div>
@@ -515,7 +533,7 @@ class __TwigTemplate_628bfa5245e56f366bbd60f2234f29e8 extends Template
                                     <label class=\"form-label\" for=\"{{ form.quantite.vars.id }}\">Quantité en Stock *</label>
                                     <div class=\"input-group input-group-merge\">
                                         <span class=\"input-group-text\"><i class=\"bx bx-cube\"></i></span>
-                                        {{ form_widget(form.quantite, {'attr': {'class': 'form-control', 'placeholder': 'Ex: 10'}}) }}
+                                        {{ form_widget(form.quantite, {'attr': {'class': 'form-control', 'placeholder': 'Ex: 10', 'required': false}}) }}
                                     </div>
                                     <div class=\"form-text text-danger\">{{ form_errors(form.quantite) }}</div>
                                 </div>
@@ -553,7 +571,8 @@ class __TwigTemplate_628bfa5245e56f366bbd60f2234f29e8 extends Template
                                     <label class=\"form-label\" for=\"{{ form.fournisseur.vars.id }}\">Fournisseur *</label>
                                     <div class=\"input-group input-group-merge\">
                                         <span class=\"input-group-text\"><i class=\"bx bx-building\"></i></span>
-                                        {{ form_widget(form.fournisseur, {'attr': {'class': 'form-select'}}) }}
+                                        {{ form_widget(form.fournisseur, {'attr': {'class': 'form-select', 'id': 'materiel_fournisseur'}}) }},
+<div class=\"form-text text-danger\">{{ form_errors(form.fournisseur) }}</div>
                                     </div>
                                     <div class=\"form-text text-danger\">{{ form_errors(form.fournisseur) }}</div>
                                 </div>
@@ -600,77 +619,88 @@ class __TwigTemplate_628bfa5245e56f366bbd60f2234f29e8 extends Template
     </div>
 </div>
 
-<!-- Script JavaScript pour l'analyse d'image -->
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        document.getElementById('analyzeImage').addEventListener('click', async function() {
-            const formData = new FormData();
-            const imageInput = document.querySelector('input[name=\"materiel[image]\"]');
-            
-            if (!imageInput || !imageInput.files || !imageInput.files[0]) {
-                alert('Veuillez sélectionner une nouvelle image à analyser.');
+// --- AJAX update of fournisseur when type changes ---
+document.addEventListener('DOMContentLoaded', function() {
+    const typeSelect = document.getElementById('materiel_type');
+    const fournisseurSelect = document.getElementById('materiel_fournisseur');
+    if (typeSelect && fournisseurSelect) {
+        typeSelect.addEventListener('change', function() {
+            const selectedType = this.value;
+            if (!selectedType) {
+                fournisseurSelect.innerHTML = '<option value=\"\">Sélectionner un fournisseur</option>';
                 return;
             }
-            
-            formData.append('image', imageInput.files[0]);
-
-            // Afficher un indicateur de chargement
-            const resultDiv = document.getElementById('imageAnalysisResult');
-            resultDiv.innerHTML = '<div class=\"spinner-border text-primary\" role=\"status\"><span class=\"visually-hidden\">Chargement...</span></div>';
-
-            try {
-                const response = await fetch('{{ path('app_materiel_analyze_image') }}', {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
+            fetch('/materiel/fournisseurs-by-type/' + encodeURIComponent(selectedType))
+                .then(response => response.json())
+                .then(data => {
+                    let options = '<option value=\"\">Sélectionner un fournisseur</option>';
+                    data.forEach(f => {
+                        options += `<option value=\"\${f.id}\">\${f.nom}</option>`;
+                    });
+                    fournisseurSelect.innerHTML = options;
                 });
+        });
+    }
+});
+</script>
 
-                if (!response.ok) {
-                    throw new Error(`Erreur HTTP: \${response.status}`);
-                }
+    <!-- Script JavaScript pour l'analyse d'image -->
+<script>
+    document.getElementById('analyzeImageAI').addEventListener('click', async () => {
+        const formData = new FormData();
+        const imageInput = document.querySelector('input[name=\"materiel[image]\"]');
+        console.log('Input image trouvé:', imageInput);
+        if (!imageInput || !imageInput.files[0]) {
+            alert('Veuillez sélectionner une image.');
+            return;
+        }
+        formData.append('image', imageInput.files[0]);
+        console.log('Fichier image ajouté:', imageInput.files[0].name);
 
-                const data = await response.json();
-                
-                if (data.error) {
-                    resultDiv.innerHTML = `<div class=\"alert alert-danger\">\${data.error}</div>`;
-                } else {
-                    const labels = data.labels.map(l => `\${l.label} (\${(l.score * 100).toFixed(1)}%)`).join(', ');
-                    resultDiv.innerHTML = `
-                        <div class=\"alert alert-info\">
-                            <strong>Objets détectés :</strong> \${labels}<br>
-                            <strong>Type suggéré :</strong> \${data.suggestedType || 'Non déterminé'}
-                        </div>
-                    `;
-                    
-                    // Pré-remplir le champ type si un type est suggéré
-                    if (data.suggestedType) {
-                        const typeSelect = document.querySelector('select[name=\"materiel[type]\"]');
-                        if (typeSelect) {
-                            typeSelect.value = data.suggestedType;
-                            
-                            // Vérifier si le type sélectionné correspond
-                            if (typeSelect.value && data.suggestedType !== typeSelect.value) {
-                                resultDiv.innerHTML += `
-                                    <div class=\"alert alert-warning mt-2\">
-                                        Attention : Le type sélectionné (\${typeSelect.options[typeSelect.selectedIndex].text}) ne correspond pas au type suggéré (\${data.suggestedType}).
-                                    </div>
-                                `;
-                            }
-                        }
-                    }
-                }
-            } catch (error) {
-                console.error('Erreur:', error);
+        const resultDiv = document.getElementById('imageAnalysisResult');
+        resultDiv.innerHTML = '<div class=\"spinner-border text-primary\" role=\"status\"><span class=\"visually-hidden\">Chargement...</span></div>';
+
+        try {
+            console.log('Envoi de la requête à:', '{{ path('app_materiel_analyze_image_AI') }}');
+            const response = await fetch('{{ path('app_materiel_analyze_image_AI') }}', {
+                method: 'POST',
+                body: formData,
+            });
+            console.log('Statut de la réponse:', response.status);
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error || `Erreur HTTP: \${response.status} \${response.statusText}`);
+            }
+            const data = await response.json();
+            if (data.error) {
+                resultDiv.innerHTML = `<div class=\"alert alert-danger\">\${data.error}</div>`;
+            } else {
+                const labels = data.labels.map(l => `\${l.label} (\${(l.score * 100).toFixed(1)}%)`).join(', ');
                 resultDiv.innerHTML = `
-                    <div class=\"alert alert-danger\">
-                        Erreur lors de l'analyse de l'image: \${error.message}
-                        <br>Détails: \${error.response ? await error.response.text() : 'Pas de détails supplémentaires'}
+                    <div class=\"alert alert-info\">
+                        <strong>Objets détectés :</strong> \${labels}<br>
+                        <strong>Type suggéré :</strong> \${data.suggestedType || 'Non déterminé'}
                     </div>
                 `;
+                if (data.suggestedType) {
+                    const typeSelect = document.querySelector('select[name=\"materiel[type]\"]');
+                    typeSelect.value = data.suggestedType;
+                    if (typeSelect.value && data.suggestedType !== typeSelect.value) {
+                        resultDiv.innerHTML += `
+                            <div class=\"alert alert-warning\">
+                                Attention : Le type sélectionné (\${typeSelect.options[typeSelect.selectedIndex].text}) ne correspond pas au type suggéré (\${data.suggestedType}).
+                            </div>
+                        `;
+                    }
+                }
             }
-        });
+        } catch (error) {
+            console.error('Erreur:', error);
+            resultDiv.innerHTML = `
+                <div class=\"alert alert-danger\">Erreur lors de l'analyse de l'image: \${error.message}</div>
+            `;
+        }
     });
 </script>
 {% endblock %}", "materiel/edit.html.twig", "C:\\Users\\ibtis\\Downloads\\matchupz-web-joueur\\matchupz-web-joueur\\templates\\materiel\\edit.html.twig");

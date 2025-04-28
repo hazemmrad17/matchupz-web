@@ -1,3 +1,12 @@
+:root {
+    --bs-primary: #d6ab10; /* Yellow */
+    --bs-primary-rgb: 214, 171, 16; /* RGB equivalent for yellow */
+    --bs-dark: #0e3949; /* Dark blue */
+    --bs-dark-rgb: 14, 57, 73; /* RGB equivalent for dark blue */
+    --bs-white: #ffffff;
+    --bs-light: #f8f9fa;
+    --bs-body: #212529;
+}
 
 /*** Spinner Start ***/
 #spinner {
@@ -14,7 +23,18 @@
 }
 /*** Spinner End ***/
 
-/* back-to-to */
+/* Uniformisation des boutons matériel */
+.btn-materiel-wide {
+    min-width: 110px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    padding-top: 0;
+    padding-bottom: 0;
+    font-size: 0.9rem;
+}
+
+/* back-to-top */
 .back-to-top a {
     display: flex;
     justify-content: center;
@@ -24,12 +44,11 @@
     right: 40px;
     width: 50px;
     height: 40px;
-    margin: 0px;
+    margin: 0;
     font-size: 18px;
     background: var(--bs-primary);
     color: var(--bs-white);
     transition: 0.5s;
-    z-index: 999;
     transform: skew(18deg);
 }
 
@@ -101,7 +120,6 @@
 .btn.btn-primary:hover {
     background: var(--bs-white);
     color: var(--bs-dark);
-
 }
 
 .btn.btn-light {
@@ -121,7 +139,6 @@
     color: var(--bs-white);
     background: var(--bs-primary);
 }
-
 
 .btn.btn-dark {
     color: var(--bs-primary);
@@ -241,7 +258,6 @@
     .navbar .navbar-collapse {
         margin-top: -20px;
     }
-
 }
 
 .navbar-brand {
@@ -435,12 +451,11 @@
 }
 /*** Navbar End ***/
 
-
 /*** Single Page Hero Header Start ***/
 .bg-breadcrumb {
     position: relative;
     overflow: hidden;
-    background: linear-gradient(rgba(12, 24, 68, 0.7), rgba(12, 24, 68, 0.7)), url(../img/goal-background-img.jpg);
+    background: linear-gradient(var(--bs-dark), var(--bs-dark)), url(../img/goal-background-img.jpg) !important;
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -456,7 +471,6 @@
     color: var(--bs-white);
 }
 /*** Single Page Hero Header End ***/
-
 
 /*** Carousel Hero Header Start ***/
 .hero-section {
@@ -507,7 +521,7 @@
         background-image: url(../img/header-2.jpg);
         clip-path: polygon(20% 0%, 100% 0%, 100% 100%, 0% 100%);
         filter: grayscale(0%);
-        transform: scale(100% - 0%);
+        transform: scale(100%);
         background-position: center center;
         background-repeat: no-repeat;
         background-size: cover;
@@ -522,7 +536,7 @@
         background-image: url(../img/header-1.jpg);
         clip-path: polygon(20% 0%, 100% 0%, 100% 100%, 0% 100%);
         filter: grayscale(0%);
-        transform: scale(100% - 0%);
+        transform: scale(100%);
         background-position: center center;
         background-repeat: no-repeat;
         background-size: cover;
@@ -558,6 +572,7 @@
     bottom: 30px;
     left: 51%;
 }
+
 .header-carousel .owl-nav .owl-next {
     bottom: 30px;
     right: 51%;
@@ -592,7 +607,6 @@
     }
 }
 /*** Carousel Hero Header End ***/
-
 
 /*** About Start ***/
 .about {
@@ -631,7 +645,7 @@
     }
 
     .about .about-content {
-        margin-bottom: 0px !important;
+        margin-bottom: 0 !important;
     }
 }
 
@@ -667,7 +681,7 @@
 .goal {
     position: relative;
     overflow: hidden;
-    background: linear-gradient(rgba(255, 245, 225, 0.9), rgba(12, 24, 68, 0.9)), url(../img/goal-background-img.jpg);
+    background: linear-gradient(rgba(255, 245, 225, 0.9), rgba(14, 57, 73, 0.9)), url(../img/goal-background-img.jpg);
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -682,12 +696,12 @@
     right: 0;
     margin-right: -200px;
     transform: skew(18deg);
-    background: rgba(200, 0, 54, .1);
+    background: rgba(14, 57, 73, 0.1);
 }
 
 .goal .goal-item {
     transform: skew(10deg);
-    box-shadow: 0 0 45px rgba(12, 24, 68, 0.4);
+    box-shadow: 0 0 45px rgba(14, 57, 73, 0.4);
     margin: 0 15px 15px 15px;
 }
 
@@ -749,7 +763,7 @@
     height: 0;
     top: 0;
     left: 0;
-    background: rgba(255, 245, 225, .5);
+    background: rgba(255, 245, 225, 0.5);
     transition: 0.5s;
 }
 
@@ -820,6 +834,7 @@
 .feature-carousel .owl-nav .owl-prev {
     left: 0;
 }
+
 .feature-carousel .owl-nav .owl-next {
     right: 150px;
 }
@@ -835,7 +850,7 @@
 .courses {
     position: relative;
     overflow: hidden;
-    background: linear-gradient(rgba(12, 24, 68, 0.7), rgba(12, 24, 68, 0.7)), url(../img/services-img.jpg);
+    background: linear-gradient(rgba(14, 57, 73, 0.7), rgba(14, 57, 73, 0.7)), url(../img/services-img.jpg);
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -859,7 +874,7 @@
     position: relative;
     transform: skew(4deg);
     margin: 0 15px;
-    background: rgba(255, 245, 225, .5);
+    background: rgba(255, 245, 225, 0.5);
     transition: 0.5s;
 }
 
@@ -917,12 +932,12 @@
     height: 4px;
     bottom: 0;
     left: 0;
-    background: rgba(12, 24, 68, 0.9);
+    background: rgba(14, 57, 73, 0.9);
     transition: 0.5s;
     z-index: -1;
 }
 
-.courses-item-inner:hover:after {
+.courses-item-inner:hover::after {
     height: 100%;
 }
 /*** Courses End ***/
@@ -964,7 +979,7 @@
     top: 0;
     left: 0;
     transform: skew(100deg);
-    background: rgba(200, 0, 54, 1);
+    background: rgba(14, 57, 73, 1);
     border: none;
     transition: 0.5s;
     z-index: -1;
@@ -979,7 +994,7 @@
     top: 0;
     left: 0;
     transform: skew(-100deg);
-    background: rgba(12, 24, 68, 1);
+    background: rgba(14, 57, 73, 1);
     border: none;
     transition: 0.5s;
     z-index: -1;
@@ -987,7 +1002,7 @@
 
 .blog-content .blog-comment {
     transform: skew(8deg);
-    background: rgba(12, 24, 68, 1);
+    background: rgba(14, 57, 73, 1);
 }
 
 .blog-content .blog-comment div.small,
@@ -1049,7 +1064,7 @@
     top: 50%;
     left: 0;
     transform: translateY(-50%);
-    margin-top: 0px;
+    margin-top: 0;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1063,7 +1078,7 @@
 .explore {
     position: relative;
     overflow: hidden;
-    background: linear-gradient(rgba(12, 24, 68, 0.7), rgba(12, 24, 68, 0.7)), url(../img/services-img.jpg);
+    background: linear-gradient(rgba(14, 57, 73, 0.7), rgba(14, 57, 73, 0.7)), url(../img/services-img.jpg);
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -1078,6 +1093,7 @@
 .team .team-item {
     position: relative;
 }
+
 .team .team-item .team-img {
     position: relative;
     overflow: hidden;
@@ -1106,7 +1122,7 @@
 
 .team .team-item:hover .team-img::after {
     height: 100%;
-    background: rgba(255, 245, 225, .5);
+    background: rgba(255, 245, 225, 0.5);
 }
 
 .team .team-item .team-img .team-icon {
@@ -1122,7 +1138,7 @@
     transition: 0.5s;
 }
 
-.team .team-item:hover .team-img .team-icon a  {
+.team .team-item:hover .team-img .team-icon a {
     margin: 0 7px;
 }
 
@@ -1172,7 +1188,7 @@
 .testimonial {
     position: relative;
     overflow: hidden;
-    background: linear-gradient(rgba(12, 24, 68, 0.9), rgba(12, 24, 68, 0.9)), url(../img/services-img.jpg);
+    background: linear-gradient(rgba(14, 57, 73, 0.9), rgba(14, 57, 73, 0.9)), url(../img/services-img.jpg);
     background-position: center top;
     background-repeat: no-repeat;
     background-size: cover;
@@ -1227,6 +1243,7 @@
 .testimonial-carousel .owl-nav .owl-prev {
     left: 0;
 }
+
 .testimonial-carousel .owl-nav .owl-next {
     right: 0;
 }
@@ -1238,7 +1255,7 @@
 }
 /*** Testimonial End ***/
 
-/*** Conatct Start ***/
+/*** Contact Start ***/
 .contact {
     overflow: hidden;
 }
@@ -1253,7 +1270,7 @@
     overflow: hidden;
     display: flex;
     border: 2px solid var(--bs-dark);
-    background: linear-gradient(rgba(255, 245, 225, 0.2), rgba(12, 24, 68, 0.1), rgba(200, 0, 54, 0.3));
+    background: linear-gradient(rgba(255, 245, 225, 0.2), rgba(14, 57, 73, 0.1), rgba(14, 57, 73, 0.3));
 }
 
 .contact .contact-banner::after {
@@ -1284,7 +1301,7 @@
 /*** Footer Start ***/
 .footer {
     overflow: hidden;
-    background: linear-gradient(rgba(12, 24, 68, 0.9), rgba(12, 24, 68, 0.98)), url(../img/services-img.jpg);
+    background: linear-gradient(rgba(14, 57, 73, 0.9), rgba(14, 57, 73, 0.98)), url(../img/services-img.jpg);
     background-position: center top;
     background-repeat: no-repeat;
     background-size: cover;
@@ -1346,19 +1363,17 @@
 
 .footer .footer-item .footer-btn a:hover {
     background: var(--bs-white);
-}
-
-.footer .footer-item .footer-btn a:hover {
     color: var(--bs-primary);
 }
 /*** Footer End ***/
 
-/*** copyright Start ***/
+/*** Copyright Start ***/
 .copyright {
     border-top: 1px solid rgba(255, 255, 255, 0.08);
     background: var(--bs-dark);
 }
-/*** copyright end ***/
+/*** Copyright End ***/
+
 /* CRUD Styles */
 .table-responsive {
     overflow-x: auto;
@@ -1367,11 +1382,11 @@
 .table {
     width: 100%;
     margin-bottom: 1rem;
-    color: #212529;
+    color: var(--bs-body);
 }
 
 .table th {
-    background-color: #f8f9fa;
+    background-color: var(--bs-light);
     font-weight: 600;
 }
 
@@ -1386,7 +1401,8 @@
     margin-bottom: 0.5rem;
 }
 
-.form-control, .form-select {
+.form-control,
+.form-select {
     padding: 0.5rem 1rem;
     border-radius: 0.25rem;
     border: 1px solid #ced4da;
@@ -1408,7 +1424,8 @@
         -webkit-overflow-scrolling: touch;
     }
 }
-/* Dans votre fichier CSS principal */
+
+/* Dropdown Styles */
 .dropdown-item {
     cursor: pointer;
     transition: all 0.3s;
@@ -1425,7 +1442,3 @@
     opacity: 1;
     visibility: visible;
 }
-
-
-
-

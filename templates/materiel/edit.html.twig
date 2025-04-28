@@ -42,7 +42,7 @@
                                     <label class="form-label" for="{{ form.type.vars.id }}">Type *</label>
                                     <div class="input-group input-group-merge">
                                         <span class="input-group-text"><i class="bx bx-tag"></i></span>
-                                        {{ form_widget(form.type, {'attr': {'class': 'form-select'}}) }}
+                                        {{ form_widget(form.type, {'attr': {'class': 'form-select', 'id': 'materiel_type'}}) }}
                                     </div>
                                     <div class="form-text text-danger">{{ form_errors(form.type) }}</div>
                                 </div>
@@ -51,7 +51,7 @@
                                     <label class="form-label" for="{{ form.quantite.vars.id }}">Quantité en Stock *</label>
                                     <div class="input-group input-group-merge">
                                         <span class="input-group-text"><i class="bx bx-cube"></i></span>
-                                        {{ form_widget(form.quantite, {'attr': {'class': 'form-control', 'placeholder': 'Ex: 10'}}) }}
+                                        {{ form_widget(form.quantite, {'attr': {'class': 'form-control', 'placeholder': 'Ex: 10', 'required': false}}) }}
                                     </div>
                                     <div class="form-text text-danger">{{ form_errors(form.quantite) }}</div>
                                 </div>
@@ -89,7 +89,8 @@
                                     <label class="form-label" for="{{ form.fournisseur.vars.id }}">Fournisseur *</label>
                                     <div class="input-group input-group-merge">
                                         <span class="input-group-text"><i class="bx bx-building"></i></span>
-                                        {{ form_widget(form.fournisseur, {'attr': {'class': 'form-select'}}) }}
+                                        {{ form_widget(form.fournisseur, {'attr': {'class': 'form-select', 'id': 'materiel_fournisseur'}}) }},
+<div class="form-text text-danger">{{ form_errors(form.fournisseur) }}</div>
                                     </div>
                                     <div class="form-text text-danger">{{ form_errors(form.fournisseur) }}</div>
                                 </div>
@@ -136,77 +137,88 @@
     </div>
 </div>
 
-<!-- Script JavaScript pour l'analyse d'image -->
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        document.getElementById('analyzeImage').addEventListener('click', async function() {
-            const formData = new FormData();
-            const imageInput = document.querySelector('input[name="materiel[image]"]');
-            
-            if (!imageInput || !imageInput.files || !imageInput.files[0]) {
-                alert('Veuillez sélectionner une nouvelle image à analyser.');
+// --- AJAX update of fournisseur when type changes ---
+document.addEventListener('DOMContentLoaded', function() {
+    const typeSelect = document.getElementById('materiel_type');
+    const fournisseurSelect = document.getElementById('materiel_fournisseur');
+    if (typeSelect && fournisseurSelect) {
+        typeSelect.addEventListener('change', function() {
+            const selectedType = this.value;
+            if (!selectedType) {
+                fournisseurSelect.innerHTML = '<option value="">Sélectionner un fournisseur</option>';
                 return;
             }
-            
-            formData.append('image', imageInput.files[0]);
-
-            // Afficher un indicateur de chargement
-            const resultDiv = document.getElementById('imageAnalysisResult');
-            resultDiv.innerHTML = '<div class="spinner-border text-primary" role="status"><span class="visually-hidden">Chargement...</span></div>';
-
-            try {
-                const response = await fetch('{{ path('app_materiel_analyze_image') }}', {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
+            fetch('/materiel/fournisseurs-by-type/' + encodeURIComponent(selectedType))
+                .then(response => response.json())
+                .then(data => {
+                    let options = '<option value="">Sélectionner un fournisseur</option>';
+                    data.forEach(f => {
+                        options += `<option value="${f.id}">${f.nom}</option>`;
+                    });
+                    fournisseurSelect.innerHTML = options;
                 });
+        });
+    }
+});
+</script>
 
-                if (!response.ok) {
-                    throw new Error(`Erreur HTTP: ${response.status}`);
-                }
+    <!-- Script JavaScript pour l'analyse d'image -->
+<script>
+    document.getElementById('analyzeImageAI').addEventListener('click', async () => {
+        const formData = new FormData();
+        const imageInput = document.querySelector('input[name="materiel[image]"]');
+        console.log('Input image trouvé:', imageInput);
+        if (!imageInput || !imageInput.files[0]) {
+            alert('Veuillez sélectionner une image.');
+            return;
+        }
+        formData.append('image', imageInput.files[0]);
+        console.log('Fichier image ajouté:', imageInput.files[0].name);
 
-                const data = await response.json();
-                
-                if (data.error) {
-                    resultDiv.innerHTML = `<div class="alert alert-danger">${data.error}</div>`;
-                } else {
-                    const labels = data.labels.map(l => `${l.label} (${(l.score * 100).toFixed(1)}%)`).join(', ');
-                    resultDiv.innerHTML = `
-                        <div class="alert alert-info">
-                            <strong>Objets détectés :</strong> ${labels}<br>
-                            <strong>Type suggéré :</strong> ${data.suggestedType || 'Non déterminé'}
-                        </div>
-                    `;
-                    
-                    // Pré-remplir le champ type si un type est suggéré
-                    if (data.suggestedType) {
-                        const typeSelect = document.querySelector('select[name="materiel[type]"]');
-                        if (typeSelect) {
-                            typeSelect.value = data.suggestedType;
-                            
-                            // Vérifier si le type sélectionné correspond
-                            if (typeSelect.value && data.suggestedType !== typeSelect.value) {
-                                resultDiv.innerHTML += `
-                                    <div class="alert alert-warning mt-2">
-                                        Attention : Le type sélectionné (${typeSelect.options[typeSelect.selectedIndex].text}) ne correspond pas au type suggéré (${data.suggestedType}).
-                                    </div>
-                                `;
-                            }
-                        }
-                    }
-                }
-            } catch (error) {
-                console.error('Erreur:', error);
+        const resultDiv = document.getElementById('imageAnalysisResult');
+        resultDiv.innerHTML = '<div class="spinner-border text-primary" role="status"><span class="visually-hidden">Chargement...</span></div>';
+
+        try {
+            console.log('Envoi de la requête à:', '{{ path('app_materiel_analyze_image_AI') }}');
+            const response = await fetch('{{ path('app_materiel_analyze_image_AI') }}', {
+                method: 'POST',
+                body: formData,
+            });
+            console.log('Statut de la réponse:', response.status);
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error || `Erreur HTTP: ${response.status} ${response.statusText}`);
+            }
+            const data = await response.json();
+            if (data.error) {
+                resultDiv.innerHTML = `<div class="alert alert-danger">${data.error}</div>`;
+            } else {
+                const labels = data.labels.map(l => `${l.label} (${(l.score * 100).toFixed(1)}%)`).join(', ');
                 resultDiv.innerHTML = `
-                    <div class="alert alert-danger">
-                        Erreur lors de l'analyse de l'image: ${error.message}
-                        <br>Détails: ${error.response ? await error.response.text() : 'Pas de détails supplémentaires'}
+                    <div class="alert alert-info">
+                        <strong>Objets détectés :</strong> ${labels}<br>
+                        <strong>Type suggéré :</strong> ${data.suggestedType || 'Non déterminé'}
                     </div>
                 `;
+                if (data.suggestedType) {
+                    const typeSelect = document.querySelector('select[name="materiel[type]"]');
+                    typeSelect.value = data.suggestedType;
+                    if (typeSelect.value && data.suggestedType !== typeSelect.value) {
+                        resultDiv.innerHTML += `
+                            <div class="alert alert-warning">
+                                Attention : Le type sélectionné (${typeSelect.options[typeSelect.selectedIndex].text}) ne correspond pas au type suggéré (${data.suggestedType}).
+                            </div>
+                        `;
+                    }
+                }
             }
-        });
+        } catch (error) {
+            console.error('Erreur:', error);
+            resultDiv.innerHTML = `
+                <div class="alert alert-danger">Erreur lors de l'analyse de l'image: ${error.message}</div>
+            `;
+        }
     });
 </script>
 {% endblock %}

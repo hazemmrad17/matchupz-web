@@ -43,10 +43,6 @@ class Materiel
 
     #[ORM\Column(type: 'integer')]
     #[Assert\NotBlank(message: "La quantité ne peut pas être vide.")]
-    #[Assert\GreaterThan(
-        value: 5,
-        message: "La quantité doit être strictement supérieure à 5."
-    )]
     private int $quantite = 6; // Valeur par défaut > 5
 
     #[ORM\Column(type: 'string', columnDefinition: "ENUM('NEUF', 'USÉ', 'ENDOMMAGÉ')")]
