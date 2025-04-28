@@ -1,0 +1,86 @@
+{# templates/historique_club/_widgets.html.twig #}
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="row">
+            <!-- Total Players Widget -->
+            <div class="col-lg-3 col-md-6 col-6 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-title d-flex align-items-start justify-content-between">
+                            <div class="avatar flex-shrink-0">
+                                <span class="avatar-initial rounded bg-label-primary">
+                                    <i class="bx bx-user widget-icon"></i>
+                                </span>
+                            </div>
+                            <div class="dropdown">
+                                <button class="btn p-0" type="button" data-bs-toggle="dropdown">
+                                    <i class="bx bx-dots-vertical-rounded"></i>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-end">
+                                    <a class="dropdown-item" href="{{ path('app_historique_club_index') }}">Voir Tous</a>
+                                </div>
+                            </div>
+                        </div>
+                        <span>Joueurs Total</span>
+                        <h3 class="card-title text-nowrap mb-1">{{ stats.total_players }}</h3>
+                        <small class="text-muted">{{ stats.new_players_this_month }} nouveaux ce mois</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Current Clubs Widget -->
+            <div class="col-lg-3 col-md-6 col-6 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-title d-flex align-items-start justify-content-between">
+                            <div class="avatar flex-shrink-0">
+                                <span class="avatar-initial rounded bg-label-success">
+                                    <i class="bx bx-group widget-icon"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <span>Clubs Actifs</span>
+                        <h3 class="card-title text-nowrap mb-1">{{ stats.active_clubs }}</h3>
+                        <small class="text-muted">{{ stats.clubs_with_players }} avec joueurs</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Average Duration Widget -->
+            <div class="col-lg-3 col-md-6 col-6 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-title d-flex align-items-start justify-content-between">
+                            <div class="avatar flex-shrink-0">
+                                <span class="avatar-initial rounded bg-label-warning">
+                                    <i class="bx bx-time-five widget-icon"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <span>Durée Moyenne</span>
+                        <h3 class="card-title text-nowrap mb-1">{{ stats.avg_duration }} mois</h3>
+                        <small class="text-muted">Max: {{ stats.max_duration }} mois</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Activity Widget -->
+            <div class="col-lg-3 col-md-6 col-6 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-title d-flex align-items-start justify-content-between">
+                            <div class="avatar flex-shrink-0">
+                                <span class="avatar-initial rounded bg-label-info">
+                                    <i class="bx bx-calendar-event widget-icon"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <span>Mises à Jour</span>
+                        <h3 class="card-title text-nowrap mb-1">{{ stats.recent_updates }}</h3>
+                        <small class="text-muted">30 derniers jours</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
