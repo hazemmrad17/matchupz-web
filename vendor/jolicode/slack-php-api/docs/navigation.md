@@ -1,6 +1,0 @@
-* [Introduction](/)
-* [Get started](1-get-started)
-* [Usage](2-usage.md)
-* [Troubleshoots](3-troubleshoots.md)
-* [Updating the SDK](4-updating-sdk.md)
-* [Changelog](/changelog)
