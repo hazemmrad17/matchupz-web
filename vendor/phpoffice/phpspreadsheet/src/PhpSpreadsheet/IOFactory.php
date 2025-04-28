@@ -30,8 +30,13 @@ abstract class IOFactory
     public const WRITER_CSV = 'Csv';
     public const WRITER_HTML = 'Html';
 
+<<<<<<< HEAD
     /** @var string[] */
     private static $readers = [
+=======
+    /** @var array<string, class-string<IReader>> */
+    private static array $readers = [
+>>>>>>> match
         self::READER_XLSX => Reader\Xlsx::class,
         self::READER_XLS => Reader\Xls::class,
         self::READER_XML => Reader\Xml::class,
@@ -42,8 +47,13 @@ abstract class IOFactory
         self::READER_CSV => Reader\Csv::class,
     ];
 
+<<<<<<< HEAD
     /** @var string[] */
     private static $writers = [
+=======
+    /** @var array<string, class-string<IWriter>> */
+    private static array $writers = [
+>>>>>>> match
         self::WRITER_XLS => Writer\Xls::class,
         self::WRITER_XLSX => Writer\Xlsx::class,
         self::WRITER_ODS => Writer\Ods::class,
@@ -59,6 +69,7 @@ abstract class IOFactory
      */
     public static function createWriter(Spreadsheet $spreadsheet, string $writerType): IWriter
     {
+<<<<<<< HEAD
         if (!isset(self::$writers[$writerType])) {
             throw new Writer\Exception("No writer found for type $writerType");
         }
@@ -66,6 +77,18 @@ abstract class IOFactory
         // Instantiate writer
         /** @var IWriter */
         $className = self::$writers[$writerType];
+=======
+        /** @var class-string<IWriter> */
+        $className = $writerType;
+        if (!in_array($writerType, self::$writers, true)) {
+            if (!isset(self::$writers[$writerType])) {
+                throw new Writer\Exception("No writer found for type $writerType");
+            }
+
+            // Instantiate writer
+            $className = self::$writers[$writerType];
+        }
+>>>>>>> match
 
         return new $className($spreadsheet);
     }
@@ -75,6 +98,7 @@ abstract class IOFactory
      */
     public static function createReader(string $readerType): IReader
     {
+<<<<<<< HEAD
         if (!isset(self::$readers[$readerType])) {
             throw new Reader\Exception("No reader found for type $readerType");
         }
@@ -82,6 +106,18 @@ abstract class IOFactory
         // Instantiate reader
         /** @var IReader */
         $className = self::$readers[$readerType];
+=======
+        /** @var class-string<IReader> */
+        $className = $readerType;
+        if (!in_array($readerType, self::$readers, true)) {
+            if (!isset(self::$readers[$readerType])) {
+                throw new Reader\Exception("No reader found for type $readerType");
+            }
+
+            // Instantiate reader
+            $className = self::$readers[$readerType];
+        }
+>>>>>>> match
 
         return new $className();
     }
@@ -111,12 +147,23 @@ abstract class IOFactory
     /**
      * Identify file type using automatic IReader resolution.
      */
+<<<<<<< HEAD
     public static function identify(string $filename, ?array $readers = null): string
     {
         $reader = self::createReaderForFile($filename, $readers);
         $className = get_class($reader);
         $classType = explode('\\', $className);
         unset($reader);
+=======
+    public static function identify(string $filename, ?array $readers = null, bool $fullClassName = false): string
+    {
+        $reader = self::createReaderForFile($filename, $readers);
+        $className = $reader::class;
+        if ($fullClassName) {
+            return $className;
+        }
+        $classType = explode('\\', $className);
+>>>>>>> match
 
         return array_pop($classType);
     }
@@ -139,9 +186,13 @@ abstract class IOFactory
             $readers = array_map('strtoupper', $readers);
             $testReaders = array_filter(
                 self::$readers,
+<<<<<<< HEAD
                 function (string $readerType) use ($readers) {
                     return in_array(strtoupper($readerType), $readers, true);
                 },
+=======
+                fn (string $readerType): bool => in_array(strtoupper($readerType), $readers, true),
+>>>>>>> match
                 ARRAY_FILTER_USE_KEY
             );
         }
@@ -182,6 +233,7 @@ abstract class IOFactory
             return null;
         }
 
+<<<<<<< HEAD
         switch (strtolower($pathinfo['extension'])) {
             case 'xlsx': // Excel (OfficeOpenXML) Spreadsheet
             case 'xlsm': // Excel (OfficeOpenXML) Macro Spreadsheet (macros will be discarded)
@@ -211,10 +263,45 @@ abstract class IOFactory
             default:
                 return null;
         }
+=======
+        return match (strtolower($pathinfo['extension'])) {
+            // Excel (OfficeOpenXML) Spreadsheet
+            'xlsx',
+            // Excel (OfficeOpenXML) Macro Spreadsheet (macros will be discarded)
+            'xlsm',
+            // Excel (OfficeOpenXML) Template
+            'xltx',
+            // Excel (OfficeOpenXML) Macro Template (macros will be discarded)
+            'xltm' => 'Xlsx',
+            // Excel (BIFF) Spreadsheet
+            'xls',
+            // Excel (BIFF) Template
+            'xlt' => 'Xls',
+            // Open/Libre Offic Calc
+            'ods',
+            // Open/Libre Offic Calc Template
+            'ots' => 'Ods',
+            'slk' => 'Slk',
+            // Excel 2003 SpreadSheetML
+            'xml' => 'Xml',
+            'gnumeric' => 'Gnumeric',
+            'htm', 'html' => 'Html',
+            // Do nothing
+            // We must not try to use CSV reader since it loads
+            // all files including Excel files etc.
+            'csv' => null,
+            default => null,
+        };
+>>>>>>> match
     }
 
     /**
      * Register a writer with its type and class name.
+<<<<<<< HEAD
+=======
+     *
+     * @param class-string<IWriter> $writerClass
+>>>>>>> match
      */
     public static function registerWriter(string $writerType, string $writerClass): void
     {
@@ -227,6 +314,11 @@ abstract class IOFactory
 
     /**
      * Register a reader with its type and class name.
+<<<<<<< HEAD
+=======
+     *
+     * @param class-string<IReader> $readerClass
+>>>>>>> match
      */
     public static function registerReader(string $readerType, string $readerClass): void
     {

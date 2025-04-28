@@ -20,7 +20,11 @@ class Size
      *
      * @return float|string The result, or a string containing an error
      */
+<<<<<<< HEAD
     public static function large(...$args)
+=======
+    public static function large(mixed ...$args)
+>>>>>>> match
     {
         $aArgs = Functions::flattenArray($args);
         $entry = array_pop($aArgs);
@@ -55,7 +59,11 @@ class Size
      *
      * @return float|string The result, or a string containing an error
      */
+<<<<<<< HEAD
     public static function small(...$args)
+=======
+    public static function small(mixed ...$args)
+>>>>>>> match
     {
         $aArgs = Functions::flattenArray($args);
 

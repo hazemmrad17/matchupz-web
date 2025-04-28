@@ -19,7 +19,11 @@ class Variances extends VarianceBase
      *
      * @return float|string (string if result is an error)
      */
+<<<<<<< HEAD
     public static function VAR(...$args)
+=======
+    public static function VAR(mixed ...$args): float|string
+>>>>>>> match
     {
         $returnValue = ExcelError::DIV0();
 
@@ -61,7 +65,11 @@ class Variances extends VarianceBase
      *
      * @return float|string (string if result is an error)
      */
+<<<<<<< HEAD
     public static function VARA(...$args)
+=======
+    public static function VARA(mixed ...$args): string|float
+>>>>>>> match
     {
         $returnValue = ExcelError::DIV0();
 
@@ -107,7 +115,11 @@ class Variances extends VarianceBase
      *
      * @return float|string (string if result is an error)
      */
+<<<<<<< HEAD
     public static function VARP(...$args)
+=======
+    public static function VARP(mixed ...$args): float|string
+>>>>>>> match
     {
         // Return value
         $returnValue = ExcelError::DIV0();
@@ -150,7 +162,11 @@ class Variances extends VarianceBase
      *
      * @return float|string (string if result is an error)
      */
+<<<<<<< HEAD
     public static function VARPA(...$args)
+=======
+    public static function VARPA(mixed ...$args): string|float
+>>>>>>> match
     {
         $returnValue = ExcelError::DIV0();
 

@@ -49,7 +49,11 @@ class Helpers
             $cellAddress = $cellAddress1;
             $a1 = self::CELLADDRESS_USE_A1;
         }
+<<<<<<< HEAD
         if (strpos($cellAddress, ':') !== false) {
+=======
+        if (str_contains($cellAddress, ':')) {
+>>>>>>> match
             [$cellAddress1, $cellAddress2] = explode(':', $cellAddress);
         }
         $cellAddress = self::convertR1C1($cellAddress1, $cellAddress2, $a1, $baseRow, $baseCol);
@@ -60,9 +64,14 @@ class Helpers
     public static function extractWorksheet(string $cellAddress, Cell $cell): array
     {
         $sheetName = '';
+<<<<<<< HEAD
         if (strpos($cellAddress, '!') !== false) {
             [$sheetName, $cellAddress] = Worksheet::extractSheetTitle($cellAddress, true);
             $sheetName = trim($sheetName, "'");
+=======
+        if (str_contains($cellAddress, '!')) {
+            [$sheetName, $cellAddress] = Worksheet::extractSheetTitle($cellAddress, true, true);
+>>>>>>> match
         }
 
         $worksheet = ($sheetName !== '')

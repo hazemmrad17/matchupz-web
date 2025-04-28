@@ -6,6 +6,7 @@ use PhpOffice\PhpSpreadsheet\Calculation\Exception;
 
 class ArrayArgumentHelper
 {
+<<<<<<< HEAD
     /**
      * @var int
      */
@@ -30,6 +31,17 @@ class ArrayArgumentHelper
      * @var array
      */
     protected $columns;
+=======
+    protected int $indexStart = 0;
+
+    protected array $arguments;
+
+    protected int $argumentCount;
+
+    protected array $rows;
+
+    protected array $columns;
+>>>>>>> match
 
     public function initialise(array $arguments): void
     {
@@ -152,9 +164,13 @@ class ArrayArgumentHelper
     private function rows(array $arguments): array
     {
         return array_map(
+<<<<<<< HEAD
             function ($argument) {
                 return is_countable($argument) ? count($argument) : 1;
             },
+=======
+            fn ($argument): int => is_countable($argument) ? count($argument) : 1,
+>>>>>>> match
             $arguments
         );
     }
@@ -162,11 +178,17 @@ class ArrayArgumentHelper
     private function columns(array $arguments): array
     {
         return array_map(
+<<<<<<< HEAD
             function ($argument) {
                 return is_array($argument) && is_array($argument[array_keys($argument)[0]])
                     ? count($argument[array_keys($argument)[0]])
                     : 1;
             },
+=======
+            fn (mixed $argument): int => is_array($argument) && is_array($argument[array_keys($argument)[0]])
+                    ? count($argument[array_keys($argument)[0]])
+                    : 1,
+>>>>>>> match
             $arguments
         );
     }
@@ -201,9 +223,13 @@ class ArrayArgumentHelper
     {
         return array_filter(
             $array,
+<<<<<<< HEAD
             function ($value) {
                 return $value > 1;
             }
+=======
+            fn ($value): bool => $value > 1
+>>>>>>> match
         );
     }
 }

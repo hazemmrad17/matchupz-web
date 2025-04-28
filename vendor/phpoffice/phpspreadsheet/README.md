@@ -11,6 +11,7 @@
 PhpSpreadsheet is a library written in pure PHP and offers a set of classes that
 allow you to read and write various spreadsheet file formats such as Excel and LibreOffice Calc.
 
+<<<<<<< HEAD
 ## PHP Version Support
 
 LTS: Support for PHP versions will only be maintained for a period of six months beyond the
@@ -88,6 +89,11 @@ Settings::setChartRenderer(\PhpOffice\PhpSpreadsheet\Chart\Renderer\MtJpGraphRen
 One or the other of these libraries is necessary if you want to generate HTML or PDF files that include charts; or to render a Chart to an Image format from within your code.
 They are not necessary to define charts for writing to `Xlsx` files.
 Other file formats don't support writing Charts.
+=======
+## Installation
+
+See the [install instructions](https://phpspreadsheet.readthedocs.io/en/latest/#installation).
+>>>>>>> match
 
 ## Documentation
 

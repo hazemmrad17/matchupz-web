@@ -23,6 +23,7 @@ abstract class CellIterator implements NativeIterator
 
     /**
      * Worksheet to iterate.
+<<<<<<< HEAD
      *
      * @var Worksheet
      */
@@ -41,22 +42,45 @@ abstract class CellIterator implements NativeIterator
      * @var bool
      */
     protected $onlyExistingCells = false;
+=======
+     */
+    protected Worksheet $worksheet;
+
+    /**
+     * Cell Collection to iterate.
+     */
+    protected Cells $cellCollection;
+
+    /**
+     * Iterate only existing cells.
+     */
+    protected bool $onlyExistingCells = false;
+>>>>>>> match
 
     /**
      * If iterating all cells, and a cell doesn't exist, identifies whether a new cell should be created,
      *    or if the iterator should return a null value.
+<<<<<<< HEAD
      *
      * @var bool
      */
     protected $ifNotExists = self::IF_NOT_EXISTS_CREATE_NEW;
+=======
+     */
+    protected bool $ifNotExists = self::IF_NOT_EXISTS_CREATE_NEW;
+>>>>>>> match
 
     /**
      * Destructor.
      */
     public function __destruct()
     {
+<<<<<<< HEAD
         // @phpstan-ignore-next-line
         $this->worksheet = $this->cellCollection = null;
+=======
+        unset($this->worksheet, $this->cellCollection);
+>>>>>>> match
     }
 
     public function getIfNotExists(): bool

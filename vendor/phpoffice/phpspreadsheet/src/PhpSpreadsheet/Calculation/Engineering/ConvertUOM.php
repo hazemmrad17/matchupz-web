@@ -27,6 +27,7 @@ class ConvertUOM
     /**
      * Details of the Units of measure that can be used in CONVERTUOM().
      *
+<<<<<<< HEAD
      * @var mixed[]
      */
     private static $conversionUnits = [
@@ -196,14 +197,191 @@ class ConvertUOM
         'mph' => ['Group' => self::CATEGORY_SPEED, 'Unit Name' => 'Miles per hour', 'AllowPrefix' => false],
         'admkn' => ['Group' => self::CATEGORY_SPEED, 'Unit Name' => 'Admiralty Knot', 'AllowPrefix' => false],
         'kn' => ['Group' => self::CATEGORY_SPEED, 'Unit Name' => 'Knot', 'AllowPrefix' => false],
+=======
+     * @var array<string, array{Group: string, UnitName: string, AllowPrefix: bool}>
+     */
+    private static array $conversionUnits = [
+        // Weight and Mass
+        'g' => ['Group' => self::CATEGORY_WEIGHT_AND_MASS, 'UnitName' => 'Gram', 'AllowPrefix' => true],
+        'sg' => ['Group' => self::CATEGORY_WEIGHT_AND_MASS, 'UnitName' => 'Slug', 'AllowPrefix' => false],
+        'lbm' => ['Group' => self::CATEGORY_WEIGHT_AND_MASS, 'UnitName' => 'Pound mass (avoirdupois)', 'AllowPrefix' => false],
+        'u' => ['Group' => self::CATEGORY_WEIGHT_AND_MASS, 'UnitName' => 'U (atomic mass unit)', 'AllowPrefix' => true],
+        'ozm' => ['Group' => self::CATEGORY_WEIGHT_AND_MASS, 'UnitName' => 'Ounce mass (avoirdupois)', 'AllowPrefix' => false],
+        'grain' => ['Group' => self::CATEGORY_WEIGHT_AND_MASS, 'UnitName' => 'Grain', 'AllowPrefix' => false],
+        'cwt' => ['Group' => self::CATEGORY_WEIGHT_AND_MASS, 'UnitName' => 'U.S. (short) hundredweight', 'AllowPrefix' => false],
+        'shweight' => ['Group' => self::CATEGORY_WEIGHT_AND_MASS, 'UnitName' => 'U.S. (short) hundredweight', 'AllowPrefix' => false],
+        'uk_cwt' => ['Group' => self::CATEGORY_WEIGHT_AND_MASS, 'UnitName' => 'Imperial hundredweight', 'AllowPrefix' => false],
+        'lcwt' => ['Group' => self::CATEGORY_WEIGHT_AND_MASS, 'UnitName' => 'Imperial hundredweight', 'AllowPrefix' => false],
+        'hweight' => ['Group' => self::CATEGORY_WEIGHT_AND_MASS, 'UnitName' => 'Imperial hundredweight', 'AllowPrefix' => false],
+        'stone' => ['Group' => self::CATEGORY_WEIGHT_AND_MASS, 'UnitName' => 'Stone', 'AllowPrefix' => false],
+        'ton' => ['Group' => self::CATEGORY_WEIGHT_AND_MASS, 'UnitName' => 'Ton', 'AllowPrefix' => false],
+        'uk_ton' => ['Group' => self::CATEGORY_WEIGHT_AND_MASS, 'UnitName' => 'Imperial ton', 'AllowPrefix' => false],
+        'LTON' => ['Group' => self::CATEGORY_WEIGHT_AND_MASS, 'UnitName' => 'Imperial ton', 'AllowPrefix' => false],
+        'brton' => ['Group' => self::CATEGORY_WEIGHT_AND_MASS, 'UnitName' => 'Imperial ton', 'AllowPrefix' => false],
+        // Distance
+        'm' => ['Group' => self::CATEGORY_DISTANCE, 'UnitName' => 'Meter', 'AllowPrefix' => true],
+        'mi' => ['Group' => self::CATEGORY_DISTANCE, 'UnitName' => 'Statute mile', 'AllowPrefix' => false],
+        'Nmi' => ['Group' => self::CATEGORY_DISTANCE, 'UnitName' => 'Nautical mile', 'AllowPrefix' => false],
+        'in' => ['Group' => self::CATEGORY_DISTANCE, 'UnitName' => 'Inch', 'AllowPrefix' => false],
+        'ft' => ['Group' => self::CATEGORY_DISTANCE, 'UnitName' => 'Foot', 'AllowPrefix' => false],
+        'yd' => ['Group' => self::CATEGORY_DISTANCE, 'UnitName' => 'Yard', 'AllowPrefix' => false],
+        'ang' => ['Group' => self::CATEGORY_DISTANCE, 'UnitName' => 'Angstrom', 'AllowPrefix' => true],
+        'ell' => ['Group' => self::CATEGORY_DISTANCE, 'UnitName' => 'Ell', 'AllowPrefix' => false],
+        'ly' => ['Group' => self::CATEGORY_DISTANCE, 'UnitName' => 'Light Year', 'AllowPrefix' => false],
+        'parsec' => ['Group' => self::CATEGORY_DISTANCE, 'UnitName' => 'Parsec', 'AllowPrefix' => false],
+        'pc' => ['Group' => self::CATEGORY_DISTANCE, 'UnitName' => 'Parsec', 'AllowPrefix' => false],
+        'Pica' => ['Group' => self::CATEGORY_DISTANCE, 'UnitName' => 'Pica (1/72 in)', 'AllowPrefix' => false],
+        'Picapt' => ['Group' => self::CATEGORY_DISTANCE, 'UnitName' => 'Pica (1/72 in)', 'AllowPrefix' => false],
+        'pica' => ['Group' => self::CATEGORY_DISTANCE, 'UnitName' => 'Pica (1/6 in)', 'AllowPrefix' => false],
+        'survey_mi' => ['Group' => self::CATEGORY_DISTANCE, 'UnitName' => 'U.S survey mile (statute mile)', 'AllowPrefix' => false],
+        // Time
+        'yr' => ['Group' => self::CATEGORY_TIME, 'UnitName' => 'Year', 'AllowPrefix' => false],
+        'day' => ['Group' => self::CATEGORY_TIME, 'UnitName' => 'Day', 'AllowPrefix' => false],
+        'd' => ['Group' => self::CATEGORY_TIME, 'UnitName' => 'Day', 'AllowPrefix' => false],
+        'hr' => ['Group' => self::CATEGORY_TIME, 'UnitName' => 'Hour', 'AllowPrefix' => false],
+        'mn' => ['Group' => self::CATEGORY_TIME, 'UnitName' => 'Minute', 'AllowPrefix' => false],
+        'min' => ['Group' => self::CATEGORY_TIME, 'UnitName' => 'Minute', 'AllowPrefix' => false],
+        'sec' => ['Group' => self::CATEGORY_TIME, 'UnitName' => 'Second', 'AllowPrefix' => true],
+        's' => ['Group' => self::CATEGORY_TIME, 'UnitName' => 'Second', 'AllowPrefix' => true],
+        // Pressure
+        'Pa' => ['Group' => self::CATEGORY_PRESSURE, 'UnitName' => 'Pascal', 'AllowPrefix' => true],
+        'p' => ['Group' => self::CATEGORY_PRESSURE, 'UnitName' => 'Pascal', 'AllowPrefix' => true],
+        'atm' => ['Group' => self::CATEGORY_PRESSURE, 'UnitName' => 'Atmosphere', 'AllowPrefix' => true],
+        'at' => ['Group' => self::CATEGORY_PRESSURE, 'UnitName' => 'Atmosphere', 'AllowPrefix' => true],
+        'mmHg' => ['Group' => self::CATEGORY_PRESSURE, 'UnitName' => 'mm of Mercury', 'AllowPrefix' => true],
+        'psi' => ['Group' => self::CATEGORY_PRESSURE, 'UnitName' => 'PSI', 'AllowPrefix' => true],
+        'Torr' => ['Group' => self::CATEGORY_PRESSURE, 'UnitName' => 'Torr', 'AllowPrefix' => true],
+        // Force
+        'N' => ['Group' => self::CATEGORY_FORCE, 'UnitName' => 'Newton', 'AllowPrefix' => true],
+        'dyn' => ['Group' => self::CATEGORY_FORCE, 'UnitName' => 'Dyne', 'AllowPrefix' => true],
+        'dy' => ['Group' => self::CATEGORY_FORCE, 'UnitName' => 'Dyne', 'AllowPrefix' => true],
+        'lbf' => ['Group' => self::CATEGORY_FORCE, 'UnitName' => 'Pound force', 'AllowPrefix' => false],
+        'pond' => ['Group' => self::CATEGORY_FORCE, 'UnitName' => 'Pond', 'AllowPrefix' => true],
+        // Energy
+        'J' => ['Group' => self::CATEGORY_ENERGY, 'UnitName' => 'Joule', 'AllowPrefix' => true],
+        'e' => ['Group' => self::CATEGORY_ENERGY, 'UnitName' => 'Erg', 'AllowPrefix' => true],
+        'c' => ['Group' => self::CATEGORY_ENERGY, 'UnitName' => 'Thermodynamic calorie', 'AllowPrefix' => true],
+        'cal' => ['Group' => self::CATEGORY_ENERGY, 'UnitName' => 'IT calorie', 'AllowPrefix' => true],
+        'eV' => ['Group' => self::CATEGORY_ENERGY, 'UnitName' => 'Electron volt', 'AllowPrefix' => true],
+        'ev' => ['Group' => self::CATEGORY_ENERGY, 'UnitName' => 'Electron volt', 'AllowPrefix' => true],
+        'HPh' => ['Group' => self::CATEGORY_ENERGY, 'UnitName' => 'Horsepower-hour', 'AllowPrefix' => false],
+        'hh' => ['Group' => self::CATEGORY_ENERGY, 'UnitName' => 'Horsepower-hour', 'AllowPrefix' => false],
+        'Wh' => ['Group' => self::CATEGORY_ENERGY, 'UnitName' => 'Watt-hour', 'AllowPrefix' => true],
+        'wh' => ['Group' => self::CATEGORY_ENERGY, 'UnitName' => 'Watt-hour', 'AllowPrefix' => true],
+        'flb' => ['Group' => self::CATEGORY_ENERGY, 'UnitName' => 'Foot-pound', 'AllowPrefix' => false],
+        'BTU' => ['Group' => self::CATEGORY_ENERGY, 'UnitName' => 'BTU', 'AllowPrefix' => false],
+        'btu' => ['Group' => self::CATEGORY_ENERGY, 'UnitName' => 'BTU', 'AllowPrefix' => false],
+        // Power
+        'HP' => ['Group' => self::CATEGORY_POWER, 'UnitName' => 'Horsepower', 'AllowPrefix' => false],
+        'h' => ['Group' => self::CATEGORY_POWER, 'UnitName' => 'Horsepower', 'AllowPrefix' => false],
+        'W' => ['Group' => self::CATEGORY_POWER, 'UnitName' => 'Watt', 'AllowPrefix' => true],
+        'w' => ['Group' => self::CATEGORY_POWER, 'UnitName' => 'Watt', 'AllowPrefix' => true],
+        'PS' => ['Group' => self::CATEGORY_POWER, 'UnitName' => 'Pferdestärke', 'AllowPrefix' => false],
+        // Magnetism
+        'T' => ['Group' => self::CATEGORY_MAGNETISM, 'UnitName' => 'Tesla', 'AllowPrefix' => true],
+        'ga' => ['Group' => self::CATEGORY_MAGNETISM, 'UnitName' => 'Gauss', 'AllowPrefix' => true],
+        // Temperature
+        'C' => ['Group' => self::CATEGORY_TEMPERATURE, 'UnitName' => 'Degrees Celsius', 'AllowPrefix' => false],
+        'cel' => ['Group' => self::CATEGORY_TEMPERATURE, 'UnitName' => 'Degrees Celsius', 'AllowPrefix' => false],
+        'F' => ['Group' => self::CATEGORY_TEMPERATURE, 'UnitName' => 'Degrees Fahrenheit', 'AllowPrefix' => false],
+        'fah' => ['Group' => self::CATEGORY_TEMPERATURE, 'UnitName' => 'Degrees Fahrenheit', 'AllowPrefix' => false],
+        'K' => ['Group' => self::CATEGORY_TEMPERATURE, 'UnitName' => 'Kelvin', 'AllowPrefix' => false],
+        'kel' => ['Group' => self::CATEGORY_TEMPERATURE, 'UnitName' => 'Kelvin', 'AllowPrefix' => false],
+        'Rank' => ['Group' => self::CATEGORY_TEMPERATURE, 'UnitName' => 'Degrees Rankine', 'AllowPrefix' => false],
+        'Reau' => ['Group' => self::CATEGORY_TEMPERATURE, 'UnitName' => 'Degrees Réaumur', 'AllowPrefix' => false],
+        // Volume
+        'l' => ['Group' => self::CATEGORY_VOLUME, 'UnitName' => 'Litre', 'AllowPrefix' => true],
+        'L' => ['Group' => self::CATEGORY_VOLUME, 'UnitName' => 'Litre', 'AllowPrefix' => true],
+        'lt' => ['Group' => self::CATEGORY_VOLUME, 'UnitName' => 'Litre', 'AllowPrefix' => true],
+        'tsp' => ['Group' => self::CATEGORY_VOLUME, 'UnitName' => 'Teaspoon', 'AllowPrefix' => false],
+        'tspm' => ['Group' => self::CATEGORY_VOLUME, 'UnitName' => 'Modern Teaspoon', 'AllowPrefix' => false],
+        'tbs' => ['Group' => self::CATEGORY_VOLUME, 'UnitName' => 'Tablespoon', 'AllowPrefix' => false],
+        'oz' => ['Group' => self::CATEGORY_VOLUME, 'UnitName' => 'Fluid Ounce', 'AllowPrefix' => false],
+        'cup' => ['Group' => self::CATEGORY_VOLUME, 'UnitName' => 'Cup', 'AllowPrefix' => false],
+        'pt' => ['Group' => self::CATEGORY_VOLUME, 'UnitName' => 'U.S. Pint', 'AllowPrefix' => false],
+        'us_pt' => ['Group' => self::CATEGORY_VOLUME, 'UnitName' => 'U.S. Pint', 'AllowPrefix' => false],
+        'uk_pt' => ['Group' => self::CATEGORY_VOLUME, 'UnitName' => 'U.K. Pint', 'AllowPrefix' => false],
+        'qt' => ['Group' => self::CATEGORY_VOLUME, 'UnitName' => 'Quart', 'AllowPrefix' => false],
+        'uk_qt' => ['Group' => self::CATEGORY_VOLUME, 'UnitName' => 'Imperial Quart (UK)', 'AllowPrefix' => false],
+        'gal' => ['Group' => self::CATEGORY_VOLUME, 'UnitName' => 'Gallon', 'AllowPrefix' => false],
+        'uk_gal' => ['Group' => self::CATEGORY_VOLUME, 'UnitName' => 'Imperial Gallon (UK)', 'AllowPrefix' => false],
+        'ang3' => ['Group' => self::CATEGORY_VOLUME, 'UnitName' => 'Cubic Angstrom', 'AllowPrefix' => true],
+        'ang^3' => ['Group' => self::CATEGORY_VOLUME, 'UnitName' => 'Cubic Angstrom', 'AllowPrefix' => true],
+        'barrel' => ['Group' => self::CATEGORY_VOLUME, 'UnitName' => 'US Oil Barrel', 'AllowPrefix' => false],
+        'bushel' => ['Group' => self::CATEGORY_VOLUME, 'UnitName' => 'US Bushel', 'AllowPrefix' => false],
+        'in3' => ['Group' => self::CATEGORY_VOLUME, 'UnitName' => 'Cubic Inch', 'AllowPrefix' => false],
+        'in^3' => ['Group' => self::CATEGORY_VOLUME, 'UnitName' => 'Cubic Inch', 'AllowPrefix' => false],
+        'ft3' => ['Group' => self::CATEGORY_VOLUME, 'UnitName' => 'Cubic Foot', 'AllowPrefix' => false],
+        'ft^3' => ['Group' => self::CATEGORY_VOLUME, 'UnitName' => 'Cubic Foot', 'AllowPrefix' => false],
+        'ly3' => ['Group' => self::CATEGORY_VOLUME, 'UnitName' => 'Cubic Light Year', 'AllowPrefix' => false],
+        'ly^3' => ['Group' => self::CATEGORY_VOLUME, 'UnitName' => 'Cubic Light Year', 'AllowPrefix' => false],
+        'm3' => ['Group' => self::CATEGORY_VOLUME, 'UnitName' => 'Cubic Meter', 'AllowPrefix' => true],
+        'm^3' => ['Group' => self::CATEGORY_VOLUME, 'UnitName' => 'Cubic Meter', 'AllowPrefix' => true],
+        'mi3' => ['Group' => self::CATEGORY_VOLUME, 'UnitName' => 'Cubic Mile', 'AllowPrefix' => false],
+        'mi^3' => ['Group' => self::CATEGORY_VOLUME, 'UnitName' => 'Cubic Mile', 'AllowPrefix' => false],
+        'yd3' => ['Group' => self::CATEGORY_VOLUME, 'UnitName' => 'Cubic Yard', 'AllowPrefix' => false],
+        'yd^3' => ['Group' => self::CATEGORY_VOLUME, 'UnitName' => 'Cubic Yard', 'AllowPrefix' => false],
+        'Nmi3' => ['Group' => self::CATEGORY_VOLUME, 'UnitName' => 'Cubic Nautical Mile', 'AllowPrefix' => false],
+        'Nmi^3' => ['Group' => self::CATEGORY_VOLUME, 'UnitName' => 'Cubic Nautical Mile', 'AllowPrefix' => false],
+        'Pica3' => ['Group' => self::CATEGORY_VOLUME, 'UnitName' => 'Cubic Pica', 'AllowPrefix' => false],
+        'Pica^3' => ['Group' => self::CATEGORY_VOLUME, 'UnitName' => 'Cubic Pica', 'AllowPrefix' => false],
+        'Picapt3' => ['Group' => self::CATEGORY_VOLUME, 'UnitName' => 'Cubic Pica', 'AllowPrefix' => false],
+        'Picapt^3' => ['Group' => self::CATEGORY_VOLUME, 'UnitName' => 'Cubic Pica', 'AllowPrefix' => false],
+        'GRT' => ['Group' => self::CATEGORY_VOLUME, 'UnitName' => 'Gross Registered Ton', 'AllowPrefix' => false],
+        'regton' => ['Group' => self::CATEGORY_VOLUME, 'UnitName' => 'Gross Registered Ton', 'AllowPrefix' => false],
+        'MTON' => ['Group' => self::CATEGORY_VOLUME, 'UnitName' => 'Measurement Ton (Freight Ton)', 'AllowPrefix' => false],
+        // Area
+        'ha' => ['Group' => self::CATEGORY_AREA, 'UnitName' => 'Hectare', 'AllowPrefix' => true],
+        'uk_acre' => ['Group' => self::CATEGORY_AREA, 'UnitName' => 'International Acre', 'AllowPrefix' => false],
+        'us_acre' => ['Group' => self::CATEGORY_AREA, 'UnitName' => 'US Survey/Statute Acre', 'AllowPrefix' => false],
+        'ang2' => ['Group' => self::CATEGORY_AREA, 'UnitName' => 'Square Angstrom', 'AllowPrefix' => true],
+        'ang^2' => ['Group' => self::CATEGORY_AREA, 'UnitName' => 'Square Angstrom', 'AllowPrefix' => true],
+        'ar' => ['Group' => self::CATEGORY_AREA, 'UnitName' => 'Are', 'AllowPrefix' => true],
+        'ft2' => ['Group' => self::CATEGORY_AREA, 'UnitName' => 'Square Feet', 'AllowPrefix' => false],
+        'ft^2' => ['Group' => self::CATEGORY_AREA, 'UnitName' => 'Square Feet', 'AllowPrefix' => false],
+        'in2' => ['Group' => self::CATEGORY_AREA, 'UnitName' => 'Square Inches', 'AllowPrefix' => false],
+        'in^2' => ['Group' => self::CATEGORY_AREA, 'UnitName' => 'Square Inches', 'AllowPrefix' => false],
+        'ly2' => ['Group' => self::CATEGORY_AREA, 'UnitName' => 'Square Light Years', 'AllowPrefix' => false],
+        'ly^2' => ['Group' => self::CATEGORY_AREA, 'UnitName' => 'Square Light Years', 'AllowPrefix' => false],
+        'm2' => ['Group' => self::CATEGORY_AREA, 'UnitName' => 'Square Meters', 'AllowPrefix' => true],
+        'm^2' => ['Group' => self::CATEGORY_AREA, 'UnitName' => 'Square Meters', 'AllowPrefix' => true],
+        'Morgen' => ['Group' => self::CATEGORY_AREA, 'UnitName' => 'Morgen', 'AllowPrefix' => false],
+        'mi2' => ['Group' => self::CATEGORY_AREA, 'UnitName' => 'Square Miles', 'AllowPrefix' => false],
+        'mi^2' => ['Group' => self::CATEGORY_AREA, 'UnitName' => 'Square Miles', 'AllowPrefix' => false],
+        'Nmi2' => ['Group' => self::CATEGORY_AREA, 'UnitName' => 'Square Nautical Miles', 'AllowPrefix' => false],
+        'Nmi^2' => ['Group' => self::CATEGORY_AREA, 'UnitName' => 'Square Nautical Miles', 'AllowPrefix' => false],
+        'Pica2' => ['Group' => self::CATEGORY_AREA, 'UnitName' => 'Square Pica', 'AllowPrefix' => false],
+        'Pica^2' => ['Group' => self::CATEGORY_AREA, 'UnitName' => 'Square Pica', 'AllowPrefix' => false],
+        'Picapt2' => ['Group' => self::CATEGORY_AREA, 'UnitName' => 'Square Pica', 'AllowPrefix' => false],
+        'Picapt^2' => ['Group' => self::CATEGORY_AREA, 'UnitName' => 'Square Pica', 'AllowPrefix' => false],
+        'yd2' => ['Group' => self::CATEGORY_AREA, 'UnitName' => 'Square Yards', 'AllowPrefix' => false],
+        'yd^2' => ['Group' => self::CATEGORY_AREA, 'UnitName' => 'Square Yards', 'AllowPrefix' => false],
+        // Information
+        'byte' => ['Group' => self::CATEGORY_INFORMATION, 'UnitName' => 'Byte', 'AllowPrefix' => true],
+        'bit' => ['Group' => self::CATEGORY_INFORMATION, 'UnitName' => 'Bit', 'AllowPrefix' => true],
+        // Speed
+        'm/s' => ['Group' => self::CATEGORY_SPEED, 'UnitName' => 'Meters per second', 'AllowPrefix' => true],
+        'm/sec' => ['Group' => self::CATEGORY_SPEED, 'UnitName' => 'Meters per second', 'AllowPrefix' => true],
+        'm/h' => ['Group' => self::CATEGORY_SPEED, 'UnitName' => 'Meters per hour', 'AllowPrefix' => true],
+        'm/hr' => ['Group' => self::CATEGORY_SPEED, 'UnitName' => 'Meters per hour', 'AllowPrefix' => true],
+        'mph' => ['Group' => self::CATEGORY_SPEED, 'UnitName' => 'Miles per hour', 'AllowPrefix' => false],
+        'admkn' => ['Group' => self::CATEGORY_SPEED, 'UnitName' => 'Admiralty Knot', 'AllowPrefix' => false],
+        'kn' => ['Group' => self::CATEGORY_SPEED, 'UnitName' => 'Knot', 'AllowPrefix' => false],
+>>>>>>> match
     ];
 
     /**
      * Details of the Multiplier prefixes that can be used with Units of Measure in CONVERTUOM().
      *
+<<<<<<< HEAD
      * @var mixed[]
      */
     private static $conversionMultipliers = [
+=======
+     * @var array<string, array{multiplier: float, name: string}>
+     */
+    private static array $conversionMultipliers = [
+>>>>>>> match
         'Y' => ['multiplier' => 1E24, 'name' => 'yotta'],
         'Z' => ['multiplier' => 1E21, 'name' => 'zetta'],
         'E' => ['multiplier' => 1E18, 'name' => 'exa'],
@@ -230,9 +408,15 @@ class ConvertUOM
     /**
      * Details of the Multiplier prefixes that can be used with Units of Measure in CONVERTUOM().
      *
+<<<<<<< HEAD
      * @var mixed[]
      */
     private static $binaryConversionMultipliers = [
+=======
+     ** @var array<string, array{multiplier: float|int, name: string}>
+     */
+    private static array $binaryConversionMultipliers = [
+>>>>>>> match
         'Yi' => ['multiplier' => 2 ** 80, 'name' => 'yobi'],
         'Zi' => ['multiplier' => 2 ** 70, 'name' => 'zebi'],
         'Ei' => ['multiplier' => 2 ** 60, 'name' => 'exbi'],
@@ -246,9 +430,15 @@ class ConvertUOM
     /**
      * Details of the Units of measure conversion factors, organised by group.
      *
+<<<<<<< HEAD
      * @var mixed[]
      */
     private static $unitConversions = [
+=======
+     * @var array<string, array<string, float>>
+     */
+    private static array $unitConversions = [
+>>>>>>> match
         // Conversion uses gram (g) as an intermediate unit
         self::CATEGORY_WEIGHT_AND_MASS => [
             'g' => 1.0,
@@ -435,10 +625,15 @@ class ConvertUOM
     /**
      *    getConversionGroups
      * Returns a list of the different conversion groups for UOM conversions.
+<<<<<<< HEAD
      *
      * @return array
      */
     public static function getConversionCategories()
+=======
+     */
+    public static function getConversionCategories(): array
+>>>>>>> match
     {
         $conversionGroups = [];
         foreach (self::$conversionUnits as $conversionUnit) {
@@ -452,11 +647,17 @@ class ConvertUOM
      *    getConversionGroupUnits
      * Returns an array of units of measure, for a specified conversion group, or for all groups.
      *
+<<<<<<< HEAD
      * @param string $category The group whose units of measure you want to retrieve
      *
      * @return array
      */
     public static function getConversionCategoryUnits($category = null)
+=======
+     * @param ?string $category The group whose units of measure you want to retrieve
+     */
+    public static function getConversionCategoryUnits(?string $category = null): array
+>>>>>>> match
     {
         $conversionGroups = [];
         foreach (self::$conversionUnits as $conversionUnit => $conversionGroup) {
@@ -471,18 +672,28 @@ class ConvertUOM
     /**
      * getConversionGroupUnitDetails.
      *
+<<<<<<< HEAD
      * @param string $category The group whose units of measure you want to retrieve
      *
      * @return array
      */
     public static function getConversionCategoryUnitDetails($category = null)
+=======
+     * @param ?string $category The group whose units of measure you want to retrieve
+     */
+    public static function getConversionCategoryUnitDetails(?string $category = null): array
+>>>>>>> match
     {
         $conversionGroups = [];
         foreach (self::$conversionUnits as $conversionUnit => $conversionGroup) {
             if (($category === null) || ($conversionGroup['Group'] == $category)) {
                 $conversionGroups[$conversionGroup['Group']][] = [
                     'unit' => $conversionUnit,
+<<<<<<< HEAD
                     'description' => $conversionGroup['Unit Name'],
+=======
+                    'description' => $conversionGroup['UnitName'],
+>>>>>>> match
                 ];
             }
         }
@@ -496,7 +707,11 @@ class ConvertUOM
      *
      * @return mixed[]
      */
+<<<<<<< HEAD
     public static function getConversionMultipliers()
+=======
+    public static function getConversionMultipliers(): array
+>>>>>>> match
     {
         return self::$conversionMultipliers;
     }
@@ -507,7 +722,11 @@ class ConvertUOM
      *
      * @return mixed[]
      */
+<<<<<<< HEAD
     public static function getBinaryConversionMultipliers()
+=======
+    public static function getBinaryConversionMultipliers(): array
+>>>>>>> match
     {
         return self::$binaryConversionMultipliers;
     }
@@ -546,7 +765,11 @@ class ConvertUOM
         try {
             [$fromUOM, $fromCategory, $fromMultiplier] = self::getUOMDetails($fromUOM);
             [$toUOM, $toCategory, $toMultiplier] = self::getUOMDetails($toUOM);
+<<<<<<< HEAD
         } catch (Exception $e) {
+=======
+        } catch (Exception) {
+>>>>>>> match
             return ExcelError::NA();
         }
 
@@ -564,7 +787,11 @@ class ConvertUOM
         } elseif ($fromUOM === $toUOM) {
             return $value / $toMultiplier;
         } elseif ($fromCategory === self::CATEGORY_TEMPERATURE) {
+<<<<<<< HEAD
             return self::convertTemperature($fromUOM, $toUOM, /** @scrutinizer ignore-type */ $value);
+=======
+            return self::convertTemperature($fromUOM, $toUOM, $value);
+>>>>>>> match
         }
 
         $baseValue = $value * (1.0 / self::$unitConversions[$fromCategory][$fromUOM]);
@@ -621,12 +848,16 @@ class ConvertUOM
         throw new Exception('UoM Not Found');
     }
 
+<<<<<<< HEAD
     /**
      * @param float|int $value
      *
      * @return float|int
      */
     protected static function convertTemperature(string $fromUOM, string $toUOM, $value)
+=======
+    protected static function convertTemperature(string $fromUOM, string $toUOM, float|int $value): float|int
+>>>>>>> match
     {
         $fromUOM = self::resolveTemperatureSynonyms($fromUOM);
         $toUOM = self::resolveTemperatureSynonyms($toUOM);
@@ -680,6 +911,7 @@ class ConvertUOM
 
     private static function resolveTemperatureSynonyms(string $uom): string
     {
+<<<<<<< HEAD
         switch ($uom) {
             case 'fah':
                 return 'F';
@@ -690,5 +922,13 @@ class ConvertUOM
         }
 
         return $uom;
+=======
+        return match ($uom) {
+            'fah' => 'F',
+            'cel' => 'C',
+            'kel' => 'K',
+            default => $uom,
+        };
+>>>>>>> match
     }
 }

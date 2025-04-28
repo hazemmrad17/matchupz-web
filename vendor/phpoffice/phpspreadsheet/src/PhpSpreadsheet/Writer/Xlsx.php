@@ -37,6 +37,7 @@ class Xlsx extends BaseWriter
 {
     /**
      * Office2003 compatibility.
+<<<<<<< HEAD
      *
      * @var bool
      */
@@ -48,61 +49,99 @@ class Xlsx extends BaseWriter
      * @var Spreadsheet
      */
     private $spreadSheet;
+=======
+     */
+    private bool $office2003compatibility = false;
+
+    /**
+     * Private Spreadsheet.
+     */
+    private Spreadsheet $spreadSheet;
+>>>>>>> match
 
     /**
      * Private string table.
      *
      * @var string[]
      */
+<<<<<<< HEAD
     private $stringTable = [];
+=======
+    private array $stringTable = [];
+>>>>>>> match
 
     /**
      * Private unique Conditional HashTable.
      *
      * @var HashTable<Conditional>
      */
+<<<<<<< HEAD
     private $stylesConditionalHashTable;
+=======
+    private HashTable $stylesConditionalHashTable;
+>>>>>>> match
 
     /**
      * Private unique Style HashTable.
      *
      * @var HashTable<\PhpOffice\PhpSpreadsheet\Style\Style>
      */
+<<<<<<< HEAD
     private $styleHashTable;
+=======
+    private HashTable $styleHashTable;
+>>>>>>> match
 
     /**
      * Private unique Fill HashTable.
      *
      * @var HashTable<Fill>
      */
+<<<<<<< HEAD
     private $fillHashTable;
+=======
+    private HashTable $fillHashTable;
+>>>>>>> match
 
     /**
      * Private unique \PhpOffice\PhpSpreadsheet\Style\Font HashTable.
      *
      * @var HashTable<Font>
      */
+<<<<<<< HEAD
     private $fontHashTable;
+=======
+    private HashTable $fontHashTable;
+>>>>>>> match
 
     /**
      * Private unique Borders HashTable.
      *
      * @var HashTable<Borders>
      */
+<<<<<<< HEAD
     private $bordersHashTable;
+=======
+    private HashTable $bordersHashTable;
+>>>>>>> match
 
     /**
      * Private unique NumberFormat HashTable.
      *
      * @var HashTable<NumberFormat>
      */
+<<<<<<< HEAD
     private $numFmtHashTable;
+=======
+    private HashTable $numFmtHashTable;
+>>>>>>> match
 
     /**
      * Private unique \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet\BaseDrawing HashTable.
      *
      * @var HashTable<BaseDrawing>
      */
+<<<<<<< HEAD
     private $drawingHashTable;
 
     /**
@@ -181,6 +220,53 @@ class Xlsx extends BaseWriter
      * @var Worksheet
      */
     private $writerPartWorksheet;
+=======
+    private HashTable $drawingHashTable;
+
+    /**
+     * Private handle for zip stream.
+     */
+    private ZipStream $zip;
+
+    private Chart $writerPartChart;
+
+    private Comments $writerPartComments;
+
+    private ContentTypes $writerPartContentTypes;
+
+    private DocProps $writerPartDocProps;
+
+    private Drawing $writerPartDrawing;
+
+    private Rels $writerPartRels;
+
+    private RelsRibbon $writerPartRelsRibbon;
+
+    private RelsVBA $writerPartRelsVBA;
+
+    private StringTable $writerPartStringTable;
+
+    private Style $writerPartStyle;
+
+    private Theme $writerPartTheme;
+
+    private Table $writerPartTable;
+
+    private Workbook $writerPartWorkbook;
+
+    private Worksheet $writerPartWorksheet;
+
+    private bool $explicitStyle0 = false;
+
+    private bool $useCSEArrays = false;
+
+    private bool $useDynamicArray = false;
+
+    public const DEFAULT_FORCE_FULL_CALC = false;
+
+    // Default changed from null in PhpSpreadsheet 4.0.0.
+    private ?bool $forceFullCalc = self::DEFAULT_FORCE_FULL_CALC;
+>>>>>>> match
 
     /**
      * Create a new Xlsx Writer.
@@ -206,6 +292,7 @@ class Xlsx extends BaseWriter
         $this->writerPartWorksheet = new Worksheet($this);
 
         // Set HashTable variables
+<<<<<<< HEAD
         // @phpstan-ignore-next-line
         $this->bordersHashTable = new HashTable();
         // @phpstan-ignore-next-line
@@ -220,6 +307,16 @@ class Xlsx extends BaseWriter
         $this->styleHashTable = new HashTable();
         // @phpstan-ignore-next-line
         $this->stylesConditionalHashTable = new HashTable();
+=======
+        $this->bordersHashTable = new HashTable();
+        $this->drawingHashTable = new HashTable();
+        $this->fillHashTable = new HashTable();
+        $this->fontHashTable = new HashTable();
+        $this->numFmtHashTable = new HashTable();
+        $this->styleHashTable = new HashTable();
+        $this->stylesConditionalHashTable = new HashTable();
+        $this->determineUseDynamicArrays();
+>>>>>>> match
     }
 
     public function getWriterPartChart(): Chart
@@ -300,6 +397,10 @@ class Xlsx extends BaseWriter
     public function save($filename, int $flags = 0): void
     {
         $this->processFlags($flags);
+<<<<<<< HEAD
+=======
+        $this->determineUseDynamicArrays();
+>>>>>>> match
 
         // garbage collect
         $this->pathNames = [];
@@ -330,6 +431,13 @@ class Xlsx extends BaseWriter
         $zipContent = [];
         // Add [Content_Types].xml to ZIP file
         $zipContent['[Content_Types].xml'] = $this->getWriterPartContentTypes()->writeContentTypes($this->spreadSheet, $this->includeCharts);
+<<<<<<< HEAD
+=======
+        $metadataData = (new Xlsx\Metadata($this))->writeMetadata();
+        if ($metadataData !== '') {
+            $zipContent['xl/metadata.xml'] = $metadataData;
+        }
+>>>>>>> match
 
         //if hasMacros, add the vbaProject.bin file, Certificate file(if exists)
         if ($this->spreadSheet->hasMacros()) {
@@ -385,7 +493,11 @@ class Xlsx extends BaseWriter
         $zipContent['xl/styles.xml'] = $this->getWriterPartStyle()->writeStyles($this->spreadSheet);
 
         // Add workbook to ZIP file
+<<<<<<< HEAD
         $zipContent['xl/workbook.xml'] = $this->getWriterPartWorkbook()->writeWorkbook($this->spreadSheet, $this->preCalculateFormulas);
+=======
+        $zipContent['xl/workbook.xml'] = $this->getWriterPartWorkbook()->writeWorkbook($this->spreadSheet, $this->preCalculateFormulas, $this->forceFullCalc);
+>>>>>>> match
 
         $chartCount = 0;
         // Add worksheets
@@ -407,7 +519,11 @@ class Xlsx extends BaseWriter
         // Add worksheet relationships (drawings, ...)
         for ($i = 0; $i < $this->spreadSheet->getSheetCount(); ++$i) {
             // Add relationships
+<<<<<<< HEAD
             $zipContent['xl/worksheets/_rels/sheet' . ($i + 1) . '.xml.rels'] = $this->getWriterPartRels()->writeWorksheetRelationships($this->spreadSheet->getSheet($i), ($i + 1), $this->includeCharts, $tableRef1);
+=======
+            $zipContent['xl/worksheets/_rels/sheet' . ($i + 1) . '.xml.rels'] = $this->getWriterPartRels()->writeWorksheetRelationships($this->spreadSheet->getSheet($i), ($i + 1), $this->includeCharts, $tableRef1, $zipContent);
+>>>>>>> match
 
             // Add unparsedLoadedData
             $sheetCodeName = $this->spreadSheet->getSheet($i)->getCodeName();
@@ -442,7 +558,11 @@ class Xlsx extends BaseWriter
             }
 
             // Add unparsed drawings
+<<<<<<< HEAD
             if (isset($unparsedLoadedData['sheets'][$sheetCodeName]['Drawings'])) {
+=======
+            if (isset($unparsedLoadedData['sheets'][$sheetCodeName]['Drawings']) && !isset($zipContent['xl/drawings/drawing' . ($i + 1) . '.xml'])) {
+>>>>>>> match
                 foreach ($unparsedLoadedData['sheets'][$sheetCodeName]['Drawings'] as $relId => $drawingXml) {
                     $drawingFile = array_search($relId, $unparsedLoadedData['sheets'][$sheetCodeName]['drawingOriginalIds']);
                     if ($drawingFile !== false) {
@@ -452,6 +572,12 @@ class Xlsx extends BaseWriter
                     }
                 }
             }
+<<<<<<< HEAD
+=======
+            if (isset($unparsedLoadedData['sheets'][$sheetCodeName]['drawingOriginalIds']) && !isset($zipContent['xl/drawings/drawing' . ($i + 1) . '.xml'])) {
+                $zipContent['xl/drawings/drawing' . ($i + 1) . '.xml'] = '<xml></xml>';
+            }
+>>>>>>> match
 
             // Add comment relationship parts
             $legacy = $unparsedLoadedData['sheets'][$this->spreadSheet->getSheet($i)->getCodeName()]['legacyDrawing'] ?? null;
@@ -495,7 +621,13 @@ class Xlsx extends BaseWriter
 
                 // Media
                 foreach ($this->spreadSheet->getSheet($i)->getHeaderFooter()->getImages() as $image) {
+<<<<<<< HEAD
                     $zipContent['xl/media/' . $image->getIndexedFilename()] = file_get_contents($image->getPath());
+=======
+                    if ($image->getPath() !== '') {
+                        $zipContent['xl/media/' . $image->getIndexedFilename()] = file_get_contents($image->getPath());
+                    }
+>>>>>>> match
                 }
             }
 
@@ -511,7 +643,14 @@ class Xlsx extends BaseWriter
             if ($this->getDrawingHashTable()->getByIndex($i) instanceof WorksheetDrawing) {
                 $imageContents = null;
                 $imagePath = $this->getDrawingHashTable()->getByIndex($i)->getPath();
+<<<<<<< HEAD
                 if (strpos($imagePath, 'zip://') !== false) {
+=======
+                if ($imagePath === '') {
+                    continue;
+                }
+                if (str_contains($imagePath, 'zip://')) {
+>>>>>>> match
                     $imagePath = substr($imagePath, 6);
                     $imagePathSplitted = explode('#', $imagePath);
 
@@ -527,7 +666,10 @@ class Xlsx extends BaseWriter
                 $zipContent['xl/media/' . $this->getDrawingHashTable()->getByIndex($i)->getIndexedFilename()] = $imageContents;
             } elseif ($this->getDrawingHashTable()->getByIndex($i) instanceof MemoryDrawing) {
                 ob_start();
+<<<<<<< HEAD
                 /** @var callable */
+=======
+>>>>>>> match
                 $callable = $this->getDrawingHashTable()->getByIndex($i)->getRenderingFunction();
                 call_user_func(
                     $callable,
@@ -552,7 +694,11 @@ class Xlsx extends BaseWriter
         // Close file
         try {
             $this->zip->finish();
+<<<<<<< HEAD
         } catch (OverflowException $e) {
+=======
+        } catch (OverflowException) {
+>>>>>>> match
             throw new WriterException('Could not close resource.');
         }
 
@@ -561,10 +707,15 @@ class Xlsx extends BaseWriter
 
     /**
      * Get Spreadsheet object.
+<<<<<<< HEAD
      *
      * @return Spreadsheet
      */
     public function getSpreadsheet()
+=======
+     */
+    public function getSpreadsheet(): Spreadsheet
+>>>>>>> match
     {
         return $this->spreadSheet;
     }
@@ -576,7 +727,11 @@ class Xlsx extends BaseWriter
      *
      * @return $this
      */
+<<<<<<< HEAD
     public function setSpreadsheet(Spreadsheet $spreadsheet)
+=======
+    public function setSpreadsheet(Spreadsheet $spreadsheet): static
+>>>>>>> match
     {
         $this->spreadSheet = $spreadsheet;
 
@@ -588,7 +743,11 @@ class Xlsx extends BaseWriter
      *
      * @return string[]
      */
+<<<<<<< HEAD
     public function getStringTable()
+=======
+    public function getStringTable(): array
+>>>>>>> match
     {
         return $this->stringTable;
     }
@@ -598,7 +757,11 @@ class Xlsx extends BaseWriter
      *
      * @return HashTable<\PhpOffice\PhpSpreadsheet\Style\Style>
      */
+<<<<<<< HEAD
     public function getStyleHashTable()
+=======
+    public function getStyleHashTable(): HashTable
+>>>>>>> match
     {
         return $this->styleHashTable;
     }
@@ -608,7 +771,11 @@ class Xlsx extends BaseWriter
      *
      * @return HashTable<Conditional>
      */
+<<<<<<< HEAD
     public function getStylesConditionalHashTable()
+=======
+    public function getStylesConditionalHashTable(): HashTable
+>>>>>>> match
     {
         return $this->stylesConditionalHashTable;
     }
@@ -618,7 +785,11 @@ class Xlsx extends BaseWriter
      *
      * @return HashTable<Fill>
      */
+<<<<<<< HEAD
     public function getFillHashTable()
+=======
+    public function getFillHashTable(): HashTable
+>>>>>>> match
     {
         return $this->fillHashTable;
     }
@@ -628,7 +799,11 @@ class Xlsx extends BaseWriter
      *
      * @return HashTable<Font>
      */
+<<<<<<< HEAD
     public function getFontHashTable()
+=======
+    public function getFontHashTable(): HashTable
+>>>>>>> match
     {
         return $this->fontHashTable;
     }
@@ -638,7 +813,11 @@ class Xlsx extends BaseWriter
      *
      * @return HashTable<Borders>
      */
+<<<<<<< HEAD
     public function getBordersHashTable()
+=======
+    public function getBordersHashTable(): HashTable
+>>>>>>> match
     {
         return $this->bordersHashTable;
     }
@@ -648,7 +827,11 @@ class Xlsx extends BaseWriter
      *
      * @return HashTable<NumberFormat>
      */
+<<<<<<< HEAD
     public function getNumFmtHashTable()
+=======
+    public function getNumFmtHashTable(): HashTable
+>>>>>>> match
     {
         return $this->numFmtHashTable;
     }
@@ -658,17 +841,26 @@ class Xlsx extends BaseWriter
      *
      * @return HashTable<BaseDrawing>
      */
+<<<<<<< HEAD
     public function getDrawingHashTable()
+=======
+    public function getDrawingHashTable(): HashTable
+>>>>>>> match
     {
         return $this->drawingHashTable;
     }
 
     /**
      * Get Office2003 compatibility.
+<<<<<<< HEAD
      *
      * @return bool
      */
     public function getOffice2003Compatibility()
+=======
+     */
+    public function getOffice2003Compatibility(): bool
+>>>>>>> match
     {
         return $this->office2003compatibility;
     }
@@ -680,15 +872,23 @@ class Xlsx extends BaseWriter
      *
      * @return $this
      */
+<<<<<<< HEAD
     public function setOffice2003Compatibility($office2003compatibility)
+=======
+    public function setOffice2003Compatibility(bool $office2003compatibility): static
+>>>>>>> match
     {
         $this->office2003compatibility = $office2003compatibility;
 
         return $this;
     }
 
+<<<<<<< HEAD
     /** @var array */
     private $pathNames = [];
+=======
+    private array $pathNames = [];
+>>>>>>> match
 
     private function addZipFile(string $path, string $content): void
     {
@@ -705,6 +905,7 @@ class Xlsx extends BaseWriter
         }
     }
 
+<<<<<<< HEAD
     /**
      * @return mixed
      */
@@ -712,6 +913,15 @@ class Xlsx extends BaseWriter
     {
         $data = null;
         $filename = $drawing->getPath();
+=======
+    private function processDrawing(WorksheetDrawing $drawing): string|null|false
+    {
+        $data = null;
+        $filename = $drawing->getPath();
+        if ($filename === '') {
+            return null;
+        }
+>>>>>>> match
         $imageData = getimagesize($filename);
 
         if (!empty($imageData)) {
@@ -752,4 +962,59 @@ class Xlsx extends BaseWriter
 
         return $data;
     }
+<<<<<<< HEAD
+=======
+
+    public function getExplicitStyle0(): bool
+    {
+        return $this->explicitStyle0;
+    }
+
+    /**
+     * This may be useful if non-default Alignment is part of default style
+     * and you think you might want to open the spreadsheet
+     * with LibreOffice or Gnumeric.
+     */
+    public function setExplicitStyle0(bool $explicitStyle0): self
+    {
+        $this->explicitStyle0 = $explicitStyle0;
+
+        return $this;
+    }
+
+    public function setUseCSEArrays(?bool $useCSEArrays): void
+    {
+        if ($useCSEArrays !== null) {
+            $this->useCSEArrays = $useCSEArrays;
+        }
+        $this->determineUseDynamicArrays();
+    }
+
+    public function useDynamicArrays(): bool
+    {
+        return $this->useDynamicArray;
+    }
+
+    private function determineUseDynamicArrays(): void
+    {
+        $this->useDynamicArray = $this->preCalculateFormulas && Calculation::getInstance($this->spreadSheet)->getInstanceArrayReturnType() === Calculation::RETURN_ARRAY_AS_ARRAY && !$this->useCSEArrays;
+    }
+
+    /**
+     * If this is set when a spreadsheet is opened,
+     * values may not be automatically re-calculated,
+     * and a button will be available to force re-calculation.
+     * This may apply to all spreadsheets open at that time.
+     * If null, this will be set to the opposite of $preCalculateFormulas.
+     * It is likely that false is the desired setting, although
+     * cases have been reported where true is required (issue #456).
+     * Nevertheless, default is set to false in PhpSpreadsheet 4.0.0.
+     */
+    public function setForceFullCalc(?bool $forceFullCalc): self
+    {
+        $this->forceFullCalc = $forceFullCalc;
+
+        return $this;
+    }
+>>>>>>> match
 }

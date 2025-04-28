@@ -16,6 +16,7 @@ class Settings
      * Class name of the chart renderer used for rendering charts
      * eg: PhpOffice\PhpSpreadsheet\Chart\Renderer\JpGraph.
      *
+<<<<<<< HEAD
      * @var ?string
      */
     private static $chartRenderer;
@@ -45,6 +46,23 @@ class Settings
      * @var null|RequestFactoryInterface
      */
     private static $requestFactory;
+=======
+     * @var null|class-string<IRenderer>
+     */
+    private static ?string $chartRenderer = null;
+
+    /**
+     * The cache implementation to be used for cell collection.
+     */
+    private static ?CacheInterface $cache = null;
+
+    /**
+     * The HTTP client implementation to be used for network request.
+     */
+    private static ?ClientInterface $httpClient = null;
+
+    private static ?RequestFactoryInterface $requestFactory = null;
+>>>>>>> match
 
     /**
      * Set the locale code to use for formula translations and any special formatting.
@@ -53,7 +71,11 @@ class Settings
      *
      * @return bool Success or failure
      */
+<<<<<<< HEAD
     public static function setLocale(string $locale)
+=======
+    public static function setLocale(string $locale): bool
+>>>>>>> match
     {
         return Calculation::getInstance()->setLocale($locale);
     }
@@ -66,7 +88,11 @@ class Settings
     /**
      * Identify to PhpSpreadsheet the external library to use for rendering charts.
      *
+<<<<<<< HEAD
      * @param string $rendererClassName Class name of the chart renderer
+=======
+     * @param class-string<IRenderer> $rendererClassName Class name of the chart renderer
+>>>>>>> match
      *    eg: PhpOffice\PhpSpreadsheet\Chart\Renderer\JpGraph
      */
     public static function setChartRenderer(string $rendererClassName): void
@@ -78,10 +104,22 @@ class Settings
         self::$chartRenderer = $rendererClassName;
     }
 
+<<<<<<< HEAD
     /**
      * Return the Chart Rendering Library that PhpSpreadsheet is currently configured to use.
      *
      * @return null|string Class name of the chart renderer
+=======
+    public static function unsetChartRenderer(): void
+    {
+        self::$chartRenderer = null;
+    }
+
+    /**
+     * Return the Chart Rendering Library that PhpSpreadsheet is currently configured to use.
+     *
+     * @return null|class-string<IRenderer> Class name of the chart renderer
+>>>>>>> match
      *    eg: PhpOffice\PhpSpreadsheet\Chart\Renderer\JpGraph
      */
     public static function getChartRenderer(): ?string
@@ -91,6 +129,7 @@ class Settings
 
     public static function htmlEntityFlags(): int
     {
+<<<<<<< HEAD
         return \ENT_COMPAT;
     }
 
@@ -150,6 +189,9 @@ class Settings
     public static function getLibXmlDisableEntityLoader(): bool
     {
         return true;
+=======
+        return ENT_COMPAT;
+>>>>>>> match
     }
 
     /**
@@ -174,9 +216,13 @@ class Settings
 
     public static function useSimpleCacheVersion3(): bool
     {
+<<<<<<< HEAD
         return
             PHP_MAJOR_VERSION === 8 &&
             (new ReflectionClass(CacheInterface::class))->getMethod('get')->getReturnType() !== null;
+=======
+        return (new ReflectionClass(CacheInterface::class))->getMethod('get')->getReturnType() !== null;
+>>>>>>> match
     }
 
     /**

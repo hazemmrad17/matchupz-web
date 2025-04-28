@@ -27,6 +27,7 @@ class Fill extends Supervisor
     const FILL_PATTERN_LIGHTVERTICAL = 'lightVertical';
     const FILL_PATTERN_MEDIUMGRAY = 'mediumGray';
 
+<<<<<<< HEAD
     /**
      * @var null|int
      */
@@ -67,6 +68,33 @@ class Fill extends Supervisor
 
     /** @var bool */
     private $colorChanged = false;
+=======
+    public ?int $startcolorIndex = null;
+
+    public ?int $endcolorIndex = null;
+
+    /**
+     * Fill type.
+     */
+    protected ?string $fillType = self::FILL_NONE;
+
+    /**
+     * Rotation.
+     */
+    protected float $rotation = 0.0;
+
+    /**
+     * Start color.
+     */
+    protected Color $startColor;
+
+    /**
+     * End color.
+     */
+    protected Color $endColor;
+
+    private bool $colorChanged = false;
+>>>>>>> match
 
     /**
      * Create a new Fill.
@@ -78,7 +106,11 @@ class Fill extends Supervisor
      *                                    Leave this value at default unless you understand exactly what
      *                                        its ramifications are
      */
+<<<<<<< HEAD
     public function __construct($isSupervisor = false, $isConditional = false)
+=======
+    public function __construct(bool $isSupervisor = false, bool $isConditional = false)
+>>>>>>> match
     {
         // Supervisor?
         parent::__construct($isSupervisor);
@@ -100,12 +132,19 @@ class Fill extends Supervisor
     /**
      * Get the shared style component for the currently active cell in currently active sheet.
      * Only used for style supervisor.
+<<<<<<< HEAD
      *
      * @return Fill
      */
     public function getSharedComponent()
     {
         /** @var Style */
+=======
+     */
+    public function getSharedComponent(): self
+    {
+        /** @var Style $parent */
+>>>>>>> match
         $parent = $this->parent;
 
         return $parent->getSharedComponent()->getFill();
@@ -113,12 +152,17 @@ class Fill extends Supervisor
 
     /**
      * Build style array from subcomponents.
+<<<<<<< HEAD
      *
      * @param array $array
      *
      * @return array
      */
     public function getStyleArray($array)
+=======
+     */
+    public function getStyleArray(array $array): array
+>>>>>>> match
     {
         return ['fill' => $array];
     }
@@ -145,7 +189,11 @@ class Fill extends Supervisor
      *
      * @return $this
      */
+<<<<<<< HEAD
     public function applyFromArray(array $styleArray)
+=======
+    public function applyFromArray(array $styleArray): static
+>>>>>>> match
     {
         if ($this->isSupervisor) {
             $this->getActiveSheet()->getStyle($this->getSelectedCells())->applyFromArray($this->getStyleArray($styleArray));
@@ -173,10 +221,15 @@ class Fill extends Supervisor
 
     /**
      * Get Fill Type.
+<<<<<<< HEAD
      *
      * @return null|string
      */
     public function getFillType()
+=======
+     */
+    public function getFillType(): ?string
+>>>>>>> match
     {
         if ($this->isSupervisor) {
             return $this->getSharedComponent()->getFillType();
@@ -192,7 +245,11 @@ class Fill extends Supervisor
      *
      * @return $this
      */
+<<<<<<< HEAD
     public function setFillType($fillType)
+=======
+    public function setFillType(string $fillType): static
+>>>>>>> match
     {
         if ($this->isSupervisor) {
             $styleArray = $this->getStyleArray(['fillType' => $fillType]);
@@ -206,10 +263,15 @@ class Fill extends Supervisor
 
     /**
      * Get Rotation.
+<<<<<<< HEAD
      *
      * @return float
      */
     public function getRotation()
+=======
+     */
+    public function getRotation(): float
+>>>>>>> match
     {
         if ($this->isSupervisor) {
             return $this->getSharedComponent()->getRotation();
@@ -221,11 +283,17 @@ class Fill extends Supervisor
     /**
      * Set Rotation.
      *
+<<<<<<< HEAD
      * @param float $angleInDegrees
      *
      * @return $this
      */
     public function setRotation($angleInDegrees)
+=======
+     * @return $this
+     */
+    public function setRotation(float $angleInDegrees): static
+>>>>>>> match
     {
         if ($this->isSupervisor) {
             $styleArray = $this->getStyleArray(['rotation' => $angleInDegrees]);
@@ -239,10 +307,15 @@ class Fill extends Supervisor
 
     /**
      * Get Start Color.
+<<<<<<< HEAD
      *
      * @return Color
      */
     public function getStartColor()
+=======
+     */
+    public function getStartColor(): Color
+>>>>>>> match
     {
         return $this->startColor;
     }
@@ -252,7 +325,11 @@ class Fill extends Supervisor
      *
      * @return $this
      */
+<<<<<<< HEAD
     public function setStartColor(Color $color)
+=======
+    public function setStartColor(Color $color): static
+>>>>>>> match
     {
         $this->colorChanged = true;
         // make sure parameter is a real color and not a supervisor
@@ -270,10 +347,15 @@ class Fill extends Supervisor
 
     /**
      * Get End Color.
+<<<<<<< HEAD
      *
      * @return Color
      */
     public function getEndColor()
+=======
+     */
+    public function getEndColor(): Color
+>>>>>>> match
     {
         return $this->endColor;
     }
@@ -283,7 +365,11 @@ class Fill extends Supervisor
      *
      * @return $this
      */
+<<<<<<< HEAD
     public function setEndColor(Color $color)
+=======
+    public function setEndColor(Color $color): static
+>>>>>>> match
     {
         $this->colorChanged = true;
         // make sure parameter is a real color and not a supervisor
@@ -315,11 +401,16 @@ class Fill extends Supervisor
      *
      * @return string Hash code
      */
+<<<<<<< HEAD
     public function getHashCode()
+=======
+    public function getHashCode(): string
+>>>>>>> match
     {
         if ($this->isSupervisor) {
             return $this->getSharedComponent()->getHashCode();
         }
+<<<<<<< HEAD
         // Note that we don't care about colours for fill type NONE, but could have duplicate NONEs with
         //  different hashes if we don't explicitly prevent this
         return md5(
@@ -329,6 +420,18 @@ class Fill extends Supervisor
             ($this->getFillType() !== self::FILL_NONE ? $this->getEndColor()->getHashCode() : '') .
             ((string) $this->getColorsChanged()) .
             __CLASS__
+=======
+
+        // Note that we don't care about colours for fill type NONE, but could have duplicate NONEs with
+        //  different hashes if we don't explicitly prevent this
+        return md5(
+            $this->getFillType()
+            . $this->getRotation()
+            . ($this->getFillType() !== self::FILL_NONE ? $this->getStartColor()->getHashCode() : '')
+            . ($this->getFillType() !== self::FILL_NONE ? $this->getEndColor()->getHashCode() : '')
+            . ((string) $this->getColorsChanged())
+            . __CLASS__
+>>>>>>> match
         );
     }
 

@@ -9,15 +9,21 @@ class ColumnDimension extends Dimension
 {
     /**
      * Column index.
+<<<<<<< HEAD
      *
      * @var ?string
      */
     private $columnIndex;
+=======
+     */
+    private ?string $columnIndex;
+>>>>>>> match
 
     /**
      * Column width.
      *
      * When this is set to a negative value, the column width should be ignored by IWriter
+<<<<<<< HEAD
      *
      * @var float
      */
@@ -29,13 +35,26 @@ class ColumnDimension extends Dimension
      * @var bool
      */
     private $autoSize = false;
+=======
+     */
+    private float $width = -1;
+
+    /**
+     * Auto size?
+     */
+    private bool $autoSize = false;
+>>>>>>> match
 
     /**
      * Create a new ColumnDimension.
      *
      * @param ?string $index Character column index
      */
+<<<<<<< HEAD
     public function __construct($index = 'A')
+=======
+    public function __construct(?string $index = 'A')
+>>>>>>> match
     {
         // Initialise values
         $this->columnIndex = $index;
@@ -106,7 +125,11 @@ class ColumnDimension extends Dimension
      *
      * @return $this
      */
+<<<<<<< HEAD
     public function setWidth(float $width, ?string $unitOfMeasure = null)
+=======
+    public function setWidth(float $width, ?string $unitOfMeasure = null): static
+>>>>>>> match
     {
         $this->width = ($unitOfMeasure === null || $width < 0)
             ? $width
@@ -128,7 +151,11 @@ class ColumnDimension extends Dimension
      *
      * @return $this
      */
+<<<<<<< HEAD
     public function setAutoSize(bool $autosizeEnabled)
+=======
+    public function setAutoSize(bool $autosizeEnabled): static
+>>>>>>> match
     {
         $this->autoSize = $autosizeEnabled;
 

@@ -8,6 +8,7 @@ abstract class Dimension
 {
     /**
      * Visible?
+<<<<<<< HEAD
      *
      * @var bool
      */
@@ -33,13 +34,38 @@ abstract class Dimension
      * @var null|int
      */
     private $xfIndex;
+=======
+     */
+    private bool $visible = true;
+
+    /**
+     * Outline level.
+     */
+    private int $outlineLevel = 0;
+
+    /**
+     * Collapsed.
+     */
+    private bool $collapsed = false;
+
+    /**
+     * Index to cellXf. Null value means row has no explicit cellXf format.
+     */
+    private ?int $xfIndex;
+>>>>>>> match
 
     /**
      * Create a new Dimension.
      *
+<<<<<<< HEAD
      * @param int $initialValue Numeric row index
      */
     public function __construct($initialValue = null)
+=======
+     * @param ?int $initialValue Numeric row index
+     */
+    public function __construct(?int $initialValue = null)
+>>>>>>> match
     {
         // set dimension as unformatted by default
         $this->xfIndex = $initialValue;
@@ -112,8 +138,11 @@ abstract class Dimension
 
     /**
      * Get index to cellXf.
+<<<<<<< HEAD
      *
      * @return int
+=======
+>>>>>>> match
      */
     public function getXfIndex(): ?int
     {

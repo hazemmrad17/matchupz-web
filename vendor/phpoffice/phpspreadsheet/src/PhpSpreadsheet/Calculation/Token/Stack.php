@@ -4,6 +4,7 @@ namespace PhpOffice\PhpSpreadsheet\Calculation\Token;
 
 use PhpOffice\PhpSpreadsheet\Calculation\Calculation;
 use PhpOffice\PhpSpreadsheet\Calculation\Engine\BranchPruner;
+<<<<<<< HEAD
 
 class Stack
 {
@@ -11,10 +12,18 @@ class Stack
      * @var BranchPruner
      */
     private $branchPruner;
+=======
+use PhpOffice\PhpSpreadsheet\Shared\StringHelper;
+
+class Stack
+{
+    private BranchPruner $branchPruner;
+>>>>>>> match
 
     /**
      * The parser stack for formulae.
      *
+<<<<<<< HEAD
      * @var mixed[]
      */
     private $stack = [];
@@ -25,6 +34,16 @@ class Stack
      * @var int
      */
     private $count = 0;
+=======
+     * @var array<int, array>
+     */
+    private array $stack = [];
+
+    /**
+     * Count of entries in the parser stack.
+     */
+    private int $count = 0;
+>>>>>>> match
 
     public function __construct(BranchPruner $branchPruner)
     {
@@ -41,16 +60,25 @@ class Stack
 
     /**
      * Push a new entry onto the stack.
+<<<<<<< HEAD
      *
      * @param mixed $value
      */
     public function push(string $type, $value, ?string $reference = null): void
+=======
+     */
+    public function push(string $type, mixed $value, ?string $reference = null): void
+>>>>>>> match
     {
         $stackItem = $this->getStackItem($type, $value, $reference);
         $this->stack[$this->count++] = $stackItem;
 
         if ($type === 'Function') {
+<<<<<<< HEAD
             $localeFunction = Calculation::localeFunc($value);
+=======
+            $localeFunction = Calculation::localeFunc(StringHelper::convertToString($value));
+>>>>>>> match
             if ($localeFunction != $value) {
                 $this->stack[($this->count - 1)]['localeValue'] = $localeFunction;
             }
@@ -62,10 +90,14 @@ class Stack
         $this->stack[$this->count++] = $stackItem;
     }
 
+<<<<<<< HEAD
     /**
      * @param mixed $value
      */
     public function getStackItem(string $type, $value, ?string $reference = null): array
+=======
+    public function getStackItem(string $type, mixed $value, ?string $reference = null): array
+>>>>>>> match
     {
         $stackItem = [
             'type' => $type,

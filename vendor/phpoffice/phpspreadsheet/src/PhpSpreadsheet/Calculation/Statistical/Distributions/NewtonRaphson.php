@@ -17,8 +17,12 @@ class NewtonRaphson
         $this->callback = $callback;
     }
 
+<<<<<<< HEAD
     /** @return float|string */
     public function execute(float $probability)
+=======
+    public function execute(float $probability): string|int|float
+>>>>>>> match
     {
         $xLo = 100;
         $xHi = 0;

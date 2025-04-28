@@ -70,6 +70,7 @@ class TableStyle
 
     /**
      * Theme.
+<<<<<<< HEAD
      *
      * @var string
      */
@@ -109,6 +110,40 @@ class TableStyle
      * @var null|Table
      */
     private $table;
+=======
+     */
+    private string $theme;
+
+    /**
+     * Show First Column.
+     */
+    private bool $showFirstColumn = false;
+
+    /**
+     * Show Last Column.
+     */
+    private bool $showLastColumn = false;
+
+    /**
+     * Show Row Stripes.
+     */
+    private bool $showRowStripes = false;
+
+    /**
+     * Show Column Stripes.
+     */
+    private bool $showColumnStripes = false;
+
+    /**
+     * TableDxfsStyle.
+     */
+    private ?TableDxfsStyle $tableStyle = null;
+
+    /**
+     * Table.
+     */
+    private ?Table $table = null;
+>>>>>>> match
 
     /**
      * Create a new Table Style.
@@ -211,6 +246,37 @@ class TableStyle
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * Get this Style's Dxfs TableStyle.
+     */
+    public function getTableDxfsStyle(): ?TableDxfsStyle
+    {
+        return $this->tableStyle;
+    }
+
+    /**
+     * Set this Style's Dxfs TableStyle.
+     */
+    public function setTableDxfsStyle(TableDxfsStyle $tableStyle, array $dxfs): self
+    {
+        $this->tableStyle = $tableStyle;
+
+        if ($this->tableStyle->getHeaderRow() !== null && isset($dxfs[$this->tableStyle->getHeaderRow()])) {
+            $this->tableStyle->setHeaderRowStyle($dxfs[$this->tableStyle->getHeaderRow()]);
+        }
+        if ($this->tableStyle->getFirstRowStripe() !== null && isset($dxfs[$this->tableStyle->getFirstRowStripe()])) {
+            $this->tableStyle->setFirstRowStripeStyle($dxfs[$this->tableStyle->getFirstRowStripe()]);
+        }
+        if ($this->tableStyle->getSecondRowStripe() !== null && isset($dxfs[$this->tableStyle->getSecondRowStripe()])) {
+            $this->tableStyle->setSecondRowStripeStyle($dxfs[$this->tableStyle->getSecondRowStripe()]);
+        }
+
+        return $this;
+    }
+
+    /**
+>>>>>>> match
      * Get this Style's Table.
      */
     public function getTable(): ?Table

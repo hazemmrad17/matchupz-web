@@ -6,7 +6,11 @@
                     <div class="card-body">
                         <h3 class="card-title text-primary">Aperçu des Réservations 🎯</h3>
                         <p class="mb-4">
+<<<<<<< HEAD
                             Vous avez <span class="fw-bold">{{ reservations.totalItemCount }}</span> réservations enregistrées dans le système.
+=======
+                            Vous avez <span class="fw-bold">{{ reservations|length }}</span> réservations enregistrées dans le système.
+>>>>>>> match
                         </p>
                         <a href="{{ path('reservation_new') }}" class="btn btn-sm btn-outline-primary">Ajouter une Réservation</a>
                         <a href="{{ path('reservation_statistics') }}" class="btn btn-sm btn-primary ms-2">Voir Plus</a>
@@ -56,7 +60,11 @@
                             </div>
                         </div>
                         <span class="fw-semibold d-block mb-1">Total Réservations</span>
+<<<<<<< HEAD
                         <h3 class="card-title mb-2">{{ reservations.totalItemCount }}</h3>
+=======
+                        <h3 class="card-title mb-2">{{ reservations|length }}</h3>
+>>>>>>> match
                         <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> Enregistrées</small>
                     </div>
                 </div>
@@ -107,7 +115,11 @@
             },
             series: [{
                 name: 'Réservations',
+<<<<<<< HEAD
                 data: [{{ reservations.totalItemCount }}]
+=======
+                data: [{{ reservations|length }}]
+>>>>>>> match
             }],
             xaxis: {
                 categories: ['Total Réservations']

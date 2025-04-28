@@ -6,6 +6,10 @@ use PhpOffice\PhpSpreadsheet\Calculation\ArrayEnabled;
 use PhpOffice\PhpSpreadsheet\Calculation\Information\ExcelError;
 use PhpOffice\PhpSpreadsheet\Cell\AddressHelper;
 use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
+<<<<<<< HEAD
+=======
+use PhpOffice\PhpSpreadsheet\Shared\StringHelper;
+>>>>>>> match
 
 class Address
 {
@@ -44,6 +48,7 @@ class Address
      * @param mixed $sheetName Optional Name of worksheet to use
      *                      Or can be an array of values
      *
+<<<<<<< HEAD
      * @return array|string
      *         If an array of values is passed as the $testValue argument, then the returned result will also be
      *            an array with the same dimensions
@@ -53,6 +58,16 @@ class Address
         if (
             is_array($row) || is_array($column) ||
             is_array($relativity) || is_array($referenceStyle) || is_array($sheetName)
+=======
+     * @return array|string If an array of values is passed as the $testValue argument, then the returned result will also be
+     *            an array with the same dimensions
+     */
+    public static function cell(mixed $row, mixed $column, mixed $relativity = 1, mixed $referenceStyle = true, mixed $sheetName = ''): array|string
+    {
+        if (
+            is_array($row) || is_array($column)
+            || is_array($relativity) || is_array($referenceStyle) || is_array($sheetName)
+>>>>>>> match
         ) {
             return self::evaluateArrayArguments(
                 [self::class, __FUNCTION__],
@@ -64,14 +79,25 @@ class Address
             );
         }
 
+<<<<<<< HEAD
         $relativity = $relativity ?? 1;
         $referenceStyle = $referenceStyle ?? true;
+=======
+        $relativity = ($relativity === null) ? 1 : (int) StringHelper::convertToString($relativity);
+        $referenceStyle = $referenceStyle ?? true;
+        $row = (int) StringHelper::convertToString($row);
+        $column = (int) StringHelper::convertToString($column);
+>>>>>>> match
 
         if (($row < 1) || ($column < 1)) {
             return ExcelError::VALUE();
         }
 
+<<<<<<< HEAD
         $sheetName = self::sheetName($sheetName);
+=======
+        $sheetName = self::sheetName(StringHelper::convertToString($sheetName));
+>>>>>>> match
 
         if (is_int($referenceStyle)) {
             $referenceStyle = (bool) $referenceStyle;
@@ -86,7 +112,11 @@ class Address
     private static function sheetName(string $sheetName): string
     {
         if ($sheetName > '') {
+<<<<<<< HEAD
             if (strpos($sheetName, ' ') !== false || strpos($sheetName, '[') !== false) {
+=======
+            if (str_contains($sheetName, ' ') || str_contains($sheetName, '[')) {
+>>>>>>> match
                 $sheetName = "'{$sheetName}'";
             }
             $sheetName .= '!';

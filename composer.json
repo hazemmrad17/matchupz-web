@@ -11,11 +11,19 @@
         "doctrine/doctrine-bundle": "^2.14",
         "doctrine/doctrine-migrations-bundle": "^3.4",
         "doctrine/orm": "^3.3",
+<<<<<<< HEAD
         "google/apiclient": "2.15",
         "knplabs/knp-paginator-bundle": "^6.8",
         "knplabs/knp-snappy-bundle": "^1.10",
         "phpdocumentor/reflection-docblock": "^5.6",
         "phpoffice/phpspreadsheet": "1.29",
+=======
+        "google/apiclient": "2.15.0",
+        "knplabs/knp-paginator-bundle": "^6.8",
+        "knplabs/knp-snappy-bundle": "^1.10",
+        "phpdocumentor/reflection-docblock": "^5.6",
+        "phpoffice/phpspreadsheet": "^4.2",
+>>>>>>> match
         "phpstan/phpdoc-parser": "^2.1",
         "symfony/asset": "6.4.*",
         "symfony/asset-mapper": "6.4.*",
@@ -94,7 +102,11 @@
     },
     "extra": {
         "symfony": {
+<<<<<<< HEAD
             "allow-contrib": false,
+=======
+            "allow-contrib": true,
+>>>>>>> match
             "require": "6.4.*"
         }
     },

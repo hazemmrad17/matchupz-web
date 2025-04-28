@@ -73,7 +73,11 @@ class Cotangent
      *         If an array of numbers is passed as the argument, then the returned result will also be an array
      *            with the same dimensions
      */
+<<<<<<< HEAD
     public static function acot($number)
+=======
+    public static function acot($number): array|string|float
+>>>>>>> match
     {
         if (is_array($number)) {
             return self::evaluateSingleArgumentArray([self::class, __FUNCTION__], $number);

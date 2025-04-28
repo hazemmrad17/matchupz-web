@@ -21,7 +21,11 @@ class Sine
      *         If an array of numbers is passed as the argument, then the returned result will also be an array
      *            with the same dimensions
      */
+<<<<<<< HEAD
     public static function sin($angle)
+=======
+    public static function sin(mixed $angle): array|string|float
+>>>>>>> match
     {
         if (is_array($angle)) {
             return self::evaluateSingleArgumentArray([self::class, __FUNCTION__], $angle);
@@ -47,7 +51,11 @@ class Sine
      *         If an array of numbers is passed as the argument, then the returned result will also be an array
      *            with the same dimensions
      */
+<<<<<<< HEAD
     public static function sinh($angle)
+=======
+    public static function sinh(mixed $angle): array|string|float
+>>>>>>> match
     {
         if (is_array($angle)) {
             return self::evaluateSingleArgumentArray([self::class, __FUNCTION__], $angle);

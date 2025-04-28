@@ -20,7 +20,11 @@ class Averages extends AggregateBase
      *
      * @return float|string (string if result is an error)
      */
+<<<<<<< HEAD
     public static function averageDeviations(...$args)
+=======
+    public static function averageDeviations(mixed ...$args): string|float
+>>>>>>> match
     {
         $aArgs = Functions::flattenArrayIndexed($args);
 
@@ -44,6 +48,11 @@ class Averages extends AggregateBase
                 return ExcelError::VALUE();
             }
             if (self::isAcceptedCountable($arg, $k)) {
+<<<<<<< HEAD
+=======
+                /** @var float|int|numeric-string $arg */
+                /** @var float|int|numeric-string $aMean */
+>>>>>>> match
                 $returnValue += abs($arg - $aMean);
                 ++$aCount;
             }
@@ -67,9 +76,15 @@ class Averages extends AggregateBase
      *
      * @param mixed ...$args Data values
      *
+<<<<<<< HEAD
      * @return float|string (string if result is an error)
      */
     public static function average(...$args)
+=======
+     * @return float|int|string (string if result is an error)
+     */
+    public static function average(mixed ...$args): string|int|float
+>>>>>>> match
     {
         $returnValue = $aCount = 0;
 
@@ -83,6 +98,10 @@ class Averages extends AggregateBase
                 return ExcelError::VALUE();
             }
             if (self::isAcceptedCountable($arg, $k)) {
+<<<<<<< HEAD
+=======
+                /** @var float|int|numeric-string $arg */
+>>>>>>> match
                 $returnValue += $arg;
                 ++$aCount;
             }
@@ -106,9 +125,15 @@ class Averages extends AggregateBase
      *
      * @param mixed ...$args Data values
      *
+<<<<<<< HEAD
      * @return float|string (string if result is an error)
      */
     public static function averageA(...$args)
+=======
+     * @return float|int|string (string if result is an error)
+     */
+    public static function averageA(mixed ...$args): string|int|float
+>>>>>>> match
     {
         $returnValue = null;
 
@@ -147,7 +172,11 @@ class Averages extends AggregateBase
      *
      * @return float|string The result, or a string containing an error
      */
+<<<<<<< HEAD
     public static function median(...$args)
+=======
+    public static function median(mixed ...$args): float|string
+>>>>>>> match
     {
         $aArgs = Functions::flattenArray($args);
 
@@ -161,7 +190,11 @@ class Averages extends AggregateBase
             if ($valueCount == floor($valueCount)) {
                 $returnValue = ($aArgs[$valueCount--] + $aArgs[$valueCount]) / 2;
             } else {
+<<<<<<< HEAD
                 $valueCount = floor($valueCount);
+=======
+                $valueCount = (int) floor($valueCount);
+>>>>>>> match
                 $returnValue = $aArgs[$valueCount];
             }
         }
@@ -181,7 +214,11 @@ class Averages extends AggregateBase
      *
      * @return float|string The result, or a string containing an error
      */
+<<<<<<< HEAD
     public static function mode(...$args)
+=======
+    public static function mode(mixed ...$args): float|string
+>>>>>>> match
     {
         $returnValue = ExcelError::NA();
 
@@ -200,9 +237,15 @@ class Averages extends AggregateBase
     {
         return array_filter(
             $args,
+<<<<<<< HEAD
             function ($value) {
                 // Is it a numeric value?
                 return  is_numeric($value) && (!is_string($value));
+=======
+            function ($value): bool {
+                // Is it a numeric value?
+                return is_numeric($value) && (!is_string($value));
+>>>>>>> match
             }
         );
     }
@@ -210,10 +253,15 @@ class Averages extends AggregateBase
     /**
      * Special variant of array_count_values that isn't limited to strings and integers,
      * but can work with floating point numbers as values.
+<<<<<<< HEAD
      *
      * @return float|string
      */
     private static function modeCalc(array $data)
+=======
+     */
+    private static function modeCalc(array $data): float|string
+>>>>>>> match
     {
         $frequencyArray = [];
         $index = 0;

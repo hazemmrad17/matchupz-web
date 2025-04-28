@@ -23,7 +23,11 @@ class DataType
      *
      * @var array<string, int>
      */
+<<<<<<< HEAD
     private static $errorCodes = [
+=======
+    private static array $errorCodes = [
+>>>>>>> match
         '#NULL!' => 0,
         '#DIV/0!' => 1,
         '#VALUE!' => 2,
@@ -41,7 +45,11 @@ class DataType
      *
      * @return array<string, int>
      */
+<<<<<<< HEAD
     public static function getErrorCodes()
+=======
+    public static function getErrorCodes(): array
+>>>>>>> match
     {
         return self::$errorCodes;
     }
@@ -53,7 +61,11 @@ class DataType
      *
      * @return RichText|string Sanitized value
      */
+<<<<<<< HEAD
     public static function checkString($textValue)
+=======
+    public static function checkString(null|RichText|string $textValue): RichText|string
+>>>>>>> match
     {
         if ($textValue instanceof RichText) {
             // TODO: Sanitize Rich-Text string (max. character count is 32,767)
@@ -76,12 +88,22 @@ class DataType
      *
      * @return string Sanitized value
      */
+<<<<<<< HEAD
     public static function checkErrorCode($value)
     {
         $value = (string) $value;
 
         if (!isset(self::$errorCodes[$value])) {
             $value = '#NULL!';
+=======
+    public static function checkErrorCode(mixed $value): string
+    {
+        $default = '#NULL!';
+        $value = ($value === null) ? $default : StringHelper::convertToString($value, false, $default);
+
+        if (!isset(self::$errorCodes[$value])) {
+            $value = $default;
+>>>>>>> match
         }
 
         return $value;

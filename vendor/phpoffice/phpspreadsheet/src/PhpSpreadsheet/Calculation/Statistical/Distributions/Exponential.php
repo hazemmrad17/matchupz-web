@@ -24,11 +24,18 @@ class Exponential
      * @param mixed $cumulative Boolean value indicating if we want the cdf (true) or the pdf (false)
      *                      Or can be an array of values
      *
+<<<<<<< HEAD
      * @return array|float|string
      *         If an array of numbers is passed as an argument, then the returned result will also be an array
      *            with the same dimensions
      */
     public static function distribution($value, $lambda, $cumulative)
+=======
+     * @return array|float|string If an array of numbers is passed as an argument, then the returned result will also be an array
+     *            with the same dimensions
+     */
+    public static function distribution(mixed $value, mixed $lambda, mixed $cumulative): array|string|float
+>>>>>>> match
     {
         if (is_array($value) || is_array($lambda) || is_array($cumulative)) {
             return self::evaluateArrayArguments([self::class, __FUNCTION__], $value, $lambda, $cumulative);

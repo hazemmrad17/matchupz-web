@@ -49,7 +49,11 @@ class Lcm
      *
      * @return int|string Lowest Common Multiplier, or a string containing an error
      */
+<<<<<<< HEAD
     public static function evaluate(...$args)
+=======
+    public static function evaluate(mixed ...$args): int|string
+>>>>>>> match
     {
         try {
             $arrayArgs = [];

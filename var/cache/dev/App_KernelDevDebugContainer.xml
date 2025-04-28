@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services https://symfony.com/schema/dic/services/services-1.0.xsd">
   <parameters>
+<<<<<<< HEAD
     <parameter key="kernel.project_dir">C:\Users\Ismail\Desktop\matchupz</parameter>
+=======
+    <parameter key="kernel.project_dir">C:\Users\louay\Desktop\Projet\web\matchupz-web-match</parameter>
+>>>>>>> match
     <parameter key="kernel.environment">dev</parameter>
     <parameter key="kernel.runtime_environment">%env(default:kernel.environment:APP_RUNTIME_ENV)%</parameter>
     <parameter key="kernel.runtime_mode">%env(query_string:default:container.runtime_mode:APP_RUNTIME_MODE)%</parameter>
@@ -9,9 +13,15 @@
     <parameter key="kernel.runtime_mode.cli">%env(not:default:kernel.runtime_mode.web:)%</parameter>
     <parameter key="kernel.runtime_mode.worker">%env(bool:default::key:worker:default:kernel.runtime_mode:)%</parameter>
     <parameter key="kernel.debug">true</parameter>
+<<<<<<< HEAD
     <parameter key="kernel.build_dir">C:\Users\Ismail\Desktop\matchupz\var\cache\dev</parameter>
     <parameter key="kernel.cache_dir">C:\Users\Ismail\Desktop\matchupz\var\cache\dev</parameter>
     <parameter key="kernel.logs_dir">C:\Users\Ismail\Desktop\matchupz\var\log</parameter>
+=======
+    <parameter key="kernel.build_dir">C:\Users\louay\Desktop\Projet\web\matchupz-web-match\var\cache\dev</parameter>
+    <parameter key="kernel.cache_dir">C:\Users\louay\Desktop\Projet\web\matchupz-web-match\var\cache\dev</parameter>
+    <parameter key="kernel.logs_dir">C:\Users\louay\Desktop\Projet\web\matchupz-web-match\var\log</parameter>
+>>>>>>> match
     <parameter key="kernel.bundles" type="collection">
       <parameter key="FrameworkBundle">Symfony\Bundle\FrameworkBundle\FrameworkBundle</parameter>
       <parameter key="DoctrineBundle">Doctrine\Bundle\DoctrineBundle\DoctrineBundle</parameter>
@@ -30,6 +40,7 @@
     </parameter>
     <parameter key="kernel.bundles_metadata" type="collection">
       <parameter key="FrameworkBundle" type="collection">
+<<<<<<< HEAD
         <parameter key="path">C:\Users\Ismail\Desktop\matchupz\vendor\symfony\framework-bundle</parameter>
         <parameter key="namespace">Symfony\Bundle\FrameworkBundle</parameter>
       </parameter>
@@ -83,11 +94,67 @@
       </parameter>
       <parameter key="KnpPaginatorBundle" type="collection">
         <parameter key="path">C:\Users\Ismail\Desktop\matchupz\vendor\knplabs\knp-paginator-bundle</parameter>
+=======
+        <parameter key="path">C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\framework-bundle</parameter>
+        <parameter key="namespace">Symfony\Bundle\FrameworkBundle</parameter>
+      </parameter>
+      <parameter key="DoctrineBundle" type="collection">
+        <parameter key="path">C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\doctrine\doctrine-bundle</parameter>
+        <parameter key="namespace">Doctrine\Bundle\DoctrineBundle</parameter>
+      </parameter>
+      <parameter key="DoctrineMigrationsBundle" type="collection">
+        <parameter key="path">C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\doctrine\doctrine-migrations-bundle</parameter>
+        <parameter key="namespace">Doctrine\Bundle\MigrationsBundle</parameter>
+      </parameter>
+      <parameter key="DebugBundle" type="collection">
+        <parameter key="path">C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\debug-bundle</parameter>
+        <parameter key="namespace">Symfony\Bundle\DebugBundle</parameter>
+      </parameter>
+      <parameter key="TwigBundle" type="collection">
+        <parameter key="path">C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\twig-bundle</parameter>
+        <parameter key="namespace">Symfony\Bundle\TwigBundle</parameter>
+      </parameter>
+      <parameter key="WebProfilerBundle" type="collection">
+        <parameter key="path">C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\web-profiler-bundle</parameter>
+        <parameter key="namespace">Symfony\Bundle\WebProfilerBundle</parameter>
+      </parameter>
+      <parameter key="StimulusBundle" type="collection">
+        <parameter key="path">C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\stimulus-bundle</parameter>
+        <parameter key="namespace">Symfony\UX\StimulusBundle</parameter>
+      </parameter>
+      <parameter key="TurboBundle" type="collection">
+        <parameter key="path">C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\ux-turbo</parameter>
+        <parameter key="namespace">Symfony\UX\Turbo</parameter>
+      </parameter>
+      <parameter key="TwigExtraBundle" type="collection">
+        <parameter key="path">C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\twig\extra-bundle</parameter>
+        <parameter key="namespace">Twig\Extra\TwigExtraBundle</parameter>
+      </parameter>
+      <parameter key="SecurityBundle" type="collection">
+        <parameter key="path">C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\security-bundle</parameter>
+        <parameter key="namespace">Symfony\Bundle\SecurityBundle</parameter>
+      </parameter>
+      <parameter key="MonologBundle" type="collection">
+        <parameter key="path">C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\monolog-bundle</parameter>
+        <parameter key="namespace">Symfony\Bundle\MonologBundle</parameter>
+      </parameter>
+      <parameter key="MakerBundle" type="collection">
+        <parameter key="path">C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\maker-bundle</parameter>
+        <parameter key="namespace">Symfony\Bundle\MakerBundle</parameter>
+      </parameter>
+      <parameter key="KnpSnappyBundle" type="collection">
+        <parameter key="path">C:/Users/louay/Desktop/Projet/web/matchupz-web-match/vendor/knplabs/knp-snappy-bundle/src</parameter>
+        <parameter key="namespace">Knp\Bundle\SnappyBundle</parameter>
+      </parameter>
+      <parameter key="KnpPaginatorBundle" type="collection">
+        <parameter key="path">C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\knplabs\knp-paginator-bundle</parameter>
+>>>>>>> match
         <parameter key="namespace">Knp\Bundle\PaginatorBundle</parameter>
       </parameter>
     </parameter>
     <parameter key="kernel.charset">UTF-8</parameter>
     <parameter key="kernel.container_class">App_KernelDevDebugContainer</parameter>
+<<<<<<< HEAD
     <parameter key="profile_pictures_directory">C:\Users\Ismail\Desktop\matchupz/public/uploads/profile_pictures</parameter>
     <parameter key="club_photos_directory">C:\Users\Ismail\Desktop\matchupz/public/uploads/club_photos</parameter>
     <parameter key="photos_directory">C:\Users\Ismail\Desktop\matchupz/public/uploads/photos</parameter>
@@ -96,6 +163,12 @@
     <parameter key="google_token_path">C:\Users\Ismail\Desktop\matchupz/config/secrets/google_token.json</parameter>
     <parameter key="google_calendar_id">primary</parameter>
     <parameter key="event_id_storage_path">C:\Users\Ismail\Desktop\matchupz/var/event_ids.json</parameter>
+=======
+    <parameter key="profile_pictures_directory">C:\Users\louay\Desktop\Projet\web\matchupz-web-match/public/uploads/profile_pictures</parameter>
+    <parameter key="club_photos_directory">C:\Users\louay\Desktop\Projet\web\matchupz-web-match/public/uploads/club_photos</parameter>
+    <parameter key="photos_directory">C:\Users\louay\Desktop\Projet\web\matchupz-web-match/public/uploads/photos</parameter>
+    <parameter key="app.news_api_key">2a65b6315ab7460f97ac49687599263d</parameter>
+>>>>>>> match
     <parameter key="event_dispatcher.event_aliases" type="collection">
       <parameter key="Symfony\Component\Console\Event\ConsoleCommandEvent">console.command</parameter>
       <parameter key="Symfony\Component\Console\Event\ConsoleErrorEvent">console.error</parameter>
@@ -131,18 +204,32 @@
     <parameter key="asset.request_context.base_path">null</parameter>
     <parameter key="asset.request_context.secure">null</parameter>
     <parameter key="translator.logging">false</parameter>
+<<<<<<< HEAD
     <parameter key="translator.default_path">C:\Users\Ismail\Desktop\matchupz/translations</parameter>
     <parameter key="debug.error_handler.throw_at">-1</parameter>
     <parameter key="debug.container.dump">C:\Users\Ismail\Desktop\matchupz\var\cache\dev/App_KernelDevDebugContainer.xml</parameter>
+=======
+    <parameter key="translator.default_path">C:\Users\louay\Desktop\Projet\web\matchupz-web-match/translations</parameter>
+    <parameter key="debug.error_handler.throw_at">-1</parameter>
+    <parameter key="debug.container.dump">C:\Users\louay\Desktop\Projet\web\matchupz-web-match\var\cache\dev/App_KernelDevDebugContainer.xml</parameter>
+>>>>>>> match
     <parameter key="router.request_context.host">localhost</parameter>
     <parameter key="router.request_context.scheme">http</parameter>
     <parameter key="router.request_context.base_url"></parameter>
     <parameter key="router.resource">kernel::loadRoutes</parameter>
+<<<<<<< HEAD
     <parameter key="router.cache_dir">C:\Users\Ismail\Desktop\matchupz\var\cache\dev</parameter>
     <parameter key="request_listener.http_port">80</parameter>
     <parameter key="request_listener.https_port">443</parameter>
     <parameter key="serializer.mapping.cache.file">C:\Users\Ismail\Desktop\matchupz\var\cache\dev/serialization.php</parameter>
     <parameter key="cache.prefix.seed">_C:\Users\Ismail\Desktop\matchupz.App_KernelDevDebugContainer</parameter>
+=======
+    <parameter key="router.cache_dir">C:\Users\louay\Desktop\Projet\web\matchupz-web-match\var\cache\dev</parameter>
+    <parameter key="request_listener.http_port">80</parameter>
+    <parameter key="request_listener.https_port">443</parameter>
+    <parameter key="serializer.mapping.cache.file">C:\Users\louay\Desktop\Projet\web\matchupz-web-match\var\cache\dev/serialization.php</parameter>
+    <parameter key="cache.prefix.seed">_C:\Users\louay\Desktop\Projet\web\matchupz-web-match.App_KernelDevDebugContainer</parameter>
+>>>>>>> match
     <parameter key="session.metadata.storage_key">_sf2_meta</parameter>
     <parameter key="session.storage.options" type="collection">
       <parameter key="cache_limiter" type="string">0</parameter>
@@ -155,11 +242,19 @@
     <parameter key="session.metadata.update_threshold">0</parameter>
     <parameter key="form.type_extension.csrf.enabled">true</parameter>
     <parameter key="form.type_extension.csrf.field_name">_token</parameter>
+<<<<<<< HEAD
     <parameter key="validator.mapping.cache.file">C:\Users\Ismail\Desktop\matchupz\var\cache\dev/validation.php</parameter>
     <parameter key="validator.translation_domain">validators</parameter>
     <parameter key="profiler_listener.only_exceptions">false</parameter>
     <parameter key="profiler_listener.only_main_requests">false</parameter>
     <parameter key="profiler.storage.dsn">file:C:\Users\Ismail\Desktop\matchupz\var\cache\dev/profiler</parameter>
+=======
+    <parameter key="validator.mapping.cache.file">C:\Users\louay\Desktop\Projet\web\matchupz-web-match\var\cache\dev/validation.php</parameter>
+    <parameter key="validator.translation_domain">validators</parameter>
+    <parameter key="profiler_listener.only_exceptions">false</parameter>
+    <parameter key="profiler_listener.only_main_requests">false</parameter>
+    <parameter key="profiler.storage.dsn">file:C:\Users\louay\Desktop\Projet\web\matchupz-web-match\var\cache\dev/profiler</parameter>
+>>>>>>> match
     <parameter key="doctrine.dbal.configuration.class">Doctrine\DBAL\Configuration</parameter>
     <parameter key="doctrine.data_collector.class">Doctrine\Bundle\DoctrineBundle\DataCollector\DoctrineDataCollector</parameter>
     <parameter key="doctrine.dbal.connection.event_manager.class">Symfony\Bridge\Doctrine\ContainerAwareEventManager</parameter>
@@ -229,7 +324,11 @@
     <parameter key="doctrine.orm.second_level_cache.regions_configuration.class">Doctrine\ORM\Cache\RegionsConfiguration</parameter>
     <parameter key="doctrine.orm.auto_generate_proxy_classes">true</parameter>
     <parameter key="doctrine.orm.enable_lazy_ghost_objects">true</parameter>
+<<<<<<< HEAD
     <parameter key="doctrine.orm.proxy_dir">C:\Users\Ismail\Desktop\matchupz\var\cache\dev/doctrine/orm/Proxies</parameter>
+=======
+    <parameter key="doctrine.orm.proxy_dir">C:\Users\louay\Desktop\Projet\web\matchupz-web-match\var\cache\dev/doctrine/orm/Proxies</parameter>
+>>>>>>> match
     <parameter key="doctrine.orm.proxy_namespace">Proxies</parameter>
     <parameter key="doctrine.migrations.preferred_em">null</parameter>
     <parameter key="doctrine.migrations.preferred_connection">null</parameter>
@@ -237,7 +336,11 @@
     <parameter key="twig.form.resources" type="collection">
       <parameter>form_div_layout.html.twig</parameter>
     </parameter>
+<<<<<<< HEAD
     <parameter key="twig.default_path">C:\Users\Ismail\Desktop\matchupz/templates</parameter>
+=======
+    <parameter key="twig.default_path">C:\Users\louay\Desktop\Projet\web\matchupz-web-match/templates</parameter>
+>>>>>>> match
     <parameter key="web_profiler.debug_toolbar.intercept_redirects">false</parameter>
     <parameter key="web_profiler.debug_toolbar.mode">2</parameter>
     <parameter key="security.role_hierarchy.roles" type="collection"/>
@@ -403,6 +506,7 @@
         <argument>%env(resolve:GOOGLE_AUTH_CONFIG)%</argument>
       </call>
     </service>
+<<<<<<< HEAD
     <service id="App\Twig\AppExtension" class="App\Twig\AppExtension" autowire="true" autoconfigure="true">
       <tag name="twig.extension"/>
     </service>
@@ -416,6 +520,11 @@
         <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\AbonnementController"/>
       </call>
     </service>
+=======
+    <service id="App\Entity" class="App\Entity" abstract="true">
+      <tag name="container.excluded" source="in &quot;config/services.yaml&quot;"/>
+    </service>
+>>>>>>> match
     <service id="App\Controller\ClubController" class="App\Controller\ClubController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
@@ -424,6 +533,16 @@
         <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\ClubController"/>
       </call>
     </service>
+<<<<<<< HEAD
+=======
+    <service id="App\Controller\DashboardController" class="App\Controller\DashboardController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="container.service_subscriber"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\DashboardController"/>
+      </call>
+    </service>
+>>>>>>> match
     <service id="App\Controller\EspacesportifController" class="App\Controller\EspacesportifController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
@@ -438,6 +557,16 @@
         <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\EvaluationPhysiqueController"/>
       </call>
     </service>
+<<<<<<< HEAD
+=======
+    <service id="App\Controller\FitnessController" class="App\Controller\FitnessController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="container.service_subscriber"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\FitnessController"/>
+      </call>
+    </service>
+>>>>>>> match
     <service id="App\Controller\HistoriqueClubController" class="App\Controller\HistoriqueClubController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
@@ -446,6 +575,7 @@
         <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\HistoriqueClubController"/>
       </call>
     </service>
+<<<<<<< HEAD
     <service id="App\Controller\HomeController" class="App\Controller\HomeController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
@@ -453,6 +583,8 @@
         <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\HomeController"/>
       </call>
     </service>
+=======
+>>>>>>> match
     <service id="App\Controller\JoueurController" class="App\Controller\JoueurController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
@@ -461,6 +593,17 @@
         <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\JoueurController"/>
       </call>
     </service>
+<<<<<<< HEAD
+=======
+    <service id="App\Controller\MatchController" class="App\Controller\MatchController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="container.service_subscriber"/>
+      <argument type="service" id="doctrine.orm.default_entity_manager"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\MatchController"/>
+      </call>
+    </service>
+>>>>>>> match
     <service id="App\Controller\PerformanceJoueurController" class="App\Controller\PerformanceJoueurController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
@@ -471,11 +614,26 @@
     <service id="App\Controller\ReservationController" class="App\Controller\ReservationController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
+<<<<<<< HEAD
       <argument type="service" id="monolog.logger"/>
+=======
+>>>>>>> match
       <call method="setContainer">
         <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\ReservationController"/>
       </call>
     </service>
+<<<<<<< HEAD
+=======
+    <service id="App\Controller\ScheduleController" class="App\Controller\ScheduleController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="container.service_subscriber"/>
+      <argument type="service" id="doctrine.orm.default_entity_manager"/>
+      <argument>2a65b6315ab7460f97ac49687599263d</argument>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\ScheduleController"/>
+      </call>
+    </service>
+>>>>>>> match
     <service id="App\Controller\SportController" class="App\Controller\SportController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
@@ -488,9 +646,12 @@
     <service id="App\Doctrine\TimestampDiffFunction" class="App\Doctrine\TimestampDiffFunction" autowire="true" autoconfigure="true">
       <tag name="container.error" message="Cannot autowire service &quot;App\Doctrine\TimestampDiffFunction&quot;: argument &quot;$name&quot; of method &quot;Doctrine\ORM\Query\AST\Functions\FunctionNode::__construct()&quot; is type-hinted &quot;string&quot;, you should configure its value explicitly."/>
     </service>
+<<<<<<< HEAD
     <service id="App\Form\AbonnementType" class="App\Form\AbonnementType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
+=======
+>>>>>>> match
     <service id="App\Form\ClubType" class="App\Form\ClubType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
@@ -506,12 +667,24 @@
     <service id="App\Form\JoueurType" class="App\Form\JoueurType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
+<<<<<<< HEAD
+=======
+    <service id="App\Form\MatchType" class="App\Form\MatchType" autowire="true" autoconfigure="true">
+      <tag name="form.type"/>
+    </service>
+>>>>>>> match
     <service id="App\Form\PerformanceJoueurType" class="App\Form\PerformanceJoueurType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
     <service id="App\Form\ReservationType" class="App\Form\ReservationType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
+<<<<<<< HEAD
+=======
+    <service id="App\Form\ScheduleType" class="App\Form\ScheduleType" autowire="true" autoconfigure="true">
+      <tag name="form.type"/>
+    </service>
+>>>>>>> match
     <service id="App\Form\SportType" class="App\Form\SportType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
@@ -583,6 +756,7 @@
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
     </service>
+<<<<<<< HEAD
     <service id="App\Service\EventIdStorage" class="App\Service\EventIdStorage" autowire="true" autoconfigure="true">
       <argument type="service" id="parameter_bag"/>
       <argument type="service" id="monolog.logger"/>
@@ -593,6 +767,12 @@
     <service id="App\Service\GoogleCalendarService" class="App\Service\GoogleCalendarService" autowire="true" autoconfigure="true">
       <argument type="service" id="parameter_bag"/>
       <argument type="service" id="monolog.logger"/>
+=======
+    <service id="App\Validator\NoScheduleOverlap" class="App\Validator\NoScheduleOverlap" autowire="true" autoconfigure="true"/>
+    <service id="App\Validator\NoScheduleOverlapValidator" class="App\Validator\NoScheduleOverlapValidator" autowire="true" autoconfigure="true">
+      <tag name="validator.constraint_validator"/>
+      <argument type="service" id="App\Repository\ScheduleRepository"/>
+>>>>>>> match
     </service>
     <service id="argument_metadata_factory" class="Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadataFactory"/>
     <service id="argument_resolver.backed_enum_resolver" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\BackedEnumValueResolver">
@@ -621,7 +801,11 @@
     </service>
     <service id="argument_resolver.service" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
       <tag priority="-50" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">controller.argument_value_resolver</tag>
+<<<<<<< HEAD
       <argument type="service" id=".service_locator.QxYyjev"/>
+=======
+      <argument type="service" id=".service_locator.LiIqH_L"/>
+>>>>>>> match
     </service>
     <service id="argument_resolver.default" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">
       <tag priority="-100" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">controller.argument_value_resolver</tag>
@@ -704,7 +888,11 @@
       </argument>
     </service>
     <service id="http_cache.store" class="Symfony\Component\HttpKernel\HttpCache\Store">
+<<<<<<< HEAD
       <argument>C:\Users\Ismail\Desktop\matchupz\var\cache\dev/http_cache</argument>
+=======
+      <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\var\cache\dev/http_cache</argument>
+>>>>>>> match
     </service>
     <service id="url_helper" class="Symfony\Component\HttpFoundation\UrlHelper">
       <argument type="service" id="request_stack"/>
@@ -714,7 +902,11 @@
       <tag name="container.no_preload"/>
       <argument type="tagged_iterator" tag="kernel.cache_warmer"/>
       <argument>true</argument>
+<<<<<<< HEAD
       <argument>C:\Users\Ismail\Desktop\matchupz\var\cache\dev/App_KernelDevDebugContainerDeprecations.log</argument>
+=======
+      <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\var\cache\dev/App_KernelDevDebugContainerDeprecations.log</argument>
+>>>>>>> match
     </service>
     <service id="cache_clearer" class="Symfony\Component\HttpKernel\CacheClearer\ChainCacheClearer">
       <argument type="tagged_iterator" tag="kernel.cache_clearer"/>
@@ -972,7 +1164,11 @@
       </argument>
       <argument>UTF-8</argument>
       <argument type="service" id="debug.file_link_formatter" on-invalid="null"/>
+<<<<<<< HEAD
       <argument>C:\Users\Ismail\Desktop\matchupz</argument>
+=======
+      <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match</argument>
+>>>>>>> match
       <argument type="service">
         <service>
           <argument type="service" id="request_stack"/>
@@ -1008,7 +1204,11 @@
       <tag name="console.command"/>
       <tag name="container.no_preload"/>
       <argument type="service" id="filesystem"/>
+<<<<<<< HEAD
       <argument>C:\Users\Ismail\Desktop\matchupz</argument>
+=======
+      <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match</argument>
+>>>>>>> match
       <call method="setName">
         <argument>assets:install</argument>
       </call>
@@ -1194,7 +1394,11 @@
       <tag name="console.command"/>
       <tag name="container.no_preload"/>
       <argument>dev</argument>
+<<<<<<< HEAD
       <argument>C:\Users\Ismail\Desktop\matchupz</argument>
+=======
+      <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match</argument>
+>>>>>>> match
       <call method="setName">
         <argument>debug:dotenv</argument>
       </call>
@@ -1426,6 +1630,7 @@
       <argument type="service" id="translator.data_collector"/>
       <argument type="service" id="translation.reader"/>
       <argument type="service" id="translation.extractor"/>
+<<<<<<< HEAD
       <argument>C:\Users\Ismail\Desktop\matchupz/translations</argument>
       <argument>C:\Users\Ismail\Desktop\matchupz/templates</argument>
       <argument type="collection">
@@ -1437,6 +1642,19 @@
       <argument type="collection">
         <argument>C:\Users\Ismail\Desktop\matchupz\vendor\symfony\twig-bridge/Resources/views/Email</argument>
         <argument>C:\Users\Ismail\Desktop\matchupz\vendor\symfony\twig-bridge/Resources/views/Form</argument>
+=======
+      <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match/translations</argument>
+      <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match/templates</argument>
+      <argument type="collection">
+        <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\validator/Resources/translations</argument>
+        <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\form/Resources/translations</argument>
+        <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\security-core/Resources/translations</argument>
+        <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\knplabs\knp-paginator-bundle/translations</argument>
+      </argument>
+      <argument type="collection">
+        <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\twig-bridge/Resources/views/Email</argument>
+        <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\twig-bridge/Resources/views/Form</argument>
+>>>>>>> match
       </argument>
       <argument type="collection"/>
       <call method="setName">
@@ -1453,6 +1671,7 @@
       <argument type="service" id="translation.reader"/>
       <argument type="service" id="translation.extractor"/>
       <argument>en</argument>
+<<<<<<< HEAD
       <argument>C:\Users\Ismail\Desktop\matchupz/translations</argument>
       <argument>C:\Users\Ismail\Desktop\matchupz/templates</argument>
       <argument type="collection">
@@ -1464,6 +1683,19 @@
       <argument type="collection">
         <argument>C:\Users\Ismail\Desktop\matchupz\vendor\symfony\twig-bridge/Resources/views/Email</argument>
         <argument>C:\Users\Ismail\Desktop\matchupz\vendor\symfony\twig-bridge/Resources/views/Form</argument>
+=======
+      <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match/translations</argument>
+      <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match/templates</argument>
+      <argument type="collection">
+        <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\validator/Resources/translations</argument>
+        <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\form/Resources/translations</argument>
+        <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\security-core/Resources/translations</argument>
+        <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\knplabs\knp-paginator-bundle/translations</argument>
+      </argument>
+      <argument type="collection">
+        <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\twig-bridge/Resources/views/Email</argument>
+        <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\twig-bridge/Resources/views/Form</argument>
+>>>>>>> match
       </argument>
       <argument type="collection"/>
       <call method="setName">
@@ -1544,14 +1776,24 @@
         <argument>Symfony\Bridge\Doctrine\Form\Type</argument>
       </argument>
       <argument type="collection">
+<<<<<<< HEAD
         <argument>App\Form\AbonnementType</argument>
+=======
+>>>>>>> match
         <argument>App\Form\ClubType</argument>
         <argument>App\Form\EspacesportifType</argument>
         <argument>App\Form\EvaluationPhysiqueType</argument>
         <argument>App\Form\HistoriqueClubType</argument>
         <argument>App\Form\JoueurType</argument>
+<<<<<<< HEAD
         <argument>App\Form\PerformanceJoueurType</argument>
         <argument>App\Form\ReservationType</argument>
+=======
+        <argument>App\Form\MatchType</argument>
+        <argument>App\Form\PerformanceJoueurType</argument>
+        <argument>App\Form\ReservationType</argument>
+        <argument>App\Form\ScheduleType</argument>
+>>>>>>> match
         <argument>App\Form\SportType</argument>
         <argument>Symfony\Component\Form\Extension\Core\Type\FormType</argument>
         <argument>Symfony\Component\Form\Extension\Core\Type\ChoiceType</argument>
@@ -1715,7 +1957,11 @@
       <argument></argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
+<<<<<<< HEAD
       <argument>C:\Users\Ismail\Desktop\matchupz\var\cache\dev/pools/system</argument>
+=======
+      <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\var\cache\dev/pools/system</argument>
+>>>>>>> match
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
@@ -1734,7 +1980,11 @@
       <tag name="monolog.logger" channel="cache"/>
       <argument></argument>
       <argument>0</argument>
+<<<<<<< HEAD
       <argument>C:\Users\Ismail\Desktop\matchupz\var\cache\dev/pools/app</argument>
+=======
+      <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\var\cache\dev/pools/app</argument>
+>>>>>>> match
       <argument type="service" id="cache.default_marshaller" on-invalid="ignore"/>
       <call method="setLogger">
         <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
@@ -1903,16 +2153,28 @@
     <service id="asset_mapper.cached_mapped_asset_factory" class="Symfony\Component\AssetMapper\Factory\CachedMappedAssetFactory">
       <tag name="container.decorator" id="asset_mapper.mapped_asset_factory" inner="asset_mapper.cached_mapped_asset_factory.inner"/>
       <argument type="service" id="asset_mapper.cached_mapped_asset_factory.inner"/>
+<<<<<<< HEAD
       <argument>C:\Users\Ismail\Desktop\matchupz\var\cache\dev/asset_mapper</argument>
+=======
+      <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\var\cache\dev/asset_mapper</argument>
+>>>>>>> match
       <argument>true</argument>
     </service>
     <service id="asset_mapper.repository" class="Symfony\Component\AssetMapper\AssetMapperRepository">
       <argument type="collection">
+<<<<<<< HEAD
         <argument key="C:\Users\Ismail\Desktop\matchupz\vendor\symfony\ux-turbo\src\DependencyInjection/../../assets/dist">@symfony/ux-turbo</argument>
         <argument key="C:\Users\Ismail\Desktop\matchupz\vendor\symfony\stimulus-bundle\src\DependencyInjection/../../assets/dist">@symfony/stimulus-bundle</argument>
         <argument key="assets/"></argument>
       </argument>
       <argument>C:\Users\Ismail\Desktop\matchupz</argument>
+=======
+        <argument key="C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\ux-turbo\src\DependencyInjection/../../assets/dist">@symfony/ux-turbo</argument>
+        <argument key="C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\stimulus-bundle\src\DependencyInjection/../../assets/dist">@symfony/stimulus-bundle</argument>
+        <argument key="assets/"></argument>
+      </argument>
+      <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match</argument>
+>>>>>>> match
       <argument type="collection">
         <argument>#^(?=[^\.]).*\.d\.ts$#</argument>
         <argument>#^(?=[^\.]).*.*/(?=[^\.])controllers\.json$#</argument>
@@ -1924,10 +2186,17 @@
       <argument>/assets/</argument>
     </service>
     <service id="asset_mapper.local_public_assets_filesystem" class="Symfony\Component\AssetMapper\Path\LocalPublicAssetsFilesystem">
+<<<<<<< HEAD
       <argument>C:\Users\Ismail\Desktop\matchupz/public</argument>
     </service>
     <service id="asset_mapper.compiled_asset_mapper_config_reader" class="Symfony\Component\AssetMapper\CompiledAssetMapperConfigReader">
       <argument>C:\Users\Ismail\Desktop\matchupz/public/assets</argument>
+=======
+      <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match/public</argument>
+    </service>
+    <service id="asset_mapper.compiled_asset_mapper_config_reader" class="Symfony\Component\AssetMapper\CompiledAssetMapperConfigReader">
+      <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match/public/assets</argument>
+>>>>>>> match
     </service>
     <service id="asset_mapper.asset_package" class="Symfony\Component\AssetMapper\MapperAwareAssetPackage">
       <tag name="container.decorator" id="assets._default_package" inner="asset_mapper.asset_package.inner"/>
@@ -1951,7 +2220,11 @@
       <argument type="service" id="asset_mapper"/>
       <argument type="service" id="asset_mapper.importmap.generator"/>
       <argument type="service" id="asset_mapper.local_public_assets_filesystem"/>
+<<<<<<< HEAD
       <argument>C:\Users\Ismail\Desktop\matchupz</argument>
+=======
+      <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match</argument>
+>>>>>>> match
       <argument>true</argument>
       <argument type="service" id="debug.event_dispatcher" on-invalid="null"/>
       <call method="setName">
@@ -1966,7 +2239,11 @@
       <tag name="container.no_preload"/>
       <argument type="service" id="asset_mapper"/>
       <argument type="service" id="asset_mapper.repository"/>
+<<<<<<< HEAD
       <argument>C:\Users\Ismail\Desktop\matchupz</argument>
+=======
+      <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match</argument>
+>>>>>>> match
       <call method="setName">
         <argument>debug:asset-map</argument>
       </call>
@@ -1995,7 +2272,11 @@
       <argument type="service" id="monolog.logger.asset_mapper"/>
     </service>
     <service id="asset_mapper.importmap.config_reader" class="Symfony\Component\AssetMapper\ImportMap\ImportMapConfigReader">
+<<<<<<< HEAD
       <argument>C:\Users\Ismail\Desktop\matchupz/importmap.php</argument>
+=======
+      <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match/importmap.php</argument>
+>>>>>>> match
       <argument type="service" id="asset_mapper.importmap.remote_package_storage"/>
     </service>
     <service id="asset_mapper.importmap.manager" class="Symfony\Component\AssetMapper\ImportMap\ImportMapManager">
@@ -2010,7 +2291,11 @@
       <argument type="service" id="asset_mapper.importmap.config_reader"/>
     </service>
     <service id="asset_mapper.importmap.remote_package_storage" class="Symfony\Component\AssetMapper\ImportMap\RemotePackageStorage">
+<<<<<<< HEAD
       <argument>C:\Users\Ismail\Desktop\matchupz/assets/vendor</argument>
+=======
+      <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match/assets/vendor</argument>
+>>>>>>> match
     </service>
     <service id="asset_mapper.importmap.remote_package_downloader" class="Symfony\Component\AssetMapper\ImportMap\RemotePackageDownloader">
       <argument type="service" id="asset_mapper.importmap.remote_package_storage"/>
@@ -2081,7 +2366,11 @@
       <tag name="console.command"/>
       <tag name="container.no_preload"/>
       <argument type="service" id="asset_mapper.importmap.remote_package_downloader"/>
+<<<<<<< HEAD
       <argument>C:\Users\Ismail\Desktop\matchupz</argument>
+=======
+      <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match</argument>
+>>>>>>> match
       <call method="setName">
         <argument>importmap:install</argument>
       </call>
@@ -2272,6 +2561,7 @@
         </argument>
       </argument>
       <argument type="collection">
+<<<<<<< HEAD
         <argument key="cache_dir">C:\Users\Ismail\Desktop\matchupz\var\cache\dev/translations</argument>
         <argument key="debug">true</argument>
         <argument key="resource_files" type="collection">
@@ -2635,6 +2925,371 @@
             <argument>C:\Users\Ismail\Desktop\matchupz\vendor\symfony\monolog-bundle/translations</argument>
             <argument>C:\Users\Ismail\Desktop\matchupz\vendor\symfony\maker-bundle/translations</argument>
             <argument>C:/Users/Ismail/Desktop/matchupz/vendor/knplabs/knp-snappy-bundle/src/translations</argument>
+=======
+        <argument key="cache_dir">C:\Users\louay\Desktop\Projet\web\matchupz-web-match\var\cache\dev/translations</argument>
+        <argument key="debug">true</argument>
+        <argument key="resource_files" type="collection">
+          <argument key="af" type="collection">
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\validator/Resources/translations\validators.af.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\form/Resources/translations\validators.af.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\security-core/Resources/translations\security.af.xlf</argument>
+          </argument>
+          <argument key="ar" type="collection">
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\validator/Resources/translations\validators.ar.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\form/Resources/translations\validators.ar.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\security-core/Resources/translations\security.ar.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.ar.xliff</argument>
+          </argument>
+          <argument key="az" type="collection">
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\validator/Resources/translations\validators.az.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\form/Resources/translations\validators.az.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\security-core/Resources/translations\security.az.xlf</argument>
+          </argument>
+          <argument key="be" type="collection">
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\validator/Resources/translations\validators.be.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\form/Resources/translations\validators.be.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\security-core/Resources/translations\security.be.xlf</argument>
+          </argument>
+          <argument key="bg" type="collection">
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\validator/Resources/translations\validators.bg.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\form/Resources/translations\validators.bg.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\security-core/Resources/translations\security.bg.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.bg.xliff</argument>
+          </argument>
+          <argument key="bs" type="collection">
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\validator/Resources/translations\validators.bs.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\form/Resources/translations\validators.bs.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\security-core/Resources/translations\security.bs.xlf</argument>
+          </argument>
+          <argument key="ca" type="collection">
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\validator/Resources/translations\validators.ca.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\form/Resources/translations\validators.ca.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\security-core/Resources/translations\security.ca.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.ca.xliff</argument>
+          </argument>
+          <argument key="cs" type="collection">
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\validator/Resources/translations\validators.cs.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\form/Resources/translations\validators.cs.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\security-core/Resources/translations\security.cs.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.cs.xliff</argument>
+          </argument>
+          <argument key="cy" type="collection">
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\validator/Resources/translations\validators.cy.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\form/Resources/translations\validators.cy.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\security-core/Resources/translations\security.cy.xlf</argument>
+          </argument>
+          <argument key="da" type="collection">
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\validator/Resources/translations\validators.da.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\form/Resources/translations\validators.da.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\security-core/Resources/translations\security.da.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.da.xliff</argument>
+          </argument>
+          <argument key="de" type="collection">
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\validator/Resources/translations\validators.de.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\form/Resources/translations\validators.de.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\security-core/Resources/translations\security.de.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.de.xliff</argument>
+          </argument>
+          <argument key="el" type="collection">
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\validator/Resources/translations\validators.el.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\form/Resources/translations\validators.el.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\security-core/Resources/translations\security.el.xlf</argument>
+          </argument>
+          <argument key="en" type="collection">
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\validator/Resources/translations\validators.en.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\form/Resources/translations\validators.en.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\security-core/Resources/translations\security.en.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.en.xliff</argument>
+          </argument>
+          <argument key="es" type="collection">
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\validator/Resources/translations\validators.es.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\form/Resources/translations\validators.es.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\security-core/Resources/translations\security.es.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.es.xliff</argument>
+          </argument>
+          <argument key="et" type="collection">
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\validator/Resources/translations\validators.et.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\form/Resources/translations\validators.et.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\security-core/Resources/translations\security.et.xlf</argument>
+          </argument>
+          <argument key="eu" type="collection">
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\validator/Resources/translations\validators.eu.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\form/Resources/translations\validators.eu.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\security-core/Resources/translations\security.eu.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.eu.xliff</argument>
+          </argument>
+          <argument key="fa" type="collection">
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\validator/Resources/translations\validators.fa.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\form/Resources/translations\validators.fa.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\security-core/Resources/translations\security.fa.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.fa.xliff</argument>
+          </argument>
+          <argument key="fi" type="collection">
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\validator/Resources/translations\validators.fi.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\form/Resources/translations\validators.fi.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\security-core/Resources/translations\security.fi.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.fi.xliff</argument>
+          </argument>
+          <argument key="fr" type="collection">
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\validator/Resources/translations\validators.fr.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\form/Resources/translations\validators.fr.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\security-core/Resources/translations\security.fr.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.fr.xliff</argument>
+          </argument>
+          <argument key="gl" type="collection">
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\validator/Resources/translations\validators.gl.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\form/Resources/translations\validators.gl.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\security-core/Resources/translations\security.gl.xlf</argument>
+          </argument>
+          <argument key="he" type="collection">
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\validator/Resources/translations\validators.he.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\form/Resources/translations\validators.he.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\security-core/Resources/translations\security.he.xlf</argument>
+          </argument>
+          <argument key="hr" type="collection">
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\validator/Resources/translations\validators.hr.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\form/Resources/translations\validators.hr.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\security-core/Resources/translations\security.hr.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.hr.xliff</argument>
+          </argument>
+          <argument key="hu" type="collection">
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\validator/Resources/translations\validators.hu.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\form/Resources/translations\validators.hu.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\security-core/Resources/translations\security.hu.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.hu.xliff</argument>
+          </argument>
+          <argument key="hy" type="collection">
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\validator/Resources/translations\validators.hy.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\form/Resources/translations\validators.hy.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\security-core/Resources/translations\security.hy.xlf</argument>
+          </argument>
+          <argument key="id" type="collection">
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\validator/Resources/translations\validators.id.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\form/Resources/translations\validators.id.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\security-core/Resources/translations\security.id.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.id.xliff</argument>
+          </argument>
+          <argument key="it" type="collection">
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\validator/Resources/translations\validators.it.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\form/Resources/translations\validators.it.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\security-core/Resources/translations\security.it.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.it.xliff</argument>
+          </argument>
+          <argument key="ja" type="collection">
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\validator/Resources/translations\validators.ja.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\form/Resources/translations\validators.ja.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\security-core/Resources/translations\security.ja.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.ja.xliff</argument>
+          </argument>
+          <argument key="lb" type="collection">
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\validator/Resources/translations\validators.lb.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\form/Resources/translations\validators.lb.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\security-core/Resources/translations\security.lb.xlf</argument>
+          </argument>
+          <argument key="lt" type="collection">
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\validator/Resources/translations\validators.lt.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\form/Resources/translations\validators.lt.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\security-core/Resources/translations\security.lt.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.lt.xliff</argument>
+          </argument>
+          <argument key="lv" type="collection">
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\validator/Resources/translations\validators.lv.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\form/Resources/translations\validators.lv.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\security-core/Resources/translations\security.lv.xlf</argument>
+          </argument>
+          <argument key="mk" type="collection">
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\validator/Resources/translations\validators.mk.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\form/Resources/translations\validators.mk.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\security-core/Resources/translations\security.mk.xlf</argument>
+          </argument>
+          <argument key="mn" type="collection">
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\validator/Resources/translations\validators.mn.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\form/Resources/translations\validators.mn.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\security-core/Resources/translations\security.mn.xlf</argument>
+          </argument>
+          <argument key="my" type="collection">
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\validator/Resources/translations\validators.my.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\form/Resources/translations\validators.my.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\security-core/Resources/translations\security.my.xlf</argument>
+          </argument>
+          <argument key="nb" type="collection">
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\validator/Resources/translations\validators.nb.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\form/Resources/translations\validators.nb.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\security-core/Resources/translations\security.nb.xlf</argument>
+          </argument>
+          <argument key="nl" type="collection">
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\validator/Resources/translations\validators.nl.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\form/Resources/translations\validators.nl.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\security-core/Resources/translations\security.nl.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.nl.xliff</argument>
+          </argument>
+          <argument key="nn" type="collection">
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\validator/Resources/translations\validators.nn.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\form/Resources/translations\validators.nn.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\security-core/Resources/translations\security.nn.xlf</argument>
+          </argument>
+          <argument key="no" type="collection">
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\validator/Resources/translations\validators.no.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\form/Resources/translations\validators.no.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\security-core/Resources/translations\security.no.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.no.xliff</argument>
+          </argument>
+          <argument key="pl" type="collection">
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\validator/Resources/translations\validators.pl.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\form/Resources/translations\validators.pl.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\security-core/Resources/translations\security.pl.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.pl.xliff</argument>
+          </argument>
+          <argument key="pt" type="collection">
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\validator/Resources/translations\validators.pt.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\form/Resources/translations\validators.pt.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\security-core/Resources/translations\security.pt.xlf</argument>
+          </argument>
+          <argument key="pt_BR" type="collection">
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\validator/Resources/translations\validators.pt_BR.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\form/Resources/translations\validators.pt_BR.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\security-core/Resources/translations\security.pt_BR.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.pt_BR.xliff</argument>
+          </argument>
+          <argument key="ro" type="collection">
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\validator/Resources/translations\validators.ro.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\form/Resources/translations\validators.ro.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\security-core/Resources/translations\security.ro.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.ro.xliff</argument>
+          </argument>
+          <argument key="ru" type="collection">
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\validator/Resources/translations\validators.ru.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\form/Resources/translations\validators.ru.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\security-core/Resources/translations\security.ru.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.ru.xliff</argument>
+          </argument>
+          <argument key="sk" type="collection">
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\validator/Resources/translations\validators.sk.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\form/Resources/translations\validators.sk.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\security-core/Resources/translations\security.sk.xlf</argument>
+          </argument>
+          <argument key="sl" type="collection">
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\validator/Resources/translations\validators.sl.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\form/Resources/translations\validators.sl.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\security-core/Resources/translations\security.sl.xlf</argument>
+          </argument>
+          <argument key="sq" type="collection">
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\validator/Resources/translations\validators.sq.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\form/Resources/translations\validators.sq.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\security-core/Resources/translations\security.sq.xlf</argument>
+          </argument>
+          <argument key="sr_Cyrl" type="collection">
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\validator/Resources/translations\validators.sr_Cyrl.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\form/Resources/translations\validators.sr_Cyrl.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\security-core/Resources/translations\security.sr_Cyrl.xlf</argument>
+          </argument>
+          <argument key="sr_Latn" type="collection">
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\validator/Resources/translations\validators.sr_Latn.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\form/Resources/translations\validators.sr_Latn.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\security-core/Resources/translations\security.sr_Latn.xlf</argument>
+          </argument>
+          <argument key="sv" type="collection">
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\validator/Resources/translations\validators.sv.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\form/Resources/translations\validators.sv.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\security-core/Resources/translations\security.sv.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.sv.xliff</argument>
+          </argument>
+          <argument key="th" type="collection">
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\validator/Resources/translations\validators.th.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\form/Resources/translations\validators.th.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\security-core/Resources/translations\security.th.xlf</argument>
+          </argument>
+          <argument key="tl" type="collection">
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\validator/Resources/translations\validators.tl.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\form/Resources/translations\validators.tl.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\security-core/Resources/translations\security.tl.xlf</argument>
+          </argument>
+          <argument key="tr" type="collection">
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\validator/Resources/translations\validators.tr.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\form/Resources/translations\validators.tr.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\security-core/Resources/translations\security.tr.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.tr.xliff</argument>
+          </argument>
+          <argument key="uk" type="collection">
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\validator/Resources/translations\validators.uk.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\form/Resources/translations\validators.uk.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\security-core/Resources/translations\security.uk.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.uk.xliff</argument>
+          </argument>
+          <argument key="ur" type="collection">
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\validator/Resources/translations\validators.ur.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\form/Resources/translations\validators.ur.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\security-core/Resources/translations\security.ur.xlf</argument>
+          </argument>
+          <argument key="uz" type="collection">
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\validator/Resources/translations\validators.uz.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\form/Resources/translations\validators.uz.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\security-core/Resources/translations\security.uz.xlf</argument>
+          </argument>
+          <argument key="vi" type="collection">
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\validator/Resources/translations\validators.vi.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\form/Resources/translations\validators.vi.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\security-core/Resources/translations\security.vi.xlf</argument>
+          </argument>
+          <argument key="zh_CN" type="collection">
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\validator/Resources/translations\validators.zh_CN.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\form/Resources/translations\validators.zh_CN.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\security-core/Resources/translations\security.zh_CN.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.zh_CN.xliff</argument>
+          </argument>
+          <argument key="zh_TW" type="collection">
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\validator/Resources/translations\validators.zh_TW.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\form/Resources/translations\validators.zh_TW.xlf</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\security-core/Resources/translations\security.zh_TW.xlf</argument>
+          </argument>
+          <argument key="ky" type="collection">
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.ky.xliff</argument>
+          </argument>
+          <argument key="sw" type="collection">
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.sw.xliff</argument>
+          </argument>
+        </argument>
+        <argument key="scanned_directories" type="collection">
+          <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\validator/Resources/translations</argument>
+          <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\form/Resources/translations</argument>
+          <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\security-core/Resources/translations</argument>
+          <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\knplabs\knp-paginator-bundle/translations</argument>
+          <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match/translations</argument>
+          <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\framework-bundle/translations</argument>
+          <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\doctrine\doctrine-bundle/translations</argument>
+          <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\doctrine\doctrine-migrations-bundle/translations</argument>
+          <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\debug-bundle/translations</argument>
+          <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\twig-bundle/translations</argument>
+          <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\web-profiler-bundle/translations</argument>
+          <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\stimulus-bundle/translations</argument>
+          <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\ux-turbo/translations</argument>
+          <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\twig\extra-bundle/translations</argument>
+          <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\security-bundle/translations</argument>
+          <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\monolog-bundle/translations</argument>
+          <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\maker-bundle/translations</argument>
+          <argument>C:/Users/louay/Desktop/Projet/web/matchupz-web-match/vendor/knplabs/knp-snappy-bundle/src/translations</argument>
+        </argument>
+        <argument key="cache_vary" type="collection">
+          <argument key="scanned_directories" type="collection">
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\validator/Resources/translations</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\form/Resources/translations</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\security-core/Resources/translations</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\knplabs\knp-paginator-bundle/translations</argument>
+            <argument>translations</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\framework-bundle/translations</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\doctrine\doctrine-bundle/translations</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\doctrine\doctrine-migrations-bundle/translations</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\debug-bundle/translations</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\twig-bundle/translations</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\web-profiler-bundle/translations</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\stimulus-bundle/translations</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\ux-turbo/translations</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\twig\extra-bundle/translations</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\security-bundle/translations</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\monolog-bundle/translations</argument>
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\maker-bundle/translations</argument>
+            <argument>C:/Users/louay/Desktop/Projet/web/matchupz-web-match/vendor/knplabs/knp-snappy-bundle/src/translations</argument>
+>>>>>>> match
           </argument>
         </argument>
       </argument>
@@ -2740,6 +3395,10 @@
     <service id="translation.extractor.visitor.constraint" class="Symfony\Component\Translation\Extractor\Visitor\ConstraintVisitor">
       <tag name="translation.extractor.visitor"/>
       <argument type="collection">
+<<<<<<< HEAD
+=======
+        <argument>NoScheduleOverlap</argument>
+>>>>>>> match
         <argument>All</argument>
         <argument>AtLeastOneOf</argument>
         <argument>Bic</argument>
@@ -2965,7 +3624,11 @@
     <service id="debug.file_link_formatter" class="Symfony\Component\ErrorHandler\ErrorRenderer\FileLinkFormatter">
       <argument>%env(default::SYMFONY_IDE)%</argument>
       <argument type="service" id="request_stack" on-invalid="ignore"/>
+<<<<<<< HEAD
       <argument>C:\Users\Ismail\Desktop\matchupz</argument>
+=======
+      <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match</argument>
+>>>>>>> match
       <argument type="service_closure" id="debug.file_link_formatter.url_format"/>
     </service>
     <service id="debug.stopwatch" class="Symfony\Component\Stopwatch\Stopwatch" public="true">
@@ -3612,7 +4275,11 @@
     </service>
     <service id="argument_resolver.not_tagged_controller" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
       <tag name="controller.argument_value_resolver" priority="-200"/>
+<<<<<<< HEAD
       <argument type="service" id=".service_locator.QxYyjev"/>
+=======
+      <argument type="service" id=".service_locator.LiIqH_L"/>
+>>>>>>> match
     </service>
     <service id="debug.log_processor" class="Symfony\Bridge\Monolog\Processor\DebugProcessor">
       <tag name="kernel.reset" method="reset"/>
@@ -3715,7 +4382,11 @@
       <argument type="service" id=".service_locator.bN.V_Nq.router.default"/>
       <argument>kernel::loadRoutes</argument>
       <argument type="collection">
+<<<<<<< HEAD
         <argument key="cache_dir">C:\Users\Ismail\Desktop\matchupz\var\cache\dev</argument>
+=======
+        <argument key="cache_dir">C:\Users\louay\Desktop\Projet\web\matchupz-web-match\var\cache\dev</argument>
+>>>>>>> match
         <argument key="debug">true</argument>
         <argument key="generator_class">Symfony\Component\Routing\Generator\CompiledUrlGenerator</argument>
         <argument key="generator_dumper_class">Symfony\Component\Routing\Generator\Dumper\CompiledUrlGeneratorDumper</argument>
@@ -3764,7 +4435,11 @@
       <argument type="service" id="request_stack"/>
       <argument type="service" id="router.request_context" on-invalid="ignore"/>
       <argument type="service" id="monolog.logger.request" on-invalid="ignore"/>
+<<<<<<< HEAD
       <argument>C:\Users\Ismail\Desktop\matchupz</argument>
+=======
+      <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match</argument>
+>>>>>>> match
       <argument>true</argument>
     </service>
     <service id="Symfony\Bundle\FrameworkBundle\Controller\RedirectController" class="Symfony\Bundle\FrameworkBundle\Controller\RedirectController" public="true">
@@ -3792,7 +4467,11 @@
     </service>
     <service id="secrets.vault" class="Symfony\Bundle\FrameworkBundle\Secrets\SodiumVault">
       <tag name="container.env_var_loader"/>
+<<<<<<< HEAD
       <argument>C:\Users\Ismail\Desktop\matchupz/config/secrets/%env(default:kernel.environment:APP_RUNTIME_ENV)%</argument>
+=======
+      <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match/config/secrets/%env(default:kernel.environment:APP_RUNTIME_ENV)%</argument>
+>>>>>>> match
       <argument type="service" id="secrets.decryption_key" on-invalid="ignore"/>
     </service>
     <service id="secrets.decryption_key" class="Symfony\Component\String\LazyString" constructor="fromCallable">
@@ -3800,7 +4479,11 @@
       <argument>base64:default::SYMFONY_DECRYPTION_SECRET</argument>
     </service>
     <service id="secrets.local_vault" class="Symfony\Bundle\FrameworkBundle\Secrets\DotenvVault">
+<<<<<<< HEAD
       <argument>C:\Users\Ismail\Desktop\matchupz/.env.dev.local</argument>
+=======
+      <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match/.env.dev.local</argument>
+>>>>>>> match
     </service>
     <service id="serializer.mapping.class_discriminator_resolver" class="Symfony\Component\Serializer\Mapping\ClassDiscriminatorFromClassMetadata">
       <argument type="service" id="serializer.mapping.class_metadata_factory"/>
@@ -3894,10 +4577,17 @@
           </service>
         </argument>
       </argument>
+<<<<<<< HEAD
       <argument>C:\Users\Ismail\Desktop\matchupz\var\cache\dev/serialization.php</argument>
     </service>
     <service id="serializer.mapping.cache.symfony" class="Psr\Cache\CacheItemPoolInterface">
       <argument>C:\Users\Ismail\Desktop\matchupz\var\cache\dev/serialization.php</argument>
+=======
+      <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\var\cache\dev/serialization.php</argument>
+    </service>
+    <service id="serializer.mapping.cache.symfony" class="Psr\Cache\CacheItemPoolInterface">
+      <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\var\cache\dev/serialization.php</argument>
+>>>>>>> match
       <argument type="service" id="cache.serializer"/>
       <factory class="Symfony\Component\Cache\Adapter\PhpArrayAdapter" method="create"/>
     </service>
@@ -4033,7 +4723,11 @@
       <argument>true</argument>
     </service>
     <service id="session.storage.factory.mock_file" class="Symfony\Component\HttpFoundation\Session\Storage\MockFileSessionStorageFactory">
+<<<<<<< HEAD
       <argument>C:\Users\Ismail\Desktop\matchupz\var\cache\dev/sessions</argument>
+=======
+      <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\var\cache\dev/sessions</argument>
+>>>>>>> match
       <argument>MOCKSESSID</argument>
       <argument type="service">
         <service class="Symfony\Component\HttpFoundation\Session\Storage\MetadataBag">
@@ -4101,7 +4795,11 @@
       <argument type="service" id="form.registry"/>
     </service>
     <service id="form.extension" class="Symfony\Component\Form\Extension\DependencyInjection\DependencyInjectionExtension">
+<<<<<<< HEAD
       <argument type="service" id=".service_locator.A.dra_W"/>
+=======
+      <argument type="service" id=".service_locator.kfw7JpG"/>
+>>>>>>> match
       <argument type="collection">
         <argument key="Symfony\Component\Form\Extension\Core\Type\FormType" type="iterator">
           <argument type="service" id="form.type_extension.form.transformation_failure_handling"/>
@@ -4213,7 +4911,11 @@
       </call>
       <call method="addXmlMappings">
         <argument type="collection">
+<<<<<<< HEAD
           <argument>C:\Users\Ismail\Desktop\matchupz\vendor\symfony\form/Resources/config/validation.xml</argument>
+=======
+          <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\form/Resources/config/validation.xml</argument>
+>>>>>>> match
         </argument>
       </call>
       <call method="enableAttributeMapping">
@@ -4238,6 +4940,7 @@
     <service id="validator.mapping.cache_warmer" class="Symfony\Bundle\FrameworkBundle\CacheWarmer\ValidatorCacheWarmer">
       <tag name="kernel.cache_warmer"/>
       <argument type="service" id="validator.builder"/>
+<<<<<<< HEAD
       <argument>C:\Users\Ismail\Desktop\matchupz\var\cache\dev/validation.php</argument>
     </service>
     <service id="validator.mapping.cache.adapter" class="Symfony\Component\Cache\Adapter\PhpArrayAdapter" constructor="create">
@@ -4246,6 +4949,16 @@
     </service>
     <service id="validator.validator_factory" class="Symfony\Component\Validator\ContainerConstraintValidatorFactory">
       <argument type="service" id=".service_locator.F9PKc.7"/>
+=======
+      <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\var\cache\dev/validation.php</argument>
+    </service>
+    <service id="validator.mapping.cache.adapter" class="Symfony\Component\Cache\Adapter\PhpArrayAdapter" constructor="create">
+      <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\var\cache\dev/validation.php</argument>
+      <argument type="service" id="cache.validator"/>
+    </service>
+    <service id="validator.validator_factory" class="Symfony\Component\Validator\ContainerConstraintValidatorFactory">
+      <argument type="service" id=".service_locator.Ao2HMjr"/>
+>>>>>>> match
     </service>
     <service id="Symfony\Component\Validator\Constraints\ExpressionLanguageSyntaxValidator" class="Symfony\Component\Validator\Constraints\ExpressionLanguageSyntaxValidator" abstract="true">
       <tag name="container.excluded" source="in &quot;config/validator.php&quot;"/>
@@ -4901,7 +5614,11 @@
       </call>
     </service>
     <service id="profiler.storage" class="Symfony\Component\HttpKernel\Profiler\FileProfilerStorage">
+<<<<<<< HEAD
       <argument>file:C:\Users\Ismail\Desktop\matchupz\var\cache\dev/profiler</argument>
+=======
+      <argument>file:C:\Users\louay\Desktop\Projet\web\matchupz-web-match\var\cache\dev/profiler</argument>
+>>>>>>> match
     </service>
     <service id="profiler_listener" class="Symfony\Component\HttpKernel\EventListener\ProfilerListener">
       <tag name="kernel.event_subscriber"/>
@@ -4966,7 +5683,11 @@
       <tag name="monolog.logger" channel="profiler"/>
       <tag name="data_collector" template="@WebProfiler/Collector/logger.html.twig" id="logger" priority="300"/>
       <argument type="service" id="monolog.logger.profiler" on-invalid="ignore"/>
+<<<<<<< HEAD
       <argument>C:\Users\Ismail\Desktop\matchupz\var\cache\dev/App_KernelDevDebugContainer</argument>
+=======
+      <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\var\cache\dev/App_KernelDevDebugContainer</argument>
+>>>>>>> match
       <argument type="service" id=".virtual_request_stack" on-invalid="ignore"/>
     </service>
     <service id="data_collector.time" class="Symfony\Component\HttpKernel\DataCollector\TimeDataCollector">
@@ -5345,7 +6066,11 @@
       <tag name="doctrine.event_listener" event="onSchemaCreateTable"/>
       <argument type="tagged_iterator" tag="messenger.receiver"/>
     </service>
+<<<<<<< HEAD
     <service id=".1_ServiceLocator~PWqIq5v" class="Symfony\Component\DependencyInjection\ServiceLocator">
+=======
+    <service id=".1_ServiceLocator~MXhrXvo" class="Symfony\Component\DependencyInjection\ServiceLocator">
+>>>>>>> match
       <argument type="collection"/>
     </service>
     <service id="doctrine.orm.proxy_cache_warmer" class="Symfony\Bridge\Doctrine\CacheWarmer\ProxyCacheWarmer">
@@ -5540,7 +6265,11 @@
         <argument type="service" id=".doctrine.orm.default_metadata_driver"/>
       </call>
       <call method="setProxyDir">
+<<<<<<< HEAD
         <argument>C:\Users\Ismail\Desktop\matchupz\var\cache\dev/doctrine/orm/Proxies</argument>
+=======
+        <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\var\cache\dev/doctrine/orm/Proxies</argument>
+>>>>>>> match
       </call>
       <call method="setProxyNamespace">
         <argument>Proxies</argument>
@@ -5581,7 +6310,11 @@
     </service>
     <service id="doctrine.orm.default_attribute_metadata_driver" class="Doctrine\ORM\Mapping\Driver\AttributeDriver">
       <argument type="collection">
+<<<<<<< HEAD
         <argument>C:\Users\Ismail\Desktop\matchupz\src\Entity</argument>
+=======
+        <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\src\Entity</argument>
+>>>>>>> match
       </argument>
       <argument>true</argument>
     </service>
@@ -5645,7 +6378,11 @@
     <service id="doctrine.migrations.configuration" class="Doctrine\Migrations\Configuration\Configuration">
       <call method="addMigrationsDirectory">
         <argument>DoctrineMigrations</argument>
+<<<<<<< HEAD
         <argument>C:\Users\Ismail\Desktop\matchupz/migrations</argument>
+=======
+        <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match/migrations</argument>
+>>>>>>> match
       </call>
       <call method="setAllOrNothing">
         <argument>false</argument>
@@ -5871,7 +6608,11 @@
         <argument key="source" type="service">
           <service class="Symfony\Component\VarDumper\Dumper\ContextProvider\SourceContextProvider">
             <argument>UTF-8</argument>
+<<<<<<< HEAD
             <argument>C:\Users\Ismail\Desktop\matchupz</argument>
+=======
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match</argument>
+>>>>>>> match
             <argument type="service" id="debug.file_link_formatter" on-invalid="null"/>
           </service>
         </argument>
@@ -5893,7 +6634,11 @@
         <argument key="source" type="service">
           <service class="Symfony\Component\VarDumper\Dumper\ContextProvider\SourceContextProvider">
             <argument>UTF-8</argument>
+<<<<<<< HEAD
             <argument>C:\Users\Ismail\Desktop\matchupz</argument>
+=======
+            <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match</argument>
+>>>>>>> match
             <argument type="service" id="debug.file_link_formatter" on-invalid="null"/>
           </service>
         </argument>
@@ -5958,7 +6703,11 @@
       <argument type="service" id="twig.loader.native_filesystem"/>
       <argument type="collection">
         <argument key="autoescape">name</argument>
+<<<<<<< HEAD
         <argument key="cache">C:\Users\Ismail\Desktop\matchupz\var\cache\dev/twig</argument>
+=======
+        <argument key="cache">C:\Users\louay\Desktop\Projet\web\matchupz-web-match\var\cache\dev/twig</argument>
+>>>>>>> match
         <argument key="charset">UTF-8</argument>
         <argument key="debug">true</argument>
         <argument key="strict_variables">true</argument>
@@ -6018,9 +6767,12 @@
         <argument type="service" id="twig.extension.security"/>
       </call>
       <call method="addExtension">
+<<<<<<< HEAD
         <argument type="service" id="App\Twig\AppExtension"/>
       </call>
       <call method="addExtension">
+=======
+>>>>>>> match
         <argument type="service" id="doctrine.twig.doctrine_extension"/>
       </call>
       <call method="addExtension">
@@ -6088,10 +6840,17 @@
     <service id="twig.template_iterator" class="Symfony\Bundle\TwigBundle\TemplateIterator">
       <argument type="service" id="kernel"/>
       <argument type="collection">
+<<<<<<< HEAD
         <argument key="C:\Users\Ismail\Desktop\matchupz\vendor\symfony\twig-bridge/Resources/views/Email">email</argument>
         <argument key="C:\Users\Ismail\Desktop\matchupz\vendor\symfony\twig-bridge/Resources/views/Form">null</argument>
       </argument>
       <argument>C:\Users\Ismail\Desktop\matchupz/templates</argument>
+=======
+        <argument key="C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\twig-bridge/Resources/views/Email">email</argument>
+        <argument key="C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\twig-bridge/Resources/views/Form">null</argument>
+      </argument>
+      <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match/templates</argument>
+>>>>>>> match
       <argument type="collection">
         <argument>*.twig</argument>
       </argument>
@@ -6105,6 +6864,7 @@
     <service id="twig.loader.native_filesystem" class="Twig\Loader\FilesystemLoader">
       <tag name="twig.loader"/>
       <argument type="collection"/>
+<<<<<<< HEAD
       <argument>C:\Users\Ismail\Desktop\matchupz</argument>
       <call method="addPath">
         <argument>C:\Users\Ismail\Desktop\matchupz\vendor\doctrine\doctrine-bundle/templates</argument>
@@ -6183,6 +6943,86 @@
       </call>
       <call method="addPath">
         <argument>C:\Users\Ismail\Desktop\matchupz\vendor\symfony\twig-bridge/Resources/views/Form</argument>
+=======
+      <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match</argument>
+      <call method="addPath">
+        <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\doctrine\doctrine-bundle/templates</argument>
+        <argument>Doctrine</argument>
+      </call>
+      <call method="addPath">
+        <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\doctrine\doctrine-bundle/templates</argument>
+        <argument>!Doctrine</argument>
+      </call>
+      <call method="addPath">
+        <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\doctrine\doctrine-migrations-bundle/templates</argument>
+        <argument>DoctrineMigrations</argument>
+      </call>
+      <call method="addPath">
+        <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\doctrine\doctrine-migrations-bundle/templates</argument>
+        <argument>!DoctrineMigrations</argument>
+      </call>
+      <call method="addPath">
+        <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\debug-bundle/Resources/views</argument>
+        <argument>Debug</argument>
+      </call>
+      <call method="addPath">
+        <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\debug-bundle/Resources/views</argument>
+        <argument>!Debug</argument>
+      </call>
+      <call method="addPath">
+        <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\web-profiler-bundle/Resources/views</argument>
+        <argument>WebProfiler</argument>
+      </call>
+      <call method="addPath">
+        <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\web-profiler-bundle/Resources/views</argument>
+        <argument>!WebProfiler</argument>
+      </call>
+      <call method="addPath">
+        <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\ux-turbo/templates</argument>
+        <argument>Turbo</argument>
+      </call>
+      <call method="addPath">
+        <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\ux-turbo/templates</argument>
+        <argument>!Turbo</argument>
+      </call>
+      <call method="addPath">
+        <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\security-bundle/Resources/views</argument>
+        <argument>Security</argument>
+      </call>
+      <call method="addPath">
+        <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\security-bundle/Resources/views</argument>
+        <argument>!Security</argument>
+      </call>
+      <call method="addPath">
+        <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\maker-bundle/templates</argument>
+        <argument>Maker</argument>
+      </call>
+      <call method="addPath">
+        <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\maker-bundle/templates</argument>
+        <argument>!Maker</argument>
+      </call>
+      <call method="addPath">
+        <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\knplabs\knp-paginator-bundle/templates</argument>
+        <argument>KnpPaginator</argument>
+      </call>
+      <call method="addPath">
+        <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\knplabs\knp-paginator-bundle/templates</argument>
+        <argument>!KnpPaginator</argument>
+      </call>
+      <call method="addPath">
+        <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match/templates</argument>
+      </call>
+      <call method="addPath">
+        <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\twig-bridge/Resources/views/Email</argument>
+        <argument>email</argument>
+      </call>
+      <call method="addPath">
+        <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\twig-bridge/Resources/views/Email</argument>
+        <argument>!email</argument>
+      </call>
+      <call method="addPath">
+        <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\vendor\symfony\twig-bridge/Resources/views/Form</argument>
+>>>>>>> match
       </call>
     </service>
     <service id="twig.loader.chain" class="Twig\Loader\ChainLoader"/>
@@ -6208,7 +7048,11 @@
     <service id="twig.extension.code" class="Symfony\Bridge\Twig\Extension\CodeExtension">
       <tag name="twig.extension"/>
       <argument type="service" id="debug.file_link_formatter" on-invalid="ignore"/>
+<<<<<<< HEAD
       <argument>C:\Users\Ismail\Desktop\matchupz</argument>
+=======
+      <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match</argument>
+>>>>>>> match
       <argument>UTF-8</argument>
     </service>
     <service id="twig.extension.routing" class="Symfony\Bridge\Twig\Extension\RoutingExtension">
@@ -6301,9 +7145,15 @@
       <tag name="console.command"/>
       <tag name="container.no_preload"/>
       <argument type="service" id="twig"/>
+<<<<<<< HEAD
       <argument>C:\Users\Ismail\Desktop\matchupz</argument>
       <argument>%kernel.bundles_metadata%</argument>
       <argument>C:\Users\Ismail\Desktop\matchupz/templates</argument>
+=======
+      <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match</argument>
+      <argument>%kernel.bundles_metadata%</argument>
+      <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match/templates</argument>
+>>>>>>> match
       <argument type="service" id="debug.file_link_formatter" on-invalid="null"/>
       <call method="setName">
         <argument>debug:twig</argument>
@@ -6348,7 +7198,11 @@
       <argument type="service" id="twig"/>
       <argument>%data_collector.templates%</argument>
       <argument type="service" id="web_profiler.csp.handler"/>
+<<<<<<< HEAD
       <argument>C:\Users\Ismail\Desktop\matchupz</argument>
+=======
+      <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match</argument>
+>>>>>>> match
     </service>
     <service id="web_profiler.controller.router" class="Symfony\Bundle\WebProfilerBundle\Controller\RouterController" public="true">
       <argument type="service" id="profiler" on-invalid="null"/>
@@ -6407,7 +7261,11 @@
       <argument type="service" id="stimulus.helper"/>
     </service>
     <service id="stimulus.asset_mapper.ux_package_reader" class="Symfony\UX\StimulusBundle\Ux\UxPackageReader">
+<<<<<<< HEAD
       <argument>C:\Users\Ismail\Desktop\matchupz</argument>
+=======
+      <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match</argument>
+>>>>>>> match
     </service>
     <service id="stimulus.ux_controllers_twig_extension" class="Symfony\UX\StimulusBundle\Twig\UxControllersTwigExtension">
       <tag name="twig.extension"/>
@@ -6417,15 +7275,25 @@
       <argument type="service" id="stimulus.asset_mapper.controllers_map_generator"/>
       <argument type="service" id="asset_mapper"/>
       <argument type="service" id="stimulus.asset_mapper.ux_package_reader"/>
+<<<<<<< HEAD
       <argument>C:\Users\Ismail\Desktop\matchupz</argument>
+=======
+      <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match</argument>
+>>>>>>> match
     </service>
     <service id="stimulus.asset_mapper.controllers_map_generator" class="Symfony\UX\StimulusBundle\AssetMapper\ControllersMapGenerator">
       <argument type="service" id="asset_mapper"/>
       <argument type="service" id="stimulus.asset_mapper.ux_package_reader"/>
       <argument type="collection">
+<<<<<<< HEAD
         <argument>C:\Users\Ismail\Desktop\matchupz/assets/controllers</argument>
       </argument>
       <argument>C:\Users\Ismail\Desktop\matchupz/assets/controllers.json</argument>
+=======
+        <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match/assets/controllers</argument>
+      </argument>
+      <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match/assets/controllers.json</argument>
+>>>>>>> match
       <argument type="service" id="stimulus.asset_mapper.auto_import_locator" on-invalid="null"/>
     </service>
     <service id="stimulus.asset_mapper.auto_import_locator" class="Symfony\UX\StimulusBundle\AssetMapper\AutoImportLocator">
@@ -7145,7 +8013,11 @@
     <service id="monolog.processor.psr_log_message" class="Monolog\Processor\PsrLogMessageProcessor"/>
     <service id="monolog.handler.main" class="Monolog\Handler\StreamHandler">
       <tag name="kernel.reset" method="reset"/>
+<<<<<<< HEAD
       <argument>C:\Users\Ismail\Desktop\matchupz\var\log/dev.log</argument>
+=======
+      <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\var\log/dev.log</argument>
+>>>>>>> match
       <argument>debug</argument>
       <argument>true</argument>
       <argument>null</argument>
@@ -7167,8 +8039,13 @@
       <argument type="service" id="filesystem"/>
       <argument type="service" id="maker.autoloader_util"/>
       <argument type="service" id="maker.file_link_formatter"/>
+<<<<<<< HEAD
       <argument>C:\Users\Ismail\Desktop\matchupz</argument>
       <argument>C:\Users\Ismail\Desktop\matchupz/templates</argument>
+=======
+      <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match</argument>
+      <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match/templates</argument>
+>>>>>>> match
     </service>
     <service id="maker.autoloader_finder" class="Symfony\Bundle\MakerBundle\Util\ComposerAutoloaderFinder">
       <argument>App</argument>
@@ -7345,7 +8222,11 @@
     </service>
     <service id="maker.maker.make_migration" class="Symfony\Bundle\MakerBundle\Maker\MakeMigration">
       <tag name="maker.command"/>
+<<<<<<< HEAD
       <argument>C:\Users\Ismail\Desktop\matchupz</argument>
+=======
+      <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match</argument>
+>>>>>>> match
       <argument type="service" id="maker.file_link_formatter"/>
     </service>
     <service id="maker.maker.make_stimulus_controller" class="Symfony\Bundle\MakerBundle\Maker\MakeStimulusController">
@@ -7441,6 +8322,7 @@
       <argument>page</argument>
       <argument>false</argument>
     </service>
+<<<<<<< HEAD
     <service id="Knp\Snappy\Pdf" class="Knp\Snappy\Pdf" autowire="true" autoconfigure="true">
       <argument>%env(WKHTMLTOPDF_PATH)%</argument>
       <call method="setLogger">
@@ -7455,12 +8337,21 @@
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\ClubController" class="App\Controller\ClubController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\ClubController" class="App\Controller\ClubController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\ClubController" class="App\Controller\ClubController" autowire="true" autoconfigure="true" abstract="true"/>
+=======
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\ClubController" class="App\Controller\ClubController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\ClubController" class="App\Controller\ClubController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\ClubController" class="App\Controller\ClubController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\DashboardController" class="App\Controller\DashboardController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\DashboardController" class="App\Controller\DashboardController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\DashboardController" class="App\Controller\DashboardController" autowire="true" autoconfigure="true" abstract="true"/>
+>>>>>>> match
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\EspacesportifController" class="App\Controller\EspacesportifController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\EspacesportifController" class="App\Controller\EspacesportifController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\EspacesportifController" class="App\Controller\EspacesportifController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\EvaluationPhysiqueController" class="App\Controller\EvaluationPhysiqueController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\EvaluationPhysiqueController" class="App\Controller\EvaluationPhysiqueController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\EvaluationPhysiqueController" class="App\Controller\EvaluationPhysiqueController" autowire="true" autoconfigure="true" abstract="true"/>
+<<<<<<< HEAD
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\HistoriqueClubController" class="App\Controller\HistoriqueClubController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\HistoriqueClubController" class="App\Controller\HistoriqueClubController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\HistoriqueClubController" class="App\Controller\HistoriqueClubController" autowire="true" autoconfigure="true" abstract="true"/>
@@ -7470,17 +8361,40 @@
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\JoueurController" class="App\Controller\JoueurController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\JoueurController" class="App\Controller\JoueurController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\JoueurController" class="App\Controller\JoueurController" autowire="true" autoconfigure="true" abstract="true"/>
+=======
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\FitnessController" class="App\Controller\FitnessController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\FitnessController" class="App\Controller\FitnessController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\FitnessController" class="App\Controller\FitnessController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\HistoriqueClubController" class="App\Controller\HistoriqueClubController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\HistoriqueClubController" class="App\Controller\HistoriqueClubController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\HistoriqueClubController" class="App\Controller\HistoriqueClubController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\JoueurController" class="App\Controller\JoueurController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\JoueurController" class="App\Controller\JoueurController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\JoueurController" class="App\Controller\JoueurController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\MatchController" class="App\Controller\MatchController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\MatchController" class="App\Controller\MatchController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\MatchController" class="App\Controller\MatchController" autowire="true" autoconfigure="true" abstract="true"/>
+>>>>>>> match
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\PerformanceJoueurController" class="App\Controller\PerformanceJoueurController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\PerformanceJoueurController" class="App\Controller\PerformanceJoueurController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\PerformanceJoueurController" class="App\Controller\PerformanceJoueurController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\ReservationController" class="App\Controller\ReservationController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\ReservationController" class="App\Controller\ReservationController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\ReservationController" class="App\Controller\ReservationController" autowire="true" autoconfigure="true" abstract="true"/>
+<<<<<<< HEAD
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\SportController" class="App\Controller\SportController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\SportController" class="App\Controller\SportController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\SportController" class="App\Controller\SportController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\AbonnementType" class="App\Form\AbonnementType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\AbonnementType" class="App\Form\AbonnementType" autowire="true" autoconfigure="true" abstract="true"/>
+=======
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\ScheduleController" class="App\Controller\ScheduleController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\ScheduleController" class="App\Controller\ScheduleController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\ScheduleController" class="App\Controller\ScheduleController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\SportController" class="App\Controller\SportController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\SportController" class="App\Controller\SportController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\SportController" class="App\Controller\SportController" autowire="true" autoconfigure="true" abstract="true"/>
+>>>>>>> match
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\ClubType" class="App\Form\ClubType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\ClubType" class="App\Form\ClubType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\EspacesportifType" class="App\Form\EspacesportifType" autowire="true" abstract="true"/>
@@ -7491,10 +8405,20 @@
     <service id=".abstract.instanceof.App\Form\HistoriqueClubType" class="App\Form\HistoriqueClubType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\JoueurType" class="App\Form\JoueurType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\JoueurType" class="App\Form\JoueurType" autowire="true" autoconfigure="true" abstract="true"/>
+<<<<<<< HEAD
+=======
+    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\MatchType" class="App\Form\MatchType" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Form\MatchType" class="App\Form\MatchType" autowire="true" autoconfigure="true" abstract="true"/>
+>>>>>>> match
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\PerformanceJoueurType" class="App\Form\PerformanceJoueurType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\PerformanceJoueurType" class="App\Form\PerformanceJoueurType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\ReservationType" class="App\Form\ReservationType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\ReservationType" class="App\Form\ReservationType" autowire="true" autoconfigure="true" abstract="true"/>
+<<<<<<< HEAD
+=======
+    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\ScheduleType" class="App\Form\ScheduleType" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Form\ScheduleType" class="App\Form\ScheduleType" autowire="true" autoconfigure="true" abstract="true"/>
+>>>>>>> match
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\SportType" class="App\Form\SportType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\SportType" class="App\Form\SportType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\AbonnementRepository" class="App\Repository\AbonnementRepository" autowire="true" abstract="true"/>
@@ -7531,8 +8455,13 @@
     <service id=".abstract.instanceof.App\Repository\TransactionRepository" class="App\Repository\TransactionRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\UserRepository" class="App\Repository\UserRepository" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Repository\UserRepository" class="App\Repository\UserRepository" autowire="true" autoconfigure="true" abstract="true"/>
+<<<<<<< HEAD
     <service id=".instanceof.Psr\Log\LoggerAwareInterface.0.Knp\Snappy\Pdf" class="Knp\Snappy\Pdf" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.Knp\Snappy\Pdf" class="Knp\Snappy\Pdf" autowire="true" autoconfigure="true" abstract="true"/>
+=======
+    <service id=".instanceof.Symfony\Component\Validator\ConstraintValidatorInterface.0.App\Validator\NoScheduleOverlapValidator" class="App\Validator\NoScheduleOverlapValidator" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Validator\NoScheduleOverlapValidator" class="App\Validator\NoScheduleOverlapValidator" autowire="true" autoconfigure="true" abstract="true"/>
+>>>>>>> match
     <service id=".service_locator.w7.f4fT" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -7956,6 +8885,7 @@
         <argument key="loader" type="service_closure" id=".errored..service_locator.y4_Zrx..Symfony\Component\Config\Loader\LoaderInterface"/>
       </argument>
     </service>
+<<<<<<< HEAD
     <service id=".service_locator.3a_pjdo" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -7985,6 +8915,8 @@
         <argument key="entityManager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
       </argument>
     </service>
+=======
+>>>>>>> match
     <service id=".service_locator.d2ecNSb" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -8006,6 +8938,7 @@
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="clubRepository" type="service_closure" id="App\Repository\ClubRepository"/>
+<<<<<<< HEAD
         <argument key="knpSnappyPdf" type="service_closure" id="Knp\Snappy\Pdf"/>
       </argument>
     </service>
@@ -8014,6 +8947,9 @@
       <argument type="collection">
         <argument key="espaceSportifRepository" type="service_closure" id="App\Repository\EspacesportifRepository"/>
         <argument key="paginator" type="service_closure" id="knp_paginator"/>
+=======
+        <argument key="knpSnappyPdf" type="service_closure" id="knp_snappy.pdf"/>
+>>>>>>> match
       </argument>
     </service>
     <service id=".service_locator.KEBwH6u" class="Symfony\Component\DependencyInjection\ServiceLocator">
@@ -8022,17 +8958,25 @@
         <argument key="espaceSportifRepository" type="service_closure" id="App\Repository\EspacesportifRepository"/>
       </argument>
     </service>
+<<<<<<< HEAD
     <service id=".service_locator.wlYIEyg" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="entityManager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
         <argument key="espaceSportifRepository" type="service_closure" id="App\Repository\EspacesportifRepository"/>
+=======
+    <service id=".service_locator.CsMkqUa" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="entityManager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
+>>>>>>> match
       </argument>
     </service>
     <service id=".service_locator.btqHHeD" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection"/>
     </service>
+<<<<<<< HEAD
     <service id=".service_locator.rCZqcqr" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -8040,12 +8984,15 @@
         <argument key="espaceSportifRepository" type="service_closure" id="App\Repository\EspacesportifRepository"/>
       </argument>
     </service>
+=======
+>>>>>>> match
     <service id=".service_locator.cCvvgRo" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="entityManager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
       </argument>
     </service>
+<<<<<<< HEAD
     <service id=".service_locator.YpEqkTF" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -8053,6 +9000,8 @@
         <argument key="geocodingService" type="service_closure" id="App\Service\GeocodingService"/>
       </argument>
     </service>
+=======
+>>>>>>> match
     <service id=".service_locator.Nm9r6bo" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -8090,6 +9039,16 @@
         <argument key="joueurRepository" type="service_closure" id="App\Repository\JoueurRepository"/>
       </argument>
     </service>
+<<<<<<< HEAD
+=======
+    <service id=".service_locator.M1LzjtO" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="historiqueClubRepository" type="service_closure" id="App\Repository\HistoriqueClubRepository"/>
+        <argument key="paginator" type="service_closure" id="knp_paginator"/>
+      </argument>
+    </service>
+>>>>>>> match
     <service id=".service_locator.ZE9R63e" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -8113,7 +9072,11 @@
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="historiqueClubRepository" type="service_closure" id="App\Repository\HistoriqueClubRepository"/>
+<<<<<<< HEAD
         <argument key="knpSnappyPdf" type="service_closure" id="Knp\Snappy\Pdf"/>
+=======
+        <argument key="knpSnappyPdf" type="service_closure" id="knp_snappy.pdf"/>
+>>>>>>> match
       </argument>
     </service>
     <service id=".service_locator.i0N9PQM" class="Symfony\Component\DependencyInjection\ServiceLocator">
@@ -8146,11 +9109,18 @@
         <argument key="performanceRepository" type="service_closure" id="App\Repository\PerformanceJoueurRepository"/>
       </argument>
     </service>
+<<<<<<< HEAD
     <service id=".service_locator.HTMJznC" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="evaluationRepository" type="service_closure" id="App\Repository\EvaluationPhysiqueRepository"/>
         <argument key="joueurRepository" type="service_closure" id="App\Repository\JoueurRepository"/>
+=======
+    <service id=".service_locator.BKF_x8u" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="evaluationRepository" type="service_closure" id="App\Repository\EvaluationPhysiqueRepository"/>
+>>>>>>> match
         <argument key="performanceRepository" type="service_closure" id="App\Repository\PerformanceJoueurRepository"/>
       </argument>
     </service>
@@ -8162,9 +9132,25 @@
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="joueurRepository" type="service_closure" id="App\Repository\JoueurRepository"/>
+<<<<<<< HEAD
         <argument key="knpSnappyPdf" type="service_closure" id="Knp\Snappy\Pdf"/>
       </argument>
     </service>
+=======
+        <argument key="knpSnappyPdf" type="service_closure" id="knp_snappy.pdf"/>
+      </argument>
+    </service>
+    <service id=".service_locator.7eyVGjZ" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="matchEntityRepository" type="service_closure" id="App\Repository\MatchEntityRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.4cRY5uj" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection"/>
+    </service>
+>>>>>>> match
     <service id=".service_locator.CrEgygo" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -8184,6 +9170,7 @@
         <argument key="performanceJoueur" type="service_closure" id=".errored..service_locator.PNlbJGO.App\Entity\PerformanceJoueur"/>
       </argument>
     </service>
+<<<<<<< HEAD
     <service id=".service_locator.dkTXb_M" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -8192,12 +9179,15 @@
         <argument key="reservationRepository" type="service_closure" id="App\Repository\ReservationRepository"/>
       </argument>
     </service>
+=======
+>>>>>>> match
     <service id=".service_locator.caJHb8S" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="reservationRepository" type="service_closure" id="App\Repository\ReservationRepository"/>
       </argument>
     </service>
+<<<<<<< HEAD
     <service id=".service_locator.O.waGCD" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -8239,6 +9229,55 @@
       <argument type="collection">
         <argument key="googleCalendarService" type="service_closure" id="App\Service\GoogleCalendarService"/>
         <argument key="reservationRepository" type="service_closure" id="App\Repository\ReservationRepository"/>
+=======
+    <service id=".service_locator.gWTAymZ" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection"/>
+    </service>
+    <service id=".service_locator.Lt49UVm" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="entityManager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
+      </argument>
+    </service>
+    <service id=".service_locator.Z3Oe1ma" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="scheduleRepository" type="service_closure" id="App\Repository\ScheduleRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.LinRVVF" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="logger" type="service_closure" id="monolog.logger"/>
+        <argument key="scheduleRepository" type="service_closure" id="App\Repository\ScheduleRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.VA.oRVl" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="csrfTokenManager" type="service_closure" id="security.csrf.token_manager"/>
+        <argument key="scheduleRepository" type="service_closure" id="App\Repository\ScheduleRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.tUUIxuw" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection"/>
+    </service>
+    <service id=".service_locator.EXuNfpQ" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="scheduleRepository" type="service_closure" id="App\Repository\ScheduleRepository"/>
+        <argument key="snappy" type="service_closure" id="knp_snappy.pdf"/>
+      </argument>
+    </service>
+    <service id=".service_locator.1BzwIQ0" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="httpClient" type="service_closure" id=".debug.http_client"/>
+        <argument key="logger" type="service_closure" id="monolog.logger"/>
+        <argument key="scheduleRepository" type="service_closure" id="App\Repository\ScheduleRepository"/>
+>>>>>>> match
       </argument>
     </service>
     <service id=".service_locator.jpL5_4q" class="Symfony\Component\DependencyInjection\ServiceLocator">
@@ -8267,6 +9306,7 @@
     <service id=".service_locator.s2P9uaA" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
+<<<<<<< HEAD
         <argument key="knpSnappyPdf" type="service_closure" id="Knp\Snappy\Pdf"/>
         <argument key="sportRepository" type="service_closure" id="App\Repository\SportRepository"/>
       </argument>
@@ -8282,12 +9322,22 @@
         <argument key="App\Controller\AbonnementController::index" type="service_closure" id=".service_locator.3a_pjdo"/>
         <argument key="App\Controller\AbonnementController::new" type="service_closure" id=".service_locator.CsMkqUa"/>
         <argument key="App\Controller\AbonnementController::statistics" type="service_closure" id=".service_locator.9_.T.FR"/>
+=======
+        <argument key="knpSnappyPdf" type="service_closure" id="knp_snappy.pdf"/>
+        <argument key="sportRepository" type="service_closure" id="App\Repository\SportRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.LiIqH_L" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+>>>>>>> match
         <argument key="App\Controller\ClubController::exportCsv" type="service_closure" id=".service_locator.eOJlB0r"/>
         <argument key="App\Controller\ClubController::exportExcel" type="service_closure" id=".service_locator.eOJlB0r"/>
         <argument key="App\Controller\ClubController::exportPdf" type="service_closure" id=".service_locator.8te4nbt"/>
         <argument key="App\Controller\ClubController::index" type="service_closure" id=".service_locator.d2ecNSb"/>
         <argument key="App\Controller\ClubController::statistics" type="service_closure" id=".service_locator.eOJlB0r"/>
         <argument key="App\Controller\EspacesportifController::delete" type="service_closure" id=".service_locator.cCvvgRo"/>
+<<<<<<< HEAD
         <argument key="App\Controller\EspacesportifController::edit" type="service_closure" id=".service_locator.rCZqcqr"/>
         <argument key="App\Controller\EspacesportifController::exportCsv" type="service_closure" id=".service_locator.KEBwH6u"/>
         <argument key="App\Controller\EspacesportifController::exportExcel" type="service_closure" id=".service_locator.KEBwH6u"/>
@@ -8296,6 +9346,11 @@
         <argument key="App\Controller\EspacesportifController::index" type="service_closure" id=".service_locator.USDzM3K"/>
         <argument key="App\Controller\EspacesportifController::new" type="service_closure" id=".service_locator.wlYIEyg"/>
         <argument key="App\Controller\EspacesportifController::recommend" type="service_closure" id=".service_locator.YpEqkTF"/>
+=======
+        <argument key="App\Controller\EspacesportifController::edit" type="service_closure" id=".service_locator.cCvvgRo"/>
+        <argument key="App\Controller\EspacesportifController::index" type="service_closure" id=".service_locator.KEBwH6u"/>
+        <argument key="App\Controller\EspacesportifController::new" type="service_closure" id=".service_locator.CsMkqUa"/>
+>>>>>>> match
         <argument key="App\Controller\EspacesportifController::statistics" type="service_closure" id=".service_locator.CsMkqUa"/>
         <argument key="App\Controller\EvaluationPhysiqueController::delete" type="service_closure" id=".service_locator.n8st8m4"/>
         <argument key="App\Controller\EvaluationPhysiqueController::edit" type="service_closure" id=".service_locator.n8st8m4"/>
@@ -8312,25 +9367,41 @@
         <argument key="App\Controller\HistoriqueClubController::exportPdf" type="service_closure" id=".service_locator.FFEnhRj"/>
         <argument key="App\Controller\HistoriqueClubController::findByJoueur" type="service_closure" id=".service_locator.ZE9R63e"/>
         <argument key="App\Controller\HistoriqueClubController::findCurrentPlayersByClub" type="service_closure" id=".service_locator.ZE9R63e"/>
+<<<<<<< HEAD
         <argument key="App\Controller\HistoriqueClubController::index" type="service_closure" id=".service_locator.ZE9R63e"/>
         <argument key="App\Controller\HistoriqueClubController::new" type="service_closure" id=".service_locator.CsMkqUa"/>
         <argument key="App\Controller\HistoriqueClubController::show" type="service_closure" id=".service_locator.4E2JJj5"/>
         <argument key="App\Controller\HistoriqueClubController::stats" type="service_closure" id=".service_locator.ZE9R63e"/>
         <argument key="App\Controller\HomeController::index" type="service_closure" id=".service_locator.YpEqkTF"/>
+=======
+        <argument key="App\Controller\HistoriqueClubController::index" type="service_closure" id=".service_locator.M1LzjtO"/>
+        <argument key="App\Controller\HistoriqueClubController::new" type="service_closure" id=".service_locator.CsMkqUa"/>
+        <argument key="App\Controller\HistoriqueClubController::show" type="service_closure" id=".service_locator.4E2JJj5"/>
+        <argument key="App\Controller\HistoriqueClubController::stats" type="service_closure" id=".service_locator.ZE9R63e"/>
+>>>>>>> match
         <argument key="App\Controller\JoueurController::edit" type="service_closure" id=".service_locator.SYFRzfM"/>
         <argument key="App\Controller\JoueurController::exportCsv" type="service_closure" id=".service_locator.i0N9PQM"/>
         <argument key="App\Controller\JoueurController::exportExcel" type="service_closure" id=".service_locator.i0N9PQM"/>
         <argument key="App\Controller\JoueurController::exportPdf" type="service_closure" id=".service_locator.TDAL4Wh"/>
         <argument key="App\Controller\JoueurController::index" type="service_closure" id=".service_locator.gfugV81"/>
+<<<<<<< HEAD
         <argument key="App\Controller\JoueurController::show" type="service_closure" id=".service_locator.HTMJznC"/>
         <argument key="App\Controller\JoueurController::statistics" type="service_closure" id=".service_locator.dvlXw22"/>
         <argument key="App\Controller\JoueurController::test" type="service_closure" id=".service_locator.i0N9PQM"/>
+=======
+        <argument key="App\Controller\JoueurController::layout" type="service_closure" id=".service_locator.i0N9PQM"/>
+        <argument key="App\Controller\JoueurController::show" type="service_closure" id=".service_locator.BKF_x8u"/>
+        <argument key="App\Controller\JoueurController::statistics" type="service_closure" id=".service_locator.dvlXw22"/>
+        <argument key="App\Controller\JoueurController::test" type="service_closure" id=".service_locator.i0N9PQM"/>
+        <argument key="App\Controller\MatchController::index" type="service_closure" id=".service_locator.7eyVGjZ"/>
+>>>>>>> match
         <argument key="App\Controller\PerformanceJoueurController::delete" type="service_closure" id=".service_locator.PNlbJGO"/>
         <argument key="App\Controller\PerformanceJoueurController::edit" type="service_closure" id=".service_locator.PNlbJGO"/>
         <argument key="App\Controller\PerformanceJoueurController::index" type="service_closure" id=".service_locator.CrEgygo"/>
         <argument key="App\Controller\PerformanceJoueurController::new" type="service_closure" id=".service_locator.CsMkqUa"/>
         <argument key="App\Controller\PerformanceJoueurController::show" type="service_closure" id=".service_locator.z4JrMru"/>
         <argument key="App\Controller\PerformanceJoueurController::stats" type="service_closure" id=".service_locator.CrEgygo"/>
+<<<<<<< HEAD
         <argument key="App\Controller\ReservationController::addToGoogleCalendar" type="service_closure" id=".service_locator.vp1piF2"/>
         <argument key="App\Controller\ReservationController::delete" type="service_closure" id=".service_locator.zHZGuMH"/>
         <argument key="App\Controller\ReservationController::edit" type="service_closure" id=".service_locator.zHZGuMH"/>
@@ -8344,6 +9415,26 @@
         <argument key="App\Controller\ReservationController::new" type="service_closure" id=".service_locator.O.waGCD"/>
         <argument key="App\Controller\ReservationController::show" type="service_closure" id=".service_locator.aiPg5AT"/>
         <argument key="App\Controller\ReservationController::statistics" type="service_closure" id=".service_locator.caJHb8S"/>
+=======
+        <argument key="App\Controller\ReservationController::delete" type="service_closure" id=".service_locator.Lt49UVm"/>
+        <argument key="App\Controller\ReservationController::edit" type="service_closure" id=".service_locator.Lt49UVm"/>
+        <argument key="App\Controller\ReservationController::index" type="service_closure" id=".service_locator.caJHb8S"/>
+        <argument key="App\Controller\ReservationController::new" type="service_closure" id=".service_locator.CsMkqUa"/>
+        <argument key="App\Controller\ReservationController::statistics" type="service_closure" id=".service_locator.caJHb8S"/>
+        <argument key="App\Controller\ScheduleController::addToGoogleCalendar" type="service_closure" id=".service_locator.LinRVVF"/>
+        <argument key="App\Controller\ScheduleController::edit" type="service_closure" id=".service_locator.Z3Oe1ma"/>
+        <argument key="App\Controller\ScheduleController::exportCsv" type="service_closure" id=".service_locator.Z3Oe1ma"/>
+        <argument key="App\Controller\ScheduleController::exportExcel" type="service_closure" id=".service_locator.Z3Oe1ma"/>
+        <argument key="App\Controller\ScheduleController::exportPdf" type="service_closure" id=".service_locator.EXuNfpQ"/>
+        <argument key="App\Controller\ScheduleController::googleCallback" type="service_closure" id=".service_locator.LinRVVF"/>
+        <argument key="App\Controller\ScheduleController::main" type="service_closure" id=".service_locator.LinRVVF"/>
+        <argument key="App\Controller\ScheduleController::mainF" type="service_closure" id=".service_locator.Z3Oe1ma"/>
+        <argument key="App\Controller\ScheduleController::news" type="service_closure" id=".service_locator.1BzwIQ0"/>
+        <argument key="App\Controller\ScheduleController::search" type="service_closure" id=".service_locator.VA.oRVl"/>
+        <argument key="App\Controller\ScheduleController::show" type="service_closure" id=".service_locator.Z3Oe1ma"/>
+        <argument key="App\Controller\ScheduleController::showF" type="service_closure" id=".service_locator.LinRVVF"/>
+        <argument key="App\Controller\ScheduleController::statistics" type="service_closure" id=".service_locator.LinRVVF"/>
+>>>>>>> match
         <argument key="App\Controller\SportController::delete" type="service_closure" id=".service_locator.geVFa8t"/>
         <argument key="App\Controller\SportController::edit" type="service_closure" id=".service_locator.geVFa8t"/>
         <argument key="App\Controller\SportController::exportCsv" type="service_closure" id=".service_locator.cX9LP_Y"/>
@@ -8356,6 +9447,7 @@
         <argument key="App\Kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.y4_Zrx."/>
         <argument key="kernel::loadRoutes" type="service_closure" id=".service_locator.y4_Zrx."/>
         <argument key="kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.y4_Zrx."/>
+<<<<<<< HEAD
         <argument key="App\Controller\AbonnementController:delete" type="service_closure" id=".service_locator.RsAjdld"/>
         <argument key="App\Controller\AbonnementController:edit" type="service_closure" id=".service_locator.RsAjdld"/>
         <argument key="App\Controller\AbonnementController:exportCsv" type="service_closure" id=".service_locator.9_.T.FR"/>
@@ -8364,12 +9456,15 @@
         <argument key="App\Controller\AbonnementController:index" type="service_closure" id=".service_locator.3a_pjdo"/>
         <argument key="App\Controller\AbonnementController:new" type="service_closure" id=".service_locator.CsMkqUa"/>
         <argument key="App\Controller\AbonnementController:statistics" type="service_closure" id=".service_locator.9_.T.FR"/>
+=======
+>>>>>>> match
         <argument key="App\Controller\ClubController:exportCsv" type="service_closure" id=".service_locator.eOJlB0r"/>
         <argument key="App\Controller\ClubController:exportExcel" type="service_closure" id=".service_locator.eOJlB0r"/>
         <argument key="App\Controller\ClubController:exportPdf" type="service_closure" id=".service_locator.8te4nbt"/>
         <argument key="App\Controller\ClubController:index" type="service_closure" id=".service_locator.d2ecNSb"/>
         <argument key="App\Controller\ClubController:statistics" type="service_closure" id=".service_locator.eOJlB0r"/>
         <argument key="App\Controller\EspacesportifController:delete" type="service_closure" id=".service_locator.cCvvgRo"/>
+<<<<<<< HEAD
         <argument key="App\Controller\EspacesportifController:edit" type="service_closure" id=".service_locator.rCZqcqr"/>
         <argument key="App\Controller\EspacesportifController:exportCsv" type="service_closure" id=".service_locator.KEBwH6u"/>
         <argument key="App\Controller\EspacesportifController:exportExcel" type="service_closure" id=".service_locator.KEBwH6u"/>
@@ -8378,6 +9473,11 @@
         <argument key="App\Controller\EspacesportifController:index" type="service_closure" id=".service_locator.USDzM3K"/>
         <argument key="App\Controller\EspacesportifController:new" type="service_closure" id=".service_locator.wlYIEyg"/>
         <argument key="App\Controller\EspacesportifController:recommend" type="service_closure" id=".service_locator.YpEqkTF"/>
+=======
+        <argument key="App\Controller\EspacesportifController:edit" type="service_closure" id=".service_locator.cCvvgRo"/>
+        <argument key="App\Controller\EspacesportifController:index" type="service_closure" id=".service_locator.KEBwH6u"/>
+        <argument key="App\Controller\EspacesportifController:new" type="service_closure" id=".service_locator.CsMkqUa"/>
+>>>>>>> match
         <argument key="App\Controller\EspacesportifController:statistics" type="service_closure" id=".service_locator.CsMkqUa"/>
         <argument key="App\Controller\EvaluationPhysiqueController:delete" type="service_closure" id=".service_locator.n8st8m4"/>
         <argument key="App\Controller\EvaluationPhysiqueController:edit" type="service_closure" id=".service_locator.n8st8m4"/>
@@ -8394,25 +9494,41 @@
         <argument key="App\Controller\HistoriqueClubController:exportPdf" type="service_closure" id=".service_locator.FFEnhRj"/>
         <argument key="App\Controller\HistoriqueClubController:findByJoueur" type="service_closure" id=".service_locator.ZE9R63e"/>
         <argument key="App\Controller\HistoriqueClubController:findCurrentPlayersByClub" type="service_closure" id=".service_locator.ZE9R63e"/>
+<<<<<<< HEAD
         <argument key="App\Controller\HistoriqueClubController:index" type="service_closure" id=".service_locator.ZE9R63e"/>
         <argument key="App\Controller\HistoriqueClubController:new" type="service_closure" id=".service_locator.CsMkqUa"/>
         <argument key="App\Controller\HistoriqueClubController:show" type="service_closure" id=".service_locator.4E2JJj5"/>
         <argument key="App\Controller\HistoriqueClubController:stats" type="service_closure" id=".service_locator.ZE9R63e"/>
         <argument key="App\Controller\HomeController:index" type="service_closure" id=".service_locator.YpEqkTF"/>
+=======
+        <argument key="App\Controller\HistoriqueClubController:index" type="service_closure" id=".service_locator.M1LzjtO"/>
+        <argument key="App\Controller\HistoriqueClubController:new" type="service_closure" id=".service_locator.CsMkqUa"/>
+        <argument key="App\Controller\HistoriqueClubController:show" type="service_closure" id=".service_locator.4E2JJj5"/>
+        <argument key="App\Controller\HistoriqueClubController:stats" type="service_closure" id=".service_locator.ZE9R63e"/>
+>>>>>>> match
         <argument key="App\Controller\JoueurController:edit" type="service_closure" id=".service_locator.SYFRzfM"/>
         <argument key="App\Controller\JoueurController:exportCsv" type="service_closure" id=".service_locator.i0N9PQM"/>
         <argument key="App\Controller\JoueurController:exportExcel" type="service_closure" id=".service_locator.i0N9PQM"/>
         <argument key="App\Controller\JoueurController:exportPdf" type="service_closure" id=".service_locator.TDAL4Wh"/>
         <argument key="App\Controller\JoueurController:index" type="service_closure" id=".service_locator.gfugV81"/>
+<<<<<<< HEAD
         <argument key="App\Controller\JoueurController:show" type="service_closure" id=".service_locator.HTMJznC"/>
         <argument key="App\Controller\JoueurController:statistics" type="service_closure" id=".service_locator.dvlXw22"/>
         <argument key="App\Controller\JoueurController:test" type="service_closure" id=".service_locator.i0N9PQM"/>
+=======
+        <argument key="App\Controller\JoueurController:layout" type="service_closure" id=".service_locator.i0N9PQM"/>
+        <argument key="App\Controller\JoueurController:show" type="service_closure" id=".service_locator.BKF_x8u"/>
+        <argument key="App\Controller\JoueurController:statistics" type="service_closure" id=".service_locator.dvlXw22"/>
+        <argument key="App\Controller\JoueurController:test" type="service_closure" id=".service_locator.i0N9PQM"/>
+        <argument key="App\Controller\MatchController:index" type="service_closure" id=".service_locator.7eyVGjZ"/>
+>>>>>>> match
         <argument key="App\Controller\PerformanceJoueurController:delete" type="service_closure" id=".service_locator.PNlbJGO"/>
         <argument key="App\Controller\PerformanceJoueurController:edit" type="service_closure" id=".service_locator.PNlbJGO"/>
         <argument key="App\Controller\PerformanceJoueurController:index" type="service_closure" id=".service_locator.CrEgygo"/>
         <argument key="App\Controller\PerformanceJoueurController:new" type="service_closure" id=".service_locator.CsMkqUa"/>
         <argument key="App\Controller\PerformanceJoueurController:show" type="service_closure" id=".service_locator.z4JrMru"/>
         <argument key="App\Controller\PerformanceJoueurController:stats" type="service_closure" id=".service_locator.CrEgygo"/>
+<<<<<<< HEAD
         <argument key="App\Controller\ReservationController:addToGoogleCalendar" type="service_closure" id=".service_locator.vp1piF2"/>
         <argument key="App\Controller\ReservationController:delete" type="service_closure" id=".service_locator.zHZGuMH"/>
         <argument key="App\Controller\ReservationController:edit" type="service_closure" id=".service_locator.zHZGuMH"/>
@@ -8426,6 +9542,26 @@
         <argument key="App\Controller\ReservationController:new" type="service_closure" id=".service_locator.O.waGCD"/>
         <argument key="App\Controller\ReservationController:show" type="service_closure" id=".service_locator.aiPg5AT"/>
         <argument key="App\Controller\ReservationController:statistics" type="service_closure" id=".service_locator.caJHb8S"/>
+=======
+        <argument key="App\Controller\ReservationController:delete" type="service_closure" id=".service_locator.Lt49UVm"/>
+        <argument key="App\Controller\ReservationController:edit" type="service_closure" id=".service_locator.Lt49UVm"/>
+        <argument key="App\Controller\ReservationController:index" type="service_closure" id=".service_locator.caJHb8S"/>
+        <argument key="App\Controller\ReservationController:new" type="service_closure" id=".service_locator.CsMkqUa"/>
+        <argument key="App\Controller\ReservationController:statistics" type="service_closure" id=".service_locator.caJHb8S"/>
+        <argument key="App\Controller\ScheduleController:addToGoogleCalendar" type="service_closure" id=".service_locator.LinRVVF"/>
+        <argument key="App\Controller\ScheduleController:edit" type="service_closure" id=".service_locator.Z3Oe1ma"/>
+        <argument key="App\Controller\ScheduleController:exportCsv" type="service_closure" id=".service_locator.Z3Oe1ma"/>
+        <argument key="App\Controller\ScheduleController:exportExcel" type="service_closure" id=".service_locator.Z3Oe1ma"/>
+        <argument key="App\Controller\ScheduleController:exportPdf" type="service_closure" id=".service_locator.EXuNfpQ"/>
+        <argument key="App\Controller\ScheduleController:googleCallback" type="service_closure" id=".service_locator.LinRVVF"/>
+        <argument key="App\Controller\ScheduleController:main" type="service_closure" id=".service_locator.LinRVVF"/>
+        <argument key="App\Controller\ScheduleController:mainF" type="service_closure" id=".service_locator.Z3Oe1ma"/>
+        <argument key="App\Controller\ScheduleController:news" type="service_closure" id=".service_locator.1BzwIQ0"/>
+        <argument key="App\Controller\ScheduleController:search" type="service_closure" id=".service_locator.VA.oRVl"/>
+        <argument key="App\Controller\ScheduleController:show" type="service_closure" id=".service_locator.Z3Oe1ma"/>
+        <argument key="App\Controller\ScheduleController:showF" type="service_closure" id=".service_locator.LinRVVF"/>
+        <argument key="App\Controller\ScheduleController:statistics" type="service_closure" id=".service_locator.LinRVVF"/>
+>>>>>>> match
         <argument key="App\Controller\SportController:delete" type="service_closure" id=".service_locator.geVFa8t"/>
         <argument key="App\Controller\SportController:edit" type="service_closure" id=".service_locator.geVFa8t"/>
         <argument key="App\Controller\SportController:exportCsv" type="service_closure" id=".service_locator.cX9LP_Y"/>
@@ -8438,9 +9574,16 @@
         <argument key="kernel:registerContainerConfiguration" type="service_closure" id=".service_locator.y4_Zrx."/>
       </argument>
     </service>
+<<<<<<< HEAD
     <service id=".service_locator.F9PKc.7" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
+=======
+    <service id=".service_locator.Ao2HMjr" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="App\Validator\NoScheduleOverlapValidator" type="service_closure" id="App\Validator\NoScheduleOverlapValidator"/>
+>>>>>>> match
         <argument key="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntityValidator" type="service_closure" id="doctrine.orm.validator.unique"/>
         <argument key="Symfony\Component\Security\Core\Validator\Constraints\UserPasswordValidator" type="service_closure" id="security.validator.user_password"/>
         <argument key="Symfony\Component\Validator\Constraints\EmailValidator" type="service_closure" id="validator.email"/>
@@ -8595,17 +9738,30 @@
       <argument type="service" id="argument_resolver.query_parameter_value_resolver"/>
       <argument type="service" id="debug.stopwatch"/>
     </service>
+<<<<<<< HEAD
     <service id=".service_locator.A.dra_W" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Form\AbonnementType" type="service_closure" id="App\Form\AbonnementType"/>
+=======
+    <service id=".service_locator.kfw7JpG" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+>>>>>>> match
         <argument key="App\Form\ClubType" type="service_closure" id="App\Form\ClubType"/>
         <argument key="App\Form\EspacesportifType" type="service_closure" id="App\Form\EspacesportifType"/>
         <argument key="App\Form\EvaluationPhysiqueType" type="service_closure" id="App\Form\EvaluationPhysiqueType"/>
         <argument key="App\Form\HistoriqueClubType" type="service_closure" id="App\Form\HistoriqueClubType"/>
         <argument key="App\Form\JoueurType" type="service_closure" id="App\Form\JoueurType"/>
+<<<<<<< HEAD
         <argument key="App\Form\PerformanceJoueurType" type="service_closure" id="App\Form\PerformanceJoueurType"/>
         <argument key="App\Form\ReservationType" type="service_closure" id="App\Form\ReservationType"/>
+=======
+        <argument key="App\Form\MatchType" type="service_closure" id="App\Form\MatchType"/>
+        <argument key="App\Form\PerformanceJoueurType" type="service_closure" id="App\Form\PerformanceJoueurType"/>
+        <argument key="App\Form\ReservationType" type="service_closure" id="App\Form\ReservationType"/>
+        <argument key="App\Form\ScheduleType" type="service_closure" id="App\Form\ScheduleType"/>
+>>>>>>> match
         <argument key="App\Form\SportType" type="service_closure" id="App\Form\SportType"/>
         <argument key="Symfony\Bridge\Doctrine\Form\Type\EntityType" type="service_closure" id="form.type.entity"/>
         <argument key="Symfony\Component\Form\Extension\Core\Type\ChoiceType" type="service_closure" id="form.type.choice"/>
@@ -9079,18 +10235,30 @@
         <argument key="web_link.http_header_serializer" type="service_closure" id="web_link.http_header_serializer" on-invalid="ignore"/>
       </argument>
     </service>
+<<<<<<< HEAD
     <service id=".service_locator.O2p6Lk7.App\Controller\AbonnementController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\AbonnementController"/>
       <argument>App\Controller\AbonnementController</argument>
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.O2p6Lk7" method="withContext"/>
     </service>
+=======
+>>>>>>> match
     <service id=".service_locator.O2p6Lk7.App\Controller\ClubController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\ClubController"/>
       <argument>App\Controller\ClubController</argument>
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.O2p6Lk7" method="withContext"/>
     </service>
+<<<<<<< HEAD
+=======
+    <service id=".service_locator.O2p6Lk7.App\Controller\DashboardController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\DashboardController"/>
+      <argument>App\Controller\DashboardController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.O2p6Lk7" method="withContext"/>
+    </service>
+>>>>>>> match
     <service id=".service_locator.O2p6Lk7.App\Controller\EspacesportifController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\EspacesportifController"/>
       <argument>App\Controller\EspacesportifController</argument>
@@ -9103,24 +10271,45 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.O2p6Lk7" method="withContext"/>
     </service>
+<<<<<<< HEAD
+=======
+    <service id=".service_locator.O2p6Lk7.App\Controller\FitnessController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\FitnessController"/>
+      <argument>App\Controller\FitnessController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.O2p6Lk7" method="withContext"/>
+    </service>
+>>>>>>> match
     <service id=".service_locator.O2p6Lk7.App\Controller\HistoriqueClubController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\HistoriqueClubController"/>
       <argument>App\Controller\HistoriqueClubController</argument>
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.O2p6Lk7" method="withContext"/>
     </service>
+<<<<<<< HEAD
     <service id=".service_locator.O2p6Lk7.App\Controller\HomeController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\HomeController"/>
       <argument>App\Controller\HomeController</argument>
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.O2p6Lk7" method="withContext"/>
     </service>
+=======
+>>>>>>> match
     <service id=".service_locator.O2p6Lk7.App\Controller\JoueurController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\JoueurController"/>
       <argument>App\Controller\JoueurController</argument>
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.O2p6Lk7" method="withContext"/>
     </service>
+<<<<<<< HEAD
+=======
+    <service id=".service_locator.O2p6Lk7.App\Controller\MatchController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\MatchController"/>
+      <argument>App\Controller\MatchController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.O2p6Lk7" method="withContext"/>
+    </service>
+>>>>>>> match
     <service id=".service_locator.O2p6Lk7.App\Controller\PerformanceJoueurController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\PerformanceJoueurController"/>
       <argument>App\Controller\PerformanceJoueurController</argument>
@@ -9133,6 +10322,15 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.O2p6Lk7" method="withContext"/>
     </service>
+<<<<<<< HEAD
+=======
+    <service id=".service_locator.O2p6Lk7.App\Controller\ScheduleController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\ScheduleController"/>
+      <argument>App\Controller\ScheduleController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.O2p6Lk7" method="withContext"/>
+    </service>
+>>>>>>> match
     <service id=".service_locator.O2p6Lk7.App\Controller\SportController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\SportController"/>
       <argument>App\Controller\SportController</argument>
@@ -9293,7 +10491,11 @@
     <service id="asset_mapper.cached_mapped_asset_factory.inner" class="Symfony\Component\AssetMapper\Factory\MappedAssetFactory">
       <argument type="service" id="asset_mapper.public_assets_path_resolver"/>
       <argument type="service" id="asset_mapper_compiler"/>
+<<<<<<< HEAD
       <argument>C:\Users\Ismail\Desktop\matchupz/assets/vendor</argument>
+=======
+      <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match/assets/vendor</argument>
+>>>>>>> match
     </service>
     <service id="asset_mapper.asset_package.inner" class="Symfony\Component\Asset\PathPackage">
       <argument></argument>
@@ -9313,6 +10515,7 @@
       <call method="allowControllers">
         <argument type="collection">
           <argument>App\Kernel</argument>
+<<<<<<< HEAD
           <argument>App\Controller\AbonnementController</argument>
           <argument>App\Controller\ClubController</argument>
           <argument>App\Controller\EspacesportifController</argument>
@@ -9322,6 +10525,19 @@
           <argument>App\Controller\JoueurController</argument>
           <argument>App\Controller\PerformanceJoueurController</argument>
           <argument>App\Controller\ReservationController</argument>
+=======
+          <argument>App\Controller\ClubController</argument>
+          <argument>App\Controller\DashboardController</argument>
+          <argument>App\Controller\EspacesportifController</argument>
+          <argument>App\Controller\EvaluationPhysiqueController</argument>
+          <argument>App\Controller\FitnessController</argument>
+          <argument>App\Controller\HistoriqueClubController</argument>
+          <argument>App\Controller\JoueurController</argument>
+          <argument>App\Controller\MatchController</argument>
+          <argument>App\Controller\PerformanceJoueurController</argument>
+          <argument>App\Controller\ReservationController</argument>
+          <argument>App\Controller\ScheduleController</argument>
+>>>>>>> match
           <argument>App\Controller\SportController</argument>
           <argument>Doctrine\Bundle\DoctrineBundle\Controller\ProfilerController</argument>
         </argument>
@@ -10458,94 +11674,169 @@
       </argument>
     </service>
     <service id="cache.app.recorder_inner" class="Symfony\Component\Cache\Adapter\FilesystemAdapter">
+<<<<<<< HEAD
       <argument>udK73lb++Q</argument>
       <argument>0</argument>
       <argument>C:\Users\Ismail\Desktop\matchupz\var\cache\dev/pools/app</argument>
+=======
+      <argument>FXTYZebSIh</argument>
+      <argument>0</argument>
+      <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\var\cache\dev/pools/app</argument>
+>>>>>>> match
       <argument type="service" id="cache.default_marshaller" on-invalid="ignore"/>
       <call method="setLogger">
         <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       </call>
     </service>
     <service id="cache.system.recorder_inner" class="Symfony\Component\Cache\Adapter\AdapterInterface">
+<<<<<<< HEAD
       <argument>58SuXAsXpq</argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
       <argument>C:\Users\Ismail\Desktop\matchupz\var\cache\dev/pools/system</argument>
+=======
+      <argument>azrmtU9Arc</argument>
+      <argument>0</argument>
+      <argument>%container.build_id%</argument>
+      <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\var\cache\dev/pools/system</argument>
+>>>>>>> match
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
     <service id="cache.validator.recorder_inner" class="Symfony\Component\Cache\Adapter\AdapterInterface">
+<<<<<<< HEAD
       <argument>2HOpLGCKeS</argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
       <argument>C:\Users\Ismail\Desktop\matchupz\var\cache\dev/pools/system</argument>
+=======
+      <argument>gbhaM0xCNv</argument>
+      <argument>0</argument>
+      <argument>%container.build_id%</argument>
+      <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\var\cache\dev/pools/system</argument>
+>>>>>>> match
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
     <service id="cache.serializer.recorder_inner" class="Symfony\Component\Cache\Adapter\AdapterInterface">
+<<<<<<< HEAD
       <argument>veQhnsHCur</argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
       <argument>C:\Users\Ismail\Desktop\matchupz\var\cache\dev/pools/system</argument>
+=======
+      <argument>wSWaU63nCd</argument>
+      <argument>0</argument>
+      <argument>%container.build_id%</argument>
+      <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\var\cache\dev/pools/system</argument>
+>>>>>>> match
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
     <service id="cache.annotations.recorder_inner" class="Symfony\Component\Cache\Adapter\AdapterInterface">
+<<<<<<< HEAD
       <argument>TTyFBec5P9</argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
       <argument>C:\Users\Ismail\Desktop\matchupz\var\cache\dev/pools/system</argument>
+=======
+      <argument>8SFikBHifu</argument>
+      <argument>0</argument>
+      <argument>%container.build_id%</argument>
+      <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\var\cache\dev/pools/system</argument>
+>>>>>>> match
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
     <service id="cache.property_info.recorder_inner" class="Symfony\Component\Cache\Adapter\AdapterInterface">
+<<<<<<< HEAD
       <argument>3OAyUa6y9N</argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
       <argument>C:\Users\Ismail\Desktop\matchupz\var\cache\dev/pools/system</argument>
+=======
+      <argument>n4u0lFsaw1</argument>
+      <argument>0</argument>
+      <argument>%container.build_id%</argument>
+      <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\var\cache\dev/pools/system</argument>
+>>>>>>> match
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
     <service id="cache.asset_mapper.recorder_inner" class="Symfony\Component\Cache\Adapter\AdapterInterface">
+<<<<<<< HEAD
       <argument>CeB+KDkIi4</argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
       <argument>C:\Users\Ismail\Desktop\matchupz\var\cache\dev/pools/system</argument>
+=======
+      <argument>j39gIi13D2</argument>
+      <argument>0</argument>
+      <argument>%container.build_id%</argument>
+      <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\var\cache\dev/pools/system</argument>
+>>>>>>> match
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
     <service id="cache.messenger.restart_workers_signal.recorder_inner" class="Symfony\Component\Cache\Adapter\FilesystemAdapter">
+<<<<<<< HEAD
       <argument>HRUAq5rgdH</argument>
       <argument>0</argument>
       <argument>C:\Users\Ismail\Desktop\matchupz\var\cache\dev/pools/app</argument>
+=======
+      <argument>oOj0P8iZ7f</argument>
+      <argument>0</argument>
+      <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\var\cache\dev/pools/app</argument>
+>>>>>>> match
       <argument type="service" id="cache.default_marshaller" on-invalid="ignore"/>
       <call method="setLogger">
         <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       </call>
     </service>
     <service id="cache.validator_expression_language.recorder_inner" class="Symfony\Component\Cache\Adapter\AdapterInterface">
+<<<<<<< HEAD
       <argument>USUHY8g-2t</argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
       <argument>C:\Users\Ismail\Desktop\matchupz\var\cache\dev/pools/system</argument>
+=======
+      <argument>4TAT8Npr0Z</argument>
+      <argument>0</argument>
+      <argument>%container.build_id%</argument>
+      <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\var\cache\dev/pools/system</argument>
+>>>>>>> match
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
     <service id="cache.doctrine.orm.default.result.recorder_inner" class="Symfony\Component\Cache\Adapter\ArrayAdapter"/>
     <service id="cache.doctrine.orm.default.query.recorder_inner" class="Symfony\Component\Cache\Adapter\ArrayAdapter"/>
     <service id="cache.security_expression_language.recorder_inner" class="Symfony\Component\Cache\Adapter\AdapterInterface">
+<<<<<<< HEAD
       <argument>oPs6S4d6Sb</argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
       <argument>C:\Users\Ismail\Desktop\matchupz\var\cache\dev/pools/system</argument>
+=======
+      <argument>l1c3vXhjpW</argument>
+      <argument>0</argument>
+      <argument>%container.build_id%</argument>
+      <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\var\cache\dev/pools/system</argument>
+>>>>>>> match
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
     <service id="cache.security_is_granted_attribute_expression_language.recorder_inner" class="Symfony\Component\Cache\Adapter\AdapterInterface">
+<<<<<<< HEAD
       <argument>X3Acv5bGjF</argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
       <argument>C:\Users\Ismail\Desktop\matchupz\var\cache\dev/pools/system</argument>
+=======
+      <argument>J9yLcLz4gJ</argument>
+      <argument>0</argument>
+      <argument>%container.build_id%</argument>
+      <argument>C:\Users\louay\Desktop\Projet\web\matchupz-web-match\var\cache\dev/pools/system</argument>
+>>>>>>> match
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
@@ -10727,12 +12018,20 @@
     <service id="Symfony\Component\Security\Core\User\UserCheckerInterface" alias="security.user_checker"/>
     <service id="logger" alias="monolog.logger"/>
     <service id="Psr\Log\LoggerInterface" alias="monolog.logger"/>
+<<<<<<< HEAD
+=======
+    <service id="Knp\Snappy\Pdf" alias="knp_snappy.pdf"/>
+>>>>>>> match
     <service id="Knp\Snappy\Image" alias="knp_snappy.image"/>
     <service id="Knp\Component\Pager\PaginatorInterface" alias="knp_paginator"/>
     <service id="Knp\Component\Pager\ArgumentAccess\ArgumentAccessInterface" alias="Knp\Component\Pager\ArgumentAccess\RequestArgumentAccess"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.w7.f4fT" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
+<<<<<<< HEAD
     <service id="argument_resolver.controller_locator" alias=".service_locator.QxYyjev"/>
+=======
+    <service id="argument_resolver.controller_locator" alias=".service_locator.LiIqH_L"/>
+>>>>>>> match
     <service id="doctrine.id_generator_locator" alias=".service_locator.KLVvNIq"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface $requestLogger" alias="monolog.logger.request"/>
@@ -10757,15 +12056,20 @@
     <service id=".service_locator.80edgLI" alias="messenger.receiver_locator"/>
     <service id=".service_locator.h8Jkkd2" alias="messenger.retry_strategy_locator"/>
     <service id=".service_locator.bJ.4HC5" alias=".service_locator.w7.f4fT"/>
+<<<<<<< HEAD
     <service id=".service_locator.U1vYzKJ" alias=".service_locator.rCZqcqr"/>
     <service id=".service_locator.Ujuv6y5" alias=".service_locator.cCvvgRo"/>
     <service id=".service_locator.rjBDxh1" alias=".service_locator.YpEqkTF"/>
+=======
+    <service id=".service_locator.Ujuv6y5" alias=".service_locator.cCvvgRo"/>
+>>>>>>> match
     <service id=".service_locator.Naq5WmR" alias=".service_locator.n8st8m4"/>
     <service id=".service_locator.MteuFlB" alias=".service_locator.0qaldgn"/>
     <service id=".service_locator._kIBHZW" alias=".service_locator.0AreAVX"/>
     <service id=".service_locator.OTRGUMV" alias=".service_locator.gfugV81"/>
     <service id=".service_locator.CbdBTI6" alias=".service_locator.dvlXw22"/>
     <service id=".service_locator.982YDwk" alias=".service_locator.SYFRzfM"/>
+<<<<<<< HEAD
     <service id=".service_locator.v_qfomK" alias=".service_locator.HTMJznC"/>
     <service id=".service_locator.IcIxi4." alias=".service_locator.PNlbJGO"/>
     <service id=".service_locator.PMA8vDP" alias=".service_locator.dkTXb_M"/>
@@ -10780,6 +12084,20 @@
     <service id=".service_locator..dPnxla" alias=".service_locator.QxYyjev"/>
     <service id=".service_locator.BFrsqsn" alias=".service_locator.F9PKc.7"/>
     <service id=".service_locator.eC9PMMu" alias=".service_locator.A.dra_W"/>
+=======
+    <service id=".service_locator.j7s8Dqo" alias=".service_locator.BKF_x8u"/>
+    <service id=".service_locator.IcIxi4." alias=".service_locator.PNlbJGO"/>
+    <service id=".service_locator.r3wEyuD" alias=".service_locator.Lt49UVm"/>
+    <service id=".service_locator.UnQqFHc" alias=".service_locator.LinRVVF"/>
+    <service id=".service_locator.UA97Ptq" alias=".service_locator.VA.oRVl"/>
+    <service id=".service_locator.M8QYclP" alias=".service_locator.1BzwIQ0"/>
+    <service id=".service_locator.vYOHL0D" alias=".service_locator.jpL5_4q"/>
+    <service id=".service_locator.X9gG0Wi" alias=".service_locator.geVFa8t"/>
+    <service id=".service_locator.RwykrWv" alias=".service_locator.s2P9uaA"/>
+    <service id=".service_locator.s7VHmdq" alias=".service_locator.LiIqH_L"/>
+    <service id=".service_locator.iSQzeXT" alias=".service_locator.Ao2HMjr"/>
+    <service id=".service_locator.jtp2qW4" alias=".service_locator.kfw7JpG"/>
+>>>>>>> match
     <service id=".service_locator.XtmiKbi" alias=".service_locator.MfxSDRP"/>
     <service id=".service_locator.O24_MAy" alias=".service_locator.yY.p4P7"/>
     <service id=".service_locator.jUv.zyj" alias=".service_locator.O2p6Lk7"/>
@@ -10803,6 +12121,7 @@
     <service id="doctrine.orm.default_metadata_driver" alias=".doctrine.orm.default_metadata_driver"/>
     <service id="security.event_dispatcher.main" alias="debug.security.event_dispatcher.main"/>
     <service id=".service_locator.gFlme_s" alias=".service_locator.y4_Zrx."/>
+<<<<<<< HEAD
     <service id=".service_locator.4CyRaPf" alias=".service_locator.3a_pjdo"/>
     <service id=".service_locator.YJIKvn2" alias=".service_locator.9_.T.FR"/>
     <service id=".service_locator.9e2t_lq" alias=".service_locator.CsMkqUa"/>
@@ -10819,6 +12138,18 @@
     <service id=".service_locator.KFl_Jdo" alias=".service_locator.Nm9r6bo"/>
     <service id=".service_locator.s5W9BFG" alias=".service_locator.n8st8m4"/>
     <service id=".service_locator.pJ_xnf_" alias=".service_locator.0qaldgn"/>
+=======
+    <service id=".service_locator.BjUZy0_" alias=".service_locator.d2ecNSb"/>
+    <service id=".service_locator.zb_P8ny" alias=".service_locator.eOJlB0r"/>
+    <service id=".service_locator.5EzUEJW" alias=".service_locator.8te4nbt"/>
+    <service id=".service_locator.yjrcdVj" alias=".service_locator.KEBwH6u"/>
+    <service id=".service_locator.9e2t_lq" alias=".service_locator.CsMkqUa"/>
+    <service id=".service_locator.yEqFhNP" alias=".service_locator.cCvvgRo"/>
+    <service id=".service_locator.KFl_Jdo" alias=".service_locator.Nm9r6bo"/>
+    <service id=".service_locator.s5W9BFG" alias=".service_locator.n8st8m4"/>
+    <service id=".service_locator.pJ_xnf_" alias=".service_locator.0qaldgn"/>
+    <service id=".service_locator.JFvnd0a" alias=".service_locator.M1LzjtO"/>
+>>>>>>> match
     <service id=".service_locator.WL1gjZt" alias=".service_locator.ZE9R63e"/>
     <service id=".service_locator.MB8hsSd" alias=".service_locator.4E2JJj5"/>
     <service id=".service_locator.jV9c70C" alias=".service_locator.0AreAVX"/>
@@ -10827,6 +12158,7 @@
     <service id=".service_locator.6eTaCtE" alias=".service_locator.gfugV81"/>
     <service id=".service_locator.o4u8GOZ" alias=".service_locator.dvlXw22"/>
     <service id=".service_locator.X_gmxku" alias=".service_locator.SYFRzfM"/>
+<<<<<<< HEAD
     <service id=".service_locator.Y4bILpk" alias=".service_locator.HTMJznC"/>
     <service id=".service_locator.ne_snVk" alias=".service_locator.TDAL4Wh"/>
     <service id=".service_locator.LXe3GOx" alias=".service_locator.CrEgygo"/>
@@ -10840,6 +12172,21 @@
     <service id=".service_locator.Z..bkWz" alias=".service_locator.vuIsjve"/>
     <service id=".service_locator.j9MA5xx" alias=".service_locator.vp1piF2"/>
     <service id=".service_locator..cSIv9Z" alias=".service_locator.H_fHta4"/>
+=======
+    <service id=".service_locator.R9pqApQ" alias=".service_locator.BKF_x8u"/>
+    <service id=".service_locator.ne_snVk" alias=".service_locator.TDAL4Wh"/>
+    <service id=".service_locator.xb.lGKw" alias=".service_locator.7eyVGjZ"/>
+    <service id=".service_locator.LXe3GOx" alias=".service_locator.CrEgygo"/>
+    <service id=".service_locator.5TBLhhJ" alias=".service_locator.z4JrMru"/>
+    <service id=".service_locator.4AVqgs9" alias=".service_locator.PNlbJGO"/>
+    <service id=".service_locator.LuS44bc" alias=".service_locator.caJHb8S"/>
+    <service id=".service_locator.Egb5n_m" alias=".service_locator.Lt49UVm"/>
+    <service id=".service_locator.sdWL846" alias=".service_locator.Z3Oe1ma"/>
+    <service id=".service_locator.jQ6lm71" alias=".service_locator.LinRVVF"/>
+    <service id=".service_locator.deNQON3" alias=".service_locator.VA.oRVl"/>
+    <service id=".service_locator.FFU9kCT" alias=".service_locator.EXuNfpQ"/>
+    <service id=".service_locator.IgGlJ6H" alias=".service_locator.1BzwIQ0"/>
+>>>>>>> match
     <service id=".service_locator.W_TcJ7V" alias=".service_locator.jpL5_4q"/>
     <service id=".service_locator.vtj.h5i" alias=".service_locator.cX9LP_Y"/>
     <service id=".service_locator.0VPh.hj" alias=".service_locator.geVFa8t"/>

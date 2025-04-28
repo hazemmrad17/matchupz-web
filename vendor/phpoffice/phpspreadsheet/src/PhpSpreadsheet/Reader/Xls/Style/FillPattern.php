@@ -9,7 +9,11 @@ class FillPattern
     /**
      * @var array<int, string>
      */
+<<<<<<< HEAD
     protected static $fillPatternMap = [
+=======
+    protected static array $fillPatternMap = [
+>>>>>>> match
         0x00 => Fill::FILL_NONE,
         0x01 => Fill::FILL_SOLID,
         0x02 => Fill::FILL_PATTERN_MEDIUMGRAY,
@@ -34,6 +38,7 @@ class FillPattern
     /**
      * Get fill pattern from index
      * OpenOffice documentation: 2.5.12.
+<<<<<<< HEAD
      *
      * @param int $index
      *
@@ -46,5 +51,11 @@ class FillPattern
         }
 
         return Fill::FILL_NONE;
+=======
+     */
+    public static function lookup(int $index): string
+    {
+        return self::$fillPatternMap[$index] ?? Fill::FILL_NONE;
+>>>>>>> match
     }
 }

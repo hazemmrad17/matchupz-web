@@ -2,6 +2,10 @@
 
 namespace PhpOffice\PhpSpreadsheet\Writer\Ods;
 
+<<<<<<< HEAD
+=======
+use Composer\Pcre\Preg;
+>>>>>>> match
 use PhpOffice\PhpSpreadsheet\Cell\CellAddress;
 use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
 use PhpOffice\PhpSpreadsheet\Shared\XMLWriter;
@@ -97,7 +101,11 @@ class Settings extends WriterPart
     private function writeSelectedCells(XMLWriter $objWriter, Worksheet $worksheet): void
     {
         $selected = $worksheet->getSelectedCells();
+<<<<<<< HEAD
         if (preg_match('/^([a-z]+)([0-9]+)/i', $selected, $matches) === 1) {
+=======
+        if (Preg::isMatch('/^([a-z]+)([0-9]+)/i', $selected, $matches)) {
+>>>>>>> match
             $colSel = Coordinate::columnIndexFromString($matches[1]) - 1;
             $rowSel = (int) $matches[2] - 1;
             $objWriter->startElement('config:config-item');
@@ -124,7 +132,11 @@ class Settings extends WriterPart
 
     private function writeFreezePane(XMLWriter $objWriter, Worksheet $worksheet): void
     {
+<<<<<<< HEAD
         $freezePane = CellAddress::fromCellAddress($worksheet->getFreezePane());
+=======
+        $freezePane = CellAddress::fromCellAddress($worksheet->getFreezePane() ?? '');
+>>>>>>> match
         if ($freezePane->cellAddress() === 'A1') {
             return;
         }

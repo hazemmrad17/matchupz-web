@@ -2,7 +2,13 @@
 
 namespace PhpOffice\PhpSpreadsheet\Style\NumberFormat\Wizard;
 
+<<<<<<< HEAD
 abstract class DateTimeWizard implements Wizard
+=======
+use Stringable;
+
+abstract class DateTimeWizard implements Stringable, Wizard
+>>>>>>> match
 {
     protected const NO_ESCAPING_NEEDED = "$+-/():!^&'~{}<>= ";
 
@@ -15,7 +21,11 @@ abstract class DateTimeWizard implements Wizard
 
     protected function escapeSingleCharacter(string $value): string
     {
+<<<<<<< HEAD
         if (strpos(self::NO_ESCAPING_NEEDED, $value) !== false) {
+=======
+        if (str_contains(self::NO_ESCAPING_NEEDED, $value)) {
+>>>>>>> match
             return $value;
         }
 

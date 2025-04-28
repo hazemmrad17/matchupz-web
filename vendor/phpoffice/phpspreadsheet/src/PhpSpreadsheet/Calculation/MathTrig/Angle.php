@@ -20,7 +20,11 @@ class Angle
      *         If an array of numbers is passed as the argument, then the returned result will also be an array
      *            with the same dimensions
      */
+<<<<<<< HEAD
     public static function toDegrees($number)
+=======
+    public static function toDegrees(mixed $number): array|string|float
+>>>>>>> match
     {
         if (is_array($number)) {
             return self::evaluateSingleArgumentArray([self::class, __FUNCTION__], $number);
@@ -46,7 +50,11 @@ class Angle
      *         If an array of numbers is passed as the argument, then the returned result will also be an array
      *            with the same dimensions
      */
+<<<<<<< HEAD
     public static function toRadians($number)
+=======
+    public static function toRadians(mixed $number): array|string|float
+>>>>>>> match
     {
         if (is_array($number)) {
             return self::evaluateSingleArgumentArray([self::class, __FUNCTION__], $number);

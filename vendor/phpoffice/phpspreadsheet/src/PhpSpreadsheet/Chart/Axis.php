@@ -26,6 +26,7 @@ class Axis extends Properties
 
     /**
      * Chart Major Gridlines as.
+<<<<<<< HEAD
      *
      * @var ?GridLines
      */
@@ -37,30 +38,59 @@ class Axis extends Properties
      * @var ?GridLines
      */
     private $minorGridlines;
+=======
+     */
+    private ?GridLines $majorGridlines = null;
+
+    /**
+     * Chart Minor Gridlines as.
+     */
+    private ?GridLines $minorGridlines = null;
+>>>>>>> match
 
     /**
      * Axis Number.
      *
+<<<<<<< HEAD
      * @var mixed[]
      */
     private $axisNumber = [
+=======
+     * @var array{format: string, source_linked: int, numeric: ?bool}
+     */
+    private array $axisNumber = [
+>>>>>>> match
         'format' => self::FORMAT_CODE_GENERAL,
         'source_linked' => 1,
         'numeric' => null,
     ];
 
+<<<<<<< HEAD
     /** @var string */
     private $axisType = '';
 
     /** @var ?AxisText */
     private $axisText;
+=======
+    private string $axisType = '';
+
+    private ?AxisText $axisText = null;
+
+    private ?Title $dispUnitsTitle = null;
+>>>>>>> match
 
     /**
      * Axis Options.
      *
+<<<<<<< HEAD
      * @var mixed[]
      */
     private $axisOptions = [
+=======
+     * @var array<string, null|string>
+     */
+    private array $axisOptions = [
+>>>>>>> match
         'minimum' => null,
         'maximum' => null,
         'major_unit' => null,
@@ -76,14 +106,45 @@ class Axis extends Properties
         'majorTimeUnit' => self::TIME_UNIT_YEARS,
         'minorTimeUnit' => self::TIME_UNIT_MONTHS,
         'baseTimeUnit' => self::TIME_UNIT_DAYS,
+<<<<<<< HEAD
+=======
+        'logBase' => null,
+        'dispUnitsBuiltIn' => null,
+    ];
+    public const DISP_UNITS_HUNDREDS = 'hundreds';
+    public const DISP_UNITS_THOUSANDS = 'thousands';
+    public const DISP_UNITS_TEN_THOUSANDS = 'tenThousands';
+    public const DISP_UNITS_HUNDRED_THOUSANDS = 'hundredThousands';
+    public const DISP_UNITS_MILLIONS = 'millions';
+    public const DISP_UNITS_TEN_MILLIONS = 'tenMillions';
+    public const DISP_UNITS_HUNDRED_MILLIONS = 'hundredMillions';
+    public const DISP_UNITS_BILLIONS = 'billions';
+    public const DISP_UNITS_TRILLIONS = 'trillions';
+    public const TRILLION_INDEX = (PHP_INT_SIZE > 4) ? 1000000000000 : '1000000000000';
+    public const DISP_UNITS_BUILTIN_INT = [
+        100 => self::DISP_UNITS_HUNDREDS,
+        1000 => self::DISP_UNITS_THOUSANDS,
+        10000 => self::DISP_UNITS_TEN_THOUSANDS,
+        100000 => self::DISP_UNITS_HUNDRED_THOUSANDS,
+        1000000 => self::DISP_UNITS_MILLIONS,
+        10000000 => self::DISP_UNITS_TEN_MILLIONS,
+        100000000 => self::DISP_UNITS_HUNDRED_MILLIONS,
+        1000000000 => self::DISP_UNITS_BILLIONS,
+        self::TRILLION_INDEX => self::DISP_UNITS_TRILLIONS, // overflow for 32-bit
+>>>>>>> match
     ];
 
     /**
      * Fill Properties.
+<<<<<<< HEAD
      *
      * @var ChartColor
      */
     private $fillColor;
+=======
+     */
+    private ChartColor $fillColor;
+>>>>>>> match
 
     private const NUMERIC_FORMAT = [
         Properties::FORMAT_CODE_NUMBER,
@@ -91,6 +152,7 @@ class Axis extends Properties
         Properties::FORMAT_CODE_DATE_ISO8601,
     ];
 
+<<<<<<< HEAD
     /** @var bool */
     private $noFill = false;
 
@@ -102,6 +164,16 @@ class Axis extends Properties
     public function setAxisNumberProperties($format_code, ?bool $numeric = null, int $sourceLinked = 0): void
     {
         $format = (string) $format_code;
+=======
+    private bool $noFill = false;
+
+    /**
+     * Get Series Data Type.
+     */
+    public function setAxisNumberProperties(string $format_code, ?bool $numeric = null, int $sourceLinked = 0): void
+    {
+        $format = $format_code;
+>>>>>>> match
         $this->axisNumber['format'] = $format;
         $this->axisNumber['source_linked'] = $sourceLinked;
         if (is_bool($numeric)) {
@@ -113,20 +185,30 @@ class Axis extends Properties
 
     /**
      * Get Axis Number Format Data Type.
+<<<<<<< HEAD
      *
      * @return string
      */
     public function getAxisNumberFormat()
+=======
+     */
+    public function getAxisNumberFormat(): string
+>>>>>>> match
     {
         return $this->axisNumber['format'];
     }
 
     /**
      * Get Axis Number Source Linked.
+<<<<<<< HEAD
      *
      * @return string
      */
     public function getAxisNumberSourceLinked()
+=======
+     */
+    public function getAxisNumberSourceLinked(): string
+>>>>>>> match
     {
         return (string) $this->axisNumber['source_linked'];
     }
@@ -136,10 +218,17 @@ class Axis extends Properties
         return $this->axisType === self::AXIS_TYPE_DATE || (bool) $this->axisNumber['numeric'];
     }
 
+<<<<<<< HEAD
     public function setAxisOption(string $key, ?string $value): void
     {
         if ($value !== null && $value !== '') {
             $this->axisOptions[$key] = $value;
+=======
+    public function setAxisOption(string $key, null|float|int|string $value): void
+    {
+        if ($value !== null && $value !== '') {
+            $this->axisOptions[$key] = (string) $value;
+>>>>>>> match
         }
     }
 
@@ -153,6 +242,7 @@ class Axis extends Properties
         ?string $axisOrientation = null,
         ?string $majorTmt = null,
         ?string $minorTmt = null,
+<<<<<<< HEAD
         ?string $minimum = null,
         ?string $maximum = null,
         ?string $majorUnit = null,
@@ -162,6 +252,19 @@ class Axis extends Properties
         ?string $baseTimeUnit = null,
         ?string $majorTimeUnit = null,
         ?string $minorTimeUnit = null
+=======
+        null|float|int|string $minimum = null,
+        null|float|int|string $maximum = null,
+        null|float|int|string $majorUnit = null,
+        null|float|int|string $minorUnit = null,
+        null|float|int|string $textRotation = null,
+        ?string $hidden = null,
+        ?string $baseTimeUnit = null,
+        ?string $majorTimeUnit = null,
+        ?string $minorTimeUnit = null,
+        null|float|int|string $logBase = null,
+        ?string $dispUnitsBuiltIn = null
+>>>>>>> match
     ): void {
         $this->axisOptions['axis_labels'] = $axisLabels;
         $this->setAxisOption('horizontal_crosses_value', $horizontalCrossesValue);
@@ -178,16 +281,26 @@ class Axis extends Properties
         $this->setAxisOption('baseTimeUnit', $baseTimeUnit);
         $this->setAxisOption('majorTimeUnit', $majorTimeUnit);
         $this->setAxisOption('minorTimeUnit', $minorTimeUnit);
+<<<<<<< HEAD
+=======
+        $this->setAxisOption('logBase', $logBase);
+        $this->setAxisOption('dispUnitsBuiltIn', $dispUnitsBuiltIn);
+>>>>>>> match
     }
 
     /**
      * Get Axis Options Property.
+<<<<<<< HEAD
      *
      * @param string $property
      *
      * @return ?string
      */
     public function getAxisOptionsProperty($property)
+=======
+     */
+    public function getAxisOptionsProperty(string $property): ?string
+>>>>>>> match
     {
         if ($property === 'textRotation') {
             if ($this->axisText !== null) {
@@ -202,10 +315,15 @@ class Axis extends Properties
 
     /**
      * Set Axis Orientation Property.
+<<<<<<< HEAD
      *
      * @param string $orientation
      */
     public function setAxisOrientation($orientation): void
+=======
+     */
+    public function setAxisOrientation(string $orientation): void
+>>>>>>> match
     {
         $this->axisOptions['orientation'] = (string) $orientation;
     }
@@ -228,24 +346,34 @@ class Axis extends Properties
 
     /**
      * Set Fill Property.
+<<<<<<< HEAD
      *
      * @param ?string $color
      * @param ?int $alpha
      * @param ?string $AlphaType
      */
     public function setFillParameters($color, $alpha = null, $AlphaType = ChartColor::EXCEL_COLOR_TYPE_RGB): void
+=======
+     */
+    public function setFillParameters(?string $color, ?int $alpha = null, ?string $AlphaType = ChartColor::EXCEL_COLOR_TYPE_RGB): void
+>>>>>>> match
     {
         $this->fillColor->setColorProperties($color, $alpha, $AlphaType);
     }
 
     /**
      * Get Fill Property.
+<<<<<<< HEAD
      *
      * @param string $property
      *
      * @return string
      */
     public function getFillProperty($property)
+=======
+     */
+    public function getFillProperty(string $property): string
+>>>>>>> match
     {
         return (string) $this->fillColor->getColorProperty($property);
     }
@@ -255,6 +383,7 @@ class Axis extends Properties
         return $this->fillColor;
     }
 
+<<<<<<< HEAD
     /**
      * Get Line Color Property.
      *
@@ -273,6 +402,9 @@ class Axis extends Properties
 
     /** @var string */
     private $crossBetween = ''; // 'between' or 'midCat' might be better
+=======
+    private string $crossBetween = ''; // 'between' or 'midCat' might be better
+>>>>>>> match
 
     public function setCrossBetween(string $crossBetween): self
     {
@@ -333,4 +465,32 @@ class Axis extends Properties
     {
         return $this->noFill;
     }
+<<<<<<< HEAD
+=======
+
+    public function setDispUnitsTitle(?Title $dispUnitsTitle): self
+    {
+        $this->dispUnitsTitle = $dispUnitsTitle;
+
+        return $this;
+    }
+
+    public function getDispUnitsTitle(): ?Title
+    {
+        return $this->dispUnitsTitle;
+    }
+
+    /**
+     * Implement PHP __clone to create a deep clone, not just a shallow copy.
+     */
+    public function __clone()
+    {
+        parent::__clone();
+        $this->majorGridlines = ($this->majorGridlines === null) ? null : clone $this->majorGridlines;
+        $this->majorGridlines = ($this->minorGridlines === null) ? null : clone $this->minorGridlines;
+        $this->axisText = ($this->axisText === null) ? null : clone $this->axisText;
+        $this->dispUnitsTitle = ($this->dispUnitsTitle === null) ? null : clone $this->dispUnitsTitle;
+        $this->fillColor = clone $this->fillColor;
+    }
+>>>>>>> match
 }

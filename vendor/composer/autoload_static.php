@@ -23,7 +23,10 @@ class ComposerStaticIniteb2b2b308665f84e2e46c12f80a9462b
         '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
         '2203a247e6fda86070a5e4e07aed533a' => __DIR__ . '/..' . '/symfony/clock/Resources/now.php',
         '9d2b9fc6db0f153a0a149fefb182415e' => __DIR__ . '/..' . '/symfony/polyfill-php84/bootstrap.php',
+<<<<<<< HEAD
         '2cffec82183ee1cea088009cef9a6fc3' => __DIR__ . '/..' . '/ezyang/htmlpurifier/library/HTMLPurifier.composer.php',
+=======
+>>>>>>> match
         '1f87db08236948d07391152dccb70f04' => __DIR__ . '/..' . '/google/apiclient-services/autoload.php',
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
         'decc78cc4436b1292c6c0d151b19445c' => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib/bootstrap.php',
@@ -195,6 +198,10 @@ class ComposerStaticIniteb2b2b308665f84e2e46c12f80a9462b
         'C' => 
         array (
             'Composer\\Semver\\' => 16,
+<<<<<<< HEAD
+=======
+            'Composer\\Pcre\\' => 14,
+>>>>>>> match
             'Complex\\' => 8,
         ),
         'A' => 
@@ -211,9 +218,15 @@ class ComposerStaticIniteb2b2b308665f84e2e46c12f80a9462b
         ),
         'phpDocumentor\\Reflection\\' => 
         array (
+<<<<<<< HEAD
             0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
             1 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
             2 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
+=======
+            0 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
+            1 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
+            2 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
+>>>>>>> match
         ),
         'ZipStream\\' => 
         array (
@@ -696,6 +709,13 @@ class ComposerStaticIniteb2b2b308665f84e2e46c12f80a9462b
         array (
             0 => __DIR__ . '/..' . '/composer/semver/src',
         ),
+<<<<<<< HEAD
+=======
+        'Composer\\Pcre\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/composer/pcre/src',
+        ),
+>>>>>>> match
         'Complex\\' => 
         array (
             0 => __DIR__ . '/..' . '/markbaker/complex/classes/src',
@@ -710,6 +730,7 @@ class ComposerStaticIniteb2b2b308665f84e2e46c12f80a9462b
         ),
     );
 
+<<<<<<< HEAD
     public static $prefixesPsr0 = array (
         'H' => 
         array (
@@ -720,6 +741,8 @@ class ComposerStaticIniteb2b2b308665f84e2e46c12f80a9462b
         ),
     );
 
+=======
+>>>>>>> match
     public static $classMap = array (
         'Collator' => __DIR__ . '/..' . '/symfony/polyfill-intl-icu/Resources/stubs/Collator.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
@@ -1396,7 +1419,10 @@ class ComposerStaticIniteb2b2b308665f84e2e46c12f80a9462b
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticIniteb2b2b308665f84e2e46c12f80a9462b::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticIniteb2b2b308665f84e2e46c12f80a9462b::$prefixDirsPsr4;
+<<<<<<< HEAD
             $loader->prefixesPsr0 = ComposerStaticIniteb2b2b308665f84e2e46c12f80a9462b::$prefixesPsr0;
+=======
+>>>>>>> match
             $loader->classMap = ComposerStaticIniteb2b2b308665f84e2e46c12f80a9462b::$classMap;
 
         }, null, ClassLoader::class);

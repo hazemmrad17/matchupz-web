@@ -6,5 +6,8 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+<<<<<<< HEAD
     'HTMLPurifier' => array($vendorDir . '/ezyang/htmlpurifier/library'),
+=======
+>>>>>>> match
 );

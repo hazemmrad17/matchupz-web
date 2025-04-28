@@ -6,11 +6,17 @@ use PhpOffice\PhpSpreadsheet\Calculation\Financial\Constants as FinancialConstan
 
 class InterestAndPrincipal
 {
+<<<<<<< HEAD
     /** @var float */
     protected $interest;
 
     /** @var float */
     protected $principal;
+=======
+    protected float $interest;
+
+    protected float $principal;
+>>>>>>> match
 
     public function __construct(
         float $rate = 0.0,

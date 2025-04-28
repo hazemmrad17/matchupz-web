@@ -8,12 +8,17 @@ use PhpOffice\PhpSpreadsheet\Cell\AddressHelper;
 use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
 use PhpOffice\PhpSpreadsheet\Cell\DataType;
 use PhpOffice\PhpSpreadsheet\DefinedName;
+<<<<<<< HEAD
+=======
+use PhpOffice\PhpSpreadsheet\Helper\Html as HelperHtml;
+>>>>>>> match
 use PhpOffice\PhpSpreadsheet\Reader\Security\XmlScanner;
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx\Namespaces;
 use PhpOffice\PhpSpreadsheet\Reader\Xml\PageSettings;
 use PhpOffice\PhpSpreadsheet\Reader\Xml\Properties;
 use PhpOffice\PhpSpreadsheet\Reader\Xml\Style;
 use PhpOffice\PhpSpreadsheet\RichText\RichText;
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Settings;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
 use PhpOffice\PhpSpreadsheet\Shared\File;
@@ -21,6 +26,15 @@ use PhpOffice\PhpSpreadsheet\Shared\StringHelper;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use SimpleXMLElement;
+=======
+use PhpOffice\PhpSpreadsheet\Shared\Date;
+use PhpOffice\PhpSpreadsheet\Shared\File;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Worksheet\SheetView;
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
+use SimpleXMLElement;
+use Throwable;
+>>>>>>> match
 
 /**
  * Reader for SpreadsheetML, the XML schema for Microsoft Office Excel 2003.
@@ -31,10 +45,15 @@ class Xml extends BaseReader
 
     /**
      * Formats.
+<<<<<<< HEAD
      *
      * @var array
      */
     protected $styles = [];
+=======
+     */
+    protected array $styles = [];
+>>>>>>> match
 
     /**
      * Create a new Excel2003XML Reader instance.
@@ -43,10 +62,30 @@ class Xml extends BaseReader
     {
         parent::__construct();
         $this->securityScanner = XmlScanner::getInstance($this);
+<<<<<<< HEAD
     }
 
     /** @var string */
     private $fileContents = '';
+=======
+        /** @var callable */
+        $unentity = [self::class, 'unentity'];
+        $this->securityScanner->setAdditionalCallback($unentity);
+    }
+
+    public static function unentity(string $contents): string
+    {
+        $contents = preg_replace('/&(amp|lt|gt|quot|apos);/', "\u{fffe}\u{feff}\$1;", trim($contents)) ?? $contents;
+        $contents = html_entity_decode($contents, ENT_NOQUOTES | ENT_SUBSTITUTE | ENT_HTML401, 'UTF-8');
+        $contents = str_replace("\u{fffe}\u{feff}", '&', $contents);
+
+        return $contents;
+    }
+
+    private string $fileContents = '';
+
+    private string $xmlFailMessage = '';
+>>>>>>> match
 
     public static function xmlMappings(): array
     {
@@ -77,7 +116,12 @@ class Xml extends BaseReader
         ];
 
         // Open file
+<<<<<<< HEAD
         $data = file_get_contents($filename) ?: '';
+=======
+        $data = (string) file_get_contents($filename);
+        $data = $this->getSecurityScannerOrThrow()->scan($data);
+>>>>>>> match
 
         // Why?
         //$data = str_replace("'", '"', $data); // fix headers with single quote
@@ -85,13 +129,18 @@ class Xml extends BaseReader
         $valid = true;
         foreach ($signature as $match) {
             // every part of the signature must be present
+<<<<<<< HEAD
             if (strpos($data, $match) === false) {
+=======
+            if (!str_contains($data, $match)) {
+>>>>>>> match
                 $valid = false;
 
                 break;
             }
         }
 
+<<<<<<< HEAD
         //    Retrieve charset encoding
         if (preg_match('/<?xml.*encoding=[\'"](.*?)[\'"].*?>/m', $data, $matches)) {
             $charSet = strtoupper($matches[1]);
@@ -100,11 +149,14 @@ class Xml extends BaseReader
                 $data = (string) preg_replace('/(<?xml.*encoding=[\'"]).*?([\'"].*?>)/um', '$1' . 'UTF-8' . '$2', $data, 1);
             }
         }
+=======
+>>>>>>> match
         $this->fileContents = $data;
 
         return $valid;
     }
 
+<<<<<<< HEAD
     /**
      * Check if the file is a valid SimpleXML.
      *
@@ -122,6 +174,35 @@ class Xml extends BaseReader
             );
         } catch (\Exception $e) {
             throw new Exception('Cannot load invalid XML file: ' . $filename, 0, $e);
+=======
+    /** @return false|SimpleXMLElement */
+    private function trySimpleXMLLoadStringPrivate(string $filename, string $fileOrString = 'file'): SimpleXMLElement|bool
+    {
+        $this->xmlFailMessage = "Cannot load invalid XML $fileOrString: " . $filename;
+        $xml = false;
+
+        try {
+            $data = $this->fileContents;
+            $continue = true;
+            if ($data === '' && $fileOrString === 'file') {
+                if ($filename === '') {
+                    $this->xmlFailMessage = 'Cannot load empty path';
+                    $continue = false;
+                } else {
+                    $datax = @file_get_contents($filename);
+                    $data = $datax ?: '';
+                    $continue = $datax !== false;
+                }
+            }
+            if ($continue) {
+                $xml = @simplexml_load_string(
+                    $this->getSecurityScannerOrThrow()
+                        ->scan($data)
+                );
+            }
+        } catch (Throwable $e) {
+            throw new Exception($this->xmlFailMessage, 0, $e);
+>>>>>>> match
         }
         $this->fileContents = '';
 
@@ -130,12 +211,17 @@ class Xml extends BaseReader
 
     /**
      * Reads names of the worksheets from a file, without parsing the whole file to a Spreadsheet object.
+<<<<<<< HEAD
      *
      * @param string $filename
      *
      * @return array
      */
     public function listWorksheetNames($filename)
+=======
+     */
+    public function listWorksheetNames(string $filename): array
+>>>>>>> match
     {
         File::assertFile($filename);
         if (!$this->canRead($filename)) {
@@ -144,7 +230,11 @@ class Xml extends BaseReader
 
         $worksheetNames = [];
 
+<<<<<<< HEAD
         $xml = $this->trySimpleXMLLoadString($filename);
+=======
+        $xml = $this->trySimpleXMLLoadStringPrivate($filename);
+>>>>>>> match
         if ($xml === false) {
             throw new Exception("Problem reading {$filename}");
         }
@@ -160,12 +250,17 @@ class Xml extends BaseReader
 
     /**
      * Return worksheet info (Name, Last Column Letter, Last Column Index, Total Rows, Total Columns).
+<<<<<<< HEAD
      *
      * @param string $filename
      *
      * @return array
      */
     public function listWorksheetInfo($filename)
+=======
+     */
+    public function listWorksheetInfo(string $filename): array
+>>>>>>> match
     {
         File::assertFile($filename);
         if (!$this->canRead($filename)) {
@@ -174,7 +269,11 @@ class Xml extends BaseReader
 
         $worksheetInfo = [];
 
+<<<<<<< HEAD
         $xml = $this->trySimpleXMLLoadString($filename);
+=======
+        $xml = $this->trySimpleXMLLoadStringPrivate($filename);
+>>>>>>> match
         if ($xml === false) {
             throw new Exception("Problem reading {$filename}");
         }
@@ -222,6 +321,10 @@ class Xml extends BaseReader
 
             $tmpInfo['lastColumnLetter'] = Coordinate::stringFromColumnIndex($tmpInfo['lastColumnIndex'] + 1);
             $tmpInfo['totalColumns'] = $tmpInfo['lastColumnIndex'] + 1;
+<<<<<<< HEAD
+=======
+            $tmpInfo['sheetState'] = Worksheet::SHEETSTATE_VISIBLE;
+>>>>>>> match
 
             $worksheetInfo[] = $tmpInfo;
             ++$worksheetID;
@@ -235,8 +338,13 @@ class Xml extends BaseReader
      */
     public function loadSpreadsheetFromString(string $contents): Spreadsheet
     {
+<<<<<<< HEAD
         // Create new Spreadsheet
         $spreadsheet = new Spreadsheet();
+=======
+        $spreadsheet = $this->newSpreadsheet();
+        $spreadsheet->setValueBinder($this->valueBinder);
+>>>>>>> match
         $spreadsheet->removeSheetByIndex(0);
 
         // Load into this instance
@@ -248,8 +356,13 @@ class Xml extends BaseReader
      */
     protected function loadSpreadsheetFromFile(string $filename): Spreadsheet
     {
+<<<<<<< HEAD
         // Create new Spreadsheet
         $spreadsheet = new Spreadsheet();
+=======
+        $spreadsheet = $this->newSpreadsheet();
+        $spreadsheet->setValueBinder($this->valueBinder);
+>>>>>>> match
         $spreadsheet->removeSheetByIndex(0);
 
         // Load into this instance
@@ -265,16 +378,29 @@ class Xml extends BaseReader
     {
         if ($useContents) {
             $this->fileContents = $filename;
+<<<<<<< HEAD
+=======
+            $fileOrString = 'string';
+>>>>>>> match
         } else {
             File::assertFile($filename);
             if (!$this->canRead($filename)) {
                 throw new Exception($filename . ' is an Invalid Spreadsheet file.');
             }
+<<<<<<< HEAD
         }
 
         $xml = $this->trySimpleXMLLoadString($filename);
         if ($xml === false) {
             throw new Exception("Problem reading {$filename}");
+=======
+            $fileOrString = 'file';
+        }
+
+        $xml = $this->trySimpleXMLLoadStringPrivate($filename, $fileOrString);
+        if ($xml === false) {
+            throw new Exception($this->xmlFailMessage);
+>>>>>>> match
         }
 
         $namespaces = $xml->getNamespaces(true);
@@ -295,8 +421,13 @@ class Xml extends BaseReader
             $worksheet_ss = self::getAttributes($worksheet, self::NAMESPACES_SS);
 
             if (
+<<<<<<< HEAD
                 isset($this->loadSheetsOnly, $worksheet_ss['Name']) &&
                 (!in_array($worksheet_ss['Name'], /** @scrutinizer ignore-type */ $this->loadSheetsOnly))
+=======
+                isset($this->loadSheetsOnly, $worksheet_ss['Name'])
+                && (!in_array($worksheet_ss['Name'], $this->loadSheetsOnly))
+>>>>>>> match
             ) {
                 continue;
             }
@@ -382,11 +513,16 @@ class Xml extends BaseReader
 
                     $columnID = 'A';
                     foreach ($rowData->Cell as $cell) {
+<<<<<<< HEAD
+=======
+                        $arrayRef = '';
+>>>>>>> match
                         $cell_ss = self::getAttributes($cell, self::NAMESPACES_SS);
                         if (isset($cell_ss['Index'])) {
                             $columnID = Coordinate::stringFromColumnIndex((int) $cell_ss['Index']);
                         }
                         $cellRange = $columnID . $rowID;
+<<<<<<< HEAD
 
                         if ($this->getReadFilter() !== null) {
                             if (!$this->getReadFilter()->readCell($columnID, $rowID, $worksheetName)) {
@@ -394,6 +530,17 @@ class Xml extends BaseReader
 
                                 continue;
                             }
+=======
+                        if (isset($cell_ss['ArrayRange'])) {
+                            $arrayRange = (string) $cell_ss['ArrayRange'];
+                            $arrayRef = AddressHelper::convertFormulaToA1($arrayRange, $rowID, Coordinate::columnIndexFromString($columnID));
+                        }
+
+                        if (!$this->getReadFilter()->readCell($columnID, $rowID, $worksheetName)) {
+                            ++$columnID;
+
+                            continue;
+>>>>>>> match
                         }
 
                         if (isset($cell_ss['HRef'])) {
@@ -419,6 +566,12 @@ class Xml extends BaseReader
                         if (isset($cell_ss['Formula'])) {
                             $cellDataFormula = $cell_ss['Formula'];
                             $hasCalculatedValue = true;
+<<<<<<< HEAD
+=======
+                            if ($arrayRef !== '') {
+                                $spreadsheet->getActiveSheet()->getCell($columnID . $rowID)->setFormulaAttributes(['t' => 'array', 'ref' => $arrayRef]);
+                            }
+>>>>>>> match
                         }
                         if (isset($cell->Data)) {
                             $cellData = $cell->Data;
@@ -439,6 +592,17 @@ class Xml extends BaseReader
                                     */
                                     case 'String':
                                         $type = DataType::TYPE_STRING;
+<<<<<<< HEAD
+=======
+                                        $rich = $cellData->children('http://www.w3.org/TR/REC-html40');
+                                        if ($rich) {
+                                            // in case of HTML content we extract the payload
+                                            // and convert it into a rich text object
+                                            $content = $cellData->asXML() ?: '';
+                                            $html = new HelperHtml();
+                                            $cellValue = $html->toRichTextObject($content, true);
+                                        }
+>>>>>>> match
 
                                         break;
                                     case 'Number':
@@ -468,6 +632,10 @@ class Xml extends BaseReader
                                 }
                             }
 
+<<<<<<< HEAD
+=======
+                            $originalType = $type;
+>>>>>>> match
                             if ($hasCalculatedValue) {
                                 $type = DataType::TYPE_FORMULA;
                                 $columnNumber = Coordinate::columnIndexFromString($columnID);
@@ -476,7 +644,11 @@ class Xml extends BaseReader
 
                             $spreadsheet->getActiveSheet()->getCell($columnID . $rowID)->setValueExplicit((($hasCalculatedValue) ? $cellDataFormula : $cellValue), $type);
                             if ($hasCalculatedValue) {
+<<<<<<< HEAD
                                 $spreadsheet->getActiveSheet()->getCell($columnID . $rowID)->setCalculatedValue($cellValue);
+=======
+                                $spreadsheet->getActiveSheet()->getCell($columnID . $rowID)->setCalculatedValue($cellValue, $originalType === DataType::TYPE_NUMERIC);
+>>>>>>> match
                             }
                             $rowHasData = true;
                         }
@@ -488,9 +660,12 @@ class Xml extends BaseReader
                         if (isset($cell_ss['StyleID'])) {
                             $style = (string) $cell_ss['StyleID'];
                             if ((isset($this->styles[$style])) && (!empty($this->styles[$style]))) {
+<<<<<<< HEAD
                                 //if (!$spreadsheet->getActiveSheet()->cellExists($columnID . $rowID)) {
                                 //    $spreadsheet->getActiveSheet()->getCell($columnID . $rowID)->setValue(null);
                                 //}
+=======
+>>>>>>> match
                                 $spreadsheet->getActiveSheet()->getStyle($cellRange)
                                     ->applyFromArray($this->styles[$style]);
                             }
@@ -517,6 +692,28 @@ class Xml extends BaseReader
             $dataValidations->loadDataValidations($worksheet, $spreadsheet);
             $xmlX = $worksheet->children(Namespaces::URN_EXCEL);
             if (isset($xmlX->WorksheetOptions)) {
+<<<<<<< HEAD
+=======
+                if (isset($xmlX->WorksheetOptions->ShowPageBreakZoom)) {
+                    $spreadsheet->getActiveSheet()->getSheetView()->setView(SheetView::SHEETVIEW_PAGE_BREAK_PREVIEW);
+                }
+                if (isset($xmlX->WorksheetOptions->Zoom)) {
+                    $zoomScaleNormal = (int) $xmlX->WorksheetOptions->Zoom;
+                    if ($zoomScaleNormal > 0) {
+                        $spreadsheet->getActiveSheet()->getSheetView()->setZoomScaleNormal($zoomScaleNormal);
+                        $spreadsheet->getActiveSheet()->getSheetView()->setZoomScale($zoomScaleNormal);
+                    }
+                }
+                if (isset($xmlX->WorksheetOptions->PageBreakZoom)) {
+                    $zoomScaleNormal = (int) $xmlX->WorksheetOptions->PageBreakZoom;
+                    if ($zoomScaleNormal > 0) {
+                        $spreadsheet->getActiveSheet()->getSheetView()->setZoomScaleSheetLayoutView($zoomScaleNormal);
+                    }
+                }
+                if (isset($xmlX->WorksheetOptions->ShowPageBreakZoom)) {
+                    $spreadsheet->getActiveSheet()->getSheetView()->setView(SheetView::SHEETVIEW_PAGE_BREAK_PREVIEW);
+                }
+>>>>>>> match
                 if (isset($xmlX->WorksheetOptions->FreezePanes)) {
                     $freezeRow = $freezeColumn = 1;
                     if (isset($xmlX->WorksheetOptions->SplitHorizontal)) {
@@ -525,7 +722,48 @@ class Xml extends BaseReader
                     if (isset($xmlX->WorksheetOptions->SplitVertical)) {
                         $freezeColumn = (int) $xmlX->WorksheetOptions->SplitVertical + 1;
                     }
+<<<<<<< HEAD
                     $spreadsheet->getActiveSheet()->freezePane(Coordinate::stringFromColumnIndex($freezeColumn) . (string) $freezeRow);
+=======
+                    $leftTopRow = (string) $xmlX->WorksheetOptions->TopRowBottomPane;
+                    $leftTopColumn = (string) $xmlX->WorksheetOptions->LeftColumnRightPane;
+                    if (is_numeric($leftTopRow) && is_numeric($leftTopColumn)) {
+                        $leftTopCoordinate = Coordinate::stringFromColumnIndex((int) $leftTopColumn + 1) . (string) ($leftTopRow + 1);
+                        $spreadsheet->getActiveSheet()->freezePane(Coordinate::stringFromColumnIndex($freezeColumn) . (string) $freezeRow, $leftTopCoordinate, !isset($xmlX->WorksheetOptions->FrozenNoSplit));
+                    } else {
+                        $spreadsheet->getActiveSheet()->freezePane(Coordinate::stringFromColumnIndex($freezeColumn) . (string) $freezeRow, null, !isset($xmlX->WorksheetOptions->FrozenNoSplit));
+                    }
+                } elseif (isset($xmlX->WorksheetOptions->SplitVertical) || isset($xmlX->WorksheetOptions->SplitHorizontal)) {
+                    if (isset($xmlX->WorksheetOptions->SplitHorizontal)) {
+                        $ySplit = (int) $xmlX->WorksheetOptions->SplitHorizontal;
+                        $spreadsheet->getActiveSheet()->setYSplit($ySplit);
+                    }
+                    if (isset($xmlX->WorksheetOptions->SplitVertical)) {
+                        $xSplit = (int) $xmlX->WorksheetOptions->SplitVertical;
+                        $spreadsheet->getActiveSheet()->setXSplit($xSplit);
+                    }
+                    if (isset($xmlX->WorksheetOptions->LeftColumnVisible) || isset($xmlX->WorksheetOptions->TopRowVisible)) {
+                        $leftTopColumn = $leftTopRow = 1;
+                        if (isset($xmlX->WorksheetOptions->LeftColumnVisible)) {
+                            $leftTopColumn = 1 + (int) $xmlX->WorksheetOptions->LeftColumnVisible;
+                        }
+                        if (isset($xmlX->WorksheetOptions->TopRowVisible)) {
+                            $leftTopRow = 1 + (int) $xmlX->WorksheetOptions->TopRowVisible;
+                        }
+                        $leftTopCoordinate = Coordinate::stringFromColumnIndex($leftTopColumn) . "$leftTopRow";
+                        $spreadsheet->getActiveSheet()->setTopLeftCell($leftTopCoordinate);
+                    }
+
+                    $leftTopColumn = $leftTopRow = 1;
+                    if (isset($xmlX->WorksheetOptions->LeftColumnRightPane)) {
+                        $leftTopColumn = 1 + (int) $xmlX->WorksheetOptions->LeftColumnRightPane;
+                    }
+                    if (isset($xmlX->WorksheetOptions->TopRowBottomPane)) {
+                        $leftTopRow = 1 + (int) $xmlX->WorksheetOptions->TopRowBottomPane;
+                    }
+                    $leftTopCoordinate = Coordinate::stringFromColumnIndex($leftTopColumn) . "$leftTopRow";
+                    $spreadsheet->getActiveSheet()->setPaneTopLeftCell($leftTopCoordinate);
+>>>>>>> match
                 }
                 (new PageSettings($xmlX))->loadPageSettings($spreadsheet);
                 if (isset($xmlX->WorksheetOptions->TopRowVisible, $xmlX->WorksheetOptions->LeftColumnVisible)) {
@@ -565,6 +803,23 @@ class Xml extends BaseReader
                     }
                 }
             }
+<<<<<<< HEAD
+=======
+            if (isset($xmlX->PageBreaks)) {
+                if (isset($xmlX->PageBreaks->ColBreaks)) {
+                    foreach ($xmlX->PageBreaks->ColBreaks->ColBreak as $colBreak) {
+                        $colBreak = (string) $colBreak->Column;
+                        $spreadsheet->getActiveSheet()->setBreak([1 + (int) $colBreak, 1], Worksheet::BREAK_COLUMN);
+                    }
+                }
+                if (isset($xmlX->PageBreaks->RowBreaks)) {
+                    foreach ($xmlX->PageBreaks->RowBreaks->RowBreak as $rowBreak) {
+                        $rowBreak = (string) $rowBreak->Row;
+                        $spreadsheet->getActiveSheet()->setBreak([1, (int) $rowBreak], Worksheet::BREAK_ROW);
+                    }
+                }
+            }
+>>>>>>> match
             ++$worksheetID;
         }
 

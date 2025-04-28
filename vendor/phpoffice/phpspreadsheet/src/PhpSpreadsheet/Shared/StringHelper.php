@@ -2,6 +2,13 @@
 
 namespace PhpOffice\PhpSpreadsheet\Shared;
 
+<<<<<<< HEAD
+=======
+use PhpOffice\PhpSpreadsheet\Calculation\Calculation;
+use PhpOffice\PhpSpreadsheet\Exception as SpreadsheetException;
+use Stringable;
+
+>>>>>>> match
 class StringHelper
 {
     /**
@@ -9,6 +16,7 @@ class StringHelper
      *
      * @var string[]
      */
+<<<<<<< HEAD
     private static $controlCharacters = [];
 
     /**
@@ -52,6 +60,39 @@ class StringHelper
      * @var string
      */
     private static $iconvOptions = '//IGNORE//TRANSLIT';
+=======
+    private static array $controlCharacters = [];
+
+    /**
+     * SYLK Characters array.
+     */
+    private static array $SYLKCharacters = [];
+
+    /**
+     * Decimal separator.
+     */
+    private static ?string $decimalSeparator = null;
+
+    /**
+     * Thousands separator.
+     */
+    private static ?string $thousandsSeparator = null;
+
+    /**
+     * Currency code.
+     */
+    private static ?string $currencyCode = null;
+
+    /**
+     * Is iconv extension avalable?
+     */
+    private static ?bool $isIconvEnabled = null;
+
+    /**
+     * iconv options.
+     */
+    private static string $iconvOptions = '//IGNORE//TRANSLIT';
+>>>>>>> match
 
     /**
      * Build control characters array.
@@ -234,10 +275,15 @@ class StringHelper
 
     /**
      * Get whether iconv extension is available.
+<<<<<<< HEAD
      *
      * @return bool
      */
     public static function getIsIconvEnabled()
+=======
+     */
+    public static function getIsIconvEnabled(): bool
+>>>>>>> match
     {
         if (isset(self::$isIconvEnabled)) {
             return self::$isIconvEnabled;
@@ -288,10 +334,15 @@ class StringHelper
      * element or in the shared string <t> element.
      *
      * @param string $textValue Value to unescape
+<<<<<<< HEAD
      *
      * @return string
      */
     public static function controlCharacterOOXML2PHP($textValue)
+=======
+     */
+    public static function controlCharacterOOXML2PHP(string $textValue): string
+>>>>>>> match
     {
         self::buildCharacterSets();
 
@@ -310,10 +361,15 @@ class StringHelper
      * element or in the shared string <t> element.
      *
      * @param string $textValue Value to escape
+<<<<<<< HEAD
      *
      * @return string
      */
     public static function controlCharacterPHP2OOXML($textValue)
+=======
+     */
+    public static function controlCharacterPHP2OOXML(string $textValue): string
+>>>>>>> match
     {
         self::buildCharacterSets();
 
@@ -330,6 +386,7 @@ class StringHelper
         mb_substitute_character(65533); // Unicode substitution character
         // Phpstan does not think this can return false.
         $returnValue = mb_convert_encoding($textValue, 'UTF-8', 'UTF-8');
+<<<<<<< HEAD
         mb_substitute_character(/** @scrutinizer ignore-type */ $subst);
 
         return self::returnString($returnValue);
@@ -343,6 +400,11 @@ class StringHelper
     private static function returnString($value): string
     {
         return is_string($value) ? $value : '';
+=======
+        mb_substitute_character($subst);
+
+        return $returnValue;
+>>>>>>> match
     }
 
     /**
@@ -356,10 +418,15 @@ class StringHelper
     /**
      * Formats a numeric value as a string for output in various output writers forcing
      * point as decimal separator in case locale is other than English.
+<<<<<<< HEAD
      *
      * @param float|int|string $numericValue
      */
     public static function formatNumber($numericValue): string
+=======
+     */
+    public static function formatNumber(float|int|string|null $numericValue): string
+>>>>>>> match
     {
         if (is_float($numericValue)) {
             return str_replace(',', '.', (string) $numericValue);
@@ -376,7 +443,11 @@ class StringHelper
      * see OpenOffice.org's Documentation of the Microsoft Excel File Format, sect. 2.5.3.
      *
      * @param string $textValue UTF-8 encoded string
+<<<<<<< HEAD
      * @param mixed[] $arrcRuns Details of rich text runs in $value
+=======
+     * @param array<int, array{strlen: int, fontidx: int}> $arrcRuns Details of rich text runs in $value
+>>>>>>> match
      */
     public static function UTF8toBIFF8UnicodeShort(string $textValue, array $arrcRuns = []): string
     {
@@ -412,11 +483,17 @@ class StringHelper
      */
     public static function UTF8toBIFF8UnicodeLong(string $textValue): string
     {
+<<<<<<< HEAD
         // character count
         $ln = self::countCharacters($textValue, 'UTF-8');
 
         // characters
         $chars = self::convertEncoding($textValue, 'UTF-16LE', 'UTF-8');
+=======
+        // characters
+        $chars = self::convertEncoding($textValue, 'UTF-16LE', 'UTF-8');
+        $ln = (int) (strlen($chars) / 2);  // N.B. - strlen, not mb_strlen issue #642
+>>>>>>> match
 
         return pack('vC', $ln, 0x0001) . $chars;
     }
@@ -436,7 +513,11 @@ class StringHelper
             }
         }
 
+<<<<<<< HEAD
         return self::returnString(mb_convert_encoding($textValue, $to, $from));
+=======
+        return mb_convert_encoding($textValue, $to, $from);
+>>>>>>> match
     }
 
     /**
@@ -543,6 +624,26 @@ class StringHelper
         return implode('', $characters);
     }
 
+<<<<<<< HEAD
+=======
+    private static function useAlt(string $altValue, string $default, bool $trimAlt): string
+    {
+        return ($trimAlt ? trim($altValue) : $altValue) ?: $default;
+    }
+
+    private static function getLocaleValue(string $key, string $altKey, string $default, bool $trimAlt = false): string
+    {
+        $localeconv = localeconv();
+        $rslt = $localeconv[$key];
+        // win-1252 implements Euro as 0x80 plus other symbols
+        if (preg_match('//u', $rslt) !== 1) {
+            $rslt = '';
+        }
+
+        return $rslt ?: self::useAlt($localeconv[$altKey], $default, $trimAlt);
+    }
+
+>>>>>>> match
     /**
      * Get the decimal separator. If it has not yet been set explicitly, try to obtain number
      * formatting information from locale.
@@ -550,6 +651,7 @@ class StringHelper
     public static function getDecimalSeparator(): string
     {
         if (!isset(self::$decimalSeparator)) {
+<<<<<<< HEAD
             $localeconv = localeconv();
             self::$decimalSeparator = ($localeconv['decimal_point'] != '')
                 ? $localeconv['decimal_point'] : $localeconv['mon_decimal_point'];
@@ -558,6 +660,9 @@ class StringHelper
                 // Default to .
                 self::$decimalSeparator = '.';
             }
+=======
+            self::$decimalSeparator = self::getLocaleValue('decimal_point', 'mon_decimal_point', '.');
+>>>>>>> match
         }
 
         return self::$decimalSeparator;
@@ -567,9 +672,15 @@ class StringHelper
      * Set the decimal separator. Only used by NumberFormat::toFormattedString()
      * to format output by \PhpOffice\PhpSpreadsheet\Writer\Html and \PhpOffice\PhpSpreadsheet\Writer\Pdf.
      *
+<<<<<<< HEAD
      * @param string $separator Character for decimal separator
      */
     public static function setDecimalSeparator(string $separator): void
+=======
+     * @param ?string $separator Character for decimal separator
+     */
+    public static function setDecimalSeparator(?string $separator): void
+>>>>>>> match
     {
         self::$decimalSeparator = $separator;
     }
@@ -581,6 +692,7 @@ class StringHelper
     public static function getThousandsSeparator(): string
     {
         if (!isset(self::$thousandsSeparator)) {
+<<<<<<< HEAD
             $localeconv = localeconv();
             self::$thousandsSeparator = ($localeconv['thousands_sep'] != '')
                 ? $localeconv['thousands_sep'] : $localeconv['mon_thousands_sep'];
@@ -589,6 +701,9 @@ class StringHelper
                 // Default to .
                 self::$thousandsSeparator = ',';
             }
+=======
+            self::$thousandsSeparator = self::getLocaleValue('thousands_sep', 'mon_thousands_sep', ',');
+>>>>>>> match
         }
 
         return self::$thousandsSeparator;
@@ -598,9 +713,15 @@ class StringHelper
      * Set the thousands separator. Only used by NumberFormat::toFormattedString()
      * to format output by \PhpOffice\PhpSpreadsheet\Writer\Html and \PhpOffice\PhpSpreadsheet\Writer\Pdf.
      *
+<<<<<<< HEAD
      * @param string $separator Character for thousands separator
      */
     public static function setThousandsSeparator(string $separator): void
+=======
+     * @param ?string $separator Character for thousands separator
+     */
+    public static function setThousandsSeparator(?string $separator): void
+>>>>>>> match
     {
         self::$thousandsSeparator = $separator;
     }
@@ -609,6 +730,7 @@ class StringHelper
      *    Get the currency code. If it has not yet been set explicitly, try to obtain the
      *        symbol information from locale.
      */
+<<<<<<< HEAD
     public static function getCurrencyCode(): string
     {
         if (!empty(self::$currencyCode)) {
@@ -625,6 +747,12 @@ class StringHelper
             self::$currencyCode = $localeconv['int_curr_symbol'];
 
             return self::$currencyCode;
+=======
+    public static function getCurrencyCode(bool $trimAlt = false): string
+    {
+        if (!isset(self::$currencyCode)) {
+            self::$currencyCode = self::getLocaleValue('currency_symbol', 'int_curr_symbol', '$', $trimAlt);
+>>>>>>> match
         }
 
         return self::$currencyCode;
@@ -634,9 +762,15 @@ class StringHelper
      * Set the currency code. Only used by NumberFormat::toFormattedString()
      *        to format output by \PhpOffice\PhpSpreadsheet\Writer\Html and \PhpOffice\PhpSpreadsheet\Writer\Pdf.
      *
+<<<<<<< HEAD
      * @param string $currencyCode Character for currency code
      */
     public static function setCurrencyCode(string $currencyCode): void
+=======
+     * @param ?string $currencyCode Character for currency code
+     */
+    public static function setCurrencyCode(?string $currencyCode): void
+>>>>>>> match
     {
         self::$currencyCode = $currencyCode;
     }
@@ -653,7 +787,11 @@ class StringHelper
         self::buildCharacterSets();
 
         // If there is no escape character in the string there is nothing to do
+<<<<<<< HEAD
         if (strpos($textValue, '') === false) {
+=======
+        if (!str_contains($textValue, '')) {
+>>>>>>> match
             return $textValue;
         }
 
@@ -668,11 +806,17 @@ class StringHelper
      * Retrieve any leading numeric part of a string, or return the full string if no leading numeric
      * (handles basic integer or float, but not exponent or non decimal).
      *
+<<<<<<< HEAD
      * @param string $textValue
      *
      * @return mixed string or only the leading numeric part of the string
      */
     public static function testStringAsNumeric($textValue)
+=======
+     * @return float|string string or only the leading numeric part of the string
+     */
+    public static function testStringAsNumeric(string $textValue): float|string
+>>>>>>> match
     {
         if (is_numeric($textValue)) {
             return $textValue;
@@ -681,4 +825,44 @@ class StringHelper
 
         return (is_numeric(substr($textValue, 0, strlen((string) $v)))) ? $v : $textValue;
     }
+<<<<<<< HEAD
+=======
+
+    public static function strlenAllowNull(?string $string): int
+    {
+        return strlen("$string");
+    }
+
+    /** @param bool $convertBool If true, convert bool to locale-aware TRUE/FALSE rather than 1/null-string */
+    public static function convertToString(mixed $value, bool $throw = true, string $default = '', bool $convertBool = false): string
+    {
+        if ($convertBool && is_bool($value)) {
+            return $value ? Calculation::getTRUE() : Calculation::getFALSE();
+        }
+        if ($value === null || is_scalar($value) || $value instanceof Stringable) {
+            return (string) $value;
+        }
+
+        if ($throw) {
+            throw new SpreadsheetException('Unable to convert to string');
+        }
+
+        return $default;
+    }
+
+    /**
+     * Assist with POST items when samples are run in browser.
+     * Never run as part of unit tests, which are command line.
+     *
+     * @codeCoverageIgnore
+     */
+    public static function convertPostToString(string $index, string $default = ''): string
+    {
+        if (isset($_POST[$index])) {
+            return htmlentities(self::convertToString($_POST[$index], false, $default));
+        }
+
+        return $default;
+    }
+>>>>>>> match
 }

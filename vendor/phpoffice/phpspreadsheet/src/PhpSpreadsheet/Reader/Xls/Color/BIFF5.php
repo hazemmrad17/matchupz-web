@@ -65,12 +65,17 @@ class BIFF5
 
     /**
      * Map color array from BIFF5 built-in color index.
+<<<<<<< HEAD
      *
      * @param int $color
      *
      * @return array
      */
     public static function lookup($color)
+=======
+     */
+    public static function lookup(int $color): array
+>>>>>>> match
     {
         return ['rgb' => self::BIFF5_COLOR_MAP[$color] ?? '000000'];
     }

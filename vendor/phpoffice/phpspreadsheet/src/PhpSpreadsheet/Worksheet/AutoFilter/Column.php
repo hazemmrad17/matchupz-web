@@ -21,7 +21,11 @@ class Column
      *
      * @var string[]
      */
+<<<<<<< HEAD
     private static $filterTypes = [
+=======
+    private static array $filterTypes = [
+>>>>>>> match
         //    Currently we're not handling
         //        colorFilter
         //        extLst
@@ -41,13 +45,18 @@ class Column
      *
      * @var string[]
      */
+<<<<<<< HEAD
     private static $ruleJoins = [
+=======
+    private static array $ruleJoins = [
+>>>>>>> match
         self::AUTOFILTER_COLUMN_JOIN_AND,
         self::AUTOFILTER_COLUMN_JOIN_OR,
     ];
 
     /**
      * Autofilter.
+<<<<<<< HEAD
      *
      * @var null|AutoFilter
      */
@@ -73,28 +82,63 @@ class Column
      * @var string
      */
     private $join = self::AUTOFILTER_COLUMN_JOIN_OR;
+=======
+     */
+    private ?AutoFilter $parent;
+
+    /**
+     * Autofilter Column Index.
+     */
+    private string $columnIndex;
+
+    /**
+     * Autofilter Column Filter Type.
+     */
+    private string $filterType = self::AUTOFILTER_FILTERTYPE_FILTER;
+
+    /**
+     * Autofilter Multiple Rules And/Or.
+     */
+    private string $join = self::AUTOFILTER_COLUMN_JOIN_OR;
+>>>>>>> match
 
     /**
      * Autofilter Column Rules.
      *
      * @var Column\Rule[]
      */
+<<<<<<< HEAD
     private $ruleset = [];
+=======
+    private array $ruleset = [];
+>>>>>>> match
 
     /**
      * Autofilter Column Dynamic Attributes.
      *
+<<<<<<< HEAD
      * @var mixed[]
      */
     private $attributes = [];
+=======
+     * @var (float|int|string)[]
+     */
+    private array $attributes = [];
+>>>>>>> match
 
     /**
      * Create a new Column.
      *
      * @param string $column Column (e.g. A)
+<<<<<<< HEAD
      * @param AutoFilter $parent Autofilter for this column
      */
     public function __construct($column, ?AutoFilter $parent = null)
+=======
+     * @param ?AutoFilter $parent Autofilter for this column
+     */
+    public function __construct(string $column, ?AutoFilter $parent = null)
+>>>>>>> match
     {
         $this->columnIndex = $column;
         $this->parent = $parent;
@@ -109,10 +153,15 @@ class Column
 
     /**
      * Get AutoFilter column index as string eg: 'A'.
+<<<<<<< HEAD
      *
      * @return string
      */
     public function getColumnIndex()
+=======
+     */
+    public function getColumnIndex(): string
+>>>>>>> match
     {
         return $this->columnIndex;
     }
@@ -124,7 +173,11 @@ class Column
      *
      * @return $this
      */
+<<<<<<< HEAD
     public function setColumnIndex($column)
+=======
+    public function setColumnIndex(string $column): static
+>>>>>>> match
     {
         $this->setEvaluatedFalse();
         // Uppercase coordinate
@@ -140,10 +193,15 @@ class Column
 
     /**
      * Get this Column's AutoFilter Parent.
+<<<<<<< HEAD
      *
      * @return null|AutoFilter
      */
     public function getParent()
+=======
+     */
+    public function getParent(): ?AutoFilter
+>>>>>>> match
     {
         return $this->parent;
     }
@@ -153,7 +211,11 @@ class Column
      *
      * @return $this
      */
+<<<<<<< HEAD
     public function setParent(?AutoFilter $parent = null)
+=======
+    public function setParent(?AutoFilter $parent = null): static
+>>>>>>> match
     {
         $this->setEvaluatedFalse();
         $this->parent = $parent;
@@ -163,10 +225,15 @@ class Column
 
     /**
      * Get AutoFilter Type.
+<<<<<<< HEAD
      *
      * @return string
      */
     public function getFilterType()
+=======
+     */
+    public function getFilterType(): string
+>>>>>>> match
     {
         return $this->filterType;
     }
@@ -174,11 +241,17 @@ class Column
     /**
      * Set AutoFilter Type.
      *
+<<<<<<< HEAD
      * @param string $filterType
      *
      * @return $this
      */
     public function setFilterType($filterType)
+=======
+     * @return $this
+     */
+    public function setFilterType(string $filterType): static
+>>>>>>> match
     {
         $this->setEvaluatedFalse();
         if (!in_array($filterType, self::$filterTypes)) {
@@ -195,10 +268,15 @@ class Column
 
     /**
      * Get AutoFilter Multiple Rules And/Or Join.
+<<<<<<< HEAD
      *
      * @return string
      */
     public function getJoin()
+=======
+     */
+    public function getJoin(): string
+>>>>>>> match
     {
         return $this->join;
     }
@@ -210,7 +288,11 @@ class Column
      *
      * @return $this
      */
+<<<<<<< HEAD
     public function setJoin($join)
+=======
+    public function setJoin(string $join): static
+>>>>>>> match
     {
         $this->setEvaluatedFalse();
         // Lowercase And/Or
@@ -227,11 +309,19 @@ class Column
     /**
      * Set AutoFilter Attributes.
      *
+<<<<<<< HEAD
      * @param mixed[] $attributes
      *
      * @return $this
      */
     public function setAttributes($attributes)
+=======
+     * @param (float|int|string)[] $attributes
+     *
+     * @return $this
+     */
+    public function setAttributes(array $attributes): static
+>>>>>>> match
     {
         $this->setEvaluatedFalse();
         $this->attributes = $attributes;
@@ -243,11 +333,19 @@ class Column
      * Set An AutoFilter Attribute.
      *
      * @param string $name Attribute Name
+<<<<<<< HEAD
      * @param int|string $value Attribute Value
      *
      * @return $this
      */
     public function setAttribute($name, $value)
+=======
+     * @param float|int|string $value Attribute Value
+     *
+     * @return $this
+     */
+    public function setAttribute(string $name, $value): static
+>>>>>>> match
     {
         $this->setEvaluatedFalse();
         $this->attributes[$name] = $value;
@@ -258,9 +356,15 @@ class Column
     /**
      * Get AutoFilter Column Attributes.
      *
+<<<<<<< HEAD
      * @return int[]|string[]
      */
     public function getAttributes()
+=======
+     * @return (float|int|string)[]
+     */
+    public function getAttributes(): array
+>>>>>>> match
     {
         return $this->attributes;
     }
@@ -269,10 +373,15 @@ class Column
      * Get specific AutoFilter Column Attribute.
      *
      * @param string $name Attribute Name
+<<<<<<< HEAD
      *
      * @return null|int|string
      */
     public function getAttribute($name)
+=======
+     */
+    public function getAttribute(string $name): null|float|int|string
+>>>>>>> match
     {
         if (isset($this->attributes[$name])) {
             return $this->attributes[$name];
@@ -291,7 +400,11 @@ class Column
      *
      * @return Column\Rule[]
      */
+<<<<<<< HEAD
     public function getRules()
+=======
+    public function getRules(): array
+>>>>>>> match
     {
         return $this->ruleset;
     }
@@ -300,10 +413,15 @@ class Column
      * Get a specified AutoFilter Column Rule.
      *
      * @param int $index Rule index in the ruleset array
+<<<<<<< HEAD
      *
      * @return Column\Rule
      */
     public function getRule($index)
+=======
+     */
+    public function getRule(int $index): Column\Rule
+>>>>>>> match
     {
         if (!isset($this->ruleset[$index])) {
             $this->ruleset[$index] = new Column\Rule($this);
@@ -314,10 +432,15 @@ class Column
 
     /**
      * Create a new AutoFilter Column Rule in the ruleset.
+<<<<<<< HEAD
      *
      * @return Column\Rule
      */
     public function createRule()
+=======
+     */
+    public function createRule(): Column\Rule
+>>>>>>> match
     {
         $this->setEvaluatedFalse();
         if ($this->filterType === self::AUTOFILTER_FILTERTYPE_CUSTOMFILTER && count($this->ruleset) >= 2) {
@@ -333,7 +456,11 @@ class Column
      *
      * @return $this
      */
+<<<<<<< HEAD
     public function addRule(Column\Rule $rule)
+=======
+    public function addRule(Column\Rule $rule): static
+>>>>>>> match
     {
         $this->setEvaluatedFalse();
         $rule->setParent($this);
@@ -350,7 +477,11 @@ class Column
      *
      * @return $this
      */
+<<<<<<< HEAD
     public function deleteRule($index)
+=======
+    public function deleteRule(int $index): static
+>>>>>>> match
     {
         $this->setEvaluatedFalse();
         if (isset($this->ruleset[$index])) {
@@ -369,7 +500,11 @@ class Column
      *
      * @return $this
      */
+<<<<<<< HEAD
     public function clearRules()
+=======
+    public function clearRules(): static
+>>>>>>> match
     {
         $this->setEvaluatedFalse();
         $this->ruleset = [];
@@ -384,6 +519,10 @@ class Column
     public function __clone()
     {
         $vars = get_object_vars($this);
+<<<<<<< HEAD
+=======
+        /** @var Column\Rule[] $value */
+>>>>>>> match
         foreach ($vars as $key => $value) {
             if ($key === 'parent') {
                 // Detach from autofilter parent

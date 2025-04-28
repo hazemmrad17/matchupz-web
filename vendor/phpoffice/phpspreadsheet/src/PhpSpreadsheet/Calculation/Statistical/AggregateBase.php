@@ -10,6 +10,7 @@ abstract class AggregateBase
      * MS Excel does not count Booleans if passed as cell values, but they are counted if passed as literals.
      * OpenOffice Calc always counts Booleans.
      * Gnumeric never counts Booleans.
+<<<<<<< HEAD
      *
      * @param mixed $arg
      * @param mixed $k
@@ -17,6 +18,10 @@ abstract class AggregateBase
      * @return int|mixed
      */
     protected static function testAcceptedBoolean($arg, $k)
+=======
+     */
+    protected static function testAcceptedBoolean(mixed $arg, mixed $k): mixed
+>>>>>>> match
     {
         if (!is_bool($arg)) {
             return $arg;
@@ -41,6 +46,7 @@ abstract class AggregateBase
         return $arg;
     }
 
+<<<<<<< HEAD
     /**
      * @param mixed $arg
      * @param mixed $k
@@ -48,6 +54,9 @@ abstract class AggregateBase
      * @return bool
      */
     protected static function isAcceptedCountable($arg, $k, bool $countNull = false)
+=======
+    protected static function isAcceptedCountable(mixed $arg, mixed $k, bool $countNull = false): bool
+>>>>>>> match
     {
         if ($countNull && $arg === null && !Functions::isCellValue($k) && Functions::getCompatibilityMode() !== Functions::COMPATIBILITY_GNUMERIC) {
             return true;

@@ -19,6 +19,7 @@ class BSE
 
     /**
      * The parent BLIP Store Entry Container.
+<<<<<<< HEAD
      * Property is never currently read.
      *
      * @var BstoreContainer
@@ -38,6 +39,21 @@ class BSE
      * @var int
      */
     private $blipType;
+=======
+     * Property is currently unused.
+     */
+    private BstoreContainer $parent;
+
+    /**
+     * The BLIP (Big Large Image or Picture).
+     */
+    private ?BSE\Blip $blip = null;
+
+    /**
+     * The BLIP type.
+     */
+    private int $blipType;
+>>>>>>> match
 
     /**
      * Set parent BLIP Store Entry Container.
@@ -47,12 +63,24 @@ class BSE
         $this->parent = $parent;
     }
 
+<<<<<<< HEAD
     /**
      * Get the BLIP.
      *
      * @return ?BSE\Blip
      */
     public function getBlip()
+=======
+    public function getParent(): BstoreContainer
+    {
+        return $this->parent;
+    }
+
+    /**
+     * Get the BLIP.
+     */
+    public function getBlip(): ?BSE\Blip
+>>>>>>> match
     {
         return $this->blip;
     }
@@ -68,20 +96,30 @@ class BSE
 
     /**
      * Get the BLIP type.
+<<<<<<< HEAD
      *
      * @return int
      */
     public function getBlipType()
+=======
+     */
+    public function getBlipType(): int
+>>>>>>> match
     {
         return $this->blipType;
     }
 
     /**
      * Set the BLIP type.
+<<<<<<< HEAD
      *
      * @param int $blipType
      */
     public function setBlipType($blipType): void
+=======
+     */
+    public function setBlipType(int $blipType): void
+>>>>>>> match
     {
         $this->blipType = $blipType;
     }

@@ -6,15 +6,34 @@ use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
 use PhpOffice\PhpSpreadsheet\Comment;
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx\Namespaces;
 use PhpOffice\PhpSpreadsheet\Shared\XMLWriter;
+<<<<<<< HEAD
 
 class Comments extends WriterPart
 {
+=======
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
+
+class Comments extends WriterPart
+{
+    private const VALID_HORIZONTAL_ALIGNMENT = [
+        Alignment::HORIZONTAL_CENTER,
+        Alignment::HORIZONTAL_DISTRIBUTED,
+        Alignment::HORIZONTAL_JUSTIFY,
+        Alignment::HORIZONTAL_LEFT,
+        Alignment::HORIZONTAL_RIGHT,
+    ];
+
+>>>>>>> match
     /**
      * Write comments to XML format.
      *
      * @return string XML Output
      */
+<<<<<<< HEAD
     public function writeComments(\PhpOffice\PhpSpreadsheet\Worksheet\Worksheet $worksheet)
+=======
+    public function writeComments(\PhpOffice\PhpSpreadsheet\Worksheet\Worksheet $worksheet): string
+>>>>>>> match
     {
         // Create XML writer
         $objWriter = null;
@@ -70,7 +89,11 @@ class Comments extends WriterPart
      * @param Comment $comment Comment
      * @param array $authors Array of authors
      */
+<<<<<<< HEAD
     private function writeComment(XMLWriter $objWriter, $cellReference, Comment $comment, array $authors): void
+=======
+    private function writeComment(XMLWriter $objWriter, string $cellReference, Comment $comment, array $authors): void
+>>>>>>> match
     {
         // comment
         $objWriter->startElement('comment');
@@ -90,7 +113,11 @@ class Comments extends WriterPart
      *
      * @return string XML Output
      */
+<<<<<<< HEAD
     public function writeVMLComments(\PhpOffice\PhpSpreadsheet\Worksheet\Worksheet $worksheet)
+=======
+    public function writeVMLComments(\PhpOffice\PhpSpreadsheet\Worksheet\Worksheet $worksheet): string
+>>>>>>> match
     {
         // Create XML writer
         $objWriter = null;
@@ -161,7 +188,11 @@ class Comments extends WriterPart
      * @param string $cellReference Cell reference, eg: 'A1'
      * @param Comment $comment Comment
      */
+<<<<<<< HEAD
     private function writeVMLComment(XMLWriter $objWriter, $cellReference, Comment $comment): void
+=======
+    private function writeVMLComment(XMLWriter $objWriter, string $cellReference, Comment $comment): void
+>>>>>>> match
     {
         // Metadata
         [$column, $row] = Coordinate::indexesFromString($cellReference);
@@ -200,12 +231,23 @@ class Comments extends WriterPart
         $objWriter->endElement();
 
         // v:textbox
+<<<<<<< HEAD
         $objWriter->startElement('v:textbox');
         $objWriter->writeAttribute('style', 'mso-direction-alt:auto');
 
         // div
         $objWriter->startElement('div');
         $objWriter->writeAttribute('style', 'text-align:left');
+=======
+        $textBoxArray = [Comment::TEXTBOX_DIRECTION_RTL => 'rtl', Comment::TEXTBOX_DIRECTION_LTR => 'ltr'];
+        $textboxRtl = $textBoxArray[strtolower($comment->getTextBoxDirection())] ?? 'auto';
+        $objWriter->startElement('v:textbox');
+        $objWriter->writeAttribute('style', "mso-direction-alt:$textboxRtl");
+
+        // div
+        $objWriter->startElement('div');
+        $objWriter->writeAttribute('style', ($textboxRtl === 'rtl' ? 'text-align:right;direction:rtl' : 'text-align:left'));
+>>>>>>> match
         $objWriter->endElement();
 
         $objWriter->endElement();
@@ -223,6 +265,15 @@ class Comments extends WriterPart
         // x:AutoFill
         $objWriter->writeElement('x:AutoFill', 'False');
 
+<<<<<<< HEAD
+=======
+        // x:TextHAlign horizontal alignment of text
+        $alignment = strtolower($comment->getAlignment());
+        if (in_array($alignment, self::VALID_HORIZONTAL_ALIGNMENT, true)) {
+            $objWriter->writeElement('x:TextHAlign', ucfirst($alignment));
+        }
+
+>>>>>>> match
         // x:Row
         $objWriter->writeElement('x:Row', (string) ($row - 1));
 

@@ -8,6 +8,7 @@ use PhpOffice\PhpSpreadsheet\Style\Style;
 
 class CellStyleAssessor
 {
+<<<<<<< HEAD
     /**
      * @var CellMatcher
      */
@@ -20,6 +21,17 @@ class CellStyleAssessor
 
     public function __construct(Cell $cell, string $conditionalRange)
     {
+=======
+    protected CellMatcher $cellMatcher;
+
+    protected StyleMerger $styleMerger;
+
+    protected Cell $cell;
+
+    public function __construct(Cell $cell, string $conditionalRange)
+    {
+        $this->cell = $cell;
+>>>>>>> match
         $this->cellMatcher = new CellMatcher($cell, $conditionalRange);
         $this->styleMerger = new StyleMerger($cell->getStyle());
     }
@@ -30,10 +42,16 @@ class CellStyleAssessor
     public function matchConditions(array $conditionalStyles = []): Style
     {
         foreach ($conditionalStyles as $conditional) {
+<<<<<<< HEAD
             /** @var Conditional $conditional */
             if ($this->cellMatcher->evaluateConditional($conditional) === true) {
                 // Merging the conditional style into the base style goes in here
                 $this->styleMerger->mergeStyle($conditional->getStyle());
+=======
+            if ($this->cellMatcher->evaluateConditional($conditional) === true) {
+                // Merging the conditional style into the base style goes in here
+                $this->styleMerger->mergeStyle($conditional->getStyle($this->cell->getValue()));
+>>>>>>> match
                 if ($conditional->getStopIfTrue() === true) {
                     break;
                 }
@@ -42,4 +60,31 @@ class CellStyleAssessor
 
         return $this->styleMerger->getStyle();
     }
+<<<<<<< HEAD
+=======
+
+    /**
+     * @param Conditional[] $conditionalStyles
+     */
+    public function matchConditionsReturnNullIfNoneMatched(array $conditionalStyles, string $cellData, bool $stopAtFirstMatch = false): ?Style
+    {
+        $matched = false;
+        $value = (float) $cellData;
+        foreach ($conditionalStyles as $conditional) {
+            if ($this->cellMatcher->evaluateConditional($conditional) === true) {
+                $matched = true;
+                // Merging the conditional style into the base style goes in here
+                $this->styleMerger->mergeStyle($conditional->getStyle($value));
+                if ($conditional->getStopIfTrue() === true || $stopAtFirstMatch) {
+                    break;
+                }
+            }
+        }
+        if ($matched) {
+            return $this->styleMerger->getStyle();
+        }
+
+        return null;
+    }
+>>>>>>> match
 }

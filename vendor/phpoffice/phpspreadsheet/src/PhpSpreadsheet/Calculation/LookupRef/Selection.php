@@ -24,7 +24,11 @@ class Selection
      *
      * @return mixed The selected value
      */
+<<<<<<< HEAD
     public static function choose($chosenEntry, ...$chooseArgs)
+=======
+    public static function choose(mixed $chosenEntry, mixed ...$chooseArgs): mixed
+>>>>>>> match
     {
         if (is_array($chosenEntry)) {
             return self::evaluateArrayArgumentsSubset([self::class, __FUNCTION__], 1, $chosenEntry, ...$chooseArgs);

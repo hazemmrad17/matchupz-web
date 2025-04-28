@@ -12,11 +12,14 @@
                     <h5 class="card-title mb-0">Réservation #{{ reservation.idReservation }}</h5>
                     <div>
                         <a href="{{ path('reservation_edit', {'id_reservation': reservation.idReservation}) }}" class="btn btn-sm btn-primary">Modifier</a>
+<<<<<<< HEAD
                         {% if isSyncedWithGoogleCalendar %}
                             <button class="btn btn-sm btn-success" disabled>Ajouté à Google Calendar</button>
                         {% else %}
                             <a href="{{ path('reservation_add_to_google_calendar', {'id_reservation': reservation.idReservation}) }}" class="btn btn-sm btn-success">Ajouter à Google Calendar</a>
                         {% endif %}
+=======
+>>>>>>> match
                         <a href="{{ path('reservation_index') }}" class="btn btn-sm btn-secondary">Retour à la liste</a>
                         <form method="post" action="{{ path('reservation_delete', {'id_reservation': reservation.idReservation}) }}" style="display:inline;" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce sport ?');">
                             <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ reservation.idReservation) }}">
@@ -26,7 +29,10 @@
                         </form>
                     </div>
                 </div>
+<<<<<<< HEAD
 
+=======
+>>>>>>> match
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-6">
@@ -46,6 +52,7 @@
                             <p>{{ reservation.status }}</p>
                         </div>
                     </div>
+<<<<<<< HEAD
 
                     <!-- Add the Google Calendar embed below the reservation details -->
                     <div class="row mt-4">
@@ -65,6 +72,10 @@
                     </div>
                 </div>
             </div>                                                      
+=======
+                </div>
+            </div>
+>>>>>>> match
         </div>
     </div>
 {% endblock %}

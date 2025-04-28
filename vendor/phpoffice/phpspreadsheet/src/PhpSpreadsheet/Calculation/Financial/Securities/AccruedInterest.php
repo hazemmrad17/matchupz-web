@@ -6,6 +6,10 @@ use PhpOffice\PhpSpreadsheet\Calculation\DateTimeExcel\YearFrac;
 use PhpOffice\PhpSpreadsheet\Calculation\Exception;
 use PhpOffice\PhpSpreadsheet\Calculation\Financial\Constants as FinancialConstants;
 use PhpOffice\PhpSpreadsheet\Calculation\Functions;
+<<<<<<< HEAD
+=======
+use PhpOffice\PhpSpreadsheet\Shared\StringHelper;
+>>>>>>> match
 
 class AccruedInterest
 {
@@ -40,11 +44,16 @@ class AccruedInterest
      *                         2               Actual/360
      *                         3               Actual/365
      *                         4               European 30/360
+<<<<<<< HEAD
      * @param mixed $calcMethod
+=======
+     * @param mixed $calcMethod Unused by PhpSpreadsheet, and apparently by Excel (https://exceljet.net/functions/accrint-function)
+>>>>>>> match
      *
      * @return float|string Result, or a string containing an error
      */
     public static function periodic(
+<<<<<<< HEAD
         $issue,
         $firstInterest,
         $settlement,
@@ -55,6 +64,17 @@ class AccruedInterest
         $calcMethod = self::ACCRINT_CALCMODE_ISSUE_TO_SETTLEMENT
     ) {
         self::doNothing($calcMethod);
+=======
+        mixed $issue,
+        mixed $firstInterest,
+        mixed $settlement,
+        mixed $rate,
+        mixed $parValue = 1000,
+        mixed $frequency = FinancialConstants::FREQUENCY_ANNUAL,
+        mixed $basis = FinancialConstants::BASIS_DAYS_PER_YEAR_NASD,
+        mixed $calcMethod = self::ACCRINT_CALCMODE_ISSUE_TO_SETTLEMENT
+    ) {
+>>>>>>> match
         $issue = Functions::flattenSingleValue($issue);
         $firstInterest = Functions::flattenSingleValue($firstInterest);
         $settlement = Functions::flattenSingleValue($settlement);
@@ -73,8 +93,12 @@ class AccruedInterest
             SecurityValidations::validateSecurityPeriod($issue, $settlement);
             $rate = SecurityValidations::validateRate($rate);
             $parValue = SecurityValidations::validateParValue($parValue);
+<<<<<<< HEAD
             $frequency = SecurityValidations::validateFrequency($frequency);
             self::doNothing($frequency);
+=======
+            SecurityValidations::validateFrequency($frequency);
+>>>>>>> match
             $basis = SecurityValidations::validateBasis($basis);
         } catch (Exception $e) {
             return $e->getMessage();
@@ -83,12 +107,20 @@ class AccruedInterest
         $daysBetweenIssueAndSettlement = Functions::scalar(YearFrac::fraction($issue, $settlement, $basis));
         if (!is_numeric($daysBetweenIssueAndSettlement)) {
             //    return date error
+<<<<<<< HEAD
             return $daysBetweenIssueAndSettlement;
+=======
+            return StringHelper::convertToString($daysBetweenIssueAndSettlement);
+>>>>>>> match
         }
         $daysBetweenFirstInterestAndSettlement = Functions::scalar(YearFrac::fraction($firstInterest, $settlement, $basis));
         if (!is_numeric($daysBetweenFirstInterestAndSettlement)) {
             //    return date error
+<<<<<<< HEAD
             return $daysBetweenFirstInterestAndSettlement;
+=======
+            return StringHelper::convertToString($daysBetweenFirstInterestAndSettlement);
+>>>>>>> match
         }
 
         return $parValue * $rate * $daysBetweenIssueAndSettlement;
@@ -117,11 +149,19 @@ class AccruedInterest
      * @return float|string Result, or a string containing an error
      */
     public static function atMaturity(
+<<<<<<< HEAD
         $issue,
         $settlement,
         $rate,
         $parValue = 1000,
         $basis = FinancialConstants::BASIS_DAYS_PER_YEAR_NASD
+=======
+        mixed $issue,
+        mixed $settlement,
+        mixed $rate,
+        mixed $parValue = 1000,
+        mixed $basis = FinancialConstants::BASIS_DAYS_PER_YEAR_NASD
+>>>>>>> match
     ) {
         $issue = Functions::flattenSingleValue($issue);
         $settlement = Functions::flattenSingleValue($settlement);
@@ -145,15 +185,22 @@ class AccruedInterest
         $daysBetweenIssueAndSettlement = Functions::scalar(YearFrac::fraction($issue, $settlement, $basis));
         if (!is_numeric($daysBetweenIssueAndSettlement)) {
             //    return date error
+<<<<<<< HEAD
             return $daysBetweenIssueAndSettlement;
+=======
+            return StringHelper::convertToString($daysBetweenIssueAndSettlement);
+>>>>>>> match
         }
 
         return $parValue * $rate * $daysBetweenIssueAndSettlement;
     }
+<<<<<<< HEAD
 
     /** @param mixed $arg */
     private static function doNothing($arg): bool
     {
         return (bool) $arg;
     }
+=======
+>>>>>>> match
 }

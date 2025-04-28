@@ -14,6 +14,10 @@ use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Knp\Snappy\Pdf;
+<<<<<<< HEAD
+=======
+use Knp\Component\Pager\PaginatorInterface;
+>>>>>>> match
 
 #[Route('/historique/club')]
 class HistoriqueClubController extends AbstractController
@@ -26,6 +30,7 @@ class HistoriqueClubController extends AbstractController
     }
 
     #[Route('/', name: 'app_historique_club_index', methods: ['GET'])]
+<<<<<<< HEAD
     public function index(HistoriqueClubRepository $historiqueClubRepository): Response
     {
         $stats = [
@@ -41,6 +46,40 @@ class HistoriqueClubController extends AbstractController
         return $this->render('historique_club/index.html.twig', [
             'historique_clubs' => $historiqueClubRepository->findAll(),
             'stats' => $stats,
+=======
+    public function index(Request $request, HistoriqueClubRepository $historiqueClubRepository, PaginatorInterface $paginator): Response
+    {
+        // Get the current page from the query parameter (default to 1)
+        $page = $request->query->getInt('page', 1);
+
+        // Create a query for pagination
+        $query = $historiqueClubRepository->createQueryBuilder('h')
+            ->orderBy('h.saisonDebut', 'DESC')
+            ->getQuery();
+
+        // Paginate the results (5 items per page)
+        $pagination = $paginator->paginate(
+            $query,
+            $page,
+            5
+        );
+
+        $stats = [
+            'total_players' => $historiqueClubRepository->countDistinctPlayers() ?? 0,
+            'new_players_this_month' => $historiqueClubRepository->countNewPlayersThisMonth() ?? 0,
+            'active_clubs' => $historiqueClubRepository->countActiveClubs() ?? 0,
+            'clubs_with_players' => $historiqueClubRepository->countClubsWithPlayers() ?? 0,
+            'avg_duration' => ($historiqueClubRepository->getAverageDuration() / 30) ?? 0.0,
+            'max_duration' => ($historiqueClubRepository->getMaxDuration() / 30) ?? 0.0,
+            'recent_updates' => $historiqueClubRepository->countRecentUpdates() ?? 0,
+        ];
+
+        return $this->render('historique_club/index.html.twig', [
+            'historique_clubs' => $pagination->getItems(),
+            'stats' => $stats,
+            'currentPage' => $pagination->getCurrentPageNumber(),
+            'totalPages' => ceil($pagination->getTotalItemCount() / $pagination->getItemNumberPerPage()),
+>>>>>>> match
         ]);
     }
 
@@ -48,11 +87,16 @@ class HistoriqueClubController extends AbstractController
     public function stats(HistoriqueClubRepository $historiqueClubRepository): Response
     {
         $stats = [
+<<<<<<< HEAD
             'total_entries' => $historiqueClubRepository->count([]),
+=======
+            'total_entries' => $historiqueClubRepository->count([]) ?? 0,
+>>>>>>> match
             'current_players' => $historiqueClubRepository->createQueryBuilder('h')
                 ->select('COUNT(h.idHistorique)')
                 ->where('h.saisonFin IS NULL')
                 ->getQuery()
+<<<<<<< HEAD
                 ->getSingleScalarResult(),
             'distinct_players' => $historiqueClubRepository->countDistinctPlayers(),
             'new_players_this_month' => $historiqueClubRepository->countNewPlayersThisMonth(),
@@ -62,6 +106,17 @@ class HistoriqueClubController extends AbstractController
             'max_duration' => $historiqueClubRepository->getMaxDuration(),
             'recent_updates' => $historiqueClubRepository->countRecentUpdates(),
             'club_distribution' => $historiqueClubRepository->getClubDistribution(), // For chart
+=======
+                ->getSingleScalarResult() ?? 0,
+            'distinct_players' => $historiqueClubRepository->countDistinctPlayers() ?? 0,
+            'new_players_this_month' => $historiqueClubRepository->countNewPlayersThisMonth() ?? 0,
+            'active_clubs' => $historiqueClubRepository->countActiveClubs() ?? 0,
+            'clubs_with_players' => $historiqueClubRepository->countClubsWithPlayers() ?? 0,
+            'average_duration' => $historiqueClubRepository->getAverageDuration() ?? 0.0,
+            'max_duration' => $historiqueClubRepository->getMaxDuration() ?? 0.0,
+            'recent_updates' => $historiqueClubRepository->countRecentUpdates() ?? 0,
+            'club_distribution' => $historiqueClubRepository->getClubDistribution() ?: [],
+>>>>>>> match
         ];
 
         return $this->render('historique_club/statistics.html.twig', [
@@ -72,7 +127,11 @@ class HistoriqueClubController extends AbstractController
     #[Route('/new', name: 'app_historique_club_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
+<<<<<<< HEAD
         $historiqueClub = new HistoriqueClub();
+=======
+        $historiqueClub = new HistoriqueClub;
+>>>>>>> match
         $form = $this->createForm(HistoriqueClubType::class, $historiqueClub);
         $form->handleRequest($request);
 
@@ -241,6 +300,7 @@ class HistoriqueClubController extends AbstractController
         $row = 2;
         foreach ($historiqueClubs as $historique) {
             $duration = $historique->getSaisonFin() 
+<<<<<<< HEAD
             ? $historique->getSaisonDebut()->diff($historique->getSaisonFin())->format('%y ans, %m mois')
             : 'En cours (' . $historique->getSaisonDebut()->diff(new \DateTime())->format('%y ans, %m mois') . ')';
 
@@ -263,3 +323,27 @@ class HistoriqueClubController extends AbstractController
     return $this->file($temp_file, $filename, ResponseHeaderBag::DISPOSITION_ATTACHMENT);
 }
 }
+=======
+                ? $historique->getSaisonDebut()->diff($historique->getSaisonFin())->format('%y ans, %m mois')
+                : 'En cours (' . $historique->getSaisonDebut()->diff(new \DateTime())->format('%y ans, %m mois') . ')';
+
+            $sheet->setCellValue('A' . $row, $historique->getJoueur()->getNom() . ' ' . $historique->getJoueur()->getPrenom());
+            $sheet->setCellValue('B' . $row, $historique->getNomClub());
+            $sheet->setCellValue('C' . $row, $historique->getSaisonDebut() ? $historique->getSaisonDebut()->format('m/Y') : 'N/A');
+            $sheet->setCellValue('D' . $row, $historique->getSaisonFin() ? $historique->getSaisonFin()->format('m/Y') : 'Actuel');
+            $sheet->setCellValue('E' . $row, $duration);
+
+            $row++;
+        }
+
+        $writer = new Xlsx($spreadsheet);
+        $filename = 'historique_clubs_export_' . date('Y-m-d') . '.xlsx';
+
+        // Create temporary file in memory
+        $temp_file = tempnam(sys_get_temp_dir(), $filename);
+        $writer->save($temp_file);
+
+        return $this->file($temp_file, $filename, ResponseHeaderBag::DISPOSITION_ATTACHMENT);
+    }
+}
+>>>>>>> match

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {
   "name": "sneat-bootstrap-html-admin-template-free",
   "description": "Most Powerful & Comprehensive Free Bootstrap 5 HTML Admin Dashboard Template built for developers! 🚀",
@@ -108,3 +109,6 @@
     "default": "development"
   }
 }
+=======
+{}
+>>>>>>> match

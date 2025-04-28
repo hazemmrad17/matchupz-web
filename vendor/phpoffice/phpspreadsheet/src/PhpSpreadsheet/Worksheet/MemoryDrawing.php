@@ -28,14 +28,20 @@ class MemoryDrawing extends BaseDrawing
 
     /**
      * Image resource.
+<<<<<<< HEAD
      *
      * @var null|GdImage|resource
      */
     private $imageResource;
+=======
+     */
+    private null|GdImage $imageResource = null;
+>>>>>>> match
 
     /**
      * Rendering function.
      *
+<<<<<<< HEAD
      * @var string
      */
     private $renderingFunction;
@@ -56,6 +62,21 @@ class MemoryDrawing extends BaseDrawing
 
     /** @var null|resource */
     private $alwaysNull;
+=======
+     * @var callable-string
+     */
+    private string $renderingFunction;
+
+    /**
+     * Mime type.
+     */
+    private string $mimeType;
+
+    /**
+     * Unique name.
+     */
+    private string $uniqueName;
+>>>>>>> match
 
     /**
      * Create a new MemoryDrawing.
@@ -66,7 +87,10 @@ class MemoryDrawing extends BaseDrawing
         $this->renderingFunction = self::RENDERING_DEFAULT;
         $this->mimeType = self::MIMETYPE_DEFAULT;
         $this->uniqueName = md5(mt_rand(0, 9999) . time() . mt_rand(0, 9999));
+<<<<<<< HEAD
         $this->alwaysNull = null;
+=======
+>>>>>>> match
 
         // Initialize parent
         parent::__construct();
@@ -75,10 +99,17 @@ class MemoryDrawing extends BaseDrawing
     public function __destruct()
     {
         if ($this->imageResource) {
+<<<<<<< HEAD
             $rslt = @imagedestroy($this->imageResource);
             // "Fix" for Scrutinizer
             $this->imageResource = $rslt ? null : $this->alwaysNull;
         }
+=======
+            @imagedestroy($this->imageResource);
+            $this->imageResource = null;
+        }
+        $this->worksheet = null;
+>>>>>>> match
     }
 
     public function __clone()
@@ -113,10 +144,15 @@ class MemoryDrawing extends BaseDrawing
             // If the image has transparency...
             $transparent = imagecolortransparent($this->imageResource);
             if ($transparent >= 0) {
+<<<<<<< HEAD
                 $rgb = imagecolorsforindex($this->imageResource, $transparent);
                 if (empty($rgb)) {
                     throw new Exception('Could not get image colors');
                 }
+=======
+                // Starting with Php8.0, next function throws rather than return false
+                $rgb = imagecolorsforindex($this->imageResource, $transparent);
+>>>>>>> match
 
                 imagesavealpha($clone, true);
                 $color = imagecolorallocatealpha($clone, $rgb['red'], $rgb['green'], $rgb['blue'], $rgb['alpha']);
@@ -162,6 +198,12 @@ class MemoryDrawing extends BaseDrawing
         }
 
         $mimeType = self::identifyMimeType($imageString);
+<<<<<<< HEAD
+=======
+        if (imageistruecolor($gdImage) || imagecolortransparent($gdImage) >= 0) {
+            imagesavealpha($gdImage, true);
+        }
+>>>>>>> match
         $renderingFunction = self::identifyRenderingFunction($mimeType);
 
         $drawing = new self();
@@ -172,6 +214,7 @@ class MemoryDrawing extends BaseDrawing
         return $drawing;
     }
 
+<<<<<<< HEAD
     private static function identifyRenderingFunction(string $mimeType): string
     {
         switch ($mimeType) {
@@ -184,6 +227,17 @@ class MemoryDrawing extends BaseDrawing
         }
 
         return self::RENDERING_DEFAULT;
+=======
+    /** @return callable-string */
+    private static function identifyRenderingFunction(string $mimeType): string
+    {
+        return match ($mimeType) {
+            self::MIMETYPE_PNG => self::RENDERING_PNG,
+            self::MIMETYPE_JPEG => self::RENDERING_JPEG,
+            self::MIMETYPE_GIF => self::RENDERING_GIF,
+            default => self::RENDERING_DEFAULT,
+        };
+>>>>>>> match
     }
 
     /**
@@ -230,7 +284,11 @@ class MemoryDrawing extends BaseDrawing
         if (function_exists('getimagesize')) {
             $imageSize = @getimagesize($temporaryFileName);
             if (is_array($imageSize)) {
+<<<<<<< HEAD
                 $mimeType = $imageSize['mime'] ?? null;
+=======
+                $mimeType = $imageSize['mime'];
+>>>>>>> match
 
                 return self::supportedMimeTypes($mimeType);
             }
@@ -250,10 +308,15 @@ class MemoryDrawing extends BaseDrawing
 
     /**
      * Get image resource.
+<<<<<<< HEAD
      *
      * @return null|GdImage|resource
      */
     public function getImageResource()
+=======
+     */
+    public function getImageResource(): ?GdImage
+>>>>>>> match
     {
         return $this->imageResource;
     }
@@ -261,11 +324,17 @@ class MemoryDrawing extends BaseDrawing
     /**
      * Set image resource.
      *
+<<<<<<< HEAD
      * @param GdImage|resource $value
      *
      * @return $this
      */
     public function setImageResource($value)
+=======
+     * @return $this
+     */
+    public function setImageResource(?GdImage $value): static
+>>>>>>> match
     {
         $this->imageResource = $value;
 
@@ -281,9 +350,15 @@ class MemoryDrawing extends BaseDrawing
     /**
      * Get rendering function.
      *
+<<<<<<< HEAD
      * @return string
      */
     public function getRenderingFunction()
+=======
+     * @return callable-string
+     */
+    public function getRenderingFunction(): string
+>>>>>>> match
     {
         return $this->renderingFunction;
     }
@@ -291,11 +366,19 @@ class MemoryDrawing extends BaseDrawing
     /**
      * Set rendering function.
      *
+<<<<<<< HEAD
      * @param string $value see self::RENDERING_*
      *
      * @return $this
      */
     public function setRenderingFunction($value)
+=======
+     * @param callable-string $value see self::RENDERING_*
+     *
+     * @return $this
+     */
+    public function setRenderingFunction(string $value): static
+>>>>>>> match
     {
         $this->renderingFunction = $value;
 
@@ -304,10 +387,15 @@ class MemoryDrawing extends BaseDrawing
 
     /**
      * Get mime type.
+<<<<<<< HEAD
      *
      * @return string
      */
     public function getMimeType()
+=======
+     */
+    public function getMimeType(): string
+>>>>>>> match
     {
         return $this->mimeType;
     }
@@ -319,7 +407,11 @@ class MemoryDrawing extends BaseDrawing
      *
      * @return $this
      */
+<<<<<<< HEAD
     public function setMimeType($value)
+=======
+    public function setMimeType(string $value): static
+>>>>>>> match
     {
         $this->mimeType = $value;
 
@@ -343,6 +435,7 @@ class MemoryDrawing extends BaseDrawing
      *
      * @return string Hash code
      */
+<<<<<<< HEAD
     public function getHashCode()
     {
         return md5(
@@ -351,6 +444,16 @@ class MemoryDrawing extends BaseDrawing
             $this->uniqueName .
             parent::getHashCode() .
             __CLASS__
+=======
+    public function getHashCode(): string
+    {
+        return md5(
+            $this->renderingFunction
+            . $this->mimeType
+            . $this->uniqueName
+            . parent::getHashCode()
+            . __CLASS__
+>>>>>>> match
         );
     }
 }

@@ -2,15 +2,26 @@
 
 namespace PhpOffice\PhpSpreadsheet\Writer\Ods;
 
+<<<<<<< HEAD
+=======
+use Composer\Pcre\Preg;
+use PhpOffice\PhpSpreadsheet\Calculation\Calculation;
+use PhpOffice\PhpSpreadsheet\Calculation\Exception as CalculationException;
+>>>>>>> match
 use PhpOffice\PhpSpreadsheet\Cell\Cell;
 use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
 use PhpOffice\PhpSpreadsheet\Cell\DataType;
 use PhpOffice\PhpSpreadsheet\Shared\XMLWriter;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Worksheet\Row;
 use PhpOffice\PhpSpreadsheet\Worksheet\RowCellIterator;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use PhpOffice\PhpSpreadsheet\Writer\Exception;
+=======
+use PhpOffice\PhpSpreadsheet\Worksheet\RowCellIterator;
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
+>>>>>>> match
 use PhpOffice\PhpSpreadsheet\Writer\Ods;
 use PhpOffice\PhpSpreadsheet\Writer\Ods\Cell\Comment;
 use PhpOffice\PhpSpreadsheet\Writer\Ods\Cell\Style;
@@ -20,11 +31,15 @@ use PhpOffice\PhpSpreadsheet\Writer\Ods\Cell\Style;
  */
 class Content extends WriterPart
 {
+<<<<<<< HEAD
     const NUMBER_COLS_REPEATED_MAX = 1024;
     const NUMBER_ROWS_REPEATED_MAX = 1048576;
 
     /** @var Formula */
     private $formulaConvertor;
+=======
+    private Formula $formulaConvertor;
+>>>>>>> match
 
     /**
      * Set parent Ods writer.
@@ -119,9 +134,16 @@ class Content extends WriterPart
      */
     private function writeSheets(XMLWriter $objWriter): void
     {
+<<<<<<< HEAD
         $spreadsheet = $this->getParentWriter()->getSpreadsheet(); /** @var Spreadsheet $spreadsheet */
         $sheetCount = $spreadsheet->getSheetCount();
         for ($sheetIndex = 0; $sheetIndex < $sheetCount; ++$sheetIndex) {
+=======
+        $spreadsheet = $this->getParentWriter()->getSpreadsheet();
+        $sheetCount = $spreadsheet->getSheetCount();
+        for ($sheetIndex = 0; $sheetIndex < $sheetCount; ++$sheetIndex) {
+            $spreadsheet->getSheet($sheetIndex)->calculateArrays($this->getParentWriter()->getPreCalculateFormulas());
+>>>>>>> match
             $objWriter->startElement('table:table');
             $objWriter->writeAttribute('table:name', $spreadsheet->getSheet($sheetIndex)->getTitle());
             $objWriter->writeAttribute('table:style-name', Style::TABLE_STYLE_PREFIX . (string) ($sheetIndex + 1));
@@ -142,7 +164,10 @@ class Content extends WriterPart
                     sprintf('%s_%d_%d', Style::COLUMN_STYLE_PREFIX, $sheetIndex, $columnDimension->getColumnNumeric())
                 );
                 $objWriter->writeAttribute('table:default-cell-style-name', 'ce0');
+<<<<<<< HEAD
 //                $objWriter->writeAttribute('table:number-columns-repeated', self::NUMBER_COLS_REPEATED_MAX);
+=======
+>>>>>>> match
                 $objWriter->endElement();
             }
             $this->writeRows($objWriter, $spreadsheet->getSheet($sheetIndex), $sheetIndex);
@@ -155,6 +180,7 @@ class Content extends WriterPart
      */
     private function writeRows(XMLWriter $objWriter, Worksheet $sheet, int $sheetIndex): void
     {
+<<<<<<< HEAD
         $numberRowsRepeated = self::NUMBER_ROWS_REPEATED_MAX;
         $span_row = 0;
         $rows = $sheet->getRowIterator();
@@ -183,6 +209,35 @@ class Content extends WriterPart
                 $objWriter->endElement();
             } else {
                 ++$span_row;
+=======
+        $spanRow = 0;
+        $rows = $sheet->getRowIterator();
+        foreach ($rows as $row) {
+            $cellIterator = $row->getCellIterator(iterateOnlyExistingCells: true);
+            $cellIterator->rewind();
+            $rowStyleExists = $sheet->rowDimensionExists($row->getRowIndex()) && $sheet->getRowDimension($row->getRowIndex())->getRowHeight() > 0;
+            if ($cellIterator->valid() || $rowStyleExists) {
+                if ($spanRow) {
+                    $objWriter->startElement('table:table-row');
+                    $objWriter->writeAttribute(
+                        'table:number-rows-repeated',
+                        (string) $spanRow
+                    );
+                    $objWriter->endElement();
+                    $spanRow = 0;
+                }
+                $objWriter->startElement('table:table-row');
+                if ($rowStyleExists) {
+                    $objWriter->writeAttribute(
+                        'table:style-name',
+                        sprintf('%s_%d_%d', Style::ROW_STYLE_PREFIX, $sheetIndex, $row->getRowIndex())
+                    );
+                }
+                $this->writeCells($objWriter, $cellIterator);
+                $objWriter->endElement();
+            } else {
+                ++$spanRow;
+>>>>>>> match
             }
         }
     }
@@ -192,11 +247,19 @@ class Content extends WriterPart
      */
     private function writeCells(XMLWriter $objWriter, RowCellIterator $cells): void
     {
+<<<<<<< HEAD
         $numberColsRepeated = self::NUMBER_COLS_REPEATED_MAX;
         $prevColumn = -1;
         foreach ($cells as $cell) {
             /** @var \PhpOffice\PhpSpreadsheet\Cell\Cell $cell */
             $column = Coordinate::columnIndexFromString($cell->getColumn()) - 1;
+=======
+        $prevColumn = -1;
+        foreach ($cells as $cell) {
+            /** @var Cell $cell */
+            $column = Coordinate::columnIndexFromString($cell->getColumn()) - 1;
+            $attributes = $cell->getFormulaAttributes() ?? [];
+>>>>>>> match
 
             $this->writeCellSpan($objWriter, $column, $prevColumn);
             $objWriter->startElement('table:table-cell');
@@ -204,15 +267,24 @@ class Content extends WriterPart
 
             // Style XF
             $style = $cell->getXfIndex();
+<<<<<<< HEAD
             if ($style !== null) {
                 $objWriter->writeAttribute('table:style-name', Style::CELL_STYLE_PREFIX . $style);
             }
+=======
+            $objWriter->writeAttribute('table:style-name', Style::CELL_STYLE_PREFIX . $style);
+>>>>>>> match
 
             switch ($cell->getDataType()) {
                 case DataType::TYPE_BOOL:
                     $objWriter->writeAttribute('office:value-type', 'boolean');
+<<<<<<< HEAD
                     $objWriter->writeAttribute('office:value', $cell->getValue());
                     $objWriter->writeElement('text:p', $cell->getValue());
+=======
+                    $objWriter->writeAttribute('office:boolean-value', $cell->getValue() ? 'true' : 'false');
+                    $objWriter->writeElement('text:p', Calculation::getInstance()->getLocaleBoolean($cell->getValue() ? 'TRUE' : 'FALSE'));
+>>>>>>> match
 
                     break;
                 case DataType::TYPE_ERROR:
@@ -223,6 +295,7 @@ class Content extends WriterPart
 
                     break;
                 case DataType::TYPE_FORMULA:
+<<<<<<< HEAD
                     $formulaValue = $cell->getValue();
                     if ($this->getParentWriter()->getPreCalculateFormulas()) {
                         try {
@@ -232,6 +305,33 @@ class Content extends WriterPart
                         }
                     }
                     $objWriter->writeAttribute('table:formula', $this->formulaConvertor->convertFormula($cell->getValue()));
+=======
+                    $formulaValue = $cell->getValueString();
+                    if ($this->getParentWriter()->getPreCalculateFormulas()) {
+                        try {
+                            $formulaValue = $cell->getCalculatedValueString();
+                        } catch (CalculationException $e) {
+                            // don't do anything
+                        }
+                    }
+                    if (isset($attributes['ref'])) {
+                        if (Preg::isMatch('/^([A-Z]{1,3})([0-9]{1,7})(:([A-Z]{1,3})([0-9]{1,7}))?$/', (string) $attributes['ref'], $matches)) {
+                            $matrixRowSpan = 1;
+                            $matrixColSpan = 1;
+                            if (isset($matches[3])) {
+                                $minRow = (int) $matches[2];
+                                $maxRow = (int) $matches[5];
+                                $matrixRowSpan = $maxRow - $minRow + 1;
+                                $minCol = Coordinate::columnIndexFromString($matches[1]);
+                                $maxCol = Coordinate::columnIndexFromString($matches[4]);
+                                $matrixColSpan = $maxCol - $minCol + 1;
+                            }
+                            $objWriter->writeAttribute('table:number-matrix-columns-spanned', "$matrixColSpan");
+                            $objWriter->writeAttribute('table:number-matrix-rows-spanned', "$matrixRowSpan");
+                        }
+                    }
+                    $objWriter->writeAttribute('table:formula', $this->formulaConvertor->convertFormula($cell->getValueString()));
+>>>>>>> match
                     if (is_numeric($formulaValue)) {
                         $objWriter->writeAttribute('office:value-type', 'float');
                     } else {
@@ -243,15 +343,40 @@ class Content extends WriterPart
                     break;
                 case DataType::TYPE_NUMERIC:
                     $objWriter->writeAttribute('office:value-type', 'float');
+<<<<<<< HEAD
                     $objWriter->writeAttribute('office:value', $cell->getValue());
                     $objWriter->writeElement('text:p', $cell->getValue());
+=======
+                    $objWriter->writeAttribute('office:value', $cell->getValueString());
+                    $objWriter->writeElement('text:p', $cell->getValueString());
+>>>>>>> match
 
                     break;
                 case DataType::TYPE_INLINE:
                     // break intentionally omitted
                 case DataType::TYPE_STRING:
                     $objWriter->writeAttribute('office:value-type', 'string');
+<<<<<<< HEAD
                     $objWriter->writeElement('text:p', $cell->getValue());
+=======
+                    $url = $cell->getHyperlink()->getUrl();
+                    if (empty($url)) {
+                        $objWriter->writeElement('text:p', $cell->getValueString());
+                    } else {
+                        $objWriter->startElement('text:p');
+                        $objWriter->startElement('text:a');
+                        $sheets = 'sheet://';
+                        $lensheets = strlen($sheets);
+                        if (substr($url, 0, $lensheets) === $sheets) {
+                            $url = '#' . substr($url, $lensheets);
+                        }
+                        $objWriter->writeAttribute('xlink:href', $url);
+                        $objWriter->writeAttribute('xlink:type', 'simple');
+                        $objWriter->text($cell->getValueString());
+                        $objWriter->endElement(); // text:a
+                        $objWriter->endElement(); // text:p
+                    }
+>>>>>>> match
 
                     break;
             }
@@ -259,6 +384,7 @@ class Content extends WriterPart
             $objWriter->endElement();
             $prevColumn = $column;
         }
+<<<<<<< HEAD
 
         $numberColsRepeated = $numberColsRepeated - $prevColumn - 1;
         if ($numberColsRepeated > 0) {
@@ -270,15 +396,22 @@ class Content extends WriterPart
                 $objWriter->writeElement('table:table-cell');
             }
         }
+=======
+>>>>>>> match
     }
 
     /**
      * Write span.
+<<<<<<< HEAD
      *
      * @param int $curColumn
      * @param int $prevColumn
      */
     private function writeCellSpan(XMLWriter $objWriter, $curColumn, $prevColumn): void
+=======
+     */
+    private function writeCellSpan(XMLWriter $objWriter, int $curColumn, int $prevColumn): void
+>>>>>>> match
     {
         $diff = $curColumn - $prevColumn - 1;
         if (1 === $diff) {

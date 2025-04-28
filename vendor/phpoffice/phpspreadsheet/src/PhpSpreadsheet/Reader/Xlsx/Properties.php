@@ -4,16 +4,25 @@ namespace PhpOffice\PhpSpreadsheet\Reader\Xlsx;
 
 use PhpOffice\PhpSpreadsheet\Document\Properties as DocumentProperties;
 use PhpOffice\PhpSpreadsheet\Reader\Security\XmlScanner;
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Settings;
+=======
+>>>>>>> match
 use SimpleXMLElement;
 
 class Properties
 {
+<<<<<<< HEAD
     /** @var XmlScanner */
     private $securityScanner;
 
     /** @var DocumentProperties */
     private $docProps;
+=======
+    private XmlScanner $securityScanner;
+
+    private DocumentProperties $docProps;
+>>>>>>> match
 
     public function __construct(XmlScanner $securityScanner, DocumentProperties $docProps)
     {
@@ -21,6 +30,7 @@ class Properties
         $this->docProps = $docProps;
     }
 
+<<<<<<< HEAD
     /**
      * @param mixed $obj
      */
@@ -29,16 +39,25 @@ class Properties
         return ($obj instanceof SimpleXMLElement) ? $obj : null;
     }
 
+=======
+>>>>>>> match
     private function extractPropertyData(string $propertyData): ?SimpleXMLElement
     {
         // okay to omit namespace because everything will be processed by xpath
         $obj = simplexml_load_string(
+<<<<<<< HEAD
             $this->securityScanner->scan($propertyData),
             'SimpleXMLElement',
             Settings::getLibXmlLoaderOptions()
         );
 
         return self::nullOrSimple($obj);
+=======
+            $this->securityScanner->scan($propertyData)
+        );
+
+        return $obj === false ? null : $obj;
+>>>>>>> match
     }
 
     public function readCoreProperties(string $propertyData): void
@@ -50,6 +69,7 @@ class Properties
             $xmlCore->registerXPathNamespace('dcterms', Namespaces::DC_TERMS);
             $xmlCore->registerXPathNamespace('cp', Namespaces::CORE_PROPERTIES2);
 
+<<<<<<< HEAD
             $this->docProps->setCreator((string) self::getArrayItem($xmlCore->xpath('dc:creator')));
             $this->docProps->setLastModifiedBy((string) self::getArrayItem($xmlCore->xpath('cp:lastModifiedBy')));
             $this->docProps->setCreated((string) self::getArrayItem($xmlCore->xpath('dcterms:created'))); //! respect xsi:type
@@ -59,6 +79,17 @@ class Properties
             $this->docProps->setSubject((string) self::getArrayItem($xmlCore->xpath('dc:subject')));
             $this->docProps->setKeywords((string) self::getArrayItem($xmlCore->xpath('cp:keywords')));
             $this->docProps->setCategory((string) self::getArrayItem($xmlCore->xpath('cp:category')));
+=======
+            $this->docProps->setCreator($this->getArrayItem($xmlCore->xpath('dc:creator')));
+            $this->docProps->setLastModifiedBy($this->getArrayItem($xmlCore->xpath('cp:lastModifiedBy')));
+            $this->docProps->setCreated($this->getArrayItem($xmlCore->xpath('dcterms:created'))); //! respect xsi:type
+            $this->docProps->setModified($this->getArrayItem($xmlCore->xpath('dcterms:modified'))); //! respect xsi:type
+            $this->docProps->setTitle($this->getArrayItem($xmlCore->xpath('dc:title')));
+            $this->docProps->setDescription($this->getArrayItem($xmlCore->xpath('dc:description')));
+            $this->docProps->setSubject($this->getArrayItem($xmlCore->xpath('dc:subject')));
+            $this->docProps->setKeywords($this->getArrayItem($xmlCore->xpath('cp:keywords')));
+            $this->docProps->setCategory($this->getArrayItem($xmlCore->xpath('cp:category')));
+>>>>>>> match
         }
     }
 
@@ -101,6 +132,7 @@ class Properties
         }
     }
 
+<<<<<<< HEAD
     /**
      * @param null|array|false $array
      * @param mixed $key
@@ -108,5 +140,10 @@ class Properties
     private static function getArrayItem($array, $key = 0): ?SimpleXMLElement
     {
         return is_array($array) ? ($array[$key] ?? null) : null;
+=======
+    private function getArrayItem(null|array|false $array): string
+    {
+        return is_array($array) ? (string) ($array[0] ?? '') : '';
+>>>>>>> match
     }
 }

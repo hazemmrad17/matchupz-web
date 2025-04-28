@@ -16,10 +16,15 @@ class Counts extends AggregateBase
      *        COUNT(value1[,value2[, ...]])
      *
      * @param mixed ...$args Data values
+<<<<<<< HEAD
      *
      * @return int
      */
     public static function COUNT(...$args)
+=======
+     */
+    public static function COUNT(mixed ...$args): int
+>>>>>>> match
     {
         $returnValue = 0;
 
@@ -47,10 +52,15 @@ class Counts extends AggregateBase
      *        COUNTA(value1[,value2[, ...]])
      *
      * @param mixed ...$args Data values
+<<<<<<< HEAD
      *
      * @return int
      */
     public static function COUNTA(...$args)
+=======
+     */
+    public static function COUNTA(mixed ...$args): int
+>>>>>>> match
     {
         $returnValue = 0;
 
@@ -75,10 +85,15 @@ class Counts extends AggregateBase
      *        COUNTBLANK(value1[,value2[, ...]])
      *
      * @param mixed $range Data values
+<<<<<<< HEAD
      *
      * @return int
      */
     public static function COUNTBLANK($range)
+=======
+     */
+    public static function COUNTBLANK(mixed $range): int
+>>>>>>> match
     {
         if ($range === null) {
             return 1;

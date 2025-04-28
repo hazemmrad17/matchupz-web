@@ -8,6 +8,7 @@ use PhpOffice\PhpSpreadsheet\Calculation\Internal\WildcardMatch;
 
 abstract class DatabaseAbstract
 {
+<<<<<<< HEAD
     /**
      * @param array $database
      * @param int|string $field
@@ -16,6 +17,9 @@ abstract class DatabaseAbstract
      * @return null|float|int|string
      */
     abstract public static function evaluate($database, $field, $criteria);
+=======
+    abstract public static function evaluate(array $database, array|null|int|string $field, array $criteria): null|float|int|string;
+>>>>>>> match
 
     /**
      * fieldExtract.
@@ -32,14 +36,29 @@ abstract class DatabaseAbstract
      *                                        represents the position of the column within the list: 1 for
      *                                        the first column, 2 for the second column, and so on.
      */
+<<<<<<< HEAD
     protected static function fieldExtract(array $database, $field): ?int
     {
         $field = strtoupper(Functions::flattenSingleValue($field) ?? '');
+=======
+    protected static function fieldExtract(array $database, mixed $field): ?int
+    {
+        /** @var ?string */
+        $single = Functions::flattenSingleValue($field);
+        $field = strtoupper($single ?? '');
+>>>>>>> match
         if ($field === '') {
             return null;
         }
 
+<<<<<<< HEAD
         $fieldNames = array_map('strtoupper', array_shift($database));
+=======
+        /** @var callable */
+        $callable = 'strtoupper';
+        /** @var non-empty-array $database */
+        $fieldNames = array_map($callable, array_shift($database));
+>>>>>>> match
         if (is_numeric($field)) {
             $field = (int) $field - 1;
             if ($field < 0 || $field >= count($fieldNames)) {
@@ -73,7 +92,13 @@ abstract class DatabaseAbstract
      */
     protected static function filter(array $database, array $criteria): array
     {
+<<<<<<< HEAD
         $fieldNames = array_shift($database);
+=======
+        /** @var array */
+        $fieldNames = array_shift($database);
+        /** @var array */
+>>>>>>> match
         $criteriaNames = array_shift($criteria);
 
         //    Convert the criteria into a set of AND/OR conditions with [:placeholders]
@@ -91,6 +116,10 @@ abstract class DatabaseAbstract
 
         //    extract an array of values for the requested column
         $columnData = [];
+<<<<<<< HEAD
+=======
+        /** @var array $row */
+>>>>>>> match
         foreach ($database as $rowKey => $row) {
             $keys = array_keys($row);
             $key = $keys[$field] ?? null;
@@ -115,19 +144,27 @@ abstract class DatabaseAbstract
         }
 
         $rowQuery = array_map(
+<<<<<<< HEAD
             function ($rowValue) {
                 return (count($rowValue) > 1) ? 'AND(' . implode(',', $rowValue) . ')' : ($rowValue[0] ?? '');
             },
+=======
+            fn ($rowValue): string => (count($rowValue) > 1) ? 'AND(' . implode(',', $rowValue) . ')' : ($rowValue[0] ?? ''), // @phpstan-ignore-line
+>>>>>>> match
             $baseQuery
         );
 
         return (count($rowQuery) > 1) ? 'OR(' . implode(',', $rowQuery) . ')' : ($rowQuery[0] ?? '');
     }
 
+<<<<<<< HEAD
     /**
      * @param mixed $criterion
      */
     private static function buildCondition($criterion, string $criterionName): string
+=======
+    private static function buildCondition(mixed $criterion, string $criterionName): string
+>>>>>>> match
     {
         $ifCondition = Functions::ifCondition($criterion);
 
@@ -168,10 +205,14 @@ abstract class DatabaseAbstract
         return $database;
     }
 
+<<<<<<< HEAD
     /**
      * @return mixed
      */
     private static function processCondition(string $criterion, array $fields, array $dataValues, string $conditions)
+=======
+    private static function processCondition(string $criterion, array $fields, array $dataValues, string $conditions): string
+>>>>>>> match
     {
         $key = array_search($criterion, $fields, true);
 
@@ -181,7 +222,11 @@ abstract class DatabaseAbstract
         } elseif ($dataValues[$key] !== null) {
             $dataValue = $dataValues[$key];
             // escape quotes if we have a string containing quotes
+<<<<<<< HEAD
             if (is_string($dataValue) && strpos($dataValue, '"') !== false) {
+=======
+            if (is_string($dataValue) && str_contains($dataValue, '"')) {
+>>>>>>> match
                 $dataValue = str_replace('"', '""', $dataValue);
             }
             $dataValue = (is_string($dataValue)) ? Calculation::wrapResult(strtoupper($dataValue)) : $dataValue;

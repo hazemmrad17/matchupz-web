@@ -30,7 +30,11 @@ class StandardNormal
      *         If an array of numbers is passed as an argument, then the returned result will also be an array
      *            with the same dimensions
      */
+<<<<<<< HEAD
     public static function cumulative($value)
+=======
+    public static function cumulative(mixed $value)
+>>>>>>> match
     {
         return Normal::distribution($value, 0, 1, true);
     }
@@ -55,7 +59,11 @@ class StandardNormal
      *         If an array of numbers is passed as an argument, then the returned result will also be an array
      *            with the same dimensions
      */
+<<<<<<< HEAD
     public static function distribution($value, $cumulative)
+=======
+    public static function distribution(mixed $value, mixed $cumulative)
+>>>>>>> match
     {
         return Normal::distribution($value, 0, 1, $cumulative);
     }
@@ -76,7 +84,11 @@ class StandardNormal
      *         If an array of numbers is passed as an argument, then the returned result will also be an array
      *            with the same dimensions
      */
+<<<<<<< HEAD
     public static function inverse($value)
+=======
+    public static function inverse(mixed $value)
+>>>>>>> match
     {
         return Normal::inverse($value, 0, 1);
     }
@@ -87,14 +99,22 @@ class StandardNormal
      * Calculates the probability that a member of a standard normal population will fall between
      *     the mean and z standard deviations from the mean.
      *
+<<<<<<< HEAD
      * @param mixed $value
      *                      Or can be an array of values
+=======
+     * @param mixed $value Or can be an array of values
+>>>>>>> match
      *
      * @return array|float|string The result, or a string containing an error
      *         If an array of numbers is passed as an argument, then the returned result will also be an array
      *            with the same dimensions
      */
+<<<<<<< HEAD
     public static function gauss($value)
+=======
+    public static function gauss(mixed $value): array|string|float
+>>>>>>> match
     {
         if (is_array($value)) {
             return self::evaluateSingleArgumentArray([self::class, __FUNCTION__], $value);
@@ -103,7 +123,11 @@ class StandardNormal
         if (!is_numeric($value)) {
             return ExcelError::VALUE();
         }
+<<<<<<< HEAD
         /** @var float */
+=======
+        /** @var float $dist */
+>>>>>>> match
         $dist = self::distribution($value, true);
 
         return $dist - 0.5;
@@ -128,7 +152,11 @@ class StandardNormal
      *         If an array of numbers is passed as an argument, then the returned result will also be an array
      *            with the same dimensions
      */
+<<<<<<< HEAD
     public static function zTest($dataSet, $m0, $sigma = null)
+=======
+    public static function zTest(mixed $dataSet, mixed $m0, mixed $sigma = null)
+>>>>>>> match
     {
         if (is_array($m0) || is_array($sigma)) {
             return self::evaluateArrayArgumentsSubsetFrom([self::class, __FUNCTION__], 1, $dataSet, $m0, $sigma);
@@ -141,13 +169,27 @@ class StandardNormal
         }
 
         if ($sigma === null) {
+<<<<<<< HEAD
             /** @var float */
+=======
+            /** @var float $sigma */
+>>>>>>> match
             $sigma = StandardDeviations::STDEV($dataSet);
         }
         $n = count($dataSet);
 
         $sub1 = Averages::average($dataSet);
 
+<<<<<<< HEAD
         return is_numeric($sub1) ? (1 - self::cumulative(($sub1 - $m0) / ($sigma / sqrt($n)))) : $sub1;
+=======
+        if (!is_numeric($sub1)) {
+            return $sub1;
+        }
+
+        $temp = self::cumulative(($sub1 - $m0) / ($sigma / sqrt($n)));
+
+        return 1 - (is_numeric($temp) ? $temp : 0);
+>>>>>>> match
     }
 }

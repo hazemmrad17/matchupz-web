@@ -20,7 +20,11 @@ class PercentageFormatter extends BaseFormatter
         $vDecimalCount = strlen(rtrim($vDecimals, '0'));
 
         $format = str_replace('%', '%%', $format);
+<<<<<<< HEAD
         $wholePartSize = strlen((string) floor($value));
+=======
+        $wholePartSize = strlen((string) floor(abs($value)));
+>>>>>>> match
         $decimalPartSize = 0;
         $placeHolders = '';
         // Number of decimals
@@ -38,11 +42,20 @@ class PercentageFormatter extends BaseFormatter
 
         $wholePartSize += $decimalPartSize + (int) ($decimalPartSize > 0);
         $replacement = "0{$wholePartSize}.{$decimalPartSize}";
+<<<<<<< HEAD
         $mask = (string) preg_replace('/[#0,]+\.?[?#0,]*/ui', "%{$replacement}f{$placeHolders}", $format);
 
         /** @var float */
         $valueFloat = $value;
 
         return sprintf($mask, round($valueFloat, $decimalPartSize));
+=======
+        $mask = (string) preg_replace('/[#0,]+\.?[?#0,]*/ui', "%{$replacement}F{$placeHolders}", $format);
+
+        /** @var float $valueFloat */
+        $valueFloat = $value;
+
+        return self::adjustSeparators(sprintf($mask, round($valueFloat, $decimalPartSize)));
+>>>>>>> match
     }
 }

@@ -33,7 +33,11 @@ class NetworkDays
      *         If an array of values is passed for the $startDate or $endDate arguments, then the returned result
      *            will also be an array with matching dimensions
      */
+<<<<<<< HEAD
     public static function count($startDate, $endDate, ...$dateArgs)
+=======
+    public static function count(mixed $startDate, mixed $endDate, mixed ...$dateArgs): array|string|int
+>>>>>>> match
     {
         if (is_array($startDate) || is_array($endDate)) {
             return self::evaluateArrayArgumentsSubset(

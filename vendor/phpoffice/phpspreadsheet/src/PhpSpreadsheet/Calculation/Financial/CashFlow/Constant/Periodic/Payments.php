@@ -24,12 +24,21 @@ class Payments
      * @return float|string Result, or a string containing an error
      */
     public static function annuity(
+<<<<<<< HEAD
         $interestRate,
         $numberOfPeriods,
         $presentValue,
         $futureValue = 0,
         $type = FinancialConstants::PAYMENT_END_OF_PERIOD
     ) {
+=======
+        mixed $interestRate,
+        mixed $numberOfPeriods,
+        mixed $presentValue,
+        mixed $futureValue = 0,
+        mixed $type = FinancialConstants::PAYMENT_END_OF_PERIOD
+    ): string|float {
+>>>>>>> match
         $interestRate = Functions::flattenSingleValue($interestRate);
         $numberOfPeriods = Functions::flattenSingleValue($numberOfPeriods);
         $presentValue = Functions::flattenSingleValue($presentValue);
@@ -48,8 +57,13 @@ class Payments
 
         // Calculate
         if ($interestRate != 0.0) {
+<<<<<<< HEAD
             return (-$futureValue - $presentValue * (1 + $interestRate) ** $numberOfPeriods) /
                 (1 + $interestRate * $type) / (((1 + $interestRate) ** $numberOfPeriods - 1) / $interestRate);
+=======
+            return (-$futureValue - $presentValue * (1 + $interestRate) ** $numberOfPeriods)
+                / (1 + $interestRate * $type) / (((1 + $interestRate) ** $numberOfPeriods - 1) / $interestRate);
+>>>>>>> match
         }
 
         return (-$presentValue - $futureValue) / $numberOfPeriods;
@@ -71,6 +85,7 @@ class Payments
      * @return float|string Result, or a string containing an error
      */
     public static function interestPayment(
+<<<<<<< HEAD
         $interestRate,
         $period,
         $numberOfPeriods,
@@ -78,6 +93,15 @@ class Payments
         $futureValue = 0,
         $type = FinancialConstants::PAYMENT_END_OF_PERIOD
     ) {
+=======
+        mixed $interestRate,
+        mixed $period,
+        mixed $numberOfPeriods,
+        mixed $presentValue,
+        mixed $futureValue = 0,
+        mixed $type = FinancialConstants::PAYMENT_END_OF_PERIOD
+    ): string|float {
+>>>>>>> match
         $interestRate = Functions::flattenSingleValue($interestRate);
         $period = Functions::flattenSingleValue($period);
         $numberOfPeriods = Functions::flattenSingleValue($numberOfPeriods);

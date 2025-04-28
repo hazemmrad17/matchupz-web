@@ -28,16 +28,27 @@ class Periodic
      *                                Values must contain at least one positive value and one negative value to
      *                                    calculate the internal rate of return.
      * @param mixed $guess A number that you guess is close to the result of IRR
+<<<<<<< HEAD
      *
      * @return float|string
      */
     public static function rate($values, $guess = 0.1)
+=======
+     */
+    public static function rate(mixed $values, mixed $guess = 0.1): string|float
+>>>>>>> match
     {
         if (!is_array($values)) {
             return ExcelError::VALUE();
         }
         $values = Functions::flattenArray($values);
         $guess = Functions::flattenSingleValue($guess);
+<<<<<<< HEAD
+=======
+        if (!is_numeric($guess)) {
+            return ExcelError::VALUE();
+        }
+>>>>>>> match
 
         // create an initial range, with a root somewhere between 0 and guess
         $x1 = 0.0;
@@ -99,20 +110,34 @@ class Periodic
      *
      * @return float|string Result, or a string containing an error
      */
+<<<<<<< HEAD
     public static function modifiedRate($values, $financeRate, $reinvestmentRate)
+=======
+    public static function modifiedRate(mixed $values, mixed $financeRate, mixed $reinvestmentRate): string|float
+>>>>>>> match
     {
         if (!is_array($values)) {
             return ExcelError::DIV0();
         }
         $values = Functions::flattenArray($values);
+<<<<<<< HEAD
         $financeRate = Functions::flattenSingleValue($financeRate);
+=======
+        /** @var float */
+        $financeRate = Functions::flattenSingleValue($financeRate);
+        /** @var float */
+>>>>>>> match
         $reinvestmentRate = Functions::flattenSingleValue($reinvestmentRate);
         $n = count($values);
 
         $rr = 1.0 + $reinvestmentRate;
         $fr = 1.0 + $financeRate;
 
+<<<<<<< HEAD
         $npvPos = $npvNeg = self::$zeroPointZero;
+=======
+        $npvPos = $npvNeg = 0.0;
+>>>>>>> match
         foreach ($values as $i => $v) {
             if ($v >= 0) {
                 $npvPos += $v / $rr ** $i;
@@ -121,7 +146,11 @@ class Periodic
             }
         }
 
+<<<<<<< HEAD
         if ($npvNeg === self::$zeroPointZero || $npvPos === self::$zeroPointZero) {
+=======
+        if ($npvNeg === 0.0 || $npvPos === 0.0) {
+>>>>>>> match
             return ExcelError::DIV0();
         }
 
@@ -132,6 +161,7 @@ class Periodic
     }
 
     /**
+<<<<<<< HEAD
      * Sop to Scrutinizer.
      *
      * @var float
@@ -139,10 +169,13 @@ class Periodic
     private static $zeroPointZero = 0.0;
 
     /**
+=======
+>>>>>>> match
      * NPV.
      *
      * Returns the Net Present Value of a cash flow series given a discount rate.
      *
+<<<<<<< HEAD
      * @param mixed $rate
      * @param array $args
      *
@@ -152,6 +185,15 @@ class Periodic
     {
         $returnValue = 0;
 
+=======
+     * @param array $args
+     */
+    public static function presentValue(mixed $rate, ...$args): int|float
+    {
+        $returnValue = 0;
+
+        /** @var float */
+>>>>>>> match
         $rate = Functions::flattenSingleValue($rate);
         $aArgs = Functions::flattenArray($args);
 

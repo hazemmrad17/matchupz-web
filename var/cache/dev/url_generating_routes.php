@@ -17,6 +17,7 @@ return [
     '_profiler_router' => [['token'], ['_controller' => 'web_profiler.controller.router::panelAction'], [], [['text', '/router'], ['variable', '/', '[^/]++', 'token', true], ['text', '/_profiler']], [], [], []],
     '_profiler_exception' => [['token'], ['_controller' => 'web_profiler.controller.exception_panel::body'], [], [['text', '/exception'], ['variable', '/', '[^/]++', 'token', true], ['text', '/_profiler']], [], [], []],
     '_profiler_exception_css' => [['token'], ['_controller' => 'web_profiler.controller.exception_panel::stylesheet'], [], [['text', '/exception.css'], ['variable', '/', '[^/]++', 'token', true], ['text', '/_profiler']], [], [], []],
+<<<<<<< HEAD
     'abonnement_index' => [[], ['_controller' => 'App\\Controller\\AbonnementController::index'], [], [['text', '/abonnement/']], [], [], []],
     'abonnement_export_csv' => [[], ['_controller' => 'App\\Controller\\AbonnementController::exportCsv'], [], [['text', '/abonnement/export/csv']], [], [], []],
     'abonnement_export_pdf' => [[], ['_controller' => 'App\\Controller\\AbonnementController::exportPdf'], [], [['text', '/abonnement/export/pdf']], [], [], []],
@@ -26,6 +27,8 @@ return [
     'abonnement_show' => [['idAbonnement'], ['_controller' => 'App\\Controller\\AbonnementController::show'], ['idAbonnement' => '\\d+'], [['variable', '/', '\\d+', 'idAbonnement', true], ['text', '/abonnement']], [], [], []],
     'abonnement_edit' => [['idAbonnement'], ['_controller' => 'App\\Controller\\AbonnementController::edit'], ['idAbonnement' => '\\d+'], [['text', '/edit'], ['variable', '/', '\\d+', 'idAbonnement', true], ['text', '/abonnement']], [], [], []],
     'abonnement_delete' => [['idAbonnement'], ['_controller' => 'App\\Controller\\AbonnementController::delete'], ['idAbonnement' => '\\d+'], [['variable', '/', '\\d+', 'idAbonnement', true], ['text', '/abonnement']], [], [], []],
+=======
+>>>>>>> match
     'club_index' => [[], ['_controller' => 'App\\Controller\\ClubController::index'], [], [['text', '/club/']], [], [], []],
     'club_new' => [[], ['_controller' => 'App\\Controller\\ClubController::new'], [], [['text', '/club/new']], [], [], []],
     'club_show' => [['idClub'], ['_controller' => 'App\\Controller\\ClubController::show'], ['idClub' => '\\d+'], [['variable', '/', '\\d+', 'idClub', true], ['text', '/club']], [], [], []],
@@ -35,17 +38,25 @@ return [
     'club_export_pdf' => [[], ['_controller' => 'App\\Controller\\ClubController::exportPdf'], [], [['text', '/club/export/pdf']], [], [], []],
     'club_export_csv' => [[], ['_controller' => 'App\\Controller\\ClubController::exportCsv'], [], [['text', '/club/export/csv']], [], [], []],
     'club_export_excel' => [[], ['_controller' => 'App\\Controller\\ClubController::exportExcel'], [], [['text', '/club/export/excel']], [], [], []],
+<<<<<<< HEAD
     'espace_index' => [[], ['_controller' => 'App\\Controller\\EspacesportifController::index'], [], [['text', '/espace/']], [], [], []],
     'espace_export_csv' => [[], ['_controller' => 'App\\Controller\\EspacesportifController::exportCsv'], [], [['text', '/espace/export/csv']], [], [], []],
     'espace_export_pdf' => [[], ['_controller' => 'App\\Controller\\EspacesportifController::exportPdf'], [], [['text', '/espace/export/pdf']], [], [], []],
     'espace_export_excel' => [[], ['_controller' => 'App\\Controller\\EspacesportifController::exportExcel'], [], [['text', '/espace/export/excel']], [], [], []],
+=======
+    'maintenance' => [[], ['_controller' => 'App\\Controller\\DashboardController::index'], [], [['text', '/home']], [], [], []],
+    'espace_index' => [[], ['_controller' => 'App\\Controller\\EspacesportifController::index'], [], [['text', '/espace/']], [], [], []],
+>>>>>>> match
     'espace_new' => [[], ['_controller' => 'App\\Controller\\EspacesportifController::new'], [], [['text', '/espace/new']], [], [], []],
     'espace_show' => [['id_lieu'], ['_controller' => 'App\\Controller\\EspacesportifController::show'], ['id_lieu' => '\\d+'], [['variable', '/', '\\d+', 'id_lieu', true], ['text', '/espace']], [], [], []],
     'espace_edit' => [['id_lieu'], ['_controller' => 'App\\Controller\\EspacesportifController::edit'], ['id_lieu' => '\\d+'], [['text', '/edit'], ['variable', '/', '\\d+', 'id_lieu', true], ['text', '/espace']], [], [], []],
     'espace_delete' => [['id_lieu'], ['_controller' => 'App\\Controller\\EspacesportifController::delete'], ['id_lieu' => '\\d+'], [['variable', '/', '\\d+', 'id_lieu', true], ['text', '/espace']], [], [], []],
     'espace_statistics' => [[], ['_controller' => 'App\\Controller\\EspacesportifController::statistics'], [], [['text', '/espace/statistics']], [], [], []],
+<<<<<<< HEAD
     'app_espace_sportifs' => [[], ['_controller' => 'App\\Controller\\EspacesportifController::front'], [], [['text', '/espace/front']], [], [], []],
     'espace_recommend' => [[], ['_controller' => 'App\\Controller\\EspacesportifController::recommend'], [], [['text', '/espace/recommend']], [], [], []],
+=======
+>>>>>>> match
     'app_evaluation_physique_stats' => [[], ['_controller' => 'App\\Controller\\EvaluationPhysiqueController::statistics'], [], [['text', '/evaluation_physique/statistiques']], [], [], []],
     'app_maintenance' => [[], ['_controller' => 'App\\Controller\\EvaluationPhysiqueController::maintenance'], [], [['text', '/evaluation_physique/maintenance']], [], [], []],
     'app_evaluation_physique_index' => [[], ['_controller' => 'App\\Controller\\EvaluationPhysiqueController::index'], [], [['text', '/evaluation_physique/']], [], [], []],
@@ -54,6 +65,18 @@ return [
     'app_evaluation_physique_edit' => [['idEvaluation'], ['_controller' => 'App\\Controller\\EvaluationPhysiqueController::edit'], [], [['text', '/edit'], ['variable', '/', '[^/]++', 'idEvaluation', true], ['text', '/evaluation_physique']], [], [], []],
     'app_evaluation_physique_delete' => [['idEvaluation'], ['_controller' => 'App\\Controller\\EvaluationPhysiqueController::delete'], [], [['variable', '/', '[^/]++', 'idEvaluation', true], ['text', '/evaluation_physique']], [], [], []],
     'app_evaluation_physique_by_joueur' => [['joueurId'], ['_controller' => 'App\\Controller\\EvaluationPhysiqueController::evaluationsByJoueur'], [], [['variable', '/', '[^/]++', 'joueurId', true], ['text', '/evaluation_physique/joueur']], [], [], []],
+<<<<<<< HEAD
+=======
+    'app_home' => [[], ['_controller' => 'App\\Controller\\FitnessController::index'], [], [['text', '/']], [], [], []],
+    'app_features' => [[], ['_controller' => 'App\\Controller\\FitnessController::features'], [], [['text', '/features']], [], [], []],
+    'app_course' => [[], ['_controller' => 'App\\Controller\\FitnessController::course'], [], [['text', '/course']], [], [], []],
+    'app_blog' => [[], ['_controller' => 'App\\Controller\\FitnessController::blog'], [], [['text', '/blog']], [], [], []],
+    'app_feature' => [[], ['_controller' => 'App\\Controller\\FitnessController::feature'], [], [['text', '/feature']], [], [], []],
+    'app_team' => [[], ['_controller' => 'App\\Controller\\FitnessController::team'], [], [['text', '/team']], [], [], []],
+    'app_testimonial' => [[], ['_controller' => 'App\\Controller\\FitnessController::testimonial'], [], [['text', '/testimonial']], [], [], []],
+    'app_404' => [[], ['_controller' => 'App\\Controller\\FitnessController::notFound'], [], [['text', '/404']], [], [], []],
+    'app_contact' => [[], ['_controller' => 'App\\Controller\\FitnessController::contact'], [], [['text', '/contact']], [], [], []],
+>>>>>>> match
     'app_historique_club_index' => [[], ['_controller' => 'App\\Controller\\HistoriqueClubController::index'], [], [['text', '/historique/club/']], [], [], []],
     'app_historique_club_stats' => [[], ['_controller' => 'App\\Controller\\HistoriqueClubController::stats'], [], [['text', '/historique/club/statistics']], [], [], []],
     'app_historique_club_new' => [[], ['_controller' => 'App\\Controller\\HistoriqueClubController::new'], [], [['text', '/historique/club/new']], [], [], []],
@@ -65,18 +88,35 @@ return [
     'app_historique_club_export_csv' => [[], ['_controller' => 'App\\Controller\\HistoriqueClubController::exportCsv'], [], [['text', '/historique/club/export/csv']], [], [], []],
     'app_historique_club_export_pdf' => [[], ['_controller' => 'App\\Controller\\HistoriqueClubController::exportPdf'], [], [['text', '/historique/club/export/pdf']], [], [], []],
     'app_historique_club_export_excel' => [[], ['_controller' => 'App\\Controller\\HistoriqueClubController::exportExcel'], [], [['text', '/historique/club/export/excel']], [], [], []],
+<<<<<<< HEAD
     'app_home' => [[], ['_controller' => 'App\\Controller\\HomeController::index'], [], [['text', '/']], [], [], []],
+=======
+>>>>>>> match
     'joueur_test' => [[], ['_controller' => 'App\\Controller\\JoueurController::test'], [], [['text', '/joueur/test']], [], [], []],
     'joueur_main' => [[], ['_controller' => 'App\\Controller\\JoueurController::index'], [], [['text', '/joueur/']], [], [], []],
     'joueur_new' => [[], ['_controller' => 'App\\Controller\\JoueurController::new'], [], [['text', '/joueur/new']], [], [], []],
     'joueur_statistics' => [[], ['_controller' => 'App\\Controller\\JoueurController::statistics'], [], [['text', '/joueur/statistics']], [], [], []],
     'joueur_edit' => [['id'], ['_controller' => 'App\\Controller\\JoueurController::edit'], [], [['text', '/edit'], ['variable', '/', '[^/]++', 'id', true], ['text', '/joueur']], [], [], []],
+<<<<<<< HEAD
     'joueur_show' => [['id'], ['_controller' => 'App\\Controller\\JoueurController::show'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/joueur']], [], [], []],
+=======
+    'joueur_show' => [['id'], ['_controller' => 'App\\Controller\\JoueurController::show'], ['id' => '\\d+'], [['variable', '/', '\\d+', 'id', true], ['text', '/joueur']], [], [], []],
+>>>>>>> match
     'joueur_delete' => [['id'], ['_controller' => 'App\\Controller\\JoueurController::delete'], [], [['text', '/delete'], ['variable', '/', '[^/]++', 'id', true], ['text', '/joueur']], [], [], []],
     'joueur_export_csv' => [[], ['_controller' => 'App\\Controller\\JoueurController::exportCsv'], [], [['text', '/joueur/export/csv']], [], [], []],
     'joueur_export_pdf' => [[], ['_controller' => 'App\\Controller\\JoueurController::exportPdf'], [], [['text', '/joueur/export/pdf']], [], [], []],
     'joueur_export_excel' => [[], ['_controller' => 'App\\Controller\\JoueurController::exportExcel'], [], [['text', '/joueur/export/excel']], [], [], []],
     'joueur_tracking' => [[], ['_controller' => 'App\\Controller\\JoueurController::trackingRedirect'], [], [['text', '/joueur/tracking']], [], [], []],
+<<<<<<< HEAD
+=======
+    'football_layout' => [[], ['_controller' => 'App\\Controller\\JoueurController::layout'], [], [['text', '/joueur/formations']], [], [], []],
+    'match_main' => [[], ['_controller' => 'App\\Controller\\MatchController::index'], [], [['text', '/match/main']], [], [], []],
+    'match_new' => [[], ['_controller' => 'App\\Controller\\MatchController::new'], [], [['text', '/match/new']], [], [], []],
+    'match_statistics' => [[], ['_controller' => 'App\\Controller\\MatchController::statistics'], [], [['text', '/match/stats']], [], [], []],
+    'match_edit' => [['id'], ['_controller' => 'App\\Controller\\MatchController::edit'], [], [['text', '/edit'], ['variable', '/', '[^/]++', 'id', true], ['text', '/match']], [], [], []],
+    'match_delete' => [['id'], ['_controller' => 'App\\Controller\\MatchController::delete'], [], [['text', '/delete'], ['variable', '/', '[^/]++', 'id', true], ['text', '/match']], [], [], []],
+    'match_show' => [['id'], ['_controller' => 'App\\Controller\\MatchController::show'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/match']], [], [], []],
+>>>>>>> match
     'performance_joueur_stats' => [[], ['_controller' => 'App\\Controller\\PerformanceJoueurController::stats'], [], [['text', '/performance_joueur/stats']], [], [], []],
     'performance_joueur_index' => [[], ['_controller' => 'App\\Controller\\PerformanceJoueurController::index'], [], [['text', '/performance_joueur/']], [], [], []],
     'performance_joueur_new' => [[], ['_controller' => 'App\\Controller\\PerformanceJoueurController::new'], [], [['text', '/performance_joueur/new']], [], [], []],
@@ -84,18 +124,40 @@ return [
     'performance_joueur_edit' => [['idPerformance'], ['_controller' => 'App\\Controller\\PerformanceJoueurController::edit'], [], [['text', '/edit'], ['variable', '/', '[^/]++', 'idPerformance', true], ['text', '/performance_joueur']], [], [], []],
     'performance_joueur_delete' => [['idPerformance'], ['_controller' => 'App\\Controller\\PerformanceJoueurController::delete'], [], [['variable', '/', '[^/]++', 'idPerformance', true], ['text', '/performance_joueur']], [], [], []],
     'reservation_index' => [[], ['_controller' => 'App\\Controller\\ReservationController::index'], [], [['text', '/reservation/']], [], [], []],
+<<<<<<< HEAD
     'reservation_export_csv' => [[], ['_controller' => 'App\\Controller\\ReservationController::exportCsv'], [], [['text', '/reservation/export/csv']], [], [], []],
     'reservation_export_pdf' => [[], ['_controller' => 'App\\Controller\\ReservationController::exportPdf'], [], [['text', '/reservation/export/pdf']], [], [], []],
     'reservation_export_excel' => [[], ['_controller' => 'App\\Controller\\ReservationController::exportExcel'], [], [['text', '/reservation/export/excel']], [], [], []],
+=======
+>>>>>>> match
     'reservation_new' => [[], ['_controller' => 'App\\Controller\\ReservationController::new'], [], [['text', '/reservation/new']], [], [], []],
     'reservation_statistics' => [[], ['_controller' => 'App\\Controller\\ReservationController::statistics'], [], [['text', '/reservation/statistics']], [], [], []],
     'reservation_show' => [['id_reservation'], ['_controller' => 'App\\Controller\\ReservationController::show'], ['id_reservation' => '\\d+'], [['variable', '/', '\\d+', 'id_reservation', true], ['text', '/reservation']], [], [], []],
     'reservation_edit' => [['id_reservation'], ['_controller' => 'App\\Controller\\ReservationController::edit'], ['id_reservation' => '\\d+'], [['text', '/edit'], ['variable', '/', '\\d+', 'id_reservation', true], ['text', '/reservation']], [], [], []],
     'reservation_delete' => [['id_reservation'], ['_controller' => 'App\\Controller\\ReservationController::delete'], ['id_reservation' => '\\d+'], [['variable', '/', '\\d+', 'id_reservation', true], ['text', '/reservation']], [], [], []],
+<<<<<<< HEAD
     'google_auth' => [[], ['_controller' => 'App\\Controller\\ReservationController::googleAuth'], [], [['text', '/reservation/google-auth']], [], [], []],
     'google_logout' => [[], ['_controller' => 'App\\Controller\\ReservationController::googleLogout'], [], [['text', '/reservation/google-logout']], [], [], []],
     'reservation_add_to_google_calendar' => [['id_reservation'], ['_controller' => 'App\\Controller\\ReservationController::addToGoogleCalendar'], ['id_reservation' => '\\d+'], [['text', '/add-to-google-calendar'], ['variable', '/', '\\d+', 'id_reservation', true], ['text', '/reservation']], [], [], []],
     'google_callback' => [[], ['_controller' => 'App\\Controller\\ReservationController::googleCallback'], [], [['text', '/reservation/google-callback']], [], [], []],
+=======
+    'schedule_mainF' => [[], ['_controller' => 'App\\Controller\\ScheduleController::mainF'], [], [['text', '/schedule/mainF']], [], [], []],
+    'schedule_main' => [[], ['_controller' => 'App\\Controller\\ScheduleController::main'], [], [['text', '/schedule/main']], [], [], []],
+    'schedule_statistics' => [[], ['_controller' => 'App\\Controller\\ScheduleController::statistics'], [], [['text', '/schedule/statistics']], [], [], []],
+    'schedule_search' => [[], ['_controller' => 'App\\Controller\\ScheduleController::search'], [], [['text', '/schedule/search']], [], [], []],
+    'schedule_new' => [[], ['_controller' => 'App\\Controller\\ScheduleController::new'], [], [['text', '/schedule/new']], [], [], []],
+    'schedule_show' => [['idSchedule'], ['_controller' => 'App\\Controller\\ScheduleController::show'], ['idSchedule' => '\\d+'], [['variable', '/', '\\d+', 'idSchedule', true], ['text', '/schedule']], [], [], []],
+    'schedule_showF' => [['idSchedule'], ['_controller' => 'App\\Controller\\ScheduleController::showF'], ['idSchedule' => '\\d+'], [['text', '/showF'], ['variable', '/', '\\d+', 'idSchedule', true], ['text', '/schedule']], [], [], []],
+    'schedule_edit' => [['idSchedule'], ['_controller' => 'App\\Controller\\ScheduleController::edit'], ['idSchedule' => '\\d+'], [['text', '/edit'], ['variable', '/', '\\d+', 'idSchedule', true], ['text', '/schedule']], [], [], []],
+    'schedule_delete' => [['idSchedule'], ['_controller' => 'App\\Controller\\ScheduleController::delete'], ['idSchedule' => '\\d+'], [['text', '/delete'], ['variable', '/', '\\d+', 'idSchedule', true], ['text', '/schedule']], [], [], []],
+    'test_view' => [[], ['_controller' => 'App\\Controller\\ScheduleController::testView'], [], [['text', '/schedule/test-view']], [], [], []],
+    'schedule_export_pdf' => [[], ['_controller' => 'App\\Controller\\ScheduleController::exportPdf'], [], [['text', '/schedule/export/pdf']], [], [], []],
+    'schedule_export_csv' => [[], ['_controller' => 'App\\Controller\\ScheduleController::exportCsv'], [], [['text', '/schedule/export/csv']], [], [], []],
+    'schedule_export_excel' => [[], ['_controller' => 'App\\Controller\\ScheduleController::exportExcel'], [], [['text', '/schedule/export/excel']], [], [], []],
+    'schedule_add_to_google_calendar' => [['idSchedule'], ['_controller' => 'App\\Controller\\ScheduleController::addToGoogleCalendar'], ['idSchedule' => '\\d+'], [['text', '/add-to-google-calendar'], ['variable', '/', '\\d+', 'idSchedule', true], ['text', '/schedule']], [], [], []],
+    'schedule_google_callback' => [[], ['_controller' => 'App\\Controller\\ScheduleController::googleCallback'], [], [['text', '/schedule/google-callback']], [], [], []],
+    'schedule_news' => [['idSchedule'], ['_controller' => 'App\\Controller\\ScheduleController::news'], ['idSchedule' => '\\d+'], [['text', '/news'], ['variable', '/', '\\d+', 'idSchedule', true], ['text', '/schedule']], [], [], []],
+>>>>>>> match
     'sport_index' => [[], ['_controller' => 'App\\Controller\\SportController::index'], [], [['text', '/sport/']], [], [], []],
     'sport_new' => [[], ['_controller' => 'App\\Controller\\SportController::new'], [], [['text', '/sport/new']], [], [], []],
     'sport_statistics' => [[], ['_controller' => 'App\\Controller\\SportController::statistics'], [], [['text', '/sport/statistics']], [], [], []],
@@ -105,6 +167,7 @@ return [
     'sport_export_csv' => [[], ['_controller' => 'App\\Controller\\SportController::exportCsv'], [], [['text', '/sport/export/csv']], [], [], []],
     'sport_export_pdf' => [[], ['_controller' => 'App\\Controller\\SportController::exportPdf'], [], [['text', '/sport/export/pdf']], [], [], []],
     'sport_export_excel' => [[], ['_controller' => 'App\\Controller\\SportController::exportExcel'], [], [['text', '/sport/export/excel']], [], [], []],
+<<<<<<< HEAD
     'App\Controller\AbonnementController::index' => [[], ['_controller' => 'App\\Controller\\AbonnementController::index'], [], [['text', '/abonnement/']], [], [], []],
     'App\Controller\AbonnementController::exportCsv' => [[], ['_controller' => 'App\\Controller\\AbonnementController::exportCsv'], [], [['text', '/abonnement/export/csv']], [], [], []],
     'App\Controller\AbonnementController::exportPdf' => [[], ['_controller' => 'App\\Controller\\AbonnementController::exportPdf'], [], [['text', '/abonnement/export/pdf']], [], [], []],
@@ -114,6 +177,8 @@ return [
     'App\Controller\AbonnementController::show' => [['idAbonnement'], ['_controller' => 'App\\Controller\\AbonnementController::show'], ['idAbonnement' => '\\d+'], [['variable', '/', '\\d+', 'idAbonnement', true], ['text', '/abonnement']], [], [], []],
     'App\Controller\AbonnementController::edit' => [['idAbonnement'], ['_controller' => 'App\\Controller\\AbonnementController::edit'], ['idAbonnement' => '\\d+'], [['text', '/edit'], ['variable', '/', '\\d+', 'idAbonnement', true], ['text', '/abonnement']], [], [], []],
     'App\Controller\AbonnementController::delete' => [['idAbonnement'], ['_controller' => 'App\\Controller\\AbonnementController::delete'], ['idAbonnement' => '\\d+'], [['variable', '/', '\\d+', 'idAbonnement', true], ['text', '/abonnement']], [], [], []],
+=======
+>>>>>>> match
     'App\Controller\ClubController::index' => [[], ['_controller' => 'App\\Controller\\ClubController::index'], [], [['text', '/club/']], [], [], []],
     'App\Controller\ClubController::new' => [[], ['_controller' => 'App\\Controller\\ClubController::new'], [], [['text', '/club/new']], [], [], []],
     'App\Controller\ClubController::show' => [['idClub'], ['_controller' => 'App\\Controller\\ClubController::show'], ['idClub' => '\\d+'], [['variable', '/', '\\d+', 'idClub', true], ['text', '/club']], [], [], []],
@@ -123,17 +188,25 @@ return [
     'App\Controller\ClubController::exportPdf' => [[], ['_controller' => 'App\\Controller\\ClubController::exportPdf'], [], [['text', '/club/export/pdf']], [], [], []],
     'App\Controller\ClubController::exportCsv' => [[], ['_controller' => 'App\\Controller\\ClubController::exportCsv'], [], [['text', '/club/export/csv']], [], [], []],
     'App\Controller\ClubController::exportExcel' => [[], ['_controller' => 'App\\Controller\\ClubController::exportExcel'], [], [['text', '/club/export/excel']], [], [], []],
+<<<<<<< HEAD
     'App\Controller\EspacesportifController::index' => [[], ['_controller' => 'App\\Controller\\EspacesportifController::index'], [], [['text', '/espace/']], [], [], []],
     'App\Controller\EspacesportifController::exportCsv' => [[], ['_controller' => 'App\\Controller\\EspacesportifController::exportCsv'], [], [['text', '/espace/export/csv']], [], [], []],
     'App\Controller\EspacesportifController::exportPdf' => [[], ['_controller' => 'App\\Controller\\EspacesportifController::exportPdf'], [], [['text', '/espace/export/pdf']], [], [], []],
     'App\Controller\EspacesportifController::exportExcel' => [[], ['_controller' => 'App\\Controller\\EspacesportifController::exportExcel'], [], [['text', '/espace/export/excel']], [], [], []],
+=======
+    'App\Controller\DashboardController::index' => [[], ['_controller' => 'App\\Controller\\DashboardController::index'], [], [['text', '/home']], [], [], []],
+    'App\Controller\EspacesportifController::index' => [[], ['_controller' => 'App\\Controller\\EspacesportifController::index'], [], [['text', '/espace/']], [], [], []],
+>>>>>>> match
     'App\Controller\EspacesportifController::new' => [[], ['_controller' => 'App\\Controller\\EspacesportifController::new'], [], [['text', '/espace/new']], [], [], []],
     'App\Controller\EspacesportifController::show' => [['id_lieu'], ['_controller' => 'App\\Controller\\EspacesportifController::show'], ['id_lieu' => '\\d+'], [['variable', '/', '\\d+', 'id_lieu', true], ['text', '/espace']], [], [], []],
     'App\Controller\EspacesportifController::edit' => [['id_lieu'], ['_controller' => 'App\\Controller\\EspacesportifController::edit'], ['id_lieu' => '\\d+'], [['text', '/edit'], ['variable', '/', '\\d+', 'id_lieu', true], ['text', '/espace']], [], [], []],
     'App\Controller\EspacesportifController::delete' => [['id_lieu'], ['_controller' => 'App\\Controller\\EspacesportifController::delete'], ['id_lieu' => '\\d+'], [['variable', '/', '\\d+', 'id_lieu', true], ['text', '/espace']], [], [], []],
     'App\Controller\EspacesportifController::statistics' => [[], ['_controller' => 'App\\Controller\\EspacesportifController::statistics'], [], [['text', '/espace/statistics']], [], [], []],
+<<<<<<< HEAD
     'App\Controller\EspacesportifController::front' => [[], ['_controller' => 'App\\Controller\\EspacesportifController::front'], [], [['text', '/espace/front']], [], [], []],
     'App\Controller\EspacesportifController::recommend' => [[], ['_controller' => 'App\\Controller\\EspacesportifController::recommend'], [], [['text', '/espace/recommend']], [], [], []],
+=======
+>>>>>>> match
     'App\Controller\EvaluationPhysiqueController::statistics' => [[], ['_controller' => 'App\\Controller\\EvaluationPhysiqueController::statistics'], [], [['text', '/evaluation_physique/statistiques']], [], [], []],
     'App\Controller\EvaluationPhysiqueController::maintenance' => [[], ['_controller' => 'App\\Controller\\EvaluationPhysiqueController::maintenance'], [], [['text', '/evaluation_physique/maintenance']], [], [], []],
     'App\Controller\EvaluationPhysiqueController::index' => [[], ['_controller' => 'App\\Controller\\EvaluationPhysiqueController::index'], [], [['text', '/evaluation_physique/']], [], [], []],
@@ -143,6 +216,18 @@ return [
     'App\Controller\EvaluationPhysiqueController::delete' => [['idEvaluation'], ['_controller' => 'App\\Controller\\EvaluationPhysiqueController::delete'], [], [['variable', '/', '[^/]++', 'idEvaluation', true], ['text', '/evaluation_physique']], [], [], []],
     'App\Controller\EvaluationPhysiqueController::findCurrentPlayersByClub' => [['clubName'], ['_controller' => 'App\\Controller\\HistoriqueClubController::findCurrentPlayersByClub'], [], [['text', '/current'], ['variable', '/', '[^/]++', 'clubName', true], ['text', '/historique/club/club']], [], [], []],
     'App\Controller\EvaluationPhysiqueController::evaluationsByJoueur' => [['joueurId'], ['_controller' => 'App\\Controller\\EvaluationPhysiqueController::evaluationsByJoueur'], [], [['variable', '/', '[^/]++', 'joueurId', true], ['text', '/evaluation_physique/joueur']], [], [], []],
+<<<<<<< HEAD
+=======
+    'App\Controller\FitnessController::index' => [[], ['_controller' => 'App\\Controller\\FitnessController::index'], [], [['text', '/']], [], [], []],
+    'App\Controller\FitnessController::features' => [[], ['_controller' => 'App\\Controller\\FitnessController::features'], [], [['text', '/features']], [], [], []],
+    'App\Controller\FitnessController::course' => [[], ['_controller' => 'App\\Controller\\FitnessController::course'], [], [['text', '/course']], [], [], []],
+    'App\Controller\FitnessController::blog' => [[], ['_controller' => 'App\\Controller\\FitnessController::blog'], [], [['text', '/blog']], [], [], []],
+    'App\Controller\FitnessController::feature' => [[], ['_controller' => 'App\\Controller\\FitnessController::feature'], [], [['text', '/feature']], [], [], []],
+    'App\Controller\FitnessController::team' => [[], ['_controller' => 'App\\Controller\\FitnessController::team'], [], [['text', '/team']], [], [], []],
+    'App\Controller\FitnessController::testimonial' => [[], ['_controller' => 'App\\Controller\\FitnessController::testimonial'], [], [['text', '/testimonial']], [], [], []],
+    'App\Controller\FitnessController::notFound' => [[], ['_controller' => 'App\\Controller\\FitnessController::notFound'], [], [['text', '/404']], [], [], []],
+    'App\Controller\FitnessController::contact' => [[], ['_controller' => 'App\\Controller\\FitnessController::contact'], [], [['text', '/contact']], [], [], []],
+>>>>>>> match
     'App\Controller\HistoriqueClubController::index' => [[], ['_controller' => 'App\\Controller\\HistoriqueClubController::index'], [], [['text', '/historique/club/']], [], [], []],
     'App\Controller\HistoriqueClubController::stats' => [[], ['_controller' => 'App\\Controller\\HistoriqueClubController::stats'], [], [['text', '/historique/club/statistics']], [], [], []],
     'App\Controller\HistoriqueClubController::new' => [[], ['_controller' => 'App\\Controller\\HistoriqueClubController::new'], [], [['text', '/historique/club/new']], [], [], []],
@@ -154,18 +239,35 @@ return [
     'App\Controller\HistoriqueClubController::exportCsv' => [[], ['_controller' => 'App\\Controller\\HistoriqueClubController::exportCsv'], [], [['text', '/historique/club/export/csv']], [], [], []],
     'App\Controller\HistoriqueClubController::exportPdf' => [[], ['_controller' => 'App\\Controller\\HistoriqueClubController::exportPdf'], [], [['text', '/historique/club/export/pdf']], [], [], []],
     'App\Controller\HistoriqueClubController::exportExcel' => [[], ['_controller' => 'App\\Controller\\HistoriqueClubController::exportExcel'], [], [['text', '/historique/club/export/excel']], [], [], []],
+<<<<<<< HEAD
     'App\Controller\HomeController::index' => [[], ['_controller' => 'App\\Controller\\HomeController::index'], [], [['text', '/']], [], [], []],
+=======
+>>>>>>> match
     'App\Controller\JoueurController::test' => [[], ['_controller' => 'App\\Controller\\JoueurController::test'], [], [['text', '/joueur/test']], [], [], []],
     'App\Controller\JoueurController::index' => [[], ['_controller' => 'App\\Controller\\JoueurController::index'], [], [['text', '/joueur/']], [], [], []],
     'App\Controller\JoueurController::new' => [[], ['_controller' => 'App\\Controller\\JoueurController::new'], [], [['text', '/joueur/new']], [], [], []],
     'App\Controller\JoueurController::statistics' => [[], ['_controller' => 'App\\Controller\\JoueurController::statistics'], [], [['text', '/joueur/statistics']], [], [], []],
     'App\Controller\JoueurController::edit' => [['id'], ['_controller' => 'App\\Controller\\JoueurController::edit'], [], [['text', '/edit'], ['variable', '/', '[^/]++', 'id', true], ['text', '/joueur']], [], [], []],
+<<<<<<< HEAD
     'App\Controller\JoueurController::show' => [['id'], ['_controller' => 'App\\Controller\\JoueurController::show'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/joueur']], [], [], []],
+=======
+    'App\Controller\JoueurController::show' => [['id'], ['_controller' => 'App\\Controller\\JoueurController::show'], ['id' => '\\d+'], [['variable', '/', '\\d+', 'id', true], ['text', '/joueur']], [], [], []],
+>>>>>>> match
     'App\Controller\JoueurController::delete' => [['id'], ['_controller' => 'App\\Controller\\JoueurController::delete'], [], [['text', '/delete'], ['variable', '/', '[^/]++', 'id', true], ['text', '/joueur']], [], [], []],
     'App\Controller\JoueurController::exportCsv' => [[], ['_controller' => 'App\\Controller\\JoueurController::exportCsv'], [], [['text', '/joueur/export/csv']], [], [], []],
     'App\Controller\JoueurController::exportPdf' => [[], ['_controller' => 'App\\Controller\\JoueurController::exportPdf'], [], [['text', '/joueur/export/pdf']], [], [], []],
     'App\Controller\JoueurController::exportExcel' => [[], ['_controller' => 'App\\Controller\\JoueurController::exportExcel'], [], [['text', '/joueur/export/excel']], [], [], []],
     'App\Controller\JoueurController::trackingRedirect' => [[], ['_controller' => 'App\\Controller\\JoueurController::trackingRedirect'], [], [['text', '/joueur/tracking']], [], [], []],
+<<<<<<< HEAD
+=======
+    'App\Controller\JoueurController::layout' => [[], ['_controller' => 'App\\Controller\\JoueurController::layout'], [], [['text', '/joueur/formations']], [], [], []],
+    'App\Controller\MatchController::index' => [[], ['_controller' => 'App\\Controller\\MatchController::index'], [], [['text', '/match/main']], [], [], []],
+    'App\Controller\MatchController::new' => [[], ['_controller' => 'App\\Controller\\MatchController::new'], [], [['text', '/match/new']], [], [], []],
+    'App\Controller\MatchController::statistics' => [[], ['_controller' => 'App\\Controller\\MatchController::statistics'], [], [['text', '/match/stats']], [], [], []],
+    'App\Controller\MatchController::edit' => [['id'], ['_controller' => 'App\\Controller\\MatchController::edit'], [], [['text', '/edit'], ['variable', '/', '[^/]++', 'id', true], ['text', '/match']], [], [], []],
+    'App\Controller\MatchController::delete' => [['id'], ['_controller' => 'App\\Controller\\MatchController::delete'], [], [['text', '/delete'], ['variable', '/', '[^/]++', 'id', true], ['text', '/match']], [], [], []],
+    'App\Controller\MatchController::show' => [['id'], ['_controller' => 'App\\Controller\\MatchController::show'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/match']], [], [], []],
+>>>>>>> match
     'App\Controller\PerformanceJoueurController::stats' => [[], ['_controller' => 'App\\Controller\\PerformanceJoueurController::stats'], [], [['text', '/performance_joueur/stats']], [], [], []],
     'App\Controller\PerformanceJoueurController::index' => [[], ['_controller' => 'App\\Controller\\PerformanceJoueurController::index'], [], [['text', '/performance_joueur/']], [], [], []],
     'App\Controller\PerformanceJoueurController::new' => [[], ['_controller' => 'App\\Controller\\PerformanceJoueurController::new'], [], [['text', '/performance_joueur/new']], [], [], []],
@@ -173,18 +275,40 @@ return [
     'App\Controller\PerformanceJoueurController::edit' => [['idPerformance'], ['_controller' => 'App\\Controller\\PerformanceJoueurController::edit'], [], [['text', '/edit'], ['variable', '/', '[^/]++', 'idPerformance', true], ['text', '/performance_joueur']], [], [], []],
     'App\Controller\PerformanceJoueurController::delete' => [['idPerformance'], ['_controller' => 'App\\Controller\\PerformanceJoueurController::delete'], [], [['variable', '/', '[^/]++', 'idPerformance', true], ['text', '/performance_joueur']], [], [], []],
     'App\Controller\ReservationController::index' => [[], ['_controller' => 'App\\Controller\\ReservationController::index'], [], [['text', '/reservation/']], [], [], []],
+<<<<<<< HEAD
     'App\Controller\ReservationController::exportCsv' => [[], ['_controller' => 'App\\Controller\\ReservationController::exportCsv'], [], [['text', '/reservation/export/csv']], [], [], []],
     'App\Controller\ReservationController::exportPdf' => [[], ['_controller' => 'App\\Controller\\ReservationController::exportPdf'], [], [['text', '/reservation/export/pdf']], [], [], []],
     'App\Controller\ReservationController::exportExcel' => [[], ['_controller' => 'App\\Controller\\ReservationController::exportExcel'], [], [['text', '/reservation/export/excel']], [], [], []],
+=======
+>>>>>>> match
     'App\Controller\ReservationController::new' => [[], ['_controller' => 'App\\Controller\\ReservationController::new'], [], [['text', '/reservation/new']], [], [], []],
     'App\Controller\ReservationController::statistics' => [[], ['_controller' => 'App\\Controller\\ReservationController::statistics'], [], [['text', '/reservation/statistics']], [], [], []],
     'App\Controller\ReservationController::show' => [['id_reservation'], ['_controller' => 'App\\Controller\\ReservationController::show'], ['id_reservation' => '\\d+'], [['variable', '/', '\\d+', 'id_reservation', true], ['text', '/reservation']], [], [], []],
     'App\Controller\ReservationController::edit' => [['id_reservation'], ['_controller' => 'App\\Controller\\ReservationController::edit'], ['id_reservation' => '\\d+'], [['text', '/edit'], ['variable', '/', '\\d+', 'id_reservation', true], ['text', '/reservation']], [], [], []],
     'App\Controller\ReservationController::delete' => [['id_reservation'], ['_controller' => 'App\\Controller\\ReservationController::delete'], ['id_reservation' => '\\d+'], [['variable', '/', '\\d+', 'id_reservation', true], ['text', '/reservation']], [], [], []],
+<<<<<<< HEAD
     'App\Controller\ReservationController::googleAuth' => [[], ['_controller' => 'App\\Controller\\ReservationController::googleAuth'], [], [['text', '/reservation/google-auth']], [], [], []],
     'App\Controller\ReservationController::googleLogout' => [[], ['_controller' => 'App\\Controller\\ReservationController::googleLogout'], [], [['text', '/reservation/google-logout']], [], [], []],
     'App\Controller\ReservationController::addToGoogleCalendar' => [['id_reservation'], ['_controller' => 'App\\Controller\\ReservationController::addToGoogleCalendar'], ['id_reservation' => '\\d+'], [['text', '/add-to-google-calendar'], ['variable', '/', '\\d+', 'id_reservation', true], ['text', '/reservation']], [], [], []],
     'App\Controller\ReservationController::googleCallback' => [[], ['_controller' => 'App\\Controller\\ReservationController::googleCallback'], [], [['text', '/reservation/google-callback']], [], [], []],
+=======
+    'App\Controller\ScheduleController::mainF' => [[], ['_controller' => 'App\\Controller\\ScheduleController::mainF'], [], [['text', '/schedule/mainF']], [], [], []],
+    'App\Controller\ScheduleController::main' => [[], ['_controller' => 'App\\Controller\\ScheduleController::main'], [], [['text', '/schedule/main']], [], [], []],
+    'App\Controller\ScheduleController::statistics' => [[], ['_controller' => 'App\\Controller\\ScheduleController::statistics'], [], [['text', '/schedule/statistics']], [], [], []],
+    'App\Controller\ScheduleController::search' => [[], ['_controller' => 'App\\Controller\\ScheduleController::search'], [], [['text', '/schedule/search']], [], [], []],
+    'App\Controller\ScheduleController::new' => [[], ['_controller' => 'App\\Controller\\ScheduleController::new'], [], [['text', '/schedule/new']], [], [], []],
+    'App\Controller\ScheduleController::show' => [['idSchedule'], ['_controller' => 'App\\Controller\\ScheduleController::show'], ['idSchedule' => '\\d+'], [['variable', '/', '\\d+', 'idSchedule', true], ['text', '/schedule']], [], [], []],
+    'App\Controller\ScheduleController::showF' => [['idSchedule'], ['_controller' => 'App\\Controller\\ScheduleController::showF'], ['idSchedule' => '\\d+'], [['text', '/showF'], ['variable', '/', '\\d+', 'idSchedule', true], ['text', '/schedule']], [], [], []],
+    'App\Controller\ScheduleController::edit' => [['idSchedule'], ['_controller' => 'App\\Controller\\ScheduleController::edit'], ['idSchedule' => '\\d+'], [['text', '/edit'], ['variable', '/', '\\d+', 'idSchedule', true], ['text', '/schedule']], [], [], []],
+    'App\Controller\ScheduleController::delete' => [['idSchedule'], ['_controller' => 'App\\Controller\\ScheduleController::delete'], ['idSchedule' => '\\d+'], [['text', '/delete'], ['variable', '/', '\\d+', 'idSchedule', true], ['text', '/schedule']], [], [], []],
+    'App\Controller\ScheduleController::testView' => [[], ['_controller' => 'App\\Controller\\ScheduleController::testView'], [], [['text', '/schedule/test-view']], [], [], []],
+    'App\Controller\ScheduleController::exportPdf' => [[], ['_controller' => 'App\\Controller\\ScheduleController::exportPdf'], [], [['text', '/schedule/export/pdf']], [], [], []],
+    'App\Controller\ScheduleController::exportCsv' => [[], ['_controller' => 'App\\Controller\\ScheduleController::exportCsv'], [], [['text', '/schedule/export/csv']], [], [], []],
+    'App\Controller\ScheduleController::exportExcel' => [[], ['_controller' => 'App\\Controller\\ScheduleController::exportExcel'], [], [['text', '/schedule/export/excel']], [], [], []],
+    'App\Controller\ScheduleController::addToGoogleCalendar' => [['idSchedule'], ['_controller' => 'App\\Controller\\ScheduleController::addToGoogleCalendar'], ['idSchedule' => '\\d+'], [['text', '/add-to-google-calendar'], ['variable', '/', '\\d+', 'idSchedule', true], ['text', '/schedule']], [], [], []],
+    'App\Controller\ScheduleController::googleCallback' => [[], ['_controller' => 'App\\Controller\\ScheduleController::googleCallback'], [], [['text', '/schedule/google-callback']], [], [], []],
+    'App\Controller\ScheduleController::news' => [['idSchedule'], ['_controller' => 'App\\Controller\\ScheduleController::news'], ['idSchedule' => '\\d+'], [['text', '/news'], ['variable', '/', '\\d+', 'idSchedule', true], ['text', '/schedule']], [], [], []],
+>>>>>>> match
     'App\Controller\SportController::index' => [[], ['_controller' => 'App\\Controller\\SportController::index'], [], [['text', '/sport/']], [], [], []],
     'App\Controller\SportController::new' => [[], ['_controller' => 'App\\Controller\\SportController::new'], [], [['text', '/sport/new']], [], [], []],
     'App\Controller\SportController::statistics' => [[], ['_controller' => 'App\\Controller\\SportController::statistics'], [], [['text', '/sport/statistics']], [], [], []],

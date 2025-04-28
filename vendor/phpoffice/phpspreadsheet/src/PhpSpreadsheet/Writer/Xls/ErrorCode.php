@@ -7,7 +7,11 @@ class ErrorCode
     /**
      * @var array<string, int>
      */
+<<<<<<< HEAD
     protected static $errorCodeMap = [
+=======
+    protected static array $errorCodeMap = [
+>>>>>>> match
         '#NULL!' => 0x00,
         '#DIV/0!' => 0x07,
         '#VALUE!' => 0x0F,

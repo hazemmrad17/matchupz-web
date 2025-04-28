@@ -18,6 +18,7 @@ class Ods extends BaseWriter
 {
     /**
      * Private PhpSpreadsheet.
+<<<<<<< HEAD
      *
      * @var Spreadsheet
      */
@@ -57,6 +58,24 @@ class Ods extends BaseWriter
      * @var Thumbnails
      */
     private $writerPartThumbnails;
+=======
+     */
+    private Spreadsheet $spreadSheet;
+
+    private Content $writerPartContent;
+
+    private Meta $writerPartMeta;
+
+    private MetaInf $writerPartMetaInf;
+
+    private Mimetype $writerPartMimetype;
+
+    private Settings $writerPartSettings;
+
+    private Styles $writerPartStyles;
+
+    private Thumbnails $writerPartThumbnails;
+>>>>>>> match
 
     /**
      * Create a new Ods.
@@ -137,7 +156,11 @@ class Ods extends BaseWriter
         // Close file
         try {
             $zip->finish();
+<<<<<<< HEAD
         } catch (OverflowException $e) {
+=======
+        } catch (OverflowException) {
+>>>>>>> match
             throw new WriterException('Could not close resource.');
         }
 
@@ -146,10 +169,15 @@ class Ods extends BaseWriter
 
     /**
      * Create zip object.
+<<<<<<< HEAD
      *
      * @return ZipStream
      */
     private function createZip()
+=======
+     */
+    private function createZip(): ZipStream
+>>>>>>> match
     {
         // Try opening the ZIP file
         if (!is_resource($this->fileHandle)) {
@@ -162,10 +190,15 @@ class Ods extends BaseWriter
 
     /**
      * Get Spreadsheet object.
+<<<<<<< HEAD
      *
      * @return Spreadsheet
      */
     public function getSpreadsheet()
+=======
+     */
+    public function getSpreadsheet(): Spreadsheet
+>>>>>>> match
     {
         return $this->spreadSheet;
     }
@@ -177,7 +210,11 @@ class Ods extends BaseWriter
      *
      * @return $this
      */
+<<<<<<< HEAD
     public function setSpreadsheet(Spreadsheet $spreadsheet)
+=======
+    public function setSpreadsheet(Spreadsheet $spreadsheet): static
+>>>>>>> match
     {
         $this->spreadSheet = $spreadsheet;
 

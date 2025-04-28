@@ -15,7 +15,11 @@ class ConvertOctal extends ConvertBase
      * Excel Function:
      *        OCT2BIN(x[,places])
      *
+<<<<<<< HEAD
      * @param array|string $value The octal number you want to convert. Number may not
+=======
+     * @param array|bool|float|int|string $value The octal number you want to convert. Number may not
+>>>>>>> match
      *                          contain more than 10 characters. The most significant
      *                          bit of number is the sign bit. The remaining 29 bits
      *                          are magnitude bits. Negative numbers are represented
@@ -44,7 +48,11 @@ class ConvertOctal extends ConvertBase
      *         If an array of numbers is passed as an argument, then the returned result will also be an array
      *            with the same dimensions
      */
+<<<<<<< HEAD
     public static function toBinary($value, $places = null)
+=======
+    public static function toBinary($value, $places = null): array|string
+>>>>>>> match
     {
         if (is_array($value) || is_array($places)) {
             return self::evaluateArrayArguments([self::class, __FUNCTION__], $value, $places);
@@ -69,7 +77,11 @@ class ConvertOctal extends ConvertBase
      * Excel Function:
      *        OCT2DEC(x)
      *
+<<<<<<< HEAD
      * @param array|string $value The octal number you want to convert. Number may not contain
+=======
+     * @param array|bool|float|int|string $value The octal number you want to convert. Number may not contain
+>>>>>>> match
      *                          more than 10 octal characters (30 bits). The most significant
      *                          bit of number is the sign bit. The remaining 29 bits are
      *                          magnitude bits. Negative numbers are represented using
@@ -78,7 +90,11 @@ class ConvertOctal extends ConvertBase
      *                          #NUM! error value.
      *                      Or can be an array of values
      *
+<<<<<<< HEAD
      * @return array|string Result, or an error
+=======
+     * @return array|float|int|string Result, or an error
+>>>>>>> match
      *         If an array of numbers is passed as an argument, then the returned result will also be an array
      *            with the same dimensions
      */
@@ -96,7 +112,11 @@ class ConvertOctal extends ConvertBase
         }
 
         $binX = '';
+<<<<<<< HEAD
         foreach (str_split($value) as $char) {
+=======
+        foreach (mb_str_split($value, 1, 'UTF-8') as $char) {
+>>>>>>> match
             $binX .= str_pad(decbin((int) $char), 3, '0', STR_PAD_LEFT);
         }
         if (strlen($binX) == 30 && $binX[0] == '1') {
@@ -104,10 +124,17 @@ class ConvertOctal extends ConvertBase
                 $binX[$i] = ($binX[$i] == '1' ? '0' : '1');
             }
 
+<<<<<<< HEAD
             return (string) ((bindec($binX) + 1) * -1);
         }
 
         return (string) bindec($binX);
+=======
+            return (bindec($binX) + 1) * -1;
+        }
+
+        return bindec($binX);
+>>>>>>> match
     }
 
     /**
@@ -118,7 +145,11 @@ class ConvertOctal extends ConvertBase
      * Excel Function:
      *        OCT2HEX(x[,places])
      *
+<<<<<<< HEAD
      * @param array|string $value The octal number you want to convert. Number may not contain
+=======
+     * @param array|bool|float|int|string $value The octal number you want to convert. Number may not contain
+>>>>>>> match
      *                          more than 10 octal characters (30 bits). The most significant
      *                          bit of number is the sign bit. The remaining 29 bits are
      *                          magnitude bits. Negative numbers are represented using
@@ -142,7 +173,11 @@ class ConvertOctal extends ConvertBase
      *         If an array of numbers is passed as an argument, then the returned result will also be an array
      *            with the same dimensions
      */
+<<<<<<< HEAD
     public static function toHex($value, $places = null)
+=======
+    public static function toHex($value, $places = null): array|string
+>>>>>>> match
     {
         if (is_array($value) || is_array($places)) {
             return self::evaluateArrayArguments([self::class, __FUNCTION__], $value, $places);

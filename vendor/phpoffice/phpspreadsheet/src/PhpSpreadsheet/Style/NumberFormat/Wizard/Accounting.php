@@ -5,6 +5,7 @@ namespace PhpOffice\PhpSpreadsheet\Style\NumberFormat\Wizard;
 use NumberFormatter;
 use PhpOffice\PhpSpreadsheet\Exception;
 
+<<<<<<< HEAD
 class Accounting extends Currency
 {
     /**
@@ -37,23 +38,41 @@ class Accounting extends Currency
         $this->setCurrencySymbolSpacing($currencySymbolSpacing);
         $this->setLocale($locale);
     }
+=======
+class Accounting extends CurrencyBase
+{
+    protected ?bool $overrideSpacing = true;
+
+    protected ?CurrencyNegative $overrideNegative = CurrencyNegative::parentheses;
+>>>>>>> match
 
     /**
      * @throws Exception if the Intl extension and ICU version don't support Accounting formats
      */
     protected function getLocaleFormat(): string
     {
+<<<<<<< HEAD
         if (version_compare(PHP_VERSION, '7.4.1', '<')) {
             throw new Exception('The Intl extension does not support Accounting Formats below PHP 7.4.1');
         }
 
         if ($this->icuVersion() < 53.0) {
             throw new Exception('The Intl extension does not support Accounting Formats without ICU 53');
+=======
+        if (self::icuVersion() < 53.0) {
+            // @codeCoverageIgnoreStart
+            throw new Exception('The Intl extension does not support Accounting Formats without ICU 53');
+            // @codeCoverageIgnoreEnd
+>>>>>>> match
         }
 
         // Scrutinizer does not recognize CURRENCY_ACCOUNTING
         $formatter = new Locale($this->fullLocale, NumberFormatter::CURRENCY_ACCOUNTING);
+<<<<<<< HEAD
         $mask = $formatter->format();
+=======
+        $mask = $formatter->format($this->stripLeadingRLM);
+>>>>>>> match
         if ($this->decimals === 0) {
             $mask = (string) preg_replace('/\.0+/miu', '', $mask);
         }
@@ -61,7 +80,11 @@ class Accounting extends Currency
         return str_replace('¤', $this->formatCurrencyCode(), $mask);
     }
 
+<<<<<<< HEAD
     private function icuVersion(): float
+=======
+    public static function icuVersion(): float
+>>>>>>> match
     {
         [$major, $minor] = explode('.', INTL_ICU_VERSION);
 
@@ -76,6 +99,7 @@ class Accounting extends Currency
 
         return "[\${$this->currencyCode}-{$this->locale}]";
     }
+<<<<<<< HEAD
 
     public function format(): string
     {
@@ -99,4 +123,6 @@ class Accounting extends Currency
             $this->currencySymbolPosition === self::TRAILING_SYMBOL ? $this->formatCurrencyCode() : null
         );
     }
+=======
+>>>>>>> match
 }

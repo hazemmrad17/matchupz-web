@@ -8,8 +8,12 @@ use SimpleXMLElement;
 
 class Properties
 {
+<<<<<<< HEAD
     /** @var Spreadsheet */
     private $spreadsheet;
+=======
+    private Spreadsheet $spreadsheet;
+>>>>>>> match
 
     public function __construct(Spreadsheet $spreadsheet)
     {
@@ -22,14 +26,20 @@ class Properties
         $officeProperty = $xml->children($namespacesMeta['office']);
         foreach ($officeProperty as $officePropertyData) {
             if (isset($namespacesMeta['dc'])) {
+<<<<<<< HEAD
                 /** @scrutinizer ignore-call */
+=======
+>>>>>>> match
                 $officePropertiesDC = $officePropertyData->children($namespacesMeta['dc']);
                 $this->setCoreProperties($docProps, $officePropertiesDC);
             }
 
             $officePropertyMeta = null;
             if (isset($namespacesMeta['dc'])) {
+<<<<<<< HEAD
                 /** @scrutinizer ignore-call */
+=======
+>>>>>>> match
                 $officePropertyMeta = $officePropertyData->children($namespacesMeta['meta']);
             }
             $officePropertyMeta = $officePropertyMeta ?? [];
@@ -91,17 +101,32 @@ class Properties
 
                 break;
             case 'user-defined':
+<<<<<<< HEAD
                 $this->setUserDefinedProperty($propertyValueAttributes, $propertyValue, $docProps);
+=======
+                $name2 = (string) ($propertyValueAttributes['name'] ?? '');
+                if ($name2 === 'Company') {
+                    $docProps->setCompany($propertyValue);
+                } elseif ($name2 === 'category') {
+                    $docProps->setCategory($propertyValue);
+                } else {
+                    $this->setUserDefinedProperty($propertyValueAttributes, $propertyValue, $docProps);
+                }
+>>>>>>> match
 
                 break;
         }
     }
 
+<<<<<<< HEAD
     /**
      * @param mixed $propertyValueAttributes
      * @param mixed $propertyValue
      */
     private function setUserDefinedProperty($propertyValueAttributes, $propertyValue, DocumentProperties $docProps): void
+=======
+    private function setUserDefinedProperty(iterable $propertyValueAttributes, string $propertyValue, DocumentProperties $docProps): void
+>>>>>>> match
     {
         $propertyValueName = '';
         $propertyValueType = DocumentProperties::PROPERTY_TYPE_STRING;

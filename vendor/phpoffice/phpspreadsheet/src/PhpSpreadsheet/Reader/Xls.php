@@ -6,23 +6,35 @@ use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
 use PhpOffice\PhpSpreadsheet\Cell\DataType;
 use PhpOffice\PhpSpreadsheet\Cell\DataValidation;
 use PhpOffice\PhpSpreadsheet\Exception as PhpSpreadsheetException;
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\NamedRange;
 use PhpOffice\PhpSpreadsheet\Reader\Xls\ConditionalFormatting;
+=======
+>>>>>>> match
 use PhpOffice\PhpSpreadsheet\Reader\Xls\Style\CellFont;
 use PhpOffice\PhpSpreadsheet\Reader\Xls\Style\FillPattern;
 use PhpOffice\PhpSpreadsheet\RichText\RichText;
 use PhpOffice\PhpSpreadsheet\Shared\CodePage;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
 use PhpOffice\PhpSpreadsheet\Shared\Escher;
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Shared\Escher\DgContainer\SpgrContainer\SpContainer;
 use PhpOffice\PhpSpreadsheet\Shared\Escher\DggContainer\BstoreContainer\BSE;
+=======
+>>>>>>> match
 use PhpOffice\PhpSpreadsheet\Shared\File;
 use PhpOffice\PhpSpreadsheet\Shared\OLE;
 use PhpOffice\PhpSpreadsheet\Shared\OLERead;
 use PhpOffice\PhpSpreadsheet\Shared\StringHelper;
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Shared\Xls as SharedXls;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
+=======
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use PhpOffice\PhpSpreadsheet\Style\Border;
+>>>>>>> match
 use PhpOffice\PhpSpreadsheet\Style\Borders;
 use PhpOffice\PhpSpreadsheet\Style\Conditional;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
@@ -30,7 +42,10 @@ use PhpOffice\PhpSpreadsheet\Style\Font;
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 use PhpOffice\PhpSpreadsheet\Style\Protection;
 use PhpOffice\PhpSpreadsheet\Style\Style;
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Worksheet\MemoryDrawing;
+=======
+>>>>>>> match
 use PhpOffice\PhpSpreadsheet\Worksheet\PageSetup;
 use PhpOffice\PhpSpreadsheet\Worksheet\SheetView;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
@@ -65,6 +80,7 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 //         Patch code for user-defined named cells supports single cells only.
 //         NOTE: this patch only works for BIFF8 as BIFF5-7 use a different
 //         external sheet reference structure
+<<<<<<< HEAD
 class Xls extends BaseReader
 {
     // ParseXL definitions
@@ -229,12 +245,61 @@ class Xls extends BaseReader
      * @var array
      */
     private $formats;
+=======
+class Xls extends XlsBase
+{
+    /**
+     * Summary Information stream data.
+     */
+    protected ?string $summaryInformation = null;
+
+    /**
+     * Extended Summary Information stream data.
+     */
+    protected ?string $documentSummaryInformation = null;
+
+    /**
+     * Workbook stream data. (Includes workbook globals substream as well as sheet substreams).
+     */
+    protected string $data;
+
+    /**
+     * Size in bytes of $this->data.
+     */
+    protected int $dataSize;
+
+    /**
+     * Current position in stream.
+     */
+    protected int $pos;
+
+    /**
+     * Workbook to be returned by the reader.
+     */
+    protected Spreadsheet $spreadsheet;
+
+    /**
+     * Worksheet that is currently being built by the reader.
+     */
+    protected Worksheet $phpSheet;
+
+    /**
+     * BIFF version.
+     */
+    protected int $version = 0;
+
+    /**
+     * Shared formats.
+     */
+    protected array $formats;
+>>>>>>> match
 
     /**
      * Shared fonts.
      *
      * @var Font[]
      */
+<<<<<<< HEAD
     private $objFonts;
 
     /**
@@ -362,10 +427,104 @@ class Xls extends BaseReader
      * @var array
      */
     private $sharedFormulas;
+=======
+    protected array $objFonts;
+
+    /**
+     * Color palette.
+     */
+    protected array $palette;
+
+    /**
+     * Worksheets.
+     */
+    protected array $sheets;
+
+    /**
+     * External books.
+     */
+    protected array $externalBooks;
+
+    /**
+     * REF structures. Only applies to BIFF8.
+     */
+    protected array $ref;
+
+    /**
+     * External names.
+     */
+    protected array $externalNames;
+
+    /**
+     * Defined names.
+     */
+    protected array $definedname;
+
+    /**
+     * Shared strings. Only applies to BIFF8.
+     */
+    protected array $sst;
+
+    /**
+     * Panes are frozen? (in sheet currently being read). See WINDOW2 record.
+     */
+    protected bool $frozen;
+
+    /**
+     * Fit printout to number of pages? (in sheet currently being read). See SHEETPR record.
+     */
+    protected bool $isFitToPages;
+
+    /**
+     * Objects. One OBJ record contributes with one entry.
+     */
+    protected array $objs;
+
+    /**
+     * Text Objects. One TXO record corresponds with one entry.
+     */
+    protected array $textObjects;
+
+    /**
+     * Cell Annotations (BIFF8).
+     */
+    protected array $cellNotes;
+
+    /**
+     * The combined MSODRAWINGGROUP data.
+     */
+    protected string $drawingGroupData;
+
+    /**
+     * The combined MSODRAWING data (per sheet).
+     */
+    protected string $drawingData;
+
+    /**
+     * Keep track of XF index.
+     */
+    protected int $xfIndex;
+
+    /**
+     * Mapping of XF index (that is a cell XF) to final index in cellXf collection.
+     */
+    protected array $mapCellXfIndex;
+
+    /**
+     * Mapping of XF index (that is a style XF) to final index in cellStyleXf collection.
+     */
+    protected array $mapCellStyleXfIndex;
+
+    /**
+     * The shared formulas in a sheet. One SHAREDFMLA record contributes with one value.
+     */
+    protected array $sharedFormulas;
+>>>>>>> match
 
     /**
      * The shared formula parts in a sheet. One FORMULA record contributes with one value if it
      * refers to a shared formula.
+<<<<<<< HEAD
      *
      * @var array
      */
@@ -398,10 +557,35 @@ class Xls extends BaseReader
      * @var int
      */
     private $rc4Pos = 0;
+=======
+     */
+    protected array $sharedFormulaParts;
+
+    /**
+     * The type of encryption in use.
+     */
+    protected int $encryption = 0;
+
+    /**
+     * The position in the stream after which contents are encrypted.
+     */
+    protected int $encryptionStartPos = 0;
+
+    /**
+     * The current RC4 decryption object.
+     */
+    protected ?Xls\RC4 $rc4Key = null;
+
+    /**
+     * The position in the stream that the RC4 decryption object was left at.
+     */
+    protected int $rc4Pos = 0;
+>>>>>>> match
 
     /**
      * The current MD5 context state.
      * It is never set in the program, so code which uses it is suspect.
+<<<<<<< HEAD
      *
      * @var string
      */
@@ -515,10 +699,28 @@ class Xls extends BaseReader
         }
 
         return $worksheetNames;
+=======
+     */
+    private string $md5Ctxt = '';
+
+    protected int $textObjRef;
+
+    protected string $baseCell;
+
+    protected bool $activeSheetSet = false;
+
+    /**
+     * Reads names of the worksheets from a file, without parsing the whole file to a PhpSpreadsheet object.
+     */
+    public function listWorksheetNames(string $filename): array
+    {
+        return (new Xls\ListFunctions())->listWorksheetNames2($filename, $this);
+>>>>>>> match
     }
 
     /**
      * Return worksheet info (Name, Last Column Letter, Last Column Index, Total Rows, Total Columns).
+<<<<<<< HEAD
      *
      * @param string $filename
      *
@@ -627,6 +829,12 @@ class Xls extends BaseReader
         }
 
         return $worksheetInfo;
+=======
+     */
+    public function listWorksheetInfo(string $filename): array
+    {
+        return (new Xls\ListFunctions())->listWorksheetInfo2($filename, $this);
+>>>>>>> match
     }
 
     /**
@@ -634,6 +842,7 @@ class Xls extends BaseReader
      */
     protected function loadSpreadsheetFromFile(string $filename): Spreadsheet
     {
+<<<<<<< HEAD
         // Read the OLE file
         $this->loadOLE($filename);
 
@@ -1321,6 +1530,9 @@ class Xls extends BaseReader
         $this->data = '';
 
         return $this->spreadsheet;
+=======
+        return (new Xls\LoadSpreadsheet())->loadSpreadsheetFromFile2($filename, $this);
+>>>>>>> match
     }
 
     /**
@@ -1332,7 +1544,11 @@ class Xls extends BaseReader
      *
      * @return string Record data
      */
+<<<<<<< HEAD
     private function readRecordData($data, $pos, $len)
+=======
+    protected function readRecordData(string $data, int $pos, int $len): string
+>>>>>>> match
     {
         $data = substr($data, $pos, $len);
 
@@ -1381,10 +1597,15 @@ class Xls extends BaseReader
 
     /**
      * Use OLE reader to extract the relevant data streams from the OLE file.
+<<<<<<< HEAD
      *
      * @param string $filename
      */
     private function loadOLE($filename): void
+=======
+     */
+    protected function loadOLE(string $filename): void
+>>>>>>> match
     {
         // OLE reader
         $ole = new OLERead();
@@ -1401,7 +1622,11 @@ class Xls extends BaseReader
     /**
      * Read summary information.
      */
+<<<<<<< HEAD
     private function readSummaryInformation(): void
+=======
+    protected function readSummaryInformation(): void
+>>>>>>> match
     {
         if (!isset($this->summaryInformation)) {
             return;
@@ -1413,7 +1638,11 @@ class Xls extends BaseReader
         // offset: 6; size: 2; OS indicator
         // offset: 8; size: 16
         // offset: 24; size: 4; section count
+<<<<<<< HEAD
         $secCount = self::getInt4d($this->summaryInformation, 24);
+=======
+        //$secCount = self::getInt4d($this->summaryInformation, 24);
+>>>>>>> match
 
         // offset: 28; size: 16; first section's class id: e0 85 9f f2 f9 4f 68 10 ab 91 08 00 2b 27 b3 d9
         // offset: 44; size: 4
@@ -1421,7 +1650,11 @@ class Xls extends BaseReader
 
         // section header
         // offset: $secOffset; size: 4; section length
+<<<<<<< HEAD
         $secLength = self::getInt4d($this->summaryInformation, $secOffset);
+=======
+        //$secLength = self::getInt4d($this->summaryInformation, $secOffset);
+>>>>>>> match
 
         // offset: $secOffset+4; size: 4; property count
         $countProperties = self::getInt4d($this->summaryInformation, $secOffset + 4);
@@ -1548,7 +1781,11 @@ class Xls extends BaseReader
     /**
      * Read additional document summary information.
      */
+<<<<<<< HEAD
     private function readDocumentSummaryInformation(): void
+=======
+    protected function readDocumentSummaryInformation(): void
+>>>>>>> match
     {
         if (!isset($this->documentSummaryInformation)) {
             return;
@@ -1560,7 +1797,11 @@ class Xls extends BaseReader
         //    offset: 6;    size: 2;    OS indicator
         //    offset: 8;    size: 16
         //    offset: 24;    size: 4;    section count
+<<<<<<< HEAD
         $secCount = self::getInt4d($this->documentSummaryInformation, 24);
+=======
+        //$secCount = self::getInt4d($this->documentSummaryInformation, 24);
+>>>>>>> match
 
         // offset: 28;    size: 16;    first section's class id: 02 d5 cd d5 9c 2e 1b 10 93 97 08 00 2b 2c f9 ae
         // offset: 44;    size: 4;    first section offset
@@ -1568,7 +1809,11 @@ class Xls extends BaseReader
 
         //    section header
         //    offset: $secOffset;    size: 4;    section length
+<<<<<<< HEAD
         $secLength = self::getInt4d($this->documentSummaryInformation, $secOffset);
+=======
+        //$secLength = self::getInt4d($this->documentSummaryInformation, $secOffset);
+>>>>>>> match
 
         //    offset: $secOffset+4;    size: 4;    property count
         $countProperties = self::getInt4d($this->documentSummaryInformation, $secOffset + 4);
@@ -1686,7 +1931,11 @@ class Xls extends BaseReader
     /**
      * Reads a general type of BIFF record. Does nothing except for moving stream pointer forward to next record.
      */
+<<<<<<< HEAD
     private function readDefault(): void
+=======
+    protected function readDefault(): void
+>>>>>>> match
     {
         $length = self::getUInt2d($this->data, $this->pos + 2);
 
@@ -1698,7 +1947,11 @@ class Xls extends BaseReader
      *    The NOTE record specifies a comment associated with a particular cell. In Excel 95 (BIFF7) and earlier versions,
      *        this record stores a note (cell note). This feature was significantly enhanced in Excel 97.
      */
+<<<<<<< HEAD
     private function readNote(): void
+=======
+    protected function readNote(): void
+>>>>>>> match
     {
         $length = self::getUInt2d($this->data, $this->pos + 2);
         $recordData = $this->readRecordData($this->data, $this->pos + 4, $length);
@@ -1710,7 +1963,11 @@ class Xls extends BaseReader
             return;
         }
 
+<<<<<<< HEAD
         $cellAddress = $this->readBIFF8CellAddress(substr($recordData, 0, 4));
+=======
+        $cellAddress = Xls\Biff8::readBIFF8CellAddress(substr($recordData, 0, 4));
+>>>>>>> match
         if ($this->version == self::XLS_BIFF8) {
             $noteObjID = self::getUInt2d($recordData, 6);
             $noteAuthor = self::readUnicodeStringLong(substr($recordData, 8));
@@ -1726,14 +1983,22 @@ class Xls extends BaseReader
                 //    If the address row is -1 and the column is 0, (which translates as $B$65536) then this is a continuation
                 //        note from the previous cell annotation. We're not yet handling this, so annotations longer than the
                 //        max 2048 bytes will probably throw a wobbly.
+<<<<<<< HEAD
                 $row = self::getUInt2d($recordData, 0);
+=======
+                //$row = self::getUInt2d($recordData, 0);
+>>>>>>> match
                 $extension = true;
                 $arrayKeys = array_keys($this->phpSheet->getComments());
                 $cellAddress = array_pop($arrayKeys);
             }
 
             $cellAddress = str_replace('$', '', (string) $cellAddress);
+<<<<<<< HEAD
             $noteLength = self::getUInt2d($recordData, 4);
+=======
+            //$noteLength = self::getUInt2d($recordData, 4);
+>>>>>>> match
             $noteText = trim(substr($recordData, 6));
 
             if ($extension) {
@@ -1752,7 +2017,11 @@ class Xls extends BaseReader
     /**
      * The TEXT Object record contains the text associated with a cell annotation.
      */
+<<<<<<< HEAD
     private function readTextObject(): void
+=======
+    protected function readTextObject(): void
+>>>>>>> match
     {
         $length = self::getUInt2d($this->data, $this->pos + 2);
         $recordData = $this->readRecordData($this->data, $this->pos + 4, $length);
@@ -1772,7 +2041,11 @@ class Xls extends BaseReader
         // followed by the continuation records containing the actual text and formatting
         $grbitOpts = self::getUInt2d($recordData, 0);
         $rot = self::getUInt2d($recordData, 2);
+<<<<<<< HEAD
         $cchText = self::getUInt2d($recordData, 10);
+=======
+        //$cchText = self::getUInt2d($recordData, 10);
+>>>>>>> match
         $cbRuns = self::getUInt2d($recordData, 12);
         $text = $this->getSplicedRecordData();
 
@@ -1799,7 +2072,11 @@ class Xls extends BaseReader
     /**
      * Read BOF.
      */
+<<<<<<< HEAD
     private function readBof(): void
+=======
+    protected function readBof(): void
+>>>>>>> match
     {
         $length = self::getUInt2d($this->data, $this->pos + 2);
         $recordData = substr($this->data, $this->pos + 4, $length);
@@ -1850,7 +2127,11 @@ class Xls extends BaseReader
      * are based on the source of Spreadsheet-ParseExcel:
      * https://metacpan.org/release/Spreadsheet-ParseExcel
      */
+<<<<<<< HEAD
     private function readFilepass(): void
+=======
+    protected function readFilepass(): void
+>>>>>>> match
     {
         $length = self::getUInt2d($this->data, $this->pos + 2);
 
@@ -1878,10 +2159,15 @@ class Xls extends BaseReader
      *
      * @param int $block Block for which to create decrypto
      * @param string $valContext MD5 context state
+<<<<<<< HEAD
      *
      * @return Xls\RC4
      */
     private function makeKey($block, $valContext)
+=======
+     */
+    private function makeKey(int $block, string $valContext): Xls\RC4
+>>>>>>> match
     {
         $pwarray = str_repeat("\0", 64);
 
@@ -1889,10 +2175,17 @@ class Xls extends BaseReader
             $pwarray[$i] = $valContext[$i];
         }
 
+<<<<<<< HEAD
         $pwarray[5] = chr($block & 0xff);
         $pwarray[6] = chr(($block >> 8) & 0xff);
         $pwarray[7] = chr(($block >> 16) & 0xff);
         $pwarray[8] = chr(($block >> 24) & 0xff);
+=======
+        $pwarray[5] = chr($block & 0xFF);
+        $pwarray[6] = chr(($block >> 8) & 0xFF);
+        $pwarray[7] = chr(($block >> 16) & 0xFF);
+        $pwarray[8] = chr(($block >> 24) & 0xFF);
+>>>>>>> match
 
         $pwarray[9] = "\x80";
         $pwarray[56] = "\x48";
@@ -1916,18 +2209,30 @@ class Xls extends BaseReader
      *
      * @return bool Success
      */
+<<<<<<< HEAD
     private function verifyPassword($password, $docid, $salt_data, $hashedsalt_data, &$valContext)
+=======
+    private function verifyPassword(string $password, string $docid, string $salt_data, string $hashedsalt_data, string &$valContext): bool
+>>>>>>> match
     {
         $pwarray = str_repeat("\0", 64);
 
         $iMax = strlen($password);
         for ($i = 0; $i < $iMax; ++$i) {
             $o = ord(substr($password, $i, 1));
+<<<<<<< HEAD
             $pwarray[2 * $i] = chr($o & 0xff);
             $pwarray[2 * $i + 1] = chr(($o >> 8) & 0xff);
         }
         $pwarray[2 * $i] = chr(0x80);
         $pwarray[56] = chr(($i << 4) & 0xff);
+=======
+            $pwarray[2 * $i] = chr($o & 0xFF);
+            $pwarray[2 * $i + 1] = chr(($o >> 8) & 0xFF);
+        }
+        $pwarray[2 * $i] = chr(0x80);
+        $pwarray[56] = chr(($i << 4) & 0xFF);
+>>>>>>> match
 
         $md5 = new Xls\MD5();
         $md5->add($pwarray);
@@ -2000,7 +2305,11 @@ class Xls extends BaseReader
      * --    "OpenOffice.org's Documentation of the Microsoft
      *         Excel File Format"
      */
+<<<<<<< HEAD
     private function readCodepage(): void
+=======
+    protected function readCodepage(): void
+>>>>>>> match
     {
         $length = self::getUInt2d($this->data, $this->pos + 2);
         $recordData = $this->readRecordData($this->data, $this->pos + 4, $length);
@@ -2026,7 +2335,11 @@ class Xls extends BaseReader
      * --    "OpenOffice.org's Documentation of the Microsoft
      *         Excel File Format"
      */
+<<<<<<< HEAD
     private function readDateMode(): void
+=======
+    protected function readDateMode(): void
+>>>>>>> match
     {
         $length = self::getUInt2d($this->data, $this->pos + 2);
         $recordData = $this->readRecordData($this->data, $this->pos + 4, $length);
@@ -2036,15 +2349,26 @@ class Xls extends BaseReader
 
         // offset: 0; size: 2; 0 = base 1900, 1 = base 1904
         Date::setExcelCalendar(Date::CALENDAR_WINDOWS_1900);
+<<<<<<< HEAD
         if (ord($recordData[0]) == 1) {
             Date::setExcelCalendar(Date::CALENDAR_MAC_1904);
+=======
+        $this->spreadsheet->setExcelCalendar(Date::CALENDAR_WINDOWS_1900);
+        if (ord($recordData[0]) == 1) {
+            Date::setExcelCalendar(Date::CALENDAR_MAC_1904);
+            $this->spreadsheet->setExcelCalendar(Date::CALENDAR_MAC_1904);
+>>>>>>> match
         }
     }
 
     /**
      * Read a FONT record.
      */
+<<<<<<< HEAD
     private function readFont(): void
+=======
+    protected function readFont(): void
+>>>>>>> match
     {
         $length = self::getUInt2d($this->data, $this->pos + 2);
         $recordData = $this->readRecordData($this->data, $this->pos + 4, $length);
@@ -2079,12 +2403,18 @@ class Xls extends BaseReader
             $objFont->colorIndex = $colorIndex;
 
             // offset: 6; size: 2; font weight
+<<<<<<< HEAD
             $weight = self::getUInt2d($recordData, 6);
             switch ($weight) {
                 case 0x02BC:
                     $objFont->setBold(true);
 
                     break;
+=======
+            $weight = self::getUInt2d($recordData, 6); // regular=400 bold=700
+            if ($weight >= 550) {
+                $objFont->setBold(true);
+>>>>>>> match
             }
 
             // offset: 8; size: 2; escapement type
@@ -2124,7 +2454,11 @@ class Xls extends BaseReader
      * --    "OpenOffice.org's Documentation of the Microsoft
      *         Excel File Format"
      */
+<<<<<<< HEAD
     private function readFormat(): void
+=======
+    protected function readFormat(): void
+>>>>>>> match
     {
         $length = self::getUInt2d($this->data, $this->pos + 2);
         $recordData = $this->readRecordData($this->data, $this->pos + 4, $length);
@@ -2165,7 +2499,11 @@ class Xls extends BaseReader
      * --    "OpenOffice.org's Documentation of the Microsoft
      *         Excel File Format"
      */
+<<<<<<< HEAD
     private function readXf(): void
+=======
+    protected function readXf(): void
+>>>>>>> match
     {
         $length = self::getUInt2d($this->data, $this->pos + 2);
         $recordData = $this->readRecordData($this->data, $this->pos + 4, $length);
@@ -2184,7 +2522,13 @@ class Xls extends BaseReader
                 // check the OpenOffice documentation of the FONT record
                 $fontIndex = self::getUInt2d($recordData, 0) - 1;
             }
+<<<<<<< HEAD
             $objStyle->setFont($this->objFonts[$fontIndex]);
+=======
+            if (isset($this->objFonts[$fontIndex])) {
+                $objStyle->setFont($this->objFonts[$fontIndex]);
+            }
+>>>>>>> match
 
             // offset:  2; size: 2; Index to FORMAT record
             $numberFormatIndex = self::getUInt2d($recordData, 2);
@@ -2286,16 +2630,28 @@ class Xls extends BaseReader
                 // bit: 30; mask: 0x40000000; 1 = diagonal line from top left to right bottom
                 $diagonalDown = (0x40000000 & self::getInt4d($recordData, 10)) >> 30 ? true : false;
 
+<<<<<<< HEAD
                 // bit: 31; mask: 0x80000000; 1 = diagonal line from bottom left to top right
                 $diagonalUp = ((int) 0x80000000 & self::getInt4d($recordData, 10)) >> 31 ? true : false;
 
                 if ($diagonalUp === false) {
                     if ($diagonalDown == false) {
+=======
+                // bit: 31; mask: 0x800000; 1 = diagonal line from bottom left to top right
+                $diagonalUp = (self::HIGH_ORDER_BIT & self::getInt4d($recordData, 10)) >> 31 ? true : false;
+
+                if ($diagonalUp === false) {
+                    if ($diagonalDown === false) {
+>>>>>>> match
                         $objStyle->getBorders()->setDiagonalDirection(Borders::DIAGONAL_NONE);
                     } else {
                         $objStyle->getBorders()->setDiagonalDirection(Borders::DIAGONAL_DOWN);
                     }
+<<<<<<< HEAD
                 } elseif ($diagonalDown == false) {
+=======
+                } elseif ($diagonalDown === false) {
+>>>>>>> match
                     $objStyle->getBorders()->setDiagonalDirection(Borders::DIAGONAL_UP);
                 } else {
                     $objStyle->getBorders()->setDiagonalDirection(Borders::DIAGONAL_BOTH);
@@ -2317,7 +2673,11 @@ class Xls extends BaseReader
                 }
 
                 // bit: 31-26; mask: 0xFC000000 fill pattern
+<<<<<<< HEAD
                 if ($fillType = Xls\Style\FillPattern::lookup(((int) 0xFC000000 & self::getInt4d($recordData, 14)) >> 26)) {
+=======
+                if ($fillType = FillPattern::lookup((self::FC000000 & self::getInt4d($recordData, 14)) >> 26)) {
+>>>>>>> match
                     $objStyle->getFill()->setFillType($fillType);
                 }
                 // offset: 18; size: 2; pattern and background colour
@@ -2363,13 +2723,21 @@ class Xls extends BaseReader
                 $objStyle->getFill()->endcolorIndex = (0x00003F80 & $borderAndBackground) >> 7;
 
                 // bit: 21-16; mask: 0x003F0000; fill pattern
+<<<<<<< HEAD
                 $objStyle->getFill()->setFillType(Xls\Style\FillPattern::lookup((0x003F0000 & $borderAndBackground) >> 16));
+=======
+                $objStyle->getFill()->setFillType(FillPattern::lookup((0x003F0000 & $borderAndBackground) >> 16));
+>>>>>>> match
 
                 // bit: 24-22; mask: 0x01C00000; bottom line style
                 $objStyle->getBorders()->getBottom()->setBorderStyle(Xls\Style\Border::lookup((0x01C00000 & $borderAndBackground) >> 22));
 
                 // bit: 31-25; mask: 0xFE000000; bottom line color
+<<<<<<< HEAD
                 $objStyle->getBorders()->getBottom()->colorIndex = ((int) 0xFE000000 & $borderAndBackground) >> 25;
+=======
+                $objStyle->getBorders()->getBottom()->colorIndex = (self::FE000000 & $borderAndBackground) >> 25;
+>>>>>>> match
 
                 // offset: 12; size: 4; cell border lines
                 $borderLines = self::getInt4d($recordData, 12);
@@ -2411,7 +2779,11 @@ class Xls extends BaseReader
         }
     }
 
+<<<<<<< HEAD
     private function readXfExt(): void
+=======
+    protected function readXfExt(): void
+>>>>>>> match
     {
         $length = self::getUInt2d($this->data, $this->pos + 2);
         $recordData = $this->readRecordData($this->data, $this->pos + 4, $length);
@@ -2434,7 +2806,11 @@ class Xls extends BaseReader
             // offset: 16; size: 2; not used
 
             // offset: 18; size: 2; number of extension properties that follow
+<<<<<<< HEAD
             $cexts = self::getUInt2d($recordData, 18);
+=======
+            //$cexts = self::getUInt2d($recordData, 18);
+>>>>>>> match
 
             // start reading the actual extension data
             $offset = 20;
@@ -2587,7 +2963,11 @@ class Xls extends BaseReader
     /**
      * Read STYLE record.
      */
+<<<<<<< HEAD
     private function readStyle(): void
+=======
+    protected function readStyle(): void
+>>>>>>> match
     {
         $length = self::getUInt2d($this->data, $this->pos + 2);
         $recordData = $this->readRecordData($this->data, $this->pos + 4, $length);
@@ -2600,7 +2980,11 @@ class Xls extends BaseReader
             $ixfe = self::getUInt2d($recordData, 0);
 
             // bit: 11-0; mask 0x0FFF; index to XF record
+<<<<<<< HEAD
             $xfIndex = (0x0FFF & $ixfe) >> 0;
+=======
+            //$xfIndex = (0x0FFF & $ixfe) >> 0;
+>>>>>>> match
 
             // bit: 15; mask 0x8000; 0 = user-defined style, 1 = built-in style
             $isBuiltIn = (bool) ((0x8000 & $ixfe) >> 15);
@@ -2624,7 +3008,11 @@ class Xls extends BaseReader
     /**
      * Read PALETTE record.
      */
+<<<<<<< HEAD
     private function readPalette(): void
+=======
+    protected function readPalette(): void
+>>>>>>> match
     {
         $length = self::getUInt2d($this->data, $this->pos + 2);
         $recordData = $this->readRecordData($this->data, $this->pos + 4, $length);
@@ -2656,7 +3044,11 @@ class Xls extends BaseReader
      * --    "OpenOffice.org's Documentation of the Microsoft
      *         Excel File Format"
      */
+<<<<<<< HEAD
     private function readSheet(): void
+=======
+    protected function readSheet(): void
+>>>>>>> match
     {
         $length = self::getUInt2d($this->data, $this->pos + 2);
         $recordData = $this->readRecordData($this->data, $this->pos + 4, $length);
@@ -2669,6 +3061,7 @@ class Xls extends BaseReader
         $this->pos += 4 + $length;
 
         // offset: 4; size: 1; sheet state
+<<<<<<< HEAD
         switch (ord($recordData[4])) {
             case 0x00:
                 $sheetState = Worksheet::SHEETSTATE_VISIBLE;
@@ -2687,6 +3080,14 @@ class Xls extends BaseReader
 
                 break;
         }
+=======
+        $sheetState = match (ord($recordData[4])) {
+            0x00 => Worksheet::SHEETSTATE_VISIBLE,
+            0x01 => Worksheet::SHEETSTATE_HIDDEN,
+            0x02 => Worksheet::SHEETSTATE_VERYHIDDEN,
+            default => Worksheet::SHEETSTATE_VISIBLE,
+        };
+>>>>>>> match
 
         // offset: 5; size: 1; sheet type
         $sheetType = ord($recordData[5]);
@@ -2712,7 +3113,11 @@ class Xls extends BaseReader
     /**
      * Read EXTERNALBOOK record.
      */
+<<<<<<< HEAD
     private function readExternalBook(): void
+=======
+    protected function readExternalBook(): void
+>>>>>>> match
     {
         $length = self::getUInt2d($this->data, $this->pos + 2);
         $recordData = $this->readRecordData($this->data, $this->pos + 4, $length);
@@ -2774,7 +3179,11 @@ class Xls extends BaseReader
     /**
      * Read EXTERNNAME record.
      */
+<<<<<<< HEAD
     private function readExternName(): void
+=======
+    protected function readExternName(): void
+>>>>>>> match
     {
         $length = self::getUInt2d($this->data, $this->pos + 2);
         $recordData = $this->readRecordData($this->data, $this->pos + 4, $length);
@@ -2785,7 +3194,11 @@ class Xls extends BaseReader
         // external sheet references provided for named cells
         if ($this->version == self::XLS_BIFF8) {
             // offset: 0; size: 2; options
+<<<<<<< HEAD
             $options = self::getUInt2d($recordData, 0);
+=======
+            //$options = self::getUInt2d($recordData, 0);
+>>>>>>> match
 
             // offset: 2; size: 2;
 
@@ -2808,7 +3221,11 @@ class Xls extends BaseReader
     /**
      * Read EXTERNSHEET record.
      */
+<<<<<<< HEAD
     private function readExternSheet(): void
+=======
+    protected function readExternSheet(): void
+>>>>>>> match
     {
         $length = self::getUInt2d($this->data, $this->pos + 2);
         $recordData = $this->readRecordData($this->data, $this->pos + 4, $length);
@@ -2844,7 +3261,11 @@ class Xls extends BaseReader
      * --    "OpenOffice.org's Documentation of the Microsoft
      *         Excel File Format"
      */
+<<<<<<< HEAD
     private function readDefinedName(): void
+=======
+    protected function readDefinedName(): void
+>>>>>>> match
     {
         $length = self::getUInt2d($this->data, $this->pos + 2);
         $recordData = $this->readRecordData($this->data, $this->pos + 4, $length);
@@ -2882,8 +3303,14 @@ class Xls extends BaseReader
 
             try {
                 $formula = $this->getFormulaFromStructure($formulaStructure);
+<<<<<<< HEAD
             } catch (PhpSpreadsheetException $e) {
                 $formula = '';
+=======
+            } catch (PhpSpreadsheetException) {
+                $formula = '';
+                $isBuiltInName = 0;
+>>>>>>> match
             }
 
             $this->definedname[] = [
@@ -2898,9 +3325,15 @@ class Xls extends BaseReader
     /**
      * Read MSODRAWINGGROUP record.
      */
+<<<<<<< HEAD
     private function readMsoDrawingGroup(): void
     {
         $length = self::getUInt2d($this->data, $this->pos + 2);
+=======
+    protected function readMsoDrawingGroup(): void
+    {
+        //$length = self::getUInt2d($this->data, $this->pos + 2);
+>>>>>>> match
 
         // get spliced record data
         $splicedRecordData = $this->getSplicedRecordData();
@@ -2920,7 +3353,11 @@ class Xls extends BaseReader
      * --    "OpenOffice.org's Documentation of the Microsoft
      *         Excel File Format"
      */
+<<<<<<< HEAD
     private function readSst(): void
+=======
+    protected function readSst(): void
+>>>>>>> match
     {
         // offset within (spliced) record data
         $pos = 0;
@@ -3052,7 +3489,11 @@ class Xls extends BaseReader
                         $len = min($charsLeft, $limitpos - $pos);
                         for ($j = 0; $j < $len; ++$j) {
                             $retstr .= $recordData[$pos + $j]
+<<<<<<< HEAD
                             . chr(0);
+=======
+                                . chr(0);
+>>>>>>> match
                         }
                         $charsLeft -= $len;
                         $isCompressed = false;
@@ -3116,7 +3557,11 @@ class Xls extends BaseReader
     /**
      * Read PRINTGRIDLINES record.
      */
+<<<<<<< HEAD
     private function readPrintGridlines(): void
+=======
+    protected function readPrintGridlines(): void
+>>>>>>> match
     {
         $length = self::getUInt2d($this->data, $this->pos + 2);
         $recordData = $this->readRecordData($this->data, $this->pos + 4, $length);
@@ -3134,7 +3579,11 @@ class Xls extends BaseReader
     /**
      * Read DEFAULTROWHEIGHT record.
      */
+<<<<<<< HEAD
     private function readDefaultRowHeight(): void
+=======
+    protected function readDefaultRowHeight(): void
+>>>>>>> match
     {
         $length = self::getUInt2d($this->data, $this->pos + 2);
         $recordData = $this->readRecordData($this->data, $this->pos + 4, $length);
@@ -3151,7 +3600,11 @@ class Xls extends BaseReader
     /**
      * Read SHEETPR record.
      */
+<<<<<<< HEAD
     private function readSheetPr(): void
+=======
+    protected function readSheetPr(): void
+>>>>>>> match
     {
         $length = self::getUInt2d($this->data, $this->pos + 2);
         $recordData = $this->readRecordData($this->data, $this->pos + 4, $length);
@@ -3177,7 +3630,11 @@ class Xls extends BaseReader
     /**
      * Read HORIZONTALPAGEBREAKS record.
      */
+<<<<<<< HEAD
     private function readHorizontalPageBreaks(): void
+=======
+    protected function readHorizontalPageBreaks(): void
+>>>>>>> match
     {
         $length = self::getUInt2d($this->data, $this->pos + 2);
         $recordData = $this->readRecordData($this->data, $this->pos + 4, $length);
@@ -3193,7 +3650,11 @@ class Xls extends BaseReader
             for ($i = 0; $i < $nm; ++$i) {
                 $r = self::getUInt2d($recordData, 2 + 6 * $i);
                 $cf = self::getUInt2d($recordData, 2 + 6 * $i + 2);
+<<<<<<< HEAD
                 $cl = self::getUInt2d($recordData, 2 + 6 * $i + 4);
+=======
+                //$cl = self::getUInt2d($recordData, 2 + 6 * $i + 4);
+>>>>>>> match
 
                 // not sure why two column indexes are necessary?
                 $this->phpSheet->setBreak([$cf + 1, $r], Worksheet::BREAK_ROW);
@@ -3204,7 +3665,11 @@ class Xls extends BaseReader
     /**
      * Read VERTICALPAGEBREAKS record.
      */
+<<<<<<< HEAD
     private function readVerticalPageBreaks(): void
+=======
+    protected function readVerticalPageBreaks(): void
+>>>>>>> match
     {
         $length = self::getUInt2d($this->data, $this->pos + 2);
         $recordData = $this->readRecordData($this->data, $this->pos + 4, $length);
@@ -3231,7 +3696,11 @@ class Xls extends BaseReader
     /**
      * Read HEADER record.
      */
+<<<<<<< HEAD
     private function readHeader(): void
+=======
+    protected function readHeader(): void
+>>>>>>> match
     {
         $length = self::getUInt2d($this->data, $this->pos + 2);
         $recordData = $this->readRecordData($this->data, $this->pos + 4, $length);
@@ -3258,7 +3727,11 @@ class Xls extends BaseReader
     /**
      * Read FOOTER record.
      */
+<<<<<<< HEAD
     private function readFooter(): void
+=======
+    protected function readFooter(): void
+>>>>>>> match
     {
         $length = self::getUInt2d($this->data, $this->pos + 2);
         $recordData = $this->readRecordData($this->data, $this->pos + 4, $length);
@@ -3284,7 +3757,11 @@ class Xls extends BaseReader
     /**
      * Read HCENTER record.
      */
+<<<<<<< HEAD
     private function readHcenter(): void
+=======
+    protected function readHcenter(): void
+>>>>>>> match
     {
         $length = self::getUInt2d($this->data, $this->pos + 2);
         $recordData = $this->readRecordData($this->data, $this->pos + 4, $length);
@@ -3303,7 +3780,11 @@ class Xls extends BaseReader
     /**
      * Read VCENTER record.
      */
+<<<<<<< HEAD
     private function readVcenter(): void
+=======
+    protected function readVcenter(): void
+>>>>>>> match
     {
         $length = self::getUInt2d($this->data, $this->pos + 2);
         $recordData = $this->readRecordData($this->data, $this->pos + 4, $length);
@@ -3322,7 +3803,11 @@ class Xls extends BaseReader
     /**
      * Read LEFTMARGIN record.
      */
+<<<<<<< HEAD
     private function readLeftMargin(): void
+=======
+    protected function readLeftMargin(): void
+>>>>>>> match
     {
         $length = self::getUInt2d($this->data, $this->pos + 2);
         $recordData = $this->readRecordData($this->data, $this->pos + 4, $length);
@@ -3339,7 +3824,11 @@ class Xls extends BaseReader
     /**
      * Read RIGHTMARGIN record.
      */
+<<<<<<< HEAD
     private function readRightMargin(): void
+=======
+    protected function readRightMargin(): void
+>>>>>>> match
     {
         $length = self::getUInt2d($this->data, $this->pos + 2);
         $recordData = $this->readRecordData($this->data, $this->pos + 4, $length);
@@ -3356,7 +3845,11 @@ class Xls extends BaseReader
     /**
      * Read TOPMARGIN record.
      */
+<<<<<<< HEAD
     private function readTopMargin(): void
+=======
+    protected function readTopMargin(): void
+>>>>>>> match
     {
         $length = self::getUInt2d($this->data, $this->pos + 2);
         $recordData = $this->readRecordData($this->data, $this->pos + 4, $length);
@@ -3373,7 +3866,11 @@ class Xls extends BaseReader
     /**
      * Read BOTTOMMARGIN record.
      */
+<<<<<<< HEAD
     private function readBottomMargin(): void
+=======
+    protected function readBottomMargin(): void
+>>>>>>> match
     {
         $length = self::getUInt2d($this->data, $this->pos + 2);
         $recordData = $this->readRecordData($this->data, $this->pos + 4, $length);
@@ -3390,7 +3887,11 @@ class Xls extends BaseReader
     /**
      * Read PAGESETUP record.
      */
+<<<<<<< HEAD
     private function readPageSetup(): void
+=======
+    protected function readPageSetup(): void
+>>>>>>> match
     {
         $length = self::getUInt2d($this->data, $this->pos + 2);
         $recordData = $this->readRecordData($this->data, $this->pos + 4, $length);
@@ -3448,7 +3949,11 @@ class Xls extends BaseReader
      * PROTECT - Sheet protection (BIFF2 through BIFF8)
      *   if this record is omitted, then it also means no sheet protection.
      */
+<<<<<<< HEAD
     private function readProtect(): void
+=======
+    protected function readProtect(): void
+>>>>>>> match
     {
         $length = self::getUInt2d($this->data, $this->pos + 2);
         $recordData = $this->readRecordData($this->data, $this->pos + 4, $length);
@@ -3470,7 +3975,11 @@ class Xls extends BaseReader
     /**
      * SCENPROTECT.
      */
+<<<<<<< HEAD
     private function readScenProtect(): void
+=======
+    protected function readScenProtect(): void
+>>>>>>> match
     {
         $length = self::getUInt2d($this->data, $this->pos + 2);
         $recordData = $this->readRecordData($this->data, $this->pos + 4, $length);
@@ -3493,7 +4002,11 @@ class Xls extends BaseReader
     /**
      * OBJECTPROTECT.
      */
+<<<<<<< HEAD
     private function readObjectProtect(): void
+=======
+    protected function readObjectProtect(): void
+>>>>>>> match
     {
         $length = self::getUInt2d($this->data, $this->pos + 2);
         $recordData = $this->readRecordData($this->data, $this->pos + 4, $length);
@@ -3516,7 +4029,11 @@ class Xls extends BaseReader
     /**
      * PASSWORD - Sheet protection (hashed) password (BIFF2 through BIFF8).
      */
+<<<<<<< HEAD
     private function readPassword(): void
+=======
+    protected function readPassword(): void
+>>>>>>> match
     {
         $length = self::getUInt2d($this->data, $this->pos + 2);
         $recordData = $this->readRecordData($this->data, $this->pos + 4, $length);
@@ -3534,7 +4051,11 @@ class Xls extends BaseReader
     /**
      * Read DEFCOLWIDTH record.
      */
+<<<<<<< HEAD
     private function readDefColWidth(): void
+=======
+    protected function readDefColWidth(): void
+>>>>>>> match
     {
         $length = self::getUInt2d($this->data, $this->pos + 2);
         $recordData = $this->readRecordData($this->data, $this->pos + 4, $length);
@@ -3552,7 +4073,11 @@ class Xls extends BaseReader
     /**
      * Read COLINFO record.
      */
+<<<<<<< HEAD
     private function readColInfo(): void
+=======
+    protected function readColInfo(): void
+>>>>>>> match
     {
         $length = self::getUInt2d($this->data, $this->pos + 2);
         $recordData = $this->readRecordData($this->data, $this->pos + 4, $length);
@@ -3612,7 +4137,11 @@ class Xls extends BaseReader
      * --    "OpenOffice.org's Documentation of the Microsoft
      *         Excel File Format"
      */
+<<<<<<< HEAD
     private function readRow(): void
+=======
+    protected function readRow(): void
+>>>>>>> match
     {
         $length = self::getUInt2d($this->data, $this->pos + 2);
         $recordData = $this->readRecordData($this->data, $this->pos + 4, $length);
@@ -3681,7 +4210,11 @@ class Xls extends BaseReader
      * --    "OpenOffice.org's Documentation of the Microsoft
      *         Excel File Format"
      */
+<<<<<<< HEAD
     private function readRk(): void
+=======
+    protected function readRk(): void
+>>>>>>> match
     {
         $length = self::getUInt2d($this->data, $this->pos + 2);
         $recordData = $this->readRecordData($this->data, $this->pos + 4, $length);
@@ -3697,7 +4230,11 @@ class Xls extends BaseReader
         $columnString = Coordinate::stringFromColumnIndex($column + 1);
 
         // Read cell?
+<<<<<<< HEAD
         if (($this->getReadFilter() !== null) && $this->getReadFilter()->readCell($columnString, $row + 1, $this->phpSheet->getTitle())) {
+=======
+        if ($this->getReadFilter()->readCell($columnString, $row + 1, $this->phpSheet->getTitle())) {
+>>>>>>> match
             // offset: 4; size: 2; index to XF record
             $xfIndex = self::getUInt2d($recordData, 4);
 
@@ -3725,7 +4262,11 @@ class Xls extends BaseReader
      * --    "OpenOffice.org's Documentation of the Microsoft
      *         Excel File Format"
      */
+<<<<<<< HEAD
     private function readLabelSst(): void
+=======
+    protected function readLabelSst(): void
+>>>>>>> match
     {
         $length = self::getUInt2d($this->data, $this->pos + 2);
         $recordData = $this->readRecordData($this->data, $this->pos + 4, $length);
@@ -3740,9 +4281,15 @@ class Xls extends BaseReader
         $column = self::getUInt2d($recordData, 2);
         $columnString = Coordinate::stringFromColumnIndex($column + 1);
 
+<<<<<<< HEAD
         $emptyCell = true;
         // Read cell?
         if (($this->getReadFilter() !== null) && $this->getReadFilter()->readCell($columnString, $row + 1, $this->phpSheet->getTitle())) {
+=======
+        $cell = null;
+        // Read cell?
+        if ($this->getReadFilter()->readCell($columnString, $row + 1, $this->phpSheet->getTitle())) {
+>>>>>>> match
             // offset: 4; size: 2; index to XF record
             $xfIndex = self::getUInt2d($recordData, 4);
 
@@ -3787,17 +4334,27 @@ class Xls extends BaseReader
                 if ($this->readEmptyCells || trim($richText->getPlainText()) !== '') {
                     $cell = $this->phpSheet->getCell($columnString . ($row + 1));
                     $cell->setValueExplicit($richText, DataType::TYPE_STRING);
+<<<<<<< HEAD
                     $emptyCell = false;
+=======
+>>>>>>> match
                 }
             } else {
                 if ($this->readEmptyCells || trim($this->sst[$index]['value']) !== '') {
                     $cell = $this->phpSheet->getCell($columnString . ($row + 1));
                     $cell->setValueExplicit($this->sst[$index]['value'], DataType::TYPE_STRING);
+<<<<<<< HEAD
                     $emptyCell = false;
                 }
             }
 
             if (!$this->readDataOnly && !$emptyCell && isset($this->mapCellXfIndex[$xfIndex])) {
+=======
+                }
+            }
+
+            if (!$this->readDataOnly && $cell !== null && isset($this->mapCellXfIndex[$xfIndex])) {
+>>>>>>> match
                 // add style information
                 $cell->setXfIndex($this->mapCellXfIndex[$xfIndex]);
             }
@@ -3812,7 +4369,11 @@ class Xls extends BaseReader
      * --    "OpenOffice.org's Documentation of the Microsoft
      *         Excel File Format"
      */
+<<<<<<< HEAD
     private function readMulRk(): void
+=======
+    protected function readMulRk(): void
+>>>>>>> match
     {
         $length = self::getUInt2d($this->data, $this->pos + 2);
         $recordData = $this->readRecordData($this->data, $this->pos + 4, $length);
@@ -3837,7 +4398,11 @@ class Xls extends BaseReader
             $columnString = Coordinate::stringFromColumnIndex($colFirst + $i);
 
             // Read cell?
+<<<<<<< HEAD
             if (($this->getReadFilter() !== null) && $this->getReadFilter()->readCell($columnString, $row + 1, $this->phpSheet->getTitle())) {
+=======
+            if ($this->getReadFilter()->readCell($columnString, $row + 1, $this->phpSheet->getTitle())) {
+>>>>>>> match
                 // offset: var; size: 2; index to XF record
                 $xfIndex = self::getUInt2d($recordData, $offset);
 
@@ -3865,7 +4430,11 @@ class Xls extends BaseReader
      * --    "OpenOffice.org's Documentation of the Microsoft
      *         Excel File Format"
      */
+<<<<<<< HEAD
     private function readNumber(): void
+=======
+    protected function readNumber(): void
+>>>>>>> match
     {
         $length = self::getUInt2d($this->data, $this->pos + 2);
         $recordData = $this->readRecordData($this->data, $this->pos + 4, $length);
@@ -3881,7 +4450,11 @@ class Xls extends BaseReader
         $columnString = Coordinate::stringFromColumnIndex($column + 1);
 
         // Read cell?
+<<<<<<< HEAD
         if (($this->getReadFilter() !== null) && $this->getReadFilter()->readCell($columnString, $row + 1, $this->phpSheet->getTitle())) {
+=======
+        if ($this->getReadFilter()->readCell($columnString, $row + 1, $this->phpSheet->getTitle())) {
+>>>>>>> match
             // offset 4; size: 2; index to XF record
             $xfIndex = self::getUInt2d($recordData, 4);
 
@@ -3906,7 +4479,11 @@ class Xls extends BaseReader
      * --    "OpenOffice.org's Documentation of the Microsoft
      *         Excel File Format"
      */
+<<<<<<< HEAD
     private function readFormula(): void
+=======
+    protected function readFormula(): void
+>>>>>>> match
     {
         $length = self::getUInt2d($this->data, $this->pos + 2);
         $recordData = $this->readRecordData($this->data, $this->pos + 4, $length);
@@ -3947,7 +4524,11 @@ class Xls extends BaseReader
         }
 
         // Read cell?
+<<<<<<< HEAD
         if (($this->getReadFilter() !== null) && $this->getReadFilter()->readCell($columnString, $row + 1, $this->phpSheet->getTitle())) {
+=======
+        if ($this->getReadFilter()->readCell($columnString, $row + 1, $this->phpSheet->getTitle())) {
+>>>>>>> match
             if ($isPartOfSharedFormula) {
                 // formula is added to this cell after the sheet has been read
                 $this->sharedFormulaParts[$columnString . ($row + 1)] = $this->baseCell;
@@ -4017,7 +4598,11 @@ class Xls extends BaseReader
                     }
                     $formula = $this->getFormulaFromStructure($formulaStructure); // get formula in human language
                     $cell->setValueExplicit('=' . $formula, DataType::TYPE_FORMULA);
+<<<<<<< HEAD
                 } catch (PhpSpreadsheetException $e) {
+=======
+                } catch (PhpSpreadsheetException) {
+>>>>>>> match
                     $cell->setValueExplicit($value, $dataType);
                 }
             } else {
@@ -4029,7 +4614,11 @@ class Xls extends BaseReader
             }
 
             // store the cached calculated value
+<<<<<<< HEAD
             $cell->setCalculatedValue($value);
+=======
+            $cell->setCalculatedValue($value, $dataType === DataType::TYPE_NUMERIC);
+>>>>>>> match
         }
     }
 
@@ -4038,7 +4627,11 @@ class Xls extends BaseReader
      * which usually contains relative references.
      * These will be used to construct the formula in each shared formula part after the sheet is read.
      */
+<<<<<<< HEAD
     private function readSharedFmla(): void
+=======
+    protected function readSharedFmla(): void
+>>>>>>> match
     {
         $length = self::getUInt2d($this->data, $this->pos + 2);
         $recordData = $this->readRecordData($this->data, $this->pos + 4, $length);
@@ -4047,13 +4640,22 @@ class Xls extends BaseReader
         $this->pos += 4 + $length;
 
         // offset: 0, size: 6; cell range address of the area used by the shared formula, not used for anything
+<<<<<<< HEAD
         $cellRange = substr($recordData, 0, 6);
         $cellRange = $this->readBIFF5CellRangeAddressFixed($cellRange); // note: even BIFF8 uses BIFF5 syntax
+=======
+        //$cellRange = substr($recordData, 0, 6);
+        //$cellRange = Xls\Biff5::readBIFF5CellRangeAddressFixed($cellRange); // note: even BIFF8 uses BIFF5 syntax
+>>>>>>> match
 
         // offset: 6, size: 1; not used
 
         // offset: 7, size: 1; number of existing FORMULA records for this shared formula
+<<<<<<< HEAD
         $no = ord($recordData[7]);
+=======
+        //$no = ord($recordData[7]);
+>>>>>>> match
 
         // offset: 8, size: var; Binary token array of the shared formula
         $formula = substr($recordData, 8);
@@ -4069,7 +4671,11 @@ class Xls extends BaseReader
      *
      * @return string The string contents as UTF-8
      */
+<<<<<<< HEAD
     private function readString()
+=======
+    protected function readString(): string
+>>>>>>> match
     {
         $length = self::getUInt2d($this->data, $this->pos + 2);
         $recordData = $this->readRecordData($this->data, $this->pos + 4, $length);
@@ -4096,7 +4702,11 @@ class Xls extends BaseReader
      * --    "OpenOffice.org's Documentation of the Microsoft
      *         Excel File Format"
      */
+<<<<<<< HEAD
     private function readBoolErr(): void
+=======
+    protected function readBoolErr(): void
+>>>>>>> match
     {
         $length = self::getUInt2d($this->data, $this->pos + 2);
         $recordData = $this->readRecordData($this->data, $this->pos + 4, $length);
@@ -4112,7 +4722,11 @@ class Xls extends BaseReader
         $columnString = Coordinate::stringFromColumnIndex($column + 1);
 
         // Read cell?
+<<<<<<< HEAD
         if (($this->getReadFilter() !== null) && $this->getReadFilter()->readCell($columnString, $row + 1, $this->phpSheet->getTitle())) {
+=======
+        if ($this->getReadFilter()->readCell($columnString, $row + 1, $this->phpSheet->getTitle())) {
+>>>>>>> match
             // offset: 4; size: 2; index to XF record
             $xfIndex = self::getUInt2d($recordData, 4);
 
@@ -4155,7 +4769,11 @@ class Xls extends BaseReader
      * --    "OpenOffice.org's Documentation of the Microsoft
      *         Excel File Format"
      */
+<<<<<<< HEAD
     private function readMulBlank(): void
+=======
+    protected function readMulBlank(): void
+>>>>>>> match
     {
         $length = self::getUInt2d($this->data, $this->pos + 2);
         $recordData = $this->readRecordData($this->data, $this->pos + 4, $length);
@@ -4176,7 +4794,11 @@ class Xls extends BaseReader
                 $columnString = Coordinate::stringFromColumnIndex($fc + $i + 1);
 
                 // Read cell?
+<<<<<<< HEAD
                 if (($this->getReadFilter() !== null) && $this->getReadFilter()->readCell($columnString, $row + 1, $this->phpSheet->getTitle())) {
+=======
+                if ($this->getReadFilter()->readCell($columnString, $row + 1, $this->phpSheet->getTitle())) {
+>>>>>>> match
                     $xfIndex = self::getUInt2d($recordData, 4 + 2 * $i);
                     if (isset($this->mapCellXfIndex[$xfIndex])) {
                         $this->phpSheet->getCell($columnString . ($row + 1))->setXfIndex($this->mapCellXfIndex[$xfIndex]);
@@ -4198,7 +4820,11 @@ class Xls extends BaseReader
      * --    "OpenOffice.org's Documentation of the Microsoft
      *         Excel File Format"
      */
+<<<<<<< HEAD
     private function readLabel(): void
+=======
+    protected function readLabel(): void
+>>>>>>> match
     {
         $length = self::getUInt2d($this->data, $this->pos + 2);
         $recordData = $this->readRecordData($this->data, $this->pos + 4, $length);
@@ -4214,7 +4840,11 @@ class Xls extends BaseReader
         $columnString = Coordinate::stringFromColumnIndex($column + 1);
 
         // Read cell?
+<<<<<<< HEAD
         if (($this->getReadFilter() !== null) && $this->getReadFilter()->readCell($columnString, $row + 1, $this->phpSheet->getTitle())) {
+=======
+        if ($this->getReadFilter()->readCell($columnString, $row + 1, $this->phpSheet->getTitle())) {
+>>>>>>> match
             // offset: 4; size: 2; XF index
             $xfIndex = self::getUInt2d($recordData, 4);
 
@@ -4242,7 +4872,11 @@ class Xls extends BaseReader
     /**
      * Read BLANK record.
      */
+<<<<<<< HEAD
     private function readBlank(): void
+=======
+    protected function readBlank(): void
+>>>>>>> match
     {
         $length = self::getUInt2d($this->data, $this->pos + 2);
         $recordData = $this->readRecordData($this->data, $this->pos + 4, $length);
@@ -4258,7 +4892,11 @@ class Xls extends BaseReader
         $columnString = Coordinate::stringFromColumnIndex($col + 1);
 
         // Read cell?
+<<<<<<< HEAD
         if (($this->getReadFilter() !== null) && $this->getReadFilter()->readCell($columnString, $row + 1, $this->phpSheet->getTitle())) {
+=======
+        if ($this->getReadFilter()->readCell($columnString, $row + 1, $this->phpSheet->getTitle())) {
+>>>>>>> match
             // offset: 4; size: 2; XF index
             $xfIndex = self::getUInt2d($recordData, 4);
 
@@ -4272,9 +4910,15 @@ class Xls extends BaseReader
     /**
      * Read MSODRAWING record.
      */
+<<<<<<< HEAD
     private function readMsoDrawing(): void
     {
         $length = self::getUInt2d($this->data, $this->pos + 2);
+=======
+    protected function readMsoDrawing(): void
+    {
+        //$length = self::getUInt2d($this->data, $this->pos + 2);
+>>>>>>> match
 
         // get spliced record data
         $splicedRecordData = $this->getSplicedRecordData();
@@ -4286,7 +4930,11 @@ class Xls extends BaseReader
     /**
      * Read OBJ record.
      */
+<<<<<<< HEAD
     private function readObj(): void
+=======
+    protected function readObj(): void
+>>>>>>> match
     {
         $length = self::getUInt2d($this->data, $this->pos + 2);
         $recordData = $this->readRecordData($this->data, $this->pos + 4, $length);
@@ -4326,7 +4974,11 @@ class Xls extends BaseReader
     /**
      * Read WINDOW2 record.
      */
+<<<<<<< HEAD
     private function readWindow2(): void
+=======
+    protected function readWindow2(): void
+>>>>>>> match
     {
         $length = self::getUInt2d($this->data, $this->pos + 2);
         $recordData = $this->readRecordData($this->data, $this->pos + 4, $length);
@@ -4338,10 +4990,17 @@ class Xls extends BaseReader
         $options = self::getUInt2d($recordData, 0);
 
         // offset: 2; size: 2; index to first visible row
+<<<<<<< HEAD
         $firstVisibleRow = self::getUInt2d($recordData, 2);
 
         // offset: 4; size: 2; index to first visible colum
         $firstVisibleColumn = self::getUInt2d($recordData, 4);
+=======
+        //$firstVisibleRow = self::getUInt2d($recordData, 2);
+
+        // offset: 4; size: 2; index to first visible colum
+        //$firstVisibleColumn = self::getUInt2d($recordData, 4);
+>>>>>>> match
         $zoomscaleInPageBreakPreview = 0;
         $zoomscaleInNormalView = 0;
         if ($this->version === self::XLS_BIFF8) {
@@ -4388,6 +5047,10 @@ class Xls extends BaseReader
         $isActive = (bool) ((0x0400 & $options) >> 10);
         if ($isActive) {
             $this->spreadsheet->setActiveSheetIndex($this->spreadsheet->getIndex($this->phpSheet));
+<<<<<<< HEAD
+=======
+            $this->activeSheetSet = true;
+>>>>>>> match
         }
 
         // bit: 11; mask: 0x0800; 0 = normal view, 1 = page break view
@@ -4410,7 +5073,11 @@ class Xls extends BaseReader
     /**
      * Read PLV Record(Created by Excel2007 or upper).
      */
+<<<<<<< HEAD
     private function readPageLayoutView(): void
+=======
+    protected function readPageLayoutView(): void
+>>>>>>> match
     {
         $length = self::getUInt2d($this->data, $this->pos + 2);
         $recordData = $this->readRecordData($this->data, $this->pos + 4, $length);
@@ -4420,10 +5087,17 @@ class Xls extends BaseReader
 
         // offset: 0; size: 2; rt
         //->ignore
+<<<<<<< HEAD
         $rt = self::getUInt2d($recordData, 0);
         // offset: 2; size: 2; grbitfr
         //->ignore
         $grbitFrt = self::getUInt2d($recordData, 2);
+=======
+        //$rt = self::getUInt2d($recordData, 0);
+        // offset: 2; size: 2; grbitfr
+        //->ignore
+        //$grbitFrt = self::getUInt2d($recordData, 2);
+>>>>>>> match
         // offset: 4; size: 8; reserved
         //->ignore
 
@@ -4434,8 +5108,13 @@ class Xls extends BaseReader
 
         // decomprise grbit
         $fPageLayoutView = $grbit & 0x01;
+<<<<<<< HEAD
         $fRulerVisible = ($grbit >> 1) & 0x01; //no support
         $fWhitespaceHidden = ($grbit >> 3) & 0x01; //no support
+=======
+        //$fRulerVisible = ($grbit >> 1) & 0x01; //no support
+        //$fWhitespaceHidden = ($grbit >> 3) & 0x01; //no support
+>>>>>>> match
 
         if ($fPageLayoutView === 1) {
             $this->phpSheet->getSheetView()->setView(SheetView::SHEETVIEW_PAGE_LAYOUT);
@@ -4447,7 +5126,11 @@ class Xls extends BaseReader
     /**
      * Read SCL record.
      */
+<<<<<<< HEAD
     private function readScl(): void
+=======
+    protected function readScl(): void
+>>>>>>> match
     {
         $length = self::getUInt2d($this->data, $this->pos + 2);
         $recordData = $this->readRecordData($this->data, $this->pos + 4, $length);
@@ -4468,7 +5151,11 @@ class Xls extends BaseReader
     /**
      * Read PANE record.
      */
+<<<<<<< HEAD
     private function readPane(): void
+=======
+    protected function readPane(): void
+>>>>>>> match
     {
         $length = self::getUInt2d($this->data, $this->pos + 2);
         $recordData = $this->readRecordData($this->data, $this->pos + 4, $length);
@@ -4502,16 +5189,25 @@ class Xls extends BaseReader
     /**
      * Read SELECTION record. There is one such record for each pane in the sheet.
      */
+<<<<<<< HEAD
     private function readSelection(): void
     {
         $length = self::getUInt2d($this->data, $this->pos + 2);
         $recordData = $this->readRecordData($this->data, $this->pos + 4, $length);
+=======
+    protected function readSelection(): string
+    {
+        $length = self::getUInt2d($this->data, $this->pos + 2);
+        $recordData = $this->readRecordData($this->data, $this->pos + 4, $length);
+        $selectedCells = '';
+>>>>>>> match
 
         // move stream pointer to next record
         $this->pos += 4 + $length;
 
         if (!$this->readDataOnly) {
             // offset: 0; size: 1; pane identifier
+<<<<<<< HEAD
             $paneId = ord($recordData[0]);
 
             // offset: 1; size: 2; index to row of the active cell
@@ -4527,6 +5223,23 @@ class Xls extends BaseReader
             // offset: 7; size: var; cell range address list containing all selected cell ranges
             $data = substr($recordData, 7);
             $cellRangeAddressList = $this->readBIFF5CellRangeAddressList($data); // note: also BIFF8 uses BIFF5 syntax
+=======
+            //$paneId = ord($recordData[0]);
+
+            // offset: 1; size: 2; index to row of the active cell
+            //$r = self::getUInt2d($recordData, 1);
+
+            // offset: 3; size: 2; index to column of the active cell
+            //$c = self::getUInt2d($recordData, 3);
+
+            // offset: 5; size: 2; index into the following cell range list to the
+            //  entry that contains the active cell
+            //$index = self::getUInt2d($recordData, 5);
+
+            // offset: 7; size: var; cell range address list containing all selected cell ranges
+            $data = substr($recordData, 7);
+            $cellRangeAddressList = Xls\Biff5::readBIFF5CellRangeAddressList($data); // note: also BIFF8 uses BIFF5 syntax
+>>>>>>> match
 
             $selectedCells = $cellRangeAddressList['cellRangeAddresses'][0];
 
@@ -4547,10 +5260,16 @@ class Xls extends BaseReader
 
             $this->phpSheet->setSelectedCells($selectedCells);
         }
+<<<<<<< HEAD
+=======
+
+        return $selectedCells;
+>>>>>>> match
     }
 
     private function includeCellRangeFiltered(string $cellRangeAddress): bool
     {
+<<<<<<< HEAD
         $includeCellRange = true;
         if ($this->getReadFilter() !== null) {
             $includeCellRange = false;
@@ -4563,6 +5282,17 @@ class Xls extends BaseReader
 
                         break 2;
                     }
+=======
+        $includeCellRange = false;
+        $rangeBoundaries = Coordinate::getRangeBoundaries($cellRangeAddress);
+        ++$rangeBoundaries[1][0];
+        for ($row = $rangeBoundaries[0][1]; $row <= $rangeBoundaries[1][1]; ++$row) {
+            for ($column = $rangeBoundaries[0][0]; $column != $rangeBoundaries[1][0]; ++$column) {
+                if ($this->getReadFilter()->readCell($column, $row, $this->phpSheet->getTitle())) {
+                    $includeCellRange = true;
+
+                    break 2;
+>>>>>>> match
                 }
             }
         }
@@ -4579,7 +5309,11 @@ class Xls extends BaseReader
      * --    "OpenOffice.org's Documentation of the Microsoft
      *         Excel File Format"
      */
+<<<<<<< HEAD
     private function readMergedCells(): void
+=======
+    protected function readMergedCells(): void
+>>>>>>> match
     {
         $length = self::getUInt2d($this->data, $this->pos + 2);
         $recordData = $this->readRecordData($this->data, $this->pos + 4, $length);
@@ -4588,11 +5322,19 @@ class Xls extends BaseReader
         $this->pos += 4 + $length;
 
         if ($this->version == self::XLS_BIFF8 && !$this->readDataOnly) {
+<<<<<<< HEAD
             $cellRangeAddressList = $this->readBIFF8CellRangeAddressList($recordData);
             foreach ($cellRangeAddressList['cellRangeAddresses'] as $cellRangeAddress) {
                 if (
                     (strpos($cellRangeAddress, ':') !== false) &&
                     ($this->includeCellRangeFiltered($cellRangeAddress))
+=======
+            $cellRangeAddressList = Xls\Biff8::readBIFF8CellRangeAddressList($recordData);
+            foreach ($cellRangeAddressList['cellRangeAddresses'] as $cellRangeAddress) {
+                if (
+                    (str_contains($cellRangeAddress, ':'))
+                    && ($this->includeCellRangeFiltered($cellRangeAddress))
+>>>>>>> match
                 ) {
                     $this->phpSheet->mergeCells($cellRangeAddress, Worksheet::MERGE_CELL_CONTENT_HIDE);
                 }
@@ -4603,7 +5345,11 @@ class Xls extends BaseReader
     /**
      * Read HYPERLINK record.
      */
+<<<<<<< HEAD
     private function readHyperLink(): void
+=======
+    protected function readHyperLink(): void
+>>>>>>> match
     {
         $length = self::getUInt2d($this->data, $this->pos + 2);
         $recordData = $this->readRecordData($this->data, $this->pos + 4, $length);
@@ -4614,8 +5360,13 @@ class Xls extends BaseReader
         if (!$this->readDataOnly) {
             // offset: 0; size: 8; cell range address of all cells containing this hyperlink
             try {
+<<<<<<< HEAD
                 $cellRange = $this->readBIFF8CellRangeAddressFixed($recordData);
             } catch (PhpSpreadsheetException $e) {
+=======
+                $cellRange = Xls\Biff8::readBIFF8CellRangeAddressFixed($recordData);
+            } catch (PhpSpreadsheetException) {
+>>>>>>> match
                 return;
             }
 
@@ -4628,7 +5379,11 @@ class Xls extends BaseReader
             $isFileLinkOrUrl = (0x00000001 & self::getUInt2d($recordData, 28)) >> 0;
 
             // bit: 1; mask: 0x00000002; 0 = relative path, 1 = absolute path or URL
+<<<<<<< HEAD
             $isAbsPathOrUrl = (0x00000001 & self::getUInt2d($recordData, 28)) >> 1;
+=======
+            //$isAbsPathOrUrl = (0x00000001 & self::getUInt2d($recordData, 28)) >> 1;
+>>>>>>> match
 
             // bit: 2 (and 4); mask: 0x00000014; 0 = no description
             $hasDesc = (0x00000014 & self::getUInt2d($recordData, 28)) >> 2;
@@ -4649,7 +5404,11 @@ class Xls extends BaseReader
                 // offset: 32; size: var; character count of description text
                 $dl = self::getInt4d($recordData, 32);
                 // offset: 36; size: var; character array of description text, no Unicode string header, always 16-bit characters, zero terminated
+<<<<<<< HEAD
                 $desc = self::encodeUTF16(substr($recordData, 36, 2 * ($dl - 1)), false);
+=======
+                //$desc = self::encodeUTF16(substr($recordData, 36, 2 * ($dl - 1)), false);
+>>>>>>> match
                 $offset += 4 + 2 * $dl;
             }
             if ($hasFrame) {
@@ -4722,6 +5481,10 @@ class Xls extends BaseReader
                     $sz = self::getInt4d($recordData, $offset);
                     $offset += 4;
 
+<<<<<<< HEAD
+=======
+                    $extendedFilePath = '';
+>>>>>>> match
                     // only present if $sz > 0
                     if ($sz > 0) {
                         // offset: var; size: 4; size of the character array of the extended file path and name
@@ -4776,10 +5539,17 @@ class Xls extends BaseReader
     /**
      * Read DATAVALIDATIONS record.
      */
+<<<<<<< HEAD
     private function readDataValidations(): void
     {
         $length = self::getUInt2d($this->data, $this->pos + 2);
         $recordData = $this->readRecordData($this->data, $this->pos + 4, $length);
+=======
+    protected function readDataValidations(): void
+    {
+        $length = self::getUInt2d($this->data, $this->pos + 2);
+        //$recordData = $this->readRecordData($this->data, $this->pos + 4, $length);
+>>>>>>> match
 
         // move stream pointer forward to next record
         $this->pos += 4 + $length;
@@ -4788,6 +5558,7 @@ class Xls extends BaseReader
     /**
      * Read DATAVALIDATION record.
      */
+<<<<<<< HEAD
     private function readDataValidation(): void
     {
         $length = self::getUInt2d($this->data, $this->pos + 2);
@@ -4920,12 +5691,21 @@ class Xls extends BaseReader
                 $objValidation->setFormula2($formula2);
             }
         }
+=======
+    protected function readDataValidation(): void
+    {
+        (new Xls\DataValidationHelper())->readDataValidation2($this);
+>>>>>>> match
     }
 
     /**
      * Read SHEETLAYOUT record. Stores sheet tab color information.
      */
+<<<<<<< HEAD
     private function readSheetLayout(): void
+=======
+    protected function readSheetLayout(): void
+>>>>>>> match
     {
         $length = self::getUInt2d($this->data, $this->pos + 2);
         $recordData = $this->readRecordData($this->data, $this->pos + 4, $length);
@@ -4933,9 +5713,12 @@ class Xls extends BaseReader
         // move stream pointer to next record
         $this->pos += 4 + $length;
 
+<<<<<<< HEAD
         // local pointer in record data
         $offset = 0;
 
+=======
+>>>>>>> match
         if (!$this->readDataOnly) {
             // offset: 0; size: 2; repeated record identifier 0x0862
 
@@ -4963,7 +5746,11 @@ class Xls extends BaseReader
     /**
      * Read SHEETPROTECTION record (FEATHEADR).
      */
+<<<<<<< HEAD
     private function readSheetProtection(): void
+=======
+    protected function readSheetProtection(): void
+>>>>>>> match
     {
         $length = self::getUInt2d($this->data, $this->pos + 2);
         $recordData = $this->readRecordData($this->data, $this->pos + 4, $length);
@@ -5067,7 +5854,11 @@ class Xls extends BaseReader
      * Reading of this record is based on Microsoft Office Excel 97-2000 Binary File Format Specification,
      * where it is referred to as FEAT record.
      */
+<<<<<<< HEAD
     private function readRangeProtection(): void
+=======
+    protected function readRangeProtection(): void
+>>>>>>> match
     {
         $length = self::getUInt2d($this->data, $this->pos + 2);
         $recordData = $this->readRecordData($this->data, $this->pos + 4, $length);
@@ -5101,8 +5892,13 @@ class Xls extends BaseReader
             $cellRanges = [];
             for ($i = 0; $i < $cref; ++$i) {
                 try {
+<<<<<<< HEAD
                     $cellRange = $this->readBIFF8CellRangeAddressFixed(substr($recordData, 27 + 8 * $i, 8));
                 } catch (PhpSpreadsheetException $e) {
+=======
+                    $cellRange = Xls\Biff8::readBIFF8CellRangeAddressFixed(substr($recordData, 27 + 8 * $i, 8));
+                } catch (PhpSpreadsheetException) {
+>>>>>>> match
                     return;
                 }
                 $cellRanges[] = $cellRange;
@@ -5110,7 +5906,11 @@ class Xls extends BaseReader
             }
 
             // offset: var; size: var; variable length of feature specific data
+<<<<<<< HEAD
             $rgbFeat = substr($recordData, $offset);
+=======
+            //$rgbFeat = substr($recordData, $offset);
+>>>>>>> match
             $offset += 4;
 
             // offset: var; size: 4; the encrypted password (only 16-bit although field is 32-bit)
@@ -5119,7 +5919,11 @@ class Xls extends BaseReader
 
             // Apply range protection to sheet
             if ($cellRanges) {
+<<<<<<< HEAD
                 $this->phpSheet->protectCells(implode(' ', $cellRanges), strtoupper(dechex($wPassword)), true);
+=======
+                $this->phpSheet->protectCells(implode(' ', $cellRanges), ($wPassword === 0) ? '' : strtoupper(dechex($wPassword)), true);
+>>>>>>> match
             }
         }
     }
@@ -5129,7 +5933,11 @@ class Xls extends BaseReader
      * When MSODRAWING data on a sheet exceeds 8224 bytes, CONTINUE records are used instead. Undocumented.
      * In this case, we must treat the CONTINUE record as a MSODRAWING record.
      */
+<<<<<<< HEAD
     private function readContinue(): void
+=======
+    protected function readContinue(): void
+>>>>>>> match
     {
         $length = self::getUInt2d($this->data, $this->pos + 2);
         $recordData = $this->readRecordData($this->data, $this->pos + 4, $length);
@@ -5177,10 +5985,15 @@ class Xls extends BaseReader
      * records are found. Splices the record data pieces and returns the combined string as if record data
      * is in one piece.
      * Moves to next current position in data stream to start of next record different from a CONtINUE record.
+<<<<<<< HEAD
      *
      * @return array
      */
     private function getSplicedRecordData()
+=======
+     */
+    private function getSplicedRecordData(): array
+>>>>>>> match
     {
         $data = '';
         $spliceOffsets = [];
@@ -5192,7 +6005,11 @@ class Xls extends BaseReader
             ++$i;
 
             // offset: 0; size: 2; identifier
+<<<<<<< HEAD
             $identifier = self::getUInt2d($this->data, $this->pos);
+=======
+            //$identifier = self::getUInt2d($this->data, $this->pos);
+>>>>>>> match
             // offset: 2; size: 2; length
             $length = self::getUInt2d($this->data, $this->pos + 2);
             $data .= $this->readRecordData($this->data, $this->pos + 4, $length);
@@ -5217,7 +6034,11 @@ class Xls extends BaseReader
      *
      * @return string Human readable formula
      */
+<<<<<<< HEAD
     private function getFormulaFromStructure($formulaStructure, $baseCell = 'A1')
+=======
+    protected function getFormulaFromStructure(string $formulaStructure, string $baseCell = 'A1'): string
+>>>>>>> match
     {
         // offset: 0; size: 2; size of the following formula data
         $sz = self::getUInt2d($formulaStructure, 0);
@@ -5244,12 +6065,20 @@ class Xls extends BaseReader
      *
      * @return string Human readable formula
      */
+<<<<<<< HEAD
     private function getFormulaFromData($formulaData, $additionalData = '', $baseCell = 'A1')
+=======
+    private function getFormulaFromData(string $formulaData, string $additionalData = '', string $baseCell = 'A1'): string
+>>>>>>> match
     {
         // start parsing the formula data
         $tokens = [];
 
+<<<<<<< HEAD
         while (strlen($formulaData) > 0 && $token = $this->getNextToken($formulaData, $baseCell)) {
+=======
+        while ($formulaData !== '' && $token = $this->getNextToken($formulaData, $baseCell)) {
+>>>>>>> match
             $tokens[] = $token;
             $formulaData = substr($formulaData, $token['size']);
         }
@@ -5262,12 +6091,19 @@ class Xls extends BaseReader
     /**
      * Take array of tokens together with additional data for formula and return human readable formula.
      *
+<<<<<<< HEAD
      * @param array $tokens
+=======
+>>>>>>> match
      * @param string $additionalData Additional binary data going with the formula
      *
      * @return string Human readable formula
      */
+<<<<<<< HEAD
     private function createFormulaFromTokens($tokens, $additionalData)
+=======
+    private function createFormulaFromTokens(array $tokens, string $additionalData): string
+>>>>>>> match
     {
         // empty formula?
         if (empty($tokens)) {
@@ -5393,7 +6229,11 @@ class Xls extends BaseReader
 
                     break;
                 case 'tArray': // array constant
+<<<<<<< HEAD
                     $constantArray = self::readBIFF8ConstantArray($additionalData);
+=======
+                    $constantArray = Xls\Biff8::readBIFF8ConstantArray($additionalData);
+>>>>>>> match
                     $formulaStrings[] = $space1 . $space0 . $constantArray['value'];
                     $additionalData = substr($additionalData, $constantArray['size']); // bite of chunk of additional data
                     unset($space0, $space1);
@@ -5401,7 +6241,11 @@ class Xls extends BaseReader
                     break;
                 case 'tMemArea':
                     // bite off chunk of additional data
+<<<<<<< HEAD
                     $cellRangeAddressList = $this->readBIFF8CellRangeAddressList($additionalData);
+=======
+                    $cellRangeAddressList = Xls\Biff8::readBIFF8CellRangeAddressList($additionalData);
+>>>>>>> match
                     $additionalData = substr($additionalData, $cellRangeAddressList['size']);
                     $formulaStrings[] = "$space1$space0{$token['data']}";
                     unset($space0, $space1);
@@ -5439,10 +6283,15 @@ class Xls extends BaseReader
      *
      * @param string $formulaData Formula data
      * @param string $baseCell Base cell, only needed when formula contains tRefN tokens, e.g. with shared formulas
+<<<<<<< HEAD
      *
      * @return array
      */
     private function getNextToken($formulaData, $baseCell = 'A1')
+=======
+     */
+    private function getNextToken(string $formulaData, string $baseCell = 'A1'): array
+>>>>>>> match
     {
         // offset: 0; size: 1; token id
         $id = ord($formulaData[0]); // token id
@@ -5619,6 +6468,7 @@ class Xls extends BaseReader
                         $name = 'tAttrSpace';
                         $size = 4;
                         // offset: 2; size: 2; space type and position
+<<<<<<< HEAD
                         switch (ord($formulaData[2])) {
                             case 0x00:
                                 $spacetype = 'type0';
@@ -5647,6 +6497,17 @@ class Xls extends BaseReader
                             default:
                                 throw new Exception('Unrecognized space type in tAttrSpace token');
                         }
+=======
+                        $spacetype = match (ord($formulaData[2])) {
+                            0x00 => 'type0',
+                            0x01 => 'type1',
+                            0x02 => 'type2',
+                            0x03 => 'type3',
+                            0x04 => 'type4',
+                            0x05 => 'type5',
+                            default => throw new Exception('Unrecognized space type in tAttrSpace token'),
+                        };
+>>>>>>> match
                         // offset: 3; size: 1; number of inserted spaces/carriage returns
                         $spacecount = ord($formulaData[3]);
 
@@ -5702,6 +6563,7 @@ class Xls extends BaseReader
                 $name = 'tFunc';
                 $size = 3;
                 // offset: 1; size: 2; index to built-in sheet function
+<<<<<<< HEAD
                 switch (self::getUInt2d($formulaData, 1)) {
                     case 2:
                         $function = 'ISNA';
@@ -6507,6 +7369,13 @@ class Xls extends BaseReader
                         throw new Exception('Unrecognized function in formula');
                 }
                 $data = ['function' => $function, 'args' => $args];
+=======
+                $mapping = Xls\Mappings::TFUNC_MAPPINGS[self::getUInt2d($formulaData, 1)] ?? null;
+                if ($mapping === null) {
+                    throw new Exception('Unrecognized function in formula');
+                }
+                $data = ['function' => $mapping[0], 'args' => $mapping[1]];
+>>>>>>> match
 
                 break;
             case 0x22:    //    function with variable number of arguments
@@ -6518,6 +7387,7 @@ class Xls extends BaseReader
                 $args = ord($formulaData[1]);
                 // offset: 2: size: 2; index to built-in sheet function
                 $index = self::getUInt2d($formulaData, 2);
+<<<<<<< HEAD
                 switch ($index) {
                     case 0:
                         $function = 'COUNT';
@@ -6873,6 +7743,11 @@ class Xls extends BaseReader
                         break;
                     default:
                         throw new Exception('Unrecognized function in formula');
+=======
+                $function = Xls\Mappings::TFUNCV_MAPPINGS[$index] ?? null;
+                if ($function === null) {
+                    throw new Exception('Unrecognized function in formula');
+>>>>>>> match
                 }
                 $data = ['function' => $function, 'args' => $args];
 
@@ -6893,7 +7768,11 @@ class Xls extends BaseReader
             case 0x64:
                 $name = 'tRef';
                 $size = 5;
+<<<<<<< HEAD
                 $data = $this->readBIFF8CellAddress(substr($formulaData, 1, 4));
+=======
+                $data = Xls\Biff8::readBIFF8CellAddress(substr($formulaData, 1, 4));
+>>>>>>> match
 
                 break;
             case 0x25:    //    cell range reference to cells in the same sheet (2d)
@@ -6901,7 +7780,11 @@ class Xls extends BaseReader
             case 0x65:
                 $name = 'tArea';
                 $size = 9;
+<<<<<<< HEAD
                 $data = $this->readBIFF8CellRangeAddress(substr($formulaData, 1, 8));
+=======
+                $data = Xls\Biff8::readBIFF8CellRangeAddress(substr($formulaData, 1, 8));
+>>>>>>> match
 
                 break;
             case 0x26:    //    Constant reference sub-expression
@@ -6941,7 +7824,11 @@ class Xls extends BaseReader
             case 0x6C:
                 $name = 'tRefN';
                 $size = 5;
+<<<<<<< HEAD
                 $data = $this->readBIFF8CellAddressB(substr($formulaData, 1, 4), $baseCell);
+=======
+                $data = Xls\Biff8::readBIFF8CellAddressB(substr($formulaData, 1, 4), $baseCell);
+>>>>>>> match
 
                 break;
             case 0x2D:    //    Relative 2d range reference
@@ -6949,7 +7836,11 @@ class Xls extends BaseReader
             case 0x6D:
                 $name = 'tAreaN';
                 $size = 9;
+<<<<<<< HEAD
                 $data = $this->readBIFF8CellRangeAddressB(substr($formulaData, 1, 8), $baseCell);
+=======
+                $data = Xls\Biff8::readBIFF8CellRangeAddressB(substr($formulaData, 1, 8), $baseCell);
+>>>>>>> match
 
                 break;
             case 0x39:    //    External name
@@ -6962,6 +7853,10 @@ class Xls extends BaseReader
                 $index = self::getUInt2d($formulaData, 3);
                 // assume index is to EXTERNNAME record
                 $data = $this->externalNames[$index - 1]['name'] ?? '';
+<<<<<<< HEAD
+=======
+
+>>>>>>> match
                 // offset: 5; size: 2; not used
                 break;
             case 0x3A:    //    3d reference to cell
@@ -6974,10 +7869,17 @@ class Xls extends BaseReader
                     // offset: 1; size: 2; index to REF entry
                     $sheetRange = $this->readSheetRangeByRefIndex(self::getUInt2d($formulaData, 1));
                     // offset: 3; size: 4; cell address
+<<<<<<< HEAD
                     $cellAddress = $this->readBIFF8CellAddress(substr($formulaData, 3, 4));
 
                     $data = "$sheetRange!$cellAddress";
                 } catch (PhpSpreadsheetException $e) {
+=======
+                    $cellAddress = Xls\Biff8::readBIFF8CellAddress(substr($formulaData, 3, 4));
+
+                    $data = "$sheetRange!$cellAddress";
+                } catch (PhpSpreadsheetException) {
+>>>>>>> match
                     // deleted sheet reference
                     $data = '#REF!';
                 }
@@ -6993,10 +7895,17 @@ class Xls extends BaseReader
                     // offset: 1; size: 2; index to REF entry
                     $sheetRange = $this->readSheetRangeByRefIndex(self::getUInt2d($formulaData, 1));
                     // offset: 3; size: 8; cell address
+<<<<<<< HEAD
                     $cellRangeAddress = $this->readBIFF8CellRangeAddress(substr($formulaData, 3, 8));
 
                     $data = "$sheetRange!$cellRangeAddress";
                 } catch (PhpSpreadsheetException $e) {
+=======
+                    $cellRangeAddress = Xls\Biff8::readBIFF8CellRangeAddress(substr($formulaData, 3, 8));
+
+                    $data = "$sheetRange!$cellRangeAddress";
+                } catch (PhpSpreadsheetException) {
+>>>>>>> match
                     // deleted sheet reference
                     $data = '#REF!';
                 }
@@ -7016,6 +7925,7 @@ class Xls extends BaseReader
     }
 
     /**
+<<<<<<< HEAD
      * Reads a cell address in BIFF8 e.g. 'A2' or '$A$2'
      * section 3.3.4.
      *
@@ -7368,16 +8278,23 @@ class Xls extends BaseReader
     }
 
     /**
+=======
+>>>>>>> match
      * Get a sheet range like Sheet1:Sheet3 from REF index
      * Note: If there is only one sheet in the range, one gets e.g Sheet1
      * It can also happen that the REF structure uses the -1 (FFFF) code to indicate deleted sheets,
      * in which case an Exception is thrown.
+<<<<<<< HEAD
      *
      * @param int $index
      *
      * @return false|string
      */
     private function readSheetRangeByRefIndex($index)
+=======
+     */
+    protected function readSheetRangeByRefIndex(int $index): string|false
+>>>>>>> match
     {
         if (isset($this->ref[$index])) {
             $type = $this->externalBooks[$this->ref[$index]['externalBookIndex']]['type'];
@@ -7422,6 +8339,7 @@ class Xls extends BaseReader
     }
 
     /**
+<<<<<<< HEAD
      * read BIFF8 constant value array from array data
      * returns e.g. ['value' => '{1,2;3,4}', 'size' => 40]
      * section 2.5.8.
@@ -7553,6 +8471,12 @@ class Xls extends BaseReader
      * @return array
      */
     private function readByteStringShort($subData)
+=======
+     * Read byte string (8-bit string length)
+     * OpenOffice documentation: 2.5.2.
+     */
+    protected function readByteStringShort(string $subData): array
+>>>>>>> match
     {
         // offset: 0; size: 1; length of the string (character count)
         $ln = ord($subData[0]);
@@ -7569,12 +8493,17 @@ class Xls extends BaseReader
     /**
      * Read byte string (16-bit string length)
      * OpenOffice documentation: 2.5.2.
+<<<<<<< HEAD
      *
      * @param string $subData
      *
      * @return array
      */
     private function readByteStringLong($subData)
+=======
+     */
+    protected function readByteStringLong(string $subData): array
+>>>>>>> match
     {
         // offset: 0; size: 2; length of the string (character count)
         $ln = self::getUInt2d($subData, 0);
@@ -7589,6 +8518,7 @@ class Xls extends BaseReader
         ];
     }
 
+<<<<<<< HEAD
     /**
      * Extracts an Excel Unicode short string (8-bit string length)
      * OpenOffice documentation: 2.5.3
@@ -7844,6 +8774,9 @@ class Xls extends BaseReader
     }
 
     private function parseRichText(string $is): RichText
+=======
+    protected function parseRichText(string $is): RichText
+>>>>>>> match
     {
         $value = new RichText();
         $value->createText($is);
@@ -7864,6 +8797,7 @@ class Xls extends BaseReader
         return $this->mapCellStyleXfIndex;
     }
 
+<<<<<<< HEAD
     private function readCFHeader(): array
     {
         $length = self::getUInt2d($this->data, $this->pos + 2);
@@ -8087,5 +9021,25 @@ class Xls extends BaseReader
 
             $this->phpSheet->getStyle($cellRange)->setConditionalStyles($conditionalStyles);
         }
+=======
+    /**
+     * Parse conditional formatting blocks.
+     *
+     * @see https://www.openoffice.org/sc/excelfileformat.pdf Search for CFHEADER followed by CFRULE
+     */
+    protected function readCFHeader(): array
+    {
+        return (new Xls\ConditionalFormatting())->readCFHeader2($this);
+    }
+
+    protected function readCFRule(array $cellRangeAddresses): void
+    {
+        (new Xls\ConditionalFormatting())->readCFRule2($cellRangeAddresses, $this);
+    }
+
+    public function getVersion(): int
+    {
+        return $this->version;
+>>>>>>> match
     }
 }

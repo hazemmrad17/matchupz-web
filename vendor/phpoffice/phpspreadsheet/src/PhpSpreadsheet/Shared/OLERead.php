@@ -6,8 +6,12 @@ use PhpOffice\PhpSpreadsheet\Reader\Exception as ReaderException;
 
 class OLERead
 {
+<<<<<<< HEAD
     /** @var string */
     private $data = '';
+=======
+    private string $data = '';
+>>>>>>> match
 
     // Size of a sector = 512 bytes
     const BIG_BLOCK_SIZE = 0x200;
@@ -22,12 +26,21 @@ class OLERead
     const SMALL_BLOCK_THRESHOLD = 0x1000;
 
     // header offsets
+<<<<<<< HEAD
     const NUM_BIG_BLOCK_DEPOT_BLOCKS_POS = 0x2c;
     const ROOT_START_BLOCK_POS = 0x30;
     const SMALL_BLOCK_DEPOT_BLOCK_POS = 0x3c;
     const EXTENSION_BLOCK_POS = 0x44;
     const NUM_EXTENSION_BLOCK_POS = 0x48;
     const BIG_BLOCK_DEPOT_BLOCKS_POS = 0x4c;
+=======
+    const NUM_BIG_BLOCK_DEPOT_BLOCKS_POS = 0x2C;
+    const ROOT_START_BLOCK_POS = 0x30;
+    const SMALL_BLOCK_DEPOT_BLOCK_POS = 0x3C;
+    const EXTENSION_BLOCK_POS = 0x44;
+    const NUM_EXTENSION_BLOCK_POS = 0x48;
+    const BIG_BLOCK_DEPOT_BLOCKS_POS = 0x4C;
+>>>>>>> match
 
     // property storage offsets (directory offsets)
     const SIZE_OF_NAME_POS = 0x40;
@@ -35,6 +48,7 @@ class OLERead
     const START_BLOCK_POS = 0x74;
     const SIZE_POS = 0x78;
 
+<<<<<<< HEAD
     /** @var int */
     public $wrkbook;
 
@@ -93,6 +107,33 @@ class OLERead
      * @var array
      */
     private $props = [];
+=======
+    public ?int $wrkbook = null;
+
+    public ?int $summaryInformation = null;
+
+    public ?int $documentSummaryInformation = null;
+
+    private int $numBigBlockDepotBlocks;
+
+    private int $rootStartBlock;
+
+    private int $sbdStartBlock;
+
+    private int $extensionBlock;
+
+    private int $numExtensionBlocks;
+
+    private string $bigBlockChain;
+
+    private string $smallBlockChain;
+
+    private string $entry;
+
+    private int $rootentry;
+
+    private array $props = [];
+>>>>>>> match
 
     /**
      * Read the file.
@@ -106,7 +147,11 @@ class OLERead
         $this->data = (string) file_get_contents($filename, false, null, 0, 8);
 
         // Check OLE identifier
+<<<<<<< HEAD
         $identifierOle = pack('CCCCCCCC', 0xd0, 0xcf, 0x11, 0xe0, 0xa1, 0xb1, 0x1a, 0xe1);
+=======
+        $identifierOle = pack('CCCCCCCC', 0xD0, 0xCF, 0x11, 0xE0, 0xA1, 0xB1, 0x1A, 0xE1);
+>>>>>>> match
         if ($this->data != $identifierOle) {
             throw new ReaderException('The filename ' . $filename . ' is not recognised as an OLE file');
         }
@@ -188,12 +233,17 @@ class OLERead
 
     /**
      * Extract binary stream data.
+<<<<<<< HEAD
      *
      * @param ?int $stream
      *
      * @return null|string
      */
     public function getStream($stream)
+=======
+     */
+    public function getStream(?int $stream): ?string
+>>>>>>> match
     {
         if ($stream === null) {
             return null;
@@ -242,7 +292,11 @@ class OLERead
      *
      * @return string Data for standard stream
      */
+<<<<<<< HEAD
     private function readData($block)
+=======
+    private function readData(int $block): string
+>>>>>>> match
     {
         $data = '';
 
@@ -316,6 +370,7 @@ class OLERead
 
     /**
      * Read 4 bytes of data at specified position.
+<<<<<<< HEAD
      *
      * @param string $data
      * @param int $pos
@@ -323,6 +378,10 @@ class OLERead
      * @return int
      */
     private static function getInt4d($data, $pos)
+=======
+     */
+    private static function getInt4d(string $data, int $pos): int
+>>>>>>> match
     {
         if ($pos < 0) {
             // Invalid position

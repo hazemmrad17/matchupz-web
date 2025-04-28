@@ -21,6 +21,7 @@ class StringTable extends WriterPart
      *
      * @return string[] String table for worksheet
      */
+<<<<<<< HEAD
     public function createStringTable(ActualWorksheet $worksheet, $existingTable = null)
     {
         // Create string lookup table
@@ -30,6 +31,12 @@ class StringTable extends WriterPart
         if (($existingTable !== null) && is_array($existingTable)) {
             $aStringTable = $existingTable;
         }
+=======
+    public function createStringTable(ActualWorksheet $worksheet, ?array $existingTable = null): array
+    {
+        // Create string lookup table
+        $aStringTable = $existingTable ?? [];
+>>>>>>> match
 
         // Fill index array
         $aFlippedStringTable = $this->flipStringTable($aStringTable);
@@ -40,18 +47,31 @@ class StringTable extends WriterPart
             $cell = $worksheet->getCellCollection()->get($coordinate);
             $cellValue = $cell->getValue();
             if (
+<<<<<<< HEAD
                 !is_object($cellValue) &&
                 ($cellValue !== null) &&
                 $cellValue !== '' &&
                 ($cell->getDataType() == DataType::TYPE_STRING || $cell->getDataType() == DataType::TYPE_STRING2 || $cell->getDataType() == DataType::TYPE_NULL) &&
                 !isset($aFlippedStringTable[$cellValue])
+=======
+                !is_object($cellValue)
+                && ($cellValue !== null)
+                && $cellValue !== ''
+                && ($cell->getDataType() == DataType::TYPE_STRING || $cell->getDataType() == DataType::TYPE_STRING2 || $cell->getDataType() == DataType::TYPE_NULL)
+                && !isset($aFlippedStringTable[$cellValue])
+>>>>>>> match
             ) {
                 $aStringTable[] = $cellValue;
                 $aFlippedStringTable[$cellValue] = true;
             } elseif (
+<<<<<<< HEAD
                 $cellValue instanceof RichText &&
                 ($cellValue !== null) &&
                 !isset($aFlippedStringTable[$cellValue->getHashCode()])
+=======
+                $cellValue instanceof RichText
+                && !isset($aFlippedStringTable[$cellValue->getHashCode()])
+>>>>>>> match
             ) {
                 $aStringTable[] = $cellValue;
                 $aFlippedStringTable[$cellValue->getHashCode()] = true;
@@ -68,7 +88,11 @@ class StringTable extends WriterPart
      *
      * @return string XML Output
      */
+<<<<<<< HEAD
     public function writeStringTable(array $stringTable)
+=======
+    public function writeStringTable(array $stringTable): string
+>>>>>>> match
     {
         // Create XML writer
         $objWriter = null;
@@ -113,9 +137,15 @@ class StringTable extends WriterPart
     /**
      * Write Rich Text.
      *
+<<<<<<< HEAD
      * @param string $prefix Optional Namespace prefix
      */
     public function writeRichText(XMLWriter $objWriter, RichText $richText, $prefix = null): void
+=======
+     * @param ?string $prefix Optional Namespace prefix
+     */
+    public function writeRichText(XMLWriter $objWriter, RichText $richText, ?string $prefix = null): void
+>>>>>>> match
     {
         if ($prefix !== null) {
             $prefix .= ':';
@@ -205,7 +235,11 @@ class StringTable extends WriterPart
      * @param RichText|string $richText text string or Rich text
      * @param string $prefix Optional Namespace prefix
      */
+<<<<<<< HEAD
     public function writeRichTextForCharts(XMLWriter $objWriter, $richText = null, $prefix = ''): void
+=======
+    public function writeRichTextForCharts(XMLWriter $objWriter, $richText = null, string $prefix = ''): void
+>>>>>>> match
     {
         if (!($richText instanceof RichText)) {
             $textRun = $richText;
@@ -324,10 +358,15 @@ class StringTable extends WriterPart
      * Flip string table (for index searching).
      *
      * @param array $stringTable Stringtable
+<<<<<<< HEAD
      *
      * @return array
      */
     public function flipStringTable(array $stringTable)
+=======
+     */
+    public function flipStringTable(array $stringTable): array
+>>>>>>> match
     {
         // Return value
         $returnValue = [];

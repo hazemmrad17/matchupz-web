@@ -5,8 +5,14 @@ namespace PhpOffice\PhpSpreadsheet\Style\NumberFormat\Wizard;
 use NumberFormatter;
 use PhpOffice\PhpSpreadsheet\Exception;
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
+<<<<<<< HEAD
 
 abstract class NumberBase
+=======
+use Stringable;
+
+abstract class NumberBase implements Stringable
+>>>>>>> match
 {
     protected const MAX_DECIMALS = 30;
 
@@ -59,7 +65,11 @@ abstract class NumberBase
 
         ['language' => $language, 'script' => $script, 'country' => $country] = $matches;
         // Set case and separator to match standardised locale case
+<<<<<<< HEAD
         $language = strtolower($language ?? '');
+=======
+        $language = strtolower($language);
+>>>>>>> match
         $script = ($script === null) ? null : ucfirst(strtolower($script));
         $country = ($country === null) ? null : strtoupper($country);
 

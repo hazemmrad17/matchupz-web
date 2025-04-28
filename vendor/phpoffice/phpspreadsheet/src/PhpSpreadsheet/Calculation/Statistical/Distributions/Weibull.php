@@ -29,7 +29,11 @@ class Weibull
      *         If an array of numbers is passed as an argument, then the returned result will also be an array
      *            with the same dimensions
      */
+<<<<<<< HEAD
     public static function distribution($value, $alpha, $beta, $cumulative)
+=======
+    public static function distribution(mixed $value, mixed $alpha, mixed $beta, mixed $cumulative): array|string|float
+>>>>>>> match
     {
         if (is_array($value) || is_array($alpha) || is_array($beta) || is_array($cumulative)) {
             return self::evaluateArrayArguments([self::class, __FUNCTION__], $value, $alpha, $beta, $cumulative);

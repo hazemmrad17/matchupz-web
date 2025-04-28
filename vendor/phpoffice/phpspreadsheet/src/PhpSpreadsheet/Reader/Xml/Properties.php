@@ -8,10 +8,14 @@ use SimpleXMLElement;
 
 class Properties
 {
+<<<<<<< HEAD
     /**
      * @var Spreadsheet
      */
     protected $spreadsheet;
+=======
+    protected Spreadsheet $spreadsheet;
+>>>>>>> match
 
     public function __construct(Spreadsheet $spreadsheet)
     {

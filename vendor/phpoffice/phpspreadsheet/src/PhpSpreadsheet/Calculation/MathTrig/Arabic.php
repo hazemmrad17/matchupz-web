@@ -22,6 +22,7 @@ class Arabic
 
     /**
      * Recursively calculate the arabic value of a roman numeral.
+<<<<<<< HEAD
      *
      * @param int $sum
      * @param int $subtract
@@ -29,6 +30,10 @@ class Arabic
      * @return int
      */
     private static function calculateArabic(array $roman, &$sum = 0, $subtract = 0)
+=======
+     */
+    private static function calculateArabic(array $roman, int &$sum = 0, int $subtract = 0): int
+>>>>>>> match
     {
         $numeral = array_shift($roman);
         if (!isset(self::ROMAN_LOOKUP[$numeral])) {
@@ -51,6 +56,7 @@ class Arabic
     }
 
     /**
+<<<<<<< HEAD
      * @param mixed $value
      */
     private static function mollifyScrutinizer($value): array
@@ -66,6 +72,8 @@ class Arabic
     }
 
     /**
+=======
+>>>>>>> match
      * ARABIC.
      *
      * Converts a Roman numeral to an Arabic numeral.
@@ -73,13 +81,21 @@ class Arabic
      * Excel Function:
      *        ARABIC(text)
      *
+<<<<<<< HEAD
      * @param mixed $roman Should be a string, or can be an array of strings
+=======
+     * @param string|string[] $roman Should be a string, or can be an array of strings
+>>>>>>> match
      *
      * @return array|int|string the arabic numberal contrived from the roman numeral
      *         If an array of numbers is passed as the argument, then the returned result will also be an array
      *            with the same dimensions
      */
+<<<<<<< HEAD
     public static function evaluate($roman)
+=======
+    public static function evaluate(mixed $roman): array|int|string
+>>>>>>> match
     {
         if (is_array($roman)) {
             return self::evaluateSingleArgumentArray([self::class, __FUNCTION__], $roman);
@@ -94,12 +110,24 @@ class Arabic
         // Convert the roman numeral to an arabic number
         $negativeNumber = $roman[0] === '-';
         if ($negativeNumber) {
+<<<<<<< HEAD
             $roman = substr($roman, 1);
         }
 
         try {
             $arabic = self::calculateArabic(self::strSplit($roman));
         } catch (Exception $e) {
+=======
+            $roman = trim(substr($roman, 1));
+            if ($roman === '') {
+                return ExcelError::NAN();
+            }
+        }
+
+        try {
+            $arabic = self::calculateArabic(mb_str_split($roman, 1, 'UTF-8'));
+        } catch (Exception) {
+>>>>>>> match
             return ExcelError::VALUE(); // Invalid character detected
         }
 

@@ -3,6 +3,10 @@
 namespace PhpOffice\PhpSpreadsheet\Calculation\TextData;
 
 use PhpOffice\PhpSpreadsheet\Calculation\ArrayEnabled;
+<<<<<<< HEAD
+=======
+use PhpOffice\PhpSpreadsheet\Calculation\Exception as CalcExp;
+>>>>>>> match
 use PhpOffice\PhpSpreadsheet\Calculation\Functions;
 use PhpOffice\PhpSpreadsheet\Calculation\Information\ExcelError;
 
@@ -20,13 +24,26 @@ class CharacterConvert
      *         If an array of values is passed as the argument, then the returned result will also be an array
      *            with the same dimensions
      */
+<<<<<<< HEAD
     public static function character($character)
+=======
+    public static function character(mixed $character): array|string
+>>>>>>> match
     {
         if (is_array($character)) {
             return self::evaluateSingleArgumentArray([self::class, __FUNCTION__], $character);
         }
 
+<<<<<<< HEAD
         $character = Helpers::validateInt($character);
+=======
+        try {
+            $character = Helpers::validateInt($character, true);
+        } catch (CalcExp $e) {
+            return $e->getMessage();
+        }
+
+>>>>>>> match
         $min = Functions::getCompatibilityMode() === Functions::COMPATIBILITY_OPENOFFICE ? 0 : 1;
         if ($character < $min || $character > 255) {
             return ExcelError::VALUE();
@@ -46,13 +63,26 @@ class CharacterConvert
      *         If an array of values is passed as the argument, then the returned result will also be an array
      *            with the same dimensions
      */
+<<<<<<< HEAD
     public static function code($characters)
+=======
+    public static function code(mixed $characters): array|string|int
+>>>>>>> match
     {
         if (is_array($characters)) {
             return self::evaluateSingleArgumentArray([self::class, __FUNCTION__], $characters);
         }
 
+<<<<<<< HEAD
         $characters = Helpers::extractString($characters);
+=======
+        try {
+            $characters = Helpers::extractString($characters, true);
+        } catch (CalcExp $e) {
+            return $e->getMessage();
+        }
+
+>>>>>>> match
         if ($characters === '') {
             return ExcelError::VALUE();
         }
@@ -70,6 +100,10 @@ class CharacterConvert
         $retVal = 0;
         $iconv = iconv('UTF-8', 'UCS-4LE', $character);
         if ($iconv !== false) {
+<<<<<<< HEAD
+=======
+            /** @var false|int[] */
+>>>>>>> match
             $result = unpack('V', $iconv);
             if (is_array($result) && isset($result[1])) {
                 $retVal = $result[1];

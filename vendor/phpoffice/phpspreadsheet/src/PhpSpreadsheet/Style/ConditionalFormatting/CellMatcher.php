@@ -6,6 +6,10 @@ use PhpOffice\PhpSpreadsheet\Calculation\Calculation;
 use PhpOffice\PhpSpreadsheet\Calculation\Exception;
 use PhpOffice\PhpSpreadsheet\Cell\Cell;
 use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
+<<<<<<< HEAD
+=======
+use PhpOffice\PhpSpreadsheet\Shared\StringHelper;
+>>>>>>> match
 use PhpOffice\PhpSpreadsheet\Style\Conditional;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
@@ -30,6 +34,7 @@ class CellMatcher
         Conditional::CONDITION_UNIQUE => "COUNTIF('%s'!%s,%s)=1",
     ];
 
+<<<<<<< HEAD
     /**
      * @var Cell
      */
@@ -74,6 +79,25 @@ class CellMatcher
      * @var Calculation
      */
     protected $engine;
+=======
+    protected Cell $cell;
+
+    protected int $cellRow;
+
+    protected Worksheet $worksheet;
+
+    protected int $cellColumn;
+
+    protected string $conditionalRange;
+
+    protected string $referenceCell;
+
+    protected int $referenceRow;
+
+    protected int $referenceColumn;
+
+    protected Calculation $engine;
+>>>>>>> match
 
     public function __construct(Cell $cell, string $conditionalRange)
     {
@@ -111,6 +135,7 @@ class CellMatcher
         $cellAddress = "{$cellColumn}{$this->cellRow}";
         $this->cell = $this->worksheet->getCell($cellAddress);
 
+<<<<<<< HEAD
         switch ($conditional->getConditionType()) {
             case Conditional::CONDITION_CELLIS:
                 return $this->processOperatorComparison($conditional);
@@ -152,6 +177,40 @@ class CellMatcher
      * @return float|int|string
      */
     protected function wrapValue($value)
+=======
+        return match ($conditional->getConditionType()) {
+            Conditional::CONDITION_CELLIS => $this->processOperatorComparison($conditional),
+            Conditional::CONDITION_DUPLICATES, Conditional::CONDITION_UNIQUE => $this->processDuplicatesComparison($conditional),
+            // Expression is NOT(ISERROR(SEARCH("<TEXT>",<Cell Reference>)))
+            Conditional::CONDITION_CONTAINSTEXT,
+            // Expression is ISERROR(SEARCH("<TEXT>",<Cell Reference>))
+            Conditional::CONDITION_NOTCONTAINSTEXT,
+            // Expression is LEFT(<Cell Reference>,LEN("<TEXT>"))="<TEXT>"
+            Conditional::CONDITION_BEGINSWITH,
+            // Expression is RIGHT(<Cell Reference>,LEN("<TEXT>"))="<TEXT>"
+            Conditional::CONDITION_ENDSWITH,
+            // Expression is LEN(TRIM(<Cell Reference>))=0
+            Conditional::CONDITION_CONTAINSBLANKS,
+            // Expression is LEN(TRIM(<Cell Reference>))>0
+            Conditional::CONDITION_NOTCONTAINSBLANKS,
+            // Expression is ISERROR(<Cell Reference>)
+            Conditional::CONDITION_CONTAINSERRORS,
+            // Expression is NOT(ISERROR(<Cell Reference>))
+            Conditional::CONDITION_NOTCONTAINSERRORS,
+            // Expression varies, depending on specified timePeriod value, e.g.
+            // Yesterday FLOOR(<Cell Reference>,1)=TODAY()-1
+            // Today FLOOR(<Cell Reference>,1)=TODAY()
+            // Tomorrow FLOOR(<Cell Reference>,1)=TODAY()+1
+            // Last 7 Days AND(TODAY()-FLOOR(<Cell Reference>,1)<=6,FLOOR(<Cell Reference>,1)<=TODAY())
+            Conditional::CONDITION_TIMEPERIOD,
+            Conditional::CONDITION_EXPRESSION => $this->processExpression($conditional),
+            Conditional::CONDITION_COLORSCALE => $this->processColorScale($conditional),
+            default => false,
+        };
+    }
+
+    protected function wrapValue(mixed $value): float|int|string
+>>>>>>> match
     {
         if (!is_numeric($value)) {
             if (is_bool($value)) {
@@ -160,12 +219,17 @@ class CellMatcher
                 return 'NULL';
             }
 
+<<<<<<< HEAD
             return '"' . $value . '"';
+=======
+            return '"' . StringHelper::convertToString($value) . '"';
+>>>>>>> match
         }
 
         return $value;
     }
 
+<<<<<<< HEAD
     /**
      * @return float|int|string
      */
@@ -183,12 +247,31 @@ class CellMatcher
         $row = $matches[7];
 
         if (strpos($column, '$') === false) {
+=======
+    protected function wrapCellValue(): float|int|string
+    {
+        $this->cell = $this->worksheet->getCell([$this->cellColumn, $this->cellRow]);
+
+        return $this->wrapValue($this->cell->getCalculatedValue());
+    }
+
+    protected function conditionCellAdjustment(array $matches): float|int|string
+    {
+        $column = $matches[6];
+        $row = $matches[7];
+        if (!str_contains($column, '$')) {
+            //            $column = Coordinate::stringFromColumnIndex($this->cellColumn);
+>>>>>>> match
             $column = Coordinate::columnIndexFromString($column);
             $column += $this->cellColumn - $this->referenceColumn;
             $column = Coordinate::stringFromColumnIndex($column);
         }
 
+<<<<<<< HEAD
         if (strpos($row, '$') === false) {
+=======
+        if (!str_contains($row, '$')) {
+>>>>>>> match
             $row += $this->cellRow - $this->referenceRow;
         }
 
@@ -228,6 +311,10 @@ class CellMatcher
             }
         }
         unset($value);
+<<<<<<< HEAD
+=======
+
+>>>>>>> match
         //    Then rebuild the condition string to return it
         return implode(Calculation::FORMULA_STRING_QUOTE, $splitCondition);
     }
@@ -253,6 +340,18 @@ class CellMatcher
         return $this->evaluateExpression($expression);
     }
 
+<<<<<<< HEAD
+=======
+    protected function processColorScale(Conditional $conditional): bool
+    {
+        if (is_numeric($this->wrapCellValue()) && $conditional->getColorScale()?->colorScaleReadyForUse()) {
+            return true;
+        }
+
+        return false;
+    }
+
+>>>>>>> match
     protected function processRangeOperator(Conditional $conditional): bool
     {
         $conditions = $this->adjustConditionsForCellReferences($conditional->getConditions());
@@ -277,7 +376,11 @@ class CellMatcher
             self::COMPARISON_DUPLICATES_OPERATORS[$conditional->getConditionType()],
             $worksheetName,
             $this->conditionalRange,
+<<<<<<< HEAD
             $this->cellConditionCheck($this->cell->getCalculatedValue())
+=======
+            $this->cellConditionCheck($this->cell->getCalculatedValueString())
+>>>>>>> match
         );
 
         return $this->evaluateExpression($expression);
@@ -304,7 +407,11 @@ class CellMatcher
         try {
             $this->engine->flushInstance();
             $result = (bool) $this->engine->calculateFormula($expression);
+<<<<<<< HEAD
         } catch (Exception $e) {
+=======
+        } catch (Exception) {
+>>>>>>> match
             return false;
         }
 

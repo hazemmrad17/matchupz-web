@@ -3,16 +3,26 @@
 namespace PhpOffice\PhpSpreadsheet\Shared\Trend;
 
 use Matrix\Matrix;
+<<<<<<< HEAD
+=======
+use PhpOffice\PhpSpreadsheet\Exception as SpreadsheetException;
+>>>>>>> match
 
 // Phpstan and Scrutinizer seem to have legitimate complaints.
 // $this->slope is specified where an array is expected in several places.
 // But it seems that it should always be float.
 // This code is probably not exercised at all in unit tests.
+<<<<<<< HEAD
+=======
+// Private bool property $implemented is set to indicate
+//     whether this implementation is correct.
+>>>>>>> match
 class PolynomialBestFit extends BestFit
 {
     /**
      * Algorithm type to use for best-fit
      * (Name of this Trend class).
+<<<<<<< HEAD
      *
      * @var string
      */
@@ -31,6 +41,22 @@ class PolynomialBestFit extends BestFit
      * @return int
      */
     public function getOrder()
+=======
+     */
+    protected string $bestFitType = 'polynomial';
+
+    /**
+     * Polynomial order.
+     */
+    protected int $order = 0;
+
+    private bool $implemented = false;
+
+    /**
+     * Return the order of this polynomial.
+     */
+    public function getOrder(): int
+>>>>>>> match
     {
         return $this->order;
     }
@@ -42,7 +68,11 @@ class PolynomialBestFit extends BestFit
      *
      * @return float Y-Value
      */
+<<<<<<< HEAD
     public function getValueOfYForX($xValue)
+=======
+    public function getValueOfYForX(float $xValue): float
+>>>>>>> match
     {
         $retVal = $this->getIntersect();
         $slope = $this->getSlope();
@@ -64,7 +94,11 @@ class PolynomialBestFit extends BestFit
      *
      * @return float X-Value
      */
+<<<<<<< HEAD
     public function getValueOfXForY($yValue)
+=======
+    public function getValueOfXForY(float $yValue): float
+>>>>>>> match
     {
         return ($yValue - $this->getIntersect()) / $this->getSlope();
     }
@@ -73,10 +107,15 @@ class PolynomialBestFit extends BestFit
      * Return the Equation of the best-fit line.
      *
      * @param int $dp Number of places of decimal precision to display
+<<<<<<< HEAD
      *
      * @return string
      */
     public function getEquation($dp = 0)
+=======
+     */
+    public function getEquation(int $dp = 0): string
+>>>>>>> match
     {
         $slope = $this->getSlope($dp);
         $intersect = $this->getIntersect($dp);
@@ -100,6 +139,7 @@ class PolynomialBestFit extends BestFit
      * Return the Slope of the line.
      *
      * @param int $dp Number of places of decimal precision to display
+<<<<<<< HEAD
      *
      * @return float
      */
@@ -108,6 +148,13 @@ class PolynomialBestFit extends BestFit
         if ($dp != 0) {
             $coefficients = [];
             // Scrutinizer is correct - $this->slope is float, not array.
+=======
+     */
+    public function getSlope(int $dp = 0): float
+    {
+        if ($dp != 0) {
+            $coefficients = [];
+>>>>>>> match
             //* @phpstan-ignore-next-line
             foreach ($this->slope as $coefficient) {
                 $coefficients[] = round($coefficient, $dp);
@@ -120,12 +167,16 @@ class PolynomialBestFit extends BestFit
         return $this->slope;
     }
 
+<<<<<<< HEAD
     /**
      * @param int $dp
      *
      * @return array
      */
     public function getCoefficients($dp = 0)
+=======
+    public function getCoefficients(int $dp = 0): array
+>>>>>>> match
     {
         // Phpstan and Scrutinizer are both correct - getSlope returns float, not array.
         // @phpstan-ignore-next-line
@@ -139,7 +190,11 @@ class PolynomialBestFit extends BestFit
      * @param float[] $yValues The set of Y-values for this regression
      * @param float[] $xValues The set of X-values for this regression
      */
+<<<<<<< HEAD
     private function polynomialRegression($order, $yValues, $xValues): void
+=======
+    private function polynomialRegression(int $order, array $yValues, array $xValues): void
+>>>>>>> match
     {
         // calculate sums
         $x_sum = array_sum($xValues);
@@ -175,14 +230,26 @@ class PolynomialBestFit extends BestFit
         $coefficients = [];
         for ($i = 0; $i < $C->rows; ++$i) {
             $r = $C->getValue($i + 1, 1); // row and column are origin-1
+<<<<<<< HEAD
             if (abs($r) <= 10 ** (-9)) {
                 $r = 0;
+=======
+            if (!is_numeric($r) || abs($r + 0) <= 10 ** (-9)) {
+                $r = 0;
+            } else {
+                $r += 0;
+>>>>>>> match
             }
             $coefficients[] = $r;
         }
 
+<<<<<<< HEAD
         $this->intersect = array_shift($coefficients);
         // Phpstan (and maybe Scrutinizer) are correct
+=======
+        $this->intersect = (float) array_shift($coefficients);
+        // Phpstan is correct
+>>>>>>> match
         //* @phpstan-ignore-next-line
         $this->slope = $coefficients;
 
@@ -199,8 +266,17 @@ class PolynomialBestFit extends BestFit
      * @param float[] $yValues The set of Y-values for this regression
      * @param float[] $xValues The set of X-values for this regression
      */
+<<<<<<< HEAD
     public function __construct($order, $yValues, $xValues = [])
     {
+=======
+    public function __construct(int $order, array $yValues, array $xValues = [])
+    {
+        if (!$this->implemented) {
+            throw new SpreadsheetException('Polynomial Best Fit not yet implemented');
+        }
+
+>>>>>>> match
         parent::__construct($yValues, $xValues);
 
         if (!$this->error) {

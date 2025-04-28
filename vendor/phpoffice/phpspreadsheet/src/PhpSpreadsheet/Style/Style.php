@@ -7,11 +7,16 @@ use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
 use PhpOffice\PhpSpreadsheet\Exception;
 use PhpOffice\PhpSpreadsheet\Shared\StringHelper;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
+<<<<<<< HEAD
+=======
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
+>>>>>>> match
 
 class Style extends Supervisor
 {
     /**
      * Font.
+<<<<<<< HEAD
      *
      * @var Font
      */
@@ -65,6 +70,45 @@ class Style extends Supervisor
      * @var bool
      */
     protected $quotePrefix = false;
+=======
+     */
+    protected Font $font;
+
+    /**
+     * Fill.
+     */
+    protected Fill $fill;
+
+    /**
+     * Borders.
+     */
+    protected Borders $borders;
+
+    /**
+     * Alignment.
+     */
+    protected Alignment $alignment;
+
+    /**
+     * Number Format.
+     */
+    protected NumberFormat $numberFormat;
+
+    /**
+     * Protection.
+     */
+    protected Protection $protection;
+
+    /**
+     * Index of style in collection. Only used for real style.
+     */
+    protected int $index;
+
+    /**
+     * Use Quote Prefix when displaying in cell editor. Only used for real style.
+     */
+    protected bool $quotePrefix = false;
+>>>>>>> match
 
     /**
      * Internal cache for styles
@@ -83,7 +127,11 @@ class Style extends Supervisor
      *
      * @var null|array<string, array>
      */
+<<<<<<< HEAD
     private static $cachedStyles;
+=======
+    private static ?array $cachedStyles = null;
+>>>>>>> match
 
     /**
      * Create a new Style.
@@ -95,7 +143,11 @@ class Style extends Supervisor
      *       Leave this value at default unless you understand exactly what
      *    its ramifications are
      */
+<<<<<<< HEAD
     public function __construct($isSupervisor = false, $isConditional = false)
+=======
+    public function __construct(bool $isSupervisor = false, bool $isConditional = false)
+>>>>>>> match
     {
         parent::__construct($isSupervisor);
 
@@ -146,12 +198,17 @@ class Style extends Supervisor
 
     /**
      * Build style array from subcomponents.
+<<<<<<< HEAD
      *
      * @param array $array
      *
      * @return array
      */
     public function getStyleArray($array)
+=======
+     */
+    public function getStyleArray(array $array): array
+>>>>>>> match
     {
         return ['quotePrefix' => $array];
     }
@@ -201,15 +258,25 @@ class Style extends Supervisor
      *
      * @return $this
      */
+<<<<<<< HEAD
     public function applyFromArray(array $styleArray, $advancedBorders = true)
+=======
+    public function applyFromArray(array $styleArray, bool $advancedBorders = true): static
+>>>>>>> match
     {
         if ($this->isSupervisor) {
             $pRange = $this->getSelectedCells();
 
             // Uppercase coordinate and strip any Worksheet reference from the selected range
             $pRange = strtoupper($pRange);
+<<<<<<< HEAD
             if (strpos($pRange, '!') !== false) {
                 $pRangeWorksheet = StringHelper::strToUpper(trim(substr($pRange, 0, (int) strrpos($pRange, '!')), "'"));
+=======
+            if (str_contains($pRange, '!')) {
+                $pRangeWorksheet = StringHelper::strToUpper(substr($pRange, 0, (int) strrpos($pRange, '!')));
+                $pRangeWorksheet = Worksheet::unApostrophizeTitle($pRangeWorksheet);
+>>>>>>> match
                 if ($pRangeWorksheet !== '' && StringHelper::strToUpper($this->getActiveSheet()->getTitle()) !== $pRangeWorksheet) {
                     throw new Exception('Invalid Worksheet for specified Range');
                 }
@@ -217,7 +284,11 @@ class Style extends Supervisor
             }
 
             // Is it a cell range or a single cell?
+<<<<<<< HEAD
             if (strpos($pRange, ':') === false) {
+=======
+            if (!str_contains($pRange, ':')) {
+>>>>>>> match
                 $rangeA = $pRange;
                 $rangeB = $pRange;
             } else {
@@ -279,12 +350,21 @@ class Style extends Supervisor
                 // loop through up to 3 x 3 = 9 regions
                 for ($x = 1; $x <= $xMax; ++$x) {
                     // start column index for region
+<<<<<<< HEAD
                     $colStart = ($x == 3) ?
                         Coordinate::stringFromColumnIndex($rangeEndIndexes[0])
                         : Coordinate::stringFromColumnIndex($rangeStartIndexes[0] + $x - 1);
                     // end column index for region
                     $colEnd = ($x == 1) ?
                         Coordinate::stringFromColumnIndex($rangeStartIndexes[0])
+=======
+                    $colStart = ($x == 3)
+                        ? Coordinate::stringFromColumnIndex($rangeEndIndexes[0])
+                        : Coordinate::stringFromColumnIndex($rangeStartIndexes[0] + $x - 1);
+                    // end column index for region
+                    $colEnd = ($x == 1)
+                        ? Coordinate::stringFromColumnIndex($rangeStartIndexes[0])
+>>>>>>> match
                         : Coordinate::stringFromColumnIndex($rangeEndIndexes[0] - $xMax + $x);
 
                     for ($y = 1; $y <= $yMax; ++$y) {
@@ -308,12 +388,21 @@ class Style extends Supervisor
                         }
 
                         // start row index for region
+<<<<<<< HEAD
                         $rowStart = ($y == 3) ?
                             $rangeEndIndexes[1] : $rangeStartIndexes[1] + $y - 1;
 
                         // end row index for region
                         $rowEnd = ($y == 1) ?
                             $rangeStartIndexes[1] : $rangeEndIndexes[1] - $yMax + $y;
+=======
+                        $rowStart = ($y == 3)
+                            ? $rangeEndIndexes[1] : $rangeStartIndexes[1] + $y - 1;
+
+                        // end row index for region
+                        $rowEnd = ($y == 1)
+                            ? $rangeStartIndexes[1] : $rangeEndIndexes[1] - $yMax + $y;
+>>>>>>> match
 
                         // build range for region
                         $range = $colStart . $rowStart . ':' . $colEnd . $rowEnd;
@@ -519,9 +608,14 @@ class Style extends Supervisor
                     $cellIterator = $columnIterator->getCellIterator();
                     $cellIterator->setIterateOnlyExistingCells(true);
                     foreach ($cellIterator as $columnCell) {
+<<<<<<< HEAD
                         if ($columnCell !== null) {
                             $columnCell->getStyle()->applyFromArray($styleArray);
                         }
+=======
+                        $columnCell->getStyle()
+                            ->applyFromArray($styleArray);
+>>>>>>> match
                     }
                 }
 
@@ -538,9 +632,14 @@ class Style extends Supervisor
                     $cellIterator = $rowIterator->getCellIterator();
                     $cellIterator->setIterateOnlyExistingCells(true);
                     foreach ($cellIterator as $rowCell) {
+<<<<<<< HEAD
                         if ($rowCell !== null) {
                             $rowCell->getStyle()->applyFromArray($styleArray);
                         }
+=======
+                        $rowCell->getStyle()
+                            ->applyFromArray($styleArray);
+>>>>>>> match
                     }
                 }
 
@@ -560,20 +659,30 @@ class Style extends Supervisor
 
     /**
      * Get Fill.
+<<<<<<< HEAD
      *
      * @return Fill
      */
     public function getFill()
+=======
+     */
+    public function getFill(): Fill
+>>>>>>> match
     {
         return $this->fill;
     }
 
     /**
      * Get Font.
+<<<<<<< HEAD
      *
      * @return Font
      */
     public function getFont()
+=======
+     */
+    public function getFont(): Font
+>>>>>>> match
     {
         return $this->font;
     }
@@ -583,7 +692,11 @@ class Style extends Supervisor
      *
      * @return $this
      */
+<<<<<<< HEAD
     public function setFont(Font $font)
+=======
+    public function setFont(Font $font): static
+>>>>>>> match
     {
         $this->font = $font;
 
@@ -592,30 +705,45 @@ class Style extends Supervisor
 
     /**
      * Get Borders.
+<<<<<<< HEAD
      *
      * @return Borders
      */
     public function getBorders()
+=======
+     */
+    public function getBorders(): Borders
+>>>>>>> match
     {
         return $this->borders;
     }
 
     /**
      * Get Alignment.
+<<<<<<< HEAD
      *
      * @return Alignment
      */
     public function getAlignment()
+=======
+     */
+    public function getAlignment(): Alignment
+>>>>>>> match
     {
         return $this->alignment;
     }
 
     /**
      * Get Number Format.
+<<<<<<< HEAD
      *
      * @return NumberFormat
      */
     public function getNumberFormat()
+=======
+     */
+    public function getNumberFormat(): NumberFormat
+>>>>>>> match
     {
         return $this->numberFormat;
     }
@@ -625,7 +753,11 @@ class Style extends Supervisor
      *
      * @return Conditional[]
      */
+<<<<<<< HEAD
     public function getConditionalStyles()
+=======
+    public function getConditionalStyles(): array
+>>>>>>> match
     {
         return $this->getActiveSheet()->getConditionalStyles($this->getActiveCell());
     }
@@ -637,7 +769,11 @@ class Style extends Supervisor
      *
      * @return $this
      */
+<<<<<<< HEAD
     public function setConditionalStyles(array $conditionalStyleArray)
+=======
+    public function setConditionalStyles(array $conditionalStyleArray): static
+>>>>>>> match
     {
         $this->getActiveSheet()->setConditionalStyles($this->getSelectedCells(), $conditionalStyleArray);
 
@@ -646,20 +782,30 @@ class Style extends Supervisor
 
     /**
      * Get Protection.
+<<<<<<< HEAD
      *
      * @return Protection
      */
     public function getProtection()
+=======
+     */
+    public function getProtection(): Protection
+>>>>>>> match
     {
         return $this->protection;
     }
 
     /**
      * Get quote prefix.
+<<<<<<< HEAD
      *
      * @return bool
      */
     public function getQuotePrefix()
+=======
+     */
+    public function getQuotePrefix(): bool
+>>>>>>> match
     {
         if ($this->isSupervisor) {
             return $this->getSharedComponent()->getQuotePrefix();
@@ -671,11 +817,17 @@ class Style extends Supervisor
     /**
      * Set quote prefix.
      *
+<<<<<<< HEAD
      * @param bool $quotePrefix
      *
      * @return $this
      */
     public function setQuotePrefix($quotePrefix)
+=======
+     * @return $this
+     */
+    public function setQuotePrefix(bool $quotePrefix): static
+>>>>>>> match
     {
         if ($quotePrefix == '') {
             $quotePrefix = false;
@@ -695,6 +847,7 @@ class Style extends Supervisor
      *
      * @return string Hash code
      */
+<<<<<<< HEAD
     public function getHashCode()
     {
         return md5(
@@ -706,25 +859,48 @@ class Style extends Supervisor
             $this->protection->getHashCode() .
             ($this->quotePrefix ? 't' : 'f') .
             __CLASS__
+=======
+    public function getHashCode(): string
+    {
+        return md5(
+            $this->fill->getHashCode()
+            . $this->font->getHashCode()
+            . $this->borders->getHashCode()
+            . $this->alignment->getHashCode()
+            . $this->numberFormat->getHashCode()
+            . $this->protection->getHashCode()
+            . ($this->quotePrefix ? 't' : 'f')
+            . __CLASS__
+>>>>>>> match
         );
     }
 
     /**
      * Get own index in style collection.
+<<<<<<< HEAD
      *
      * @return int
      */
     public function getIndex()
+=======
+     */
+    public function getIndex(): int
+>>>>>>> match
     {
         return $this->index;
     }
 
     /**
      * Set own index in style collection.
+<<<<<<< HEAD
      *
      * @param int $index
      */
     public function setIndex($index): void
+=======
+     */
+    public function setIndex(int $index): void
+>>>>>>> match
     {
         $this->index = $index;
     }
@@ -738,7 +914,11 @@ class Style extends Supervisor
         $this->exportArray2($exportedArray, 'font', $this->getFont());
         $this->exportArray2($exportedArray, 'numberFormat', $this->getNumberFormat());
         $this->exportArray2($exportedArray, 'protection', $this->getProtection());
+<<<<<<< HEAD
         $this->exportArray2($exportedArray, 'quotePrefx', $this->getQuotePrefix());
+=======
+        $this->exportArray2($exportedArray, 'quotePrefix', $this->getQuotePrefix());
+>>>>>>> match
 
         return $exportedArray;
     }

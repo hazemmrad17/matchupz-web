@@ -15,6 +15,32 @@ class ScheduleRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Schedule::class);
     }
+<<<<<<< HEAD
+=======
+    // src/Repository/ScheduleRepository.php
+public function findOngoingSchedules(\DateTime $currentTime): array
+{
+    $allSchedules = $this->createQueryBuilder('s')
+        ->leftJoin('s.matchEntity', 'm')
+        ->leftJoin('s.espaceSportif', 'e')
+        ->addSelect('m')
+        ->addSelect('e')
+        ->getQuery()
+        ->getResult();
+
+    return array_filter($allSchedules, function (Schedule $schedule) use ($currentTime) {
+        $startDateTime = (clone $schedule->getDateMatch())->setTime(
+            (int) $schedule->getStartTime()->format('H'),
+            (int) $schedule->getStartTime()->format('i')
+        );
+        $endDateTime = (clone $schedule->getDateMatch())->setTime(
+            (int) $schedule->getEndTime()->format('H'),
+            (int) $schedule->getEndTime()->format('i')
+        );
+        return $currentTime >= $startDateTime && $currentTime <= $endDateTime;
+    });
+}
+>>>>>>> match
 
 //    /**
 //     * @return Schedule[] Returns an array of Schedule objects

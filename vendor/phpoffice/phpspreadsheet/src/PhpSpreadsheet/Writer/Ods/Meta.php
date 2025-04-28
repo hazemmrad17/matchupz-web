@@ -65,12 +65,20 @@ class Meta extends WriterPart
         //<meta:document-statistic meta:table-count="XXX" meta:cell-count="XXX" meta:object-count="XXX"/>
         $objWriter->startElement('meta:user-defined');
         $objWriter->writeAttribute('meta:name', 'Company');
+<<<<<<< HEAD
         $objWriter->writeRaw($spreadsheet->getProperties()->getCompany());
+=======
+        $objWriter->writeRawData($spreadsheet->getProperties()->getCompany());
+>>>>>>> match
         $objWriter->endElement();
 
         $objWriter->startElement('meta:user-defined');
         $objWriter->writeAttribute('meta:name', 'category');
+<<<<<<< HEAD
         $objWriter->writeRaw($spreadsheet->getProperties()->getCategory());
+=======
+        $objWriter->writeRawData($spreadsheet->getProperties()->getCategory());
+>>>>>>> match
         $objWriter->endElement();
 
         self::writeDocPropsCustom($objWriter, $spreadsheet);
@@ -85,7 +93,11 @@ class Meta extends WriterPart
     private static function writeDocPropsCustom(XMLWriter $objWriter, Spreadsheet $spreadsheet): void
     {
         $customPropertyList = $spreadsheet->getProperties()->getCustomProperties();
+<<<<<<< HEAD
         foreach ($customPropertyList as $key => $customProperty) {
+=======
+        foreach ($customPropertyList as $customProperty) {
+>>>>>>> match
             $propertyValue = $spreadsheet->getProperties()->getCustomPropertyValue($customProperty);
             $propertyType = $spreadsheet->getProperties()->getCustomPropertyType($customProperty);
 
@@ -96,7 +108,11 @@ class Meta extends WriterPart
                 case Properties::PROPERTY_TYPE_INTEGER:
                 case Properties::PROPERTY_TYPE_FLOAT:
                     $objWriter->writeAttribute('meta:value-type', 'float');
+<<<<<<< HEAD
                     $objWriter->writeRawData($propertyValue);
+=======
+                    $objWriter->writeRawData((string) $propertyValue);
+>>>>>>> match
 
                     break;
                 case Properties::PROPERTY_TYPE_BOOLEAN:
@@ -106,12 +122,20 @@ class Meta extends WriterPart
                     break;
                 case Properties::PROPERTY_TYPE_DATE:
                     $objWriter->writeAttribute('meta:value-type', 'date');
+<<<<<<< HEAD
                     $dtobj = Date::dateTimeFromTimestamp($propertyValue ?? 0);
+=======
+                    $dtobj = Date::dateTimeFromTimestamp((string) ($propertyValue ?? 0));
+>>>>>>> match
                     $objWriter->writeRawData($dtobj->format(DATE_W3C));
 
                     break;
                 default:
+<<<<<<< HEAD
                     $objWriter->writeRawData($propertyValue);
+=======
+                    $objWriter->writeRawData((string) $propertyValue);
+>>>>>>> match
 
                     break;
             }

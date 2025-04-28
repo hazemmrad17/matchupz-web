@@ -14,6 +14,7 @@ use SimpleXMLElement;
 
 class Styles
 {
+<<<<<<< HEAD
     /**
      * @var Spreadsheet
      */
@@ -26,6 +27,13 @@ class Styles
 
     /** @var array */
     public static $mappings = [
+=======
+    private Spreadsheet $spreadsheet;
+
+    protected bool $readDataOnly;
+
+    public static array $mappings = [
+>>>>>>> match
         'borderStyle' => [
             '0' => Border::BORDER_NONE,
             '1' => Border::BORDER_THIN,
@@ -101,7 +109,10 @@ class Styles
     private function readStyles(SimpleXMLElement $styleRegion, int $maxRow, int $maxCol): void
     {
         foreach ($styleRegion as $style) {
+<<<<<<< HEAD
             /** @scrutinizer ignore-call */
+=======
+>>>>>>> match
             $styleAttributes = $style->attributes();
             if ($styleAttributes !== null && ($styleAttributes['startRow'] <= $maxRow) && ($styleAttributes['startCol'] <= $maxCol)) {
                 $cellRange = $this->readStyleRange($styleAttributes, $maxCol, $maxRow);
@@ -118,7 +129,11 @@ class Styles
                 if ($this->readDataOnly === false && $styleAttributes !== null) {
                     //    If readDataOnly is false, we set all formatting information
                     $styleArray['numberFormat']['formatCode'] = $formatCode;
+<<<<<<< HEAD
                     $styleArray = $this->readStyle($styleArray, $styleAttributes, /** @scrutinizer ignore-type */ $style);
+=======
+                    $styleArray = $this->readStyle($styleArray, $styleAttributes, $style);
+>>>>>>> match
                 }
                 $this->spreadsheet->getActiveSheet()->getStyle($cellRange)->applyFromArray($styleArray);
             }

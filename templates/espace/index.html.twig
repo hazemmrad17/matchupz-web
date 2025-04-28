@@ -6,6 +6,7 @@
 
 {% block title %}Liste des Espaces Sportifs{% endblock %}
 
+<<<<<<< HEAD
 {% block stylesheets %}
     {{ parent() }}
     <style>
@@ -83,6 +84,8 @@
     </style>
 {% endblock %}
 
+=======
+>>>>>>> match
 {% block content %}
     <div class="content-wrapper">
         <div class="container-xxl flex-grow-1 container-p-y">
@@ -100,6 +103,7 @@
 
             <div class="card">
                 <h5 class="card-header d-flex justify-content-between align-items-center">
+<<<<<<< HEAD
                     <div class="d-flex align-items-center">
                         <span>Liste des Espaces Sportifs</span>
                         <div class="navbar-nav align-items-center ms-3">
@@ -132,6 +136,13 @@
                 </h5>
                 <div class="table-responsive text-nowrap">
                     <table class="table" id="espacesTable">
+=======
+                    Liste des Espaces Sportifs
+                    <a href="{{ path('espace_new') }}" class="btn btn-primary">Ajouter un Espace</a>
+                </h5>
+                <div class="table-responsive text-nowrap">
+                    <table class="table">
+>>>>>>> match
                         <thead>
                             <tr>
                                 <th>Nom</th>
@@ -141,7 +152,11 @@
                                 <th>Actions</th>
                             </tr>
                         </thead>
+<<<<<<< HEAD
                         <tbody class="table-border-bottom-0" id="espacesTableBody">
+=======
+                        <tbody class="table-border-bottom-0">
+>>>>>>> match
                             {% for espace in espaces %}
                                 <tr class="table-default">
                                     <td>
@@ -181,9 +196,12 @@
                         </tbody>
                     </table>
                 </div>
+<<<<<<< HEAD
                 <div class="card-footer" id="paginationContainer">
                     {% include 'espace/_pagination.html.twig' with {'espaces': espaces, 'searchTerm': searchTerm} %}
                 </div>
+=======
+>>>>>>> match
             </div>
 
             <h5 class="mt-4">Top Espaces par Capacité</h5>
@@ -213,6 +231,7 @@
             </div>
         </div>
     </div>
+<<<<<<< HEAD
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -333,4 +352,6 @@
             }, 300));
         });
     </script>
+=======
+>>>>>>> match
 {% endblock %}

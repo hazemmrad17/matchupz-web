@@ -10,10 +10,15 @@ abstract class Supervisor implements IComparable
 {
     /**
      * Supervisor?
+<<<<<<< HEAD
      *
      * @var bool
      */
     protected $isSupervisor;
+=======
+     */
+    protected bool $isSupervisor;
+>>>>>>> match
 
     /**
      * Parent. Only used for supervisor.
@@ -24,10 +29,15 @@ abstract class Supervisor implements IComparable
 
     /**
      * Parent property name.
+<<<<<<< HEAD
      *
      * @var null|string
      */
     protected $parentPropertyName;
+=======
+     */
+    protected ?string $parentPropertyName = null;
+>>>>>>> match
 
     /**
      * Create a new Supervisor.
@@ -36,7 +46,11 @@ abstract class Supervisor implements IComparable
      *                                    Leave this value at default unless you understand exactly what
      *                                        its ramifications are
      */
+<<<<<<< HEAD
     public function __construct($isSupervisor = false)
+=======
+    public function __construct(bool $isSupervisor = false)
+>>>>>>> match
     {
         // Supervisor?
         $this->isSupervisor = $isSupervisor;
@@ -45,12 +59,18 @@ abstract class Supervisor implements IComparable
     /**
      * Bind parent. Only used for supervisor.
      *
+<<<<<<< HEAD
      * @param Spreadsheet|Supervisor $parent
      * @param null|string $parentPropertyName
      *
      * @return $this
      */
     public function bindParent($parent, $parentPropertyName = null)
+=======
+     * @return $this
+     */
+    public function bindParent(Spreadsheet|self $parent, ?string $parentPropertyName = null)
+>>>>>>> match
     {
         $this->parent = $parent;
         $this->parentPropertyName = $parentPropertyName;
@@ -60,20 +80,30 @@ abstract class Supervisor implements IComparable
 
     /**
      * Is this a supervisor or a cell style component?
+<<<<<<< HEAD
      *
      * @return bool
      */
     public function getIsSupervisor()
+=======
+     */
+    public function getIsSupervisor(): bool
+>>>>>>> match
     {
         return $this->isSupervisor;
     }
 
     /**
      * Get the currently active sheet. Only used for supervisor.
+<<<<<<< HEAD
      *
      * @return Worksheet
      */
     public function getActiveSheet()
+=======
+     */
+    public function getActiveSheet(): Worksheet
+>>>>>>> match
     {
         return $this->parent->getActiveSheet();
     }
@@ -84,7 +114,11 @@ abstract class Supervisor implements IComparable
      *
      * @return string E.g. 'A1'
      */
+<<<<<<< HEAD
     public function getSelectedCells()
+=======
+    public function getSelectedCells(): string
+>>>>>>> match
     {
         return $this->getActiveSheet()->getSelectedCells();
     }
@@ -95,7 +129,11 @@ abstract class Supervisor implements IComparable
      *
      * @return string E.g. 'A1'
      */
+<<<<<<< HEAD
     public function getActiveCell()
+=======
+    public function getActiveCell(): string
+>>>>>>> match
     {
         return $this->getActiveSheet()->getActiveCell();
     }
@@ -144,10 +182,15 @@ abstract class Supervisor implements IComparable
      * The parameter objOrValue is either a primitive type,
      * which is the value added to the array,
      * or a Style object to be recursively added via exportArray.
+<<<<<<< HEAD
      *
      * @param mixed $objOrValue
      */
     final protected function exportArray2(array &$exportedArray, string $index, $objOrValue): void
+=======
+     */
+    final protected function exportArray2(array &$exportedArray, string $index, mixed $objOrValue): void
+>>>>>>> match
     {
         if ($objOrValue instanceof self) {
             $exportedArray[$index] = $objOrValue->exportArray();
@@ -159,6 +202,7 @@ abstract class Supervisor implements IComparable
     /**
      * Get the shared style component for the currently active cell in currently active sheet.
      * Only used for style supervisor.
+<<<<<<< HEAD
      *
      * @return mixed
      */
@@ -172,4 +216,13 @@ abstract class Supervisor implements IComparable
      * @return array
      */
     abstract public function getStyleArray($array);
+=======
+     */
+    abstract public function getSharedComponent(): mixed;
+
+    /**
+     * Build style array from subcomponents.
+     */
+    abstract public function getStyleArray(array $array): array;
+>>>>>>> match
 }

@@ -8,6 +8,7 @@ class Layout
 {
     /**
      * layoutTarget.
+<<<<<<< HEAD
      *
      * @var ?string
      */
@@ -67,42 +68,106 @@ class Layout
 
     /** @var bool */
     private $numFmtLinked = false;
+=======
+     */
+    private ?string $layoutTarget = null;
+
+    /**
+     * X Mode.
+     */
+    private ?string $xMode = null;
+
+    /**
+     * Y Mode.
+     */
+    private ?string $yMode = null;
+
+    /**
+     * X-Position.
+     */
+    private ?float $xPos = null;
+
+    /**
+     * Y-Position.
+     */
+    private ?float $yPos = null;
+
+    /**
+     * width.
+     */
+    private ?float $width = null;
+
+    /**
+     * height.
+     */
+    private ?float $height = null;
+
+    /**
+     * Position - t=top.
+     */
+    private string $dLblPos = '';
+
+    private string $numFmtCode = '';
+
+    private bool $numFmtLinked = false;
+>>>>>>> match
 
     /**
      * show legend key
      * Specifies that legend keys should be shown in data labels.
+<<<<<<< HEAD
      *
      * @var ?bool
      */
     private $showLegendKey;
+=======
+     */
+    private ?bool $showLegendKey = null;
+>>>>>>> match
 
     /**
      * show value
      * Specifies that the value should be shown in a data label.
+<<<<<<< HEAD
      *
      * @var ?bool
      */
     private $showVal;
+=======
+     */
+    private ?bool $showVal = null;
+>>>>>>> match
 
     /**
      * show category name
      * Specifies that the category name should be shown in the data label.
+<<<<<<< HEAD
      *
      * @var ?bool
      */
     private $showCatName;
+=======
+     */
+    private ?bool $showCatName = null;
+>>>>>>> match
 
     /**
      * show data series name
      * Specifies that the series name should be shown in the data label.
+<<<<<<< HEAD
      *
      * @var ?bool
      */
     private $showSerName;
+=======
+     */
+    private ?bool $showSerName = null;
+>>>>>>> match
 
     /**
      * show percentage
      * Specifies that the percentage should be shown in the data label.
+<<<<<<< HEAD
      *
      * @var ?bool
      */
@@ -114,10 +179,20 @@ class Layout
      * @var ?bool
      */
     private $showBubbleSize;
+=======
+     */
+    private ?bool $showPercent = null;
+
+    /**
+     * show bubble size.
+     */
+    private ?bool $showBubbleSize = null;
+>>>>>>> match
 
     /**
      * show leader lines
      * Specifies that leader lines should be shown for the data label.
+<<<<<<< HEAD
      *
      * @var ?bool
      */
@@ -134,6 +209,18 @@ class Layout
 
     /** @var Properties */
     private $labelEffects;
+=======
+     */
+    private ?bool $showLeaderLines = null;
+
+    private ?ChartColor $labelFillColor = null;
+
+    private ?ChartColor $labelBorderColor = null;
+
+    private ?Font $labelFont = null;
+
+    private ?Properties $labelEffects = null;
+>>>>>>> match
 
     /**
      * Create a new Layout.
@@ -207,10 +294,15 @@ class Layout
 
     /**
      * Get Layout Target.
+<<<<<<< HEAD
      *
      * @return ?string
      */
     public function getLayoutTarget()
+=======
+     */
+    public function getLayoutTarget(): ?string
+>>>>>>> match
     {
         return $this->layoutTarget;
     }
@@ -218,11 +310,17 @@ class Layout
     /**
      * Set Layout Target.
      *
+<<<<<<< HEAD
      * @param ?string $target
      *
      * @return $this
      */
     public function setLayoutTarget($target)
+=======
+     * @return $this
+     */
+    public function setLayoutTarget(?string $target): static
+>>>>>>> match
     {
         $this->layoutTarget = $target;
 
@@ -231,10 +329,15 @@ class Layout
 
     /**
      * Get X-Mode.
+<<<<<<< HEAD
      *
      * @return ?string
      */
     public function getXMode()
+=======
+     */
+    public function getXMode(): ?string
+>>>>>>> match
     {
         return $this->xMode;
     }
@@ -242,11 +345,17 @@ class Layout
     /**
      * Set X-Mode.
      *
+<<<<<<< HEAD
      * @param ?string $mode
      *
      * @return $this
      */
     public function setXMode($mode)
+=======
+     * @return $this
+     */
+    public function setXMode(?string $mode): static
+>>>>>>> match
     {
         $this->xMode = (string) $mode;
 
@@ -255,10 +364,15 @@ class Layout
 
     /**
      * Get Y-Mode.
+<<<<<<< HEAD
      *
      * @return ?string
      */
     public function getYMode()
+=======
+     */
+    public function getYMode(): ?string
+>>>>>>> match
     {
         return $this->yMode;
     }
@@ -266,11 +380,17 @@ class Layout
     /**
      * Set Y-Mode.
      *
+<<<<<<< HEAD
      * @param ?string $mode
      *
      * @return $this
      */
     public function setYMode($mode)
+=======
+     * @return $this
+     */
+    public function setYMode(?string $mode): static
+>>>>>>> match
     {
         $this->yMode = (string) $mode;
 
@@ -279,10 +399,15 @@ class Layout
 
     /**
      * Get X-Position.
+<<<<<<< HEAD
      *
      * @return null|float|int
      */
     public function getXPosition()
+=======
+     */
+    public function getXPosition(): null|float|int
+>>>>>>> match
     {
         return $this->xPos;
     }
@@ -290,6 +415,7 @@ class Layout
     /**
      * Set X-Position.
      *
+<<<<<<< HEAD
      * @param ?float $position
      *
      * @return $this
@@ -297,16 +423,28 @@ class Layout
     public function setXPosition($position)
     {
         $this->xPos = (float) $position;
+=======
+     * @return $this
+     */
+    public function setXPosition(float $position): static
+    {
+        $this->xPos = $position;
+>>>>>>> match
 
         return $this;
     }
 
     /**
      * Get Y-Position.
+<<<<<<< HEAD
      *
      * @return null|float
      */
     public function getYPosition()
+=======
+     */
+    public function getYPosition(): ?float
+>>>>>>> match
     {
         return $this->yPos;
     }
@@ -314,6 +452,7 @@ class Layout
     /**
      * Set Y-Position.
      *
+<<<<<<< HEAD
      * @param ?float $position
      *
      * @return $this
@@ -321,16 +460,28 @@ class Layout
     public function setYPosition($position)
     {
         $this->yPos = (float) $position;
+=======
+     * @return $this
+     */
+    public function setYPosition(float $position): static
+    {
+        $this->yPos = $position;
+>>>>>>> match
 
         return $this;
     }
 
     /**
      * Get Width.
+<<<<<<< HEAD
      *
      * @return ?float
      */
     public function getWidth()
+=======
+     */
+    public function getWidth(): ?float
+>>>>>>> match
     {
         return $this->width;
     }
@@ -338,11 +489,17 @@ class Layout
     /**
      * Set Width.
      *
+<<<<<<< HEAD
      * @param ?float $width
      *
      * @return $this
      */
     public function setWidth($width)
+=======
+     * @return $this
+     */
+    public function setWidth(?float $width): static
+>>>>>>> match
     {
         $this->width = $width;
 
@@ -351,10 +508,15 @@ class Layout
 
     /**
      * Get Height.
+<<<<<<< HEAD
      *
      * @return null|float
      */
     public function getHeight()
+=======
+     */
+    public function getHeight(): ?float
+>>>>>>> match
     {
         return $this->height;
     }
@@ -362,11 +524,17 @@ class Layout
     /**
      * Set Height.
      *
+<<<<<<< HEAD
      * @param ?float $height
      *
      * @return $this
      */
     public function setHeight($height)
+=======
+     * @return $this
+     */
+    public function setHeight(?float $height): static
+>>>>>>> match
     {
         $this->height = $height;
 
@@ -514,6 +682,16 @@ class Layout
         return $this->labelFont;
     }
 
+<<<<<<< HEAD
+=======
+    public function setLabelFont(?Font $labelFont): self
+    {
+        $this->labelFont = $labelFont;
+
+        return $this;
+    }
+
+>>>>>>> match
     public function getLabelEffects(): ?Properties
     {
         return $this->labelEffects;
@@ -574,4 +752,18 @@ class Layout
 
         return $this;
     }
+<<<<<<< HEAD
+=======
+
+    /**
+     * Implement PHP __clone to create a deep clone, not just a shallow copy.
+     */
+    public function __clone()
+    {
+        $this->labelFillColor = ($this->labelFillColor === null) ? null : clone $this->labelFillColor;
+        $this->labelBorderColor = ($this->labelBorderColor === null) ? null : clone $this->labelBorderColor;
+        $this->labelFont = ($this->labelFont === null) ? null : clone $this->labelFont;
+        $this->labelEffects = ($this->labelEffects === null) ? null : clone $this->labelEffects;
+    }
+>>>>>>> match
 }

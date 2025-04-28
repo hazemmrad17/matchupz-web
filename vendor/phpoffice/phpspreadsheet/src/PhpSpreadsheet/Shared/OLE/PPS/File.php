@@ -37,17 +37,26 @@ class File extends PPS
      *
      * @see OLE::ascToUcs()
      */
+<<<<<<< HEAD
     public function __construct($name)
+=======
+    public function __construct(string $name)
+>>>>>>> match
     {
         parent::__construct(null, $name, OLE::OLE_PPS_TYPE_FILE, null, null, null, null, null, '', []);
     }
 
     /**
      * Initialization method. Has to be called right after OLE_PPS_File().
+<<<<<<< HEAD
      *
      * @return mixed true on success
      */
     public function init()
+=======
+     */
+    public function init(): bool
+>>>>>>> match
     {
         return true;
     }
@@ -57,7 +66,11 @@ class File extends PPS
      *
      * @param string $data The data to append
      */
+<<<<<<< HEAD
     public function append($data): void
+=======
+    public function append(string $data): void
+>>>>>>> match
     {
         $this->_data .= $data;
     }

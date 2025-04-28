@@ -17,7 +17,11 @@
                             <div class="card mb-4">
                                 <div class="card-body">
                                     <h5 class="card-title">Total des Entrées</h5>
+<<<<<<< HEAD
                                     <p class="display-4">{{ stats.total_entries }}</p>
+=======
+                                    <p class="display-4">{{ stats.total_entries|default(0) }}</p>
+>>>>>>> match
                                 </div>
                             </div>
                         </div>
@@ -25,7 +29,11 @@
                             <div class="card mb-4">
                                 <div class="card-body">
                                     <h5 class="card-title">Joueurs Actuels</h5>
+<<<<<<< HEAD
                                     <p class="display-4">{{ stats.current_players }}</p>
+=======
+                                    <p class="display-4">{{ stats.current_players|default(0) }}</p>
+>>>>>>> match
                                 </div>
                             </div>
                         </div>
@@ -33,7 +41,11 @@
                             <div class="card mb-4">
                                 <div class="card-body">
                                     <h5 class="card-title">Joueurs Distincts</h5>
+<<<<<<< HEAD
                                     <p class="display-4">{{ stats.distinct_players }}</p>
+=======
+                                    <p class="display-4">{{ stats.distinct_players|default(0) }}</p>
+>>>>>>> match
                                 </div>
                             </div>
                         </div>
@@ -41,7 +53,11 @@
                             <div class="card mb-4">
                                 <div class="card-body">
                                     <h5 class="card-title">Nouveaux Joueurs ce Mois</h5>
+<<<<<<< HEAD
                                     <p class="display-4">{{ stats.new_players_this_month }}</p>
+=======
+                                    <p class="display-4">{{ stats.new_players_this_month|default(0) }}</p>
+>>>>>>> match
                                 </div>
                             </div>
                         </div>
@@ -49,7 +65,11 @@
                             <div class="card mb-4">
                                 <div class="card-body">
                                     <h5 class="card-title">Clubs Actifs</h5>
+<<<<<<< HEAD
                                     <p class="display-4">{{ stats.active_clubs }}</p>
+=======
+                                    <p class="display-4">{{ stats.active_clubs|default(0) }}</p>
+>>>>>>> match
                                 </div>
                             </div>
                         </div>
@@ -57,7 +77,11 @@
                             <div class="card mb-4">
                                 <div class="card-body">
                                     <h5 class="card-title">Clubs avec Joueurs</h5>
+<<<<<<< HEAD
                                     <p class="display-4">{{ stats.clubs_with_players }}</p>
+=======
+                                    <p class="display-4">{{ stats.clubs_with_players|default(0) }}</p>
+>>>>>>> match
                                 </div>
                             </div>
                         </div>
@@ -65,7 +89,11 @@
                             <div class="card mb-4">
                                 <div class="card-body">
                                     <h5 class="card-title">Durée Moyenne (jours)</h5>
+<<<<<<< HEAD
                                     <p class="display-4">{{ stats.average_duration|round(0, 'floor') }}</p>
+=======
+                                    <p class="display-4">{{ stats.average_duration|round(0, 'floor')|default(0) }}</p>
+>>>>>>> match
                                 </div>
                             </div>
                         </div>
@@ -73,7 +101,11 @@
                             <div class="card mb-4">
                                 <div class="card-body">
                                     <h5 class="card-title">Durée Maximale (jours)</h5>
+<<<<<<< HEAD
                                     <p class="display-4">{{ stats.max_duration }}</p>
+=======
+                                    <p class="display-4">{{ stats.max_duration|default(0) }}</p>
+>>>>>>> match
                                 </div>
                             </div>
                         </div>
@@ -81,7 +113,11 @@
                             <div class="card mb-4">
                                 <div class="card-body">
                                     <h5 class="card-title">Mises à jour Récentes (7 jours)</h5>
+<<<<<<< HEAD
                                     <p class="display-4">{{ stats.recent_updates }}</p>
+=======
+                                    <p class="display-4">{{ stats.recent_updates|default(0) }}</p>
+>>>>>>> match
                                 </div>
                             </div>
                         </div>
@@ -93,7 +129,15 @@
                             <div class="card">
                                 <h5 class="card-header">Répartition des Joueurs par Club</h5>
                                 <div class="card-body">
+<<<<<<< HEAD
                                     <canvas id="clubDistributionChart" height="100"></canvas>
+=======
+                                    {% if stats.club_distribution|length > 0 %}
+                                        <canvas id="clubDistributionChart" height="100"></canvas>
+                                    {% else %}
+                                        <p class="text-muted text-center">Aucune donnée disponible pour la répartition des clubs.</p>
+                                    {% endif %}
+>>>>>>> match
                                 </div>
                             </div>
                         </div>
@@ -102,11 +146,19 @@
             </div>
         </div>
     </div>
+<<<<<<< HEAD
 
+=======
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+>>>>>>> match
     {# ChartJS Script #}
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+<<<<<<< HEAD
             const clubCtx = document.getElementById('clubDistributionChart').getContext('2d');
             
             const clubData = {
@@ -141,6 +193,44 @@
                     }
                 }
             });
+=======
+            {% if stats.club_distribution|length > 0 %}
+                const clubCtx = document.getElementById('clubDistributionChart').getContext('2d');
+                
+                const clubData = {
+                    labels: [{% for club in stats.club_distribution %}'{{ club.club|escape('js') }}',{% endfor %}],
+                    datasets: [{
+                        data: [{% for club in stats.club_distribution %}{{ club.playerCount }},{% endfor %}],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.7)',
+                            'rgba(54, 162, 235, 0.7)',
+                            'rgba(255, 206, 86, 0.7)',
+                            'rgba(75, 192, 192, 0.7)',
+                            'rgba(153, 102, 255, 0.7)',
+                            'rgba(255, 159, 64, 0.7)',
+                            // Add more colors if needed
+                        ]
+                    }]
+                };
+                
+                new Chart(clubCtx, {
+                    type: 'pie',
+                    data: clubData,
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                position: 'right',
+                            },
+                            title: {
+                                display: true,
+                                text: 'Répartition des Joueurs par Club'
+                            }
+                        }
+                    }
+                });
+            {% endif %}
+>>>>>>> match
         });
     </script>
 {% endblock %}

@@ -56,8 +56,22 @@ class Styles extends WriterPart
 
         $objWriter->writeElement('office:font-face-decls');
         $objWriter->writeElement('office:styles');
+<<<<<<< HEAD
         $objWriter->writeElement('office:automatic-styles');
         $objWriter->writeElement('office:master-styles');
+=======
+        $objWriter->startElement('office:automatic-styles');
+        $objWriter->startElement('style:page-layout');
+        $objWriter->writeAttribute('style:name', 'Mpm1');
+        $objWriter->endElement(); // style:page-layout
+        $objWriter->endElement(); // office:automatic-styles
+        $objWriter->startElement('office:master-styles');
+        $objWriter->startElement('style:master-page');
+        $objWriter->writeAttribute('style:name', 'Default');
+        $objWriter->writeAttribute('style:page-layout-name', 'Mpm1');
+        $objWriter->endElement(); //style:master-page
+        $objWriter->endElement(); //office:master-styles
+>>>>>>> match
         $objWriter->endElement();
 
         return $objWriter->getData();

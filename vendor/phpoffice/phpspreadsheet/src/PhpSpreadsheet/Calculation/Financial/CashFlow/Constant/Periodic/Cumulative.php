@@ -27,6 +27,7 @@ class Cumulative
      * @param mixed $type A number 0 or 1 and indicates when payments are due:
      *                    0 or omitted    At the end of the period.
      *                    1               At the beginning of the period.
+<<<<<<< HEAD
      *
      * @return float|string
      */
@@ -38,6 +39,17 @@ class Cumulative
         $end,
         $type = FinancialConstants::PAYMENT_END_OF_PERIOD
     ) {
+=======
+     */
+    public static function interest(
+        mixed $rate,
+        mixed $periods,
+        mixed $presentValue,
+        mixed $start,
+        mixed $end,
+        mixed $type = FinancialConstants::PAYMENT_END_OF_PERIOD
+    ): string|float|int {
+>>>>>>> match
         $rate = Functions::flattenSingleValue($rate);
         $periods = Functions::flattenSingleValue($periods);
         $presentValue = Functions::flattenSingleValue($presentValue);
@@ -92,6 +104,7 @@ class Cumulative
      * @param mixed $type A number 0 or 1 and indicates when payments are due:
      *                    0 or omitted    At the end of the period.
      *                    1               At the beginning of the period.
+<<<<<<< HEAD
      *
      * @return float|string
      */
@@ -103,6 +116,17 @@ class Cumulative
         $end,
         $type = FinancialConstants::PAYMENT_END_OF_PERIOD
     ) {
+=======
+     */
+    public static function principal(
+        mixed $rate,
+        mixed $periods,
+        mixed $presentValue,
+        mixed $start,
+        mixed $end,
+        mixed $type = FinancialConstants::PAYMENT_END_OF_PERIOD
+    ): string|float|int {
+>>>>>>> match
         $rate = Functions::flattenSingleValue($rate);
         $periods = Functions::flattenSingleValue($periods);
         $presentValue = Functions::flattenSingleValue($presentValue);

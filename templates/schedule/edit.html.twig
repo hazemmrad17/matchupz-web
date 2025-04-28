@@ -1,0 +1,283 @@
+{% extends 'base.html.twig' %}
+{% block searchbar %}
+    {% include 'searchbar.html.twig' %}
+{% endblock %}
+
+{% block content %}
+    <div class="content-wrapper">
+        <div class="container-xxl flex-grow-1 container-p-y">
+            <h4 class="fw-bold py-3 mb-4">
+                <span class="text-muted fw-light">Schedules /</span> Modifier Schedule
+            </h4>
+
+            <div class="col-xl">
+                <div class="card mb-4">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">Modifier Schedule #{{ schedule.idSchedule }}</h5>
+                        <small class="text-muted float-end">Mettre à jour les détails</small>
+                    </div>
+                    <div class="card-body">
+                        {{ form_start(form, {'id': 'scheduleForm', 'novalidate': 'novalidate'}) }}
+                            <div class="mb-3">
+                                <label class="form-label" for="schedule_dateMatch">Date du Match</label>
+                                <div class="input-group input-group-merge">
+                                    <span class="input-group-text"><i class="bx bx-calendar"></i></span>
+                                    {{ form_widget(form.dateMatch, {'attr': {'class': 'form-control', 'id': 'schedule_dateMatch'}}) }}
+                                </div>
+                                <div class="text-danger mt-1" id="dateMatchError">
+                                    {{ form_errors(form.dateMatch) }}
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="schedule_startTime">Heure de Début</label>
+                                <div class="input-group input-group-merge">
+                                    <span class="input-group-text"><i class="bx bx-time"></i></span>
+                                    {{ form_widget(form.startTime, {'attr': {'class': 'form-control', 'id': 'schedule_startTime'}}) }}
+                                </div>
+                                <div class="text-danger mt-1" id="startTimeError">
+                                    {{ form_errors(form.startTime) }}
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="schedule_endTime">Heure de Fin</label>
+                                <div class="input-group input-group-merge">
+                                    <span class="input-group-text"><i class="bx bx-time"></i></span>
+                                    {{ form_widget(form.endTime, {'attr': {'class': 'form-control', 'id': 'schedule_endTime'}}) }}
+                                </div>
+                                <div class="text-danger mt-1" id="endTimeError">
+                                    {{ form_errors(form.endTime) }}
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="schedule_matchEntity">Match</label>
+                                <div class="input-group input-group-merge">
+                                    <span class="input-group-text"><i class="bx bx-football"></i></span>
+                                    {{ form_widget(form.matchEntity, {'attr': {'class': 'form-control', 'id': 'schedule_matchEntity'}}) }}
+                                </div>
+                                <div class="text-danger mt-1" id="matchEntityError">
+                                    {{ form_errors(form.matchEntity) }}
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="schedule_espaceSportif">Espace Sportif</label>
+                                <div class="input-group input-group-merge">
+                                    <span class="input-group-text"><i class="bx bx-map"></i></span>
+                                    {{ form_widget(form.espaceSportif, {'attr': {'class': 'form-control', 'id': 'schedule_espaceSportif'}}) }}
+                                </div>
+                                <div class="text-danger mt-1" id="espaceSportifError">
+                                    {{ form_errors(form.espaceSportif) }}
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="schedule_URL">URL de la vidéo YouTube (embed)</label>
+                                <div class="input-group input-group-merge">
+                                    <span class="input-group-text"><i class="bx bx-video"></i></span>
+                                    {{ form_widget(form.URL, {'attr': {'class': 'form-control', 'id': 'schedule_URL'}}) }}
+                                </div>
+                                <small class="form-text text-muted">{{ form_help(form.URL) }}</small>
+                                <div class="text-danger mt-1" id="URLError">
+                                    {{ form_errors(form.URL) }}
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="schedule_streamURL">URL de la diffusion en direct YouTube (embed)</label>
+                                <div class="input-group input-group-merge">
+                                    <span class="input-group-text"><i class="bx bx-video-recording"></i></span>
+                                    {{ form_widget(form.streamURL, {'attr': {'class': 'form-control', 'id': 'schedule_streamURL'}}) }}
+                                </div>
+                                <small class="form-text text-muted">{{ form_help(form.streamURL) }}</small>
+                                <div class="text-danger mt-1" id="streamURLError">
+                                    {{ form_errors(form.streamURL) }}
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Mettre à Jour</button>
+                            <a href="{{ path('schedule_show', {'idSchedule': schedule.idSchedule}) }}" class="btn btn-secondary">Annuler</a>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.getElementById('scheduleForm');
+            const dateMatchInput = document.getElementById('schedule_dateMatch');
+            const startTimeInput = document.getElementById('schedule_startTime');
+            const endTimeInput = document.getElementById('schedule_endTime');
+            const matchEntityInput = document.getElementById('schedule_matchEntity');
+            const espaceSportifInput = document.getElementById('schedule_espaceSportif');
+            const URLInput = document.getElementById('schedule_URL');
+            const streamURLInput = document.getElementById('schedule_streamURL');
+            const dateMatchError = document.getElementById('dateMatchError');
+            const startTimeError = document.getElementById('startTimeError');
+            const endTimeError = document.getElementById('endTimeError');
+            const matchEntityError = document.getElementById('matchEntityError');
+            const espaceSportifError = document.getElementById('espaceSportifError');
+            const URLError = document.getElementById('URLError');
+            const streamURLError = document.getElementById('streamURLError');
+
+            // Function to validate a single field (required fields)
+            function validateField(input, errorElement, fieldName, isRequired = true) {
+                let hasError = false;
+                errorElement.textContent = errorElement.textContent || '';
+                input.classList.remove('is-invalid');
+
+                if (isRequired && !input.value.trim()) {
+                    errorElement.textContent = `Le champ ${fieldName} ne peut pas être vide.`;
+                    input.classList.add('is-invalid');
+                    hasError = true;
+                }
+                return hasError;
+            }
+
+            // Function to validate dateMatch (not in the past)
+            function validateDateMatch() {
+                dateMatchError.textContent = dateMatchError.textContent || '';
+                dateMatchInput.classList.remove('is-invalid');
+
+                if (dateMatchInput.value) {
+                    const selectedDate = new Date(dateMatchInput.value);
+                    const today = new Date();
+                    today.setHours(0, 0, 0, 0); // Reset time to midnight for comparison
+
+                    if (selectedDate < today) {
+                        dateMatchError.textContent = "La date du match ne peut pas être dans le passé.";
+                        dateMatchInput.classList.add('is-invalid');
+                        return true;
+                    }
+                }
+                return false;
+            }
+
+            // Function to validate startTime and endTime
+            function validateTimeRange() {
+                endTimeError.textContent = endTimeError.textContent || '';
+                endTimeInput.classList.remove('is-invalid');
+
+                if (startTimeInput.value && endTimeInput.value) {
+                    const startTime = new Date(`1970-01-01T${startTimeInput.value}:00`);
+                    const endTime = new Date(`1970-01-01T${endTimeInput.value}:00`);
+
+                    if (endTime <= startTime) {
+                        endTimeError.textContent = "L'heure de fin doit être après l'heure de début.";
+                        endTimeInput.classList.add('is-invalid');
+                        return true;
+                    }
+                }
+                return false;
+            }
+
+            // Function to validate URL (optional, must contain /embed/ if provided)
+            function validateURL() {
+                URLError.textContent = URLError.textContent || '';
+                URLInput.classList.remove('is-invalid');
+
+                if (URLInput.value.trim()) {
+                    const embedPattern = /\/embed\//;
+                    if (!embedPattern.test(URLInput.value)) {
+                        URLError.textContent = "L'URL doit être une URL YouTube au format embed (par exemple, https://www.youtube.com/embed/VIDEO_ID).";
+                        URLInput.classList.add('is-invalid');
+                        return true;
+                    }
+                }
+                return false;
+            }
+
+            // Function to validate streamURL (optional, must contain /embed/ if provided)
+            function validateStreamURL() {
+                streamURLError.textContent = streamURLError.textContent || '';
+                streamURLInput.classList.remove('is-invalid');
+
+                if (streamURLInput.value.trim()) {
+                    const embedPattern = /\/embed\//;
+                    if (!embedPattern.test(streamURLInput.value)) {
+                        streamURLError.textContent = "L'URL de diffusion en direct doit être une URL YouTube au format embed (par exemple, https://www.youtube.com/embed/VIDEO_ID).";
+                        streamURLInput.classList.add('is-invalid');
+                        return true;
+                    }
+                }
+                return false;
+            }
+
+            // Real-time validation on input/change
+            dateMatchInput.addEventListener('input', function () {
+                validateField(dateMatchInput, dateMatchError, 'Date du Match');
+                validateDateMatch();
+            });
+
+            startTimeInput.addEventListener('input', function () {
+                validateField(startTimeInput, startTimeError, 'Heure de Début');
+                validateTimeRange();
+            });
+
+            endTimeInput.addEventListener('input', function () {
+                validateField(endTimeInput, endTimeError, 'Heure de Fin');
+                validateTimeRange();
+            });
+
+            matchEntityInput.addEventListener('change', function () {
+                validateField(matchEntityInput, matchEntityError, 'Match');
+            });
+
+            espaceSportifInput.addEventListener('change', function () {
+                validateField(espaceSportifInput, espaceSportifError, 'Espace Sportif');
+            });
+
+            URLInput.addEventListener('input', function () {
+                validateField(URLInput, URLError, 'URL de la vidéo YouTube', false); // Not required
+                validateURL();
+            });
+
+            streamURLInput.addEventListener('input', function () {
+                validateField(streamURLInput, streamURLError, 'URL de la diffusion en direct YouTube', false); // Not required
+                validateStreamURL();
+            });
+
+            // Validate on form submission
+            form.addEventListener('submit', function (event) {
+                let hasError = false;
+
+                // Validate all fields
+                if (validateField(dateMatchInput, dateMatchError, 'Date du Match')) {
+                    hasError = true;
+                }
+                if (validateField(startTimeInput, startTimeError, 'Heure de Début')) {
+                    hasError = true;
+                }
+                if (validateField(endTimeInput, endTimeError, 'Heure de Fin')) {
+                    hasError = true;
+                }
+                if (validateField(matchEntityInput, matchEntityError, 'Match')) {
+                    hasError = true;
+                }
+                if (validateField(espaceSportifInput, espaceSportifError, 'Espace Sportif')) {
+                    hasError = true;
+                }
+                if (validateField(URLInput, URLError, 'URL de la vidéo YouTube', false)) {
+                    hasError = true;
+                }
+                if (validateField(streamURLInput, streamURLError, 'URL de la diffusion en direct YouTube', false)) {
+                    hasError = true;
+                }
+                if (validateDateMatch()) {
+                    hasError = true;
+                }
+                if (validateTimeRange()) {
+                    hasError = true;
+                }
+                if (validateURL()) {
+                    hasError = true;
+                }
+                if (validateStreamURL()) {
+                    hasError = true;
+                }
+
+                if (hasError) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+            });
+        });
+    </script>
+{% endblock %}

@@ -6,13 +6,21 @@ use PhpOffice\PhpSpreadsheet\Calculation\ArrayEnabled;
 use PhpOffice\PhpSpreadsheet\Calculation\Exception;
 use PhpOffice\PhpSpreadsheet\Calculation\Functions;
 use PhpOffice\PhpSpreadsheet\Calculation\Information\ExcelError;
+<<<<<<< HEAD
+=======
+use PhpOffice\PhpSpreadsheet\Shared\StringHelper;
+>>>>>>> match
 
 abstract class ConvertBase
 {
     use ArrayEnabled;
 
+<<<<<<< HEAD
     /** @param mixed $value */
     protected static function validateValue($value): string
+=======
+    protected static function validateValue(mixed $value): string
+>>>>>>> match
     {
         if (is_bool($value)) {
             if (Functions::getCompatibilityMode() !== Functions::COMPATIBILITY_OPENOFFICE) {
@@ -27,11 +35,18 @@ abstract class ConvertBase
             }
         }
 
+<<<<<<< HEAD
         return strtoupper((string) $value);
     }
 
     /** @param mixed $places */
     protected static function validatePlaces($places = null): ?int
+=======
+        return strtoupper(StringHelper::convertToString($value));
+    }
+
+    protected static function validatePlaces(mixed $places = null): ?int
+>>>>>>> match
     {
         if ($places === null) {
             return $places;

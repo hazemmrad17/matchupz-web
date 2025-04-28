@@ -8,6 +8,7 @@ class Security
 {
     /**
      * LockRevision.
+<<<<<<< HEAD
      *
      * @var bool
      */
@@ -40,6 +41,30 @@ class Security
      * @var string
      */
     private $workbookPassword = '';
+=======
+     */
+    private bool $lockRevision = false;
+
+    /**
+     * LockStructure.
+     */
+    private bool $lockStructure = false;
+
+    /**
+     * LockWindows.
+     */
+    private bool $lockWindows = false;
+
+    /**
+     * RevisionsPassword.
+     */
+    private string $revisionsPassword = '';
+
+    /**
+     * WorkbookPassword.
+     */
+    private string $workbookPassword = '';
+>>>>>>> match
 
     /**
      * Create a new Document Security instance.
@@ -53,9 +78,15 @@ class Security
      */
     public function isSecurityEnabled(): bool
     {
+<<<<<<< HEAD
         return  $this->lockRevision ||
                 $this->lockStructure ||
                 $this->lockWindows;
+=======
+        return $this->lockRevision
+                || $this->lockStructure
+                || $this->lockWindows;
+>>>>>>> match
     }
 
     public function getLockRevision(): bool
@@ -108,12 +139,19 @@ class Security
     /**
      * Set RevisionsPassword.
      *
+<<<<<<< HEAD
      * @param string $password
+=======
+>>>>>>> match
      * @param bool $alreadyHashed If the password has already been hashed, set this to true
      *
      * @return $this
      */
+<<<<<<< HEAD
     public function setRevisionsPassword(?string $password, bool $alreadyHashed = false)
+=======
+    public function setRevisionsPassword(?string $password, bool $alreadyHashed = false): static
+>>>>>>> match
     {
         if ($password !== null) {
             if (!$alreadyHashed) {
@@ -133,12 +171,19 @@ class Security
     /**
      * Set WorkbookPassword.
      *
+<<<<<<< HEAD
      * @param string $password
+=======
+>>>>>>> match
      * @param bool $alreadyHashed If the password has already been hashed, set this to true
      *
      * @return $this
      */
+<<<<<<< HEAD
     public function setWorkbookPassword(?string $password, bool $alreadyHashed = false)
+=======
+    public function setWorkbookPassword(?string $password, bool $alreadyHashed = false): static
+>>>>>>> match
     {
         if ($password !== null) {
             if (!$alreadyHashed) {

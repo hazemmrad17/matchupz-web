@@ -70,7 +70,11 @@ class Ceiling
      *         If an array of numbers is passed as an argument, then the returned result will also be an array
      *            with the same dimensions
      */
+<<<<<<< HEAD
     public static function math($number, $significance = null, $mode = 0)
+=======
+    public static function math(mixed $number, mixed $significance = null, $mode = 0): array|string|float
+>>>>>>> match
     {
         if (is_array($number) || is_array($significance) || is_array($mode)) {
             return self::evaluateArrayArguments([self::class, __FUNCTION__], $number, $significance, $mode);
@@ -111,7 +115,11 @@ class Ceiling
      *         If an array of numbers is passed as an argument, then the returned result will also be an array
      *            with the same dimensions
      */
+<<<<<<< HEAD
     public static function precise($number, $significance = 1)
+=======
+    public static function precise(mixed $number, $significance = 1): array|string|float
+>>>>>>> match
     {
         if (is_array($number) || is_array($significance)) {
             return self::evaluateArrayArguments([self::class, __FUNCTION__], $number, $significance);
@@ -137,15 +145,24 @@ class Ceiling
      */
     private static function ceilingMathTest(float $significance, float $number, int $mode): bool
     {
+<<<<<<< HEAD
         return ((float) $significance < 0) || ((float) $number < 0 && !empty($mode));
+=======
+        return ($significance < 0) || ($number < 0 && !empty($mode));
+>>>>>>> match
     }
 
     /**
      * Avoid Scrutinizer problems concerning complexity.
+<<<<<<< HEAD
      *
      * @return float|string
      */
     private static function argumentsOk(float $number, float $significance)
+=======
+     */
+    private static function argumentsOk(float $number, float $significance): float|string
+>>>>>>> match
     {
         if (empty($number * $significance)) {
             return 0.0;

@@ -6,10 +6,31 @@ use PhpOffice\PhpSpreadsheet\Calculation\Calculation;
 
 class FormulaTranslator
 {
+<<<<<<< HEAD
     public static function convertToExcelAddressValue(string $openOfficeAddress): string
     {
         $excelAddress = $openOfficeAddress;
 
+=======
+    private static function replaceQuotedPeriod(string $value): string
+    {
+        $value2 = '';
+        $quoted = false;
+        foreach (mb_str_split($value, 1, 'UTF-8') as $char) {
+            if ($char === "'") {
+                $quoted = !$quoted;
+            } elseif ($char === '.' && $quoted) {
+                $char = "\u{fffe}";
+            }
+            $value2 .= $char;
+        }
+
+        return $value2;
+    }
+
+    public static function convertToExcelAddressValue(string $openOfficeAddress): string
+    {
+>>>>>>> match
         // Cell range 3-d reference
         // As we don't support 3-d ranges, we're just going to take a quick and dirty approach
         //  and assume that the second worksheet reference is the same as the first
@@ -20,6 +41,10 @@ class FormulaTranslator
                 '/\$?([^\.]+)\.([^\.]+)/miu', // Cell reference in another sheet
                 '/\.([^\.]+):\.([^\.]+)/miu', // Cell range reference
                 '/\.([^\.]+)/miu', // Simple cell reference
+<<<<<<< HEAD
+=======
+                '/\x{FFFE}/miu', // restore quoted periods
+>>>>>>> match
             ],
             [
                 '$1!$2:$4',
@@ -27,8 +52,14 @@ class FormulaTranslator
                 '$1!$2',
                 '$1:$2',
                 '$1',
+<<<<<<< HEAD
             ],
             $excelAddress
+=======
+                '.',
+            ],
+            self::replaceQuotedPeriod($openOfficeAddress)
+>>>>>>> match
         );
 
         return $excelAddress;
@@ -52,14 +83,24 @@ class FormulaTranslator
                         '/\[\$?([^\.]+)\.([^\.]+)\]/miu', // Cell reference in another sheet
                         '/\[\.([^\.]+):\.([^\.]+)\]/miu', // Cell range reference
                         '/\[\.([^\.]+)\]/miu', // Simple cell reference
+<<<<<<< HEAD
+=======
+                        '/\x{FFFE}/miu', // restore quoted periods
+>>>>>>> match
                     ],
                     [
                         '$1!$2:$3',
                         '$1!$2',
                         '$1:$2',
                         '$1',
+<<<<<<< HEAD
                     ],
                     $value
+=======
+                        '.',
+                    ],
+                    self::replaceQuotedPeriod($value)
+>>>>>>> match
                 );
                 // Convert references to defined names/formulae
                 $value = str_replace('$$', '', $value);

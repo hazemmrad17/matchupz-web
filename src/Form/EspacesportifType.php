@@ -3,24 +3,33 @@
 namespace App\Form;
 
 use App\Entity\Espacesportif;
+<<<<<<< HEAD
 use App\Repository\EspacesportifRepository;
+=======
+>>>>>>> match
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+<<<<<<< HEAD
 use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\Validator\Constraints\Callback;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
+=======
+>>>>>>> match
 
 class EspacesportifType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+<<<<<<< HEAD
         // Get the repository from options
         $repository = $options['espace_repository'];
 
+=======
+>>>>>>> match
         $builder
             ->add('nom_espace', TextType::class, [
                 'label' => 'Nom de l\'Espace',
@@ -35,6 +44,7 @@ class EspacesportifType extends AbstractType
                 'row_attr' => [
                     'class' => 'mb-3',
                 ],
+<<<<<<< HEAD
                 'constraints' => [
                     new Regex([
                         'pattern' => '/^[a-zA-Z\s]+$/',
@@ -55,6 +65,8 @@ class EspacesportifType extends AbstractType
                         },
                     ]),
                 ],
+=======
+>>>>>>> match
             ])
             ->add('adresse', TextType::class, [
                 'label' => 'Adresse',
@@ -106,9 +118,17 @@ class EspacesportifType extends AbstractType
                     'class' => 'mb-3',
                 ],
             ])
+<<<<<<< HEAD
             ->add('nombre_reservations', NumberType::class, [
                 'label' => 'Nombre de Réservations',
                 'mapped' => false,
+=======
+            // Add a field to display related statistics (e.g., number of reservations)
+            // This is a read-only field, as statistics are typically calculated, not user-editable
+            ->add('nombre_reservations', NumberType::class, [
+                'label' => 'Nombre de Réservations',
+                'mapped' => false, // This field is not mapped to the entity
+>>>>>>> match
                 'required' => false,
                 'disabled' => true,
                 'attr' => [
@@ -121,7 +141,11 @@ class EspacesportifType extends AbstractType
                 'row_attr' => [
                     'class' => 'mb-3',
                 ],
+<<<<<<< HEAD
                 'data' => $options['data'] ? $options['data']->getReservations()->count() : 0,
+=======
+                'data' => $options['data'] ? $options['data']->getReservations()->count() : 0, // Calculate the number of reservations
+>>>>>>> match
             ])
         ;
     }
@@ -130,10 +154,14 @@ class EspacesportifType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Espacesportif::class,
+<<<<<<< HEAD
             'espace_repository' => null,
         ]);
 
         $resolver->setRequired('espace_repository');
         $resolver->setAllowedTypes('espace_repository', [EspacesportifRepository::class]);
+=======
+        ]);
+>>>>>>> match
     }
 }

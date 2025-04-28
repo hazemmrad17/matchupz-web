@@ -366,6 +366,7 @@ class JoueurController extends AbstractController
         ]);
     }
 
+<<<<<<< HEAD
     #[Route('/{id}', name: 'joueur_show', methods: ['GET'])]
     public function show(
         int $id,
@@ -374,6 +375,14 @@ class JoueurController extends AbstractController
         EvaluationPhysiqueRepository $evaluationRepository
     ): Response {
         $joueur = $joueurRepository->find($id);
+=======
+    #[Route('/{id}', name: 'joueur_show', methods: ['GET'], requirements: ['id' => '\d+'])]
+    public function show(
+        ?Joueur $joueur,
+        PerformanceJoueurRepository $performanceRepository,
+        EvaluationPhysiqueRepository $evaluationRepository
+    ): Response {
+>>>>>>> match
         if (!$joueur) {
             throw $this->createNotFoundException('Joueur not found');
         }
@@ -566,4 +575,16 @@ class JoueurController extends AbstractController
             'message' => 'Player Tracking is currently under maintenance. Please check back later.',
         ]);
     }
+<<<<<<< HEAD
+=======
+    
+    #[Route('/formations', name: 'football_layout')]
+    public function layout(JoueurRepository $joueurRepository): Response
+    {
+        $joueurs = $joueurRepository->findBy(['sport' => 1, 'statut' => 'Actif']);
+        return $this->render('joueur/football_layout.html.twig', [
+            'joueurs' => $joueurs,
+        ]);
+    }
+>>>>>>> match
 }

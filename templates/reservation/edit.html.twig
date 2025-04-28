@@ -1,9 +1,12 @@
 {% extends 'base.html.twig' %}
 
+<<<<<<< HEAD
 {% block searchbar %}
     {% include 'searchbar.html.twig' %}
 {% endblock %}
 
+=======
+>>>>>>> match
 {% block content %}
     <div class="content-wrapper">
         <div class="container-xxl flex-grow-1 container-p-y">
@@ -22,10 +25,14 @@
                             <div class="alert alert-danger">{{ message }}</div>
                         {% endfor %}
 
+<<<<<<< HEAD
                         {# Display global form errors #}
                         {{ form_errors(form) }}
 
                         {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+=======
+                        {{ form_start(form) }}
+>>>>>>> match
                             <div class="mb-3">
                                 <label class="form-label" for="espacesportif">Lieu Sportif</label>
                                 <div class="input-group input-group-merge">

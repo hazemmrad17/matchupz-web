@@ -7,6 +7,10 @@ use PhpOffice\PhpSpreadsheet\Calculation\Functions;
 use PhpOffice\PhpSpreadsheet\Calculation\Information\ExcelError;
 use PhpOffice\PhpSpreadsheet\Cell\Cell;
 use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
+<<<<<<< HEAD
+=======
+use PhpOffice\PhpSpreadsheet\Worksheet\Validations;
+>>>>>>> match
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
 class Offset
@@ -24,16 +28,25 @@ class Offset
      * @param null|string $cellAddress The reference from which you want to base the offset.
      *                                     Reference must refer to a cell or range of adjacent cells;
      *                                     otherwise, OFFSET returns the #VALUE! error value.
+<<<<<<< HEAD
      * @param mixed $rows The number of rows, up or down, that you want the upper-left cell to refer to.
+=======
+     * @param int $rows The number of rows, up or down, that you want the upper-left cell to refer to.
+>>>>>>> match
      *                        Using 5 as the rows argument specifies that the upper-left cell in the
      *                        reference is five rows below reference. Rows can be positive (which means
      *                        below the starting reference) or negative (which means above the starting
      *                        reference).
+<<<<<<< HEAD
      * @param mixed $columns The number of columns, to the left or right, that you want the upper-left cell
+=======
+     * @param int $columns The number of columns, to the left or right, that you want the upper-left cell
+>>>>>>> match
      *                           of the result to refer to. Using 5 as the cols argument specifies that the
      *                           upper-left cell in the reference is five columns to the right of reference.
      *                           Cols can be positive (which means to the right of the starting reference)
      *                           or negative (which means to the left of the starting reference).
+<<<<<<< HEAD
      * @param mixed $height The height, in number of rows, that you want the returned reference to be.
      *                          Height must be a positive number.
      * @param mixed $width The width, in number of columns, that you want the returned reference to be.
@@ -46,6 +59,24 @@ class Offset
         $rows = Functions::flattenSingleValue($rows);
         $columns = Functions::flattenSingleValue($columns);
         $height = Functions::flattenSingleValue($height);
+=======
+     * @param ?int $height The height, in number of rows, that you want the returned reference to be.
+     *                          Height must be a positive number.
+     * @param ?int $width The width, in number of columns, that you want the returned reference to be.
+     *                         Width must be a positive number.
+     *
+     * @return array|string An array containing a cell or range of cells, or a string on error
+     */
+    public static function OFFSET(?string $cellAddress = null, $rows = 0, $columns = 0, $height = null, $width = null, ?Cell $cell = null): string|array
+    {
+        /** @var int */
+        $rows = Functions::flattenSingleValue($rows);
+        /** @var int */
+        $columns = Functions::flattenSingleValue($columns);
+        /** @var int */
+        $height = Functions::flattenSingleValue($height);
+        /** @var int */
+>>>>>>> match
         $width = Functions::flattenSingleValue($width);
 
         if ($cellAddress === null || $cellAddress === '') {
@@ -55,6 +86,13 @@ class Offset
         if (!is_object($cell)) {
             return ExcelError::REF();
         }
+<<<<<<< HEAD
+=======
+        $sheet = $cell->getParent()?->getParent(); // worksheet
+        if ($sheet !== null) {
+            $cellAddress = Validations::definedNameToCoordinate($cellAddress, $sheet);
+        }
+>>>>>>> match
 
         [$cellAddress, $worksheet] = self::extractWorksheet($cellAddress, $cell);
 
@@ -62,12 +100,20 @@ class Offset
         if (strpos($cellAddress, ':')) {
             [$startCell, $endCell] = explode(':', $cellAddress);
         }
+<<<<<<< HEAD
         [$startCellColumn, $startCellRow] = Coordinate::coordinateFromString($startCell);
         [$endCellColumn, $endCellRow] = Coordinate::coordinateFromString($endCell);
 
         $startCellRow += $rows;
         $startCellColumn = Coordinate::columnIndexFromString($startCellColumn) - 1;
         $startCellColumn += $columns;
+=======
+        [$startCellColumn, $startCellRow] = Coordinate::indexesFromString($startCell);
+        [, $endCellRow, $endCellColumn] = Coordinate::indexesFromString($endCell);
+
+        $startCellRow += $rows;
+        $startCellColumn += $columns - 1;
+>>>>>>> match
 
         if (($startCellRow <= 0) || ($startCellColumn < 0)) {
             return ExcelError::REF();
@@ -91,8 +137,12 @@ class Offset
         return self::extractRequiredCells($worksheet, $cellAddress);
     }
 
+<<<<<<< HEAD
     /** @return mixed */
     private static function extractRequiredCells(?Worksheet $worksheet, string $cellAddress)
+=======
+    private static function extractRequiredCells(?Worksheet $worksheet, string $cellAddress): array
+>>>>>>> match
     {
         return Calculation::getInstance($worksheet !== null ? $worksheet->getParent() : null)
             ->extractCellRange($cellAddress, $worksheet, false);
@@ -103,9 +153,14 @@ class Offset
         $cellAddress = self::assessCellAddress($cellAddress ?? '', $cell);
 
         $sheetName = '';
+<<<<<<< HEAD
         if (strpos($cellAddress, '!') !== false) {
             [$sheetName, $cellAddress] = Worksheet::extractSheetTitle($cellAddress, true);
             $sheetName = trim($sheetName, "'");
+=======
+        if (str_contains($cellAddress, '!')) {
+            [$sheetName, $cellAddress] = Worksheet::extractSheetTitle($cellAddress, true, true);
+>>>>>>> match
         }
 
         $worksheet = ($sheetName !== '')
@@ -125,8 +180,13 @@ class Offset
     }
 
     /**
+<<<<<<< HEAD
      * @param mixed $width
      * @param mixed $columns
+=======
+     * @param null|object|scalar $width
+     * @param scalar $columns
+>>>>>>> match
      */
     private static function adjustEndCellColumnForWidth(string $endCellColumn, $width, int $startCellColumn, $columns): int
     {
@@ -141,11 +201,18 @@ class Offset
     }
 
     /**
+<<<<<<< HEAD
      * @param mixed $height
      * @param mixed $rows
      * @param mixed $endCellRow
      */
     private static function adustEndCellRowForHeight($height, int $startCellRow, $rows, $endCellRow): int
+=======
+     * @param null|object|scalar $height
+     * @param scalar $rows
+     */
+    private static function adustEndCellRowForHeight($height, int $startCellRow, $rows, int $endCellRow): int
+>>>>>>> match
     {
         if (($height !== null) && (!is_object($height))) {
             $endCellRow = $startCellRow + (int) $height - 1;

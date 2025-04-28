@@ -35,7 +35,11 @@ class BesselI
      *         If an array of numbers is passed as an argument, then the returned result will also be an array
      *            with the same dimensions
      */
+<<<<<<< HEAD
     public static function BESSELI($x, $ord)
+=======
+    public static function BESSELI(mixed $x, mixed $ord): array|string|float
+>>>>>>> match
     {
         if (is_array($x) || is_array($ord)) {
             return self::evaluateArrayArguments([self::class, __FUNCTION__], $x, $ord);
@@ -59,6 +63,7 @@ class BesselI
 
     private static function calculate(float $x, int $ord): float
     {
+<<<<<<< HEAD
         // special cases
         switch ($ord) {
             case 0:
@@ -68,6 +73,13 @@ class BesselI
         }
 
         return self::besselI2($x, $ord);
+=======
+        return match ($ord) {
+            0 => self::besselI0($x),
+            1 => self::besselI1($x),
+            default => self::besselI2($x, $ord),
+        };
+>>>>>>> match
     }
 
     private static function besselI0(float $x): float
@@ -85,8 +97,13 @@ class BesselI
         $y = 3.75 / $ax;
 
         return (exp($ax) / sqrt($ax)) * (0.39894228 + $y * (0.1328592e-1 + $y * (0.225319e-2 + $y * (-0.157565e-2
+<<<<<<< HEAD
                             + $y * (0.916281e-2 + $y * (-0.2057706e-1 + $y * (0.2635537e-1 +
                                         $y * (-0.1647633e-1 + $y * 0.392377e-2))))))));
+=======
+                            + $y * (0.916281e-2 + $y * (-0.2057706e-1 + $y * (0.2635537e-1
+                                        + $y * (-0.1647633e-1 + $y * 0.392377e-2))))))));
+>>>>>>> match
     }
 
     private static function besselI1(float $x): float
@@ -96,21 +113,32 @@ class BesselI
         if ($ax < 3.75) {
             $y = $x / 3.75;
             $y = $y * $y;
+<<<<<<< HEAD
             $ans = $ax * (0.5 + $y * (0.87890594 + $y * (0.51498869 + $y * (0.15084934 + $y * (0.2658733e-1 +
                                     $y * (0.301532e-2 + $y * 0.32411e-3))))));
+=======
+            $ans = $ax * (0.5 + $y * (0.87890594 + $y * (0.51498869 + $y * (0.15084934 + $y * (0.2658733e-1
+                                    + $y * (0.301532e-2 + $y * 0.32411e-3))))));
+>>>>>>> match
 
             return ($x < 0.0) ? -$ans : $ans;
         }
 
         $y = 3.75 / $ax;
         $ans = 0.2282967e-1 + $y * (-0.2895312e-1 + $y * (0.1787654e-1 - $y * 0.420059e-2));
+<<<<<<< HEAD
         $ans = 0.39894228 + $y * (-0.3988024e-1 + $y * (-0.362018e-2 + $y * (0.163801e-2 +
                         $y * (-0.1031555e-1 + $y * $ans))));
+=======
+        $ans = 0.39894228 + $y * (-0.3988024e-1 + $y * (-0.362018e-2 + $y * (0.163801e-2
+                        + $y * (-0.1031555e-1 + $y * $ans))));
+>>>>>>> match
         $ans *= exp($ax) / sqrt($ax);
 
         return ($x < 0.0) ? -$ans : $ans;
     }
 
+<<<<<<< HEAD
     /**
      * Sop to Scrutinizer.
      *
@@ -121,6 +149,11 @@ class BesselI
     private static function besselI2(float $x, int $ord): float
     {
         if ($x === self::$zeroPointZero) {
+=======
+    private static function besselI2(float $x, int $ord): float
+    {
+        if ($x === 0.0) {
+>>>>>>> match
             return 0.0;
         }
 

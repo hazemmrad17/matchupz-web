@@ -23,7 +23,11 @@ class IntClass
      *         If an array of numbers is passed as the argument, then the returned result will also be an array
      *            with the same dimensions
      */
+<<<<<<< HEAD
     public static function evaluate($number)
+=======
+    public static function evaluate($number): array|string|int
+>>>>>>> match
     {
         if (is_array($number)) {
             return self::evaluateSingleArgumentArray([self::class, __FUNCTION__], $number);

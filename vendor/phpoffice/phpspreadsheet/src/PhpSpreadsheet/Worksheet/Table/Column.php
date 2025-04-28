@@ -12,6 +12,7 @@ class Column
 {
     /**
      * Table Column Index.
+<<<<<<< HEAD
      *
      * @var string
      */
@@ -58,14 +59,54 @@ class Column
      * @var null|Table
      */
     private $table;
+=======
+     */
+    private string $columnIndex;
+
+    /**
+     * Show Filter Button.
+     */
+    private bool $showFilterButton = true;
+
+    /**
+     * Total Row Label.
+     */
+    private ?string $totalsRowLabel = null;
+
+    /**
+     * Total Row Function.
+     */
+    private ?string $totalsRowFunction = null;
+
+    /**
+     * Total Row Formula.
+     */
+    private ?string $totalsRowFormula = null;
+
+    /**
+     * Column Formula.
+     */
+    private ?string $columnFormula = null;
+
+    /**
+     * Table.
+     */
+    private ?Table $table;
+>>>>>>> match
 
     /**
      * Create a new Column.
      *
      * @param string $column Column (e.g. A)
+<<<<<<< HEAD
      * @param Table $table Table for this column
      */
     public function __construct($column, ?Table $table = null)
+=======
+     * @param ?Table $table Table for this column
+     */
+    public function __construct(string $column, ?Table $table = null)
+>>>>>>> match
     {
         $this->columnIndex = $column;
         $this->table = $table;
@@ -84,7 +125,11 @@ class Column
      *
      * @param string $column Column (e.g. A)
      */
+<<<<<<< HEAD
     public function setColumnIndex($column): self
+=======
+    public function setColumnIndex(string $column): self
+>>>>>>> match
     {
         // Uppercase coordinate
         $column = strtoupper($column);
@@ -230,7 +275,11 @@ class Column
         foreach ($worksheet->getCoordinates(false) as $coordinate) {
             $cell = $worksheet->getCell($coordinate);
             if ($cell->getDataType() === DataType::TYPE_FORMULA) {
+<<<<<<< HEAD
                 $formula = $cell->getValue();
+=======
+                $formula = $cell->getValueString();
+>>>>>>> match
                 if (preg_match($pattern, $formula) === 1) {
                     $formula = preg_replace($pattern, "[$1{$newTitle}]", $formula);
                     $cell->setValueExplicit($formula, DataType::TYPE_FORMULA);
@@ -246,8 +295,13 @@ class Column
         foreach ($spreadsheet->getNamedFormulae() as $namedFormula) {
             $formula = $namedFormula->getValue();
             if (preg_match($pattern, $formula) === 1) {
+<<<<<<< HEAD
                 $formula = preg_replace($pattern, "[$1{$newTitle}]", $formula);
                 $namedFormula->setValue($formula); // @phpstan-ignore-line
+=======
+                $formula = preg_replace($pattern, "[$1{$newTitle}]", $formula) ?? '';
+                $namedFormula->setValue($formula);
+>>>>>>> match
             }
         }
     }

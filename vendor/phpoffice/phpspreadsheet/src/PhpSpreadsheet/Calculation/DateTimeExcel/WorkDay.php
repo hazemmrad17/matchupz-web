@@ -2,6 +2,10 @@
 
 namespace PhpOffice\PhpSpreadsheet\Calculation\DateTimeExcel;
 
+<<<<<<< HEAD
+=======
+use DateTime;
+>>>>>>> match
 use PhpOffice\PhpSpreadsheet\Calculation\ArrayEnabled;
 use PhpOffice\PhpSpreadsheet\Calculation\Exception;
 use PhpOffice\PhpSpreadsheet\Calculation\Functions;
@@ -30,12 +34,20 @@ class WorkDay
      *                         Or can be an array of int values
      * @param null|mixed $dateArgs An array of dates (such as holidays) to exclude from the calculation
      *
+<<<<<<< HEAD
      * @return array|mixed Excel date/time serial value, PHP date/time serial value or PHP date/time object,
+=======
+     * @return array|DateTime|float|int|string Excel date/time serial value, PHP date/time serial value or PHP date/time object,
+>>>>>>> match
      *                        depending on the value of the ReturnDateType flag
      *         If an array of values is passed for the $startDate or $endDays,arguments, then the returned result
      *            will also be an array with matching dimensions
      */
+<<<<<<< HEAD
     public static function date($startDate, $endDays, ...$dateArgs)
+=======
+    public static function date(mixed $startDate, array|int|string $endDays, mixed ...$dateArgs): array|float|int|DateTime|string
+>>>>>>> match
     {
         if (is_array($startDate) || is_array($endDays)) {
             return self::evaluateArrayArgumentsSubset(
@@ -71,10 +83,15 @@ class WorkDay
 
     /**
      * Use incrementing logic to determine Workday.
+<<<<<<< HEAD
      *
      * @return mixed
      */
     private static function incrementing(float $startDate, int $endDays, array $holidayArray)
+=======
+     */
+    private static function incrementing(float $startDate, int $endDays, array $holidayArray): float|int|DateTime
+>>>>>>> match
     {
         //    Adjust the start date if it falls over a weekend
         $startDoW = self::getWeekDay($startDate, 3);
@@ -132,10 +149,15 @@ class WorkDay
 
     /**
      * Use decrementing logic to determine Workday.
+<<<<<<< HEAD
      *
      * @return mixed
      */
     private static function decrementing(float $startDate, int $endDays, array $holidayArray)
+=======
+     */
+    private static function decrementing(float $startDate, int $endDays, array $holidayArray): float|int|DateTime
+>>>>>>> match
     {
         //    Adjust the start date if it falls over a weekend
         $startDoW = self::getWeekDay($startDate, 3);

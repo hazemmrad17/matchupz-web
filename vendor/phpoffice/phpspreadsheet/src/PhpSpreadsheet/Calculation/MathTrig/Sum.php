@@ -5,7 +5,10 @@ namespace PhpOffice\PhpSpreadsheet\Calculation\MathTrig;
 use PhpOffice\PhpSpreadsheet\Calculation\Functions;
 use PhpOffice\PhpSpreadsheet\Calculation\Information\ErrorValue;
 use PhpOffice\PhpSpreadsheet\Calculation\Information\ExcelError;
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\Information\Value;
+=======
+>>>>>>> match
 
 class Sum
 {
@@ -18,10 +21,15 @@ class Sum
      *        SUM(value1[,value2[, ...]])
      *
      * @param mixed ...$args Data values
+<<<<<<< HEAD
      *
      * @return float|string
      */
     public static function sumIgnoringStrings(...$args)
+=======
+     */
+    public static function sumIgnoringStrings(mixed ...$args): float|int|string
+>>>>>>> match
     {
         $returnValue = 0;
 
@@ -47,20 +55,29 @@ class Sum
      *        SUM(value1[,value2[, ...]])
      *
      * @param mixed ...$args Data values
+<<<<<<< HEAD
      *
      * @return float|string
      */
     public static function sumErroringStrings(...$args)
+=======
+     */
+    public static function sumErroringStrings(mixed ...$args): float|int|string|array
+>>>>>>> match
     {
         $returnValue = 0;
         // Loop through the arguments
         $aArgs = Functions::flattenArrayIndexed($args);
         foreach ($aArgs as $k => $arg) {
             // Is it a numeric value?
+<<<<<<< HEAD
             if (is_numeric($arg) || empty($arg)) {
                 if (is_string($arg)) {
                     $arg = (int) $arg;
                 }
+=======
+            if (is_numeric($arg)) {
+>>>>>>> match
                 $returnValue += $arg;
             } elseif (is_bool($arg)) {
                 $returnValue += (int) $arg;
@@ -83,9 +100,15 @@ class Sum
      *
      * @param mixed ...$args Data values
      *
+<<<<<<< HEAD
      * @return float|string The result, or a string containing an error
      */
     public static function product(...$args)
+=======
+     * @return float|int|string The result, or a string containing an error
+     */
+    public static function product(mixed ...$args): string|int|float
+>>>>>>> match
     {
         $arrayList = $args;
 

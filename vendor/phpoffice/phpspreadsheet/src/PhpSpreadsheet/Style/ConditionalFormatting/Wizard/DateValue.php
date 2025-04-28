@@ -46,8 +46,12 @@ class DateValue extends WizardAbstract implements WizardInterface
         Conditional::TIMEPERIOD_NEXT_MONTH => 'AND(MONTH(%s)=MONTH(EDATE(TODAY(),0+1)),YEAR(%s)=YEAR(EDATE(TODAY(),0+1)))',
     ];
 
+<<<<<<< HEAD
     /** @var string */
     protected $operator;
+=======
+    protected string $operator;
+>>>>>>> match
 
     public function __construct(string $cellRange)
     {
@@ -95,10 +99,16 @@ class DateValue extends WizardAbstract implements WizardInterface
     }
 
     /**
+<<<<<<< HEAD
      * @param string $methodName
      * @param mixed[] $arguments
      */
     public function __call($methodName, $arguments): self
+=======
+     * @param mixed[] $arguments
+     */
+    public function __call(string $methodName, array $arguments): self
+>>>>>>> match
     {
         if (!isset(self::MAGIC_OPERATIONS[$methodName])) {
             throw new Exception('Invalid Operation for Date Value CF Rule Wizard');

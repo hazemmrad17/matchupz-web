@@ -22,10 +22,14 @@ class Errors extends WizardAbstract implements WizardInterface
         Wizard::ERRORS => 'ISERROR(%s)',
     ];
 
+<<<<<<< HEAD
     /**
      * @var bool
      */
     protected $inverse;
+=======
+    protected bool $inverse;
+>>>>>>> match
 
     public function __construct(string $cellRange, bool $inverse = false)
     {
@@ -64,8 +68,13 @@ class Errors extends WizardAbstract implements WizardInterface
     public static function fromConditional(Conditional $conditional, string $cellRange = 'A1'): WizardInterface
     {
         if (
+<<<<<<< HEAD
             $conditional->getConditionType() !== Conditional::CONDITION_CONTAINSERRORS &&
             $conditional->getConditionType() !== Conditional::CONDITION_NOTCONTAINSERRORS
+=======
+            $conditional->getConditionType() !== Conditional::CONDITION_CONTAINSERRORS
+            && $conditional->getConditionType() !== Conditional::CONDITION_NOTCONTAINSERRORS
+>>>>>>> match
         ) {
             throw new Exception('Conditional is not an Errors CF Rule conditional');
         }
@@ -79,10 +88,16 @@ class Errors extends WizardAbstract implements WizardInterface
     }
 
     /**
+<<<<<<< HEAD
      * @param string $methodName
      * @param mixed[] $arguments
      */
     public function __call($methodName, $arguments): self
+=======
+     * @param mixed[] $arguments
+     */
+    public function __call(string $methodName, array $arguments): self
+>>>>>>> match
     {
         if (!array_key_exists($methodName, self::OPERATORS)) {
             throw new Exception('Invalid Operation for Errors CF Rule Wizard');

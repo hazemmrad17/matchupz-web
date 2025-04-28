@@ -28,7 +28,11 @@ class Tcpdf extends Pdf
      *
      * @return \TCPDF implementation
      */
+<<<<<<< HEAD
     protected function createExternalWriterInstance($orientation, $unit, $paperSize)
+=======
+    protected function createExternalWriterInstance(string $orientation, string $unit, $paperSize): \TCPDF
+>>>>>>> match
     {
         return new \TCPDF($orientation, $unit, $paperSize);
     }

@@ -3,6 +3,7 @@
 namespace PhpOffice\PhpSpreadsheet\Cell;
 
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
+<<<<<<< HEAD
 
 class RowRange implements AddressRange
 {
@@ -20,6 +21,20 @@ class RowRange implements AddressRange
      * @var int
      */
     protected $to;
+=======
+use Stringable;
+
+/**
+ * @implements AddressRange<int>
+ */
+class RowRange implements AddressRange, Stringable
+{
+    protected ?Worksheet $worksheet;
+
+    protected int $from;
+
+    protected int $to;
+>>>>>>> match
 
     public function __construct(int $from, ?int $to = null, ?Worksheet $worksheet = null)
     {
@@ -27,6 +42,14 @@ class RowRange implements AddressRange
         $this->worksheet = $worksheet;
     }
 
+<<<<<<< HEAD
+=======
+    public function __destruct()
+    {
+        $this->worksheet = null;
+    }
+
+>>>>>>> match
     public static function fromArray(array $array, ?Worksheet $worksheet = null): self
     {
         [$from, $to] = $array;

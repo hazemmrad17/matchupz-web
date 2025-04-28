@@ -6,6 +6,7 @@ use PhpOffice\PhpSpreadsheet\Calculation\Exception;
 use PhpOffice\PhpSpreadsheet\Calculation\Functions;
 use PhpOffice\PhpSpreadsheet\Calculation\Information\ExcelError;
 use PhpOffice\PhpSpreadsheet\Calculation\Statistical;
+<<<<<<< HEAD
 
 class Subtotal
 {
@@ -14,6 +15,13 @@ class Subtotal
      * @param mixed $args
      */
     protected static function filterHiddenArgs($cellReference, $args): array
+=======
+use PhpOffice\PhpSpreadsheet\Cell\Cell;
+
+class Subtotal
+{
+    protected static function filterHiddenArgs(Cell $cellReference, array $args): array
+>>>>>>> match
     {
         return array_filter(
             $args,
@@ -24,12 +32,17 @@ class Subtotal
                     return true;
                 }
 
+<<<<<<< HEAD
                 return $cellReference->getWorksheet()->getRowDimension($row)->getVisible();
+=======
+                return $cellReference->getWorksheet()->getRowDimension((int) $row)->getVisible();
+>>>>>>> match
             },
             ARRAY_FILTER_USE_KEY
         );
     }
 
+<<<<<<< HEAD
     /**
      * @param mixed $cellReference
      * @param mixed $args
@@ -39,6 +52,13 @@ class Subtotal
         return array_filter(
             $args,
             function ($index) use ($cellReference) {
+=======
+    protected static function filterFormulaArgs(Cell $cellReference, array $args): array
+    {
+        return array_filter(
+            $args,
+            function ($index) use ($cellReference): bool {
+>>>>>>> match
                 $explodeArray = explode('.', $index);
                 $row = $explodeArray[1] ?? '';
                 $column = $explodeArray[2] ?? '';
@@ -48,7 +68,11 @@ class Subtotal
                     $isFormula = $cellReference->getWorksheet()->getCell($column . $row)->isFormula();
                     $cellFormula = !preg_match(
                         '/^=.*\b(SUBTOTAL|AGGREGATE)\s*\(/i',
+<<<<<<< HEAD
                         $cellReference->getWorksheet()->getCell($column . $row)->getValue() ?? ''
+=======
+                        $cellReference->getWorksheet()->getCell($column . $row)->getValueString()
+>>>>>>> match
                     );
 
                     $retVal = !$isFormula || $cellFormula;
@@ -60,6 +84,12 @@ class Subtotal
         );
     }
 
+<<<<<<< HEAD
+=======
+    /**
+     * @var array<int, callable>
+     */
+>>>>>>> match
     private const CALL_FUNCTIONS = [
         1 => [Statistical\Averages::class, 'average'], // 1 and 101
         [Statistical\Counts::class, 'COUNT'], // 2 and 102
@@ -87,11 +117,18 @@ class Subtotal
      *                    but ignore any values in the range that are
      *                    in hidden rows
      * @param mixed[] $args A mixed data series of values
+<<<<<<< HEAD
      *
      * @return float|string
      */
     public static function evaluate($functionType, ...$args)
     {
+=======
+     */
+    public static function evaluate(mixed $functionType, ...$args): float|int|string
+    {
+        /** @var Cell */
+>>>>>>> match
         $cellReference = array_pop($args);
         $bArgs = Functions::flattenArrayIndexed($args);
         $aArgs = [];
@@ -124,10 +161,16 @@ class Subtotal
 
         $aArgs = self::filterFormulaArgs($cellReference, $aArgs);
         if (array_key_exists($subtotal, self::CALL_FUNCTIONS)) {
+<<<<<<< HEAD
             /** @var callable */
             $call = self::CALL_FUNCTIONS[$subtotal];
 
             return call_user_func_array($call, $aArgs);
+=======
+            $call = self::CALL_FUNCTIONS[$subtotal];
+
+            return call_user_func_array($call, $aArgs); //* @phpstan-ignore-line
+>>>>>>> match
         }
 
         return ExcelError::VALUE();

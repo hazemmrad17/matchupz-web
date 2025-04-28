@@ -5,11 +5,15 @@ namespace App\Controller;
 use App\Entity\Espacesportif;
 use App\Form\EspacesportifType;
 use App\Repository\EspacesportifRepository;
+<<<<<<< HEAD
 use App\Service\GeocodingService;
+=======
+>>>>>>> match
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+<<<<<<< HEAD
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Attribute\Route;
@@ -18,11 +22,16 @@ use Knp\Component\Pager\PaginatorInterface;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Dompdf\Dompdf;
+=======
+use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Bridge\Doctrine\Attribute\MapEntity;
+>>>>>>> match
 
 #[Route('/espace')]
 class EspacesportifController extends AbstractController
 {
     #[Route('/', name: 'espace_index', methods: ['GET'])]
+<<<<<<< HEAD
     public function index(EspacesportifRepository $espaceSportifRepository, Request $request, PaginatorInterface $paginator): Response
     {
         $topCapacite = $espaceSportifRepository->findTopCapacite(5);
@@ -207,16 +216,50 @@ class EspacesportifController extends AbstractController
             'espace_repository' => $espaceSportifRepository,
         ]);
         $form->handleRequest($request);
+=======
+    public function index(EspacesportifRepository $espaceSportifRepository): Response
+    {
+        $espaces = $espaceSportifRepository->findAll();
+        $topCapacite = $espaceSportifRepository->findTopCapacite(5);
+
+        // Data for widgets
+        $totalEspaces = $espaceSportifRepository->countTotalEspaces();
+        $espacesWithReservations = count(array_filter($espaces, fn($espace) => $espace->getReservations()->count() > 0));
+
+        return $this->render('espace/index.html.twig', [
+            'espaces' => $espaces,
+            'top_capacite' => $topCapacite,
+            'totalEspaces' => $totalEspaces,
+            'espacesWithReservations' => $espacesWithReservations,
+        ]);
+    }
+
+    #[Route('/new', name: 'espace_new', methods: ['GET', 'POST'])]
+    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $espace = new Espacesportif();
+        $form = $this->createForm(EspacesportifType::class, $espace);
+        $form->handleRequest($request);
+
+>>>>>>> match
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
                 $entityManager->persist($espace);
                 $entityManager->flush();
+<<<<<<< HEAD
+=======
+
+>>>>>>> match
                 $this->addFlash('success', 'Espace sportif créé avec succès!');
                 return $this->redirectToRoute('espace_index');
             } else {
                 $this->addFlash('error', 'Erreur lors de la création de l\'espace sportif. Veuillez vérifier les champs.');
             }
         }
+<<<<<<< HEAD
+=======
+
+>>>>>>> match
         return $this->render('espace/new.html.twig', [
             'espace' => $espace,
             'form' => $form->createView(),
@@ -229,17 +272,26 @@ class EspacesportifController extends AbstractController
         if (!$espace) {
             throw $this->createNotFoundException('L\'espace sportif avec l\'ID ' . $request->attributes->get('id_lieu') . ' n\'existe pas');
         }
+<<<<<<< HEAD
+=======
+
+>>>>>>> match
         return $this->render('espace/show.html.twig', [
             'espace' => $espace,
         ]);
     }
 
     #[Route('/{id_lieu}/edit', name: 'espace_edit', methods: ['GET', 'POST'], requirements: ['id_lieu' => '\d+'])]
+<<<<<<< HEAD
     public function edit(Request $request, #[MapEntity(mapping: ['id_lieu' => 'id_lieu'])] Espacesportif $espace = null, EntityManagerInterface $entityManager, EspacesportifRepository $espaceSportifRepository): Response
+=======
+    public function edit(Request $request, #[MapEntity(mapping: ['id_lieu' => 'id_lieu'])] Espacesportif $espace = null, EntityManagerInterface $entityManager): Response
+>>>>>>> match
     {
         if (!$espace) {
             throw $this->createNotFoundException('L\'espace sportif avec l\'ID ' . $request->attributes->get('id_lieu') . ' n\'existe pas');
         }
+<<<<<<< HEAD
         $form = $this->createForm(EspacesportifType::class, $espace, [
             'espace_repository' => $espaceSportifRepository,
         ]);
@@ -247,12 +299,26 @@ class EspacesportifController extends AbstractController
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
                 $entityManager->flush();
+=======
+
+        $form = $this->createForm(EspacesportifType::class, $espace);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()) {
+            if ($form->isValid()) {
+                $entityManager->flush();
+
+>>>>>>> match
                 $this->addFlash('success', 'Espace sportif mis à jour avec succès!');
                 return $this->redirectToRoute('espace_index');
             } else {
                 $this->addFlash('error', 'Erreur lors de la mise à jour de l\'espace sportif. Veuillez vérifier les champs.');
             }
         }
+<<<<<<< HEAD
+=======
+
+>>>>>>> match
         return $this->render('espace/edit.html.twig', [
             'espace' => $espace,
             'form' => $form->createView(),
@@ -265,13 +331,25 @@ class EspacesportifController extends AbstractController
         if (!$espace) {
             throw $this->createNotFoundException('L\'espace sportif avec l\'ID ' . $request->attributes->get('id_lieu') . ' n\'existe pas');
         }
+<<<<<<< HEAD
         if ($this->isCsrfTokenValid('delete'.$espace->getIdLieu(), $request->request->get('_token'))) {
             $entityManager->remove($espace);
             $entityManager->flush();
+=======
+
+        if ($this->isCsrfTokenValid('delete'.$espace->getIdLieu(), $request->request->get('_token'))) {
+            $entityManager->remove($espace);
+            $entityManager->flush();
+
+>>>>>>> match
             $this->addFlash('success', 'Espace sportif supprimé avec succès!');
         } else {
             $this->addFlash('error', 'Erreur lors de la suppression de l\'espace sportif.');
         }
+<<<<<<< HEAD
+=======
+
+>>>>>>> match
         return $this->redirectToRoute('espace_index');
     }
 
@@ -279,16 +357,39 @@ class EspacesportifController extends AbstractController
     public function statistics(EntityManagerInterface $entityManager): Response
     {
         $espaceSportifRepository = $entityManager->getRepository(Espacesportif::class);
+<<<<<<< HEAD
         $allEspaces = $espaceSportifRepository->findAll();
         $totalEspaces = $espaceSportifRepository->countTotalEspaces();
         $averageCapacite = $espaceSportifRepository->averageCapacite();
+=======
+
+        $allEspaces = $espaceSportifRepository->findAll();
+
+        // Total number of espaces
+        $totalEspaces = $espaceSportifRepository->countTotalEspaces();
+
+        // Average capacity
+        $averageCapacite = $espaceSportifRepository->averageCapacite();
+
+        // Category distribution
+>>>>>>> match
         $categories = ['terrain foot', 'terrain basket', 'salle gym', 'football', 'Football\''];
         $categorieDistribution = [];
         foreach ($categories as $categorie) {
             $categorieDistribution[$categorie] = count($espaceSportifRepository->findByCategorie($categorie));
         }
+<<<<<<< HEAD
         $reservationDistribution = $espaceSportifRepository->getReservationDistribution();
         $reservationStatusDistribution = $espaceSportifRepository->getReservationStatusDistribution();
+=======
+
+        // Reservations per espace
+        $reservationDistribution = $espaceSportifRepository->getReservationDistribution();
+
+        // Espaces with vs without reservations
+        $reservationStatusDistribution = $espaceSportifRepository->getReservationStatusDistribution();
+
+>>>>>>> match
         return $this->render('espace/statistics.html.twig', [
             'totalEspaces' => $totalEspaces,
             'averageCapacite' => $averageCapacite,
@@ -298,6 +399,7 @@ class EspacesportifController extends AbstractController
             'allEspaces' => $allEspaces,
         ]);
     }
+<<<<<<< HEAD
 
     #[Route('/front', name: 'app_espace_sportifs', methods: ['GET'])]
     public function front(EspacesportifRepository $espaceSportifRepository, GeocodingService $geocodingService, Request $request): Response
@@ -596,4 +698,6 @@ class EspacesportifController extends AbstractController
 
         return $standardized;
     }
+=======
+>>>>>>> match
 }

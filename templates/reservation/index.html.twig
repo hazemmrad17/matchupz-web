@@ -6,6 +6,7 @@
 
 {% block title %}Liste des Réservations{% endblock %}
 
+<<<<<<< HEAD
 {% block stylesheets %}
     {{ parent() }}
     <style>
@@ -83,6 +84,8 @@
     </style>
 {% endblock %}
 
+=======
+>>>>>>> match
 {% block content %}
     <div class="content-wrapper">
         <div class="container-xxl flex-grow-1 container-p-y">
@@ -96,6 +99,7 @@
             {% include 'reservation/reservation_widgets.html.twig' %}
             <div class="card">
                 <h5 class="card-header d-flex justify-content-between align-items-center">
+<<<<<<< HEAD
                     <div class="d-flex align-items-center">
                         <span>Liste des Réservations</span>
                         <div class="navbar-nav align-items-center ms-3">
@@ -128,6 +132,13 @@
                 </h5>
                 <div class="table-responsive text-nowrap">
                     <table class="table" id="reservationsTable">
+=======
+                    Liste des Réservations
+                    <a href="{{ path('reservation_new') }}" class="btn btn-primary">Ajouter une Réservation</a>
+                </h5>
+                <div class="table-responsive text-nowrap">
+                    <table class="table">
+>>>>>>> match
                         <thead>
                             <tr>
                                 <th>Lieu Sportif</th>
@@ -137,7 +148,11 @@
                                 <th>Actions</th>
                             </tr>
                         </thead>
+<<<<<<< HEAD
                         <tbody class="table-border-bottom-0" id="reservationsTableBody">
+=======
+                        <tbody class="table-border-bottom-0">
+>>>>>>> match
                             {% for reservation in reservations %}
                                 <tr class="table-default">
                                     <td>
@@ -177,9 +192,12 @@
                         </tbody>
                     </table>
                 </div>
+<<<<<<< HEAD
                 <div class="card-footer" id="paginationContainer">
                     {% include 'reservation/_pagination.html.twig' with {'reservations': reservations, 'searchTerm': searchTerm} %}
                 </div>
+=======
+>>>>>>> match
             </div>
 
             <h5 class="mt-4">Réservations Confirmées à Venir</h5>
@@ -209,6 +227,7 @@
             </div>
         </div>
     </div>
+<<<<<<< HEAD
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -328,4 +347,6 @@
             }, 300));
         });
     </script>
+=======
+>>>>>>> match
 {% endblock %}

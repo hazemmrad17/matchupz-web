@@ -8,15 +8,21 @@ class RowDimension extends Dimension
 {
     /**
      * Row index.
+<<<<<<< HEAD
      *
      * @var ?int
      */
     private $rowIndex;
+=======
+     */
+    private ?int $rowIndex;
+>>>>>>> match
 
     /**
      * Row height (in pt).
      *
      * When this is set to a negative value, the row height should be ignored by IWriter
+<<<<<<< HEAD
      *
      * @var float
      */
@@ -28,13 +34,26 @@ class RowDimension extends Dimension
      * @var bool
      */
     private $zeroHeight = false;
+=======
+     */
+    private float $height = -1;
+
+    /**
+     * ZeroHeight for Row?
+     */
+    private bool $zeroHeight = false;
+>>>>>>> match
 
     /**
      * Create a new RowDimension.
      *
      * @param ?int $index Numeric row index
      */
+<<<<<<< HEAD
     public function __construct($index = 0)
+=======
+    public function __construct(?int $index = 0)
+>>>>>>> match
     {
         // Initialise values
         $this->rowIndex = $index;
@@ -56,7 +75,11 @@ class RowDimension extends Dimension
      *
      * @return $this
      */
+<<<<<<< HEAD
     public function setRowIndex(int $index)
+=======
+    public function setRowIndex(int $index): static
+>>>>>>> match
     {
         $this->rowIndex = $index;
 
@@ -68,10 +91,15 @@ class RowDimension extends Dimension
      * By default, this will be in points; but this method also accepts an optional unit of measure
      *    argument, and will convert the value from points to the specified UoM.
      *    A value of -1 tells Excel to display this column in its default height.
+<<<<<<< HEAD
      *
      * @return float
      */
     public function getRowHeight(?string $unitOfMeasure = null)
+=======
+     */
+    public function getRowHeight(?string $unitOfMeasure = null): float
+>>>>>>> match
     {
         return ($unitOfMeasure === null || $this->height < 0)
             ? $this->height
@@ -87,7 +115,11 @@ class RowDimension extends Dimension
      *
      * @return $this
      */
+<<<<<<< HEAD
     public function setRowHeight($height, ?string $unitOfMeasure = null)
+=======
+    public function setRowHeight(float $height, ?string $unitOfMeasure = null): static
+>>>>>>> match
     {
         $this->height = ($unitOfMeasure === null || $height < 0)
             ? $height
@@ -109,7 +141,11 @@ class RowDimension extends Dimension
      *
      * @return $this
      */
+<<<<<<< HEAD
     public function setZeroHeight(bool $zeroHeight)
+=======
+    public function setZeroHeight(bool $zeroHeight): static
+>>>>>>> match
     {
         $this->zeroHeight = $zeroHeight;
 

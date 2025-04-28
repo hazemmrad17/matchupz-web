@@ -31,6 +31,7 @@ class Xls extends BaseWriter
 {
     /**
      * PhpSpreadsheet object.
+<<<<<<< HEAD
      *
      * @var Spreadsheet
      */
@@ -96,11 +97,61 @@ class Xls extends BaseWriter
      * @var Workbook
      */
     private $writerWorkbook;
+=======
+     */
+    private Spreadsheet $spreadsheet;
+
+    /**
+     * Total number of shared strings in workbook.
+     */
+    private int $strTotal = 0;
+
+    /**
+     * Number of unique shared strings in workbook.
+     */
+    private int $strUnique = 0;
+
+    /**
+     * Array of unique shared strings in workbook.
+     */
+    private array $strTable = [];
+
+    /**
+     * Color cache. Mapping between RGB value and color index.
+     */
+    private array $colors;
+
+    /**
+     * Formula parser.
+     */
+    private Parser $parser;
+
+    /**
+     * Identifier clusters for drawings. Used in MSODRAWINGGROUP record.
+     */
+    private array $IDCLs;
+
+    /**
+     * Basic OLE object summary information.
+     */
+    private string $summaryInformation;
+
+    /**
+     * Extended OLE object document summary information.
+     */
+    private string $documentSummaryInformation;
+
+    private Workbook $writerWorkbook;
+>>>>>>> match
 
     /**
      * @var Worksheet[]
      */
+<<<<<<< HEAD
     private $writerWorksheets;
+=======
+    private array $writerWorksheets;
+>>>>>>> match
 
     /**
      * Create a new Xls Writer.
@@ -111,7 +162,11 @@ class Xls extends BaseWriter
     {
         $this->spreadsheet = $spreadsheet;
 
+<<<<<<< HEAD
         $this->parser = new Xls\Parser($spreadsheet);
+=======
+        $this->parser = new Parser($spreadsheet);
+>>>>>>> match
     }
 
     /**
@@ -135,12 +190,20 @@ class Xls extends BaseWriter
         $this->colors = [];
 
         // Initialise workbook writer
+<<<<<<< HEAD
         $this->writerWorkbook = new Xls\Workbook($this->spreadsheet, $this->strTotal, $this->strUnique, $this->strTable, $this->colors, $this->parser);
+=======
+        $this->writerWorkbook = new Workbook($this->spreadsheet, $this->strTotal, $this->strUnique, $this->strTable, $this->colors, $this->parser);
+>>>>>>> match
 
         // Initialise worksheet writers
         $countSheets = $this->spreadsheet->getSheetCount();
         for ($i = 0; $i < $countSheets; ++$i) {
+<<<<<<< HEAD
             $this->writerWorksheets[$i] = new Xls\Worksheet($this->strTotal, $this->strUnique, $this->strTable, $this->colors, $this->parser, $this->preCalculateFormulas, $this->spreadsheet->getSheet($i));
+=======
+            $this->writerWorksheets[$i] = new Worksheet($this->strTotal, $this->strUnique, $this->strTable, $this->colors, $this->parser, $this->preCalculateFormulas, $this->spreadsheet->getSheet($i), $this->writerWorkbook);
+>>>>>>> match
         }
 
         // build Escher objects. Escher objects for workbooks needs to be build before Escher object for workbook.
@@ -413,7 +476,11 @@ class Xls extends BaseWriter
         }
 
         ob_start();
+<<<<<<< HEAD
         call_user_func($renderingFunction, $drawing->getImageResource());
+=======
+        call_user_func($renderingFunction, $drawing->getImageResource()); // @phpstan-ignore-line
+>>>>>>> match
         $blipData = ob_get_contents();
         ob_end_clean();
 
@@ -427,6 +494,11 @@ class Xls extends BaseWriter
         $bstoreContainer->addBSE($BSE);
     }
 
+<<<<<<< HEAD
+=======
+    private static int $two = 2; // phpstan silliness
+
+>>>>>>> match
     private function processDrawing(BstoreContainer &$bstoreContainer, Drawing $drawing): void
     {
         $blipType = 0;
@@ -434,7 +506,11 @@ class Xls extends BaseWriter
         $filename = $drawing->getPath();
 
         $imageSize = getimagesize($filename);
+<<<<<<< HEAD
         $imageFormat = empty($imageSize) ? 0 : ($imageSize[2] ?? 0);
+=======
+        $imageFormat = empty($imageSize) ? 0 : ($imageSize[self::$two] ?? 0);
+>>>>>>> match
 
         switch ($imageFormat) {
             case 1: // GIF, not supported by BIFF8, we convert to PNG
@@ -486,7 +562,11 @@ class Xls extends BaseWriter
 
     private function processBaseDrawing(BstoreContainer &$bstoreContainer, BaseDrawing $drawing): void
     {
+<<<<<<< HEAD
         if ($drawing instanceof Drawing) {
+=======
+        if ($drawing instanceof Drawing && $drawing->getPath() !== '') {
+>>>>>>> match
             $this->processDrawing($bstoreContainer, $drawing);
         } elseif ($drawing instanceof MemoryDrawing) {
             $this->processMemoryDrawing($bstoreContainer, $drawing, $drawing->getRenderingFunction());
@@ -569,10 +649,15 @@ class Xls extends BaseWriter
 
     /**
      * Build the OLE Part for DocumentSummary Information.
+<<<<<<< HEAD
      *
      * @return string
      */
     private function writeDocumentSummaryInformation()
+=======
+     */
+    private function writeDocumentSummaryInformation(): string
+>>>>>>> match
     {
         // offset: 0; size: 2; must be 0xFE 0xFF (UTF-16 LE byte order mark)
         $data = pack('v', 0xFFFE);
@@ -751,12 +836,15 @@ class Xls extends BaseWriter
                 $dataSection_Content .= $dataProp['data']['data'];
 
                 $dataSection_Content_Offset += 4 + 4 + strlen($dataProp['data']['data']);
+<<<<<<< HEAD
                 /* Condition below can never be true
                 } elseif ($dataProp['type']['data'] == 0x40) { // Filetime (64-bit value representing the number of 100-nanosecond intervals since January 1, 1601)
                     $dataSection_Content .= $dataProp['data']['data'];
 
                     $dataSection_Content_Offset += 4 + 8;
                 */
+=======
+>>>>>>> match
             } else {
                 $dataSection_Content .= $dataProp['data']['data'];
 
@@ -779,10 +867,14 @@ class Xls extends BaseWriter
         return $data;
     }
 
+<<<<<<< HEAD
     /**
      * @param float|int $dataProp
      */
     private function writeSummaryPropOle($dataProp, int &$dataSection_NumProps, array &$dataSection, int $sumdata, int $typdata): void
+=======
+    private function writeSummaryPropOle(float|int $dataProp, int &$dataSection_NumProps, array &$dataSection, int $sumdata, int $typdata): void
+>>>>>>> match
     {
         if ($dataProp) {
             $dataSection[] = [
@@ -810,10 +902,15 @@ class Xls extends BaseWriter
 
     /**
      * Build the OLE Part for Summary Information.
+<<<<<<< HEAD
      *
      * @return string
      */
     private function writeSummaryInformation()
+=======
+     */
+    private function writeSummaryInformation(): string
+>>>>>>> match
     {
         // offset: 0; size: 2; must be 0xFE 0xFF (UTF-16 LE byte order mark)
         $data = pack('v', 0xFFFE);
@@ -849,6 +946,7 @@ class Xls extends BaseWriter
         ++$dataSection_NumProps;
 
         $props = $this->spreadsheet->getProperties();
+<<<<<<< HEAD
         $this->writeSummaryProp($props->getTitle(), $dataSection_NumProps, $dataSection, 0x02, 0x1e);
         $this->writeSummaryProp($props->getSubject(), $dataSection_NumProps, $dataSection, 0x03, 0x1e);
         $this->writeSummaryProp($props->getCreator(), $dataSection_NumProps, $dataSection, 0x04, 0x1e);
@@ -857,6 +955,16 @@ class Xls extends BaseWriter
         $this->writeSummaryProp($props->getLastModifiedBy(), $dataSection_NumProps, $dataSection, 0x08, 0x1e);
         $this->writeSummaryPropOle($props->getCreated(), $dataSection_NumProps, $dataSection, 0x0c, 0x40);
         $this->writeSummaryPropOle($props->getModified(), $dataSection_NumProps, $dataSection, 0x0d, 0x40);
+=======
+        $this->writeSummaryProp($props->getTitle(), $dataSection_NumProps, $dataSection, 0x02, 0x1E);
+        $this->writeSummaryProp($props->getSubject(), $dataSection_NumProps, $dataSection, 0x03, 0x1E);
+        $this->writeSummaryProp($props->getCreator(), $dataSection_NumProps, $dataSection, 0x04, 0x1E);
+        $this->writeSummaryProp($props->getKeywords(), $dataSection_NumProps, $dataSection, 0x05, 0x1E);
+        $this->writeSummaryProp($props->getDescription(), $dataSection_NumProps, $dataSection, 0x06, 0x1E);
+        $this->writeSummaryProp($props->getLastModifiedBy(), $dataSection_NumProps, $dataSection, 0x08, 0x1E);
+        $this->writeSummaryPropOle($props->getCreated(), $dataSection_NumProps, $dataSection, 0x0C, 0x40);
+        $this->writeSummaryPropOle($props->getModified(), $dataSection_NumProps, $dataSection, 0x0D, 0x40);
+>>>>>>> match
 
         //    Security
         $dataSection[] = [

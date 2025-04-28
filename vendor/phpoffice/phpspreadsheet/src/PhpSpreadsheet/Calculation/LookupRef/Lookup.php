@@ -4,7 +4,10 @@ namespace PhpOffice\PhpSpreadsheet\Calculation\LookupRef;
 
 use PhpOffice\PhpSpreadsheet\Calculation\ArrayEnabled;
 use PhpOffice\PhpSpreadsheet\Calculation\Information\ExcelError;
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Calculation\LookupRef;
+=======
+>>>>>>> match
 
 class Lookup
 {
@@ -20,7 +23,11 @@ class Lookup
      *
      * @return mixed The value of the found cell
      */
+<<<<<<< HEAD
     public static function lookup($lookupValue, $lookupVector, $resultVector = null)
+=======
+    public static function lookup(mixed $lookupValue, mixed $lookupVector, $resultVector = null): mixed
+>>>>>>> match
     {
         if (is_array($lookupValue)) {
             return self::evaluateArrayArgumentsSubset([self::class, __FUNCTION__], 1, $lookupValue, $lookupVector, $resultVector);
@@ -34,18 +41,31 @@ class Lookup
         $lookupColumns = self::columnCount($lookupVector);
         // we correctly orient our results
         if (($lookupRows === 1 && $lookupColumns > 1) || (!$hasResultVector && $lookupRows === 2 && $lookupColumns !== 2)) {
+<<<<<<< HEAD
             $lookupVector = LookupRef\Matrix::transpose($lookupVector);
+=======
+            $lookupVector = Matrix::transpose($lookupVector);
+>>>>>>> match
             $lookupRows = self::rowCount($lookupVector);
             $lookupColumns = self::columnCount($lookupVector);
         }
 
+<<<<<<< HEAD
         $resultVector = self::verifyResultVector($resultVector ?? $lookupVector);
+=======
+        $resultVector = self::verifyResultVector($resultVector ?? $lookupVector); //* @phpstan-ignore-line
+>>>>>>> match
 
         if ($lookupRows === 2 && !$hasResultVector) {
             $resultVector = array_pop($lookupVector);
             $lookupVector = array_shift($lookupVector);
         }
 
+<<<<<<< HEAD
+=======
+        /** @var array $lookupVector */
+        /** @var array $resultVector */
+>>>>>>> match
         if ($lookupColumns !== 2) {
             $lookupVector = self::verifyLookupValues($lookupVector, $resultVector);
         }
@@ -85,7 +105,11 @@ class Lookup
 
         // we correctly orient our results
         if ($resultRows === 1 && $resultColumns > 1) {
+<<<<<<< HEAD
             $resultVector = LookupRef\Matrix::transpose($resultVector);
+=======
+            $resultVector = Matrix::transpose($resultVector);
+>>>>>>> match
         }
 
         return $resultVector;

@@ -8,6 +8,7 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
 class PageSettings
 {
+<<<<<<< HEAD
     /**
      * @var string
      */
@@ -27,24 +28,47 @@ class PageSettings
      * @var string
      */
     private $tableNs;
+=======
+    private string $officeNs = '';
+
+    private string $stylesNs = '';
+
+    private string $stylesFo = '';
+
+    private string $tableNs = '';
+>>>>>>> match
 
     /**
      * @var string[]
      */
+<<<<<<< HEAD
     private $tableStylesCrossReference = [];
 
     /** @var array */
     private $pageLayoutStyles = [];
+=======
+    private array $tableStylesCrossReference = [];
+
+    private array $pageLayoutStyles = [];
+>>>>>>> match
 
     /**
      * @var string[]
      */
+<<<<<<< HEAD
     private $masterStylesCrossReference = [];
+=======
+    private array $masterStylesCrossReference = [];
+>>>>>>> match
 
     /**
      * @var string[]
      */
+<<<<<<< HEAD
     private $masterPrintStylesCrossReference = [];
+=======
+    private array $masterPrintStylesCrossReference = [];
+>>>>>>> match
 
     public function __construct(DOMDocument $styleDom)
     {
@@ -55,10 +79,17 @@ class PageSettings
 
     private function setDomNameSpaces(DOMDocument $styleDom): void
     {
+<<<<<<< HEAD
         $this->officeNs = $styleDom->lookupNamespaceUri('office');
         $this->stylesNs = $styleDom->lookupNamespaceUri('style');
         $this->stylesFo = $styleDom->lookupNamespaceUri('fo');
         $this->tableNs = $styleDom->lookupNamespaceUri('table');
+=======
+        $this->officeNs = (string) $styleDom->lookupNamespaceUri('office');
+        $this->stylesNs = (string) $styleDom->lookupNamespaceUri('style');
+        $this->stylesFo = (string) $styleDom->lookupNamespaceUri('fo');
+        $this->tableNs = (string) $styleDom->lookupNamespaceUri('table');
+>>>>>>> match
     }
 
     private function readPageSettingStyles(DOMDocument $styleDom): void
@@ -68,6 +99,7 @@ class PageSettings
 
         foreach ($styles as $styleSet) {
             $styleName = $styleSet->getAttributeNS($this->stylesNs, 'name');
+<<<<<<< HEAD
             $pageLayoutProperties = $styleSet->getElementsByTagNameNS($this->stylesNs, 'page-layout-properties')[0];
             $styleOrientation = $pageLayoutProperties->getAttributeNS($this->stylesNs, 'print-orientation');
             $styleScale = $pageLayoutProperties->getAttributeNS($this->stylesNs, 'scale-to');
@@ -84,6 +116,24 @@ class PageSettings
             $footer = $styleSet->getElementsByTagNameNS($this->stylesNs, 'footer-style')[0];
             $footerProperties = $footer->getElementsByTagNameNS($this->stylesNs, 'header-footer-properties')[0];
             $marginFooter = isset($footerProperties) ? $footerProperties->getAttributeNS($this->stylesFo, 'min-height') : null;
+=======
+            $pageLayoutProperties = $styleSet->getElementsByTagNameNS($this->stylesNs, 'page-layout-properties')->item(0);
+            $styleOrientation = $pageLayoutProperties?->getAttributeNS($this->stylesNs, 'print-orientation');
+            $styleScale = $pageLayoutProperties?->getAttributeNS($this->stylesNs, 'scale-to');
+            $stylePrintOrder = $pageLayoutProperties?->getAttributeNS($this->stylesNs, 'print-page-order');
+            $centered = $pageLayoutProperties?->getAttributeNS($this->stylesNs, 'table-centering');
+
+            $marginLeft = $pageLayoutProperties?->getAttributeNS($this->stylesFo, 'margin-left');
+            $marginRight = $pageLayoutProperties?->getAttributeNS($this->stylesFo, 'margin-right');
+            $marginTop = $pageLayoutProperties?->getAttributeNS($this->stylesFo, 'margin-top');
+            $marginBottom = $pageLayoutProperties?->getAttributeNS($this->stylesFo, 'margin-bottom');
+            $header = $styleSet->getElementsByTagNameNS($this->stylesNs, 'header-style')->item(0);
+            $headerProperties = $header?->getElementsByTagNameNS($this->stylesNs, 'header-footer-properties')?->item(0);
+            $marginHeader = $headerProperties?->getAttributeNS($this->stylesFo, 'min-height');
+            $footer = $styleSet->getElementsByTagNameNS($this->stylesNs, 'footer-style')->item(0);
+            $footerProperties = $footer?->getElementsByTagNameNS($this->stylesNs, 'header-footer-properties')?->item(0);
+            $marginFooter = $footerProperties?->getAttributeNS($this->stylesFo, 'min-height');
+>>>>>>> match
 
             $this->pageLayoutStyles[$styleName] = (object) [
                 'orientation' => $styleOrientation ?: PageSetup::ORIENTATION_DEFAULT,

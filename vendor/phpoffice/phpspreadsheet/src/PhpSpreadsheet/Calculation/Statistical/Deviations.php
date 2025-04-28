@@ -16,10 +16,15 @@ class Deviations
      *        DEVSQ(value1[,value2[, ...]])
      *
      * @param mixed ...$args Data values
+<<<<<<< HEAD
      *
      * @return float|string
      */
     public static function sumSquares(...$args)
+=======
+     */
+    public static function sumSquares(mixed ...$args): string|float
+>>>>>>> match
     {
         $aArgs = Functions::flattenArrayIndexed($args);
 
@@ -34,9 +39,15 @@ class Deviations
         foreach ($aArgs as $k => $arg) {
             // Is it a numeric value?
             if (
+<<<<<<< HEAD
                 (is_bool($arg)) &&
                 ((!Functions::isCellValue($k)) ||
                     (Functions::getCompatibilityMode() == Functions::COMPATIBILITY_OPENOFFICE))
+=======
+                (is_bool($arg))
+                && ((!Functions::isCellValue($k))
+                    || (Functions::getCompatibilityMode() == Functions::COMPATIBILITY_OPENOFFICE))
+>>>>>>> match
             ) {
                 $arg = (int) $arg;
             }
@@ -58,17 +69,26 @@ class Deviations
      * relatively flat distribution.
      *
      * @param array ...$args Data Series
+<<<<<<< HEAD
      *
      * @return float|string
      */
     public static function kurtosis(...$args)
+=======
+     */
+    public static function kurtosis(...$args): string|int|float
+>>>>>>> match
     {
         $aArgs = Functions::flattenArrayIndexed($args);
         $mean = Averages::average($aArgs);
         if (!is_numeric($mean)) {
             return ExcelError::DIV0();
         }
+<<<<<<< HEAD
         $stdDev = StandardDeviations::STDEV($aArgs);
+=======
+        $stdDev = (float) StandardDeviations::STDEV($aArgs);
+>>>>>>> match
 
         if ($stdDev > 0) {
             $count = $summer = 0;
@@ -85,9 +105,15 @@ class Deviations
             }
 
             if ($count > 3) {
+<<<<<<< HEAD
                 return $summer * ($count * ($count + 1) /
                         (($count - 1) * ($count - 2) * ($count - 3))) - (3 * ($count - 1) ** 2 /
                         (($count - 2) * ($count - 3)));
+=======
+                return $summer * ($count * ($count + 1)
+                        / (($count - 1) * ($count - 2) * ($count - 3))) - (3 * ($count - 1) ** 2
+                        / (($count - 2) * ($count - 3)));
+>>>>>>> match
             }
         }
 
@@ -106,7 +132,11 @@ class Deviations
      *
      * @return float|int|string The result, or a string containing an error
      */
+<<<<<<< HEAD
     public static function skew(...$args)
+=======
+    public static function skew(...$args): string|int|float
+>>>>>>> match
     {
         $aArgs = Functions::flattenArrayIndexed($args);
         $mean = Averages::average($aArgs);
@@ -126,7 +156,11 @@ class Deviations
                 return ExcelError::VALUE();
             } else {
                 // Is it a numeric value?
+<<<<<<< HEAD
                 if ((is_numeric($arg)) && (!is_string($arg))) {
+=======
+                if (!is_string($arg)) {
+>>>>>>> match
                     $summer += (($arg - $mean) / $stdDev) ** 3;
                     ++$count;
                 }

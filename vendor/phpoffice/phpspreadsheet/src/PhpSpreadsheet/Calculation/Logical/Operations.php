@@ -31,11 +31,17 @@ class Operations
      *
      * @return bool|string the logical AND of the arguments
      */
+<<<<<<< HEAD
     public static function logicalAnd(...$args)
     {
         return self::countTrueValues($args, function (int $trueValueCount, int $count): bool {
             return $trueValueCount === $count;
         });
+=======
+    public static function logicalAnd(mixed ...$args)
+    {
+        return self::countTrueValues($args, fn (int $trueValueCount, int $count): bool => $trueValueCount === $count);
+>>>>>>> match
     }
 
     /**
@@ -58,11 +64,17 @@ class Operations
      *
      * @return bool|string the logical OR of the arguments
      */
+<<<<<<< HEAD
     public static function logicalOr(...$args)
     {
         return self::countTrueValues($args, function (int $trueValueCount): bool {
             return $trueValueCount > 0;
         });
+=======
+    public static function logicalOr(mixed ...$args)
+    {
+        return self::countTrueValues($args, fn (int $trueValueCount): bool => $trueValueCount > 0);
+>>>>>>> match
     }
 
     /**
@@ -87,11 +99,17 @@ class Operations
      *
      * @return bool|string the logical XOR of the arguments
      */
+<<<<<<< HEAD
     public static function logicalXor(...$args)
     {
         return self::countTrueValues($args, function (int $trueValueCount): bool {
             return $trueValueCount % 2 === 1;
         });
+=======
+    public static function logicalXor(mixed ...$args)
+    {
+        return self::countTrueValues($args, fn (int $trueValueCount): bool => $trueValueCount % 2 === 1);
+>>>>>>> match
     }
 
     /**
@@ -116,7 +134,11 @@ class Operations
      *         If an array of values is passed as an argument, then the returned result will also be an array
      *            with the same dimensions
      */
+<<<<<<< HEAD
     public static function NOT($logical = false)
+=======
+    public static function NOT(mixed $logical = false): array|bool|string
+>>>>>>> match
     {
         if (is_array($logical)) {
             return self::evaluateSingleArgumentArray([self::class, __FUNCTION__], $logical);
@@ -136,10 +158,14 @@ class Operations
         return !$logical;
     }
 
+<<<<<<< HEAD
     /**
      * @return bool|string
      */
     private static function countTrueValues(array $args, callable $func)
+=======
+    private static function countTrueValues(array $args, callable $func): bool|string
+>>>>>>> match
     {
         $trueValueCount = 0;
         $count = 0;

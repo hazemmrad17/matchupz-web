@@ -82,6 +82,11 @@ class Namespaces
 
     const CONTENT_TYPES = 'http://schemas.openxmlformats.org/package/2006/content-types';
 
+<<<<<<< HEAD
+=======
+    const RELATIONSHIPS_METADATA = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships/sheetMetadata';
+
+>>>>>>> match
     const RELATIONSHIPS_PRINTER_SETTINGS = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships/printerSettings';
 
     const RELATIONSHIPS_TABLE = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships/table';
@@ -115,4 +120,11 @@ class Namespaces
     const PURL_CHART = 'http://purl.oclc.org/ooxml/drawingml/chart';
 
     const PURL_WORKSHEET = 'http://purl.oclc.org/ooxml/officeDocument/relationships/worksheet';
+<<<<<<< HEAD
+=======
+
+    const DYNAMIC_ARRAY = 'http://schemas.microsoft.com/office/spreadsheetml/2017/dynamicarray';
+
+    const DYNAMIC_ARRAY_RICHDATA = 'http://schemas.microsoft.com/office/spreadsheetml/2017/richdata';
+>>>>>>> match
 }

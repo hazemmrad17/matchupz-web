@@ -2,6 +2,10 @@
 
 namespace PhpOffice\PhpSpreadsheet\Calculation\DateTimeExcel;
 
+<<<<<<< HEAD
+=======
+use DateTime;
+>>>>>>> match
 use PhpOffice\PhpSpreadsheet\Calculation\ArrayEnabled;
 use PhpOffice\PhpSpreadsheet\Calculation\Exception;
 
@@ -28,12 +32,20 @@ class Month
      *                                        a negative value yields a past date.
      *                         Or can be an array of adjustment values
      *
+<<<<<<< HEAD
      * @return array|mixed Excel date/time serial value, PHP date/time serial value or PHP date/time object,
+=======
+     * @return array|DateTime|float|int|string Excel date/time serial value, PHP date/time serial value or PHP date/time object,
+>>>>>>> match
      *                        depending on the value of the ReturnDateType flag
      *         If an array of values is passed as the argument, then the returned result will also be an array
      *            with the same dimensions
      */
+<<<<<<< HEAD
     public static function adjust($dateValue, $adjustmentMonths)
+=======
+    public static function adjust(mixed $dateValue, array|string|bool|float|int $adjustmentMonths): DateTime|float|int|string|array
+>>>>>>> match
     {
         if (is_array($dateValue) || is_array($adjustmentMonths)) {
             return self::evaluateArrayArguments([self::class, __FUNCTION__], $dateValue, $adjustmentMonths);
@@ -72,12 +84,20 @@ class Month
      *                                        a negative value yields a past date.
      *                         Or can be an array of adjustment values
      *
+<<<<<<< HEAD
      * @return array|mixed Excel date/time serial value, PHP date/time serial value or PHP date/time object,
+=======
+     * @return array|DateTime|float|int|string Excel date/time serial value, PHP date/time serial value or PHP date/time object,
+>>>>>>> match
      *                        depending on the value of the ReturnDateType flag
      *         If an array of values is passed as the argument, then the returned result will also be an array
      *            with the same dimensions
      */
+<<<<<<< HEAD
     public static function lastDay($dateValue, $adjustmentMonths)
+=======
+    public static function lastDay(mixed $dateValue, array|float|int|bool|string $adjustmentMonths): array|string|DateTime|float|int
+>>>>>>> match
     {
         if (is_array($dateValue) || is_array($adjustmentMonths)) {
             return self::evaluateArrayArguments([self::class, __FUNCTION__], $dateValue, $adjustmentMonths);

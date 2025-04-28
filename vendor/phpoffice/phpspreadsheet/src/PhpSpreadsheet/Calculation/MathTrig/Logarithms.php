@@ -26,7 +26,11 @@ class Logarithms
      *         If an array of numbers is passed as an argument, then the returned result will also be an array
      *            with the same dimensions
      */
+<<<<<<< HEAD
     public static function withBase($number, $base = 10)
+=======
+    public static function withBase(mixed $number, mixed $base = 10): array|string|float
+>>>>>>> match
     {
         if (is_array($number) || is_array($base)) {
             return self::evaluateArrayArguments([self::class, __FUNCTION__], $number, $base);
@@ -56,7 +60,11 @@ class Logarithms
      *         If an array of numbers is passed as an argument, then the returned result will also be an array
      *            with the same dimensions
      */
+<<<<<<< HEAD
     public static function base10($number)
+=======
+    public static function base10(mixed $number): array|string|float
+>>>>>>> match
     {
         if (is_array($number)) {
             return self::evaluateSingleArgumentArray([self::class, __FUNCTION__], $number);
@@ -84,7 +92,11 @@ class Logarithms
      *         If an array of numbers is passed as an argument, then the returned result will also be an array
      *            with the same dimensions
      */
+<<<<<<< HEAD
     public static function natural($number)
+=======
+    public static function natural(mixed $number): array|string|float
+>>>>>>> match
     {
         if (is_array($number)) {
             return self::evaluateSingleArgumentArray([self::class, __FUNCTION__], $number);

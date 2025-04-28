@@ -169,6 +169,7 @@ class Rule
     // Rule Operators (Date Special) which are translated to standard numeric operators with calculated values
     //    const AUTOFILTER_COLUMN_RULE_BEFORE                = 'lessThan';
     //    const AUTOFILTER_COLUMN_RULE_AFTER                = 'greaterThan';
+<<<<<<< HEAD
 
     /**
      * Autofilter Column.
@@ -183,6 +184,17 @@ class Rule
      * @var string
      */
     private $ruleType = self::AUTOFILTER_RULETYPE_FILTER;
+=======
+    /**
+     * Autofilter Column.
+     */
+    private ?Column $parent;
+
+    /**
+     * Autofilter Rule Type.
+     */
+    private string $ruleType = self::AUTOFILTER_RULETYPE_FILTER;
+>>>>>>> match
 
     /**
      * Autofilter Rule Value.
@@ -193,6 +205,7 @@ class Rule
 
     /**
      * Autofilter Rule Operator.
+<<<<<<< HEAD
      *
      * @var string
      */
@@ -204,6 +217,15 @@ class Rule
      * @var string
      */
     private $grouping = '';
+=======
+     */
+    private string $operator = self::AUTOFILTER_COLUMN_RULE_EQUAL;
+
+    /**
+     * DateTimeGrouping Group Value.
+     */
+    private string $grouping = '';
+>>>>>>> match
 
     /**
      * Create a new Rule.
@@ -222,10 +244,15 @@ class Rule
 
     /**
      * Get AutoFilter Rule Type.
+<<<<<<< HEAD
      *
      * @return string
      */
     public function getRuleType()
+=======
+     */
+    public function getRuleType(): string
+>>>>>>> match
     {
         return $this->ruleType;
     }
@@ -237,7 +264,11 @@ class Rule
      *
      * @return $this
      */
+<<<<<<< HEAD
     public function setRuleType($ruleType)
+=======
+    public function setRuleType(string $ruleType): static
+>>>>>>> match
     {
         $this->setEvaluatedFalse();
         if (!in_array($ruleType, self::RULE_TYPES)) {
@@ -266,7 +297,11 @@ class Rule
      *
      * @return $this
      */
+<<<<<<< HEAD
     public function setValue($value)
+=======
+    public function setValue($value): static
+>>>>>>> match
     {
         $this->setEvaluatedFalse();
         if (is_array($value)) {
@@ -294,10 +329,15 @@ class Rule
 
     /**
      * Get AutoFilter Rule Operator.
+<<<<<<< HEAD
      *
      * @return string
      */
     public function getOperator()
+=======
+     */
+    public function getOperator(): string
+>>>>>>> match
     {
         return $this->operator;
     }
@@ -309,15 +349,24 @@ class Rule
      *
      * @return $this
      */
+<<<<<<< HEAD
     public function setOperator($operator)
+=======
+    public function setOperator(string $operator): static
+>>>>>>> match
     {
         $this->setEvaluatedFalse();
         if (empty($operator)) {
             $operator = self::AUTOFILTER_COLUMN_RULE_EQUAL;
         }
         if (
+<<<<<<< HEAD
             (!in_array($operator, self::OPERATORS)) &&
             (!in_array($operator, self::TOP_TEN_VALUE))
+=======
+            (!in_array($operator, self::OPERATORS))
+            && (!in_array($operator, self::TOP_TEN_VALUE))
+>>>>>>> match
         ) {
             throw new PhpSpreadsheetException('Invalid operator for column AutoFilter Rule.');
         }
@@ -328,10 +377,15 @@ class Rule
 
     /**
      * Get AutoFilter Rule Grouping.
+<<<<<<< HEAD
      *
      * @return string
      */
     public function getGrouping()
+=======
+     */
+    public function getGrouping(): string
+>>>>>>> match
     {
         return $this->grouping;
     }
@@ -339,6 +393,7 @@ class Rule
     /**
      * Set AutoFilter Rule Grouping.
      *
+<<<<<<< HEAD
      * @param string $grouping
      *
      * @return $this
@@ -351,6 +406,17 @@ class Rule
             (!in_array($grouping, self::DATE_TIME_GROUPS)) &&
             (!in_array($grouping, self::DYNAMIC_TYPES)) &&
             (!in_array($grouping, self::TOP_TEN_TYPE))
+=======
+     * @return $this
+     */
+    public function setGrouping(string $grouping): static
+    {
+        $this->setEvaluatedFalse();
+        if (
+            (!in_array($grouping, self::DATE_TIME_GROUPS))
+            && (!in_array($grouping, self::DYNAMIC_TYPES))
+            && (!in_array($grouping, self::TOP_TEN_TYPE))
+>>>>>>> match
         ) {
             throw new PhpSpreadsheetException('Invalid grouping for column AutoFilter Rule.');
         }
@@ -364,11 +430,18 @@ class Rule
      *
      * @param string $operator see self::AUTOFILTER_COLUMN_RULE_*
      * @param int|int[]|string|string[] $value
+<<<<<<< HEAD
      * @param string $grouping
      *
      * @return $this
      */
     public function setRule($operator, $value, $grouping = null)
+=======
+     *
+     * @return $this
+     */
+    public function setRule(string $operator, $value, ?string $grouping = null): static
+>>>>>>> match
     {
         $this->setEvaluatedFalse();
         $this->setOperator($operator);
@@ -385,10 +458,15 @@ class Rule
 
     /**
      * Get this Rule's AutoFilter Column Parent.
+<<<<<<< HEAD
      *
      * @return ?Column
      */
     public function getParent()
+=======
+     */
+    public function getParent(): ?Column
+>>>>>>> match
     {
         return $this->parent;
     }
@@ -398,7 +476,11 @@ class Rule
      *
      * @return $this
      */
+<<<<<<< HEAD
     public function setParent(?Column $parent = null)
+=======
+    public function setParent(?Column $parent = null): static
+>>>>>>> match
     {
         $this->setEvaluatedFalse();
         $this->parent = $parent;

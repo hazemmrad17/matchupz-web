@@ -1,9 +1,13 @@
 {% extends 'base.html.twig' %}
+<<<<<<< HEAD
 
+=======
+>>>>>>> match
 {% block searchbar %}
     {% include 'searchbar.html.twig' %}
 {% endblock %}
 
+<<<<<<< HEAD
 {% block title %}Liste des Abonnements{% endblock %}
 
 {% block stylesheets %}
@@ -82,10 +86,14 @@
         }
     </style>
 {% endblock %}
+=======
+{% block title %}Liste des Sports{% endblock %}
+>>>>>>> match
 
 {% block content %}
     <div class="content-wrapper">
         <div class="container-xxl flex-grow-1 container-p-y">
+<<<<<<< HEAD
             {% for message in app.flashes('success') %}
                 <div class="alert alert-success">{{ message }}</div>
             {% endfor %}
@@ -151,12 +159,38 @@
                                     <td>{{ abonnement.dateFin|date('d/m/Y') }}</td>
                                     <td>{{ abonnement.tarif }}</td>
                                     <td>{{ abonnement.etat }}</td>
+=======
+            {% include 'sport/sport_widgets.html.twig' %}
+            <div class="card">
+                <h5 class="card-header d-flex justify-content-between align-items-center">
+                    Liste des Sports
+                    <a href="{{ path('sport_new') }}" class="btn btn-primary">Ajouter un Sport</a>
+                </h5>
+                <div class="table-responsive text-nowrap">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Nom du Sport</th>
+                                <th>Description</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-border-bottom-0">
+                            {% for sport in sports %}
+                                <tr class="table-default">
+                                    <td>
+                                        <i class="fab fa-sketch fa-lg text-warning me-3"></i>
+                                        <strong>{{ sport.nomSport }}</strong>
+                                    </td>
+                                    <td>{{ sport.description|default('N/A')}}</td>
+>>>>>>> match
                                     <td>
                                         <div class="dropdown">
                                             <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
                                                 <i class="bx bx-dots-vertical-rounded"></i>
                                             </button>
                                             <div class="dropdown-menu">
+<<<<<<< HEAD
                                                 <a class="dropdown-item" href="{{ path('abonnement_show', {'idAbonnement': abonnement.idAbonnement}) }}">
                                                     <i class="bx bx-show me-1"></i> Voir
                                                 </a>
@@ -165,6 +199,16 @@
                                                 </a>
                                                 <form method="post" action="{{ path('abonnement_delete', {'idAbonnement': abonnement.idAbonnement}) }}" style="display:inline;" onsubmit="return confirm('Confirmer la suppression?');">
                                                     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ abonnement.idAbonnement) }}">
+=======
+                                                <a class="dropdown-item" href="{{ path('sport_show', {'idSport': sport.idSport}) }}">
+                                                    <i class="bx bx-show me-1"></i> Voir
+                                                </a>
+                                                <a class="dropdown-item" href="{{ path('sport_edit', {'idSport': sport.idSport}) }}">
+                                                    <i class="bx bx-edit-alt me-1"></i> Modifier
+                                                </a>
+                                                <form method="post" action="{{ path('sport_delete', {'idSport': sport.idSport}) }}" style="display:inline;" onsubmit="return confirm('Confirmer la suppression?');">
+                                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ sport.idSport) }}">
+>>>>>>> match
                                                     <button class="dropdown-item" type="submit">
                                                         <i class="bx bx-trash me-1"></i> Supprimer
                                                     </button>
@@ -175,12 +219,17 @@
                                 </tr>
                             {% else %}
                                 <tr>
+<<<<<<< HEAD
                                     <td colspan="7" class="text-center">Aucun abonnement trouvé</td>
+=======
+                                    <td colspan="3" class="text-center">Aucun sport trouvé</td>
+>>>>>>> match
                                 </tr>
                             {% endfor %}
                         </tbody>
                     </table>
                 </div>
+<<<<<<< HEAD
                 <div class="card-footer" id="paginationContainer">
                     {% include 'abonnement/_pagination.html.twig' with {'abonnements': abonnements, 'searchTerm': searchTerm} %}
                 </div>
@@ -334,4 +383,9 @@
             }, 300));
         });
     </script>
+=======
+            </div>
+        </div>
+    </div>
+>>>>>>> match
 {% endblock %}

@@ -24,7 +24,11 @@ class Percentiles
      *
      * @return float|string The result, or a string containing an error
      */
+<<<<<<< HEAD
     public static function PERCENTILE(...$args)
+=======
+    public static function PERCENTILE(mixed ...$args)
+>>>>>>> match
     {
         $aArgs = Functions::flattenArray($args);
 
@@ -47,9 +51,16 @@ class Percentiles
             sort($mArgs);
             $count = Counts::COUNT($mArgs);
             $index = $entry * ($count - 1);
+<<<<<<< HEAD
             $iBase = floor($index);
             if ($index == $iBase) {
                 return $mArgs[$index];
+=======
+            $indexFloor = floor($index);
+            $iBase = (int) $indexFloor;
+            if ($index == $indexFloor) {
+                return $mArgs[$iBase];
+>>>>>>> match
             }
             $iNext = $iBase + 1;
             $iProportion = $index - $iBase;
@@ -74,7 +85,11 @@ class Percentiles
      *
      * @return float|string (string if result is an error)
      */
+<<<<<<< HEAD
     public static function PERCENTRANK($valueSet, $value, $significance = 3)
+=======
+    public static function PERCENTRANK(mixed $valueSet, mixed $value, mixed $significance = 3): string|float
+>>>>>>> match
     {
         $valueSet = Functions::flattenArray($valueSet);
         $value = Functions::flattenSingleValue($value);
@@ -125,7 +140,11 @@ class Percentiles
      *
      * @return float|string The result, or a string containing an error
      */
+<<<<<<< HEAD
     public static function QUARTILE(...$args)
+=======
+    public static function QUARTILE(mixed ...$args)
+>>>>>>> match
     {
         $aArgs = Functions::flattenArray($args);
         $entry = array_pop($aArgs);
@@ -156,7 +175,11 @@ class Percentiles
      *
      * @return float|string The result, or a string containing an error (0 = Descending, 1 = Ascending)
      */
+<<<<<<< HEAD
     public static function RANK($value, $valueSet, $order = self::RANK_SORT_DESCENDING)
+=======
+    public static function RANK(mixed $value, mixed $valueSet, mixed $order = self::RANK_SORT_DESCENDING)
+>>>>>>> match
     {
         $value = Functions::flattenSingleValue($value);
         $valueSet = Functions::flattenArray($valueSet);
@@ -188,9 +211,13 @@ class Percentiles
     {
         return array_filter(
             $dataSet,
+<<<<<<< HEAD
             function ($value): bool {
                 return is_numeric($value) && !is_string($value);
             }
+=======
+            fn ($value): bool => is_numeric($value) && !is_string($value)
+>>>>>>> match
         );
     }
 
@@ -198,9 +225,13 @@ class Percentiles
     {
         return array_filter(
             $dataSet,
+<<<<<<< HEAD
             function ($value): bool {
                 return is_numeric($value);
             }
+=======
+            fn ($value): bool => is_numeric($value)
+>>>>>>> match
         );
     }
 }

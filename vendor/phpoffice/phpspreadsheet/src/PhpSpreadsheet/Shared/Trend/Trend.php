@@ -2,6 +2,11 @@
 
 namespace PhpOffice\PhpSpreadsheet\Shared\Trend;
 
+<<<<<<< HEAD
+=======
+use PhpOffice\PhpSpreadsheet\Exception as SpreadsheetException;
+
+>>>>>>> match
 class Trend
 {
     const TREND_LINEAR = 'Linear';
@@ -18,10 +23,15 @@ class Trend
 
     /**
      * Names of the best-fit Trend analysis methods.
+<<<<<<< HEAD
      *
      * @var string[]
      */
     private static $trendTypes = [
+=======
+     */
+    private const TREND_TYPES = [
+>>>>>>> match
         self::TREND_LINEAR,
         self::TREND_LOGARITHMIC,
         self::TREND_EXPONENTIAL,
@@ -33,7 +43,11 @@ class Trend
      *
      * @var string[]
      */
+<<<<<<< HEAD
     private static $trendTypePolynomialOrders = [
+=======
+    private static array $trendTypePolynomialOrders = [
+>>>>>>> match
         self::TREND_POLYNOMIAL_2,
         self::TREND_POLYNOMIAL_3,
         self::TREND_POLYNOMIAL_4,
@@ -46,6 +60,7 @@ class Trend
      *
      * @var BestFit[]
      */
+<<<<<<< HEAD
     private static $trendCache = [];
 
     /**
@@ -57,6 +72,11 @@ class Trend
      * @return mixed
      */
     public static function calculate($trendType = self::TREND_BEST_FIT, $yValues = [], $xValues = [], $const = true)
+=======
+    private static array $trendCache = [];
+
+    public static function calculate(string $trendType = self::TREND_BEST_FIT, array $yValues = [], array $xValues = [], bool $const = true): BestFit
+>>>>>>> match
     {
         //    Calculate number of points in each dataset
         $nY = count($yValues);
@@ -67,7 +87,11 @@ class Trend
             $xValues = range(1, $nY);
         } elseif ($nY !== $nX) {
             //    Ensure both arrays of points are the same size
+<<<<<<< HEAD
             trigger_error('Trend(): Number of elements in coordinate arrays do not match.', E_USER_ERROR);
+=======
+            throw new SpreadsheetException('Trend(): Number of elements in coordinate arrays do not match.');
+>>>>>>> match
         }
 
         $key = md5($trendType . $const . serialize($yValues) . serialize($xValues));
@@ -101,6 +125,7 @@ class Trend
                 //    Start by generating an instance of each available Trend method
                 $bestFit = [];
                 $bestFitValue = [];
+<<<<<<< HEAD
                 foreach (self::$trendTypes as $trendMethod) {
                     $className = '\PhpOffice\PhpSpreadsheet\Shared\Trend\\' . $trendType . 'BestFit';
                     //* @phpstan-ignore-next-line
@@ -108,6 +133,14 @@ class Trend
                     $bestFitValue[$trendMethod] = $bestFit[$trendMethod]->getGoodnessOfFit();
                 }
                 if ($trendType != self::TREND_BEST_FIT_NO_POLY) {
+=======
+                foreach (self::TREND_TYPES as $trendMethod) {
+                    $className = '\PhpOffice\PhpSpreadsheet\Shared\Trend\\' . $trendMethod . 'BestFit';
+                    $bestFit[$trendMethod] = new $className($yValues, $xValues, $const);
+                    $bestFitValue[$trendMethod] = $bestFit[$trendMethod]->getGoodnessOfFit();
+                }
+                if ($trendType !== self::TREND_BEST_FIT_NO_POLY) {
+>>>>>>> match
                     foreach (self::$trendTypePolynomialOrders as $trendMethod) {
                         $order = (int) substr($trendMethod, -1);
                         $bestFit[$trendMethod] = new PolynomialBestFit($order, $yValues, $xValues);
@@ -124,7 +157,11 @@ class Trend
 
                 return $bestFit[$bestFitType];
             default:
+<<<<<<< HEAD
                 return false;
+=======
+                throw new SpreadsheetException("Unknown trend type $trendType");
+>>>>>>> match
         }
     }
 }

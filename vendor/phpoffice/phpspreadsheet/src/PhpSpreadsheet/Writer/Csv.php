@@ -3,12 +3,19 @@
 namespace PhpOffice\PhpSpreadsheet\Writer;
 
 use PhpOffice\PhpSpreadsheet\Calculation\Calculation;
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
+=======
+use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use Stringable;
+>>>>>>> match
 
 class Csv extends BaseWriter
 {
     /**
      * PhpSpreadsheet object.
+<<<<<<< HEAD
      *
      * @var Spreadsheet
      */
@@ -48,10 +55,40 @@ class Csv extends BaseWriter
      * @var bool
      */
     private $useBOM = false;
+=======
+     */
+    private Spreadsheet $spreadsheet;
+
+    /**
+     * Delimiter.
+     */
+    private string $delimiter = ',';
+
+    /**
+     * Enclosure.
+     */
+    private string $enclosure = '"';
+
+    /**
+     * Line ending.
+     */
+    private string $lineEnding = PHP_EOL;
+
+    /**
+     * Sheet index to write.
+     */
+    private int $sheetIndex = 0;
+
+    /**
+     * Whether to write a UTF8 BOM.
+     */
+    private bool $useBOM = false;
+>>>>>>> match
 
     /**
      * Whether to write a Separator line as the first line of the file
      *     sep=x.
+<<<<<<< HEAD
      *
      * @var bool
      */
@@ -70,6 +107,29 @@ class Csv extends BaseWriter
      * @var string
      */
     private $outputEncoding = '';
+=======
+     */
+    private bool $includeSeparatorLine = false;
+
+    /**
+     * Whether to write a fully Excel compatible CSV file.
+     */
+    private bool $excelCompatibility = false;
+
+    /**
+     * Output encoding.
+     */
+    private string $outputEncoding = '';
+
+    /**
+     * Whether number of columns should be allowed to vary
+     * between rows, or use a fixed range based on the max
+     * column overall.
+     */
+    private bool $variableColumns = false;
+
+    private bool $preferHyperlinkToLabel = false;
+>>>>>>> match
 
     /**
      * Create a new CSV.
@@ -93,8 +153,12 @@ class Csv extends BaseWriter
 
         $saveDebugLog = Calculation::getInstance($this->spreadsheet)->getDebugLog()->getWriteDebugLog();
         Calculation::getInstance($this->spreadsheet)->getDebugLog()->setWriteDebugLog(false);
+<<<<<<< HEAD
         $saveArrayReturnType = Calculation::getArrayReturnType();
         Calculation::setArrayReturnType(Calculation::RETURN_ARRAY_AS_VALUE);
+=======
+        $sheet->calculateArrays($this->preCalculateFormulas);
+>>>>>>> match
 
         // Open file
         $this->openFileHandle($filename);
@@ -122,6 +186,7 @@ class Csv extends BaseWriter
         $maxRow = $sheet->getHighestDataRow();
 
         // Write rows to file
+<<<<<<< HEAD
         for ($row = 1; $row <= $maxRow; ++$row) {
             // Convert the row to an array...
             $cellsArray = $sheet->rangeToArray('A' . $row . ':' . $maxCol . $row, '', $this->preCalculateFormulas);
@@ -131,6 +196,31 @@ class Csv extends BaseWriter
 
         $this->maybeCloseFileHandle();
         Calculation::setArrayReturnType($saveArrayReturnType);
+=======
+        $row = 0;
+        foreach ($sheet->rangeToArrayYieldRows("A1:$maxCol$maxRow", '', $this->preCalculateFormulas) as $cellsArray) {
+            ++$row;
+            if ($this->variableColumns) {
+                $column = $sheet->getHighestDataColumn($row);
+                if ($column === 'A' && !$sheet->cellExists("A$row")) {
+                    $cellsArray = [];
+                } else {
+                    array_splice($cellsArray, Coordinate::columnIndexFromString($column));
+                }
+            }
+            if ($this->preferHyperlinkToLabel) {
+                foreach ($cellsArray as $key => $value) {
+                    $url = $sheet->getCell([$key + 1, $row])->getHyperlink()->getUrl();
+                    if ($url !== '') {
+                        $cellsArray[$key] = $url;
+                    }
+                }
+            }
+            $this->writeLine($this->fileHandle, $cellsArray);
+        }
+
+        $this->maybeCloseFileHandle();
+>>>>>>> match
         Calculation::getInstance($this->spreadsheet)->getDebugLog()->setWriteDebugLog($saveDebugLog);
     }
 
@@ -251,8 +341,12 @@ class Csv extends BaseWriter
         return $this;
     }
 
+<<<<<<< HEAD
     /** @var bool */
     private $enclosureRequired = true;
+=======
+    private bool $enclosureRequired = true;
+>>>>>>> match
 
     public function setEnclosureRequired(bool $value): self
     {
@@ -269,9 +363,15 @@ class Csv extends BaseWriter
     /**
      * Convert boolean to TRUE/FALSE; otherwise return element cast to string.
      *
+<<<<<<< HEAD
      * @param mixed $element
      */
     private static function elementToString($element): string
+=======
+     * @param null|bool|float|int|string|Stringable $element element to be converted
+     */
+    private static function elementToString(mixed $element): string
+>>>>>>> match
     {
         if (is_bool($element)) {
             return $element ? 'TRUE' : 'FALSE';
@@ -294,6 +394,10 @@ class Csv extends BaseWriter
         // Build the line
         $line = '';
 
+<<<<<<< HEAD
+=======
+        /** @var null|bool|float|int|string|Stringable $element */
+>>>>>>> match
         foreach ($values as $element) {
             $element = self::elementToString($element);
             // Add delimiter
@@ -321,6 +425,50 @@ class Csv extends BaseWriter
         if ($this->outputEncoding != '') {
             $line = mb_convert_encoding($line, $this->outputEncoding);
         }
+<<<<<<< HEAD
         fwrite($fileHandle, /** @scrutinizer ignore-type */ $line);
+=======
+        fwrite($fileHandle, $line);
+    }
+
+    /**
+     * Get whether number of columns should be allowed to vary
+     * between rows, or use a fixed range based on the max
+     * column overall.
+     */
+    public function getVariableColumns(): bool
+    {
+        return $this->variableColumns;
+    }
+
+    /**
+     * Set whether number of columns should be allowed to vary
+     * between rows, or use a fixed range based on the max
+     * column overall.
+     */
+    public function setVariableColumns(bool $pValue): self
+    {
+        $this->variableColumns = $pValue;
+
+        return $this;
+    }
+
+    /**
+     * Get whether hyperlink or label should be output.
+     */
+    public function getPreferHyperlinkToLabel(): bool
+    {
+        return $this->preferHyperlinkToLabel;
+    }
+
+    /**
+     * Set whether hyperlink or label should be output.
+     */
+    public function setPreferHyperlinkToLabel(bool $preferHyperlinkToLabel): self
+    {
+        $this->preferHyperlinkToLabel = $preferHyperlinkToLabel;
+
+        return $this;
+>>>>>>> match
     }
 }

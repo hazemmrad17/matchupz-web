@@ -2,6 +2,11 @@
 
 namespace PhpOffice\PhpSpreadsheet\Chart\Renderer;
 
+<<<<<<< HEAD
+=======
+use mitoteam\jpgraph\MtJpGraph;
+
+>>>>>>> match
 /**
  * Jpgraph is not officially maintained by Composer at packagist.org.
  *
@@ -19,7 +24,11 @@ class MtJpGraphRenderer extends JpGraphRendererBase
             return;
         }
 
+<<<<<<< HEAD
         \mitoteam\jpgraph\MtJpGraph::load([
+=======
+        MtJpGraph::load([
+>>>>>>> match
             'bar',
             'contour',
             'line',

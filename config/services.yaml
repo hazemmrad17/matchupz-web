@@ -7,6 +7,7 @@ parameters:
     profile_pictures_directory: '%kernel.project_dir%/public/uploads/profile_pictures'
     club_photos_directory: '%kernel.project_dir%/public/uploads/club_photos'
     photos_directory: '%kernel.project_dir%/public/uploads/photos'
+<<<<<<< HEAD
     app.api_ninja_key: '%env(API_NINJA_KEY)%'  # Added for GeocodingService
     google_credentials_path: '%kernel.project_dir%/config/secrets/google_credentials.json'
     google_token_path: '%kernel.project_dir%/config/secrets/google_token.json'
@@ -23,12 +24,23 @@ services:
         tags: ['twig.extension']
 
     # default configuration for services in *this* file
+=======
+    app.news_api_key: '2a65b6315ab7460f97ac49687599263d'
+
+services:
+    # Default configuration for services in *this* file
+>>>>>>> match
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
 
+<<<<<<< HEAD
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
+=======
+    # Makes classes in src/ available to be used as services
+    # This creates a service per class whose id is the fully-qualified class name
+>>>>>>> match
     App\:
         resource: '../src/'
         exclude:
@@ -36,6 +48,7 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
 
+<<<<<<< HEAD
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
     App\Service\GeocodingService:
@@ -51,3 +64,15 @@ services:
         arguments:
             $params: '@parameter_bag'
             $logger: '@logger'
+=======
+    # Explicitly configure ScheduleController to inject both $entityManager and $newsApiKey
+    App\Controller\ScheduleController:
+        arguments:
+            $entityManager: '@doctrine.orm.entity_manager'
+            $newsApiKey: '%app.news_api_key%'
+
+    App\Validator\NoScheduleOverlapValidator:
+        tags: ['validator.constraint_validator']
+        arguments:
+            $scheduleRepository: '@App\Repository\ScheduleRepository'
+>>>>>>> match

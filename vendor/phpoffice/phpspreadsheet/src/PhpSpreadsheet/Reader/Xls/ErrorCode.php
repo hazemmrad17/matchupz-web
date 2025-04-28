@@ -16,12 +16,17 @@ class ErrorCode
 
     /**
      * Map error code, e.g. '#N/A'.
+<<<<<<< HEAD
      *
      * @param int $code
      *
      * @return bool|string
      */
     public static function lookup($code)
+=======
+     */
+    public static function lookup(int $code): string|bool
+>>>>>>> match
     {
         return self::ERROR_CODE_MAP[$code] ?? false;
     }

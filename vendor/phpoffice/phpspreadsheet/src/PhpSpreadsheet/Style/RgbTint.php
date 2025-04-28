@@ -60,9 +60,12 @@ class RgbTint
         return [$h, $luminance, $s];
     }
 
+<<<<<<< HEAD
     /** @var mixed */
     private static $scrutinizerZeroPointZero = 0.0;
 
+=======
+>>>>>>> match
     /**
      * Convert hue/luminance/saturation to red/green/blue.
      *
@@ -72,9 +75,15 @@ class RgbTint
      *
      * @return float[]
      */
+<<<<<<< HEAD
     private static function hlsToRgb($hue, $luminance, $saturation): array
     {
         if ($saturation === self::$scrutinizerZeroPointZero) {
+=======
+    private static function hlsToRgb(float $hue, float $luminance, float $saturation): array
+    {
+        if ($saturation === 0.0) {
+>>>>>>> match
             return [$luminance, $luminance, $luminance];
         }
         if ($luminance <= 0.5) {

@@ -29,6 +29,7 @@ class Legend
 
     /**
      * Legend position.
+<<<<<<< HEAD
      *
      * @var string
      */
@@ -65,6 +66,31 @@ class Legend
      * @param bool $overlay
      */
     public function __construct($position = self::POSITION_RIGHT, ?Layout $layout = null, $overlay = false)
+=======
+     */
+    private string $position = self::POSITION_RIGHT;
+
+    /**
+     * Allow overlay of other elements?
+     */
+    private bool $overlay = true;
+
+    /**
+     * Legend Layout.
+     */
+    private ?Layout $layout;
+
+    private GridLines $borderLines;
+
+    private ChartColor $fillColor;
+
+    private ?AxisText $legendText = null;
+
+    /**
+     * Create a new Legend.
+     */
+    public function __construct(string $position = self::POSITION_RIGHT, ?Layout $layout = null, bool $overlay = false)
+>>>>>>> match
     {
         $this->setPosition($position);
         $this->layout = $layout;
@@ -80,10 +106,15 @@ class Legend
 
     /**
      * Get legend position as an excel string value.
+<<<<<<< HEAD
      *
      * @return string
      */
     public function getPosition()
+=======
+     */
+    public function getPosition(): string
+>>>>>>> match
     {
         return $this->position;
     }
@@ -92,10 +123,15 @@ class Legend
      * Get legend position using an excel string value.
      *
      * @param string $position see self::POSITION_*
+<<<<<<< HEAD
      *
      * @return bool
      */
     public function setPosition($position)
+=======
+     */
+    public function setPosition(string $position): bool
+>>>>>>> match
     {
         if (!in_array($position, self::POSITION_XLREF)) {
             return false;
@@ -108,12 +144,18 @@ class Legend
 
     /**
      * Get legend position as an Excel internal numeric value.
+<<<<<<< HEAD
      *
      * @return false|int
      */
     public function getPositionXL()
     {
         // Scrutinizer thinks the following could return string. It is wrong.
+=======
+     */
+    public function getPositionXL(): false|int
+    {
+>>>>>>> match
         return array_search($this->position, self::POSITION_XLREF);
     }
 
@@ -121,10 +163,15 @@ class Legend
      * Set legend position using an Excel internal numeric value.
      *
      * @param int $positionXL see self::XL_LEGEND_POSITION_*
+<<<<<<< HEAD
      *
      * @return bool
      */
     public function setPositionXL($positionXL)
+=======
+     */
+    public function setPositionXL(int $positionXL): bool
+>>>>>>> match
     {
         if (!isset(self::POSITION_XLREF[$positionXL])) {
             return false;
@@ -137,30 +184,45 @@ class Legend
 
     /**
      * Get allow overlay of other elements?
+<<<<<<< HEAD
      *
      * @return bool
      */
     public function getOverlay()
+=======
+     */
+    public function getOverlay(): bool
+>>>>>>> match
     {
         return $this->overlay;
     }
 
     /**
      * Set allow overlay of other elements?
+<<<<<<< HEAD
      *
      * @param bool $overlay
      */
     public function setOverlay($overlay): void
+=======
+     */
+    public function setOverlay(bool $overlay): void
+>>>>>>> match
     {
         $this->overlay = $overlay;
     }
 
     /**
      * Get Layout.
+<<<<<<< HEAD
      *
      * @return ?Layout
      */
     public function getLayout()
+=======
+     */
+    public function getLayout(): ?Layout
+>>>>>>> match
     {
         return $this->layout;
     }
@@ -188,4 +250,18 @@ class Legend
 
         return $this;
     }
+<<<<<<< HEAD
+=======
+
+    /**
+     * Implement PHP __clone to create a deep clone, not just a shallow copy.
+     */
+    public function __clone()
+    {
+        $this->layout = ($this->layout === null) ? null : clone $this->layout;
+        $this->legendText = ($this->legendText === null) ? null : clone $this->legendText;
+        $this->borderLines = clone $this->borderLines;
+        $this->fillColor = clone $this->fillColor;
+    }
+>>>>>>> match
 }

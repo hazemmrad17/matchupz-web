@@ -35,6 +35,7 @@ class Escher
 
     /**
      * Escher stream data (binary).
+<<<<<<< HEAD
      *
      * @var string
      */
@@ -67,6 +68,30 @@ class Escher
      * @param mixed $object
      */
     public function __construct($object)
+=======
+     */
+    private string $data;
+
+    /**
+     * Size in bytes of the Escher stream data.
+     */
+    private int $dataSize;
+
+    /**
+     * Current position of stream pointer in Escher stream data.
+     */
+    private int $pos;
+
+    /**
+     * The object to be returned by the reader. Modified during load.
+     */
+    private BSE|BstoreContainer|DgContainer|DggContainer|\PhpOffice\PhpSpreadsheet\Shared\Escher|SpContainer|SpgrContainer $object;
+
+    /**
+     * Create a new Escher instance.
+     */
+    public function __construct(BSE|BstoreContainer|DgContainer|DggContainer|\PhpOffice\PhpSpreadsheet\Shared\Escher|SpContainer|SpgrContainer $object)
+>>>>>>> match
     {
         $this->object = $object;
     }
@@ -94,12 +119,17 @@ class Escher
 
     /**
      * Load Escher stream data. May be a partial Escher stream.
+<<<<<<< HEAD
      *
      * @param string $data
      *
      * @return BSE|BstoreContainer|DgContainer|DggContainer|\PhpOffice\PhpSpreadsheet\Shared\Escher|SpContainer|SpgrContainer
      */
     public function load($data)
+=======
+     */
+    public function load(string $data): BSE|BstoreContainer|DgContainer|DggContainer|\PhpOffice\PhpSpreadsheet\Shared\Escher|SpContainer|SpgrContainer
+>>>>>>> match
     {
         $this->data = $data;
 
@@ -553,10 +583,14 @@ class Escher
         $this->applyAttribute('setEndOffsetY', $endOffsetY);
     }
 
+<<<<<<< HEAD
     /**
      * @param mixed $value
      */
     private function applyAttribute(string $name, $value): void
+=======
+    private function applyAttribute(string $name, mixed $value): void
+>>>>>>> match
     {
         if (method_exists($this->object, $name)) {
             $this->object->$name($value);
@@ -581,7 +615,11 @@ class Escher
      * @param string $data Binary data
      * @param int $n Number of properties
      */
+<<<<<<< HEAD
     private function readOfficeArtRGFOPTE($data, $n): void
+=======
+    private function readOfficeArtRGFOPTE(string $data, int $n): void
+>>>>>>> match
     {
         $splicedComplexData = substr($data, 6 * $n);
 

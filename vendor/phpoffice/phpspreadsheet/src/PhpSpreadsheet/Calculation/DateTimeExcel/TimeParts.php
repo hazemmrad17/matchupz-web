@@ -27,7 +27,11 @@ class TimeParts
      *         If an array of numbers is passed as the argument, then the returned result will also be an array
      *            with the same dimensions
      */
+<<<<<<< HEAD
     public static function hour($timeValue)
+=======
+    public static function hour(mixed $timeValue): array|string|int
+>>>>>>> match
     {
         if (is_array($timeValue)) {
             return self::evaluateSingleArgumentArray([self::class, __FUNCTION__], $timeValue);
@@ -35,7 +39,11 @@ class TimeParts
 
         try {
             Helpers::nullFalseTrueToNumber($timeValue);
+<<<<<<< HEAD
             if (!is_numeric($timeValue)) {
+=======
+            if (is_string($timeValue) && !is_numeric($timeValue)) {
+>>>>>>> match
                 $timeValue = Helpers::getTimeValue($timeValue);
             }
             Helpers::validateNotNegative($timeValue);
@@ -46,6 +54,10 @@ class TimeParts
         // Execute function
         $timeValue = fmod($timeValue, 1);
         $timeValue = SharedDateHelper::excelToDateTimeObject($timeValue);
+<<<<<<< HEAD
+=======
+        SharedDateHelper::roundMicroseconds($timeValue);
+>>>>>>> match
 
         return (int) $timeValue->format('H');
     }
@@ -67,7 +79,11 @@ class TimeParts
      *         If an array of numbers is passed as the argument, then the returned result will also be an array
      *            with the same dimensions
      */
+<<<<<<< HEAD
     public static function minute($timeValue)
+=======
+    public static function minute(mixed $timeValue): array|string|int
+>>>>>>> match
     {
         if (is_array($timeValue)) {
             return self::evaluateSingleArgumentArray([self::class, __FUNCTION__], $timeValue);
@@ -75,7 +91,11 @@ class TimeParts
 
         try {
             Helpers::nullFalseTrueToNumber($timeValue);
+<<<<<<< HEAD
             if (!is_numeric($timeValue)) {
+=======
+            if (is_string($timeValue) && !is_numeric($timeValue)) {
+>>>>>>> match
                 $timeValue = Helpers::getTimeValue($timeValue);
             }
             Helpers::validateNotNegative($timeValue);
@@ -86,6 +106,10 @@ class TimeParts
         // Execute function
         $timeValue = fmod($timeValue, 1);
         $timeValue = SharedDateHelper::excelToDateTimeObject($timeValue);
+<<<<<<< HEAD
+=======
+        SharedDateHelper::roundMicroseconds($timeValue);
+>>>>>>> match
 
         return (int) $timeValue->format('i');
     }
@@ -107,7 +131,11 @@ class TimeParts
      *         If an array of numbers is passed as the argument, then the returned result will also be an array
      *            with the same dimensions
      */
+<<<<<<< HEAD
     public static function second($timeValue)
+=======
+    public static function second(mixed $timeValue): array|string|int
+>>>>>>> match
     {
         if (is_array($timeValue)) {
             return self::evaluateSingleArgumentArray([self::class, __FUNCTION__], $timeValue);
@@ -115,7 +143,11 @@ class TimeParts
 
         try {
             Helpers::nullFalseTrueToNumber($timeValue);
+<<<<<<< HEAD
             if (!is_numeric($timeValue)) {
+=======
+            if (is_string($timeValue) && !is_numeric($timeValue)) {
+>>>>>>> match
                 $timeValue = Helpers::getTimeValue($timeValue);
             }
             Helpers::validateNotNegative($timeValue);
@@ -126,6 +158,10 @@ class TimeParts
         // Execute function
         $timeValue = fmod($timeValue, 1);
         $timeValue = SharedDateHelper::excelToDateTimeObject($timeValue);
+<<<<<<< HEAD
+=======
+        SharedDateHelper::roundMicroseconds($timeValue);
+>>>>>>> match
 
         return (int) $timeValue->format('s');
     }

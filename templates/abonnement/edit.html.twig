@@ -1,19 +1,27 @@
 {% extends 'base.html.twig' %}
 
+<<<<<<< HEAD
 {% block searchbar %}
     {% include 'searchbar.html.twig' %}
 {% endblock %}
 
+=======
+>>>>>>> match
 {% block content %}
     <div class="content-wrapper">
         <div class="container-xxl flex-grow-1 container-p-y">
             <h4 class="fw-bold py-3 mb-4">
+<<<<<<< HEAD
                 <span class="text-muted fw-light">Abonnements /</span> Modifier Abonnement
+=======
+                <span class="text-muted fw-light">Sports /</span> Modifier Sport
+>>>>>>> match
             </h4>
 
             <div class="col-xl">
                 <div class="card mb-4">
                     <div class="card-header d-flex justify-content-between align-items-center">
+<<<<<<< HEAD
                         <h5 class="mb-0">Modifier Abonnement #{{ abonnement.idAbonnement }}</h5>
                         <small class="text-muted float-end">Mettre à jour les détails</small>
                     </div>
@@ -75,6 +83,29 @@
                             </div>
                             <button type="submit" class="btn btn-primary">Mettre à jour</button>
                             <a href="{{ path('abonnement_show', {'idAbonnement': abonnement.idAbonnement}) }}" class="btn btn-secondary">Annuler</a>
+=======
+                        <h5 class="mb-0">Modifier Sport #{{ sport.idSport }}</h5>
+                        <small class="text-muted float-end">Mettre à jour les détails</small>
+                    </div>
+                    <div class="card-body">
+                        {{ form_start(form) }}
+                            <div class="mb-3">
+                                <label class="form-label" for="nomSport">Nom du Sport</label>
+                                <div class="input-group input-group-merge">
+                                    <span class="input-group-text"><i class="bx bx-run"></i></span>
+                                    {{ form_widget(form.nomSport, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="description">Description</label>
+                                <div class="input-group input-group-merge">
+                                    <span class="input-group-text"><i class="bx bx-detail"></i></span>
+                                    {{ form_widget(form.description, {'attr': {'class': 'form-control', 'rows': '5'}}) }}
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Mettre à jour</button>
+                            <a href="{{ path('sport_show', {'idSport': sport.idSport}) }}" class="btn btn-secondary">Annuler</a>
+>>>>>>> match
                         {{ form_end(form) }}
                     </div>
                 </div>

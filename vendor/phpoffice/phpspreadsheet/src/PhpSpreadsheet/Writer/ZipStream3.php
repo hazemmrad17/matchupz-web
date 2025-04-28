@@ -2,7 +2,10 @@
 
 namespace PhpOffice\PhpSpreadsheet\Writer;
 
+<<<<<<< HEAD
 use ZipStream\Option\Archive;
+=======
+>>>>>>> match
 use ZipStream\ZipStream;
 
 class ZipStream3

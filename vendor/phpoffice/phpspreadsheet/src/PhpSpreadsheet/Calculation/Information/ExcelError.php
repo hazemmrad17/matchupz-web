@@ -30,6 +30,7 @@ class ExcelError
         'calculation' => '#CALC!', //14
     ];
 
+<<<<<<< HEAD
     /**
      * List of error codes. Replaced by constant;
      * previously it was public and updateable, allowing
@@ -45,6 +46,9 @@ class ExcelError
      * @param mixed $value
      */
     public static function throwError($value): string
+=======
+    public static function throwError(mixed $value): string
+>>>>>>> match
     {
         return in_array($value, self::ERROR_CODES, true) ? $value : self::ERROR_CODES['value'];
     }
@@ -53,10 +57,15 @@ class ExcelError
      * ERROR_TYPE.
      *
      * @param mixed $value Value to check
+<<<<<<< HEAD
      *
      * @return array|int|string
      */
     public static function type($value = '')
+=======
+     */
+    public static function type(mixed $value = ''): array|int|string
+>>>>>>> match
     {
         if (is_array($value)) {
             return self::evaluateSingleArgumentArray([self::class, __FUNCTION__], $value);
@@ -168,4 +177,17 @@ class ExcelError
     {
         return self::ERROR_CODES['calculation'];
     }
+<<<<<<< HEAD
+=======
+
+    /**
+     * SPILL.
+     *
+     * @return string #SPILL!
+     */
+    public static function SPILL(): string
+    {
+        return self::ERROR_CODES['spill'];
+    }
+>>>>>>> match
 }

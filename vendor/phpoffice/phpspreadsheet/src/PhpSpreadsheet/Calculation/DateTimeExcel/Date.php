@@ -2,6 +2,10 @@
 
 namespace PhpOffice\PhpSpreadsheet\Calculation\DateTimeExcel;
 
+<<<<<<< HEAD
+=======
+use DateTime;
+>>>>>>> match
 use PhpOffice\PhpSpreadsheet\Calculation\ArrayEnabled;
 use PhpOffice\PhpSpreadsheet\Calculation\Exception;
 use PhpOffice\PhpSpreadsheet\Calculation\Information\ExcelError;
@@ -27,7 +31,11 @@ class Date
      * A Month name or abbreviation (English only at this point) such as 'January' or 'Jan' will still be accepted,
      *     as will a day value with a suffix (e.g. '21st' rather than simply 21); again only English language.
      *
+<<<<<<< HEAD
      * @param array|int $year The value of the year argument can include one to four digits.
+=======
+     * @param array|float|int|string $year The value of the year argument can include one to four digits.
+>>>>>>> match
      *                                Excel interprets the year argument according to the configured
      *                                date system: 1900 or 1904.
      *                                If year is between 0 (zero) and 1899 (inclusive), Excel adds that
@@ -38,7 +46,11 @@ class Date
      *                                2008.
      *                                If year is less than 0 or is 10000 or greater, Excel returns the
      *                                #NUM! error value.
+<<<<<<< HEAD
      * @param array|int $month A positive or negative integer representing the month of the year
+=======
+     * @param array|float|int|string $month A positive or negative integer representing the month of the year
+>>>>>>> match
      *                                from 1 to 12 (January to December).
      *                                If month is greater than 12, month adds that number of months to
      *                                the first month in the year specified. For example, DATE(2008,14,2)
@@ -47,7 +59,11 @@ class Date
      *                                number of months, plus 1, from the first month in the year
      *                                specified. For example, DATE(2008,-3,2) returns the serial number
      *                                representing September 2, 2007.
+<<<<<<< HEAD
      * @param array|int $day A positive or negative integer representing the day of the month
+=======
+     * @param array|float|int|string $day A positive or negative integer representing the day of the month
+>>>>>>> match
      *                                from 1 to 31.
      *                                If day is greater than the number of days in the month specified,
      *                                day adds that number of days to the first day in the month. For
@@ -58,12 +74,20 @@ class Date
      *                                example, DATE(2008,1,-15) returns the serial number representing
      *                                December 16, 2007.
      *
+<<<<<<< HEAD
      * @return mixed Excel date/time serial value, PHP date/time serial value or PHP date/time object,
+=======
+     * @return array|DateTime|float|int|string Excel date/time serial value, PHP date/time serial value or PHP date/time object,
+>>>>>>> match
      *                        depending on the value of the ReturnDateType flag
      *         If an array of numbers is passed as the argument, then the returned result will also be an array
      *            with the same dimensions
      */
+<<<<<<< HEAD
     public static function fromYMD($year, $month, $day)
+=======
+    public static function fromYMD(array|float|int|string $year, null|array|bool|float|int|string $month, array|float|int|string $day): float|int|DateTime|string|array
+>>>>>>> match
     {
         if (is_array($year) || is_array($month) || is_array($day)) {
             return self::evaluateArrayArguments([self::class, __FUNCTION__], $year, $month, $day);
@@ -72,28 +96,50 @@ class Date
         $baseYear = SharedDateHelper::getExcelCalendar();
 
         try {
+<<<<<<< HEAD
             $year = self::getYear($year, $baseYear); // must be int - Scrutinizer is wrong
             $month = self::getMonth($month);
             $day = self::getDay($day);
             self::adjustYearMonth(/** @scrutinizer ignore-type */ $year, $month, $baseYear);
+=======
+            $year = self::getYear($year, $baseYear);
+            $month = self::getMonth($month);
+            $day = self::getDay($day);
+            self::adjustYearMonth($year, $month, $baseYear);
+>>>>>>> match
         } catch (Exception $e) {
             return $e->getMessage();
         }
 
         // Execute function
+<<<<<<< HEAD
         $excelDateValue = SharedDateHelper::formattedPHPToExcel(/** @scrutinizer ignore-type */ $year, $month, $day);
+=======
+        $excelDateValue = SharedDateHelper::formattedPHPToExcel($year, $month, $day);
+>>>>>>> match
 
         return Helpers::returnIn3FormatsFloat($excelDateValue);
     }
 
     /**
      * Convert year from multiple formats to int.
+<<<<<<< HEAD
      *
      * @param mixed $year
      */
     private static function getYear($year, int $baseYear): int
     {
         $year = ($year !== null) ? StringHelper::testStringAsNumeric((string) $year) : 0;
+=======
+     */
+    private static function getYear(mixed $year, int $baseYear): int
+    {
+        if ($year === null) {
+            $year = 0;
+        } elseif (is_scalar($year)) {
+            $year = StringHelper::testStringAsNumeric((string) $year);
+        }
+>>>>>>> match
         if (!is_numeric($year)) {
             throw new Exception(ExcelError::VALUE());
         }
@@ -115,6 +161,7 @@ class Date
 
     /**
      * Convert month from multiple formats to int.
+<<<<<<< HEAD
      *
      * @param mixed $month
      */
@@ -125,6 +172,20 @@ class Date
         }
 
         $month = ($month !== null) ? StringHelper::testStringAsNumeric((string) $month) : 0;
+=======
+     */
+    private static function getMonth(mixed $month): int
+    {
+        if (is_string($month)) {
+            if (!is_numeric($month)) {
+                $month = SharedDateHelper::monthStringToNumber($month);
+            }
+        } elseif ($month === null) {
+            $month = 0;
+        } elseif (is_bool($month)) {
+            $month = (int) $month;
+        }
+>>>>>>> match
         if (!is_numeric($month)) {
             throw new Exception(ExcelError::VALUE());
         }
@@ -134,6 +195,7 @@ class Date
 
     /**
      * Convert day from multiple formats to int.
+<<<<<<< HEAD
      *
      * @param mixed $day
      */
@@ -144,6 +206,20 @@ class Date
         }
 
         $day = ($day !== null) ? StringHelper::testStringAsNumeric((string) $day) : 0;
+=======
+     */
+    private static function getDay(mixed $day): int
+    {
+        if (is_string($day) && !is_numeric($day)) {
+            $day = SharedDateHelper::dayStringToNumber($day);
+        }
+
+        if ($day === null) {
+            $day = 0;
+        } elseif (is_scalar($day)) {
+            $day = StringHelper::testStringAsNumeric((string) $day);
+        }
+>>>>>>> match
         if (!is_numeric($day)) {
             throw new Exception(ExcelError::VALUE());
         }
@@ -156,11 +232,19 @@ class Date
         if ($month < 1) {
             //    Handle year/month adjustment if month < 1
             --$month;
+<<<<<<< HEAD
             $year += ceil($month / 12) - 1;
             $month = 13 - abs($month % 12);
         } elseif ($month > 12) {
             //    Handle year/month adjustment if month > 12
             $year += floor($month / 12);
+=======
+            $year += (int) (ceil($month / 12) - 1);
+            $month = 13 - abs($month % 12);
+        } elseif ($month > 12) {
+            //    Handle year/month adjustment if month > 12
+            $year += intdiv($month, 12);
+>>>>>>> match
             $month = ($month % 12);
         }
 

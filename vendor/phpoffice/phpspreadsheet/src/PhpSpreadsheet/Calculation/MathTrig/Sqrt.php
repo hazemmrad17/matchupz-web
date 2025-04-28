@@ -20,7 +20,11 @@ class Sqrt
      *         If an array of numbers is passed as the argument, then the returned result will also be an array
      *            with the same dimensions
      */
+<<<<<<< HEAD
     public static function sqrt($number)
+=======
+    public static function sqrt(mixed $number)
+>>>>>>> match
     {
         if (is_array($number)) {
             return self::evaluateSingleArgumentArray([self::class, __FUNCTION__], $number);
@@ -46,7 +50,11 @@ class Sqrt
      *         If an array of numbers is passed as the argument, then the returned result will also be an array
      *            with the same dimensions
      */
+<<<<<<< HEAD
     public static function pi($number)
+=======
+    public static function pi($number): array|string|float
+>>>>>>> match
     {
         if (is_array($number)) {
             return self::evaluateSingleArgumentArray([self::class, __FUNCTION__], $number);

@@ -6,6 +6,10 @@ use PhpOffice\PhpSpreadsheet\Reader\Xlsx\Namespaces;
 use PhpOffice\PhpSpreadsheet\Shared\File;
 use PhpOffice\PhpSpreadsheet\Shared\XMLWriter;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
+<<<<<<< HEAD
+=======
+use PhpOffice\PhpSpreadsheet\Worksheet\Drawing as WorksheetDrawing;
+>>>>>>> match
 use PhpOffice\PhpSpreadsheet\Worksheet\MemoryDrawing;
 use PhpOffice\PhpSpreadsheet\Writer\Exception as WriterException;
 
@@ -18,7 +22,11 @@ class ContentTypes extends WriterPart
      *
      * @return string XML Output
      */
+<<<<<<< HEAD
     public function writeContentTypes(Spreadsheet $spreadsheet, $includeCharts = false)
+=======
+    public function writeContentTypes(Spreadsheet $spreadsheet, bool $includeCharts = false): string
+>>>>>>> match
     {
         // Create XML writer
         $objWriter = null;
@@ -132,6 +140,7 @@ class ContentTypes extends WriterPart
             $extension = '';
             $mimeType = '';
 
+<<<<<<< HEAD
             if ($this->getParentWriter()->getDrawingHashTable()->getByIndex($i) instanceof \PhpOffice\PhpSpreadsheet\Worksheet\Drawing) {
                 $extension = strtolower($this->getParentWriter()->getDrawingHashTable()->getByIndex($i)->getExtension());
                 $mimeType = $this->getImageMimeType($this->getParentWriter()->getDrawingHashTable()->getByIndex($i)->getPath());
@@ -144,6 +153,25 @@ class ContentTypes extends WriterPart
             }
 
             if (!isset($aMediaContentTypes[$extension])) {
+=======
+            $drawing = $this->getParentWriter()->getDrawingHashTable()->getByIndex($i);
+            if ($drawing instanceof WorksheetDrawing && $drawing->getPath() !== '') {
+                $extension = strtolower($drawing->getExtension());
+                if ($drawing->getIsUrl()) {
+                    $mimeType = image_type_to_mime_type($drawing->getType());
+                } else {
+                    $mimeType = $this->getImageMimeType($drawing->getPath());
+                }
+            } elseif ($drawing instanceof MemoryDrawing) {
+                $extension = strtolower($drawing->getMimeType());
+                $extension = explode('/', $extension);
+                $extension = $extension[1];
+
+                $mimeType = $drawing->getMimeType();
+            }
+
+            if ($mimeType !== '' && !isset($aMediaContentTypes[$extension])) {
+>>>>>>> match
                 $aMediaContentTypes[$extension] = $mimeType;
 
                 $this->writeDefaultContentType($objWriter, $extension, $mimeType);
@@ -162,7 +190,11 @@ class ContentTypes extends WriterPart
         for ($i = 0; $i < $sheetCount; ++$i) {
             if (count($spreadsheet->getSheet($i)->getHeaderFooter()->getImages()) > 0) {
                 foreach ($spreadsheet->getSheet($i)->getHeaderFooter()->getImages() as $image) {
+<<<<<<< HEAD
                     if (!isset($aMediaContentTypes[strtolower($image->getExtension())])) {
+=======
+                    if ($image->getPath() !== '' && !isset($aMediaContentTypes[strtolower($image->getExtension())])) {
+>>>>>>> match
                         $aMediaContentTypes[strtolower($image->getExtension())] = $this->getImageMimeType($image->getPath());
 
                         $this->writeDefaultContentType($objWriter, strtolower($image->getExtension()), $aMediaContentTypes[strtolower($image->getExtension())]);
@@ -186,6 +218,16 @@ class ContentTypes extends WriterPart
                     }
                 }
             }
+<<<<<<< HEAD
+=======
+
+            $bgImage = $spreadsheet->getSheet($i)->getBackgroundImage();
+            $mimeType = $spreadsheet->getSheet($i)->getBackgroundMime();
+            $extension = $spreadsheet->getSheet($i)->getBackgroundExtension();
+            if ($bgImage !== '' && !isset($aMediaContentTypes[$extension])) {
+                $this->writeDefaultContentType($objWriter, $extension, $mimeType);
+            }
+>>>>>>> match
         }
 
         // unparsed defaults
@@ -202,12 +244,25 @@ class ContentTypes extends WriterPart
             }
         }
 
+<<<<<<< HEAD
+=======
+        // Metadata needed for Dynamic Arrays
+        if ($this->getParentWriter()->useDynamicArrays()) {
+            $this->writeOverrideContentType($objWriter, '/xl/metadata.xml', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheetMetadata+xml');
+        }
+
+>>>>>>> match
         $objWriter->endElement();
 
         // Return
         return $objWriter->getData();
     }
 
+<<<<<<< HEAD
+=======
+    private static int $three = 3; // phpstan silliness
+
+>>>>>>> match
     /**
      * Get image mime type.
      *
@@ -215,12 +270,20 @@ class ContentTypes extends WriterPart
      *
      * @return string Mime Type
      */
+<<<<<<< HEAD
     private function getImageMimeType($filename)
+=======
+    private function getImageMimeType(string $filename): string
+>>>>>>> match
     {
         if (File::fileExists($filename)) {
             $image = getimagesize($filename);
 
+<<<<<<< HEAD
             return image_type_to_mime_type((is_array($image) && count($image) >= 3) ? $image[2] : 0);
+=======
+            return image_type_to_mime_type((is_array($image) && count($image) >= self::$three) ? $image[2] : 0);
+>>>>>>> match
         }
 
         throw new WriterException("File $filename does not exist");
@@ -232,7 +295,11 @@ class ContentTypes extends WriterPart
      * @param string $partName Part name
      * @param string $contentType Content type
      */
+<<<<<<< HEAD
     private function writeDefaultContentType(XMLWriter $objWriter, $partName, $contentType): void
+=======
+    private function writeDefaultContentType(XMLWriter $objWriter, string $partName, string $contentType): void
+>>>>>>> match
     {
         if ($partName != '' && $contentType != '') {
             // Write content type
@@ -251,7 +318,11 @@ class ContentTypes extends WriterPart
      * @param string $partName Part name
      * @param string $contentType Content type
      */
+<<<<<<< HEAD
     private function writeOverrideContentType(XMLWriter $objWriter, $partName, $contentType): void
+=======
+    private function writeOverrideContentType(XMLWriter $objWriter, string $partName, string $contentType): void
+>>>>>>> match
     {
         if ($partName != '' && $contentType != '') {
             // Write content type

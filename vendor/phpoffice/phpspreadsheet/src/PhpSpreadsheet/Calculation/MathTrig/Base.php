@@ -29,7 +29,11 @@ class Base
      *         If an array of numbers is passed as an argument, then the returned result will also be an array
      *            with the same dimensions
      */
+<<<<<<< HEAD
     public static function evaluate($number, $radix, $minLength = null)
+=======
+    public static function evaluate(mixed $number, mixed $radix, mixed $minLength = null): array|string
+>>>>>>> match
     {
         if (is_array($number) || is_array($radix) || is_array($minLength)) {
             return self::evaluateArrayArguments([self::class, __FUNCTION__], $number, $radix, $minLength);
@@ -45,10 +49,14 @@ class Base
         return self::calculate($number, $radix, $minLength);
     }
 
+<<<<<<< HEAD
     /**
      * @param mixed $minLength
      */
     private static function calculate(float $number, int $radix, $minLength): string
+=======
+    private static function calculate(float $number, int $radix, mixed $minLength): string
+>>>>>>> match
     {
         if ($minLength === null || is_numeric($minLength)) {
             if ($number < 0 || $number >= 2 ** 53 || $radix < 2 || $radix > 36) {

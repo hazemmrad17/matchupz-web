@@ -6,6 +6,11 @@ use PhpOffice\PhpSpreadsheet\Exception as PhpSpreadsheetException;
 use PhpOffice\PhpSpreadsheet\RichText\RichText;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use PhpOffice\PhpSpreadsheet\Style\Font as FontStyle;
+<<<<<<< HEAD
+=======
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
+>>>>>>> match
 
 class Font
 {
@@ -203,15 +208,27 @@ class Font
     /**
      * Array that can be used to supplement FONT_FILE_NAMES for calculating exact width.
      *
+<<<<<<< HEAD
      * @var array
      */
     private static $extraFontArray = [];
 
+=======
+     * @var array<string, array<string, string>>
+     */
+    private static array $extraFontArray = [];
+
+    /** @param array<string, array<string, string>> $extraFontArray */
+>>>>>>> match
     public static function setExtraFontArray(array $extraFontArray): void
     {
         self::$extraFontArray = $extraFontArray;
     }
 
+<<<<<<< HEAD
+=======
+    /** @return array<string, array<string, string>> */
+>>>>>>> match
     public static function getExtraFontArray(): array
     {
         return self::$extraFontArray;
@@ -219,6 +236,7 @@ class Font
 
     /**
      * AutoSize method.
+<<<<<<< HEAD
      *
      * @var string
      */
@@ -230,6 +248,15 @@ class Font
      * @var string
      */
     private static $trueTypeFontPath = '';
+=======
+     */
+    private static string $autoSizeMethod = self::AUTOSIZE_METHOD_APPROX;
+
+    /**
+     * Path to folder containing TrueType font .ttf files.
+     */
+    private static string $trueTypeFontPath = '';
+>>>>>>> match
 
     /**
      * How wide is a default column for a given default font and size?
@@ -279,6 +306,7 @@ class Font
     ];
 
     /**
+<<<<<<< HEAD
      * List of column widths. Replaced by constant;
      * previously it was public and updateable, allowing
      * user to make inappropriate alterations.
@@ -290,13 +318,19 @@ class Font
     public static $defaultColumnWidths = self::DEFAULT_COLUMN_WIDTHS;
 
     /**
+=======
+>>>>>>> match
      * Set autoSize method.
      *
      * @param string $method see self::AUTOSIZE_METHOD_*
      *
      * @return bool Success or failure
      */
+<<<<<<< HEAD
     public static function setAutoSizeMethod($method)
+=======
+    public static function setAutoSizeMethod(string $method): bool
+>>>>>>> match
     {
         if (!in_array($method, self::AUTOSIZE_METHODS)) {
             return false;
@@ -308,41 +342,85 @@ class Font
 
     /**
      * Get autoSize method.
+<<<<<<< HEAD
      *
      * @return string
      */
     public static function getAutoSizeMethod()
+=======
+     */
+    public static function getAutoSizeMethod(): string
+>>>>>>> match
     {
         return self::$autoSizeMethod;
     }
 
     /**
      * Set the path to the folder containing .ttf files. There should be a trailing slash.
+<<<<<<< HEAD
      * Typical locations on variout some platforms:
+=======
+     * Path will be recursively searched for font file.
+     * Typical locations on various platforms:
+>>>>>>> match
      *    <ul>
      *        <li>C:/Windows/Fonts/</li>
      *        <li>/usr/share/fonts/truetype/</li>
      *        <li>~/.fonts/</li>
      * </ul>.
+<<<<<<< HEAD
      *
      * @param string $folderPath
      */
     public static function setTrueTypeFontPath($folderPath): void
+=======
+     */
+    public static function setTrueTypeFontPath(string $folderPath): void
+>>>>>>> match
     {
         self::$trueTypeFontPath = $folderPath;
     }
 
     /**
      * Get the path to the folder containing .ttf files.
+<<<<<<< HEAD
      *
      * @return string
      */
     public static function getTrueTypeFontPath()
+=======
+     */
+    public static function getTrueTypeFontPath(): string
+>>>>>>> match
     {
         return self::$trueTypeFontPath;
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * Pad amount for exact in pixels; use best guess if null.
+     */
+    private static null|float|int $paddingAmountExact = null;
+
+    /**
+     * Set pad amount for exact in pixels; use best guess if null.
+     */
+    public static function setPaddingAmountExact(null|float|int $paddingAmountExact): void
+    {
+        self::$paddingAmountExact = $paddingAmountExact;
+    }
+
+    /**
+     * Get pad amount for exact in pixels; or null if using best guess.
+     */
+    public static function getPaddingAmountExact(): null|float|int
+    {
+        return self::$paddingAmountExact;
+    }
+
+    /**
+>>>>>>> match
      * Calculate an (approximate) OpenXML column width, based on font size and text contained.
      *
      * @param FontStyle $font Font object
@@ -354,7 +432,11 @@ class Font
     public static function calculateColumnWidth(
         FontStyle $font,
         $cellText = '',
+<<<<<<< HEAD
         $rotation = 0,
+=======
+        int $rotation = 0,
+>>>>>>> match
         ?FontStyle $defaultFont = null,
         bool $filterAdjustment = false,
         int $indentAdjustment = 0
@@ -366,7 +448,11 @@ class Font
 
         // Special case if there are one or more newline characters ("\n")
         $cellText = (string) $cellText;
+<<<<<<< HEAD
         if (strpos($cellText, "\n") !== false) {
+=======
+        if (str_contains($cellText, "\n")) {
+>>>>>>> match
             $lineTexts = explode("\n", $cellText);
             $lineWidths = [];
             foreach ($lineTexts as $lineText) {
@@ -391,8 +477,13 @@ class Font
 
                 // Width of text in pixels excl. padding
                 // and addition because Excel adds some padding, just use approx width of 'n' glyph
+<<<<<<< HEAD
                 $columnWidth = self::getTextWidthPixelsExact($cellText, $font, $rotation) + $columnWidthAdjust;
             } catch (PhpSpreadsheetException $e) {
+=======
+                $columnWidth = self::getTextWidthPixelsExact($cellText, $font, $rotation) + (self::$paddingAmountExact ?? $columnWidthAdjust);
+            } catch (PhpSpreadsheetException) {
+>>>>>>> match
                 $approximate = true;
             }
         }
@@ -443,12 +534,18 @@ class Font
     /**
      * Get approximate width in pixels for a string of text in a certain font at a certain rotation angle.
      *
+<<<<<<< HEAD
      * @param string $columnText
      * @param int $rotation
      *
      * @return int Text width in pixels (no padding added)
      */
     public static function getTextWidthPixelsApprox($columnText, FontStyle $font, $rotation = 0)
+=======
+     * @return int Text width in pixels (no padding added)
+     */
+    public static function getTextWidthPixelsApprox(string $columnText, FontStyle $font, int $rotation = 0): int
+>>>>>>> match
     {
         $fontName = $font->getName();
         $fontSize = $font->getSize();
@@ -497,11 +594,19 @@ class Font
     /**
      * Calculate an (approximate) pixel size, based on a font points size.
      *
+<<<<<<< HEAD
      * @param int $fontSizeInPoints Font size (in points)
      *
      * @return int Font size (in pixels)
      */
     public static function fontSizeToPixels($fontSizeInPoints)
+=======
+     * @param float|int $fontSizeInPoints Font size (in points)
+     *
+     * @return int Font size (in pixels)
+     */
+    public static function fontSizeToPixels(float|int $fontSizeInPoints): int
+>>>>>>> match
     {
         return (int) ((4 / 3) * $fontSizeInPoints);
     }
@@ -509,11 +614,19 @@ class Font
     /**
      * Calculate an (approximate) pixel size, based on inch size.
      *
+<<<<<<< HEAD
      * @param int $sizeInInch Font size (in inch)
      *
      * @return int Size (in pixels)
      */
     public static function inchSizeToPixels($sizeInInch)
+=======
+     * @param float|int $sizeInInch Font size (in inch)
+     *
+     * @return float|int Size (in pixels)
+     */
+    public static function inchSizeToPixels(int|float $sizeInInch): int|float
+>>>>>>> match
     {
         return $sizeInInch * 96;
     }
@@ -521,11 +634,19 @@ class Font
     /**
      * Calculate an (approximate) pixel size, based on centimeter size.
      *
+<<<<<<< HEAD
      * @param int $sizeInCm Font size (in centimeters)
      *
      * @return float Size (in pixels)
      */
     public static function centimeterSizeToPixels($sizeInCm)
+=======
+     * @param float|int $sizeInCm Font size (in centimeters)
+     *
+     * @return float Size (in pixels)
+     */
+    public static function centimeterSizeToPixels(int|float $sizeInCm): float
+>>>>>>> match
     {
         return $sizeInCm * 37.795275591;
     }
@@ -535,7 +656,11 @@ class Font
      *
      * @return string Path to TrueType font file
      */
+<<<<<<< HEAD
     public static function getTrueTypeFontFileFromFont(FontStyle $font, bool $checkPath = true)
+=======
+    public static function getTrueTypeFontFileFromFont(FontStyle $font, bool $checkPath = true): string
+>>>>>>> match
     {
         if ($checkPath && (!file_exists(self::$trueTypeFontPath) || !is_dir(self::$trueTypeFontPath))) {
             throw new PhpSpreadsheetException('Valid directory to TrueType Font files not specified');
@@ -561,9 +686,15 @@ class Font
         if (mb_strlen(self::$trueTypeFontPath) > 1 && mb_substr(self::$trueTypeFontPath, -1) !== '/' && mb_substr(self::$trueTypeFontPath, -1) !== '\\') {
             $separator = DIRECTORY_SEPARATOR;
         }
+<<<<<<< HEAD
         $fontFileAbsolute = preg_match('~^([A-Za-z]:)?[/\\\\]~', $fontFile) === 1;
         if (!$fontFileAbsolute) {
             $fontFile = self::$trueTypeFontPath . $separator . $fontFile;
+=======
+        $fontFileAbsolute = preg_match('~^([A-Za-z]:)?[/\\\]~', $fontFile) === 1;
+        if (!$fontFileAbsolute) {
+            $fontFile = self::findFontFile(self::$trueTypeFontPath, $fontFile) ?? self::$trueTypeFontPath . $separator . $fontFile;
+>>>>>>> match
         }
 
         // Check if file actually exists
@@ -612,7 +743,11 @@ class Font
      *
      * @return int Character set code
      */
+<<<<<<< HEAD
     public static function getCharsetFromFontName($fontName)
+=======
+    public static function getCharsetFromFontName(string $fontName): int
+>>>>>>> match
     {
         return self::CHARSET_FROM_FONT_NAME[$fontName] ?? self::CHARSET_ANSI_LATIN;
     }
@@ -624,6 +759,7 @@ class Font
      * @param FontStyle $font The workbooks default font
      * @param bool $returnAsPixels true = return column width in pixels, false = return in OOXML units
      *
+<<<<<<< HEAD
      * @return mixed Column width
      */
     public static function getDefaultColumnWidthByFont(FontStyle $font, $returnAsPixels = false)
@@ -632,12 +768,27 @@ class Font
             // Exact width can be determined
             $columnWidth = $returnAsPixels ?
                 self::DEFAULT_COLUMN_WIDTHS[$font->getName()][$font->getSize()]['px']
+=======
+     * @return ($returnAsPixels is true ? int : float) Column width
+     */
+    public static function getDefaultColumnWidthByFont(FontStyle $font, bool $returnAsPixels = false): float|int
+    {
+        if (isset(self::DEFAULT_COLUMN_WIDTHS[$font->getName()][$font->getSize()])) {
+            // Exact width can be determined
+            $columnWidth = $returnAsPixels
+                ? self::DEFAULT_COLUMN_WIDTHS[$font->getName()][$font->getSize()]['px']
+>>>>>>> match
                     : self::DEFAULT_COLUMN_WIDTHS[$font->getName()][$font->getSize()]['width'];
         } else {
             // We don't have data for this particular font and size, use approximation by
             // extrapolating from Calibri 11
+<<<<<<< HEAD
             $columnWidth = $returnAsPixels ?
                 self::DEFAULT_COLUMN_WIDTHS['Calibri'][11]['px']
+=======
+            $columnWidth = $returnAsPixels
+                ? self::DEFAULT_COLUMN_WIDTHS['Calibri'][11]['px']
+>>>>>>> match
                     : self::DEFAULT_COLUMN_WIDTHS['Calibri'][11]['width'];
             $columnWidth = $columnWidth * $font->getSize() / 11;
 
@@ -658,7 +809,11 @@ class Font
      *
      * @return float Row height in points
      */
+<<<<<<< HEAD
     public static function getDefaultRowHeightByFont(FontStyle $font)
+=======
+    public static function getDefaultRowHeightByFont(FontStyle $font): float
+>>>>>>> match
     {
         $name = $font->getName();
         $size = $font->getSize();
@@ -672,4 +827,48 @@ class Font
 
         return $rowHeight;
     }
+<<<<<<< HEAD
+=======
+
+    private static function findFontFile(string $startDirectory, string $desiredFont): ?string
+    {
+        $fontPath = null;
+        if ($startDirectory === '') {
+            return null;
+        }
+        if (file_exists("$startDirectory/$desiredFont")) {
+            $fontPath = "$startDirectory/$desiredFont";
+        } else {
+            $iterations = 0;
+            $it = new RecursiveDirectoryIterator(
+                $startDirectory,
+                RecursiveDirectoryIterator::SKIP_DOTS
+                | RecursiveDirectoryIterator::FOLLOW_SYMLINKS
+            );
+            foreach (
+                new RecursiveIteratorIterator(
+                    $it,
+                    RecursiveIteratorIterator::LEAVES_ONLY,
+                    RecursiveIteratorIterator::CATCH_GET_CHILD
+                ) as $filex
+            ) {
+                /** @var string */
+                $file = $filex;
+                if (basename($file) === $desiredFont) {
+                    $fontPath = $file;
+
+                    break;
+                }
+                ++$iterations;
+                if ($iterations > 5000) {
+                    // @codeCoverageIgnoreStart
+                    break;
+                    // @codeCoverageIgnoreEnd
+                }
+            }
+        }
+
+        return $fontPath;
+    }
+>>>>>>> match
 }

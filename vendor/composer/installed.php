@@ -1,9 +1,15 @@
 <?php return array(
     'root' => array(
         'name' => '__root__',
+<<<<<<< HEAD
         'pretty_version' => '1.0.0+no-version-set',
         'version' => '1.0.0.0',
         'reference' => null,
+=======
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
+        'reference' => '3f3dda577cc32eb7bca96a3faca2243fd477e146',
+>>>>>>> match
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -11,14 +17,32 @@
     ),
     'versions' => array(
         '__root__' => array(
+<<<<<<< HEAD
             'pretty_version' => '1.0.0+no-version-set',
             'version' => '1.0.0.0',
             'reference' => null,
+=======
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => '3f3dda577cc32eb7bca96a3faca2243fd477e146',
+>>>>>>> match
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+<<<<<<< HEAD
+=======
+        'composer/pcre' => array(
+            'pretty_version' => '3.3.2',
+            'version' => '3.3.2.0',
+            'reference' => 'b2bed4734f0cc156ee1fe9c0da2550420d99a21e',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/./pcre',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+>>>>>>> match
         'composer/semver' => array(
             'pretty_version' => '3.4.3',
             'version' => '3.4.3.0',
@@ -163,6 +187,7 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+<<<<<<< HEAD
         'ezyang/htmlpurifier' => array(
             'pretty_version' => 'v4.18.0',
             'version' => '4.18.0.0',
@@ -172,6 +197,8 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+=======
+>>>>>>> match
         'firebase/php-jwt' => array(
             'pretty_version' => 'v6.11.1',
             'version' => '6.11.1.0',
@@ -410,9 +437,15 @@
             'dev_requirement' => false,
         ),
         'phpoffice/phpspreadsheet' => array(
+<<<<<<< HEAD
             'pretty_version' => '1.29.0',
             'version' => '1.29.0.0',
             'reference' => 'fde2ccf55eaef7e86021ff1acce26479160a0fa0',
+=======
+            'pretty_version' => '4.2.0',
+            'version' => '4.2.0.0',
+            'reference' => '5f6d7410e5fd72cac1aa67d4f05f4fe664d01ba6',
+>>>>>>> match
             'type' => 'library',
             'install_path' => __DIR__ . '/../phpoffice/phpspreadsheet',
             'aliases' => array(),
@@ -622,8 +655,13 @@
         'psr/log-implementation' => array(
             'dev_requirement' => false,
             'provided' => array(
+<<<<<<< HEAD
                 0 => '3.0.0',
                 1 => '1.0|2.0|3.0',
+=======
+                0 => '1.0|2.0|3.0',
+                1 => '3.0.0',
+>>>>>>> match
             ),
         ),
         'psr/simple-cache' => array(

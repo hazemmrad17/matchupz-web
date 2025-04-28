@@ -6,10 +6,17 @@ class WildcardMatch
 {
     private const SEARCH_SET = [
         '~~', // convert double tilde to unprintable value
+<<<<<<< HEAD
         '~\\*', // convert tilde backslash asterisk to [*] (matches literal asterisk in regexp)
         '\\*', // convert backslash asterisk to .* (matches string of any length in regexp)
         '~\\?', // convert tilde backslash question to [?] (matches literal question mark in regexp)
         '\\?', // convert backslash question to . (matches one character in regexp)
+=======
+        '~\*', // convert tilde backslash asterisk to [*] (matches literal asterisk in regexp)
+        '\*', // convert backslash asterisk to .* (matches string of any length in regexp)
+        '~\?', // convert tilde backslash question to [?] (matches literal question mark in regexp)
+        '\?', // convert backslash question to . (matches one character in regexp)
+>>>>>>> match
         "\x1c", // convert original double tilde to single tilde
     ];
 

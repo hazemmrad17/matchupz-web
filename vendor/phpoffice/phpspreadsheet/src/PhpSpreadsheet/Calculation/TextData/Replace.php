@@ -25,11 +25,18 @@ class Replace
      * @param mixed $newText String to replace in the defined position
      *                         Or can be an array of values
      *
+<<<<<<< HEAD
      * @return array|string
      *         If an array of values is passed for either of the arguments, then the returned result
      *            will also be an array with matching dimensions
      */
     public static function replace($oldText, $start, $chars, $newText)
+=======
+     * @return array|string If an array of values is passed for either of the arguments, then the returned result
+     *            will also be an array with matching dimensions
+     */
+    public static function replace(mixed $oldText, mixed $start, mixed $chars, mixed $newText): array|string
+>>>>>>> match
     {
         if (is_array($oldText) || is_array($start) || is_array($chars) || is_array($newText)) {
             return self::evaluateArrayArguments([self::class, __FUNCTION__], $oldText, $start, $chars, $newText);
@@ -66,11 +73,18 @@ class Replace
      * @param mixed $instance Integer instance Number for the occurrence of frmText to change
      *                         Or can be an array of values
      *
+<<<<<<< HEAD
      * @return array|string
      *         If an array of values is passed for either of the arguments, then the returned result
      *            will also be an array with matching dimensions
      */
     public static function substitute($text = '', $fromText = '', $toText = '', $instance = null)
+=======
+     * @return array|string If an array of values is passed for either of the arguments, then the returned result
+     *            will also be an array with matching dimensions
+     */
+    public static function substitute(mixed $text = '', mixed $fromText = '', mixed $toText = '', mixed $instance = null): array|string
+>>>>>>> match
     {
         if (is_array($text) || is_array($fromText) || is_array($toText) || is_array($instance)) {
             return self::evaluateArrayArguments([self::class, __FUNCTION__], $text, $fromText, $toText, $instance);
@@ -113,6 +127,10 @@ class Replace
             --$instance;
         }
 
+<<<<<<< HEAD
         return Functions::scalar(self::REPLACE($text, ++$pos, StringHelper::countCharacters($fromText), $toText));
+=======
+        return StringHelper::convertToString(Functions::scalar(self::REPLACE($text, ++$pos, StringHelper::countCharacters($fromText), $toText)));
+>>>>>>> match
     }
 }

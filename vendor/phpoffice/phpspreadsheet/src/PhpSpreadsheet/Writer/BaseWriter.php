@@ -2,20 +2,31 @@
 
 namespace PhpOffice\PhpSpreadsheet\Writer;
 
+<<<<<<< HEAD
+=======
+use PhpOffice\PhpSpreadsheet\Exception as PhpSpreadsheetException;
+
+>>>>>>> match
 abstract class BaseWriter implements IWriter
 {
     /**
      * Write charts that are defined in the workbook?
      * Identifies whether the Writer should write definitions for any charts that exist in the PhpSpreadsheet object.
+<<<<<<< HEAD
      *
      * @var bool
      */
     protected $includeCharts = false;
+=======
+     */
+    protected bool $includeCharts = false;
+>>>>>>> match
 
     /**
      * Pre-calculate formulas
      * Forces PhpSpreadsheet to recalculate all formulae in a workbook when saving, so that the pre-calculated values are
      * immediately available to MS Excel or other office spreadsheet viewer when opening the file.
+<<<<<<< HEAD
      *
      * @var bool
      */
@@ -34,47 +45,131 @@ abstract class BaseWriter implements IWriter
      * @var string
      */
     private $diskCachingDirectory = './';
+=======
+     */
+    protected bool $preCalculateFormulas = true;
+
+    /**
+     * Table formats
+     * Enables table formats in writer, disabled here, must be enabled in writer via a setter.
+     */
+    protected bool $tableFormats = false;
+
+    /**
+     * Conditional Formatting
+     * Enables conditional formatting in writer, disabled here, must be enabled in writer via a setter.
+     */
+    protected bool $conditionalFormatting = false;
+
+    /**
+     * Use disk caching where possible?
+     */
+    private bool $useDiskCaching = false;
+
+    /**
+     * Disk caching directory.
+     */
+    private string $diskCachingDirectory = './';
+>>>>>>> match
 
     /**
      * @var resource
      */
     protected $fileHandle;
 
+<<<<<<< HEAD
     /**
      * @var bool
      */
     private $shouldCloseFile;
 
     public function getIncludeCharts()
+=======
+    private bool $shouldCloseFile;
+
+    public function getIncludeCharts(): bool
+>>>>>>> match
     {
         return $this->includeCharts;
     }
 
+<<<<<<< HEAD
     public function setIncludeCharts($includeCharts)
     {
         $this->includeCharts = (bool) $includeCharts;
+=======
+    public function setIncludeCharts(bool $includeCharts): self
+    {
+        $this->includeCharts = $includeCharts;
+>>>>>>> match
 
         return $this;
     }
 
+<<<<<<< HEAD
     public function getPreCalculateFormulas()
+=======
+    public function getPreCalculateFormulas(): bool
+>>>>>>> match
     {
         return $this->preCalculateFormulas;
     }
 
+<<<<<<< HEAD
     public function setPreCalculateFormulas($precalculateFormulas)
     {
         $this->preCalculateFormulas = (bool) $precalculateFormulas;
+=======
+    public function setPreCalculateFormulas(bool $precalculateFormulas): self
+    {
+        $this->preCalculateFormulas = $precalculateFormulas;
+>>>>>>> match
 
         return $this;
     }
 
+<<<<<<< HEAD
     public function getUseDiskCaching()
+=======
+    public function getTableFormats(): bool
+    {
+        return $this->tableFormats;
+    }
+
+    public function setTableFormats(bool $tableFormats): self
+    {
+        if ($tableFormats) {
+            throw new PhpSpreadsheetException('Table formatting not implemented for this writer');
+        }
+
+        return $this;
+    }
+
+    public function getConditionalFormatting(): bool
+    {
+        return $this->conditionalFormatting;
+    }
+
+    public function setConditionalFormatting(bool $conditionalFormatting): self
+    {
+        if ($conditionalFormatting) {
+            throw new PhpSpreadsheetException('Conditional Formatting not implemented for this writer');
+        }
+
+        return $this;
+    }
+
+    public function getUseDiskCaching(): bool
+>>>>>>> match
     {
         return $this->useDiskCaching;
     }
 
+<<<<<<< HEAD
     public function setUseDiskCaching($useDiskCache, $cacheDirectory = null)
+=======
+    public function setUseDiskCaching(bool $useDiskCache, ?string $cacheDirectory = null): self
+>>>>>>> match
     {
         $this->useDiskCaching = $useDiskCache;
 
@@ -89,7 +184,11 @@ abstract class BaseWriter implements IWriter
         return $this;
     }
 
+<<<<<<< HEAD
     public function getDiskCachingDirectory()
+=======
+    public function getDiskCachingDirectory(): string
+>>>>>>> match
     {
         return $this->diskCachingDirectory;
     }
@@ -111,7 +210,11 @@ abstract class BaseWriter implements IWriter
      */
     public function openFileHandle($filename): void
     {
+<<<<<<< HEAD
         if (is_resource($filename)) {
+=======
+        if (!is_string($filename)) {
+>>>>>>> match
             $this->fileHandle = $filename;
             $this->shouldCloseFile = false;
 

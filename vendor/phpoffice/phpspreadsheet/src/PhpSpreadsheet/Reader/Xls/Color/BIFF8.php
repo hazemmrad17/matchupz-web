@@ -65,12 +65,17 @@ class BIFF8
 
     /**
      * Map color array from BIFF8 built-in color index.
+<<<<<<< HEAD
      *
      * @param int $color
      *
      * @return array
      */
     public static function lookup($color)
+=======
+     */
+    public static function lookup(int $color): array
+>>>>>>> match
     {
         return ['rgb' => self::BIFF8_COLOR_MAP[$color] ?? '000000'];
     }

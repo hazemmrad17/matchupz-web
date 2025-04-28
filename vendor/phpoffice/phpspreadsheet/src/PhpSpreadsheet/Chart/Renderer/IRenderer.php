@@ -14,9 +14,17 @@ interface IRenderer
     /**
      * Render the chart to given file (or stream).
      *
+<<<<<<< HEAD
      * @param string $filename Name of the file render to
      *
      * @return bool true on success
      */
     public function render($filename);
+=======
+     * @param ?string $filename Name of the file render to
+     *
+     * @return bool true on success
+     */
+    public function render(?string $filename): bool;
+>>>>>>> match
 }

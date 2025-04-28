@@ -1,6 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 # matchupz-web
 =======
+=======
+>>>>>>> match
 <p align="center">
    <a href="https://themeselection.com/products/sneat-free-bootstrap-html-admin-template/" target="_blank">
       <img src="https://user-images.githubusercontent.com/749684/150333149-805037bc-8874-4a1f-876a-61a9683f8ef5.png" alt="sneat-logo" width="30px" height="auto">
@@ -194,4 +197,7 @@ Please refer to the [CHANGELOG](https://themeselection.com/demo/sneat-bootstrap-
 - Facebook : [https://www.facebook.com/ThemeSelections/](https://www.facebook.com/ThemeSelections/)
 - Pinterest : [https://pinterest.com/themeselect/](https://pinterest.com/themeselect/)
 - Instagram : [https://www.instagram.com/themeselection/](https://www.instagram.com/themeselection/)
+<<<<<<< HEAD
 >>>>>>> espace
+=======
+>>>>>>> match

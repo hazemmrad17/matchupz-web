@@ -9,6 +9,7 @@ use PhpOffice\PhpSpreadsheet\Shared\Drawing as SharedDrawing;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use PhpOffice\PhpSpreadsheet\Style\Color;
 use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
+<<<<<<< HEAD
 
 class Comment implements IComparable
 {
@@ -81,6 +82,69 @@ class Comment implements IComparable
      * @var Drawing
      */
     private $backgroundImage;
+=======
+use Stringable;
+
+class Comment implements IComparable, Stringable
+{
+    /**
+     * Author.
+     */
+    private string $author;
+
+    /**
+     * Rich text comment.
+     */
+    private RichText $text;
+
+    /**
+     * Comment width (CSS style, i.e. XXpx or YYpt).
+     */
+    private string $width = '96pt';
+
+    /**
+     * Left margin (CSS style, i.e. XXpx or YYpt).
+     */
+    private string $marginLeft = '59.25pt';
+
+    /**
+     * Top margin (CSS style, i.e. XXpx or YYpt).
+     */
+    private string $marginTop = '1.5pt';
+
+    /**
+     * Visible.
+     */
+    private bool $visible = false;
+
+    /**
+     * Comment height (CSS style, i.e. XXpx or YYpt).
+     */
+    private string $height = '55.5pt';
+
+    /**
+     * Comment fill color.
+     */
+    private Color $fillColor;
+
+    /**
+     * Alignment.
+     */
+    private string $alignment;
+
+    /**
+     * Background image in comment.
+     */
+    private Drawing $backgroundImage;
+
+    public const TEXTBOX_DIRECTION_RTL = 'rtl';
+    public const TEXTBOX_DIRECTION_LTR = 'ltr';
+    // MS uses 'auto' in xml but 'context' in UI
+    public const TEXTBOX_DIRECTION_AUTO = 'auto';
+    public const TEXTBOX_DIRECTION_CONTEXT = 'auto';
+
+    private string $textboxDirection = '';
+>>>>>>> match
 
     /**
      * Create a new Comment.
@@ -251,9 +315,12 @@ class Comment implements IComparable
         return $this->fillColor;
     }
 
+<<<<<<< HEAD
     /**
      * Set Alignment.
      */
+=======
+>>>>>>> match
     public function setAlignment(string $alignment): self
     {
         $this->alignment = $alignment;
@@ -261,20 +328,39 @@ class Comment implements IComparable
         return $this;
     }
 
+<<<<<<< HEAD
     /**
      * Get Alignment.
      */
+=======
+>>>>>>> match
     public function getAlignment(): string
     {
         return $this->alignment;
     }
 
+<<<<<<< HEAD
+=======
+    public function setTextboxDirection(string $textboxDirection): self
+    {
+        $this->textboxDirection = $textboxDirection;
+
+        return $this;
+    }
+
+    public function getTextboxDirection(): string
+    {
+        return $this->textboxDirection;
+    }
+
+>>>>>>> match
     /**
      * Get hash code.
      */
     public function getHashCode(): string
     {
         return md5(
+<<<<<<< HEAD
             $this->author .
             $this->text->getHashCode() .
             $this->width .
@@ -286,6 +372,20 @@ class Comment implements IComparable
             $this->alignment .
             ($this->hasBackgroundImage() ? $this->backgroundImage->getHashCode() : '') .
             __CLASS__
+=======
+            $this->author
+            . $this->text->getHashCode()
+            . $this->width
+            . $this->height
+            . $this->marginLeft
+            . $this->marginTop
+            . ($this->visible ? 1 : 0)
+            . $this->fillColor->getHashCode()
+            . $this->alignment
+            . $this->textboxDirection
+            . ($this->hasBackgroundImage() ? $this->backgroundImage->getHashCode() : '')
+            . __CLASS__
+>>>>>>> match
         );
     }
 

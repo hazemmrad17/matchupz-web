@@ -26,6 +26,7 @@ class HyperGeometric
      * @param mixed $populationNumber Integer population size
      *                      Or can be an array of values
      *
+<<<<<<< HEAD
      * @return array|float|string
      *         If an array of numbers is passed as an argument, then the returned result will also be an array
      *            with the same dimensions
@@ -35,6 +36,16 @@ class HyperGeometric
         if (
             is_array($sampleSuccesses) || is_array($sampleNumber) ||
             is_array($populationSuccesses) || is_array($populationNumber)
+=======
+     * @return array|float|string If an array of numbers is passed as an argument, then the returned result will also be an array
+     *            with the same dimensions
+     */
+    public static function distribution(mixed $sampleSuccesses, mixed $sampleNumber, mixed $populationSuccesses, mixed $populationNumber): array|string|float
+    {
+        if (
+            is_array($sampleSuccesses) || is_array($sampleNumber)
+            || is_array($populationSuccesses) || is_array($populationNumber)
+>>>>>>> match
         ) {
             return self::evaluateArrayArguments(
                 [self::class, __FUNCTION__],

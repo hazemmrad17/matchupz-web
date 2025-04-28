@@ -16,7 +16,11 @@ class Table extends WriterPart
      *
      * @return string XML Output
      */
+<<<<<<< HEAD
     public function writeTable(WorksheetTable $table, $tableRef): string
+=======
+    public function writeTable(WorksheetTable $table, int $tableRef): string
+>>>>>>> match
     {
         // Create XML writer
         $objWriter = null;
@@ -50,7 +54,10 @@ class Table extends WriterPart
         if ($table->getShowHeaderRow() && $table->getAllowFilter() === true) {
             $objWriter->startElement('autoFilter');
             $objWriter->writeAttribute('ref', $range);
+<<<<<<< HEAD
             $objWriter->endElement();
+=======
+>>>>>>> match
             foreach (range($rangeStart[0], $rangeEnd[0]) as $offset => $columnIndex) {
                 $column = $table->getColumnByOffset($offset);
 
@@ -64,6 +71,10 @@ class Table extends WriterPart
                     AutoFilter::writeAutoFilterColumn($objWriter, $column, $offset);
                 }
             }
+<<<<<<< HEAD
+=======
+            $objWriter->endElement(); // autoFilter
+>>>>>>> match
         }
 
         // Table Columns
@@ -80,7 +91,11 @@ class Table extends WriterPart
 
             $objWriter->startElement('tableColumn');
             $objWriter->writeAttribute('id', (string) ($offset + 1));
+<<<<<<< HEAD
             $objWriter->writeAttribute('name', $table->getShowHeaderRow() ? $cell->getValue() : 'Column' . ($offset + 1));
+=======
+            $objWriter->writeAttribute('name', $table->getShowHeaderRow() ? $cell->getValueString() : ('Column' . ($offset + 1)));
+>>>>>>> match
 
             if ($table->getShowTotalsRow()) {
                 if ($column->getTotalsRowLabel()) {

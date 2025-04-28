@@ -18,14 +18,23 @@ class HLookup extends LookupBase
      *     in the same column based on the index_number.
      *
      * @param mixed $lookupValue The value that you want to match in lookup_array
+<<<<<<< HEAD
      * @param mixed $lookupArray The range of cells being searched
      * @param mixed $indexNumber The row number in table_array from which the matching value must be returned.
+=======
+     * @param array $lookupArray The range of cells being searched
+     * @param array|float|int|string $indexNumber The row number in table_array from which the matching value must be returned.
+>>>>>>> match
      *                                The first row is 1.
      * @param mixed $notExactMatch determines if you are looking for an exact match based on lookup_value
      *
      * @return mixed The value of the found cell
      */
+<<<<<<< HEAD
     public static function lookup($lookupValue, $lookupArray, $indexNumber, $notExactMatch = true)
+=======
+    public static function lookup(mixed $lookupValue, $lookupArray, $indexNumber, mixed $notExactMatch = true): mixed
+>>>>>>> match
     {
         if (is_array($lookupValue) || is_array($indexNumber)) {
             return self::evaluateArrayArgumentsIgnore([self::class, __FUNCTION__], 1, $lookupValue, $lookupArray, $indexNumber, $notExactMatch);
@@ -64,9 +73,15 @@ class HLookup extends LookupBase
      * @param mixed $lookupValue The value that you want to match in lookup_array
      * @param  int|string $column
      */
+<<<<<<< HEAD
     private static function hLookupSearch($lookupValue, array $lookupArray, $column, bool $notExactMatch): ?int
     {
         $lookupLower = StringHelper::strToLower((string) $lookupValue);
+=======
+    private static function hLookupSearch(mixed $lookupValue, array $lookupArray, $column, bool $notExactMatch): ?int
+    {
+        $lookupLower = StringHelper::strToLower(StringHelper::convertToString($lookupValue));
+>>>>>>> match
 
         $rowNumber = null;
         foreach ($lookupArray[$column] as $rowKey => $rowData) {
@@ -76,8 +91,13 @@ class HLookup extends LookupBase
             $cellDataLower = StringHelper::strToLower((string) $rowData);
 
             if (
+<<<<<<< HEAD
                 $notExactMatch &&
                 (($bothNumeric && $rowData > $lookupValue) || ($bothNotNumeric && $cellDataLower > $lookupLower))
+=======
+                $notExactMatch
+                && (($bothNumeric && $rowData > $lookupValue) || ($bothNotNumeric && $cellDataLower > $lookupLower))
+>>>>>>> match
             ) {
                 break;
             }

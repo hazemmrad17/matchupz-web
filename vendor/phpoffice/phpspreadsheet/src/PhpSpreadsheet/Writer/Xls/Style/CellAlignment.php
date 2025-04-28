@@ -9,7 +9,11 @@ class CellAlignment
     /**
      * @var array<string, int>
      */
+<<<<<<< HEAD
     private static $horizontalMap = [
+=======
+    private static array $horizontalMap = [
+>>>>>>> match
         Alignment::HORIZONTAL_GENERAL => 0,
         Alignment::HORIZONTAL_LEFT => 1,
         Alignment::HORIZONTAL_RIGHT => 3,
@@ -21,7 +25,11 @@ class CellAlignment
     /**
      * @var array<string, int>
      */
+<<<<<<< HEAD
     private static $verticalMap = [
+=======
+    private static array $verticalMap = [
+>>>>>>> match
         Alignment::VERTICAL_BOTTOM => 2,
         Alignment::VERTICAL_TOP => 0,
         Alignment::VERTICAL_CENTER => 1,
