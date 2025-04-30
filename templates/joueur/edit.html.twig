@@ -41,7 +41,7 @@
                                 <label class="form-label">Photo actuelle</label>
                                 <div>
                                     <img
-                                        src="{{ joueur.profilePicture ? asset('/uploads/profile_pictures/' ~ joueur.profilePicture) : asset('/img/avatars/default-player.png') }}"
+                                        src="{{ joueur.profilePicture ? asset('/uploads/profile_pictures/' ~ joueur.profilePicture) : asset('/uploads/photos/default_avatar.png') }}"
                                         alt="Avatar du joueur"
                                         class="d-block rounded"
                                         height="100"
@@ -256,6 +256,18 @@
                             <button type="submit" class="btn btn-primary">Mettre à jour</button>
                             <a href="{{ path('joueur_main') }}" class="btn btn-secondary">Annuler</a>
                         {{ form_end(form) }}
+
+                        <!-- CSS to hide the joueur select fields -->
+                        <style>
+                            #joueur_evaluationPhysique_joueur,
+                            #joueur_performanceJoueur_joueur {
+                                display: none;
+                            }
+                            label[for="joueur_evaluationPhysique_joueur"],
+                            label[for="joueur_performanceJoueur_joueur"] {
+                                display: none;
+                            }
+                        </style>
                     </div>
                 </div>
             </div>
@@ -437,6 +449,18 @@
         document.addEventListener('DOMContentLoaded', function() {
             const toastElements = document.querySelectorAll('.toast');
             toastElements.forEach(toast => new bootstrap.Toast(toast, { autohide: true, delay: 5000 }).show());
+        });
+
+        // Preview uploaded image
+        document.getElementById('joueur_profilePicture').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('uploadedAvatar').src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
         });
     </script>
 {% endblock %}

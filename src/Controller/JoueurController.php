@@ -24,8 +24,7 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Knp\Component\Pager\PaginatorInterface;
 use Knp\Snappy\Pdf;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
-use Symfony\Component\Validator\Validator\ValidatorInterface; // Correct namespace for ValidatorInterface
-
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 #[Route('/joueur')]
 class JoueurController extends AbstractController
@@ -515,19 +514,34 @@ class JoueurController extends AbstractController
     }
 
     #[Route('/formations', name: 'football_layout')]
-    public function layout(JoueurRepository $joueurRepository): Response
-    {
-        $joueurs = $joueurRepository->findBy(['sport' => 1, 'statut' => 'Actif']);
-        return $this->render('joueur/football_layout.html.twig', [
-            'joueurs' => $joueurs,
-        ]);
+public function layout(JoueurRepository $joueurRepository, Request $request): Response
+{
+    $formations = [
+        '4-4-2' => ['GK' => 1, 'RB' => 1, 'CB' => 2, 'LB' => 1, 'RM' => 1, 'CM' => 2, 'LM' => 1, 'ST' => 2],
+        '4-3-3' => ['GK' => 1, 'RB' => 1, 'CB' => 2, 'LB' => 1, 'CM' => 3, 'RW' => 1, 'LW' => 1, 'ST' => 1],
+        '3-5-2' => ['GK' => 1, 'CB' => 3, 'RM' => 1, 'CM' => 3, 'LM' => 1, 'ST' => 2],
+    ];
+
+    $selectedFormation = $request->query->get('formation', '4-4-2');
+    if (!isset($formations[$selectedFormation])) {
+        $selectedFormation = '4-4-2';
     }
+
+    // Fetch all active football players
+    $joueurs = $joueurRepository->findBy(['sport' => 1, 'statut' => 'Actif']);
+
+    return $this->render('joueur/football_layout.html.twig', [
+        'joueurs' => $joueurs,
+        'formations' => array_keys($formations),
+        'selected_formation' => $selectedFormation,
+        'formation_positions' => $formations[$selectedFormation],
+    ]);
+}
 
     #[Route('/features', name: 'app_features')]
     public function features(): Response
     {
         return $this->render('joueur/feature.html.twig');
-
     }
 
     #[Route('/scouting', name: 'joueur_scouting', methods: ['GET', 'POST'])]
@@ -662,8 +676,8 @@ class JoueurController extends AbstractController
         $error = null;
         $trackingData = null;
 
-        // Custom logging function
-        $logFile = 'C:\Users\Hazem Mrad\Desktop\matchupz-web-integration - Copy - Copy\var\log\controller.log';
+        // Custom logging function using universal log path
+        $logFile = $this->getParameter('kernel.logs_dir') . '/controller.log';
         $logMessage = function ($message) use ($logFile) {
             error_log(date('[Y-m-d H:i:s] ') . $message . "\n", 3, $logFile);
         };

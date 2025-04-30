@@ -13,9 +13,6 @@ use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\File;
-use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\Validator\Constraints\LessThanOrEqual;
 
 class JoueurType extends AbstractType
 {
@@ -25,29 +22,22 @@ class JoueurType extends AbstractType
             ->add('nom', TextType::class, [
                 'label' => 'Nom',
                 'required' => true,
-                'attr' => ['class' => 'form-control', 'placeholder' => 'ex: Dupont'],
-                'constraints' => [new NotBlank(['message' => 'Le nom ne peut pas être vide.'])],
+                'attr' => ['maxlength' => 50],
             ])
             ->add('prenom', TextType::class, [
                 'label' => 'Prénom',
                 'required' => true,
-                'attr' => ['class' => 'form-control', 'placeholder' => 'ex: Jean'],
-                'constraints' => [new NotBlank(['message' => 'Le prénom ne peut pas être vide.'])],
+                'attr' => ['maxlength' => 50],
             ])
             ->add('dateNaissance', DateType::class, [
                 'label' => 'Date de Naissance',
-                'required' => true,
                 'widget' => 'single_text',
-                'html5' => true,
-                'attr' => ['class' => 'form-control'],
-                'constraints' => [
-                    new NotBlank(['message' => 'La date de naissance ne peut pas être vide.']),
-                    new LessThanOrEqual(['value' => 'today', 'message' => 'La date de naissance ne peut pas être dans le futur.']),
-                ],
+                'required' => true,
             ])
             ->add('poste', ChoiceType::class, [
+                'label' => 'Poste',
                 'choices' => [
-                    'Gardien de but' => 'GK',
+                    'Gardien' => 'GK',
                     'Arrière droit' => 'RB',
                     'Arrière gauche' => 'LB',
                     'Ailier droit défensif' => 'RWB',
@@ -56,69 +46,52 @@ class JoueurType extends AbstractType
                     'Milieu défensif' => 'DM',
                     'Milieu central' => 'CM',
                     'Milieu offensif' => 'AM',
-                    'Milieu droit' => 'RM',
-                    'Milieu gauche' => 'LM',
-                    'Ailier droit' => 'RW',
-                    'Ailier gauche' => 'LW',
+                    'Ailier droit' => 'RM',
+                    'Ailier gauche' => 'LM',
+                    'Ailier droit offensif' => 'RW',
+                    'Ailier gauche offensif' => 'LW',
                     'Avant-centre' => 'CF',
-                    'Attaquant' => 'ST',
+                    'Buteur' => 'ST',
                     'Second attaquant' => 'SS',
                 ],
-                'label' => 'Poste',
-                'placeholder' => 'Sélectionner un poste',
                 'required' => true,
-                'attr' => ['class' => 'form-control'],
-                'constraints' => [new NotBlank(['message' => 'Le poste ne peut pas être vide.'])],
             ])
             ->add('taille', NumberType::class, [
                 'label' => 'Taille (m)',
+                'scale' => 2,
                 'required' => true,
-                'attr' => ['class' => 'form-control', 'placeholder' => 'ex: 1.85', 'step' => '0.01'],
-                'constraints' => [new NotBlank(['message' => 'La taille ne peut pas être vide.'])],
+                'attr' => ['step' => '0.01', 'min' => '0', 'max' => '3'],
             ])
             ->add('poids', NumberType::class, [
                 'label' => 'Poids (kg)',
+                'scale' => 1,
                 'required' => true,
-                'attr' => ['class' => 'form-control', 'placeholder' => 'ex: 75', 'step' => '0.1'],
-                'constraints' => [new NotBlank(['message' => 'Le poids ne peut pas être vide.'])],
+                'attr' => ['step' => '0.1', 'min' => '0', 'max' => '500'],
             ])
             ->add('email', EmailType::class, [
                 'label' => 'Email',
                 'required' => true,
-                'attr' => ['class' => 'form-control', 'placeholder' => 'ex: email@exemple.com'],
-                'constraints' => [new NotBlank(['message' => 'L\'email ne peut pas être vide.'])],
+                'attr' => ['maxlength' => 100],
             ])
             ->add('telephone', TelType::class, [
                 'label' => 'Téléphone',
                 'required' => true,
-                'attr' => ['class' => 'form-control phone-mask', 'placeholder' => 'ex: +33 6 12 34 56 78'],
-                'constraints' => [new NotBlank(['message' => 'Le téléphone ne peut pas être vide.'])],
+                'attr' => ['maxlength' => 20],
             ])
             ->add('statut', ChoiceType::class, [
+                'label' => 'Statut',
                 'choices' => [
                     'Actif' => 'Actif',
                     'Blessé' => 'Blessé',
                     'Suspendu' => 'Suspendu',
-                    'Inactif' => '',
                 ],
-                'label' => 'Statut',
-                'placeholder' => 'Sélectionner un statut',
                 'required' => true,
-                'attr' => ['class' => 'form-control'],
-                'constraints' => [new NotBlank(['message' => 'Le statut ne peut pas être vide.'])],
             ])
             ->add('profilePicture', FileType::class, [
-                'label' => 'Photo du joueur',
-                'mapped' => false,
+                'label' => 'Photo de Profil',
+                'mapped' => false, // Not directly mapped to entity property
                 'required' => false,
-                'constraints' => [
-                    new File([
-                        'maxSize' => '2M',
-                        'mimeTypes' => ['image/jpeg', 'image/png'],
-                        'mimeTypesMessage' => 'Veuillez télécharger une image JPEG ou PNG.',
-                    ]),
-                ],
-                'attr' => ['class' => 'form-control'],
+                'attr' => ['accept' => 'image/jpeg,image/png'],
             ])
             ->add('evaluationPhysique', EvaluationPhysiqueType::class, [
                 'label' => false,

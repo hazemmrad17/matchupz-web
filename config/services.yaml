@@ -10,7 +10,7 @@ parameters:
     users_image_directory: '%kernel.project_dir%/public/uploads/users'
     signatures_directory: '%kernel.project_dir%/public/signatures'
     materiels_directory: '%kernel.project_dir%/public/uploads/materiels'
-
+    kernel.logs_dir: '%kernel.project_dir%/var/log'
     app.api_ninja_key: '%env(API_NINJA_KEY)%'  # Added for GeocodingService
     google_credentials_path: '%kernel.project_dir%/config/secrets/google_credentials.json'
     google_token_path: '%kernel.project_dir%/config/secrets/google_token.json'

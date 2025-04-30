@@ -13,7 +13,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
     />
-     <meta name="csrf-token" content="{{ csrf_token('slack_notify') }}">
+    <meta name="csrf-token" content="{{ csrf_token('slack_notify') }}">
 
     <title>{% block title %}Matchupz Dashboard{% endblock %}</title>
 
@@ -28,7 +28,7 @@
       href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
       rel="stylesheet"
     />
-     <link rel="stylesheet" href="{{ asset('/css/barcode.css') }}" />
+    <link rel="stylesheet" href="{{ asset('/css/barcode.css') }}" />
 
     <!-- Icons -->
     <link href="{{ asset('vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
@@ -37,7 +37,7 @@
     <link rel="stylesheet" href="{{ asset('/vendor/css/core.css') }}" class="template-customizer-core-css" />
     <link rel="stylesheet" href="{{ asset('/vendor/css/theme-default.css') }}" class="template-customizer-theme-css" />
     <link rel="stylesheet" href="{{ asset('/css/demo.css') }}" />
-    <link rel="stylesheet" href="{{ asset('/css/custom.css') }}" /> {# Custom CSS for z-index and toast styling #}
+    <link rel="stylesheet" href="{{ asset('/css/custom.css') }}" />
 
     <!-- Vendors CSS -->
     <link rel="stylesheet" href="{{ asset('/vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }}" />
@@ -47,7 +47,6 @@
     <script src="{{ asset('/vendor/js/helpers.js') }}"></script>
     <script src="{{ asset('/js/config.js') }}"></script>
     <style>
-      /* Ensure proper footer placement */
       html, body {
         height: 100%;
       }
@@ -59,7 +58,6 @@
       .content-wrapper {
         flex: 1;
       }
-      /* Footer styles */
       .footer {
         background-color: #f8f9fa !important;
       }
@@ -68,22 +66,17 @@
   </head>
 
   <body>
-    <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
       <div class="layout-container">
-        <!-- Menu -->
         {% block navbar %}
           {% include('navbar.html.twig') %}
         {% endblock %}
 
-        <!-- Layout page -->
         <div class="layout-page">
-          <!-- Navbar -->
           {% block searchbar %}
             {% include('searchbar.html.twig') %}
           {% endblock %}
 
-          <!-- Toast Container -->
           <div class="toast-container position-fixed end-0 p-3" style="z-index: 1055; top: 70px;">
             {% for message in app.flashes('success') %}
               <div class="bs-toast toast fade show bg-success" role="alert" aria-live="assertive" aria-atomic="true">
@@ -107,7 +100,6 @@
             {% endfor %}
           </div>
 
-          <!-- Content wrapper -->
           {% block content %}
             <div class="content-wrapper">
               <div class="container-xxl flex-grow-1 container-p-y">
@@ -118,7 +110,6 @@
         </div>
       </div>
 
-      <!-- Footer -->
       <footer class="footer bg-light">
         <div class="container-fluid d-flex flex-md-row flex-column justify-content-between align-items-md-center gap-1 container-p-x py-3">
           <div>
@@ -141,7 +132,6 @@
         </div>
       </footer>
 
-      <!-- Buy Now Button -->
       <div class="buy-now">
         <a
           href="https://themeselection.com/products/sneat-bootstrap-html-admin-template/"
@@ -151,31 +141,31 @@
       </div>
     </div>
 
-    <!-- Core JS -->
     <script src="{{ asset('/vendor/libs/jquery/jquery.js') }}"></script>
     <script src="{{ asset('/vendor/libs/popper/popper.js') }}"></script>
     <script src="{{ asset('/vendor/js/bootstrap.js') }}"></script>
     <script src="{{ asset('/vendor/libs/perfect-scrollbar/perfect-scrollbar.js') }}"></script>
     <script src="{{ asset('/vendor/js/menu.js') }}"></script>
-
-    <!-- Vendors JS -->
     <script src="{{ asset('/vendor/libs/apex-charts/apexcharts.js') }}"></script>
-     <script src="https://cdn.jsdelivr.net/npm/quagga@0.12.1/dist/quagga.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/quagga@0.12.1/dist/quagga.min.js"></script>
     <script src="{{ asset('/js/barcode-scanner.js') }}"></script>
-
-
-    <!-- Main JS -->
     <script src="{{ asset('/js/main.js') }}"></script>
-
-    <!-- Page-specific JS -->
     <script>
       document.addEventListener('DOMContentLoaded', function () {
-        // Dynamically adjust toast container position
+        // Prevent infinite image load loops
+        document.querySelectorAll('img').forEach(img => {
+            img.addEventListener('error', function handleError() {
+                this.src = '{{ asset('/uploads/photos/default_avatar.png') }}';
+                this.removeEventListener('error', handleError);
+            });
+        });
+
+        // Adjust toast container position
         const navbar = document.querySelector('.layout-navbar');
         const toastContainer = document.querySelector('.toast-container');
         if (navbar && toastContainer) {
           const navbarHeight = navbar.offsetHeight;
-          toastContainer.style.top = `${navbarHeight + 10}px`; // 10px gap
+          toastContainer.style.top = `${navbarHeight + 10}px`;
         }
 
         // Initialize Bootstrap toasts
@@ -192,8 +182,6 @@
     {% block javascripts %}
       <script src="{{ asset('/js/dashboards-analytics.js') }}"></script>
     {% endblock %}
-
-    <!-- GitHub Buttons -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </body>
