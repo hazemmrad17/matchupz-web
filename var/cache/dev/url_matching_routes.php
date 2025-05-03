@@ -36,7 +36,7 @@ return [
         '/contrat/front' => [[['_route' => 'contrat_front', '_controller' => 'App\\Controller\\ContratController::front'], null, ['GET' => 0], null, false, false, null]],
         '/contrat/contrat/send-sms' => [[['_route' => 'contrat_send_sms', '_controller' => 'App\\Controller\\ContratController::sendTwilioSms'], null, ['POST' => 0], null, false, false, null]],
         '/contrat/check-expiring' => [[['_route' => 'contrat_check_expiring', '_controller' => 'App\\Controller\\ContratController::checkExpiringContractsAction'], null, ['GET' => 0], null, false, false, null]],
-        '/dashboard' => [[['_route' => 'dashboard', '_controller' => 'App\\Controller\\DashboardController::index'], null, null, null, false, false, null]],
+        '/dashboard' => [[['_route' => 'app_dashboard', '_controller' => 'App\\Controller\\DashboardController::index'], null, ['GET' => 0], null, true, false, null]],
         '/espace' => [[['_route' => 'espace_index', '_controller' => 'App\\Controller\\EspacesportifController::index'], null, ['GET' => 0], null, true, false, null]],
         '/espace/export/csv' => [[['_route' => 'espace_export_csv', '_controller' => 'App\\Controller\\EspacesportifController::exportCsv'], null, null, null, false, false, null]],
         '/espace/export/pdf' => [[['_route' => 'espace_export_pdf', '_controller' => 'App\\Controller\\EspacesportifController::exportPdf'], null, ['GET' => 0], null, false, false, null]],
