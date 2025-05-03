@@ -16,7 +16,7 @@ if (!\class_exists(App_KernelDevDebugContainer::class, false)) {
 
 return new \ContainerVVv0F1x\App_KernelDevDebugContainer([
     'container.build_hash' => 'VVv0F1x',
-    'container.build_id' => 'e3a8a34e',
-    'container.build_time' => 1745783988,
+    'container.build_id' => '5b610240',
+    'container.build_time' => 1745922175,
     'container.runtime_mode' => \in_array(\PHP_SAPI, ['cli', 'phpdbg', 'embed'], true) ? 'web=0' : 'web=1',
 ], __DIR__.\DIRECTORY_SEPARATOR.'ContainerVVv0F1x');

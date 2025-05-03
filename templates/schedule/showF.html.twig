@@ -31,8 +31,10 @@
             padding-top: 56.25%; /* 16:9 aspect ratio */
             border-radius: 12px;
             overflow: hidden;
-            margin: 20px 0; /* Extra spacing */
+            margin: 30px 0; /* Increased margin to account for scaling */
             z-index: 1; /* Ensure the placeholder is not overlapped */
+            transform: scale(1.1); /* Slightly enlarge the video by 10% */
+            transform-origin: center; /* Scale from the center */
         }
         .video-placeholder iframe {
             position: absolute;
@@ -57,6 +59,31 @@
             padding: 0 20px;
             display: none; /* Hidden by default, shown via JS if video fails */
             z-index: 3; /* Ensure the text is visible if shown */
+        }
+        /* Fix interaction issues and style the Disqus section */
+        .row .col-12 #disqus_thread {
+            margin-top: 30px;
+            margin-bottom: 30px;
+            background-color: #e0e0e0; /* Distinct light-gray background */
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #ddd; /* Subtle border to separate it */
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+            position: relative;
+            z-index: 1000; /* Ensure Disqus is above other elements */
+            pointer-events: auto; /* Ensure clicks are registered */
+        }
+        /* Fix potential overlap from parent containers */
+        .container-fluid.goal,
+        .row {
+            overflow: visible;
+        }
+        /* Disable pointer events on potential overlapping pseudo-elements */
+        .container-fluid.goal::before,
+        .container-fluid.goal::after,
+        .bg-breadcrumb::before,
+        .bg-breadcrumb::after {
+            pointer-events: none; /* Prevent background pseudo-elements from blocking clicks */
         }
     </style>
 {% endblock %}
@@ -156,26 +183,53 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Comment Section Start -->
+            <div class="row">
+                <div class="col-12">
+                    <div id="disqus_thread"></div>
+                </div>
+            </div>
+            <!-- Comment Section End -->
         </div>
     </div>
     <!-- Schedule Details End -->
 
-    <!-- JavaScript for Debugging -->
     {% block javascripts %}
         {{ parent() }}
+        <!-- Disqus Embed Code -->
+        <script>
+            /**
+             *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+             *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+             */
+            var disqus_config = function () {
+                this.page.url = window.location.href;  // Dynamically set to the current page URL
+                this.page.identifier = 'schedule-{{ schedule.idSchedule }}';  // Unique identifier for each schedule
+                console.log('Disqus URL:', window.location.href);
+                console.log('Disqus identifier:', 'schedule-{{ schedule.idSchedule }}');
+            };
+
+            (function() { // DON'T EDIT BELOW THIS LINE
+                var d = document, s = d.createElement('script');
+                s.src = 'https://matchupz.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+        <!-- Existing Video Debugging Script -->
         <script>
             document.addEventListener('DOMContentLoaded', function () {
                 const iframes = document.querySelectorAll('.video-placeholder iframe');
                 iframes.forEach(iframe => {
-                    // Log the URL for debugging
                     console.log('YouTube iframe URL:', iframe.src);
 
-                    // Detect click events on the iframe
                     iframe.addEventListener('click', function (e) {
                         console.log('Iframe clicked at coordinates:', e.clientX, e.clientY, '- attempting to interact with video');
                     });
 
-                    // Check for errors
                     iframe.addEventListener('error', function (e) {
                         console.error('Error loading YouTube video:', e);
                         const fallback = iframe.parentElement.querySelector('.video-fallback');
@@ -185,7 +239,6 @@
                         }
                     });
 
-                    // Check if the video is unavailable by iframe height
                     setTimeout(() => {
                         if (iframe.clientHeight < 50) {
                             console.warn('Video likely unavailable (iframe height too small)');
@@ -197,11 +250,9 @@
                         }
                     }, 3000);
 
-                    // Log the DOM hierarchy to check for overlapping elements
                     console.log('Iframe parent elements:', iframe.parentElement);
                 });
 
-                // Check for overlapping elements
                 const placeholder = document.querySelector('.video-placeholder');
                 if (placeholder) {
                     const computedStyle = window.getComputedStyle(placeholder);
