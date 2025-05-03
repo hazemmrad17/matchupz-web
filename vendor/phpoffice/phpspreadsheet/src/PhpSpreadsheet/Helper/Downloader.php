@@ -35,9 +35,8 @@ class Downloader
         $filepath = "{$folder}/{$filename}";
         $this->filepath = (string) realpath($filepath);
         $this->filename = basename($filepath);
-        clearstatcache();
-        if ((is_file($this->filepath) === false) || (is_readable($this->filepath) === false)) {
-            throw new Exception('File not found, or not a regular file, or cannot be read');
+        if ((file_exists($this->filepath) === false) || (is_readable($this->filepath) === false)) {
+            throw new Exception('File not found, or cannot be read');
         }
 
         $filetype ??= pathinfo($filename, PATHINFO_EXTENSION);

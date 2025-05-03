@@ -25,148 +25,179 @@
                         <h2 class="text-center mb-4">Register to MatchupZ</h2>
                         <p class="text-center mb-4">Create your account to get started!</p>
 
-                        <!-- Toast container -->
-                        <div class="position-fixed top-0 end-0 p-3" style="z-index: 1050;" id="toast-container"></div>
+                        {{ form_start(form, {'attr': {'id': 'formAuthentication', 'class': 'mb-3', 'enctype': 'multipart/form-data', 'novalidate': 'novalidate'}}) }}
 
-                        <form id="formAuthentication" class="mb-3" action="{{ path('app_registerF') }}" method="POST" enctype="multipart/form-data">
-                            <div class="row">
-                                <!-- Left Column -->
-                                <div class="col-md-6">
-                                    <!-- Nom -->
-                                    <div class="mb-3">
-                                        <label for="nom" class="form-label">Nom*</label>
-                                        <div class="input-group input-group-merge">
-                                            <span class="input-group-text"><i class="bx bx-user"></i></span>
-                                            <input
-                                                type="text"
-                                                class="form-control"
-                                                id="nom"
-                                                name="nom"
-                                                placeholder="Entrez votre nom"
-                                                autofocus
-                                            />
-                                        </div>
-                                    </div>
+                        <!-- Affichage des erreurs globales -->
+                        {% if form.vars.errors|length > 0 %}
+                            <div class="alert alert-danger">
+                                <ul>
+                                    {% for error in form.vars.errors %}
+                                        <li>{{ error.message }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        {% endif %}
 
-                                    <!-- Prénom -->
-                                    <div class="mb-3">
-                                        <label for="prenom" class="form-label">Prénom*</label>
-                                        <div class="input-group input-group-merge">
-                                            <span class="input-group-text"><i class="bx bx-user-circle"></i></span>
-                                            <input
-                                                type="text"
-                                                class="form-control"
-                                                id="prenom"
-                                                name="prenom"
-                                                placeholder="Entrez votre prénom"
-                                            />
-                                        </div>
+                        <div class="row">
+                            <!-- Left Column -->
+                            <div class="col-md-6">
+                                <!-- Nom -->
+                                <div class="mb-3">
+                                    <label for="{{ form.nom.vars.id }}" class="form-label">Nom*</label>
+                                    <div class="input-group input-group-merge">
+                                        <span class="input-group-text"><i class="bx bx-user"></i></span>
+                                        {{ form_widget(form.nom) }}
                                     </div>
-
-                                    <!-- Email -->
-                                    <div class="mb-3">
-                                        <label for="email" class="form-label">Email*</label>
-                                        <div class="input-group input-group-merge">
-                                            <span class="input-group-text"><i class="bx bx-envelope"></i></span>
-                                            <input
-                                                type="email"
-                                                class="form-control"
-                                                id="email"
-                                                name="email"
-                                                placeholder="Entrez votre email"
-                                            />
+                                    {% if form.nom.vars.errors|length > 0 %}
+                                        <div class="text-danger">
+                                            {% for error in form.nom.vars.errors %}
+                                                {{ error.message }}<br>
+                                            {% endfor %}
                                         </div>
-                                    </div>
-
-                                    <!-- Password -->
-                                    <div class="mb-3 form-password-toggle">
-                                        <label class="form-label" for="password">Mot de passe*</label>
-                                        <div class="input-group input-group-merge">
-                                            <span class="input-group-text"><i class="bx bx-lock-alt"></i></span>
-                                            <input
-                                                type="password"
-                                                id="password"
-                                                class="form-control"
-                                                name="password"
-                                                placeholder="············"
-                                                aria-describedby="password"
-                                            />
-                                            <span class="input-group-text cursor-pointer toggle-password"><i class="bx bx-hide"></i></span>
-                                        </div>
-                                    </div>
+                                    {% endif %}
                                 </div>
 
-                                <!-- Right Column -->
-                                <div class="col-md-6">
-                                    <!-- Numéro de téléphone -->
-                                    <div class="mb-3">
-                                        <label for="num_telephone" class="form-label">Téléphone</label>
-                                        <div class="input-group input-group-merge">
-                                            <span class="input-group-text"><i class="bx bx-phone"></i></span>
-                                            <input
-                                                type="tel"
-                                                class="form-control"
-                                                id="num_telephone"
-                                                name="num_telephone"
-                                                placeholder="Entrez votre numéro"
-                                            />
-                                        </div>
+                                <!-- Prénom -->
+                                <div class="mb-3">
+                                    <label for="{{ form.prenom.vars.id }}" class="form-label">Prénom*</label>
+                                    <div class="input-group input-group-merge">
+                                        <span class="input-group-text"><i class="bx bx-user-circle"></i></span>
+                                        {{ form_widget(form.prenom) }}
                                     </div>
+                                    {% if form.prenom.vars.errors|length > 0 %}
+                                        <div class="text-danger">
+                                            {% for error in form.prenom.vars.errors %}
+                                                {{ error.message }}<br>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
 
-                                    <!-- Date de naissance -->
-                                    <div class="mb-3">
-                                        <label for="date_de_naissance" class="form-label">Date de naissance</label>
-                                        <div class="input-group input-group-merge">
-                                            <span class="input-group-text"><i class="bx bx-calendar"></i></span>
-                                            <input
-                                                type="date"
-                                                class="form-control"
-                                                id="date_de_naissance"
-                                                name="date_de_naissance"
-                                            />
-                                        </div>
+                                <!-- Email -->
+                                <div class="mb-3">
+                                    <label for="{{ form.email.vars.id }}" class="form-label">Email*</label>
+                                    <div class="input-group input-group-merge">
+                                        <span class="input-group-text"><i class="bx bx-envelope"></i></span>
+                                        {{ form_widget(form.email) }}
                                     </div>
+                                    {% if form.email.vars.errors|length > 0 %}
+                                        <div class="text-danger">
+                                            {% for error in form.email.vars.errors %}
+                                                {{ error.message }}<br>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
 
-                                    <!-- Genre -->
-                                    <div class="mb-3">
-                                        <label class="form-label">Genre*</label>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="genre" id="homme" value="Homme" />
-                                            <label class="form-check-label" for="homme">
-                                                <i class="bx bx-male"></i> Homme
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="genre" id="femme" value="Femme" />
-                                            <label class="form-check-label" for="femme">
-                                                <i class="bx bx-female"></i> Femme
-                                            </label>
-                                        </div>
+                                <!-- Password -->
+                                <div class="mb-3 form-password-toggle">
+                                    <label for="{{ form.password.vars.id }}" class="form-label">Mot de passe*</label>
+                                    <div class="input-group input-group-merge">
+                                        <span class="input-group-text"><i class="bx bx-lock-alt"></i></span>
+                                        {{ form_widget(form.password) }}
+                                        <span class="input-group-text cursor-pointer toggle-password"><i class="bx bx-hide"></i></span>
                                     </div>
-
-                                    <!-- Image -->
-                                    <div class="mb-3">
-                                        <label for="image" class="form-label">Image</label>
-                                        <input type="file" class="form-control" id="image" name="image" accept="image/*">
-                                    </div>
+                                    {% if form.password.vars.errors|length > 0 %}
+                                        <div class="text-danger">
+                                            {% for error in form.password.vars.errors %}
+                                                {{ error.message }}<br>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
                                 </div>
                             </div>
 
-                            <!-- Rôle (caché, fixé à "Utilisateur") -->
-                            <input type="hidden" name="role" value="Utilisateur">
+                            <!-- Right Column -->
+                            <div class="col-md-6">
+                                <!-- Numéro de téléphone -->
+                                <div class="mb-3">
+                                    <label for="{{ form.num_telephone.vars.id }}" class="form-label">Téléphone</label>
+                                    <div class="input-group input-group-merge">
+                                        <span class="input-group-text"><i class="bx bx-phone"></i></span>
+                                        {{ form_widget(form.num_telephone) }}
+                                    </div>
+                                    {% if form.num_telephone.vars.errors|length > 0 %}
+                                        <div class="text-danger">
+                                            {% for error in form.num_telephone.vars.errors %}
+                                                {{ error.message }}<br>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
 
-                            <!-- Conditions -->
-                            <div class="mb-3">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="terms-conditions" name="terms" />
-                                    <label class="form-check-label" for="terms-conditions">
-                                        J'accepte la <a href="#" class="text-danger">politique de confidentialité et les termes</a>
-                                    </label>
+                                <!-- Date de naissance -->
+                                <div class="mb-3">
+                                    <label for="{{ form.date_de_naissance.vars.id }}" class="form-label">Date de naissance</label>
+                                    <div class="input-group input-group-merge">
+                                        <span class="input-group-text"><i class="bx bx-calendar"></i></span>
+                                        {{ form_widget(form.date_de_naissance) }}
+                                    </div>
+                                    {% if form.date_de_naissance.vars.errors|length > 0 %}
+                                        <div class="text-danger">
+                                            {% for error in form.date_de_naissance.vars.errors %}
+                                                {{ error.message }}<br>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+
+                                <!-- Genre -->
+                                <div class="mb-3">
+                                    <label class="form-label">Genre*</label>
+                                    {% for choice in form.genre %}
+                                        <div class="form-check">
+                                            {{ form_widget(choice, {'attr': {'class': 'form-check-input'}}) }}
+                                            <label class="form-check-label" for="{{ choice.vars.id }}">
+                                                <i class="bx bx-{{ choice.vars.label == 'Homme' ? 'male' : 'female' }}"></i> {{ choice.vars.label }}
+                                            </label>
+                                        </div>
+                                    {% endfor %}
+                                    {% if form.genre.vars.errors|length > 0 %}
+                                        <div class="text-danger">
+                                            {% for error in form.genre.vars.errors %}
+                                                {{ error.message }}<br>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+
+                                <!-- Image -->
+                                <div class="mb-3">
+                                    <label for="{{ form.image.vars.id }}" class="form-label">Image</label>
+                                    {{ form_widget(form.image) }}
+                                    {% if form.image.vars.errors|length > 0 %}
+                                        <div class="text-danger">
+                                            {% for error in form.image.vars.errors %}
+                                                {{ error.message }}<br>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
                                 </div>
                             </div>
+                        </div>
 
-                            <button type="submit" class="btn btn-danger d-grid w-100">S'inscrire</button>
-                        </form>
+                        <!-- Conditions -->
+                        <div class="mb-3">
+                            <div class="form-check">
+                                {{ form_widget(form.terms, {'attr': {'class': 'form-check-input'}}) }}
+                                <label class="form-check-label" for="{{ form.terms.vars.id }}">
+                                    J'accepte la <a href="#" class="text-danger">politique de confidentialité et les termes</a>
+                                </label>
+                            </div>
+                            {% if form.terms.vars.errors|length > 0 %}
+                                <div class="text-danger">
+                                    {% for error in form.terms.vars.errors %}
+                                        {{ error.message }}<br>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Rôle (caché, fixé à "Utilisateur") -->
+                        {{ form_widget(form.role) }}
+
+                        <button type="submit" class="btn btn-danger d-grid w-100">S'inscrire</button>
+                        {{ form_end(form) }}
 
                         <p class="text-center">
                             <span>Déjà un compte ?</span>
@@ -210,113 +241,8 @@
     <!-- Main JS -->
     <script src="{{ asset('assets/js/main.js') }}"></script>
 
-    <!-- Validation Script -->
+    <!-- Toggle Password Script -->
     <script>
-        document.getElementById('formAuthentication').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const toastContainer = document.getElementById('toast-container');
-            toastContainer.innerHTML = ''; // Clear previous toasts
-
-            // Get form field values
-            const nom = document.getElementById('nom')?.value.trim() || '';
-            const prenom = document.getElementById('prenom')?.value.trim() || '';
-            const email = document.getElementById('email')?.value.trim() || '';
-            const password = document.getElementById('password')?.value || '';
-            const telephone = document.getElementById('num_telephone')?.value.trim() || '';
-            const dateNaissance = document.getElementById('date_de_naissance')?.value || '';
-            const genre = document.querySelector('input[name="genre"]:checked')?.value || '';
-            const image = document.getElementById('image')?.files[0];
-            const terms = document.getElementById('terms-conditions')?.checked;
-
-            // Validation des champs obligatoires
-            if (!nom) {
-                addToast('Erreur Nom', 'Veuillez entrer le nom.');
-            } else if (!/^[a-zA-Z\s-]+$/.test(nom)) {
-                addToast('Erreur Nom', 'Le nom ne doit contenir que des lettres.');
-            }
-
-            if (!prenom) {
-                addToast('Erreur Prénom', 'Veuillez entrer le prénom.');
-            } else if (!/^[a-zA-Z\s-]+$/.test(prenom)) {
-                addToast('Erreur Prénom', 'Le prénom ne doit contenir que des lettres.');
-            }
-
-            if (!email) {
-                addToast('Erreur Email', 'Veuillez entrer un email.');
-            } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-                addToast('Erreur Email', 'Format email invalide (ex: nom@gmail.com).');
-            }
-
-            if (!password) {
-                addToast('Erreur Mot de passe', 'Veuillez entrer un mot de passe.');
-            } else if (password.length < 6) {
-                addToast('Erreur Mot de passe', 'Le mot de passe doit contenir au moins 6 caractères.');
-            }
-
-            if (telephone) {
-                if (!/^\d{8}$/.test(telephone)) {
-                    addToast('Erreur Téléphone', 'Le téléphone doit contenir exactement 8 chiffres.');
-                }
-            }
-
-            if (dateNaissance) {
-                const birthDate = new Date(dateNaissance);
-                const today = new Date();
-                const minAgeDate = new Date();
-                minAgeDate.setFullYear(today.getFullYear() - 18);
-
-                if (birthDate > today) {
-                    addToast('Erreur Date', 'La date ne peut pas être dans le futur.');
-                } else if (birthDate > minAgeDate) {
-                    addToast('Erreur Date', 'Vous devez avoir au moins 18 ans.');
-                }
-            }
-
-            if (!genre) {
-                addToast('Erreur Genre', 'Veuillez sélectionner un genre.');
-            }
-
-            if (image) {
-                const validTypes = ['image/jpeg', 'image/png'];
-                if (!validTypes.includes(image.type)) {
-                    addToast('Erreur Image', 'L\'image doit être au format JPG ou PNG.');
-                }
-                if (image.size > 2 * 1024 * 1024) {
-                    addToast('Erreur Image', 'L\'image ne doit pas dépasser 2Mo.');
-                }
-            }
-
-            if (!terms) {
-                addToast('Erreur Conditions', 'Veuillez accepter les conditions d\'utilisation.');
-            }
-
-            // Submit if no errors
-            if (toastContainer.children.length === 0) {
-                this.submit();
-            } else {
-                const toastElements = toastContainer.querySelectorAll('.toast');
-                toastElements.forEach(toast => new bootstrap.Toast(toast, { autohide: true, delay: 5000 }).show());
-            }
-        });
-
-        // Fonction pour ajouter un toast
-        function addToast(title, message) {
-            const toastContainer = document.getElementById('toast-container');
-            const toastId = 'toast-' + Date.now();
-            const toastHTML = `
-                <div id="${toastId}" class="bs-toast toast fade bg-danger" role="alert" aria-live="assertive" aria-atomic="true">
-                    <div class="toast-header">
-                        <i class="bx bx-bell me-2"></i>
-                        <div class="me-auto fw-semibold">${title}</div>
-                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-                    </div>
-                    <div class="toast-body">${message}</div>
-                </div>
-            `;
-            toastContainer.innerHTML += toastHTML;
-        }
-
-        // Gestion du toggle password
         document.addEventListener('DOMContentLoaded', function() {
             const togglePassword = document.querySelector('.toggle-password');
             if (togglePassword) {

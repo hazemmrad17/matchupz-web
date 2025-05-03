@@ -12,6 +12,17 @@ class MaterielRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Materiel::class);
     }
+    /**
+     * Check if the fournisseur's categorie_produit matches the materiel's type.
+     *
+     * @param Fournisseur $fournisseur
+     * @param string $type
+     * @return bool
+     */
+    public function checkFournisseurCategoryMatch($fournisseur, string $type): bool
+    {
+        return $fournisseur instanceof Fournisseur && $fournisseur->getCategorieProduit() === $type;
+    }
 
     public function countUniqueTypes(): int
     {
@@ -113,6 +124,167 @@ class MaterielRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('m')
             ->orderBy('m.id_materiel', 'DESC')
             ->setMaxResults($max)
+            ->getQuery()
+            ->getResult();
+    }
+
+
+
+
+
+    /**
+     * Get the distribution of materials by state (etat).
+     *
+     * @return array<string, int> Array with state as key and count as value
+     */
+    public function getStateDistribution(): array
+    {
+        $result = $this->createQueryBuilder('m')
+            ->select('m.etat, COUNT(m.id) as count')
+            ->groupBy('m.etat')
+            ->getQuery()
+            ->getResult();
+
+        return array_column($result, 'count', 'etat');
+    }
+
+    /**
+     * Get the total number of materials.
+     *
+     * @return int
+     */
+    public function getTotalMaterials(): int
+    {
+        return (int) $this->createQueryBuilder('m')
+            ->select('COUNT(m.id)')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    /**
+     * Get the number of materials with a barcode.
+     *
+     * @return int
+     */
+    public function getMaterialsWithBarcodeCount(): int
+    {
+        return (int) $this->createQueryBuilder('m')
+            ->select('COUNT(m.id)')
+            ->where('m.barcode IS NOT NULL')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    /**
+     * Get materials that have a barcode.
+     *
+     * @return Materiel[]
+     */
+    public function getMaterialsWithBarcode(): array
+    {
+        return $this->createQueryBuilder('m')
+            ->where('m.barcode IS NOT NULL')
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * Get the average length of material names.
+     *
+     * @return float
+     */
+    public function getAverageNameLength(): float
+    {
+        $connection = $this->getEntityManager()->getConnection();
+        $sql = 'SELECT AVG(CHAR_LENGTH(nom)) as avg_length FROM materiel';
+        $stmt = $connection->executeQuery($sql);
+        return (float) $stmt->fetchOne();
+    }
+
+    /**
+     * Get the total inventory value (sum of prix * quantite).
+     *
+     * @return float
+     */
+    public function getInventoryValue(): float
+    {
+        $connection = $this->getEntityManager()->getConnection();
+        $sql = 'SELECT SUM(prix * quantite) as total_value FROM materiel';
+        $stmt = $connection->executeQuery($sql);
+        return (float) $stmt->fetchOne();
+    }
+
+    /**
+     * Get materials sorted by name length (descending), limited to a specified number.
+     *
+     * @param int $limit
+     * @return array
+     */
+    public function getTopMaterialsByNameLength(int $limit = 5): array
+    {
+        $connection = $this->getEntityManager()->getConnection();
+        $sql = '
+            SELECT id, nom, type, CHAR_LENGTH(nom) as nameLength
+            FROM materiel
+            ORDER BY nameLength DESC
+            LIMIT :limit
+        ';
+        $stmt = $connection->executeQuery($sql, ['limit' => $limit]);
+        return $stmt->fetchAllAssociative();
+    }
+
+    /**
+     * Create a query builder for paginated material listing with optional search, filter, and sort.
+     *
+     * @param string|null $searchTerm
+     * @param string|null $filter
+     * @param string|null $sort
+     * @param string|null $order
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    public function createPaginatedQuery(?string $searchTerm = '', ?string $filter = '', ?string $sort = 'nom', ?string $order = 'asc'): QueryBuilder
+    {
+        $qb = $this->createQueryBuilder('m');
+
+        // Apply search term
+        if ($searchTerm) {
+            $qb->andWhere('m.nom LIKE :searchTerm OR m.barcode LIKE :searchTerm')
+               ->setParameter('searchTerm', '%' . $searchTerm . '%');
+        }
+
+        // Apply filter (example: filter by type)
+        if ($filter) {
+            $qb->andWhere('m.type = :filter')
+               ->setParameter('filter', $filter);
+        }
+
+        // Apply sorting
+        if ($sort && $order) {
+            // Ensure the sort field is valid
+            $allowedSortFields = ['nom', 'type', 'quantite', 'etat', 'prix', 'barcode'];
+            if (in_array($sort, $allowedSortFields)) {
+                $qb->orderBy('m.' . $sort, $order === 'asc' ? 'ASC' : 'DESC');
+            }
+        }
+
+        return $qb;
+    }
+
+    /**
+     * Recherche dynamique des matériels par terme via AJAX.
+     *
+     * @param string $term
+     * @return Materiel[]
+     */
+    public function findBySearchTerm(string $term): array
+    {
+        return $this->createQueryBuilder('m')
+            ->where('m.nom LIKE :term')
+            ->orWhere('m.type LIKE :term')
+            ->orWhere('m.etat LIKE :term')
+            ->orWhere('m.barcode LIKE :term')
+            ->setParameter('term', '%'.$term.'%')
+            ->orderBy('m.id', 'DESC')
             ->getQuery()
             ->getResult();
     }

@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Form;
 
 use App\Entity\User;
@@ -7,51 +6,70 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Component\Form\Extension\Core\Type\RadioType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+
 class UserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('nom')
-            ->add('prenom')
-            ->add('email')
-            ->add('password')
-            ->add('num_telephone')
-            ->add('date_de_naissance', null, [
+            ->add('nom', TextType::class, [
+                'empty_data' => '',
+            ])
+            ->add('prenom', TextType::class, [
+                'empty_data' => '',
+            ])
+            ->add('email', TextType::class, [
+                'empty_data' => '',
+            ])
+            ->add('password', PasswordType::class, [
+                'empty_data' => '',
+            ])
+            ->add('num_telephone', TextType::class, [
+                'required' => false,
+                'empty_data' => '',
+            ])
+            ->add('date_de_naissance', DateType::class, [
                 'widget' => 'single_text',
+                'required' => false,
+                'empty_data' => null,
+                'attr' => [
+                    'placeholder' => 'jj/mm/aaaa',
+                ],
             ])
             ->add('genre', ChoiceType::class, [
                 'choices' => [
-                    'Homme' => 'homme',
-                    'Femme' => 'femme'
+                    'Homme' => 'Homme',
+                    'Femme' => 'Femme',
                 ],
                 'expanded' => true,
                 'multiple' => false,
-                'label' => 'Genre'
+                'required' => true,
+                'empty_data' => '',
             ])
             ->add('role', ChoiceType::class, [
                 'choices' => [
-                    'ADMIN' => 'ADMIN',
-                    'RESPONSABLE_SPORTIF' => 'RESPONSABLE_SPORTIF',
-                    'RESERVATEUR' => 'RESERVATEUR',
-                    'RESPONSABLE_SPONSORING' => 'RESPONSABLE_SPONSORING',
-                    'RESPONSABLE_LOGISTIQUE' => 'RESPONSABLE_LOGISTIQUE',
-                    'RESPONSABLE_ESPACE_SPORTIF' => 'RESPONSABLE_ESPACE_SPORTIF',
-                    'RESPONSABLE_COACH' => 'RESPONSABLE_COACH',
-                    'UTILISATEUR' => 'UTILISATEUR'
+                    'Utilisateur' => 'Utilisateur',
+                    'Admin' => 'ADMIN',
+                    'Responsable logistique' => 'RESPONSABLE LOGISTIQUE',
+                    'Responsable des equipes' => 'RESPONSABLE DES EQUIPES',
+                    'Responsable logistique' => 'RESPONSABLE LOGISTIQUE',
+                    'Responsable espace sportif' => 'RESPONSABLE ESPACE SPORTIF',
+                    'Responsable des sponsors' => 'RESPONSABLE DES SPONSORS',
+                    'Block' => 'BLOCK',
                 ],
-                'label' => 'Rôle'
+                'multiple' => false,
+                'required' => true,
+                'data' => 'Utilisateur', // Valeur par défaut
             ])
             ->add('image', FileType::class, [
-                'label' => 'Photo de profil',
-                'mapped' => false,
-                'required' => false
-            ])
-            // reset_code a été supprimé comme demandé
-        ;
+                'required' => false,
+                'mapped' => false, // We'll handle the mapping manually in the controller
+                'data_class' => null, // Fix the error by allowing the field to handle string values
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

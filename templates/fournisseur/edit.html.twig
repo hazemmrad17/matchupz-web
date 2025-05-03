@@ -17,56 +17,73 @@
                 <div class="card mb-4">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <h5 class="mb-0">Modifier le Fournisseur #{{ fournisseur.id_fournisseur }}</h5>
-                        <small class="text-muted float-end">Tous les champs sont obligatoires</small>
+                        <small class="text-muted float-end">Remplir les détails</small>
                     </div>
                     <div class="card-body">
-                        {{ form_start(form, {'attr': {'class': 'needs-validation', 'novalidate': false}}) }}
-                            <div class="row">
-                                <div class="mb-3 col-md-6">
-                                    <label class="form-label">Nom du Fournisseur</label>
-                                    <div class="input-group input-group-merge">
-                                        <span class="input-group-text"><i class="bx bx-building"></i></span>
-                                        {{ form_widget(form.nom, {
-                                            'attr': {
-                                                'class': 'form-control',
-                                                'placeholder': 'Nom du fournisseur'
-                                            }
-                                        }) }}
-                                    </div>
-                                    {{ form_errors(form.nom) }}
-                                </div>
+                        <!-- Affichage des erreurs globales du formulaire -->
+                        {% if form_errors(form) %}
+                            <div class="alert alert-danger">
+                                {{ form_errors(form) }}
+                            </div>
+                        {% endif %}
 
-                                <div class="mb-3 col-md-6">
-                                    <label class="form-label">Email</label>
-                                    <div class="input-group input-group-merge">
-                                        <span class="input-group-text"><i class="bx bx-envelope"></i></span>
-                                        {{ form_widget(form.email, {
-                                            'attr': {
-                                                'class': 'form-control',
-                                                'placeholder': 'email@exemple.com'
-                                            }
-                                        }) }}
-                                    </div>
-                                    {{ form_errors(form.email) }}
+                        {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+                            <div class="mb-3">
+                                <label class="form-label" for="fournisseur_nom">Nom du Fournisseur</label>
+                                <div class="input-group input-group-merge">
+                                    <span class="input-group-text"><i class="bx bx-building"></i></span>
+                                    {{ form_widget(form.nom, {
+                                        'attr': {
+                                            'class': 'form-control',
+                                            'placeholder': 'Ex: SportPlus Inc.'
+                                        }
+                                    }) }}
                                 </div>
+                                {% if form_errors(form.nom) %}
+                                    <div class="text-danger">
+                                        {{ form_errors(form.nom) }}
+                                    </div>
+                                {% endif %}
                             </div>
 
                             <div class="mb-3">
-                                <label class="form-label">Adresse</label>
+                                <label class="form-label" for="fournisseur_email">Email</label>
+                                <div class="input-group input-group-merge">
+                                    <span class="input-group-text"><i class="bx bx-envelope"></i></span>
+                                    {{ form_widget(form.email, {
+                                        'attr': {
+                                            'class': 'form-control',
+                                            'placeholder': 'contact@fournisseur.com'
+                                        }
+                                    }) }}
+                                </div>
+                                {% if form_errors(form.email) %}
+                                    <div class="text-danger">
+                                        {{ form_errors(form.email) }}
+                                    </div>
+                                {% endif %}
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label" for="fournisseur_adresse">Adresse</label>
                                 <div class="input-group input-group-merge">
                                     <span class="input-group-text"><i class="bx bx-map"></i></span>
                                     {{ form_widget(form.adresse, {
                                         'attr': {
                                             'class': 'form-control',
-                                            'placeholder': 'Adresse complète'
+                                            'placeholder': 'Adresse, Ville, Code Postal'
                                         }
                                     }) }}
                                 </div>
-                                {{ form_errors(form.adresse) }}
+                                {% if form_errors(form.adresse) %}
+                                    <div class="text-danger">
+                                        {{ form_errors(form.adresse) }}
+                                    </div>
+                                {% endif %}
                             </div>
 
                             <div class="mb-3">
-                                <label class="form-label">Catégorie de Produit</label>
+                                <label class="form-label" for="fournisseur_categorie_produit">Catégorie de Produit</label>
                                 <div class="input-group input-group-merge">
                                     <span class="input-group-text"><i class="bx bx-category"></i></span>
                                     {{ form_widget(form.categorie_produit, {
@@ -75,7 +92,11 @@
                                         }
                                     }) }}
                                 </div>
-                                {{ form_errors(form.categorie_produit) }}
+                                {% if form_errors(form.categorie_produit) %}
+                                    <div class="text-danger">
+                                        {{ form_errors(form.categorie_produit) }}
+                                    </div>
+                                {% endif %}
                             </div>
 
                             <div class="mt-4">

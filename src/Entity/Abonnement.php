@@ -6,6 +6,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\AbonnementRepository;
 
+use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity(repositoryClass: AbonnementRepository::class)]
 #[ORM\Table(name: 'abonnement')]
 class Abonnement
@@ -23,9 +24,11 @@ class Abonnement
     private ?string $typeAbonnement = null;
 
     #[ORM\Column(type: 'date', name: 'date_debut', nullable: false)]
+    #[Assert\NotBlank(message: "La date de début est obligatoire.")]
     private ?\DateTimeInterface $dateDebut = null;
 
     #[ORM\Column(type: 'date', name: 'date_fin', nullable: false)]
+    #[Assert\NotBlank(message: "La date de fin est obligatoire.")]
     private ?\DateTimeInterface $dateFin = null;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 0, nullable: false)]

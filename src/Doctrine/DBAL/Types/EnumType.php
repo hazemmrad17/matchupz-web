@@ -7,19 +7,23 @@ use Doctrine\DBAL\Types\Type;
 
 class EnumType extends Type
 {
-    public function getSQLDeclaration(array $column, AbstractPlatform $platform)
+    public function getSQLDeclaration(array $column, AbstractPlatform $platform): string
     {
-        // Fallback to VARCHAR if columnDefinition isn't specified
-        return $column['columnDefinition'] ?? 'VARCHAR(255)';
+        // Your existing implementation
+        return 'ENUM(' . implode(',', $column['enum_values']) . ')';
     }
 
-    public function getName()
+    public function getName(): string
     {
+        // Your existing implementation
         return 'enum';
     }
 
-    public function requiresSQLCommentHint(AbstractPlatform $platform)
+    public function requiresSQLCommentHint(AbstractPlatform $platform): bool
     {
+        // Your existing implementation
         return true;
     }
+
+    // Other methods as needed
 }

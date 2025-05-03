@@ -35,8 +35,9 @@ class FootballAnalysisController extends AbstractController
         $error = null;
         $trackingData = null;
 
-        // Custom logging function
-        $logFile = 'C:\Users\Hazem Mrad\Desktop\matchupz-web-integration - Copy - Copy\var\log\controller.log';
+        $projectRoot = dirname(__DIR__, 3); // Adjust the number of levels based on where this code resides
+        $basePath = ['matchupz-web-0', 'var', 'log', 'controller.log']; // Example for a file in the project
+        $logFile = $projectRoot . DIRECTORY_SEPARATOR . join(DIRECTORY_SEPARATOR, $basePath);
         $logMessage = function ($message) use ($logFile) {
             error_log(date('[Y-m-d H:i:s] ') . $message . "\n", 3, $logFile);
         };
@@ -124,6 +125,7 @@ class FootballAnalysisController extends AbstractController
                             $error = "Python script not found at: $pythonScriptPath";
                         } else {
                             $pythonExecutable = 'C:\\Users\\Hazem Mrad\\AppData\\Local\\Programs\\Python\\Python310\\python.exe';
+ 
                             if (!file_exists($pythonExecutable)) {
                                 $error = "Python executable not found at: $pythonExecutable";
                             } else {
@@ -170,6 +172,9 @@ class FootballAnalysisController extends AbstractController
                                         }
                                     } else {
                                         $error = 'Error processing video: Return code ' . $returnVar . '. Output: ' . ($output ?: $errorOutput);
+                                        if (!file_exists($outputVideoPath)) {
+                                            $error .= ' Output file not found at: ' . $outputVideoPath;
+                                        }
                                         $logMessage("Processing failed: $error");
                                     }
                                 } else {
@@ -227,7 +232,10 @@ class FootballAnalysisController extends AbstractController
                             $latestJsonFile = array_reduce($jsonFiles, function($a, $b) {
                                 return filemtime($a) > filemtime($b) ? $a : $b;
                             });
-                            $logMessage("Latest JSON file: $latestJsonFile");
+                            $logMessage("Latest JSON file before processing: $latestJsonFile");
+                            if (!file_exists($latestJsonFile)) {
+                                $logMessage("Warning: Latest JSON file $latestJsonFile was deleted unexpectedly");
+                            }
                             $trackingDataContent = file_get_contents($latestJsonFile);
                             $trackingData = json_decode($trackingDataContent, true);
                             if ($trackingData === null) {

@@ -3,7 +3,7 @@ import argparse
 import os
 import logging
 import subprocess
-import cv2 # type: ignore
+import cv2  # type: ignore
 import glob
 import queue
 import threading
@@ -13,7 +13,7 @@ import signal
 import traceback
 import json
 from typing import List, Tuple, Optional
-import numpy as np # type: ignore
+import numpy as np  # type: ignore
 from tracking import ObjectTracker, KeypointsTracker
 from club_assignment import ClubAssigner, Club
 from ball_to_player_assignment import BallToPlayerAssigner
@@ -44,7 +44,7 @@ def _convert_frames_to_video(frame_dir: str, output_video: str, fps: float, fram
     print(f"Video saved as {output_video}")
 
 def save_team_data(processor: FootballVideoProcessor, output_video: str) -> None:
-    """Save team data to a JSON file."""
+    """Save team data to a JSON file with safeguards to avoid overwriting."""
     output_dir = os.path.dirname(output_video)
     logging.debug(f"Output directory for team data: {output_dir}")
     if not os.path.exists(output_dir):
@@ -65,9 +65,16 @@ def save_team_data(processor: FootballVideoProcessor, output_video: str) -> None
         print(f"Failed to write test file to {test_file_path}: {str(e)}")
         return
 
-    team_data = processor.finalize_team_data()
     team_data_path = os.path.splitext(output_video)[0] + '_team_data.json'
     logging.debug(f"Attempting to save team data to: {team_data_path}")
+    
+    # Avoid overwriting existing team data file
+    if os.path.exists(team_data_path):
+        logging.warning(f"Team data file already exists: {team_data_path}. Skipping overwrite.")
+        print(f"Team data file already exists: {team_data_path}. Skipping overwrite.")
+        return
+
+    team_data = processor.finalize_team_data()
     try:
         with open(team_data_path, 'w') as f:
             json.dump(team_data, f, indent=4)

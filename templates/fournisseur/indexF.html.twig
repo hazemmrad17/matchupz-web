@@ -1,108 +1,104 @@
-
 {% extends 'baseM.html.twig' %}
 
 {% block title %}Nos Fournisseurs - Fitness Center{% endblock %}
 
 {% block body %}
-<style>
-    .fournisseur-bg {
-        background: url("../../assets/img/fournisseur-bg.jpg") no-repeat center center/cover;
-        background-size: cover;
-        padding: 5rem 0;
-        position: relative;
-        color: white;
-    }
-    .fournisseur-bg::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.7);
-    }
-    .fournisseur-card {
-        transition: all 0.3s ease;
-        border: none;
-        border-radius: 15px;
-        overflow: hidden;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        height: 100%;
-        background: white;
-    }
-    .fournisseur-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-    }
-    .card-icon {
-        font-size: 2.5rem;
-        color: #0d6efd;
-        margin-bottom: 1rem;
-    }
-    .category-badge {
-        background: #0d6efd;
-        color: white;
-        padding: 3px 12px;
-        border-radius: 50px;
-        font-size: 0.8rem;
-        display: inline-block;
-        margin-bottom: 1rem;
-    }
-    .position-relative {
-        position: relative;
-    }
-    .z-index-1 {
-        position: relative;
-        z-index: 1;
-    }
-</style>
-
-<!-- Hero Section with Background Image -->
-<div class="fournisseur-bg">
-    <div class="container position-relative z-index-1 text-center">
-        <h1 class="display-4 fw-bold mb-4">Nos Partenaires Fournisseurs</h1>
-        <p class="lead mb-0">Découvrez nos fournisseurs de qualité qui contribuent à votre expérience fitness</p>
+    {# Recommandation du meilleur fournisseur #}
+    <!-- Header Start -->
+    <div class="container-fluid bg-breadcrumb">
+        <div class="container text-center py-5" style="max-width: 900px;">
+            <h4 class="text-white display-4 mb-4 wow fadeInDown" data-wow-delay="0.1s">Nos Fournisseurs</h4>
+            <ol class="breadcrumb d-flex justify-content-center mb-0 wow fadeInDown" data-wow-delay="0.3s">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item"><a href="#">Pages</a></li>
+                <li class="breadcrumb-item active text-primary">Fournisseurs</li>
+            </ol>    
+        </div>
     </div>
-</div>
+    <!-- Header End -->
 
-<!-- Fournisseur Cards Section -->
-<div class="container py-5">
-    <div class="row g-4">
-        {% for fournisseur in pagination %}
-        <div class="col-md-6 col-lg-4">
-            <div class="fournisseur-card card h-100 p-4">
-                <div class="card-body text-center">
-                    <div class="card-icon">
-                        <i class="fas fa-truck"></i>
-                    </div>
-                    <span class="category-badge">{{ fournisseur.categorieProduit }}</span>
-                    <h3 class="card-title">{{ fournisseur.nom }}</h3>
-                    
-                    <div class="text-start mt-4">
-                        <div class="d-flex align-items-center mb-3">
-                            <i class="fas fa-map-marker-alt text-primary me-3"></i>
-                            <p class="mb-0">{{ fournisseur.adresse }}</p>
+    <!-- Fournisseurs Carousel Start -->
+    <div class="container-fluid feature bg-light py-5">
+        <div class="container py-5 position-relative">
+            <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
+                <h4 class="text-primary">Nos Partenaires</h4>
+                <h1 class="display-4 mb-4">Découvrez Nos Fournisseurs de Qualité</h1>
+                <p class="mb-3">Nous collaborons avec des fournisseurs de confiance pour vous offrir les meilleurs équipements et services pour votre expérience fitness.</p>
+                <p class="mb-0">Explorez nos partenaires et découvrez comment ils contribuent à votre réussite sportive.</p>
+            </div>
+
+            {% set images = ['fournisseur1.jpg', 'fournisseur2.jpg', 'fournisseur3.jpg', 'fournisseur4.jpg', 'fournisseur5.jpg'] %}
+
+            {% if pagination|length > 0 %}
+                <div class="fournisseur-carousel owl-carousel mb-5 position-relative" style="z-index: 2;">
+                    {% for fournisseur in pagination %}
+                        <div class="feature-item wow fadeInUp" data-wow-delay="{{ 0.2 + (loop.index0 * 0.2) }}s">
+                            <div class="feature-img">
+                                <img src="{{ asset('img/' ~ images[loop.index0 % images|length]) }}" class="img-fluid w-100" alt="Fournisseur">
+                            </div>
+                            <div class="feature-content p-4">
+                                <h4 class="mb-3">{{ fournisseur.nom }}</h4>
+                                <p class="mb-2"><i class="fas fa-map-marker-alt me-2 text-primary"></i><strong>Adresse:</strong> {{ fournisseur.adresse }}</p>
+                                <p class="mb-2"><i class="fas fa-envelope me-2 text-primary"></i><strong>Email:</strong> {{ fournisseur.email }}</p>
+                                <p class="mb-3"><i class="fas fa-tags me-2 text-primary"></i><strong>Catégorie:</strong> {{ fournisseur.categorieProduit }}</p>
+                                <a href="{{ path('app_fournisseur_show', {'id_fournisseur': fournisseur.idFournisseur}) }}" class="btn btn-primary py-2 px-4"></a>
+                            </div>
                         </div>
-                        <div class="d-flex align-items-center mb-3">
-                            <i class="fas fa-envelope text-primary me-3"></i>
-                            <p class="mb-0">{{ fournisseur.email }}</p>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="col-12 text-center">
+                    <p class="text-muted">Aucun fournisseur trouvé.</p>
+                </div>
+            {% endif %}
+
+            <div class="feature-shaps position-absolute top-0 start-0 w-100 h-100" style="z-index: 1;"></div>
+        </div>
+    </div>
+    <!-- Fournisseurs Carousel End -->
+
+    {# Recommandation du meilleur fournisseur sous la liste #}
+    {% if bestSupplier %}
+        <div class="container pb-5">
+            <div class="row justify-content-center">
+                <div class="col-md-7 col-lg-6">
+                    <div class="card shadow-lg border-0 wow fadeInUp" data-wow-delay="0.1s" style="border-top: 5px solid #0d6efd; border-radius: 1.2rem;">
+                        <div class="card-body text-center py-4 px-4">
+                            <span class="badge bg-warning text-dark mb-2" style="font-size: 1rem; letter-spacing: 1px;"><i class="fas fa-crown text-warning me-2" style="font-size:1.5rem;"></i>Top Fournisseur</span>
+                            <h2 class="text-primary mb-2" style="font-family: 'Teko', sans-serif; letter-spacing: 1px;">{{ bestSupplier.nom }}</h2>
+                            <div class="mb-2">
+                                <span class="badge bg-primary" style="font-size: 1.1rem;">{{ bestSupplier.materialCount }} matériels fournis</span>
+                            </div>
+                            <p class="mb-0 text-muted">Merci à notre meilleur partenaire pour sa contribution exceptionnelle !</p>
                         </div>
                     </div>
-                    
-                    <a href="{{ path('app_fournisseur_show', {'id_fournisseur': fournisseur.id_fournisseur}) }}" 
-                       class="btn btn-outline-primary mt-3 stretched-link">
-                       Voir détails <i class="fas fa-arrow-right ms-2"></i>
-                    </a>
                 </div>
             </div>
         </div>
-        {% else %}
-        <div class="col-12 text-center py-5">
-            <div class="alert alert-info">
-                Aucun fournisseur disponible pour le moment
-            </div>
-        </div>
-        {% endfor %}
-    </div>
-</div>
+    {% endif %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        new WOW().init();
+
+        $(document).ready(function(){
+            $(".fournisseur-carousel").owlCarousel({
+                items: 3,
+                margin: 30,
+                loop: true,
+                autoplay: true,
+                autoplayTimeout: 3500,
+                smartSpeed: 800,
+                dots: true,
+                nav: false,
+                responsive: {
+                    0:{ items:1 },
+                    768:{ items:2 },
+                    992:{ items:3 }
+                }
+            });
+        });
+    </script>
 {% endblock %}

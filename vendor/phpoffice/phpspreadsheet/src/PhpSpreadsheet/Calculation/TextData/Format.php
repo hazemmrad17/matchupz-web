@@ -192,7 +192,6 @@ class Format
             return $e->getMessage();
         }
         if (!is_numeric($value)) {
-            $value = StringHelper::convertToString($value);
             $numberValue = str_replace(
                 StringHelper::getThousandsSeparator(),
                 '',
@@ -213,14 +212,14 @@ class Format
                 if ($timeValue !== ExcelError::VALUE()) {
                     Functions::setReturnDateType($dateSetting);
 
-                    return $timeValue; //* @phpstan-ignore-line
+                    return $timeValue;
                 }
             }
             $dateValue = Functions::scalar(DateTimeExcel\DateValue::fromString($value));
             if ($dateValue !== ExcelError::VALUE()) {
                 Functions::setReturnDateType($dateSetting);
 
-                return $dateValue; //* @phpstan-ignore-line
+                return $dateValue;
             }
             Functions::setReturnDateType($dateSetting);
 
@@ -251,23 +250,23 @@ class Format
             $value = $value->getPlainText();
         }
         if (is_string($value)) {
-            $value = ($format === true) ? StringHelper::convertToString(Calculation::wrapResult($value)) : $value;
+            $value = ($format === true) ? Calculation::wrapResult($value) : $value;
             $value = str_replace("\n", '', $value);
         } elseif (is_bool($value)) {
             $value = Calculation::getLocaleBoolean($value ? 'TRUE' : 'FALSE');
         }
 
-        return StringHelper::convertToString($value);
+        return (string) $value;
     }
 
     private static function getDecimalSeparator(mixed $decimalSeparator): string
     {
-        return empty($decimalSeparator) ? StringHelper::getDecimalSeparator() : StringHelper::convertToString($decimalSeparator);
+        return empty($decimalSeparator) ? StringHelper::getDecimalSeparator() : (string) $decimalSeparator;
     }
 
     private static function getGroupSeparator(mixed $groupSeparator): string
     {
-        return empty($groupSeparator) ? StringHelper::getThousandsSeparator() : StringHelper::convertToString($groupSeparator);
+        return empty($groupSeparator) ? StringHelper::getThousandsSeparator() : (string) $groupSeparator;
     }
 
     /**
@@ -294,9 +293,7 @@ class Format
             return $e->getMessage();
         }
 
-        /** @var null|array|scalar $value */
-        if (!is_array($value) && !is_numeric($value)) {
-            $value = StringHelper::convertToString($value);
+        if (!is_numeric($value)) {
             $decimalPositions = Preg::matchAllWithOffsets('/' . preg_quote($decimalSeparator, '/') . '/', $value, $matches);
             if ($decimalPositions > 1) {
                 return ExcelError::VALUE();

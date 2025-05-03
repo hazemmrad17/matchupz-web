@@ -1,0 +1,232 @@
+{% extends 'baseM.html.twig' %}
+
+{% block title %}Edit Profile - Fitness{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        .edit-profile-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+        .edit-profile-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .edit-profile-header h2 {
+            font-size: 2rem;
+            color: #333;
+            font-weight: bold;
+        }
+        .form-section {
+            margin-bottom: 30px;
+        }
+        .form-section h3 {
+            font-size: 1.5rem;
+            color: #555;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        .form-group label {
+            font-weight: bold;
+            color: #333;
+            width: 200px;
+            display: inline-block;
+            font-size: 1.1rem;
+        }
+        .form-group input,
+        .form-group select {
+            width: 350px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+        .form-group input[type="file"] {
+            padding: 3px; /* Adjust padding for file input */
+        }
+        .form-group .radio-group {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+        .form-group .radio-group label {
+            width: auto;
+            font-weight: normal;
+            margin-left: 5px;
+        }
+        .current-image {
+            margin-top: 10px;
+            margin-left: 200px;
+        }
+        .current-image img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 2px solid #ddd;
+        }
+        .form-buttons {
+            text-align: center;
+            margin-top: 40px;
+        }
+        .btn-submit, .btn-cancel {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            margin: 0 15px;
+        }
+        .btn-submit {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-submit:hover {
+            background-color: #0056b3;
+        }
+        .btn-cancel {
+            background-color: #6c757d;
+            color: white;
+        }
+        .btn-cancel:hover {
+            background-color: #5a6268;
+        }
+        .error-message {
+            color: red;
+            font-size: 0.9rem;
+            margin-top: 5px;
+            margin-left: 200px;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="container-fluid py-5">
+        <div class="container">
+            <div class="edit-profile-container">
+                <div class="edit-profile-header">
+                    <h2>Edit Profile</h2>
+                </div>
+
+                {{ form_start(form) }}
+                <div class="form-section">
+                    <h3>Personal Information</h3>
+                    <div class="form-group">
+                        <label for="{{ form.nom.vars.id }}">Last Name:</label>
+                        {{ form_widget(form.nom) }}
+                        {% if form_errors(form.nom) %}
+                            <div class="error-message">{{ form_errors(form.nom) }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="{{ form.prenom.vars.id }}">First Name:</label>
+                        {{ form_widget(form.prenom) }}
+                        {% if form_errors(form.prenom) %}
+                            <div class="error-message">{{ form_errors(form.prenom) }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="{{ form.date_de_naissance.vars.id }}">Date of Birth:</label>
+                        {{ form_widget(form.date_de_naissance) }}
+                        {% if form_errors(form.date_de_naissance) %}
+                            <div class="error-message">{{ form_errors(form.date_de_naissance) }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="{{ form.genre.vars.id }}">Gender:</label>
+                        <div class="radio-group">
+                            {{ form_widget(form.genre) }}
+                        </div>
+                        {% if form_errors(form.genre) %}
+                            <div class="error-message">{{ form_errors(form.genre) }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3>Contact Information</h3>
+                    <div class="form-group">
+                        <label for="{{ form.email.vars.id }}">Email:</label>
+                        {{ form_widget(form.email) }}
+                        {% if form_errors(form.email) %}
+                            <div class="error-message">{{ form_errors(form.email) }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="{{ form.num_telephone.vars.id }}">Phone Number:</label>
+                        {{ form_widget(form.num_telephone) }}
+                        {% if form_errors(form.num_telephone) %}
+                            <div class="error-message">{{ form_errors(form.num_telephone) }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3>Account Information</h3>
+                    <div class="form-group">
+                        <label for="{{ form.password.vars.id }}">Password:</label>
+                        {{ form_widget(form.password) }}
+                        {% if form_errors(form.password) %}
+                            <div class="error-message">{{ form_errors(form.password) }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="{{ form.role.vars.id }}">Role:</label>
+                        {{ form_widget(form.role) }}
+                        {% if form_errors(form.role) %}
+                            <div class="error-message">{{ form_errors(form.role) }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3>Profile Image</h3>
+                    <div class="form-group">
+                        <label for="{{ form.image.vars.id }}">Upload Image:</label>
+                        {{ form_widget(form.image) }}
+                        {% if form_errors(form.image) %}
+                            <div class="error-message">{{ form_errors(form.image) }}</div>
+                        {% endif %}
+                    </div>
+                    {% if user.image %}
+                        <div class="current-image">
+                            <p>Current Image:</p>
+                            <img src="{{ asset('Uploads/users/' ~ user.image) }}" alt="Current Profile Image">
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="form-buttons">
+                    <button type="submit" class="btn-submit">Save Changes</button>
+                    <a href="{{ path('app_user_profile_front') }}" class="btn-cancel">Cancel</a>
+                </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

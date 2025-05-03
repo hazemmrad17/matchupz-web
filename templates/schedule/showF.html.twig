@@ -31,19 +31,32 @@
             padding-top: 56.25%; /* 16:9 aspect ratio */
             border-radius: 12px;
             overflow: hidden;
-            transform: scale(1.1); /* Slightly larger scale */
             margin: 20px 0; /* Extra spacing */
+            z-index: 1; /* Ensure the placeholder is not overlapped */
         }
-        .video-placeholder::before {
-            content: '\25B6'; /* Play button Unicode */
+        .video-placeholder iframe {
             position: absolute;
-            top: 50%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            z-index: 2; /* Ensure the iframe is clickable */
+        }
+        .video-placeholder-text {
+            position: absolute;
+            top: 50%; /* Center vertically */
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: 80px; /* Larger play button */
             color: #fff;
-            opacity: 0.8;
-            text-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
+            font-size: 1.2rem;
+            font-weight: 500;
+            text-align: center;
+            opacity: 0.9;
+            text-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+            padding: 0 20px;
+            display: none; /* Hidden by default, shown via JS if video fails */
+            z-index: 3; /* Ensure the text is visible if shown */
         }
     </style>
 {% endblock %}
@@ -54,7 +67,7 @@
         <div class="container text-center py-5" style="max-width: 900px;">
             <h4 class="text-white display-4 mb-4 wow fadeInDown" data-wow-delay="0.1s">Détails de l'horaire</h4>
             <ol class="breadcrumb d-flex justify-content-center mb-0 wow fadeInDown" data-wow-delay="0.3s">
-                <li class="breadcrumb-item"><a href="#">Accueil</a></li>
+                <li class="breadcrumb-item"><a href="{{ path('app_home') }}">Accueil</a></li>
                 <li class="breadcrumb-item"><a href="{{ path('schedule_mainF') }}">Horaires</a></li>
                 <li class="breadcrumb-item active text-primary">Détails</li>
             </ol>
@@ -109,16 +122,93 @@
                             <a href="{{ path('schedule_mainF') }}" class="btn btn-primary py-3 px-5 ms-2">
                                 <span>Retour aux horaires</span>
                             </a>
+                            {% if isFutureMatch %}
+                                <a href="{{ path('schedule_add_to_google_calendar', {'idSchedule': schedule.idSchedule}) }}" class="btn btn-primary py-3 px-5 ms-2">
+                                    <span>Sauvegarder dans Google Calendar</span>
+                                </a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-6 wow fadeInRight" data-wow-delay="0.2s">
                     <div class="h-100">
-                        <div class="video-placeholder"></div>
+                        <div class="video-placeholder">
+                            {% if isFutureMatch %}
+                                <div class="video-placeholder-text">
+                                    Le match n'a pas encore commencé, vous pouvez être rappelé lorsqu'il aura lieu via Google Calendar.
+                                </div>
+                            {% elseif isOngoing and schedule.streamURL is not null %}
+                                <iframe src="{{ schedule.streamURL|raw }}?autoplay=1&mute=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                <div class="video-placeholder-text video-fallback">
+                                    La diffusion en direct n'a pas pu être chargée.
+                                </div>
+                            {% elseif not isFutureMatch and not isOngoing and schedule.URL is not null %}
+                                <iframe src="{{ schedule.URL|raw }}?controls=1" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                <div class="video-placeholder-text video-fallback">
+                                    La vidéo n'a pas pu être chargée.
+                                </div>
+                            {% else %}
+                                <div class="video-placeholder-text">
+                                    Aucune vidéo disponible pour ce match.
+                                </div>
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <!-- Schedule Details End -->
+
+    <!-- JavaScript for Debugging -->
+    {% block javascripts %}
+        {{ parent() }}
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const iframes = document.querySelectorAll('.video-placeholder iframe');
+                iframes.forEach(iframe => {
+                    // Log the URL for debugging
+                    console.log('YouTube iframe URL:', iframe.src);
+
+                    // Detect click events on the iframe
+                    iframe.addEventListener('click', function (e) {
+                        console.log('Iframe clicked at coordinates:', e.clientX, e.clientY, '- attempting to interact with video');
+                    });
+
+                    // Check for errors
+                    iframe.addEventListener('error', function (e) {
+                        console.error('Error loading YouTube video:', e);
+                        const fallback = iframe.parentElement.querySelector('.video-fallback');
+                        if (fallback) {
+                            iframe.style.display = 'none';
+                            fallback.style.display = 'block';
+                        }
+                    });
+
+                    // Check if the video is unavailable by iframe height
+                    setTimeout(() => {
+                        if (iframe.clientHeight < 50) {
+                            console.warn('Video likely unavailable (iframe height too small)');
+                            const fallback = iframe.parentElement.querySelector('.video-fallback');
+                            if (fallback) {
+                                iframe.style.display = 'none';
+                                fallback.style.display = 'block';
+                            }
+                        }
+                    }, 3000);
+
+                    // Log the DOM hierarchy to check for overlapping elements
+                    console.log('Iframe parent elements:', iframe.parentElement);
+                });
+
+                // Check for overlapping elements
+                const placeholder = document.querySelector('.video-placeholder');
+                if (placeholder) {
+                    const computedStyle = window.getComputedStyle(placeholder);
+                    console.log('Video placeholder z-index:', computedStyle.zIndex);
+                    console.log('Video placeholder pointer-events:', computedStyle.pointerEvents);
+                }
+            });
+        </script>
+    {% endblock %}
 {% endblock %}

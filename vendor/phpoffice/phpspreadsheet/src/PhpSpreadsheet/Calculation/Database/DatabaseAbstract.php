@@ -27,17 +27,12 @@ abstract class DatabaseAbstract
      */
     protected static function fieldExtract(array $database, mixed $field): ?int
     {
-        /** @var ?string */
-        $single = Functions::flattenSingleValue($field);
-        $field = strtoupper($single ?? '');
+        $field = strtoupper(Functions::flattenSingleValue($field) ?? '');
         if ($field === '') {
             return null;
         }
 
-        /** @var callable */
-        $callable = 'strtoupper';
-        /** @var non-empty-array $database */
-        $fieldNames = array_map($callable, array_shift($database));
+        $fieldNames = array_map('strtoupper', array_shift($database));
         if (is_numeric($field)) {
             $field = (int) $field - 1;
             if ($field < 0 || $field >= count($fieldNames)) {
@@ -71,9 +66,7 @@ abstract class DatabaseAbstract
      */
     protected static function filter(array $database, array $criteria): array
     {
-        /** @var array */
         $fieldNames = array_shift($database);
-        /** @var array */
         $criteriaNames = array_shift($criteria);
 
         //    Convert the criteria into a set of AND/OR conditions with [:placeholders]
@@ -91,7 +84,6 @@ abstract class DatabaseAbstract
 
         //    extract an array of values for the requested column
         $columnData = [];
-        /** @var array $row */
         foreach ($database as $rowKey => $row) {
             $keys = array_keys($row);
             $key = $keys[$field] ?? null;

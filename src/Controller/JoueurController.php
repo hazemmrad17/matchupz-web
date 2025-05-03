@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Joueur;
 use App\Entity\EvaluationPhysique;
-use App\Entity\PerformanceJoueur; 
+use App\Entity\PerformanceJoueur;
 use App\Entity\Sport;
 use App\Form\JoueurType;
 use App\Repository\JoueurRepository;
@@ -23,6 +23,8 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Knp\Component\Pager\PaginatorInterface;
 use Knp\Snappy\Pdf;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 #[Route('/joueur')]
 class JoueurController extends AbstractController
@@ -30,10 +32,12 @@ class JoueurController extends AbstractController
     private EntityManagerInterface $entityManager;
     private $processId = null;
     private $currentOutputFile = null;
+    private HttpClientInterface $httpClient;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(EntityManagerInterface $entityManager, HttpClientInterface $httpClient)
     {
         $this->entityManager = $entityManager;
+        $this->httpClient = $httpClient;
     }
 
     #[Route('/test', name: 'joueur_test', methods: ['GET'])]
@@ -45,7 +49,7 @@ class JoueurController extends AbstractController
             'first_id' => $joueurs[0]->getIdJoueur() ?? 'None',
         ]);
     }
-    
+
     #[Route('/', name: 'joueur_main', methods: ['GET'])]
     public function index(
         JoueurRepository $joueurRepository,
@@ -54,16 +58,13 @@ class JoueurController extends AbstractController
         Request $request,
         PaginatorInterface $paginator
     ): Response {
-        // Get all players for stats calculation
         $allJoueurs = $joueurRepository->findAll();
         $activePlayers = count(array_filter($allJoueurs, fn($joueur) => $joueur->getStatut() === 'Actif'));
 
-        // Create query for pagination
         $query = $joueurRepository->createQueryBuilder('j')
             ->orderBy('j.nom', 'ASC')
             ->getQuery();
 
-        // Paginate the results (5 players per page)
         $joueurs = $paginator->paginate(
             $query,
             $request->query->getInt('page', 1),
@@ -100,8 +101,7 @@ class JoueurController extends AbstractController
             }
 
             $totalScore = round(min(max($performanceScore + $physicalScore, 0), 100));
-            
-            // Only include players with a profile picture
+
             if ($joueur->getProfilePicture()) {
                 $topPerformers[] = ['joueur' => $joueur, 'score' => $totalScore];
             }
@@ -115,7 +115,7 @@ class JoueurController extends AbstractController
         }
 
         usort($topPerformers, fn($a, $b) => $b['score'] <=> $a['score']);
-        $topPerformers = array_slice($topPerformers, 0, 4); // Limit to 4 as per screenshot
+        $topPerformers = array_slice($topPerformers, 0, 4);
 
         $sportNames = [];
         $sportAvgScores = [];
@@ -150,19 +150,15 @@ class JoueurController extends AbstractController
     public function statistics(
         JoueurRepository $joueurRepository,
         EvaluationPhysiqueRepository $evaluationRepository
-    ): Response
-    {
-        // Total number of players
+    ): Response {
         $totalPlayers = $joueurRepository->count([]);
 
-        // Average height and weight
         $playerStats = $this->entityManager->createQuery(
             'SELECT AVG(j.taille) AS averageHeight, AVG(j.poids) AS averageWeight FROM App\Entity\Joueur j'
         )->getSingleResult();
         $averageHeight = $playerStats['averageHeight'] ?: 0;
         $averageWeight = $playerStats['averageWeight'] ?: 0;
 
-        // Statut distribution
         $statutDistribution = $this->entityManager->createQuery(
             'SELECT j.statut, COUNT(j.idJoueur) AS count FROM App\Entity\Joueur j GROUP BY j.statut'
         )->getResult();
@@ -171,7 +167,6 @@ class JoueurController extends AbstractController
             $statutDist[$data['statut']] = $data['count'];
         }
 
-        // Sport distribution
         $sportDistribution = $this->entityManager->createQuery(
             'SELECT s.nomSport, COUNT(j.idJoueur) AS count FROM App\Entity\Joueur j JOIN j.sport s GROUP BY s.nomSport'
         )->getResult();
@@ -180,23 +175,18 @@ class JoueurController extends AbstractController
             $sportDist[$data['nomSport']] = $data['count'];
         }
 
-        // Poste distribution
         $posteDistribution = $this->entityManager->createQuery(
             'SELECT j.poste, COUNT(j.idJoueur) AS count FROM App\Entity\Joueur j GROUP BY j.poste'
         )->getResult();
 
-        // All players
         $allPlayers = $joueurRepository->findAll();
 
-        // Evaluation physique statistics
-        // Total evaluated players
         $evaluatedPlayers = $evaluationRepository->createQueryBuilder('e')
             ->select('COUNT(DISTINCT e.joueur) as count')
             ->getQuery()
             ->getSingleScalarResult();
         $evaluationRate = $totalPlayers > 0 ? ($evaluatedPlayers / $totalPlayers) * 100 : 0;
 
-        // Average physical scores
         $averageScores = $evaluationRepository->createQueryBuilder('e')
             ->select('
                 AVG(e.niveauEndurance) as niveauEndurance,
@@ -206,7 +196,6 @@ class JoueurController extends AbstractController
             ->getQuery()
             ->getSingleResult();
 
-        // Top 10 players based on physical score
         $topPlayers = $evaluationRepository->createQueryBuilder('e')
             ->select('j.idJoueur, j.nom, j.prenom, AVG((e.niveauEndurance + e.forcePhysique + e.vitesse) / 3) as score')
             ->join('e.joueur', 'j')
@@ -216,7 +205,6 @@ class JoueurController extends AbstractController
             ->getQuery()
             ->getResult();
 
-        // Recent evaluations (last 30 days)
         $recentEvaluations = $evaluationRepository->createQueryBuilder('e')
             ->join('e.joueur', 'j')
             ->where('e.dateEvaluation >= :date')
@@ -250,7 +238,6 @@ class JoueurController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // Handle profile picture upload
             $profilePictureFile = $form->get('profilePicture')->getData();
             if ($profilePictureFile) {
                 $newFilename = uniqid() . '.' . $profilePictureFile->guessExtension();
@@ -259,7 +246,7 @@ class JoueurController extends AbstractController
                         $this->getParameter('profile_pictures_directory'),
                         $newFilename
                     );
-                    $joueur->setProfilePicture($newFilename); // Use setProfilePicture, not setProfilePictureUrl
+                    $joueur->setProfilePicture($newFilename);
                 } catch (FileException $e) {
                     $this->addFlash('danger', 'Erreur lors du téléchargement de l\'image.');
                     return $this->render('joueur/new.html.twig', [
@@ -268,10 +255,6 @@ class JoueurController extends AbstractController
                 }
             }
 
-            // Set nullable fields
-            $joueur->setSport(null);
-
-            // Persist the joueur (cascades to evaluationPhysique and performanceJoueur)
             $entityManager->persist($joueur);
             $entityManager->flush();
 
@@ -295,7 +278,6 @@ class JoueurController extends AbstractController
             throw $this->createNotFoundException('Joueur non trouvé');
         }
 
-        // Ensure related entities exist
         if (!$joueur->getEvaluationPhysique()) {
             $evaluationPhysique = new EvaluationPhysique();
             $evaluationPhysique->setJoueur($joueur);
@@ -311,7 +293,6 @@ class JoueurController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // Handle profile picture upload
             $profilePictureFile = $form->get('profilePicture')->getData();
             if ($profilePictureFile) {
                 $newFilename = uniqid().'.'.$profilePictureFile->guessExtension();
@@ -326,7 +307,7 @@ class JoueurController extends AbstractController
                             unlink($oldFile);
                         }
                     }
-                    $joueur->setProfilePicture($newFilename); // Use setProfilePicture
+                    $joueur->setProfilePicture($newFilename);
                 } catch (FileException $e) {
                     $this->addFlash('error', 'Erreur lors du téléchargement de l\'image');
                     return $this->render('joueur/edit.html.twig', [
@@ -402,10 +383,8 @@ class JoueurController extends AbstractController
     {
         $joueurs = $joueurRepository->findAll();
 
-        // Create a CSV file in memory
         $output = fopen('php://memory', 'w');
 
-        // Add headers
         fputcsv($output, [
             'Nom',
             'Prénom',
@@ -419,7 +398,6 @@ class JoueurController extends AbstractController
             'Téléphone',
         ]);
 
-        // Add data
         foreach ($joueurs as $joueur) {
             fputcsv($output, [
                 $joueur->getNom(),
@@ -435,14 +413,11 @@ class JoueurController extends AbstractController
             ]);
         }
 
-        // Rewind the file pointer to the beginning
         fseek($output, 0);
 
-        // Create the response with the CSV content
         $response = new Response(stream_get_contents($output));
         fclose($output);
 
-        // Set headers for download
         $disposition = $response->headers->makeDisposition(
             ResponseHeaderBag::DISPOSITION_ATTACHMENT,
             'joueurs_export_' . date('Y-m-d') . '.csv'
@@ -460,7 +435,6 @@ class JoueurController extends AbstractController
 
         $html = $this->renderView('joueur/export_pdf.html.twig', [
             'joueurs' => $joueurs,
-            // Pass the logo path directly if needed
             'logo_path' => $this->getParameter('kernel.project_dir').'/public/img/logo_white.svg'
         ]);
 
@@ -485,7 +459,6 @@ class JoueurController extends AbstractController
         $response->headers->set('Content-Disposition', $disposition);
 
         return $response;
-        
     }
 
     #[Route('/export/excel', name: 'joueur_export_excel')]
@@ -493,11 +466,9 @@ class JoueurController extends AbstractController
     {
         $joueurs = $joueurRepository->findAll();
 
-        // Create a new Spreadsheet object
         $spreadsheet = new Spreadsheet();
         $sheet = $spreadsheet->getActiveSheet();
 
-        // Set headers
         $sheet->setCellValue('A1', 'Nom');
         $sheet->setCellValue('B1', 'Prénom');
         $sheet->setCellValue('C1', 'Sport');
@@ -509,7 +480,6 @@ class JoueurController extends AbstractController
         $sheet->setCellValue('I1', 'Email');
         $sheet->setCellValue('J1', 'Téléphone');
 
-        // Add data
         $row = 2;
         foreach ($joueurs as $joueur) {
             $sheet->setCellValue('A' . $row, $joueur->getNom());
@@ -525,17 +495,14 @@ class JoueurController extends AbstractController
             $row++;
         }
 
-        // Create the Excel file in memory
         $writer = new Xlsx($spreadsheet);
         $fileName = 'joueurs_export_' . date('Y-m-d') . '.xlsx';
         $tempFile = tempnam(sys_get_temp_dir(), 'joueurs_export');
         $writer->save($tempFile);
 
-        // Create the response with the Excel content
         $response = new Response(file_get_contents($tempFile));
         unlink($tempFile);
 
-        // Set headers for download
         $disposition = $response->headers->makeDisposition(
             ResponseHeaderBag::DISPOSITION_ATTACHMENT,
             $fileName
@@ -545,12 +512,49 @@ class JoueurController extends AbstractController
 
         return $response;
     }
-    
+
     #[Route('/formations', name: 'football_layout')]
-    public function layout(JoueurRepository $joueurRepository): Response
+    public function layout(JoueurRepository $joueurRepository, Request $request): Response
     {
-        $joueurs = $joueurRepository->findBy(['sport' => 1, 'statut' => 'Actif']);
+        $formations = [
+            '4-4-2' => ['GK' => 1, 'RB' => 1, 'CB' => 2, 'LB' => 1, 'RM' => 1, 'CM' => 2, 'LM' => 1, 'ST' => 2],
+            '4-3-3' => ['GK' => 1, 'RB' => 1, 'CB' => 2, 'LB' => 1, 'CM' => 3, 'RW' => 1, 'LW' => 1, 'ST' => 1],
+            '3-5-2' => ['GK' => 1, 'CB' => 3, 'RM' => 1, 'CM' => 3, 'LM' => 1, 'ST' => 2],
+            '3-1-4-2' => ['GK' => 1, 'CB' => 3, 'DM' => 1, 'RM' => 1, 'CM' => 2, 'LM' => 1, 'ST' => 2],
+            '3-4-1-2' => ['GK' => 1, 'CB' => 3, 'RM' => 1, 'CM' => 2, 'LM' => 1, 'AM' => 1, 'ST' => 2],
+            '3-4-2-1' => ['GK' => 1, 'CB' => 3, 'RM' => 1, 'CM' => 2, 'LM' => 1, 'SS' => 2, 'ST' => 1],
+            '3-4-3' => ['GK' => 1, 'CB' => 3, 'RM' => 1, 'CM' => 2, 'LM' => 1, 'RW' => 1, 'LW' => 1, 'ST' => 1],
+            '3-5-1-1' => ['GK' => 1, 'CB' => 3, 'RM' => 1, 'CM' => 3, 'LM' => 1, 'AM' => 1, 'ST' => 1],
+            '4-1-2-1-2' => ['GK' => 1, 'RB' => 1, 'CB' => 2, 'LB' => 1, 'DM' => 1, 'CM' => 2, 'AM' => 1, 'ST' => 2],
+            '4-1-2-3' => ['GK' => 1, 'RB' => 1, 'CB' => 2, 'LB' => 1, 'DM' => 1, 'CM' => 2, 'RW' => 1, 'LW' => 1, 'ST' => 1],
+            '4-1-3-2' => ['GK' => 1, 'RB' => 1, 'CB' => 2, 'LB' => 1, 'DM' => 1, 'CM' => 3, 'ST' => 2],
+            '4-1-4-1' => ['GK' => 1, 'RB' => 1, 'CB' => 2, 'LB' => 1, 'DM' => 1, 'RM' => 1, 'CM' => 2, 'LM' => 1, 'ST' => 1],
+            '4-2-1-3' => ['GK' => 1, 'RB' => 1, 'CB' => 2, 'LB' => 1, 'DM' => 2, 'AM' => 1, 'RW' => 1, 'LW' => 1, 'ST' => 1],
+            '4-2-2-2' => ['GK' => 1, 'RB' => 1, 'CB' => 2, 'LB' => 1, 'DM' => 2, 'AM' => 2, 'ST' => 2],
+            '4-2-3-1' => ['GK' => 1, 'RB' => 1, 'CB' => 2, 'LB' => 1, 'DM' => 2, 'AM' => 3, 'ST' => 1],
+            '4-2-4' => ['GK' => 1, 'RB' => 1, 'CB' => 2, 'LB' => 1, 'CM' => 2, 'RW' => 1, 'LW' => 1, 'ST' => 2],
+            '4-3-1-2' => ['GK' => 1, 'RB' => 1, 'CB' => 2, 'LB' => 1, 'CM' => 3, 'AM' => 1, 'ST' => 2],
+            '4-3-2-1' => ['GK' => 1, 'RB' => 1, 'CB' => 2, 'LB' => 1, 'CM' => 3, 'SS' => 2, 'ST' => 1],
+            '4-4-1-1' => ['GK' => 1, 'RB' => 1, 'CB' => 2, 'LB' => 1, 'RM' => 1, 'CM' => 2, 'LM' => 1, 'SS' => 1, 'ST' => 1],
+            '4-5-1' => ['GK' => 1, 'RB' => 1, 'CB' => 2, 'LB' => 1, 'RM' => 1, 'CM' => 3, 'LM' => 1, 'ST' => 1],
+            '5-2-1-2' => ['GK' => 1, 'CB' => 3, 'RWB' => 1, 'LWB' => 1, 'CM' => 2, 'AM' => 1, 'ST' => 2],
+            '5-2-2-1' => ['GK' => 1, 'CB' => 3, 'RWB' => 1, 'LWB' => 1, 'CM' => 2, 'SS' => 2, 'ST' => 1],
+            '5-2-3' => ['GK' => 1, 'CB' => 3, 'RWB' => 1, 'LWB' => 1, 'CM' => 2, 'RW' => 1, 'LW' => 1, 'ST' => 1],
+            '5-3-2' => ['GK' => 1, 'CB' => 3, 'RWB' => 1, 'LWB' => 1, 'CM' => 3, 'ST' => 2],
+            '5-4-1' => ['GK' => 1, 'CB' => 3, 'RWB' => 1, 'LWB' => 1, 'RM' => 1, 'CM' => 2, 'LM' => 1, 'ST' => 1],
+        ];
+
+        // Assuming the rest of the method remains unchanged
+        $selectedFormation = $request->query->get('formation', '4-4-2');
+        if (!array_key_exists($selectedFormation, $formations)) {
+            $selectedFormation = '4-4-2'; // Default to 4-4-2 if invalid
+        }
+
+        $joueurs = $joueurRepository->findAll();
+
         return $this->render('joueur/football_layout.html.twig', [
+            'formations' => array_keys($formations),
+            'selected_formation' => $selectedFormation,
             'joueurs' => $joueurs,
         ]);
     }
@@ -561,6 +565,131 @@ class JoueurController extends AbstractController
         return $this->render('joueur/feature.html.twig');
     }
 
+    #[Route('/scouting', name: 'joueur_scouting', methods: ['GET', 'POST'])]
+    public function scouting(
+        Request $request,
+        JoueurRepository $joueurRepository,
+        EntityManagerInterface $entityManager,
+        ValidatorInterface $validator
+    ): Response {
+        $error = null;
+        $topScorers = [];
+        $selectedLeague = $request->query->getInt('league', 39); // Default to Premier League
+        $selectedSeason = $request->query->getInt('season', 2023); // Default to 2023
+        $logFile = $this->getParameter('kernel.logs_dir') . '/scouting.log';
+
+        // Helper function to log messages
+        $log = function ($message) use ($logFile) {
+            error_log(date('[Y-m-d H:i:s] ') . $message . "\n", 3, $logFile);
+        };
+
+        // Debug: Log selected league and season
+        $log("Selected League: $selectedLeague, Selected Season: $selectedSeason");
+
+        // Valid leagues and seasons for free plan
+        $validLeagues = [39, 40, 135, 78, 61, 140]; // Premier League, Championship, Serie A, Bundesliga, Ligue 1, La Liga
+        $validSeasons = [2023, 2022, 2021];
+
+        // Validate user input
+        if (!in_array($selectedLeague, $validLeagues)) {
+            $selectedLeague = 39; // Fallback to Premier League
+            $error = "Ligue non valide. Sélection par défaut : Premier League.";
+            $log("Invalid league selected: {$request->query->get('league')}. Falling back to league 39.");
+        }
+        if (!in_array($selectedSeason, $validSeasons)) {
+            $selectedSeason = 2023; // Fallback to 2023
+            $error = "Saison non valide. Sélection par défaut : 2023.";
+            $log("Invalid season selected: {$request->query->get('season')}. Falling back to season 2023.");
+        }
+
+        // Fetch top scorers using API-Football
+        try {
+            $apiKey = $this->getParameter('api_football_api_key');
+
+            // Validate API key
+            if (empty($apiKey)) {
+                $log("API-Football API key is empty or not set in configuration.");
+                throw new \Exception("API-Football API key is not configured. Please set API_FOOTBALL_API_KEY in your .env file.");
+            }
+            $log("Fetching top scorers with API key: " . substr($apiKey, 0, 5) . "...");
+
+            // Try the selected season first, then fallbacks
+            $seasonsToTry = [$selectedSeason, ...array_diff($validSeasons, [$selectedSeason])];
+            $seasonData = null;
+            $fetchedSeasonId = null;
+
+            foreach ($seasonsToTry as $season) {
+                $log("Attempting to fetch top scorers for league $selectedLeague, season $season...");
+                $baseUrl = "https://v3.football.api-sports.io/players/topscorers";
+                $queryParams = [
+                    'league' => $selectedLeague,
+                    'season' => $season,
+                ];
+                $fullUrl = $baseUrl . '?' . http_build_query($queryParams);
+                $log("Request URL: $fullUrl");
+
+                $response = $this->httpClient->request('GET', $baseUrl, [
+                    'query' => $queryParams,
+                    'headers' => [
+                        'x-rapidapi-key' => $apiKey,
+                        'x-rapidapi-host' => 'v3.football.api-sports.io',
+                    ],
+                ]);
+
+                $data = $response->toArray();
+                $log("API Response for season $season: " . json_encode($data));
+
+                if (isset($data['response']) && !empty($data['response'])) {
+                    $seasonData = $data;
+                    $fetchedSeasonId = $season;
+                    $log("Successfully fetched data for league $selectedLeague, season $season");
+                    break;
+                } else {
+                    $log("No valid data for league $selectedLeague, season $season");
+                    if (isset($data['errors']) && !empty($data['errors'])) {
+                        $log("API Errors: " . json_encode($data['errors']));
+                    }
+                }
+            }
+
+            if (!$seasonData) {
+                throw new \Exception("No top scorer data available from API-Football for league $selectedLeague, seasons " . implode(', ', $seasonsToTry) . ". Please check your API key, subscription plan, or data availability.");
+            }
+
+            // Process the top scorer data
+            foreach ($seasonData['response'] as $index => $scorer) {
+                $playerName = $scorer['player']['name'] ?? 'Unknown';
+                $teamName = $scorer['statistics'][0]['team']['name'] ?? 'Unknown';
+                $goals = $scorer['statistics'][0]['goals']['total'] ?? 0;
+                $position = $index + 1;
+
+                $topScorers[] = [
+                    'position' => $position,
+                    'player_name' => $playerName,
+                    'team_name' => $teamName,
+                    'goals' => $goals,
+                    'season_id' => $fetchedSeasonId,
+                ];
+            }
+
+            $log("Total top scorers processed: " . count($topScorers));
+        } catch (\Exception $e) {
+            $error = 'Erreur lors de la récupération des meilleurs buteurs : ' . $e->getMessage();
+            $log("API Error: " . $e->getMessage());
+            $topScorers = [];
+        }
+
+        // Debug: Log variables passed to template
+        $log("Rendering template with selected_league: $selectedLeague, selected_season: $selectedSeason");
+
+        return $this->render('joueur/scouting.html.twig', [
+            'error' => $error,
+            'top_scorers' => $topScorers,
+            'selected_league' => $selectedLeague,
+            'selected_season' => $selectedSeason,
+        ]);
+    }
+
     #[Route('/football_analysis', name: 'football_analysis')]
     public function footballAnalysis(Request $request): Response
     {
@@ -568,8 +697,8 @@ class JoueurController extends AbstractController
         $error = null;
         $trackingData = null;
 
-        // Custom logging function
-        $logFile = 'C:\Users\Hazem Mrad\Desktop\matchupz-web-integration - Copy - Copy\var\log\controller.log';
+        // Custom logging function using universal log path
+        $logFile = $this->getParameter('kernel.logs_dir') . '/controller.log';
         $logMessage = function ($message) use ($logFile) {
             error_log(date('[Y-m-d H:i:s] ') . $message . "\n", 3, $logFile);
         };

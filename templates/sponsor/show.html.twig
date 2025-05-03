@@ -39,6 +39,14 @@
                             <h6>Pack</h6>
                             <p>{{ sponsor.pack }}</p>
                         </div>
+                        <div class="col-md-6">
+                            <h6>Image</h6>
+                            {% if sponsor.sponsorPicture %}
+                                <img src="{{ asset('uploads/sponsor_pictures/' ~ sponsor.sponsorPicture) }}" alt="{{ sponsor.nom }}" style="max-width: 200px; max-height: 200px;">
+                            {% else %}
+                                <p>Aucune image disponible</p>
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
             </div>

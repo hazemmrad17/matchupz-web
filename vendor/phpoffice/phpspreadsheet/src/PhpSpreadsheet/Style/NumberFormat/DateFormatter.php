@@ -98,7 +98,6 @@ class DateFormatter
         '[ss]' => self::SECONDS_IN_DAY,
     ];
 
-    /** @param float|int|numeric-string $value */
     private static function tryInterval(bool &$seekingBracket, string &$block, mixed $value, string $format): void
     {
         if ($seekingBracket) {

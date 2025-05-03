@@ -59,9 +59,8 @@ class Conditional
     {
         if (empty($args)) {
             return 0.0;
-        }
-        if (count($args) === 3) {
-            return self::AVERAGEIF($args[1], $args[2], $args[0]); //* @phpstan-ignore-line
+        } elseif (count($args) === 3) {
+            return self::AVERAGEIF($args[1], $args[2], $args[0]);
         }
         foreach ($args as $arg) {
             if (is_array($arg) && array_key_exists(0, $arg)) {

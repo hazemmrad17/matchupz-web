@@ -5,7 +5,6 @@ namespace PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 use PhpOffice\PhpSpreadsheet\Calculation\Calculation;
 use PhpOffice\PhpSpreadsheet\Reader\Xls\Color\BIFF8;
 use PhpOffice\PhpSpreadsheet\RichText\RichText;
-use PhpOffice\PhpSpreadsheet\Shared\StringHelper;
 use PhpOffice\PhpSpreadsheet\Style\Color;
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 
@@ -130,13 +129,13 @@ class Formatter extends BaseFormatter
         $formatx = str_replace('\"', self::QUOTE_REPLACEMENT, $format);
         if (preg_match(self::SECTION_SPLIT, $format) === 0 && preg_match(self::SYMBOL_AT, $formatx) === 1) {
             if (!str_contains($format, '"')) {
-                return str_replace('@', StringHelper::convertToString($value), $format);
+                return str_replace('@', $value, $format);
             }
             //escape any dollar signs on the string, so they are not replaced with an empty value
             $value = str_replace(
                 ['$', '"'],
                 ['\$', self::QUOTE_REPLACEMENT],
-                StringHelper::convertToString($value)
+                (string) $value
             );
 
             return str_replace(
@@ -148,7 +147,7 @@ class Formatter extends BaseFormatter
 
         // If we have a text value, return it "as is"
         if (!is_numeric($value)) {
-            return StringHelper::convertToString($value);
+            return (string) $value;
         }
 
         // For 'General' format code, we just pass the value although this is not entirely the way Excel does it,

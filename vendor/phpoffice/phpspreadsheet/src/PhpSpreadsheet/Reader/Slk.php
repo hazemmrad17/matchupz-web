@@ -144,7 +144,8 @@ class Slk extends BaseReader
      */
     protected function loadSpreadsheetFromFile(string $filename): Spreadsheet
     {
-        $spreadsheet = $this->newSpreadsheet();
+        // Create new Spreadsheet
+        $spreadsheet = new Spreadsheet();
         $spreadsheet->setValueBinder($this->valueBinder);
 
         // Load into this instance

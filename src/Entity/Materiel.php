@@ -4,8 +4,11 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use App\Repository\MaterielRepository;
 
+#[UniqueEntity(fields: ['barcode'], errorPath: 'barcode', message: "Le code-barres existe déjà.")]
 #[ORM\Entity(repositoryClass: MaterielRepository::class)]
 #[ORM\Table(name: 'materiel')]
 class Materiel
@@ -16,42 +19,46 @@ class Materiel
     private ?int $id = null;
 
     #[ORM\ManyToOne(targetEntity: Fournisseur::class)]
-    #[ORM\JoinColumn(name: 'id_fournisseur', referencedColumnName: 'id_fournisseur', nullable: true)]
+    #[ORM\JoinColumn(name: 'id_fournisseur', referencedColumnName: 'id_fournisseur', nullable: false)]
+    #[Assert\NotNull(message: "Un fournisseur est requis.")]
     private ?Fournisseur $fournisseur = null;
 
-    #[ORM\Column(type: 'string', length: 200)]
-    #[Assert\NotBlank(message: "Le nom du matériel ne peut pas être vide.")]
+    #[ORM\Column(type: 'string', nullable: false)]
+    #[Assert\NotBlank(message: "Le nom du matériel est requis.")]
     #[Assert\Length(
         min: 2,
-        max: 200,
+        max: 255,
         minMessage: "Le nom doit contenir au moins {{ limit }} caractères.",
         maxMessage: "Le nom ne peut pas dépasser {{ limit }} caractères."
     )]
-    private ?string $nom = null;
+    private string $nom = '';
 
     #[ORM\Column(type: 'string', nullable: false)]
     #[Assert\NotBlank(message: "Le type de matériel est requis.")]
     #[Assert\Choice(
-        choices: ['EQUIPEMENT', 'ACCESSOIRE', 'TENUE', 'INFRASTRUCTURE'],
+        choices: ['EQUIPEMENT_SPORTIF', 'ACCESSOIRE_ENTRAINEMENT', 'MATERIEL_JEU', 'TENUE_SPORTIVE', 'EQUIPEMENT_PROTECTION', 'INFRASTRUCTURE'],
         message: "Veuillez sélectionner un type valide."
     )]
-    private ?string $type = null;
+    private string $type = '';
 
     #[ORM\Column(type: 'integer')]
     #[Assert\NotBlank(message: "La quantité ne peut pas être vide.")]
-    #[Assert\PositiveOrZero(message: "La quantité doit être un nombre positif ou zéro.")]
-    private ?int $quantite = null;
+    private int $quantite = 6; // Valeur par défaut > 5
 
-    #[ORM\Column(type: 'string', columnDefinition: "ENUM('NEUF', 'USE', 'ENDOMMAGE')")]
+    #[ORM\Column(type: 'string', columnDefinition: "ENUM('NEUF', 'USÉ', 'ENDOMMAGÉ')")]
     #[Assert\NotBlank(message: "L'état du matériel ne peut pas être vide.")]
-    private ?string $etat = null;
+    #[Assert\Choice(
+        choices: ['NEUF', 'USÉ', 'ENDOMMAGÉ'],
+        message: "Veuillez sélectionner un état valide."
+    )]
+    private string $etat = '';
 
     #[ORM\Column(name: 'prix_unitaire', type: 'float')]
     #[Assert\NotBlank(message: "Le prix unitaire ne peut pas être vide.")]
     #[Assert\Positive(message: "Le prix unitaire doit être un nombre positif.")]
-    private ?float $prix = null;
+    private float $prix = 0.0;
 
-    #[ORM\Column(type: 'string', length: 200)]
+    #[ORM\Column(type: 'string', length: 200, unique: true)]
     #[Assert\NotBlank(message: "Le code-barres ne peut pas être vide.")]
     #[Assert\Length(
         min: 2,
@@ -59,12 +66,27 @@ class Materiel
         minMessage: "Le code-barres doit contenir au moins {{ limit }} caractères.",
         maxMessage: "Le code-barres ne peut pas dépasser {{ limit }} caractères."
     )]
-    private ?string $barcode = null;
+    private string $barcode = '';
 
-    #[ORM\Column(name: 'image_data', type: 'string', length: 255)]
-    private ?string $image = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\Length(
+        max: 255,
+        maxMessage: "Le chemin de l'image ne peut pas dépasser {{ limit }} caractères."
+    )]
+    private ?string $image_data = null;
 
-    // Getters and Setters
+    #[Assert\Callback]
+    public function validateFournisseurCategory(ExecutionContextInterface $context): void
+    {
+        if ($this->fournisseur && $this->type) {
+            if ($this->fournisseur->getCategorieProduit() !== $this->type) {
+                $context->buildViolation('Le fournisseur sélectionné doit correspondre à la catégorie du matériel ({{ type }}).')
+                    ->setParameter('{{ type }}', $this->type)
+                    ->atPath('fournisseur')
+                    ->addViolation();
+            }
+        }
+    }
 
     public function getId(): ?int
     {
@@ -82,7 +104,7 @@ class Materiel
         return $this;
     }
 
-    public function getNom(): ?string
+    public function getNom(): string
     {
         return $this->nom;
     }
@@ -93,18 +115,18 @@ class Materiel
         return $this;
     }
 
-    public function getType(): ?string
-{
-    return $this->type;
-}
+    public function getType(): string
+    {
+        return $this->type;
+    }
 
     public function setType(string $type): self
     {
-         $this->type = $type;
+        $this->type = $type;
         return $this;
     }
 
-    public function getQuantite(): ?int
+    public function getQuantite(): int
     {
         return $this->quantite;
     }
@@ -115,7 +137,7 @@ class Materiel
         return $this;
     }
 
-    public function getEtat(): ?string
+    public function getEtat(): string
     {
         return $this->etat;
     }
@@ -126,7 +148,7 @@ class Materiel
         return $this;
     }
 
-    public function getPrix(): ?float
+    public function getPrix(): float
     {
         return $this->prix;
     }
@@ -137,7 +159,7 @@ class Materiel
         return $this;
     }
 
-    public function getBarcode(): ?string
+    public function getBarcode(): string
     {
         return $this->barcode;
     }
@@ -150,12 +172,12 @@ class Materiel
 
     public function getImage(): ?string
     {
-        return $this->image;
+        return $this->image_data;
     }
 
-    public function setImage(string $image): self
+    public function setImage(?string $image_data): self
     {
-        $this->image = $image;
+        $this->image_data = $image_data;
         return $this;
     }
 }

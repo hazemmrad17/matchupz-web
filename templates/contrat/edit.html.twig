@@ -19,7 +19,7 @@
                         </div>
                     {% endfor %}
 
-                    {{ form_start(form, {'attr': {'novalidate': 'novalidate', 'class': 'form-horizontal', 'id': 'contratForm'}}) }}
+                    {{ form_start(form, {'attr': {'class': 'form-horizontal', 'id': 'contratForm'}}) }}
                         {% if form_errors(form) %}
                             <div class="alert alert-danger" role="alert">
                                 {{ form_errors(form) }}
@@ -61,6 +61,13 @@
                             {% endif %}
                         </div>
                         <div class="mb-3">
+                            {{ form_label(form.article, 'Article du contrat', {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_widget(form.article, {'attr': {'class': 'form-control w-50', 'rows': '5'}}) }}
+                            {% if form_errors(form.article) %}
+                                <div class="text-danger small">{{ form_errors(form.article) }}</div>
+                            {% endif %}
+                        </div>
+                        <div class="mb-3">
                             <label class="form-label">Signature</label>
                             {% if contrat.signature %}
                                 <div class="mb-2">
@@ -69,8 +76,6 @@
                             {% endif %}
                             <canvas id="signatureCanvas" class="form-control" width="300" height="80" style="width: 300px; height: 80px; background-color: #ffffff;"></canvas>
                             {{ form_widget(form.signature, {'attr': {'id': 'signatureInput', 'class': 'd-none'}}) }}
-                            <!-- Fallback hidden input in case form.signature doesn't render -->
-                            <input type="hidden" id="signatureInput" name="contrat[signature]" class="d-none" value="{{ contrat.signature|default('') }}">
                             {% if form_errors(form.signature) %}
                                 <div class="text-danger small">{{ form_errors(form.signature) }}</div>
                             {% endif %}
@@ -116,6 +121,19 @@
             ctx.strokeStyle = '#000000';
             ctx.lineWidth = 2;
             ctx.lineCap = 'round';
+
+            // Load existing signature if available
+            {% if contrat.signature %}
+                const img = new Image();
+                img.src = '{{ asset(contrat.signature) }}';
+                img.onload = function () {
+                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                    console.log('Loaded existing signature');
+                };
+                img.onerror = function () {
+                    console.error('Failed to load existing signature');
+                };
+            {% endif %}
 
             // Drawing events
             canvas.addEventListener('mousedown', startDrawing);
@@ -178,7 +196,7 @@
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
                 if (signatureInput) {
                     signatureInput.value = 'signatures/signature_contrat_1741119108385.png';
-                    console.log('Canvas cleared, signature input set to default:', signatureInput.value);
+                    console.log('Canvas cleared, signature input set to placeholder');
                 } else {
                     console.error('Signature input not found when clearing canvas');
                 }
@@ -192,7 +210,7 @@
                 if (signatureInput) {
                     if (isEmpty) {
                         signatureInput.value = 'signatures/signature_contrat_1741119108385.png';
-                        console.log('Canvas is empty, signature input set to default:', signatureInput.value);
+                        console.log('Canvas is empty, signature input set to placeholder');
                     } else {
                         const dataUrl = canvas.toDataURL('image/png');
                         signatureInput.value = dataUrl;

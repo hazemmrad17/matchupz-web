@@ -12,6 +12,11 @@
                     <h5 class="card-title mb-0">Réservation #{{ reservation.idReservation }}</h5>
                     <div>
                         <a href="{{ path('reservation_edit', {'id_reservation': reservation.idReservation}) }}" class="btn btn-sm btn-primary">Modifier</a>
+                        {% if isSyncedWithGoogleCalendar %}
+                            <button class="btn btn-sm btn-success" disabled>Ajouté à Google Calendar</button>
+                        {% else %}
+                            <a href="{{ path('reservation_add_to_google_calendar', {'id_reservation': reservation.idReservation}) }}" class="btn btn-sm btn-success">Ajouter à Google Calendar</a>
+                        {% endif %}
                         <a href="{{ path('reservation_index') }}" class="btn btn-sm btn-secondary">Retour à la liste</a>
                         <form method="post" action="{{ path('reservation_delete', {'id_reservation': reservation.idReservation}) }}" style="display:inline;" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce sport ?');">
                             <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ reservation.idReservation) }}">
@@ -21,6 +26,7 @@
                         </form>
                     </div>
                 </div>
+
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-6">
@@ -40,8 +46,25 @@
                             <p>{{ reservation.status }}</p>
                         </div>
                     </div>
+
+                    <!-- Add the Google Calendar embed below the reservation details -->
+                    <div class="row mt-4">
+                        <div class="col-12">
+                            <h6>Calendrier des Réservations</h6>
+                            {% if not app.session.get('google_access_token') %}
+                                <div class="alert alert-info mb-3" role="alert">
+                                    Veuillez vous connecter à votre compte Google pour afficher le calendrier.
+                                    <a href="{{ path('google_auth', {'redirect_to': path('reservation_show', {'id_reservation': reservation.idReservation}) }) }}" class="btn btn-sm btn-primary ms-2">
+                                        Se connecter à Google
+                                    </a>
+                                </div>
+                            {% endif %}
+                            <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=Africa%2FTunis&showPrint=0&src=Y29udGFjdC5yZWVmaW5pdHlAZ21haWwuY29t&src=ZW4udG4jaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&color=%23039BE5&color=%230B8043" style="border:solid 1px #777; width: 100%; max-width: 1200px;" height="600" frameborder="0" scrolling="no"></iframe>
+                            <p class="text-muted mt-2">Si le calendrier ne s'affiche pas, assurez-vous d'être connecté à votre compte Google ou contactez l'administrateur pour obtenir les permissions nécessaires.</p>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </div>                                                      
         </div>
     </div>
 {% endblock %}

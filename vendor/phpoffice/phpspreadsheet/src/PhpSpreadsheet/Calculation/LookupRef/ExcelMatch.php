@@ -70,7 +70,7 @@ class ExcelMatch
         };
 
         if ($valueKey !== null) {
-            return ++$valueKey; //* @phpstan-ignore-line
+            return ++$valueKey;
         }
 
         // Unsuccessful in finding a match, return #N/A error value

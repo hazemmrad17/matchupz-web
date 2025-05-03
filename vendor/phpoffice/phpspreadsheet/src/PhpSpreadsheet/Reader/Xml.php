@@ -243,7 +243,8 @@ class Xml extends BaseReader
      */
     public function loadSpreadsheetFromString(string $contents): Spreadsheet
     {
-        $spreadsheet = $this->newSpreadsheet();
+        // Create new Spreadsheet
+        $spreadsheet = new Spreadsheet();
         $spreadsheet->setValueBinder($this->valueBinder);
         $spreadsheet->removeSheetByIndex(0);
 
@@ -256,7 +257,8 @@ class Xml extends BaseReader
      */
     protected function loadSpreadsheetFromFile(string $filename): Spreadsheet
     {
-        $spreadsheet = $this->newSpreadsheet();
+        // Create new Spreadsheet
+        $spreadsheet = new Spreadsheet();
         $spreadsheet->setValueBinder($this->valueBinder);
         $spreadsheet->removeSheetByIndex(0);
 

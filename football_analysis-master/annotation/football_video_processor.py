@@ -15,6 +15,9 @@ from utils import rgb_bgr_converter
 import cv2
 import numpy as np
 from typing import List, Dict, Optional, Tuple
+import os
+import logging
+import json
 
 class FootballVideoProcessor(AbstractAnnotator, AbstractVideoProcessor):
     """
@@ -40,7 +43,6 @@ class FootballVideoProcessor(AbstractAnnotator, AbstractVideoProcessor):
             save_tracks_dir (Optional[str]): Directory to save tracking information. If None, no tracks will be saved.
             draw_frame_num (bool): Whether or not to draw current frame number on the output video.
         """
-
         self.obj_tracker = obj_tracker
         self.obj_annotator = ObjectAnnotator()
         self.kp_tracker = kp_tracker
@@ -68,8 +70,11 @@ class FootballVideoProcessor(AbstractAnnotator, AbstractVideoProcessor):
         self.speed_estimator = SpeedEstimator(field_image.shape[1], field_image.shape[0])
         
         self.frame_num = 0
-
         self.field_image = field_image
+
+        # Store tracks internally to use in save_tracks
+        self.all_obj_tracks = {}
+        self.all_kp_tracks = {}
 
     def process(self, frames: List[np.ndarray], fps: float = 1e-6) -> List[np.ndarray]:
         """
@@ -82,7 +87,6 @@ class FootballVideoProcessor(AbstractAnnotator, AbstractVideoProcessor):
         Returns:
             List[np.ndarray]: A list of annotated video frames.
         """
-        
         self.cur_fps = max(fps, 1e-6)
 
         # Detect objects and keypoints in all frames
@@ -93,7 +97,6 @@ class FootballVideoProcessor(AbstractAnnotator, AbstractVideoProcessor):
 
         # Process each frame in the batch
         for idx, (frame, object_detection, kp_detection) in enumerate(zip(frames, batch_obj_detections, batch_kp_detections)):
-            
             # Track detected objects and keypoints
             obj_tracks = self.obj_tracker.track(object_detection)
             kp_tracks = self.kp_tracker.track(kp_detection)
@@ -117,6 +120,10 @@ class FootballVideoProcessor(AbstractAnnotator, AbstractVideoProcessor):
             all_tracks['object'] = self.speed_estimator.calculate_speed(
                 all_tracks['object'], self.frame_num, self.cur_fps
             )
+
+            # Store tracks for later saving
+            self.all_obj_tracks[self.frame_num] = all_tracks['object']
+            self.all_kp_tracks[self.frame_num] = all_tracks['keypoints']
             
             # Save tracking information if saving is enabled
             if self.save_tracks_dir:
@@ -132,10 +139,9 @@ class FootballVideoProcessor(AbstractAnnotator, AbstractVideoProcessor):
 
         return processed_frames
 
-    
     def annotate(self, frame: np.ndarray, tracks: Dict) -> np.ndarray:
         """
-        Annotates the given frame with analised data
+        Annotates the given frame with analyzed data.
 
         Args:
             frame (np.ndarray): The current video frame to be annotated.
@@ -144,7 +150,6 @@ class FootballVideoProcessor(AbstractAnnotator, AbstractVideoProcessor):
         Returns:
             np.ndarray: The annotated video frame.
         """
-         
         # Draw the frame number if required
         if self.draw_frame_num:
             frame = self.frame_num_annotator.annotate(frame, {'frame_num': self.frame_num})
@@ -163,7 +168,6 @@ class FootballVideoProcessor(AbstractAnnotator, AbstractVideoProcessor):
         combined_frame = self._annotate_possession(combined_frame)
 
         return combined_frame
-    
 
     def _combine_frame_projection(self, frame: np.ndarray, projection_frame: np.ndarray) -> np.ndarray:
         """
@@ -205,7 +209,6 @@ class FootballVideoProcessor(AbstractAnnotator, AbstractVideoProcessor):
         cv2.addWeighted(projection_resized, alpha, overlay, 1 - alpha, 0, overlay)
 
         return combined_frame
-    
 
     def _annotate_possession(self, frame: np.ndarray) -> np.ndarray:
         """
@@ -244,10 +247,16 @@ class FootballVideoProcessor(AbstractAnnotator, AbstractVideoProcessor):
         bar_width = overlay_width - bar_x
         bar_height = 15
 
-        # Get possession data from the ball-to-player assigner
-        possession = self.ball_to_player_assigner.get_ball_possessions()[-1]
-        possession_club1 = possession[0]
-        possession_club2 = possession[1]
+        # Get possession data from the ball-to-player assigner, handle empty case
+        possession_data = self.ball_to_player_assigner.get_ball_possessions()
+        if not possession_data:
+            # Default to 50/50 possession if no data is available
+            possession_club1 = 0.5
+            possession_club2 = 0.5
+        else:
+            possession = possession_data[-1]
+            possession_club1 = possession[0]
+            possession_club2 = possession[1]
 
         # Calculate sizes for each possession segment in pixels
         club1_width = int(bar_width * possession_club1)
@@ -282,10 +291,9 @@ class FootballVideoProcessor(AbstractAnnotator, AbstractVideoProcessor):
         self._display_possession_text(frame, club1_width, club2_width, neutral_width, bar_x, bar_y, possession_club1_text, possession_club2_text, club1_color, club2_color)
 
         return frame
-    
 
     def _display_possession_text(self, frame: np.ndarray, club1_width: int, club2_width: int,
-                                  neutral_width: int, bar_x: int, bar_y: int, 
+                                 neutral_width: int, bar_x: int, bar_y: int, 
                                  possession_club1_text: str, possession_club2_text: str, 
                                  club1_color: Tuple[int, int, int], club2_color: Tuple[int, int, int]) -> None:
         """
@@ -319,8 +327,6 @@ class FootballVideoProcessor(AbstractAnnotator, AbstractVideoProcessor):
         cv2.putText(frame, possession_club2_text, (club2_text_x, club2_text_y), 
                     cv2.FONT_HERSHEY_SIMPLEX, 0.5, club2_color, 1)  # Club 2's color
 
-
-
     def _save_tracks(self, all_tracks: Dict[str, Dict[int, np.ndarray]]) -> None:
         """
         Saves the tracking information for objects and keypoints to the specified directory.
@@ -331,6 +337,53 @@ class FootballVideoProcessor(AbstractAnnotator, AbstractVideoProcessor):
         self.writer.write(self.writer.get_object_tracks_path(), all_tracks['object'])
         self.writer.write(self.writer.get_keypoints_tracks_path(), all_tracks['keypoints'])
 
-    
+    def save_tracks(self, output_video: str) -> None:
+        """
+        Saves the tracking data for objects and keypoints to JSON files in the output directory.
 
-    
+        Args:
+            output_video (str): Path to the output video file, used to determine the output directory.
+        """
+        output_dir = os.path.dirname(output_video)
+        if not os.path.exists(output_dir):
+            logging.error(f"Output directory does not exist: {output_dir}")
+            return
+
+        object_tracks_path = os.path.join(output_dir, 'object_tracks.json')
+        keypoint_tracks_path = os.path.join(output_dir, 'keypoint_tracks.json')
+
+        # Save object tracks
+        try:
+            if os.path.exists(object_tracks_path):
+                logging.warning(f"Object tracks file already exists: {object_tracks_path}. Skipping overwrite.")
+            else:
+                with open(object_tracks_path, 'w') as f:
+                    json.dump(self.all_obj_tracks, f, indent=4)
+                logging.debug(f"Object tracks saved to {object_tracks_path}")
+        except Exception as e:
+            logging.error(f"Failed to save object tracks to {object_tracks_path}: {str(e)}")
+
+        # Save keypoint tracks
+        try:
+            if os.path.exists(keypoint_tracks_path):
+                logging.warning(f"Keypoint tracks file already exists: {keypoint_tracks_path}. Skipping overwrite.")
+            else:
+                with open(keypoint_tracks_path, 'w') as f:
+                    json.dump(self.all_kp_tracks, f, indent=4)
+                logging.debug(f"Keypoint tracks saved to {keypoint_tracks_path}")
+        except Exception as e:
+            logging.error(f"Failed to save keypoint tracks to {keypoint_tracks_path}: {str(e)}")
+
+    def finalize_team_data(self) -> Dict:
+        """
+        Finalizes and returns team data for saving.
+
+        Returns:
+            Dict: A dictionary containing team data (e.g., ball possession statistics).
+        """
+        possession_data = self.ball_to_player_assigner.get_ball_possessions()
+        return {
+            "club1_possession": possession_data[-1][0] if possession_data else 0.0,
+            "club2_possession": possession_data[-1][1] if possession_data else 0.0,
+            "total_frames": self.frame_num
+        }

@@ -38,15 +38,13 @@ class Lookup
             $lookupColumns = self::columnCount($lookupVector);
         }
 
-        $resultVector = self::verifyResultVector($resultVector ?? $lookupVector); //* @phpstan-ignore-line
+        $resultVector = self::verifyResultVector($resultVector ?? $lookupVector);
 
         if ($lookupRows === 2 && !$hasResultVector) {
             $resultVector = array_pop($lookupVector);
             $lookupVector = array_shift($lookupVector);
         }
 
-        /** @var array $lookupVector */
-        /** @var array $resultVector */
         if ($lookupColumns !== 2) {
             $lookupVector = self::verifyLookupValues($lookupVector, $resultVector);
         }

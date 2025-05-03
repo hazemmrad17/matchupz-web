@@ -30,7 +30,7 @@ class Fisher
         }
 
         try {
-            $value = DistributionValidations::validateFloat($value);
+            DistributionValidations::validateFloat($value);
         } catch (Exception $e) {
             return $e->getMessage();
         }
@@ -62,7 +62,7 @@ class Fisher
         }
 
         try {
-            $probability = DistributionValidations::validateFloat($probability);
+            DistributionValidations::validateFloat($probability);
         } catch (Exception $e) {
             return $e->getMessage();
         }

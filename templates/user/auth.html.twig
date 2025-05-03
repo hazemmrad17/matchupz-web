@@ -45,7 +45,7 @@
     <!-- Helpers -->
     <script src="{{ asset('assets/vendor/js/helpers.js') }}"></script>
     <script src="{{ asset('assets/js/config.js') }}"></script>
-    
+
     <style>
       .is-invalid {
         border-color: #ff3e1d !important;
@@ -126,9 +126,6 @@
               <h4 class="mb-2">Bienvenue sur MatchupZ ! 👋</h4>
               <p class="mb-4">Connectez-vous pour commencer l'aventure</p>
 
-              <!-- Toast container -->
-              <div class="position-fixed top-0 end-0 p-3" style="z-index: 1050;" id="toast-container"></div>
-
               <!-- Affichage des messages flash -->
               {% for label, messages in app.flashes %}
                 {% for message in messages %}
@@ -139,7 +136,7 @@
                 {% endfor %}
               {% endfor %}
 
-              <form id="formAuthentication" class="mb-3" action="{{ path('app_verif_user') }}" method="POST">
+              <form id="formAuthentication" class="mb-3" action="{{ path('app_verif_user') }}" method="POST" novalidate>
                 <div class="mb-3">
                   <label for="username" class="form-label">Email*</label>
                   <div class="input-group input-group-merge">
@@ -151,13 +148,14 @@
                       class="form-control" 
                       placeholder="Entrez votre email" 
                       autofocus
+                      value="{{ form._username.vars.data ?? '' }}"
                     >
                   </div>
                 </div>
                 <div class="mb-3 form-password-toggle">
                   <div class="d-flex justify-content-between">
                     <label class="form-label" for="password">Mot de passe*</label>
-                    <a href="auth-forgot-password-basic.html">
+                    <a href="{{ path('app_forgot_passwordB') }}">
                       <small>Mot de passe oublié ?</small>
                     </a>
                   </div>
@@ -169,6 +167,7 @@
                       class="form-control"
                       name="_password"
                       placeholder="············"
+                      value="{{ form._password.vars.data ?? '' }}"
                     />
                     <span class="input-group-text cursor-pointer toggle-password"><i class="bx bx-hide"></i></span>
                   </div>
@@ -214,80 +213,12 @@
     <!-- Main JS -->
     <script src="{{ asset('assets/js/main.js') }}"></script>
 
-    <!-- Validation Script -->
+    <!-- Password Toggle Script -->
     <script>
       document.addEventListener('DOMContentLoaded', function() {
-        const form = document.getElementById('formAuthentication');
-        const emailInput = document.getElementById('username');
-        const passwordInput = document.getElementById('password');
-        const toastContainer = document.getElementById('toast-container');
-
-        // Expression régulière pour valider l'email
-        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-
-        // Validation avant soumission
-        form.addEventListener('submit', function(event) {
-          event.preventDefault();
-          toastContainer.innerHTML = ''; // Clear previous toasts
-
-          const email = emailInput.value.trim();
-          const password = passwordInput.value.trim(); // Ajout de trim pour gérer les espaces
-
-          let isValid = true;
-
-          // Validation email
-          if (!email) {
-            addToast('Erreur Email', 'Veuillez remplir le champ email.');
-            emailInput.classList.add('is-invalid');
-            isValid = false;
-          } else if (!emailRegex.test(email)) {
-            addToast('Erreur Email', 'Format email invalide (ex: nom@gmail.com).');
-            emailInput.classList.add('is-invalid');
-            isValid = false;
-          } else {
-            emailInput.classList.remove('is-invalid');
-          }
-
-          // Validation mot de passe
-          if (!password) {
-            addToast('Erreur Mot de passe', 'Veuillez remplir le champ mot de passe.');
-            passwordInput.classList.add('is-invalid');
-            isValid = false;
-          } else if (password.length < 6) {
-            addToast('Erreur Mot de passe', 'Le mot de passe doit contenir au moins 6 caractères.');
-            passwordInput.classList.add('is-invalid');
-            isValid = false;
-          } else {
-            passwordInput.classList.remove('is-invalid');
-          }
-
-          // Soumission si tout est valide
-          if (isValid) {
-            this.submit();
-          } else {
-            const toastElements = toastContainer.querySelectorAll('.toast');
-            toastElements.forEach(toast => new bootstrap.Toast(toast, { autohide: true, delay: 5000 }).show());
-          }
-        });
-
-        // Fonction pour ajouter un toast
-        function addToast(title, message) {
-          const toastId = 'toast-' + Date.now();
-          const toastHTML = `
-            <div id="${toastId}" class="bs-toast toast fade bg-danger" role="alert" aria-live="assertive" aria-atomic="true">
-              <div class="toast-header">
-                <i class="bx bx-bell me-2"></i>
-                <div class="me-auto fw-semibold">${title}</div>
-                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-              </div>
-              <div class="toast-body">${message}</div>
-            </div>
-          `;
-          toastContainer.innerHTML += toastHTML;
-        }
-
         // Gestion du toggle password
         const togglePassword = document.querySelector('.toggle-password');
+        const passwordInput = document.getElementById('password');
         if (togglePassword) {
           const icon = togglePassword.querySelector('i');
           togglePassword.addEventListener('click', function() {

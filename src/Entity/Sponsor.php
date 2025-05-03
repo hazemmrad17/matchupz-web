@@ -29,10 +29,7 @@ class Sponsor
 
     #[ORM\Column(type: 'string', nullable: false)]
     #[Assert\NotBlank(message: "Le contact est obligatoire.")]
-    #[Assert\Length(
-        exactly: 8,
-        exactMessage: "Le contact doit contenir exactement 8 chiffres."
-    )]
+    
     #[Assert\Regex(
         pattern: '/^\d{8}$/',
         message: "Le contact doit contenir uniquement 8 chiffres."
@@ -41,14 +38,41 @@ class Sponsor
 
     #[ORM\Column(type: 'string', nullable: false)]
     #[Assert\NotBlank(message: "Vous devez sélectionner un pack.")]
-    private ?string $pack = null;
+    private ?string $pack = '';
 
-    #[ORM\OneToMany(targetEntity: Contrat::class, mappedBy: 'sponsor')]
+    #[ORM\Column(type: "string", length: 255, nullable: false)]
+    private ?string $sponsorPicture = null;
+
+    #[ORM\OneToMany(mappedBy: 'sponsor', targetEntity: Contrat::class, cascade: ['persist'])]
     private Collection $contrats;
 
     public function __construct()
     {
         $this->contrats = new ArrayCollection();
+    }
+
+    public function getContrats(): Collection
+    {
+        return $this->contrats;
+    }
+
+    public function addContrat(Contrat $contrat): self
+    {
+    if (!$this->contrats->contains($contrat)) {
+        $this->contrats[] = $contrat;
+        $contrat->setSponsor($this);
+    }
+        return $this;
+    }
+
+    public function removeContrat(Contrat $contrat): self
+    {
+    if ($this->contrats->removeElement($contrat)) {
+        if ($contrat->getSponsor() === $this) {
+            $contrat->setSponsor(null);
+        }
+    }
+        return $this;
     }
 
     public function getId_sponsor(): ?int
@@ -95,33 +119,20 @@ class Sponsor
         return $this;
     }
 
-    /**
-     * @return Collection<int, Contrat>
-     */
-    public function getContrats(): Collection
-    {
-        if (!$this->contrats instanceof Collection) {
-            $this->contrats = new ArrayCollection();
-        }
-        return $this->contrats;
-    }
-
-    public function addContrat(Contrat $contrat): self
-    {
-        if (!$this->getContrats()->contains($contrat)) {
-            $this->getContrats()->add($contrat);
-        }
-        return $this;
-    }
-
-    public function removeContrat(Contrat $contrat): self
-    {
-        $this->getContrats()->removeElement($contrat);
-        return $this;
-    }
-
+    
     public function getIdSponsor(): ?int
     {
         return $this->Id_sponsor;
+    }
+
+    public function getSponsorPicture(): ?string
+    {
+        return $this->sponsorPicture;
+    }
+
+    public function setSponsorPicture(?string $sponsorPicture): self
+    {
+        $this->sponsorPicture = $sponsorPicture;
+        return $this;
     }
 }

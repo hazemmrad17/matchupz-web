@@ -4,7 +4,6 @@ namespace PhpOffice\PhpSpreadsheet\Calculation\Token;
 
 use PhpOffice\PhpSpreadsheet\Calculation\Calculation;
 use PhpOffice\PhpSpreadsheet\Calculation\Engine\BranchPruner;
-use PhpOffice\PhpSpreadsheet\Shared\StringHelper;
 
 class Stack
 {
@@ -13,7 +12,7 @@ class Stack
     /**
      * The parser stack for formulae.
      *
-     * @var array<int, array>
+     * @var mixed[]
      */
     private array $stack = [];
 
@@ -44,7 +43,7 @@ class Stack
         $this->stack[$this->count++] = $stackItem;
 
         if ($type === 'Function') {
-            $localeFunction = Calculation::localeFunc(StringHelper::convertToString($value));
+            $localeFunction = Calculation::localeFunc($value);
             if ($localeFunction != $value) {
                 $this->stack[($this->count - 1)]['localeValue'] = $localeFunction;
             }

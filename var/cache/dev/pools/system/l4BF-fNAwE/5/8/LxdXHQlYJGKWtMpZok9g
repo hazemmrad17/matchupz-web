@@ -1,0 +1,3 @@
+<?php //42f796437d22c648e909e7912f46755b
+
+return [PHP_INT_MAX, 'img/football_field.png'];

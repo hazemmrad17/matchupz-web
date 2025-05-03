@@ -4,6 +4,7 @@ namespace PhpOffice\PhpSpreadsheet\Cell;
 
 use PhpOffice\PhpSpreadsheet\RichText\RichText;
 use PhpOffice\PhpSpreadsheet\Shared\StringHelper;
+use Stringable;
 
 class DataType
 {
@@ -78,11 +79,10 @@ class DataType
      */
     public static function checkErrorCode(mixed $value): string
     {
-        $default = '#NULL!';
-        $value = ($value === null) ? $default : StringHelper::convertToString($value, false, $default);
+        $value = (is_scalar($value) || $value instanceof Stringable) ? ((string) $value) : '#NULL!';
 
         if (!isset(self::$errorCodes[$value])) {
-            $value = $default;
+            $value = '#NULL!';
         }
 
         return $value;

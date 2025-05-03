@@ -3,14 +3,11 @@
 namespace PhpOffice\PhpSpreadsheet\Shared\Trend;
 
 use Matrix\Matrix;
-use PhpOffice\PhpSpreadsheet\Exception as SpreadsheetException;
 
 // Phpstan and Scrutinizer seem to have legitimate complaints.
 // $this->slope is specified where an array is expected in several places.
 // But it seems that it should always be float.
 // This code is probably not exercised at all in unit tests.
-// Private bool property $implemented is set to indicate
-//     whether this implementation is correct.
 class PolynomialBestFit extends BestFit
 {
     /**
@@ -23,8 +20,6 @@ class PolynomialBestFit extends BestFit
      * Polynomial order.
      */
     protected int $order = 0;
-
-    private bool $implemented = false;
 
     /**
      * Return the order of this polynomial.
@@ -192,10 +187,6 @@ class PolynomialBestFit extends BestFit
      */
     public function __construct(int $order, array $yValues, array $xValues = [])
     {
-        if (!$this->implemented) {
-            throw new SpreadsheetException('Polynomial Best Fit not yet implemented');
-        }
-
         parent::__construct($yValues, $xValues);
 
         if (!$this->error) {

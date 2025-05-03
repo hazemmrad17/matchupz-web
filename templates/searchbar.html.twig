@@ -1,3 +1,4 @@
+{# templates/searchbar.html.twig #}
 <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme" id="layout-navbar">
     <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
         <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
@@ -26,7 +27,7 @@
                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                     <div class="avatar avatar-online position-relative">
                         {% if app.session.get('user') and app.session.get('user').image %}
-                            <img src="{{ asset('uploads/users/' ~ app.session.get('user').image) }}" alt="User Avatar" class="avatar-img rounded-circle">
+                            <img src="{{ asset('Uploads/users/' ~ app.session.get('user').image) }}" alt="User Avatar" class="avatar-img rounded-circle">
                         {% else %}
                             <img src="{{ asset('/img/avatars/1.png') }}" alt="Default Avatar" class="avatar-img rounded-circle">
                         {% endif %}
@@ -40,7 +41,7 @@
                                 <div class="flex-shrink-0 me-3">
                                     <div class="avatar avatar-online position-relative">
                                         {% if app.session.get('user') and app.session.get('user').image %}
-                                            <img src="{{ asset('uploads/users/' ~ app.session.get('user').image) }}" alt="User Avatar" class="avatar-img rounded-circle">
+                                            <img src="{{ asset('Uploads/users/' ~ app.session.get('user').image) }}" alt="User Avatar" class="avatar-img rounded-circle">
                                         {% else %}
                                             <img src="{{ asset('/img/avatars/1.png') }}" alt="Default Avatar" class="avatar-img rounded-circle">
                                         {% endif %}
@@ -69,8 +70,12 @@
                     <li>
                         <div class="dropdown-divider"></div>
                     </li>
-                    
-                   
+                    <li>
+                        <a class="dropdown-item" href="{{ path('app_user_profile') }}">
+                            <i class="bx bx-user me-2"></i>
+                            <span class="align-middle">My Profile</span>
+                        </a>
+                    </li>
                     <li>
                         <div class="dropdown-divider"></div>
                     </li>

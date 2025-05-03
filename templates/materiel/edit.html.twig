@@ -26,145 +26,199 @@
                     <small class="text-muted float-end">Les champs marqués * sont obligatoires</small>
                 </div>
                 <div class="card-body">
-                    {{ form_start(form, {'attr': {'class': 'needs-validation', 'enctype': 'multipart/form-data'}}) }}
+                    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    {{ form_label(form.nom, 'Nom du Matériel *', {'label_attr': {'class': 'form-label'}}) }}
-                                    {{ form_widget(form.nom, {'attr': {'class': 'form-control', 'placeholder': 'Nom du matériel', 'required': 'required'}}) }}
-                                    <div class="invalid-feedback">
-                                        {{ form_errors(form.nom) ?: 'Veuillez entrer un nom.' }}
+                                    <label class="form-label" for="{{ form.nom.vars.id }}">Nom du Matériel *</label>
+                                    <div class="input-group input-group-merge">
+                                        <span class="input-group-text"><i class="bx bx-box"></i></span>
+                                        {{ form_widget(form.nom, {'attr': {'class': 'form-control', 'placeholder': 'Ex: Ballon de football'}}) }}
                                     </div>
+                                    <div class="form-text text-danger">{{ form_errors(form.nom) }}</div>
                                 </div>
-                                
+
                                 <div class="mb-3">
-                                    {{ form_label(form.type, 'Type *', {'label_attr': {'class': 'form-label'}}) }}
-                                    {{ form_widget(form.type, {'attr': {'class': 'form-select', 'required': 'required'}}) }}
-                                    <div class="invalid-feedback">
-                                        {{ form_errors(form.type) ?: 'Veuillez sélectionner un type.' }}
+                                    <label class="form-label" for="{{ form.type.vars.id }}">Type *</label>
+                                    <div class="input-group input-group-merge">
+                                        <span class="input-group-text"><i class="bx bx-tag"></i></span>
+                                        {{ form_widget(form.type, {'attr': {'class': 'form-select', 'id': 'materiel_type'}}) }}
                                     </div>
+                                    <div class="form-text text-danger">{{ form_errors(form.type) }}</div>
                                 </div>
-                                
+
                                 <div class="mb-3">
-                                    {{ form_label(form.quantite, 'Quantité *', {'label_attr': {'class': 'form-label'}}) }}
-                                    {{ form_widget(form.quantite, {'attr': {'class': 'form-control', 'placeholder': 'Quantité en stock', 'required': 'required', 'min': '0'}}) }}
-                                    <div class="invalid-feedback">
-                                        {{ form_errors(form.quantite) ?: 'Veuillez entrer une quantité valide.' }}
+                                    <label class="form-label" for="{{ form.quantite.vars.id }}">Quantité en Stock *</label>
+                                    <div class="input-group input-group-merge">
+                                        <span class="input-group-text"><i class="bx bx-cube"></i></span>
+                                        {{ form_widget(form.quantite, {'attr': {'class': 'form-control', 'placeholder': 'Ex: 10', 'required': false}}) }}
                                     </div>
+                                    <div class="form-text text-danger">{{ form_errors(form.quantite) }}</div>
                                 </div>
-                                
+
                                 <div class="mb-3">
-                                    {{ form_label(form.etat, 'État *', {'label_attr': {'class': 'form-label'}}) }}
-                                    {{ form_widget(form.etat, {'attr': {'class': 'form-select', 'required': 'required'}}) }}
-                                    <div class="invalid-feedback">
-                                        {{ form_errors(form.etat) ?: 'Veuillez sélectionner un état.' }}
+                                    <label class="form-label" for="{{ form.etat.vars.id }}">État *</label>
+                                    <div class="input-group input-group-merge">
+                                        <span class="input-group-text"><i class="bx bx-check-circle"></i></span>
+                                        {{ form_widget(form.etat, {'attr': {'class': 'form-select'}}) }}
                                     </div>
+                                    <div class="form-text text-danger">{{ form_errors(form.etat) }}</div>
                                 </div>
                             </div>
-                            
+
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    {{ form_label(form.prix, 'Prix Unitaire (€) *', {'label_attr': {'class': 'form-label'}}) }}
-                                    <div class="input-group">
-                                        <span class="input-group-text">€</span>
-                                        {{ form_widget(form.prix, {'attr': {'class': 'form-control', 'placeholder': 'Prix unitaire', 'required': 'required', 'step': '0.01', 'min': '0'}}) }}
+                                    <label class="form-label" for="{{ form.prix.vars.id }}">Prix Unitaire (€) *</label>
+                                    <div class="input-group input-group-merge">
+                                        <span class="input-group-text"><i class="bx bx-euro"></i></span>
+                                        {{ form_widget(form.prix, {'attr': {'class': 'form-control', 'placeholder': 'Ex: 29.99'}}) }}
                                     </div>
-                                    <div class="invalid-feedback">
-                                        {{ form_errors(form.prix) ?: 'Veuillez entrer un prix valide.' }}
-                                    </div>
+                                    <div class="form-text text-danger">{{ form_errors(form.prix) }}</div>
                                 </div>
-                                
+
                                 <div class="mb-3">
-                                    {{ form_label(form.barcode, 'Code-barres', {'label_attr': {'class': 'form-label'}}) }}
-                                    {{ form_widget(form.barcode, {'attr': {'class': 'form-control', 'placeholder': 'Code-barres'}}) }}
-                                    <div class="invalid-feedback">
-                                        {{ form_errors(form.barcode) ?: 'Veuillez entrer un code-barres valide.' }}
+                                    <label class="form-label" for="{{ form.barcode.vars.id }}">Code-barres *</label>
+                                    <div class="input-group input-group-merge">
+                                        <span class="input-group-text"><i class="bx bx-barcode"></i></span>
+                                        {{ form_widget(form.barcode, {'attr': {'class': 'form-control', 'placeholder': 'Ex: 123456'}}) }}
                                     </div>
+                                    <div class="form-text text-danger">{{ form_errors(form.barcode) }}</div>
                                 </div>
-                                
+
                                 <div class="mb-3">
-                                    {{ form_label(form.fournisseur, 'Fournisseur', {'label_attr': {'class': 'form-label'}}) }}
-                                    {{ form_widget(form.fournisseur, {'attr': {'class': 'form-select'}}) }}
-                                    <div class="invalid-feedback">
-                                        {{ form_errors(form.fournisseur) ?: 'Veuillez sélectionner un fournisseur.' }}
+                                    <label class="form-label" for="{{ form.fournisseur.vars.id }}">Fournisseur *</label>
+                                    <div class="input-group input-group-merge">
+                                        <span class="input-group-text"><i class="bx bx-building"></i></span>
+                                        {{ form_widget(form.fournisseur, {'attr': {'class': 'form-select', 'id': 'materiel_fournisseur'}}) }},
+<div class="form-text text-danger">{{ form_errors(form.fournisseur) }}</div>
                                     </div>
+                                    <div class="form-text text-danger">{{ form_errors(form.fournisseur) }}</div>
                                 </div>
-                                
+
                                 <div class="mb-3">
-                                    {{ form_label(form.image, 'Image', {'label_attr': {'class': 'form-label'}}) }}
-                                    {{ form_widget(form.image, {'attr': {'class': 'form-control', 'accept': 'image/jpeg,image/png,image/gif'}}) }}
-                                    <div class="invalid-feedback">
-                                        {{ form_errors(form.image) ?: 'Veuillez sélectionner une image valide.' }}
+                                    <label class="form-label" for="{{ form.image.vars.id }}">Image du Matériel</label>
+                                    <div class="input-group input-group-merge">
+                                        <span class="input-group-text"><i class="bx bx-image"></i></span>
+                                        {{ form_widget(form.image, {'attr': {'class': 'form-control'}}) }}
                                     </div>
-                                    <small class="text-muted">Formats acceptés: JPG, PNG, GIF (Max 2MB). Laissez vide pour conserver l'image actuelle.</small>
+                                    <div class="form-text text-danger">{{ form_errors(form.image) }}</div>
+                                    <small class="text-muted">Formats acceptés: JPG, JPEG, PNG (Max 5MB). Laissez vide pour conserver l'image actuelle.</small>
                                     {% if materiel.image %}
                                         <div class="mt-2">
                                             <p>Image actuelle :</p>
                                             <img src="{{ asset('Uploads/materiels/' ~ materiel.image) }}" alt="Image actuelle" style="max-width: 200px;">
                                         </div>
                                     {% endif %}
+                                    <!-- Bouton d'analyse et conteneur pour les résultats -->
+                                    <div class="mt-3">
+                                        <button type="button" class="btn btn-outline-info" id="analyzeImage">
+                                            <i class="bx bx-brain me-1"></i> Analyser l'image avec IA
+                                        </button>
+                                        <div id="imageAnalysisResult" class="mt-2"></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="mt-4">
                             <button type="submit" class="btn btn-primary">
                                 <i class="bx bx-save me-1"></i> Mettre à jour
                             </button>
-                            <a href="{{ path('app_materiel_index') }}" class="btn btn-outline-secondary">
+                            <a href="{{ path('app_materiel_index') }}" class="btn btn-secondary">
                                 <i class="bx bx-arrow-back me-1"></i> Annuler
                             </a>
                         </div>
                     {{ form_end(form) }}
+
+                    {{ include('materiel/_delete_form.html.twig') }}
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Bootstrap Validation Script -->
 <script>
-    (function () {
-        'use strict';
-        window.addEventListener('load', function () {
-            var forms = document.getElementsByClassName('needs-validation');
-            Array.prototype.filter.call(forms, function (form) {
-                form.addEventListener('submit', function (event) {
-                    if (form.checkValidity() === false) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                    }
-                    form.classList.add('was-validated');
-                }, false);
-            });
-        }, false);
-    })();
-</script>
-{% endblock %}
-
-{% block javascripts %}
-    {{ parent() }}
-    <script>
-        // Prévisualisation de l'image avant upload
-        document.addEventListener('DOMContentLoaded', function() {
-            const imageFileInput = document.querySelector('#{{ form.image.vars.id }}');
-            const imagePreview = document.createElement('div');
-            imagePreview.className = 'mt-2';
-            imagePreview.innerHTML = '<img id="imagePreview" src="#" alt="Prévisualisation" style="max-width: 200px; display: none;">';
-            imageFileInput.parentNode.appendChild(imagePreview);
-            
-            imageFileInput.addEventListener('change', function(event) {
-                const file = event.target.files[0];
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        const preview = document.getElementById('imagePreview');
-                        preview.src = e.target.result;
-                        preview.style.display = 'block';
-                    };
-                    reader.readAsDataURL(file);
-                }
-            });
+// --- AJAX update of fournisseur when type changes ---
+document.addEventListener('DOMContentLoaded', function() {
+    const typeSelect = document.getElementById('materiel_type');
+    const fournisseurSelect = document.getElementById('materiel_fournisseur');
+    if (typeSelect && fournisseurSelect) {
+        typeSelect.addEventListener('change', function() {
+            const selectedType = this.value;
+            if (!selectedType) {
+                fournisseurSelect.innerHTML = '<option value="">Sélectionner un fournisseur</option>';
+                return;
+            }
+            fetch('/materiel/fournisseurs-by-type/' + encodeURIComponent(selectedType))
+                .then(response => response.json())
+                .then(data => {
+                    let options = '<option value="">Sélectionner un fournisseur</option>';
+                    data.forEach(f => {
+                        options += `<option value="${f.id}">${f.nom}</option>`;
+                    });
+                    fournisseurSelect.innerHTML = options;
+                });
         });
-    </script>
+    }
+});
+</script>
+
+    <!-- Script JavaScript pour l'analyse d'image -->
+<script>
+    document.getElementById('analyzeImageAI').addEventListener('click', async () => {
+        const formData = new FormData();
+        const imageInput = document.querySelector('input[name="materiel[image]"]');
+        console.log('Input image trouvé:', imageInput);
+        if (!imageInput || !imageInput.files[0]) {
+            alert('Veuillez sélectionner une image.');
+            return;
+        }
+        formData.append('image', imageInput.files[0]);
+        console.log('Fichier image ajouté:', imageInput.files[0].name);
+
+        const resultDiv = document.getElementById('imageAnalysisResult');
+        resultDiv.innerHTML = '<div class="spinner-border text-primary" role="status"><span class="visually-hidden">Chargement...</span></div>';
+
+        try {
+            console.log('Envoi de la requête à:', '{{ path('app_materiel_analyze_image_AI') }}');
+            const response = await fetch('{{ path('app_materiel_analyze_image_AI') }}', {
+                method: 'POST',
+                body: formData,
+            });
+            console.log('Statut de la réponse:', response.status);
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error || `Erreur HTTP: ${response.status} ${response.statusText}`);
+            }
+            const data = await response.json();
+            if (data.error) {
+                resultDiv.innerHTML = `<div class="alert alert-danger">${data.error}</div>`;
+            } else {
+                const labels = data.labels.map(l => `${l.label} (${(l.score * 100).toFixed(1)}%)`).join(', ');
+                resultDiv.innerHTML = `
+                    <div class="alert alert-info">
+                        <strong>Objets détectés :</strong> ${labels}<br>
+                        <strong>Type suggéré :</strong> ${data.suggestedType || 'Non déterminé'}
+                    </div>
+                `;
+                if (data.suggestedType) {
+                    const typeSelect = document.querySelector('select[name="materiel[type]"]');
+                    typeSelect.value = data.suggestedType;
+                    if (typeSelect.value && data.suggestedType !== typeSelect.value) {
+                        resultDiv.innerHTML += `
+                            <div class="alert alert-warning">
+                                Attention : Le type sélectionné (${typeSelect.options[typeSelect.selectedIndex].text}) ne correspond pas au type suggéré (${data.suggestedType}).
+                            </div>
+                        `;
+                    }
+                }
+            }
+        } catch (error) {
+            console.error('Erreur:', error);
+            resultDiv.innerHTML = `
+                <div class="alert alert-danger">Erreur lors de l'analyse de l'image: ${error.message}</div>
+            `;
+        }
+    });
+</script>
 {% endblock %}

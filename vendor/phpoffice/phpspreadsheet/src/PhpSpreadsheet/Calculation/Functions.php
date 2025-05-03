@@ -4,7 +4,6 @@ namespace PhpOffice\PhpSpreadsheet\Calculation;
 
 use PhpOffice\PhpSpreadsheet\Cell\Cell;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
-use PhpOffice\PhpSpreadsheet\Shared\StringHelper;
 
 class Functions
 {
@@ -131,22 +130,16 @@ class Functions
 
     public static function isMatrixValue(mixed $idx): bool
     {
-        $idx = StringHelper::convertToString($idx);
-
         return (substr_count($idx, '.') <= 1) || (preg_match('/\.[A-Z]/', $idx) > 0);
     }
 
     public static function isValue(mixed $idx): bool
     {
-        $idx = StringHelper::convertToString($idx);
-
         return substr_count($idx, '.') === 0;
     }
 
     public static function isCellValue(mixed $idx): bool
     {
-        $idx = StringHelper::convertToString($idx);
-
         return substr_count($idx, '.') > 1;
     }
 
@@ -161,8 +154,7 @@ class Functions
             $condition = self::operandSpecialHandling($condition);
             if (is_bool($condition)) {
                 return '=' . ($condition ? 'TRUE' : 'FALSE');
-            }
-            if (!is_numeric($condition)) {
+            } elseif (!is_numeric($condition)) {
                 if ($condition !== '""') { // Not an empty string
                     // Escape any quotes in the string value
                     $condition = (string) preg_replace('/"/ui', '""', $condition);
@@ -170,32 +162,29 @@ class Functions
                 $condition = Calculation::wrapResult(strtoupper($condition));
             }
 
-            return str_replace('""""', '""', '=' . StringHelper::convertToString($condition));
+            return str_replace('""""', '""', '=' . $condition);
         }
         $operator = $operand = '';
         if (1 === preg_match('/(=|<[>=]?|>=?)(.*)/', $condition, $matches)) {
             [, $operator, $operand] = $matches;
         }
 
-        $operand = (string) self::operandSpecialHandling($operand);
+        $operand = self::operandSpecialHandling($operand);
         if (is_numeric(trim($operand, '"'))) {
             $operand = trim($operand, '"');
         } elseif (!is_numeric($operand) && $operand !== 'FALSE' && $operand !== 'TRUE') {
             $operand = str_replace('"', '""', $operand);
             $operand = Calculation::wrapResult(strtoupper($operand));
-            $operand = StringHelper::convertToString($operand);
         }
 
         return str_replace('""""', '""', $operator . $operand);
     }
 
-    private static function operandSpecialHandling(mixed $operand): bool|float|int|string
+    private static function operandSpecialHandling(mixed $operand): mixed
     {
         if (is_numeric($operand) || is_bool($operand)) {
             return $operand;
-        }
-        $operand = StringHelper::convertToString($operand);
-        if (strtoupper($operand) === Calculation::getTRUE() || strtoupper($operand) === Calculation::getFALSE()) {
+        } elseif (strtoupper($operand) === Calculation::getTRUE() || strtoupper($operand) === Calculation::getFALSE()) {
             return strtoupper($operand);
         }
 

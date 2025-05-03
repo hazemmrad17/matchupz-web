@@ -3,7 +3,6 @@
 namespace PhpOffice\PhpSpreadsheet\Writer\Xls;
 
 use PhpOffice\PhpSpreadsheet\Exception as PhpSpreadsheetException;
-use PhpOffice\PhpSpreadsheet\Shared\StringHelper;
 use PhpOffice\PhpSpreadsheet\Style\ConditionalFormatting\Wizard;
 
 class ConditionalHelper
@@ -36,7 +35,9 @@ class ConditionalHelper
             $this->tokens = pack('Cv', 0x1E, $condition);
         } else {
             try {
-                $formula = Wizard\WizardAbstract::reverseAdjustCellRef(StringHelper::convertToString($condition), $cellRange);
+                /** @var float|int|string */
+                $conditionx = $condition; // @phpstan-ignore-line
+                $formula = Wizard\WizardAbstract::reverseAdjustCellRef((string) $conditionx, $cellRange);
                 $this->parser->parse($formula);
                 $this->tokens = $this->parser->toReversePolish();
                 $this->size = strlen($this->tokens ?? '');

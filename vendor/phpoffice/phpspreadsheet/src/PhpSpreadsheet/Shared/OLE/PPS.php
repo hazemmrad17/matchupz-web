@@ -181,9 +181,7 @@ class PPS
     {
         if (!is_array($to_save) || (empty($to_save))) {
             return self::ALL_ONE_BITS;
-        }
-        /** @var self[] $to_save */
-        if (count($to_save) == 1) {
+        } elseif (count($to_save) == 1) {
             $cnt = count($raList);
             // If the first entry, it's the root... Don't clone it!
             $raList[$cnt] = ($depth == 0) ? $to_save[0] : clone $to_save[0];

@@ -51,17 +51,15 @@ class Contrat
     #[Assert\NotBlank(message: "Vous devez sélectionner un sponsor.")]
     private ?Sponsor $sponsor = null;
 
-    #[ORM\OneToMany(targetEntity: Transaction::class, mappedBy: 'contrat')]
-    private Collection $transactions;
-
     #[ORM\Column(type: 'string', nullable: false)]
     private ?string $signature = null;
 
-    public function __construct()
-    {
-        $this->transactions = new ArrayCollection();
-    }
+    #[ORM\Column(type: 'text', nullable: false)]
+    #[Assert\NotBlank(message: "L'article du contrat est obligatoire.")]
+    private string $article = '';
 
+
+   
     public function getIdContrat(): ?int
     {
         return $this->Id_Contrat;
@@ -136,6 +134,17 @@ class Contrat
     public function setSignature(string $signature): self
     {
         $this->signature = $signature;
+        return $this;
+    }
+
+    public function getArticle(): string
+    {
+        return $this->article;
+    }
+
+    public function setArticle(string $article): self
+    {
+        $this->article = $article;
         return $this;
     }
 }

@@ -257,9 +257,4 @@ abstract class BaseReader implements IReader
 
         return $this;
     }
-
-    protected function newSpreadsheet(): Spreadsheet
-    {
-        return new Spreadsheet();
-    }
 }

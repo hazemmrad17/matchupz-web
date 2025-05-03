@@ -25,20 +25,20 @@ class TableReader
     /**
      * Loads Table into the Worksheet.
      */
-    public function load(array $tableStyles, array $dxfs): void
+    public function load(): void
     {
         $this->tableAttributes = $this->tableXml->attributes() ?? [];
         // Remove all "$" in the table range
         $tableRange = (string) preg_replace('/\$/', '', $this->tableAttributes['ref'] ?? '');
         if (str_contains($tableRange, ':')) {
-            $this->readTable($tableRange, $tableStyles, $dxfs);
+            $this->readTable($tableRange);
         }
     }
 
     /**
      * Read Table from xml.
      */
-    private function readTable(string $tableRange, array $tableStyles, array $dxfs): void
+    private function readTable(string $tableRange): void
     {
         $table = new Table($tableRange);
         $table->setName((string) ($this->tableAttributes['displayName'] ?? ''));
@@ -47,7 +47,7 @@ class TableReader
 
         $this->readTableAutoFilter($table, $this->tableXml->autoFilter);
         $this->readTableColumns($table, $this->tableXml->tableColumns);
-        $this->readTableStyle($table, $this->tableXml->tableStyleInfo, $tableStyles, $dxfs);
+        $this->readTableStyle($table, $this->tableXml->tableStyleInfo);
 
         (new AutoFilter($table, $this->tableXml))->load();
         $this->worksheet->addTable($table);
@@ -100,7 +100,7 @@ class TableReader
     /**
      * Reads TableStyle from xml.
      */
-    private function readTableStyle(Table $table, SimpleXMLElement $tableStyleInfoXml, array $tableStyles, array $dxfs): void
+    private function readTableStyle(Table $table, SimpleXMLElement $tableStyleInfoXml): void
     {
         $tableStyle = new TableStyle();
         $attributes = $tableStyleInfoXml->attributes();
@@ -110,12 +110,6 @@ class TableReader
             $tableStyle->setShowColumnStripes((string) $attributes['showColumnStripes'] === '1');
             $tableStyle->setShowFirstColumn((string) $attributes['showFirstColumn'] === '1');
             $tableStyle->setShowLastColumn((string) $attributes['showLastColumn'] === '1');
-
-            foreach ($tableStyles as $style) {
-                if ($style->getName() === (string) $attributes['name']) {
-                    $tableStyle->setTableDxfsStyle($style, $dxfs);
-                }
-            }
         }
         $table->setStyle($tableStyle);
     }

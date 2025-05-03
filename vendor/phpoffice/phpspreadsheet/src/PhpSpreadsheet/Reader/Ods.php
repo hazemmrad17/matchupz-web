@@ -229,7 +229,8 @@ class Ods extends BaseReader
      */
     protected function loadSpreadsheetFromFile(string $filename): Spreadsheet
     {
-        $spreadsheet = $this->newSpreadsheet();
+        // Create new Spreadsheet
+        $spreadsheet = new Spreadsheet();
         $spreadsheet->setValueBinder($this->valueBinder);
         $spreadsheet->removeSheetByIndex(0);
 
@@ -616,7 +617,7 @@ class Ods extends BaseReader
                                                     if ($cellDataType === 'array') {
                                                         $cell->setFormulaAttributes(['t' => 'array', 'ref' => $cellDataRef]);
                                                     }
-                                                } elseif ($type !== '' || $dataValue !== null) {
+                                                } else {
                                                     $cell->setValueExplicit($dataValue, $type);
                                                 }
 

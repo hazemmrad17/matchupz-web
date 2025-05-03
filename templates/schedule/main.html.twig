@@ -3,6 +3,7 @@
     {% include 'searchbar.html.twig' %}
 {% endblock %}
 
+
 {% block title %}Liste des planning{% endblock %}
 
 {% block content %}
@@ -28,13 +29,27 @@
 
     <div class="content-wrapper">
         <div class="container-xxl flex-grow-1 container-p-y">
-            <div class="card">
+            <!-- Schedule Table -->
+            <div class="card mb-4">
+                {% block widgets %}
+                    {% include 'schedule/statistics.html.twig' %}
+                {% endblock %}
                 <h5 class="card-header d-flex justify-content-between align-items-center">
                     Liste des plannings
-                <div>
-                    <a href="{{ path('schedule_new') }}" class="btn btn-primary">Ajouter un planning</a>
+                    <div class="d-flex gap-2">
+                        <a href="{{ path('schedule_new') }}" class="btn btn-primary">Ajouter un planning</a>
+                        <div class="btn-group">
+                            <button type="button" class="btn dropdown-toggle btn-yellow" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bx bx-export me-1"></i> Exporter
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{{ path('schedule_export_csv')}}">Exporter en CSV</a></li>
+                                <li><a class="dropdown-item" href="{{ path('schedule_export_pdf')}}">Exporter en PDF</a></li>
+                                <li><a class="dropdown-item" href="{{ path('schedule_export_excel')}}">Exporter en Excel</a></li>
+                            </ul>
+                        </div>
+                    </div>
                 </h5>
-                </a>
                 <div class="card-body">
                     <div class="mb-4">
                         <div class="input-group">

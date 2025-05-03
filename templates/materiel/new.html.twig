@@ -1,55 +1,255 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Nouveau Matériel{% endblock %}
+{% block searchbar %}
+    {% include 'searchbar.html.twig' %}
+{% endblock %}
+
+{% block title %}
+    {% if form.vars.value.id %}Modifier Matériel{% else %}Nouveau Matériel{% endif %}
+{% endblock %}
 
 {% block content %}
 <div class="content-wrapper">
     <div class="container-xxl flex-grow-1 container-p-y">
         <h4 class="fw-bold py-3 mb-4">
-            <span class="text-muted fw-light">Matériel /</span> Nouvel Équipement
+            <span class="text-muted fw-light">Matériel /</span>
+            {% if form.vars.value.id %}Modifier Équipement{% else %}Nouvel Équipement{% endif %}
         </h4>
 
         <div class="col-xl">
             <div class="card mb-4">
                 <div class="card-header d-flex justify-content-between align-items-center">
-                    <h5 class="mb-0">Ajouter un Nouveau Matériel</h5>
+                    <h5 class="mb-0">
+                        {% if form.vars.value.id %}
+                            Modifier le Matériel
+                        {% else %}
+                            Ajouter un Nouveau Matériel
+                        {% endif %}
+                    </h5>
                     <small class="text-muted float-end">Remplir les détails</small>
                 </div>
                 <div class="card-body">
-                   {{ form_start(form, {'attr': {'class': 'needs-validation', 'novalidate': true}}) }}
-                        <div class="mb-3">
-                            {{ form_label(form.nom, null, {'label_attr': {'class': 'form-label'}}) }}
-                            {{ form_widget(form.nom, {'attr': {'class': 'form-control', 'placeholder': 'Nom du matériel'}}) }}
+                    <!-- Affichage des erreurs globales du formulaire -->
+                    {% if form_errors(form) %}
+                        <div class="alert alert-danger">
+                            {{ form_errors(form) }}
                         </div>
+                    {% endif %}
+
+                    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
                         <div class="mb-3">
-                            {{ form_label(form.type, null, {'label_attr': {'class': 'form-label'}}) }}
-                            {{ form_widget(form.type, {'attr': {'class': 'form-select'}}) }}
+                            <label class="form-label" for="materiel_nom">Nom du Matériel</label>
+                            <div class="input-group input-group-merge">
+                                <span class="input-group-text"><i class="bx bx-box"></i></span>
+                                {{ form_widget(form.nom, {'attr': {'class': 'form-control', 'placeholder': 'Ex: Ballon de football'}}) }}
+                            </div>
+                            {% if form_errors(form.nom) %}
+                                <div class="text-danger">
+                                    {{ form_errors(form.nom) }}
+                                </div>
+                            {% endif %}
                         </div>
+
                         <div class="mb-3">
-                            {{ form_label(form.quantite, null, {'label_attr': {'class': 'form-label'}}) }}
-                            {{ form_widget(form.quantite, {'attr': {'class': 'form-control', 'placeholder': 'Quantité en stock'}}) }}
+                            <label class="form-label" for="materiel_type">Type</label>
+                            <div class="input-group input-group-merge">
+                                <span class="input-group-text"><i class="bx bx-tag"></i></span>
+                                {{ form_widget(form.type, {'attr': {'class': 'form-select', 'id': 'materiel_type'}}) }}
+                            </div>
+                            {% if form_errors(form.type) %}
+                                <div class="text-danger">
+                                    {{ form_errors(form.type) }}
+                                </div>
+                            {% endif %}
                         </div>
+
                         <div class="mb-3">
-                            {{ form_label(form.etat, null, {'label_attr': {'class': 'form-label'}}) }}
-                            {{ form_widget(form.etat, {'attr': {'class': 'form-select'}}) }}
+                            <label class="form-label" for="materiel_quantite">Quantité en Stock</label>
+                            <div class="input-group input-group-merge">
+                                <span class="input-group-text"><i class="bx bx-cube"></i></span>
+                                {{ form_widget(form.quantite, {'attr': {'class': 'form-control', 'placeholder': 'Ex: 10'}}) }}
+                            </div>
+                            {% if form_errors(form.quantite) %}
+                                <div class="text-danger">
+                                    {{ form_errors(form.quantite) }}
+                                </div>
+                            {% endif %}
                         </div>
+
                         <div class="mb-3">
-                            {{ form_label(form.prix, null, {'label_attr': {'class': 'form-label'}}) }}
-                            <div class="input-group">
-                                <span class="input-group-text">€</span>
-                                {{ form_widget(form.prix, {'attr': {'class': 'form-control', 'placeholder': 'Prix unitaire'}}) }}
+                            <label class="form-label" for="materiel_etat">État</label>
+                            <div class="input-group input-group-merge">
+                                <span class="input-group-text"><i class="bx bx-check-circle"></i></span>
+                                {{ form_widget(form.etat, {'attr': {'class': 'form-select'}}) }}
+                            </div>
+                            {% if form_errors(form.etat) %}
+                                <div class="text-danger">
+                                    {{ form_errors(form.etat) }}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label" for="materiel_prix">Prix Unitaire (€)</label>
+                            <div class="input-group input-group-merge">
+                                <span class="input-group-text"><i class="bx bx-euro"></i></span>
+                                {{ form_widget(form.prix, {'attr': {'class': 'form-control', 'placeholder': 'Ex: 29.99'}}) }}
+                            </div>
+                            {% if form_errors(form.prix) %}
+                                <div class="text-danger">
+                                    {{ form_errors(form.prix) }}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label" for="materiel_barcode">Code-barres</label>
+                            <div class="input-group input-group-merge">
+                                <span class="input-group-text"><i class="bx bx-barcode"></i></span>
+                                {{ form_widget(form.barcode, {'attr': {'class': 'form-control', 'placeholder': 'Ex: 123456789'}}) }}
+                            </div>
+                            {% if form_errors(form.barcode) %}
+                                <div class="text-danger">
+                                    {{ form_errors(form.barcode) }}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label" for="materiel_fournisseur">Fournisseur</label>
+                            <div class="input-group input-group-merge">
+                                <span class="input-group-text"><i class="bx bx-building"></i></span>
+                                {{ form_widget(form.fournisseur, {'attr': {'class': 'form-select', 'id': 'materiel_fournisseur'}}) }}
+                            </div>
+                            {% if form_errors(form.fournisseur) %}
+                                <div class="text-danger">
+                                    {{ form_errors(form.fournisseur) }}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label" for="materiel_image">Image du Matériel</label>
+                            <div class="input-group input-group-merge">
+                                <span class="input-group-text"><i class="bx bx-image"></i></span>
+                                {{ form_widget(form.image, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                            {% if form_errors(form.image) %}
+                                <div class="text-danger">
+                                    {{ form_errors(form.image) }}
+                                </div>
+                            {% endif %}
+                            {% if materiel.image and form.vars.value.id %}
+                                <div class="mt-2">
+                                    <p>Image actuelle :</p>
+                                    <img src="{{ asset('Uploads/materiels/' ~ materiel.image) }}" alt="Image du matériel" style="max-width: 150px; max-height: 150px;" class="rounded">
+                                </div>
+                            {% endif %}
+                            <!-- Bouton d'analyse et conteneur pour les résultats -->
+                            <div class="mt-3">
+                                <button type="button" class="btn btn-outline-info" id="analyzeImageAI">
+                                    <i class="bx bx-brain me-1"></i> Analyser l'image avec IA
+                                </button>
+                                <div id="imageAnalysisResult" class="mt-2"></div>
                             </div>
                         </div>
-                        <div class="mb-3">
-                            {{ form_label(form.fournisseur, null, {'label_attr': {'class': 'form-label'}}) }}
-                            {{ form_widget(form.fournisseur, {'attr': {'class': 'form-select'}}) }}
+
+                        <!-- Button Container -->
+                        <div class="d-flex justify-content-center gap-2 mt-4">
+                            <button type="submit" class="btn btn-primary px-4" style="min-width: 150px;">
+                                {% if form.vars.value.id %}Mettre à jour{% else %}Créer{% endif %}
+                            </button>
+                            <a href="{{ path('app_materiel_index') }}" class="btn btn-secondary px-4" style="min-width: 150px;">Annuler</a>
                         </div>
-                        <button type="submit" class="btn btn-primary">Enregistrer</button>
-                        <a href="{{ path('app_materiel_index') }}" class="btn btn-outline-secondary">Annuler</a>
                     {{ form_end(form) }}
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+// --- AJAX update of fournisseur when type changes ---
+document.addEventListener('DOMContentLoaded', function() {
+    const typeSelect = document.getElementById('materiel_type');
+    const fournisseurSelect = document.getElementById('materiel_fournisseur');
+    if (typeSelect && fournisseurSelect) {
+        typeSelect.addEventListener('change', function() {
+            const selectedType = this.value;
+            if (!selectedType) {
+                fournisseurSelect.innerHTML = '<option value="">Sélectionner un fournisseur</option>';
+                return;
+            }
+            fetch('/materiel/fournisseurs-by-type/' + encodeURIComponent(selectedType))
+                .then(response => response.json())
+                .then(data => {
+                    let options = '<option value="">Sélectionner un fournisseur</option>';
+                    data.forEach(f => {
+                        options += `<option value="${f.id}">${f.nom}</option>`;
+                    });
+                    fournisseurSelect.innerHTML = options;
+                });
+        });
+    }
+});
+</script>
+
+<!-- Script JavaScript pour l'analyse d'image -->
+<script>
+    document.getElementById('analyzeImageAI').addEventListener('click', async () => {
+        const formData = new FormData();
+        const imageInput = document.querySelector('input[name="materiel[image]"]');
+        console.log('Input image trouvé:', imageInput);
+        if (!imageInput || !imageInput.files[0]) {
+            alert('Veuillez sélectionner une image.');
+            return;
+        }
+        formData.append('image', imageInput.files[0]);
+        console.log('Fichier image ajouté:', imageInput.files[0].name);
+
+        const resultDiv = document.getElementById('imageAnalysisResult');
+        resultDiv.innerHTML = '<div class="spinner-border text-primary" role="status"><span class="visually-hidden">Chargement...</span></div>';
+
+        try {
+            console.log('Envoi de la requête à:', '{{ path('app_materiel_analyze_image_AI') }}');
+            const response = await fetch('{{ path('app_materiel_analyze_image_AI') }}', {
+                method: 'POST',
+                body: formData,
+            });
+            console.log('Statut de la réponse:', response.status);
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error || `Erreur HTTP: ${response.status} ${response.statusText}`);
+            }
+            const data = await response.json();
+            if (data.error) {
+                resultDiv.innerHTML = `<div class="alert alert-danger">${data.error}</div>`;
+            } else {
+                const labels = data.labels.map(l => `${l.label} (${(l.score * 100).toFixed(1)}%)`).join(', ');
+                resultDiv.innerHTML = `
+                    <div class="alert alert-info">
+                        <strong>Objets détectés :</strong> ${labels}<br>
+                        <strong>Type suggéré :</strong> ${data.suggestedType || 'Non déterminé'}
+                    </div>
+                `;
+                if (data.suggestedType) {
+                    const typeSelect = document.querySelector('select[name="materiel[type]"]');
+                    typeSelect.value = data.suggestedType;
+                    if (typeSelect.value && data.suggestedType !== typeSelect.value) {
+                        resultDiv.innerHTML += `
+                            <div class="alert alert-warning">
+                                Attention : Le type sélectionné (${typeSelect.options[typeSelect.selectedIndex].text}) ne correspond pas au type suggéré (${data.suggestedType}).
+                            </div>
+                        `;
+                    }
+                }
+            }
+        } catch (error) {
+            console.error('Erreur:', error);
+            resultDiv.innerHTML = `
+                <div class="alert alert-danger">Erreur lors de l'analyse de l'image: ${error.message}</div>
+            `;
+        }
+    });
+</script>
 {% endblock %}

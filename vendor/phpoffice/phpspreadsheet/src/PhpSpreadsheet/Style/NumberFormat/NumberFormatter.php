@@ -159,10 +159,9 @@ class NumberFormatter extends BaseFormatter
             $size = $decimals + 3;
 
             return sprintf("%{$size}.{$decimals}E", $valueFloat);
-        }
-        if (preg_match('/0([^\d\.]+)0/', $format) || substr_count($format, '.') > 1) {
+        } elseif (preg_match('/0([^\d\.]+)0/', $format) || substr_count($format, '.') > 1) {
             if ($valueFloat == floor($valueFloat) && substr_count($format, '.') === 1) {
-                $value *= 10 ** strlen(explode('.', $format)[1]); //* @phpstan-ignore-line
+                $value *= 10 ** strlen(explode('.', $format)[1]);
             }
 
             $result = self::complexNumberFormatMask($value, $format);

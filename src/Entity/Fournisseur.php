@@ -20,19 +20,18 @@ class Fournisseur
     #[ORM\Column(type: 'string', nullable: false)]
     #[Assert\NotBlank(message: "Le nom du fournisseur est requis.")]
     #[Assert\Length(
-        min: 2,
-        max: 255,
-        minMessage: "Le nom doit contenir au moins {{ limit }} caractères.",
-        maxMessage: "Le nom ne peut pas dépasser {{ limit }} caractères."
-    )]
-    private ?string $nom = null;
+    min: 2,
+    max: 255,
+    minMessage: "Le nom doit contenir au moins {{ limit }} caractères.",
+    maxMessage: "Le nom ne peut pas dépasser {{ limit }} caractères."
+)]
+private string $nom = '';
 
     #[ORM\Column(type: 'string', nullable: true)]
-    #[Assert\Email(
-        message: "L'email '{{ value }}' n'est pas valide.",
-        mode: 'html5' // Enforces HTML5 email validation
-    )]
-    private ?string $email = null;
+#[Assert\Email(
+    message: "L'email '{{ value }}' n'est pas valide."
+)]
+private ?string $email = null;
 
     #[ORM\Column(type: 'string', nullable: true)]
     #[Assert\Length(
@@ -72,7 +71,7 @@ class Fournisseur
         return $this;
     }
 
-    public function getNom(): ?string
+    public function getNom(): string
     {
         return $this->nom;
     }

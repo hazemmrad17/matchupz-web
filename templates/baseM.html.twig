@@ -65,14 +65,46 @@
                         <div class="col-lg-4 text-center text-lg-end">
                             <div class="d-flex justify-content-end">
                              <div class="d-flex align-items-center small">
-    {% if app.session.get('user') %}
-        <!-- Utilisateur connecté : afficher le bouton logout -->
-        <a href="{{ path('app_user_logoutF') }}" class="text-body me-3">Logout</a>
-    {% else %}
-        <!-- Utilisateur non connecté : afficher login et register -->
-        <a href="{{ path('app_login') }}" class="login-btn text-body me-3 pe-3"><span>Login</span></a>
-        <a href="{{ path('app_registerF') }}" class="text-body me-3">Register</a>
-    {% endif %}
+  {% if app.session.get('user') %}
+    <!-- Utilisateur connecté : afficher l'image de profil et le menu déroulant -->
+    <div class="dropdown d-flex align-items-start">
+        <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            {% if app.session.get('user').image %}
+                <img src="{{ asset('uploads/users/' ~ app.session.get('user').image) }}" 
+                     class="rounded-circle" 
+                     style="width: 40px; height: 40px; object-fit: cover;" 
+                     alt="Profile">
+            {% else %}
+                <img src="{{ asset('images/default-profile.png') }}" 
+                     class="rounded-circle" 
+                     style="width: 40px; height: 40px; object-fit: cover;" 
+                     alt="Default Profile">
+            {% endif %}
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end">
+            <li class="dropdown-item-text fw-bold">
+                {{ app.session.get('user').nom }} {{ app.session.get('user').prenom }}
+            </li>
+            <li><hr class="dropdown-divider"></li>
+            <li>
+                <a class="dropdown-item" href="{{ path('app_user_profile_front') }}">
+                    <i class="fas fa-user"></i> My Profile
+                </a>
+            </li>
+            <li>
+                <a class="dropdown-item" href="{{ path('app_user_logoutF') }}">
+                    <i class="fas fa-power-off"></i> Log Out
+                </a>
+            </li>
+        </ul>
+    </div>
+{% else %}
+    <!-- Utilisateur non connecté : afficher login et register -->
+    <a href="{{ path('app_login') }}" class="login-btn text-body me-3 pe-3"><span>Login</span></a>
+    <a href="{{ path('app_registerF') }}" class="text-body me-3">Register</a>
+{% endif %}
+
+
 </div>
                                 <div class="d-flex pe-3">
                                     <a class="btn p-0 text-primary me-3" href="#"><i class="fab fa-facebook-f"></i></a>
@@ -114,7 +146,7 @@
                                     </div>
                                 </div>
                                 <a href="{{ path('sponsor_front') }}" class="nav-item nav-link">Sponsor</a>
-                                <a href="#" class="nav-item nav-link">Contact</a>
+                                <a href="{{ path('gemini_chat') }}" class="nav-item nav-link">Contact</a>
                                 <div class="nav-btn ps-3">
                                     <button class="btn-search btn btn-primary btn-md-square mt-2 mt-lg-0 mb-4 mb-lg-0 flex-shrink-0" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search"></i></button>
                                     <a href="#" class="btn btn-primary py-2 px-4 ms-0 ms-lg-3"><span>Get Quote</span></a>

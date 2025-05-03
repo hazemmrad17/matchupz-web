@@ -87,11 +87,13 @@
                             {% for joueur in joueurs %}
                                 <tr class="table-default">
                                     <td>
-                                        {% if joueur.profilePicture %}
-                                            <img src="{{ joueur.profilePicture }}" alt="Photo de profil de {{ joueur.prenom }} {{ joueur.nom }}" class="rounded-circle" style="width: 40px; height: 40px; object-fit: cover;" onerror="this.src='/path/to/default-image.jpg';">
-                                        {% else %}
-                                            <span class="text-muted">N/A</span>
-                                        {% endif %}
+                                        <img
+                                            src="{{ joueur.profilePicture ? asset('/uploads/profile_pictures/' ~ joueur.profilePicture) : asset('/uploads/photos/default_avatar.png') }}"
+                                            alt="Photo de profil de {{ joueur.prenom }} {{ joueur.nom }}"
+                                            class="rounded-circle"
+                                            style="width: 40px; height: 40px; object-fit: cover;"
+                                            onerror="this.src='{{ asset('/uploads/photos/default_avatar.png') }}';"
+                                        >
                                     </td>
                                     <td><i class="fab fa-sketch fa-lg text-warning me-3"></i><strong>{{ joueur.nom }}</strong></td>
                                     <td>{{ joueur.prenom }}</td>

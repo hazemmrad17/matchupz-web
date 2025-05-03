@@ -8,8 +8,8 @@
     <div class="content-wrapper">
         <div class="container-xxl flex-grow-1 container-p-y">
             <h4 class="fw-bold py-3 mb-4">
-                <span class="text-muted fw-light">Fournisseurs /</span> 
-                {% if form.vars.value.id_fournisseur %}Modifier{% else %}Nouveau{% endif %} Fournisseur
+                <span class="text-muted fw-light">Fournisseurs /</span>
+                {% if form.vars.value.id_fournisseur %}Modifier Fournisseur{% else %}Nouveau Fournisseur{% endif %}
             </h4>
 
             <div class="col-xl">
@@ -22,81 +22,73 @@
                                 Ajouter un Nouveau Fournisseur
                             {% endif %}
                         </h5>
-                        <small class="text-muted float-end">Tous les champs sont obligatoires</small>
+                        <small class="text-muted float-end">Remplir les détails</small>
                     </div>
                     <div class="card-body">
-                        {{ form_start(form, {'attr': {'class': 'needs-validation', 'novalidate': true}}) }}
-                            <div class="row">
-                                <div class="mb-3 col-md-6">
-                                    <label class="form-label" for="nom">Nom du Fournisseur</label>
-                                    <div class="input-group input-group-merge">
-                                        <span class="input-group-text"><i class="bx bx-building"></i></span>
-                                        {{ form_widget(form.nom, {
-                                            'attr': {
-                                                'class': 'form-control',
-                                                'placeholder': 'Ex: SportPlus Inc.'
-                                            }
-                                        }) }}
-                                    </div>
-                                    {{ form_errors(form.nom) }}
-                                </div>
+                        <!-- Affichage des erreurs globales du formulaire -->
+                        {% if form_errors(form) %}
+                            <div class="alert alert-danger">
+                                {{ form_errors(form) }}
+                            </div>
+                        {% endif %}
 
-                                <div class="mb-3 col-md-6">
-                                    <label class="form-label" for="email">Email</label>
-                                    <div class="input-group input-group-merge">
-                                        <span class="input-group-text"><i class="bx bx-envelope"></i></span>
-                                        {{ form_widget(form.email, {
-                                            'attr': {
-                                                'class': 'form-control',
-                                                'placeholder': 'contact@fournisseur.com'
-                                            }
-                                        }) }}
-                                    </div>
-                                    {{ form_errors(form.email) }}
+                        {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+                            <div class="mb-3">
+                                <label class="form-label" for="fournisseur_nom">Nom du Fournisseur</label>
+                                <div class="input-group input-group-merge">
+                                    <span class="input-group-text"><i class="bx bx-building"></i></span>
+                                    {{ form_widget(form.nom, {'attr': {'class': 'form-control', 'placeholder': 'Ex: SportPlus Inc.'}}) }}
                                 </div>
+                                {% if form_errors(form.nom) %}
+                                    <div class="text-danger">
+                                        {{ form_errors(form.nom) }}
+                                    </div>
+                                {% endif %}
                             </div>
 
                             <div class="mb-3">
-                                <label class="form-label" for="adresse">Adresse Complète</label>
+                                <label class="form-label" for="fournisseur_email">Email</label>
+                                <div class="input-group input-group-merge">
+                                    <span class="input-group-text"><i class="bx bx-envelope"></i></span>
+                                    {{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder': 'contact@fournisseur.com'}}) }}
+                                </div>
+                                {% if form_errors(form.email) %}
+                                    <div class="text-danger">
+                                        {{ form_errors(form.email) }}
+                                    </div>
+                                {% endif %}
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label" for="fournisseur_adresse">Adresse Complète</label>
                                 <div class="input-group input-group-merge">
                                     <span class="input-group-text"><i class="bx bx-map"></i></span>
-                                    {{ form_widget(form.adresse, {
-                                        'attr': {
-                                            'class': 'form-control',
-                                            'placeholder': 'Adresse, Ville, Code Postal'
-                                        }
-                                    }) }}
+                                    {{ form_widget(form.adresse, {'attr': {'class': 'form-control', 'placeholder': 'Adresse, Ville, Code Postal'}}) }}
                                 </div>
-                                {{ form_errors(form.adresse) }}
+                                {% if form_errors(form.adresse) %}
+                                    <div class="text-danger">
+                                        {{ form_errors(form.adresse) }}
+                                    </div>
+                                {% endif %}
                             </div>
 
                             <div class="mb-3">
-                                <label class="form-label" for="categorie_produit">Catégorie de Produits</label>
+                                <label class="form-label" for="fournisseur_categorie_produit">Catégorie de Produits</label>
                                 <div class="input-group input-group-merge">
                                     <span class="input-group-text"><i class="bx bx-category"></i></span>
-                                    <select name="{{ field_name(form.categorie_produit) }}" class="form-select">
-                                        <option value="">Sélectionnez une catégorie</option>
-                                        <option value="EQUIPEMENT_SPORTIF" {% if form.vars.value.categorie_produit == 'EQUIPEMENT_SPORTIF' %}selected{% endif %}>Équipement Sportif</option>
-                                        <option value="ACCESSOIRE_ENTRAINEMENT" {% if form.vars.value.categorie_produit == 'ACCESSOIRE_ENTRAINEMENT' %}selected{% endif %}>Accessoire d'Entraînement</option>
-                                        <option value="MATERIEL_JEU" {% if form.vars.value.categorie_produit == 'MATERIEL_JEU' %}selected{% endif %}>Matériel de Jeu</option>
-                                        <option value="TENUE_SPORTIVE" {% if form.vars.value.categorie_produit == 'TENUE_SPORTIVE' %}selected{% endif %}>Tenue Sportive</option>
-                                        <option value="EQUIPEMENT_PROTECTION" {% if form.vars.value.categorie_produit == 'EQUIPEMENT_PROTECTION' %}selected{% endif %}>Équipement de Protection</option>
-                                        <option value="INFRASTRUCTURE" {% if form.vars.value.categorie_produit == 'INFRASTRUCTURE' %}selected{% endif %}>Infrastructure</option>
-                                    </select>
+                                    {{ form_widget(form.categorie_produit, {'attr': {'class': 'form-control'}}) }}
                                 </div>
-                                {{ form_errors(form.categorie_produit) }}
+                                {% if form_errors(form.categorie_produit) %}
+                                    <div class="text-danger">
+                                        {{ form_errors(form.categorie_produit) }}
+                                    </div>
+                                {% endif %}
                             </div>
 
-                            <div class="mt-4">
-                                <button type="submit" class="btn btn-primary me-2">
-                                    <i class="bx bx-save me-1"></i>
-                                    {% if form.vars.value.id_fournisseur %}Mettre à jour{% else %}Créer{% endif %}
-                                </button>
-                                <a href="{{ path('app_fournisseur_index') }}" class="btn btn-outline-secondary">
-                                    <i class="bx bx-arrow-back me-1"></i>
-                                    Retour à la liste
-                                </a>
-                            </div>
+                            <button type="submit" class="btn btn-primary">
+                                {% if form.vars.value.id_fournisseur %}Mettre à jour{% else %}Créer{% endif %}
+                            </button>
+                            <a href="{{ path('app_fournisseur_index') }}" class="btn btn-secondary">Annuler</a>
                         {{ form_end(form) }}
                     </div>
                 </div>
