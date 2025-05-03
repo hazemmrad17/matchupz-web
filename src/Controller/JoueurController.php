@@ -514,29 +514,50 @@ class JoueurController extends AbstractController
     }
 
     #[Route('/formations', name: 'football_layout')]
-public function layout(JoueurRepository $joueurRepository, Request $request): Response
-{
-    $formations = [
-        '4-4-2' => ['GK' => 1, 'RB' => 1, 'CB' => 2, 'LB' => 1, 'RM' => 1, 'CM' => 2, 'LM' => 1, 'ST' => 2],
-        '4-3-3' => ['GK' => 1, 'RB' => 1, 'CB' => 2, 'LB' => 1, 'CM' => 3, 'RW' => 1, 'LW' => 1, 'ST' => 1],
-        '3-5-2' => ['GK' => 1, 'CB' => 3, 'RM' => 1, 'CM' => 3, 'LM' => 1, 'ST' => 2],
-    ];
+    public function layout(JoueurRepository $joueurRepository, Request $request): Response
+    {
+        $formations = [
+            '4-4-2' => ['GK' => 1, 'RB' => 1, 'CB' => 2, 'LB' => 1, 'RM' => 1, 'CM' => 2, 'LM' => 1, 'ST' => 2],
+            '4-3-3' => ['GK' => 1, 'RB' => 1, 'CB' => 2, 'LB' => 1, 'CM' => 3, 'RW' => 1, 'LW' => 1, 'ST' => 1],
+            '3-5-2' => ['GK' => 1, 'CB' => 3, 'RM' => 1, 'CM' => 3, 'LM' => 1, 'ST' => 2],
+            '3-1-4-2' => ['GK' => 1, 'CB' => 3, 'DM' => 1, 'RM' => 1, 'CM' => 2, 'LM' => 1, 'ST' => 2],
+            '3-4-1-2' => ['GK' => 1, 'CB' => 3, 'RM' => 1, 'CM' => 2, 'LM' => 1, 'AM' => 1, 'ST' => 2],
+            '3-4-2-1' => ['GK' => 1, 'CB' => 3, 'RM' => 1, 'CM' => 2, 'LM' => 1, 'SS' => 2, 'ST' => 1],
+            '3-4-3' => ['GK' => 1, 'CB' => 3, 'RM' => 1, 'CM' => 2, 'LM' => 1, 'RW' => 1, 'LW' => 1, 'ST' => 1],
+            '3-5-1-1' => ['GK' => 1, 'CB' => 3, 'RM' => 1, 'CM' => 3, 'LM' => 1, 'AM' => 1, 'ST' => 1],
+            '4-1-2-1-2' => ['GK' => 1, 'RB' => 1, 'CB' => 2, 'LB' => 1, 'DM' => 1, 'CM' => 2, 'AM' => 1, 'ST' => 2],
+            '4-1-2-3' => ['GK' => 1, 'RB' => 1, 'CB' => 2, 'LB' => 1, 'DM' => 1, 'CM' => 2, 'RW' => 1, 'LW' => 1, 'ST' => 1],
+            '4-1-3-2' => ['GK' => 1, 'RB' => 1, 'CB' => 2, 'LB' => 1, 'DM' => 1, 'CM' => 3, 'ST' => 2],
+            '4-1-4-1' => ['GK' => 1, 'RB' => 1, 'CB' => 2, 'LB' => 1, 'DM' => 1, 'RM' => 1, 'CM' => 2, 'LM' => 1, 'ST' => 1],
+            '4-2-1-3' => ['GK' => 1, 'RB' => 1, 'CB' => 2, 'LB' => 1, 'DM' => 2, 'AM' => 1, 'RW' => 1, 'LW' => 1, 'ST' => 1],
+            '4-2-2-2' => ['GK' => 1, 'RB' => 1, 'CB' => 2, 'LB' => 1, 'DM' => 2, 'AM' => 2, 'ST' => 2],
+            '4-2-3-1' => ['GK' => 1, 'RB' => 1, 'CB' => 2, 'LB' => 1, 'DM' => 2, 'AM' => 3, 'ST' => 1],
+            '4-2-4' => ['GK' => 1, 'RB' => 1, 'CB' => 2, 'LB' => 1, 'CM' => 2, 'RW' => 1, 'LW' => 1, 'ST' => 2],
+            '4-3-1-2' => ['GK' => 1, 'RB' => 1, 'CB' => 2, 'LB' => 1, 'CM' => 3, 'AM' => 1, 'ST' => 2],
+            '4-3-2-1' => ['GK' => 1, 'RB' => 1, 'CB' => 2, 'LB' => 1, 'CM' => 3, 'SS' => 2, 'ST' => 1],
+            '4-4-1-1' => ['GK' => 1, 'RB' => 1, 'CB' => 2, 'LB' => 1, 'RM' => 1, 'CM' => 2, 'LM' => 1, 'SS' => 1, 'ST' => 1],
+            '4-5-1' => ['GK' => 1, 'RB' => 1, 'CB' => 2, 'LB' => 1, 'RM' => 1, 'CM' => 3, 'LM' => 1, 'ST' => 1],
+            '5-2-1-2' => ['GK' => 1, 'CB' => 3, 'RWB' => 1, 'LWB' => 1, 'CM' => 2, 'AM' => 1, 'ST' => 2],
+            '5-2-2-1' => ['GK' => 1, 'CB' => 3, 'RWB' => 1, 'LWB' => 1, 'CM' => 2, 'SS' => 2, 'ST' => 1],
+            '5-2-3' => ['GK' => 1, 'CB' => 3, 'RWB' => 1, 'LWB' => 1, 'CM' => 2, 'RW' => 1, 'LW' => 1, 'ST' => 1],
+            '5-3-2' => ['GK' => 1, 'CB' => 3, 'RWB' => 1, 'LWB' => 1, 'CM' => 3, 'ST' => 2],
+            '5-4-1' => ['GK' => 1, 'CB' => 3, 'RWB' => 1, 'LWB' => 1, 'RM' => 1, 'CM' => 2, 'LM' => 1, 'ST' => 1],
+        ];
 
-    $selectedFormation = $request->query->get('formation', '4-4-2');
-    if (!isset($formations[$selectedFormation])) {
-        $selectedFormation = '4-4-2';
+        // Assuming the rest of the method remains unchanged
+        $selectedFormation = $request->query->get('formation', '4-4-2');
+        if (!array_key_exists($selectedFormation, $formations)) {
+            $selectedFormation = '4-4-2'; // Default to 4-4-2 if invalid
+        }
+
+        $joueurs = $joueurRepository->findAll();
+
+        return $this->render('joueur/football_layout.html.twig', [
+            'formations' => array_keys($formations),
+            'selected_formation' => $selectedFormation,
+            'joueurs' => $joueurs,
+        ]);
     }
-
-    // Fetch all active football players
-    $joueurs = $joueurRepository->findBy(['sport' => 1, 'statut' => 'Actif']);
-
-    return $this->render('joueur/football_layout.html.twig', [
-        'joueurs' => $joueurs,
-        'formations' => array_keys($formations),
-        'selected_formation' => $selectedFormation,
-        'formation_positions' => $formations[$selectedFormation],
-    ]);
-}
 
     #[Route('/features', name: 'app_features')]
     public function features(): Response

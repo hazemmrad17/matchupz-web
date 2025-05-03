@@ -1,51 +1,23 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Football Team Layout{% endblock %}
+{% block title %}Disposition de l'Équipe de Football{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
     <link rel="stylesheet" href="{{ asset('/vendor/css/football_layout.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
-    <!-- Add Boxicons for the toast icon -->
     <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
 {% endblock %}
 
 {% block body %}
 <main>
-    <!-- Toast Container -->
-    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
-        <div id="invalidDropToast" class="bs-toast toast toast-placement-ex m-2 fade hide" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000">
-            <div class="toast-header">
-                <i class="bx bx-bell me-2"></i>
-                <div class="me-auto fw-semibold">Erreur de Placement</div>
-                <small>Just now</small>
-                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-            </div>
-            <div class="toast-body">
-                <!-- Message will be set by JavaScript -->
-            </div>
-        </div>
-    </div>
-
     <div class="static">
-        <h1 class="js-heading">FOOTBALL FORMATION</h1>
-        <p class="js-subheading">Drag players onto the field to build your team.<br><span style="font-size: 11px">Ensure players match their position roles.</span></p>
+        <h1 class="js-heading">FORMATION DE FOOTBALL</h1>
+        <p class="js-subheading">Glissez les joueurs sur le terrain pour construire votre équipe.<br><span style="font-size: 11px">Assurez-vous que les joueurs correspondent à leurs rôles de position.</span></p>
         
-        <!-- Add Toast Color Selector -->
-        <div class="toast-color-selector mb-3">
-            <label for="toastColorSelect">Toast Color:</label>
-            <select id="toastColorSelect" class="form-select color-dropdown">
-                <option value="bg-danger" selected>Danger (Red)</option>
-                <option value="bg-primary">Primary (Blue)</option>
-                <option value="bg-success">Success (Green)</option>
-                <option value="bg-warning">Warning (Yellow)</option>
-                <option value="bg-info">Info (Cyan)</option>
-            </select>
-        </div>
-
         <div class="formation-selector">
             <form method="get" action="{{ path('football_layout') }}">
-                <label for="formation">Select Formation:</label>
+                <label for="formation">Sélectionner la Formation :</label>
                 <select name="formation" id="formationSelect" onchange="this.form.submit()">
                     {% for formation in formations %}
                         <option value="{{ formation }}" {{ formation == selected_formation ? 'selected' : '' }}>{{ formation }}</option>
@@ -53,13 +25,27 @@
                 </select>
             </form>
         </div>
+        
+        <div class="js-switcher switcher">
+            <a href="#" class="js-switch switch-btn disabled" data-side="home">DOMICILE</a>
+            <a href="#" class="js-switch switch-btn" data-side="away">EXTÉRIEUR</a>
+        </div>
+
+        <div class="save-buttons">
+            <h5>Enregistrer la Formation</h5>
+            <button class="js-save-btn save-btn" data-format="json">Enregistrer en JSON</button>
+        </div>
+
+        <div class="back-button">
+            <a href="{{ path('joueur_main') }}" class="save-btn"><i class="bx bx-arrow-back me-1"></i> Retour aux Joueurs</a>
+        </div>
+
         <div class="player-list">
-            <h5>Available Players</h5>
-            <p>Debug: {{ joueurs|length }} players found.</p>
+            <h5>Joueurs Disponibles</h5>
 
             {% set positionMapping = {
                 'Gardien': ['GK'],
-                'Défenseur': ['RB', 'LB', 'RWB', 'LWB', 'SW'],
+                'Défenseur': ['RB', 'LB', 'RWB', 'LWB', 'SW', 'CB'],
                 'Milieu': ['DM', 'CM', 'AM', 'RM', 'LM'],
                 'Attaquant': ['RW', 'LW', 'CF', 'ST', 'SS']
             } %}
@@ -69,73 +55,75 @@
                 {% set hasPlayers = false %}
                 {% for joueur in joueurs %}
                     {% if joueur.poste is not empty %}
+                        {% set normalizedPoste = joueur.poste|trim|upper %}
                         {% set matchesRole = false %}
                         {% for role in roles %}
-                            {% if joueur.poste|lower == role|lower %}
+                            {% if normalizedPoste == role %}
                                 {% set matchesRole = true %}
                             {% endif %}
                         {% endfor %}
                         {% if matchesRole %}
                             {% set hasPlayers = true %}
-                            <p>Debug: Player {{ joueur.nom }} - Poste: {{ joueur.poste }}, Category: {{ position }}</p>
                             <div class="player-item" draggable="true" 
-                                 data-player-id="{{ joueur.idJoueur }}" 
-                                 data-position="{{ joueur.poste|trim }}"
+                                 data-player-id="{{ joueur.idJoueur }}"
+                                 data-position="{{ normalizedPoste }}"
                                  data-category="{{ position|trim }}"
                                  data-name="{{ (joueur.nom ~ ' ' ~ joueur.prenom)|trim }}"
                                  data-img="{{ joueur.profilePicture ? asset('/Uploads/profile_pictures/' ~ joueur.profilePicture) : asset('/Uploads/photos/default_avatar.png') }}"
                                  data-goals="{{ joueur.performanceJoueur ? joueur.performanceJoueur.butsMarques : 0 }}"
                                  data-matches="{{ joueur.performanceJoueur ? joueur.performanceJoueur.minutesJouees // 90 : 0 }}"
-                                 data-height="{{ joueur.taille ? joueur.taille ~ 'm' : 'N/A' }}">
+                                 data-height="{{ joueur.taille ? joueur.taille ~ 'm' : 'N/A' }}"
+                                 data-side="{{ joueur.teamType|default('home') }}">
                                 <img src="{{ joueur.profilePicture ? asset('/Uploads/profile_pictures/' ~ joueur.profilePicture) : asset('/Uploads/photos/default_avatar.png') }}" 
-                                     alt="{{ joueur.nom }}" 
+                                     alt="{{ joueur.nom }}"
                                      onerror="this.onerror=null; this.src='{{ asset('/Uploads/photos/default_avatar.png') }}';">
                                 <span>
-                                    {{ joueur.nom ~ ' ' ~ joueur.prenom }} ({{ joueur.poste }})
-                                    <span style="display: inline-block; width: 15px; height: 15px; background-color: {{ joueur.statut == 'Actif' ? 'green' : 'red' }}; margin-left: 5px; vertical-align: middle;"></span>
+                                    {{ (joueur.nom ~ ' ' ~ joueur.prenom)|trim }} ({{ joueur.poste }})
+                                    <span class="status-rectangle" style="background-color: {{ joueur.statut == 'Actif' ? 'green' : 'red' }};"></span>
                                 </span>
                             </div>
                         {% endif %}
                     {% endif %}
                 {% endfor %}
                 {% if not hasPlayers %}
-                    <p class="no-players">No {{ position|lower }}s available.</p>
+                    <p class="no-players">Aucun {{ position|lower }} disponible.</p>
                 {% endif %}
             {% endfor %}
 
-            <h6>Other Players (No Position Specified)</h6>
+            <h6>Autres Joueurs (Aucune Position Spécifiée)</h6>
             {% set hasOthers = false %}
             {% for joueur in joueurs %}
                 {% if joueur.poste is empty %}
                     {% set hasOthers = true %}
-                    <div class="player-item" draggable="false" 
-                         data-player-id="{{ joueur.idJoueur }}" 
+                    <div class="player-item" draggable="false"
+                         data-player-id="{{ joueur.idJoueur }}"
                          data-position="Unknown"
                          data-category="Unknown"
                          data-name="{{ (joueur.nom ~ ' ' ~ joueur.prenom)|trim }}"
                          data-img="{{ joueur.profilePicture ? asset('/Uploads/profile_pictures/' ~ joueur.profilePicture) : asset('/Uploads/photos/default_avatar.png') }}"
                          data-goals="{{ joueur.performanceJoueur ? joueur.performanceJoueur.butsMarques : 0 }}"
                          data-matches="{{ joueur.performanceJoueur ? joueur.performanceJoueur.minutesJouees // 90 : 0 }}"
-                         data-height="{{ joueur.taille ? joueur.taille ~ 'm' : 'N/A' }}">
-                        <img src="{{ joueur.profilePicture ? asset('/Uploads/profile_pictures/' ~ joueur.profilePicture) : asset('/Uploads/photos/default_avatar.png') }}" 
-                             alt="{{ joueur.nom }}" 
+                         data-height="{{ joueur.taille ? joueur.taille ~ 'm' : 'N/A' }}"
+                         data-side="{{ joueur.teamType|default('home') }}">
+                        <img src="{{ joueur.profilePicture ? asset('/Uploads/profile_pictures/' ~ joueur.profilePicture) : asset('/Uploads/photos/default_avatar.png') }}"
+                             alt="{{ joueur.nom }}"
                              onerror="this.onerror=null; this.src='{{ asset('/Uploads/photos/default_avatar.png') }}';">
                         <span>
-                            {{ joueur.nom ~ ' ' ~ joueur.prenom }} (No Position)
-                            <span style="display: inline-block; width: 15px; height: 15px; background-color: {{ joueur.statut == 'Actif' ? 'green' : 'red' }}; margin-left: 5px; vertical-align: middle;"></span>
+                            {{ (joueur.nom ~ ' ' ~ joueur.prenom)|trim }} (Aucune Position)
+                            <span class="status-rectangle" style="background-color: {{ joueur.statut == 'Actif' ? 'green' : 'red' }};"></span>
                         </span>
                     </div>
                 {% endif %}
             {% endfor %}
             {% if not hasOthers %}
-                <p class="no-players">No players without a position.</p>
+                <p class="no-players">Aucun joueur sans position.</p>
             {% endif %}
         </div>
     </div>
     <div class="js-stage stage texture">
         <div class="js-world world">
             <div class="team js-team">
-                <!-- Formation positions will be populated by JavaScript -->
+                <!-- Formation positions populated by JavaScript -->
             </div>
             <div class="terrain js-terrain">
                 <div class="field field--alt"></div>
@@ -159,7 +147,7 @@
                 <div class="field__side field__side--back"></div>
             </div>
         </div>
-        <div class="loading js-loading">PLEASE WAIT...</div>
+        <div class="loading js-loading">VEUILLEZ PATIENTER...</div>
     </div>
 </main>
 {% endblock %}
@@ -168,5 +156,7 @@
     {{ parent() }}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.5.2/velocity.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="{{ asset('/vendor/js/football_layout.js') }}"></script>
 {% endblock %}

@@ -75,7 +75,7 @@ class __TwigTemplate_047d31ca62cfca6d5495ab28638de7a3 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "title"));
 
-        yield "Football Team Layout";
+        yield "Disposition de l'Équipe de Football";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
 
@@ -107,7 +107,6 @@ class __TwigTemplate_047d31ca62cfca6d5495ab28638de7a3 extends Template
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("/vendor/css/football_layout.css"), "html", null, true);
         yield "\">
     <link href=\"https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap\" rel=\"stylesheet\">
-    <!-- Add Boxicons for the toast icon -->
     <link rel=\"stylesheet\" href=\"https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css\">
 ";
         
@@ -119,7 +118,7 @@ class __TwigTemplate_047d31ca62cfca6d5495ab28638de7a3 extends Template
         yield from [];
     }
 
-    // line 13
+    // line 12
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -132,56 +131,29 @@ class __TwigTemplate_047d31ca62cfca6d5495ab28638de7a3 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
 
-        // line 14
+        // line 13
         yield "<main>
-    <!-- Toast Container -->
-    <div class=\"position-fixed bottom-0 end-0 p-3\" style=\"z-index: 11\">
-        <div id=\"invalidDropToast\" class=\"bs-toast toast toast-placement-ex m-2 fade hide\" role=\"alert\" aria-live=\"assertive\" aria-atomic=\"true\" data-delay=\"5000\">
-            <div class=\"toast-header\">
-                <i class=\"bx bx-bell me-2\"></i>
-                <div class=\"me-auto fw-semibold\">Erreur de Placement</div>
-                <small>Just now</small>
-                <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"toast\" aria-label=\"Close\"></button>
-            </div>
-            <div class=\"toast-body\">
-                <!-- Message will be set by JavaScript -->
-            </div>
-        </div>
-    </div>
-
     <div class=\"static\">
-        <h1 class=\"js-heading\">FOOTBALL FORMATION</h1>
-        <p class=\"js-subheading\">Drag players onto the field to build your team.<br><span style=\"font-size: 11px\">Ensure players match their position roles.</span></p>
+        <h1 class=\"js-heading\">FORMATION DE FOOTBALL</h1>
+        <p class=\"js-subheading\">Glissez les joueurs sur le terrain pour construire votre équipe.<br><span style=\"font-size: 11px\">Assurez-vous que les joueurs correspondent à leurs rôles de position.</span></p>
         
-        <!-- Add Toast Color Selector -->
-        <div class=\"toast-color-selector mb-3\">
-            <label for=\"toastColorSelect\">Toast Color:</label>
-            <select id=\"toastColorSelect\" class=\"form-select color-dropdown\">
-                <option value=\"bg-danger\" selected>Danger (Red)</option>
-                <option value=\"bg-primary\">Primary (Blue)</option>
-                <option value=\"bg-success\">Success (Green)</option>
-                <option value=\"bg-warning\">Warning (Yellow)</option>
-                <option value=\"bg-info\">Info (Cyan)</option>
-            </select>
-        </div>
-
         <div class=\"formation-selector\">
             <form method=\"get\" action=\"";
-        // line 47
+        // line 19
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("football_layout");
         yield "\">
-                <label for=\"formation\">Select Formation:</label>
+                <label for=\"formation\">Sélectionner la Formation :</label>
                 <select name=\"formation\" id=\"formationSelect\" onchange=\"this.form.submit()\">
                     ";
-        // line 50
+        // line 22
         $context['_parent'] = $context;
-        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["formations"]) || array_key_exists("formations", $context) ? $context["formations"] : (function () { throw new RuntimeError('Variable "formations" does not exist.', 50, $this->source); })()));
+        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["formations"]) || array_key_exists("formations", $context) ? $context["formations"] : (function () { throw new RuntimeError('Variable "formations" does not exist.', 22, $this->source); })()));
         foreach ($context['_seq'] as $context["_key"] => $context["formation"]) {
-            // line 51
+            // line 23
             yield "                        <option value=\"";
             yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($context["formation"], "html", null, true);
             yield "\" ";
-            yield ((($context["formation"] == (isset($context["selected_formation"]) || array_key_exists("selected_formation", $context) ? $context["selected_formation"] : (function () { throw new RuntimeError('Variable "selected_formation" does not exist.', 51, $this->source); })()))) ? ("selected") : (""));
+            yield ((($context["formation"] == (isset($context["selected_formation"]) || array_key_exists("selected_formation", $context) ? $context["selected_formation"] : (function () { throw new RuntimeError('Variable "selected_formation" does not exist.', 23, $this->source); })()))) ? ("selected") : (""));
             yield ">";
             yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($context["formation"], "html", null, true);
             yield "</option>
@@ -190,253 +162,271 @@ class __TwigTemplate_047d31ca62cfca6d5495ab28638de7a3 extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_key'], $context['formation'], $context['_parent']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 53
+        // line 25
         yield "                </select>
             </form>
         </div>
+        
+        <div class=\"js-switcher switcher\">
+            <a href=\"#\" class=\"js-switch switch-btn disabled\" data-side=\"home\">DOMICILE</a>
+            <a href=\"#\" class=\"js-switch switch-btn\" data-side=\"away\">EXTÉRIEUR</a>
+        </div>
+
+        <div class=\"save-buttons\">
+            <h5>Enregistrer la Formation</h5>
+            <button class=\"js-save-btn save-btn\" data-format=\"json\">Enregistrer en JSON</button>
+        </div>
+
+        <div class=\"back-button\">
+            <a href=\"";
+        // line 40
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("joueur_main");
+        yield "\" class=\"save-btn\"><i class=\"bx bx-arrow-back me-1\"></i> Retour aux Joueurs</a>
+        </div>
+
         <div class=\"player-list\">
-            <h5>Available Players</h5>
-            <p>Debug: ";
-        // line 58
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::length($this->env->getCharset(), (isset($context["joueurs"]) || array_key_exists("joueurs", $context) ? $context["joueurs"] : (function () { throw new RuntimeError('Variable "joueurs" does not exist.', 58, $this->source); })())), "html", null, true);
-        yield " players found.</p>
+            <h5>Joueurs Disponibles</h5>
 
             ";
-        // line 60
-        $context["positionMapping"] = ["Gardien" => ["GK"], "Défenseur" => ["RB", "LB", "RWB", "LWB", "SW"], "Milieu" => ["DM", "CM", "AM", "RM", "LM"], "Attaquant" => ["RW", "LW", "CF", "ST", "SS"]];
-        // line 66
+        // line 46
+        $context["positionMapping"] = ["Gardien" => ["GK"], "Défenseur" => ["RB", "LB", "RWB", "LWB", "SW", "CB"], "Milieu" => ["DM", "CM", "AM", "RM", "LM"], "Attaquant" => ["RW", "LW", "CF", "ST", "SS"]];
+        // line 52
         yield "
             ";
-        // line 67
+        // line 53
         $context['_parent'] = $context;
-        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["positionMapping"]) || array_key_exists("positionMapping", $context) ? $context["positionMapping"] : (function () { throw new RuntimeError('Variable "positionMapping" does not exist.', 67, $this->source); })()));
+        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["positionMapping"]) || array_key_exists("positionMapping", $context) ? $context["positionMapping"] : (function () { throw new RuntimeError('Variable "positionMapping" does not exist.', 53, $this->source); })()));
         foreach ($context['_seq'] as $context["position"] => $context["roles"]) {
-            // line 68
+            // line 54
             yield "                <h6>";
             yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($context["position"], "html", null, true);
             yield "s</h6>
                 ";
-            // line 69
+            // line 55
             $context["hasPlayers"] = false;
-            // line 70
+            // line 56
             yield "                ";
             $context['_parent'] = $context;
-            $context['_seq'] = CoreExtension::ensureTraversable((isset($context["joueurs"]) || array_key_exists("joueurs", $context) ? $context["joueurs"] : (function () { throw new RuntimeError('Variable "joueurs" does not exist.', 70, $this->source); })()));
+            $context['_seq'] = CoreExtension::ensureTraversable((isset($context["joueurs"]) || array_key_exists("joueurs", $context) ? $context["joueurs"] : (function () { throw new RuntimeError('Variable "joueurs" does not exist.', 56, $this->source); })()));
             foreach ($context['_seq'] as $context["_key"] => $context["joueur"]) {
-                // line 71
+                // line 57
                 yield "                    ";
-                if ( !Twig\Extension\CoreExtension::testEmpty(CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "poste", [], "any", false, false, false, 71))) {
-                    // line 72
+                if ( !Twig\Extension\CoreExtension::testEmpty(CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "poste", [], "any", false, false, false, 57))) {
+                    // line 58
+                    yield "                        ";
+                    $context["normalizedPoste"] = Twig\Extension\CoreExtension::upper($this->env->getCharset(), Twig\Extension\CoreExtension::trim(CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "poste", [], "any", false, false, false, 58)));
+                    // line 59
                     yield "                        ";
                     $context["matchesRole"] = false;
-                    // line 73
+                    // line 60
                     yield "                        ";
                     $context['_parent'] = $context;
                     $context['_seq'] = CoreExtension::ensureTraversable($context["roles"]);
                     foreach ($context['_seq'] as $context["_key"] => $context["role"]) {
-                        // line 74
+                        // line 61
                         yield "                            ";
-                        if ((Twig\Extension\CoreExtension::lower($this->env->getCharset(), CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "poste", [], "any", false, false, false, 74)) == Twig\Extension\CoreExtension::lower($this->env->getCharset(), $context["role"]))) {
-                            // line 75
+                        if (((isset($context["normalizedPoste"]) || array_key_exists("normalizedPoste", $context) ? $context["normalizedPoste"] : (function () { throw new RuntimeError('Variable "normalizedPoste" does not exist.', 61, $this->source); })()) == $context["role"])) {
+                            // line 62
                             yield "                                ";
                             $context["matchesRole"] = true;
-                            // line 76
+                            // line 63
                             yield "                            ";
                         }
-                        // line 77
+                        // line 64
                         yield "                        ";
                     }
                     $_parent = $context['_parent'];
                     unset($context['_seq'], $context['_key'], $context['role'], $context['_parent']);
                     $context = array_intersect_key($context, $_parent) + $_parent;
-                    // line 78
+                    // line 65
                     yield "                        ";
-                    if ((isset($context["matchesRole"]) || array_key_exists("matchesRole", $context) ? $context["matchesRole"] : (function () { throw new RuntimeError('Variable "matchesRole" does not exist.', 78, $this->source); })())) {
-                        // line 79
+                    if ((isset($context["matchesRole"]) || array_key_exists("matchesRole", $context) ? $context["matchesRole"] : (function () { throw new RuntimeError('Variable "matchesRole" does not exist.', 65, $this->source); })())) {
+                        // line 66
                         yield "                            ";
                         $context["hasPlayers"] = true;
-                        // line 80
-                        yield "                            <p>Debug: Player ";
-                        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "nom", [], "any", false, false, false, 80), "html", null, true);
-                        yield " - Poste: ";
-                        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "poste", [], "any", false, false, false, 80), "html", null, true);
-                        yield ", Category: ";
-                        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($context["position"], "html", null, true);
-                        yield "</p>
-                            <div class=\"player-item\" draggable=\"true\" 
+                        // line 67
+                        yield "                            <div class=\"player-item\" draggable=\"true\" 
                                  data-player-id=\"";
-                        // line 82
-                        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "idJoueur", [], "any", false, false, false, 82), "html", null, true);
-                        yield "\" 
+                        // line 68
+                        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "idJoueur", [], "any", false, false, false, 68), "html", null, true);
+                        yield "\"
                                  data-position=\"";
-                        // line 83
-                        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::trim(CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "poste", [], "any", false, false, false, 83)), "html", null, true);
+                        // line 69
+                        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["normalizedPoste"]) || array_key_exists("normalizedPoste", $context) ? $context["normalizedPoste"] : (function () { throw new RuntimeError('Variable "normalizedPoste" does not exist.', 69, $this->source); })()), "html", null, true);
                         yield "\"
                                  data-category=\"";
-                        // line 84
+                        // line 70
                         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::trim($context["position"]), "html", null, true);
                         yield "\"
                                  data-name=\"";
-                        // line 85
-                        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::trim(((CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "nom", [], "any", false, false, false, 85) . " ") . CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "prenom", [], "any", false, false, false, 85))), "html", null, true);
+                        // line 71
+                        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::trim(((CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "nom", [], "any", false, false, false, 71) . " ") . CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "prenom", [], "any", false, false, false, 71))), "html", null, true);
                         yield "\"
                                  data-img=\"";
-                        // line 86
-                        yield ((CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "profilePicture", [], "any", false, false, false, 86)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("/Uploads/profile_pictures/" . CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "profilePicture", [], "any", false, false, false, 86))), "html", null, true)) : ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("/Uploads/photos/default_avatar.png"), "html", null, true)));
+                        // line 72
+                        yield ((CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "profilePicture", [], "any", false, false, false, 72)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("/Uploads/profile_pictures/" . CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "profilePicture", [], "any", false, false, false, 72))), "html", null, true)) : ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("/Uploads/photos/default_avatar.png"), "html", null, true)));
                         yield "\"
                                  data-goals=\"";
-                        // line 87
-                        yield ((CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "performanceJoueur", [], "any", false, false, false, 87)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "performanceJoueur", [], "any", false, false, false, 87), "butsMarques", [], "any", false, false, false, 87), "html", null, true)) : (0));
+                        // line 73
+                        yield ((CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "performanceJoueur", [], "any", false, false, false, 73)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "performanceJoueur", [], "any", false, false, false, 73), "butsMarques", [], "any", false, false, false, 73), "html", null, true)) : (0));
                         yield "\"
                                  data-matches=\"";
-                        // line 88
-                        yield ((CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "performanceJoueur", [], "any", false, false, false, 88)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((int) floor((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "performanceJoueur", [], "any", false, false, false, 88), "minutesJouees", [], "any", false, false, false, 88) / 90)), "html", null, true)) : (0));
+                        // line 74
+                        yield ((CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "performanceJoueur", [], "any", false, false, false, 74)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((int) floor((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "performanceJoueur", [], "any", false, false, false, 74), "minutesJouees", [], "any", false, false, false, 74) / 90)), "html", null, true)) : (0));
                         yield "\"
                                  data-height=\"";
-                        // line 89
-                        yield ((CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "taille", [], "any", false, false, false, 89)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "taille", [], "any", false, false, false, 89) . "m"), "html", null, true)) : ("N/A"));
+                        // line 75
+                        yield ((CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "taille", [], "any", false, false, false, 75)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "taille", [], "any", false, false, false, 75) . "m"), "html", null, true)) : ("N/A"));
+                        yield "\"
+                                 data-side=\"";
+                        // line 76
+                        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(((CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "teamType", [], "any", true, true, false, 76)) ? (Twig\Extension\CoreExtension::default(CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "teamType", [], "any", false, false, false, 76), "home")) : ("home")), "html", null, true);
                         yield "\">
                                 <img src=\"";
-                        // line 90
-                        yield ((CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "profilePicture", [], "any", false, false, false, 90)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("/Uploads/profile_pictures/" . CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "profilePicture", [], "any", false, false, false, 90))), "html", null, true)) : ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("/Uploads/photos/default_avatar.png"), "html", null, true)));
+                        // line 77
+                        yield ((CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "profilePicture", [], "any", false, false, false, 77)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("/Uploads/profile_pictures/" . CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "profilePicture", [], "any", false, false, false, 77))), "html", null, true)) : ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("/Uploads/photos/default_avatar.png"), "html", null, true)));
                         yield "\" 
                                      alt=\"";
-                        // line 91
-                        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "nom", [], "any", false, false, false, 91), "html", null, true);
-                        yield "\" 
+                        // line 78
+                        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "nom", [], "any", false, false, false, 78), "html", null, true);
+                        yield "\"
                                      onerror=\"this.onerror=null; this.src='";
-                        // line 92
+                        // line 79
                         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("/Uploads/photos/default_avatar.png"), "html", null, true);
                         yield "';\">
                                 <span>
                                     ";
-                        // line 94
-                        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(((CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "nom", [], "any", false, false, false, 94) . " ") . CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "prenom", [], "any", false, false, false, 94)), "html", null, true);
+                        // line 81
+                        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::trim(((CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "nom", [], "any", false, false, false, 81) . " ") . CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "prenom", [], "any", false, false, false, 81))), "html", null, true);
                         yield " (";
-                        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "poste", [], "any", false, false, false, 94), "html", null, true);
+                        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "poste", [], "any", false, false, false, 81), "html", null, true);
                         yield ")
-                                    <span style=\"display: inline-block; width: 15px; height: 15px; background-color: ";
-                        // line 95
-                        yield (((CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "statut", [], "any", false, false, false, 95) == "Actif")) ? ("green") : ("red"));
-                        yield "; margin-left: 5px; vertical-align: middle;\"></span>
+                                    <span class=\"status-rectangle\" style=\"background-color: ";
+                        // line 82
+                        yield (((CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "statut", [], "any", false, false, false, 82) == "Actif")) ? ("green") : ("red"));
+                        yield ";\"></span>
                                 </span>
                             </div>
                         ";
                     }
-                    // line 99
+                    // line 86
                     yield "                    ";
                 }
-                // line 100
+                // line 87
                 yield "                ";
             }
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_key'], $context['joueur'], $context['_parent']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 101
+            // line 88
             yield "                ";
-            if ( !(isset($context["hasPlayers"]) || array_key_exists("hasPlayers", $context) ? $context["hasPlayers"] : (function () { throw new RuntimeError('Variable "hasPlayers" does not exist.', 101, $this->source); })())) {
-                // line 102
-                yield "                    <p class=\"no-players\">No ";
+            if ( !(isset($context["hasPlayers"]) || array_key_exists("hasPlayers", $context) ? $context["hasPlayers"] : (function () { throw new RuntimeError('Variable "hasPlayers" does not exist.', 88, $this->source); })())) {
+                // line 89
+                yield "                    <p class=\"no-players\">Aucun ";
                 yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::lower($this->env->getCharset(), $context["position"]), "html", null, true);
-                yield "s available.</p>
+                yield " disponible.</p>
                 ";
             }
-            // line 104
+            // line 91
             yield "            ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['position'], $context['roles'], $context['_parent']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 105
+        // line 92
         yield "
-            <h6>Other Players (No Position Specified)</h6>
+            <h6>Autres Joueurs (Aucune Position Spécifiée)</h6>
             ";
-        // line 107
+        // line 94
         $context["hasOthers"] = false;
-        // line 108
+        // line 95
         yield "            ";
         $context['_parent'] = $context;
-        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["joueurs"]) || array_key_exists("joueurs", $context) ? $context["joueurs"] : (function () { throw new RuntimeError('Variable "joueurs" does not exist.', 108, $this->source); })()));
+        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["joueurs"]) || array_key_exists("joueurs", $context) ? $context["joueurs"] : (function () { throw new RuntimeError('Variable "joueurs" does not exist.', 95, $this->source); })()));
         foreach ($context['_seq'] as $context["_key"] => $context["joueur"]) {
-            // line 109
+            // line 96
             yield "                ";
-            if (Twig\Extension\CoreExtension::testEmpty(CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "poste", [], "any", false, false, false, 109))) {
-                // line 110
+            if (Twig\Extension\CoreExtension::testEmpty(CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "poste", [], "any", false, false, false, 96))) {
+                // line 97
                 yield "                    ";
                 $context["hasOthers"] = true;
-                // line 111
-                yield "                    <div class=\"player-item\" draggable=\"false\" 
+                // line 98
+                yield "                    <div class=\"player-item\" draggable=\"false\"
                          data-player-id=\"";
-                // line 112
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "idJoueur", [], "any", false, false, false, 112), "html", null, true);
-                yield "\" 
+                // line 99
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "idJoueur", [], "any", false, false, false, 99), "html", null, true);
+                yield "\"
                          data-position=\"Unknown\"
                          data-category=\"Unknown\"
                          data-name=\"";
-                // line 115
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::trim(((CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "nom", [], "any", false, false, false, 115) . " ") . CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "prenom", [], "any", false, false, false, 115))), "html", null, true);
+                // line 102
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::trim(((CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "nom", [], "any", false, false, false, 102) . " ") . CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "prenom", [], "any", false, false, false, 102))), "html", null, true);
                 yield "\"
                          data-img=\"";
-                // line 116
-                yield ((CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "profilePicture", [], "any", false, false, false, 116)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("/Uploads/profile_pictures/" . CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "profilePicture", [], "any", false, false, false, 116))), "html", null, true)) : ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("/Uploads/photos/default_avatar.png"), "html", null, true)));
+                // line 103
+                yield ((CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "profilePicture", [], "any", false, false, false, 103)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("/Uploads/profile_pictures/" . CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "profilePicture", [], "any", false, false, false, 103))), "html", null, true)) : ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("/Uploads/photos/default_avatar.png"), "html", null, true)));
                 yield "\"
                          data-goals=\"";
-                // line 117
-                yield ((CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "performanceJoueur", [], "any", false, false, false, 117)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "performanceJoueur", [], "any", false, false, false, 117), "butsMarques", [], "any", false, false, false, 117), "html", null, true)) : (0));
+                // line 104
+                yield ((CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "performanceJoueur", [], "any", false, false, false, 104)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "performanceJoueur", [], "any", false, false, false, 104), "butsMarques", [], "any", false, false, false, 104), "html", null, true)) : (0));
                 yield "\"
                          data-matches=\"";
-                // line 118
-                yield ((CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "performanceJoueur", [], "any", false, false, false, 118)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((int) floor((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "performanceJoueur", [], "any", false, false, false, 118), "minutesJouees", [], "any", false, false, false, 118) / 90)), "html", null, true)) : (0));
+                // line 105
+                yield ((CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "performanceJoueur", [], "any", false, false, false, 105)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((int) floor((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "performanceJoueur", [], "any", false, false, false, 105), "minutesJouees", [], "any", false, false, false, 105) / 90)), "html", null, true)) : (0));
                 yield "\"
                          data-height=\"";
-                // line 119
-                yield ((CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "taille", [], "any", false, false, false, 119)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "taille", [], "any", false, false, false, 119) . "m"), "html", null, true)) : ("N/A"));
+                // line 106
+                yield ((CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "taille", [], "any", false, false, false, 106)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "taille", [], "any", false, false, false, 106) . "m"), "html", null, true)) : ("N/A"));
+                yield "\"
+                         data-side=\"";
+                // line 107
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(((CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "teamType", [], "any", true, true, false, 107)) ? (Twig\Extension\CoreExtension::default(CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "teamType", [], "any", false, false, false, 107), "home")) : ("home")), "html", null, true);
                 yield "\">
                         <img src=\"";
-                // line 120
-                yield ((CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "profilePicture", [], "any", false, false, false, 120)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("/Uploads/profile_pictures/" . CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "profilePicture", [], "any", false, false, false, 120))), "html", null, true)) : ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("/Uploads/photos/default_avatar.png"), "html", null, true)));
-                yield "\" 
+                // line 108
+                yield ((CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "profilePicture", [], "any", false, false, false, 108)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("/Uploads/profile_pictures/" . CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "profilePicture", [], "any", false, false, false, 108))), "html", null, true)) : ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("/Uploads/photos/default_avatar.png"), "html", null, true)));
+                yield "\"
                              alt=\"";
-                // line 121
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "nom", [], "any", false, false, false, 121), "html", null, true);
-                yield "\" 
+                // line 109
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "nom", [], "any", false, false, false, 109), "html", null, true);
+                yield "\"
                              onerror=\"this.onerror=null; this.src='";
-                // line 122
+                // line 110
                 yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("/Uploads/photos/default_avatar.png"), "html", null, true);
                 yield "';\">
                         <span>
                             ";
-                // line 124
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(((CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "nom", [], "any", false, false, false, 124) . " ") . CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "prenom", [], "any", false, false, false, 124)), "html", null, true);
-                yield " (No Position)
-                            <span style=\"display: inline-block; width: 15px; height: 15px; background-color: ";
-                // line 125
-                yield (((CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "statut", [], "any", false, false, false, 125) == "Actif")) ? ("green") : ("red"));
-                yield "; margin-left: 5px; vertical-align: middle;\"></span>
+                // line 112
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::trim(((CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "nom", [], "any", false, false, false, 112) . " ") . CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "prenom", [], "any", false, false, false, 112))), "html", null, true);
+                yield " (Aucune Position)
+                            <span class=\"status-rectangle\" style=\"background-color: ";
+                // line 113
+                yield (((CoreExtension::getAttribute($this->env, $this->source, $context["joueur"], "statut", [], "any", false, false, false, 113) == "Actif")) ? ("green") : ("red"));
+                yield ";\"></span>
                         </span>
                     </div>
                 ";
             }
-            // line 129
+            // line 117
             yield "            ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_key'], $context['joueur'], $context['_parent']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 130
+        // line 118
         yield "            ";
-        if ( !(isset($context["hasOthers"]) || array_key_exists("hasOthers", $context) ? $context["hasOthers"] : (function () { throw new RuntimeError('Variable "hasOthers" does not exist.', 130, $this->source); })())) {
-            // line 131
-            yield "                <p class=\"no-players\">No players without a position.</p>
+        if ( !(isset($context["hasOthers"]) || array_key_exists("hasOthers", $context) ? $context["hasOthers"] : (function () { throw new RuntimeError('Variable "hasOthers" does not exist.', 118, $this->source); })())) {
+            // line 119
+            yield "                <p class=\"no-players\">Aucun joueur sans position.</p>
             ";
         }
-        // line 133
+        // line 121
         yield "        </div>
     </div>
     <div class=\"js-stage stage texture\">
         <div class=\"js-world world\">
             <div class=\"team js-team\">
-                <!-- Formation positions will be populated by JavaScript -->
+                <!-- Formation positions populated by JavaScript -->
             </div>
             <div class=\"terrain js-terrain\">
                 <div class=\"field field--alt\"></div>
@@ -460,7 +450,7 @@ class __TwigTemplate_047d31ca62cfca6d5495ab28638de7a3 extends Template
                 <div class=\"field__side field__side--back\"></div>
             </div>
         </div>
-        <div class=\"loading js-loading\">PLEASE WAIT...</div>
+        <div class=\"loading js-loading\">VEUILLEZ PATIENTER...</div>
     </div>
 </main>
 ";
@@ -473,7 +463,7 @@ class __TwigTemplate_047d31ca62cfca6d5495ab28638de7a3 extends Template
         yield from [];
     }
 
-    // line 167
+    // line 155
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -486,14 +476,16 @@ class __TwigTemplate_047d31ca62cfca6d5495ab28638de7a3 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "javascripts"));
 
-        // line 168
+        // line 156
         yield "    ";
         yield from $this->yieldParentBlock("javascripts", $context, $blocks);
         yield "
     <script src=\"https://cdnjs.cloudflare.com/ajax/libs/velocity/1.5.2/velocity.min.js\"></script>
     <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js\"></script>
+    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js\"></script>
+    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js\"></script>
     <script src=\"";
-        // line 171
+        // line 161
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("/vendor/js/football_layout.js"), "html", null, true);
         yield "\"></script>
 ";
@@ -527,59 +519,31 @@ class __TwigTemplate_047d31ca62cfca6d5495ab28638de7a3 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  497 => 171,  490 => 168,  477 => 167,  434 => 133,  430 => 131,  427 => 130,  421 => 129,  414 => 125,  410 => 124,  405 => 122,  401 => 121,  397 => 120,  393 => 119,  389 => 118,  385 => 117,  381 => 116,  377 => 115,  371 => 112,  368 => 111,  365 => 110,  362 => 109,  357 => 108,  355 => 107,  351 => 105,  345 => 104,  339 => 102,  336 => 101,  330 => 100,  327 => 99,  320 => 95,  314 => 94,  309 => 92,  305 => 91,  301 => 90,  297 => 89,  293 => 88,  289 => 87,  285 => 86,  281 => 85,  277 => 84,  273 => 83,  269 => 82,  259 => 80,  256 => 79,  253 => 78,  247 => 77,  244 => 76,  241 => 75,  238 => 74,  233 => 73,  230 => 72,  227 => 71,  222 => 70,  220 => 69,  215 => 68,  211 => 67,  208 => 66,  206 => 60,  201 => 58,  194 => 53,  181 => 51,  177 => 50,  171 => 47,  136 => 14,  123 => 13,  107 => 7,  102 => 6,  89 => 5,  66 => 3,  43 => 1,);
+        return array (  489 => 161,  480 => 156,  467 => 155,  424 => 121,  420 => 119,  417 => 118,  411 => 117,  404 => 113,  400 => 112,  395 => 110,  391 => 109,  387 => 108,  383 => 107,  379 => 106,  375 => 105,  371 => 104,  367 => 103,  363 => 102,  357 => 99,  354 => 98,  351 => 97,  348 => 96,  343 => 95,  341 => 94,  337 => 92,  331 => 91,  325 => 89,  322 => 88,  316 => 87,  313 => 86,  306 => 82,  300 => 81,  295 => 79,  291 => 78,  287 => 77,  283 => 76,  279 => 75,  275 => 74,  271 => 73,  267 => 72,  263 => 71,  259 => 70,  255 => 69,  251 => 68,  248 => 67,  245 => 66,  242 => 65,  236 => 64,  233 => 63,  230 => 62,  227 => 61,  222 => 60,  219 => 59,  216 => 58,  213 => 57,  208 => 56,  206 => 55,  201 => 54,  197 => 53,  194 => 52,  192 => 46,  183 => 40,  166 => 25,  153 => 23,  149 => 22,  143 => 19,  135 => 13,  122 => 12,  107 => 7,  102 => 6,  89 => 5,  66 => 3,  43 => 1,);
     }
 
     public function getSourceContext(): Source
     {
         return new Source("{% extends 'base.html.twig' %}
 
-{% block title %}Football Team Layout{% endblock %}
+{% block title %}Disposition de l'Équipe de Football{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
     <link rel=\"stylesheet\" href=\"{{ asset('/vendor/css/football_layout.css') }}\">
     <link href=\"https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap\" rel=\"stylesheet\">
-    <!-- Add Boxicons for the toast icon -->
     <link rel=\"stylesheet\" href=\"https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css\">
 {% endblock %}
 
 {% block body %}
 <main>
-    <!-- Toast Container -->
-    <div class=\"position-fixed bottom-0 end-0 p-3\" style=\"z-index: 11\">
-        <div id=\"invalidDropToast\" class=\"bs-toast toast toast-placement-ex m-2 fade hide\" role=\"alert\" aria-live=\"assertive\" aria-atomic=\"true\" data-delay=\"5000\">
-            <div class=\"toast-header\">
-                <i class=\"bx bx-bell me-2\"></i>
-                <div class=\"me-auto fw-semibold\">Erreur de Placement</div>
-                <small>Just now</small>
-                <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"toast\" aria-label=\"Close\"></button>
-            </div>
-            <div class=\"toast-body\">
-                <!-- Message will be set by JavaScript -->
-            </div>
-        </div>
-    </div>
-
     <div class=\"static\">
-        <h1 class=\"js-heading\">FOOTBALL FORMATION</h1>
-        <p class=\"js-subheading\">Drag players onto the field to build your team.<br><span style=\"font-size: 11px\">Ensure players match their position roles.</span></p>
+        <h1 class=\"js-heading\">FORMATION DE FOOTBALL</h1>
+        <p class=\"js-subheading\">Glissez les joueurs sur le terrain pour construire votre équipe.<br><span style=\"font-size: 11px\">Assurez-vous que les joueurs correspondent à leurs rôles de position.</span></p>
         
-        <!-- Add Toast Color Selector -->
-        <div class=\"toast-color-selector mb-3\">
-            <label for=\"toastColorSelect\">Toast Color:</label>
-            <select id=\"toastColorSelect\" class=\"form-select color-dropdown\">
-                <option value=\"bg-danger\" selected>Danger (Red)</option>
-                <option value=\"bg-primary\">Primary (Blue)</option>
-                <option value=\"bg-success\">Success (Green)</option>
-                <option value=\"bg-warning\">Warning (Yellow)</option>
-                <option value=\"bg-info\">Info (Cyan)</option>
-            </select>
-        </div>
-
         <div class=\"formation-selector\">
             <form method=\"get\" action=\"{{ path('football_layout') }}\">
-                <label for=\"formation\">Select Formation:</label>
+                <label for=\"formation\">Sélectionner la Formation :</label>
                 <select name=\"formation\" id=\"formationSelect\" onchange=\"this.form.submit()\">
                     {% for formation in formations %}
                         <option value=\"{{ formation }}\" {{ formation == selected_formation ? 'selected' : '' }}>{{ formation }}</option>
@@ -587,13 +551,27 @@ class __TwigTemplate_047d31ca62cfca6d5495ab28638de7a3 extends Template
                 </select>
             </form>
         </div>
+        
+        <div class=\"js-switcher switcher\">
+            <a href=\"#\" class=\"js-switch switch-btn disabled\" data-side=\"home\">DOMICILE</a>
+            <a href=\"#\" class=\"js-switch switch-btn\" data-side=\"away\">EXTÉRIEUR</a>
+        </div>
+
+        <div class=\"save-buttons\">
+            <h5>Enregistrer la Formation</h5>
+            <button class=\"js-save-btn save-btn\" data-format=\"json\">Enregistrer en JSON</button>
+        </div>
+
+        <div class=\"back-button\">
+            <a href=\"{{ path('joueur_main') }}\" class=\"save-btn\"><i class=\"bx bx-arrow-back me-1\"></i> Retour aux Joueurs</a>
+        </div>
+
         <div class=\"player-list\">
-            <h5>Available Players</h5>
-            <p>Debug: {{ joueurs|length }} players found.</p>
+            <h5>Joueurs Disponibles</h5>
 
             {% set positionMapping = {
                 'Gardien': ['GK'],
-                'Défenseur': ['RB', 'LB', 'RWB', 'LWB', 'SW'],
+                'Défenseur': ['RB', 'LB', 'RWB', 'LWB', 'SW', 'CB'],
                 'Milieu': ['DM', 'CM', 'AM', 'RM', 'LM'],
                 'Attaquant': ['RW', 'LW', 'CF', 'ST', 'SS']
             } %}
@@ -603,73 +581,75 @@ class __TwigTemplate_047d31ca62cfca6d5495ab28638de7a3 extends Template
                 {% set hasPlayers = false %}
                 {% for joueur in joueurs %}
                     {% if joueur.poste is not empty %}
+                        {% set normalizedPoste = joueur.poste|trim|upper %}
                         {% set matchesRole = false %}
                         {% for role in roles %}
-                            {% if joueur.poste|lower == role|lower %}
+                            {% if normalizedPoste == role %}
                                 {% set matchesRole = true %}
                             {% endif %}
                         {% endfor %}
                         {% if matchesRole %}
                             {% set hasPlayers = true %}
-                            <p>Debug: Player {{ joueur.nom }} - Poste: {{ joueur.poste }}, Category: {{ position }}</p>
                             <div class=\"player-item\" draggable=\"true\" 
-                                 data-player-id=\"{{ joueur.idJoueur }}\" 
-                                 data-position=\"{{ joueur.poste|trim }}\"
+                                 data-player-id=\"{{ joueur.idJoueur }}\"
+                                 data-position=\"{{ normalizedPoste }}\"
                                  data-category=\"{{ position|trim }}\"
                                  data-name=\"{{ (joueur.nom ~ ' ' ~ joueur.prenom)|trim }}\"
                                  data-img=\"{{ joueur.profilePicture ? asset('/Uploads/profile_pictures/' ~ joueur.profilePicture) : asset('/Uploads/photos/default_avatar.png') }}\"
                                  data-goals=\"{{ joueur.performanceJoueur ? joueur.performanceJoueur.butsMarques : 0 }}\"
                                  data-matches=\"{{ joueur.performanceJoueur ? joueur.performanceJoueur.minutesJouees // 90 : 0 }}\"
-                                 data-height=\"{{ joueur.taille ? joueur.taille ~ 'm' : 'N/A' }}\">
+                                 data-height=\"{{ joueur.taille ? joueur.taille ~ 'm' : 'N/A' }}\"
+                                 data-side=\"{{ joueur.teamType|default('home') }}\">
                                 <img src=\"{{ joueur.profilePicture ? asset('/Uploads/profile_pictures/' ~ joueur.profilePicture) : asset('/Uploads/photos/default_avatar.png') }}\" 
-                                     alt=\"{{ joueur.nom }}\" 
+                                     alt=\"{{ joueur.nom }}\"
                                      onerror=\"this.onerror=null; this.src='{{ asset('/Uploads/photos/default_avatar.png') }}';\">
                                 <span>
-                                    {{ joueur.nom ~ ' ' ~ joueur.prenom }} ({{ joueur.poste }})
-                                    <span style=\"display: inline-block; width: 15px; height: 15px; background-color: {{ joueur.statut == 'Actif' ? 'green' : 'red' }}; margin-left: 5px; vertical-align: middle;\"></span>
+                                    {{ (joueur.nom ~ ' ' ~ joueur.prenom)|trim }} ({{ joueur.poste }})
+                                    <span class=\"status-rectangle\" style=\"background-color: {{ joueur.statut == 'Actif' ? 'green' : 'red' }};\"></span>
                                 </span>
                             </div>
                         {% endif %}
                     {% endif %}
                 {% endfor %}
                 {% if not hasPlayers %}
-                    <p class=\"no-players\">No {{ position|lower }}s available.</p>
+                    <p class=\"no-players\">Aucun {{ position|lower }} disponible.</p>
                 {% endif %}
             {% endfor %}
 
-            <h6>Other Players (No Position Specified)</h6>
+            <h6>Autres Joueurs (Aucune Position Spécifiée)</h6>
             {% set hasOthers = false %}
             {% for joueur in joueurs %}
                 {% if joueur.poste is empty %}
                     {% set hasOthers = true %}
-                    <div class=\"player-item\" draggable=\"false\" 
-                         data-player-id=\"{{ joueur.idJoueur }}\" 
+                    <div class=\"player-item\" draggable=\"false\"
+                         data-player-id=\"{{ joueur.idJoueur }}\"
                          data-position=\"Unknown\"
                          data-category=\"Unknown\"
                          data-name=\"{{ (joueur.nom ~ ' ' ~ joueur.prenom)|trim }}\"
                          data-img=\"{{ joueur.profilePicture ? asset('/Uploads/profile_pictures/' ~ joueur.profilePicture) : asset('/Uploads/photos/default_avatar.png') }}\"
                          data-goals=\"{{ joueur.performanceJoueur ? joueur.performanceJoueur.butsMarques : 0 }}\"
                          data-matches=\"{{ joueur.performanceJoueur ? joueur.performanceJoueur.minutesJouees // 90 : 0 }}\"
-                         data-height=\"{{ joueur.taille ? joueur.taille ~ 'm' : 'N/A' }}\">
-                        <img src=\"{{ joueur.profilePicture ? asset('/Uploads/profile_pictures/' ~ joueur.profilePicture) : asset('/Uploads/photos/default_avatar.png') }}\" 
-                             alt=\"{{ joueur.nom }}\" 
+                         data-height=\"{{ joueur.taille ? joueur.taille ~ 'm' : 'N/A' }}\"
+                         data-side=\"{{ joueur.teamType|default('home') }}\">
+                        <img src=\"{{ joueur.profilePicture ? asset('/Uploads/profile_pictures/' ~ joueur.profilePicture) : asset('/Uploads/photos/default_avatar.png') }}\"
+                             alt=\"{{ joueur.nom }}\"
                              onerror=\"this.onerror=null; this.src='{{ asset('/Uploads/photos/default_avatar.png') }}';\">
                         <span>
-                            {{ joueur.nom ~ ' ' ~ joueur.prenom }} (No Position)
-                            <span style=\"display: inline-block; width: 15px; height: 15px; background-color: {{ joueur.statut == 'Actif' ? 'green' : 'red' }}; margin-left: 5px; vertical-align: middle;\"></span>
+                            {{ (joueur.nom ~ ' ' ~ joueur.prenom)|trim }} (Aucune Position)
+                            <span class=\"status-rectangle\" style=\"background-color: {{ joueur.statut == 'Actif' ? 'green' : 'red' }};\"></span>
                         </span>
                     </div>
                 {% endif %}
             {% endfor %}
             {% if not hasOthers %}
-                <p class=\"no-players\">No players without a position.</p>
+                <p class=\"no-players\">Aucun joueur sans position.</p>
             {% endif %}
         </div>
     </div>
     <div class=\"js-stage stage texture\">
         <div class=\"js-world world\">
             <div class=\"team js-team\">
-                <!-- Formation positions will be populated by JavaScript -->
+                <!-- Formation positions populated by JavaScript -->
             </div>
             <div class=\"terrain js-terrain\">
                 <div class=\"field field--alt\"></div>
@@ -693,7 +673,7 @@ class __TwigTemplate_047d31ca62cfca6d5495ab28638de7a3 extends Template
                 <div class=\"field__side field__side--back\"></div>
             </div>
         </div>
-        <div class=\"loading js-loading\">PLEASE WAIT...</div>
+        <div class=\"loading js-loading\">VEUILLEZ PATIENTER...</div>
     </div>
 </main>
 {% endblock %}
@@ -702,6 +682,8 @@ class __TwigTemplate_047d31ca62cfca6d5495ab28638de7a3 extends Template
     {{ parent() }}
     <script src=\"https://cdnjs.cloudflare.com/ajax/libs/velocity/1.5.2/velocity.min.js\"></script>
     <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js\"></script>
+    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js\"></script>
+    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js\"></script>
     <script src=\"{{ asset('/vendor/js/football_layout.js') }}\"></script>
 {% endblock %}", "joueur/football_layout.html.twig", "C:\\Users\\Hazem Mrad\\Desktop\\Web2\\integration\\New folder - Copy\\New folder\\matchupz-web-0\\templates\\joueur\\football_layout.html.twig");
     }

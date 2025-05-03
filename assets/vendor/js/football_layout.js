@@ -8,53 +8,348 @@ let $players = null;
 let $heading = null;
 let $subHeading = null;
 let $loading = null;
+let $switchBtn = null;
+let $switcher = null;
+let $saveBtn = null;
 
-// Formation configurations (x, y coordinates in the 3D field space: x ranges from -336 to 336, y from -420 to 420)
 const formations = {
     '4-4-2': [
         { role: 'Gardien', roleDetail: 'GK', x: 0, y: 410 },
-        { role: 'Défenseur', roleDetail: 'RB', x: -200, y: 180 },
-        { role: 'Défenseur', roleDetail: 'CB', x: -70, y: 180 },
-        { role: 'Défenseur', roleDetail: 'CB', x: 70, y: 180 },
-        { role: 'Défenseur', roleDetail: 'LB', x: 200, y: 180 },
-        { role: 'Milieu', roleDetail: 'RM', x: -200, y: 50 },
-        { role: 'Milieu', roleDetail: 'CM', x: -70, y: 50 },
-        { role: 'Milieu', roleDetail: 'CM', x: 70, y: 50 },
-        { role: 'Milieu', roleDetail: 'LM', x: 200, y: 50 },
-        { role: 'Attaquant', roleDetail: 'ST', x: -70, y: -190 },
-        { role: 'Attaquant', roleDetail: 'ST', x: 70, y: -190 }
+        { role: 'Défenseur', roleDetail: 'RB', x: -200, y: 300 },
+        { role: 'Défenseur', roleDetail: 'CB', x: -70, y: 300 },
+        { role: 'Défenseur', roleDetail: 'CB', x: 70, y: 300 },
+        { role: 'Défenseur', roleDetail: 'LB', x: 200, y: 300 },
+        { role: 'Milieu', roleDetail: 'RM', x: -200, y: 80 },
+        { role: 'Milieu', roleDetail: 'CM', x: -70, y: 150 },
+        { role: 'Milieu', roleDetail: 'CM', x: 70, y: 150 },
+        { role: 'Milieu', roleDetail: 'LM', x: 200, y: 80 },
+        { role: 'Attaquant', roleDetail: 'ST', x: -70, y: 20 },
+        { role: 'Attaquant', roleDetail: 'ST', x: 70, y: 20 }
     ],
     '4-3-3': [
         { role: 'Gardien', roleDetail: 'GK', x: 0, y: 410 },
-        { role: 'Défenseur', roleDetail: 'RB', x: -200, y: 180 },
-        { role: 'Défenseur', roleDetail: 'CB', x: -70, y: 180 },
-        { role: 'Défenseur', roleDetail: 'CB', x: 70, y: 180 },
-        { role: 'Défenseur', roleDetail: 'LB', x: 200, y: 180 },
-        { role: 'Milieu', roleDetail: 'CM', x: -100, y: 50 },
-        { role: 'Milieu', roleDetail: 'CM', x: 0, y: 50 },
-        { role: 'Milieu', roleDetail: 'CM', x: 100, y: 50 },
-        { role: 'Attaquant', roleDetail: 'LW', x: -200, y: -190 },
-        { role: 'Attaquant', roleDetail: 'ST', x: 0, y: -190 },
-        { role: 'Attaquant', roleDetail: 'RW', x: 200, y: -190 }
+        { role: 'Défenseur', roleDetail: 'RB', x: -200, y: 300 },
+        { role: 'Défenseur', roleDetail: 'CB', x: -70, y: 300 },
+        { role: 'Défenseur', roleDetail: 'CB', x: 70, y: 300 },
+        { role: 'Défenseur', roleDetail: 'LB', x: 200, y: 300 },
+        { role: 'Milieu', roleDetail: 'CM', x: -100, y: 150 },
+        { role: 'Milieu', roleDetail: 'CM', x: 0, y: 150 },
+        { role: 'Milieu', roleDetail: 'CM', x: 100, y: 150 },
+        { role: 'Attaquant', roleDetail: 'LW', x: -200, y: 20 },
+        { role: 'Attaquant', roleDetail: 'ST', x: 0, y: 20 },
+        { role: 'Attaquant', roleDetail: 'RW', x: 200, y: 20 }
     ],
     '3-5-2': [
         { role: 'Gardien', roleDetail: 'GK', x: 0, y: 410 },
-        { role: 'Défenseur', roleDetail: 'CB', x: -100, y: 180 },
-        { role: 'Défenseur', roleDetail: 'CB', x: 0, y: 180 },
-        { role: 'Défenseur', roleDetail: 'CB', x: 100, y: 180 },
-        { role: 'Milieu', roleDetail: 'RM', x: -250, y: 100 },
-        { role: 'Milieu', roleDetail: 'CM', x: -100, y: 50 },
-        { role: 'Milieu', roleDetail: 'CM', x: 0, y: 50 },
-        { role: 'Milieu', roleDetail: 'CM', x: 100, y: 50 },
-        { role: 'Milieu', roleDetail: 'LM', x: 250, y: 100 },
-        { role: 'Attaquant', roleDetail: 'ST', x: -70, y: -190 },
-        { role: 'Attaquant', roleDetail: 'ST', x: 70, y: -190 }
+        { role: 'Défenseur', roleDetail: 'CB', x: -100, y: 300 },
+        { role: 'Défenseur', roleDetail: 'CB', x: 0, y: 300 },
+        { role: 'Défenseur', roleDetail: 'CB', x: 100, y: 300 },
+        { role: 'Milieu', roleDetail: 'RM', x: -250, y: 120 },
+        { role: 'Milieu', roleDetail: 'CM', x: -100, y: 150 },
+        { role: 'Milieu', roleDetail: 'CM', x: 0, y: 150 },
+        { role: 'Milieu', roleDetail: 'CM', x: 100, y: 150 },
+        { role: 'Milieu', roleDetail: 'LM', x: 250, y: 120 },
+        { role: 'Attaquant', roleDetail: 'ST', x: -70, y: 20 },
+        { role: 'Attaquant', roleDetail: 'ST', x: 70, y: 20 }
+    ],
+    '3-1-4-2': [
+        { role: 'Gardien', roleDetail: 'GK', x: 0, y: 410 },
+        { role: 'Défenseur', roleDetail: 'CB', x: -100, y: 300 },
+        { role: 'Défenseur', roleDetail: 'CB', x: 0, y: 300 },
+        { role: 'Défenseur', roleDetail: 'CB', x: 100, y: 300 },
+        { role: 'Milieu', roleDetail: 'DM', x: 0, y: 220 },
+        { role: 'Milieu', roleDetail: 'RM', x: -250, y: 120 },
+        { role: 'Milieu', roleDetail: 'CM', x: -100, y: 120 },
+        { role: 'Milieu', roleDetail: 'CM', x: 100, y: 120 },
+        { role: 'Milieu', roleDetail: 'LM', x: 250, y: 120 },
+        { role: 'Attaquant', roleDetail: 'ST', x: -70, y: 20 },
+        { role: 'Attaquant', roleDetail: 'ST', x: 70, y: 20 }
+    ],
+    '3-4-1-2': [
+        { role: 'Gardien', roleDetail: 'GK', x: 0, y: 410 },
+        { role: 'Défenseur', roleDetail: 'CB', x: -100, y: 300 },
+        { role: 'Défenseur', roleDetail: 'CB', x: 0, y: 300 },
+        { role: 'Défenseur', roleDetail: 'CB', x: 100, y: 300 },
+        { role: 'Milieu', roleDetail: 'RM', x: -250, y: 150 },
+        { role: 'Milieu', roleDetail: 'CM', x: -100, y: 150 },
+        { role: 'Milieu', roleDetail: 'CM', x: 100, y: 150 },
+        { role: 'Milieu', roleDetail: 'LM', x: 250, y: 150 },
+        { role: 'Milieu', roleDetail: 'AM', x: 0, y: 80 },
+        { role: 'Attaquant', roleDetail: 'ST', x: -70, y: 20 },
+        { role: 'Attaquant', roleDetail: 'ST', x: 70, y: 20 }
+    ],
+    '3-4-2-1': [
+        { role: 'Gardien', roleDetail: 'GK', x: 0, y: 410 },
+        { role: 'Défenseur', roleDetail: 'CB', x: -100, y: 300 },
+        { role: 'Défenseur', roleDetail: 'CB', x: 0, y: 300 },
+        { role: 'Défenseur', roleDetail: 'CB', x: 100, y: 300 },
+        { role: 'Milieu', roleDetail: 'RM', x: -250, y: 150 },
+        { role: 'Milieu', roleDetail: 'CM', x: -100, y: 150 },
+        { role: 'Milieu', roleDetail: 'CM', x: 100, y: 150 },
+        { role: 'Milieu', roleDetail: 'LM', x: 250, y: 150 },
+        { role: 'Attaquant', roleDetail: 'SS', x: -100, y: 80 },
+        { role: 'Attaquant', roleDetail: 'SS', x: 100, y: 80 },
+        { role: 'Attaquant', roleDetail: 'ST', x: 0, y: 20 }
+    ],
+    '3-4-3': [
+        { role: 'Gardien', roleDetail: 'GK', x: 0, y: 410 },
+        { role: 'Défenseur', roleDetail: 'CB', x: -100, y: 300 },
+        { role: 'Défenseur', roleDetail: 'CB', x: 0, y: 300 },
+        { role: 'Défenseur', roleDetail: 'CB', x: 100, y: 300 },
+        { role: 'Milieu', roleDetail: 'RM', x: -250, y: 150 },
+        { role: 'Milieu', roleDetail: 'CM', x: -100, y: 150 },
+        { role: 'Milieu', roleDetail: 'CM', x: 100, y: 150 },
+        { role: 'Milieu', roleDetail: 'LM', x: 250, y: 150 },
+        { role: 'Attaquant', roleDetail: 'LW', x: -200, y: 20 },
+        { role: 'Attaquant', roleDetail: 'ST', x: 0, y: 20 },
+        { role: 'Attaquant', roleDetail: 'RW', x: 200, y: 20 }
+    ],
+    '3-5-1-1': [
+        { role: 'Gardien', roleDetail: 'GK', x: 0, y: 410 },
+        { role: 'Défenseur', roleDetail: 'CB', x: -100, y: 300 },
+        { role: 'Défenseur', roleDetail: 'CB', x: 0, y: 300 },
+        { role: 'Défenseur', roleDetail: 'CB', x: 100, y: 300 },
+        { role: 'Milieu', roleDetail: 'RM', x: -250, y: 120 },
+        { role: 'Milieu', roleDetail: 'CM', x: -100, y: 150 },
+        { role: 'Milieu', roleDetail: 'CM', x: 0, y: 150 },
+        { role: 'Milieu', roleDetail: 'CM', x: 100, y: 150 },
+        { role: 'Milieu', roleDetail: 'LM', x: 250, y: 120 },
+        { role: 'Milieu', roleDetail: 'AM', x: 0, y: 80 },
+        { role: 'Attaquant', roleDetail: 'ST', x: 0, y: 20 }
+    ],
+    '4-1-2-1-2': [
+        { role: 'Gardien', roleDetail: 'GK', x: 0, y: 410 },
+        { role: 'Défenseur', roleDetail: 'RB', x: -200, y: 300 },
+        { role: 'Défenseur', roleDetail: 'CB', x: -70, y: 300 },
+        { role: 'Défenseur', roleDetail: 'CB', x: 70, y: 300 },
+        { role: 'Défenseur', roleDetail: 'LB', x: 200, y: 300 },
+        { role: 'Milieu', roleDetail: 'DM', x: 0, y: 220 },
+        { role: 'Milieu', roleDetail: 'CM', x: -100, y: 150 },
+        { role: 'Milieu', roleDetail: 'CM', x: 100, y: 150 },
+        { role: 'Milieu', roleDetail: 'AM', x: 0, y: 80 },
+        { role: 'Attaquant', roleDetail: 'ST', x: -70, y: 20 },
+        { role: 'Attaquant', roleDetail: 'ST', x: 70, y: 20 }
+    ],
+    '4-1-2-3': [
+        { role: 'Gardien', roleDetail: 'GK', x: 0, y: 410 },
+        { role: 'Défenseur', roleDetail: 'RB', x: -200, y: 300 },
+        { role: 'Défenseur', roleDetail: 'CB', x: -70, y: 300 },
+        { role: 'Défenseur', roleDetail: 'CB', x: 70, y: 300 },
+        { role: 'Défenseur', roleDetail: 'LB', x: 200, y: 300 },
+        { role: 'Milieu', roleDetail: 'DM', x: 0, y: 220 },
+        { role: 'Milieu', roleDetail: 'CM', x: -100, y: 150 },
+        { role: 'Milieu', roleDetail: 'CM', x: 100, y: 150 },
+        { role: 'Attaquant', roleDetail: 'LW', x: -200, y: 20 },
+        { role: 'Attaquant', roleDetail: 'ST', x: 0, y: 20 },
+        { role: 'Attaquant', roleDetail: 'RW', x: 200, y: 20 }
+    ],
+    '4-1-3-2': [
+        { role: 'Gardien', roleDetail: 'GK', x: 0, y: 410 },
+        { role: 'Défenseur', roleDetail: 'RB', x: -200, y: 300 },
+        { role: 'Défenseur', roleDetail: 'CB', x: -70, y: 300 },
+        { role: 'Défenseur', roleDetail: 'CB', x: 70, y: 300 },
+        { role: 'Défenseur', roleDetail: 'LB', x: 200, y: 300 },
+        { role: 'Milieu', roleDetail: 'DM', x: 0, y: 220 },
+        { role: 'Milieu', roleDetail: 'CM', x: -150, y: 150 },
+        { role: 'Milieu', roleDetail: 'CM', x: 0, y: 150 },
+        { role: 'Milieu', roleDetail: 'CM', x: 150, y: 150 },
+        { role: 'Attaquant', roleDetail: 'ST', x: -70, y: 20 },
+        { role: 'Attaquant', roleDetail: 'ST', x: 70, y: 20 }
+    ],
+    '4-1-4-1': [
+        { role: 'Gardien', roleDetail: 'GK', x: 0, y: 410 },
+        { role: 'Défenseur', roleDetail: 'RB', x: -200, y: 300 },
+        { role: 'Défenseur', roleDetail: 'CB', x: -70, y: 300 },
+        { role: 'Défenseur', roleDetail: 'CB', x: 70, y: 300 },
+        { role: 'Défenseur', roleDetail: 'LB', x: 200, y: 300 },
+        { role: 'Milieu', roleDetail: 'DM', x: 0, y: 220 },
+        { role: 'Milieu', roleDetail: 'RM', x: -250, y: 120 },
+        { role: 'Milieu', roleDetail: 'CM', x: -100, y: 120 },
+        { role: 'Milieu', roleDetail: 'CM', x: 100, y: 120 },
+        { role: 'Milieu', roleDetail: 'LM', x: 250, y: 120 },
+        { role: 'Attaquant', roleDetail: 'ST', x: 0, y: 20 }
+    ],
+    '4-2-1-3': [
+        { role: 'Gardien', roleDetail: 'GK', x: 0, y: 410 },
+        { role: 'Défenseur', roleDetail: 'RB', x: -200, y: 300 },
+        { role: 'Défenseur', roleDetail: 'CB', x: -70, y: 300 },
+        { role: 'Défenseur', roleDetail: 'CB', x: 70, y: 300 },
+        { role: 'Défenseur', roleDetail: 'LB', x: 200, y: 300 },
+        { role: 'Milieu', roleDetail: 'DM', x: -100, y: 200 },
+        { role: 'Milieu', roleDetail: 'DM', x: 100, y: 200 },
+        { role: 'Milieu', roleDetail: 'AM', x: 0, y: 120 },
+        { role: 'Attaquant', roleDetail: 'LW', x: -200, y: 20 },
+        { role: 'Attaquant', roleDetail: 'ST', x: 0, y: 20 },
+        { role: 'Attaquant', roleDetail: 'RW', x: 200, y: 20 }
+    ],
+    '4-2-2-2': [
+        { role: 'Gardien', roleDetail: 'GK', x: 0, y: 410 },
+        { role: 'Défenseur', roleDetail: 'RB', x: -200, y: 300 },
+        { role: 'Défenseur', roleDetail: 'CB', x: -70, y: 300 },
+        { role: 'Défenseur', roleDetail: 'CB', x: 70, y: 300 },
+        { role: 'Défenseur', roleDetail: 'LB', x: 200, y: 300 },
+        { role: 'Milieu', roleDetail: 'DM', x: -100, y: 200 },
+        { role: 'Milieu', roleDetail: 'DM', x: 100, y: 200 },
+        { role: 'Milieu', roleDetail: 'AM', x: -100, y: 120 },
+        { role: 'Milieu', roleDetail: 'AM', x: 100, y: 120 },
+        { role: 'Attaquant', roleDetail: 'ST', x: -70, y: 20 },
+        { role: 'Attaquant', roleDetail: 'ST', x: 70, y: 20 }
+    ],
+    '4-2-3-1': [
+        { role: 'Gardien', roleDetail: 'GK', x: 0, y: 410 },
+        { role: 'Défenseur', roleDetail: 'RB', x: -200, y: 300 },
+        { role: 'Défenseur', roleDetail: 'CB', x: -70, y: 300 },
+        { role: 'Défenseur', roleDetail: 'CB', x: 70, y: 300 },
+        { role: 'Défenseur', roleDetail: 'LB', x: 200, y: 300 },
+        { role: 'Milieu', roleDetail: 'DM', x: -100, y: 200 },
+        { role: 'Milieu', roleDetail: 'DM', x: 100, y: 200 },
+        { role: 'Milieu', roleDetail: 'AM', x: -150, y: 120 },
+        { role: 'Milieu', roleDetail: 'AM', x: 0, y: 120 },
+        { role: 'Milieu', roleDetail: 'AM', x: 150, y: 120 },
+        { role: 'Attaquant', roleDetail: 'ST', x: 0, y: 20 }
+    ],
+    '4-2-4': [
+        { role: 'Gardien', roleDetail: 'GK', x: 0, y: 410 },
+        { role: 'Défenseur', roleDetail: 'RB', x: -200, y: 300 },
+        { role: 'Défenseur', roleDetail: 'CB', x: -70, y: 300 },
+        { role: 'Défenseur', roleDetail: 'CB', x: 70, y: 300 },
+        { role: 'Défenseur', roleDetail: 'LB', x: 200, y: 300 },
+        { role: 'Milieu', roleDetail: 'CM', x: -100, y: 150 },
+        { role: 'Milieu', roleDetail: 'CM', x: 100, y: 150 },
+        { role: 'Attaquant', roleDetail: 'LW', x: -250, y: 20 },
+        { role: 'Attaquant', roleDetail: 'ST', x: -70, y: 20 },
+        { role: 'Attaquant', roleDetail: 'ST', x: 70, y: 20 },
+        { role: 'Attaquant', roleDetail: 'RW', x: 250, y: 20 }
+    ],
+    '4-3-1-2': [
+        { role: 'Gardien', roleDetail: 'GK', x: 0, y: 410 },
+        { role: 'Défenseur', roleDetail: 'RB', x: -200, y: 300 },
+        { role: 'Défenseur', roleDetail: 'CB', x: -70, y: 300 },
+        { role: 'Défenseur', roleDetail: 'CB', x: 70, y: 300 },
+        { role: 'Défenseur', roleDetail: 'LB', x: 200, y: 300 },
+        { role: 'Milieu', roleDetail: 'CM', x: -150, y: 150 },
+        { role: 'Milieu', roleDetail: 'CM', x: 0, y: 150 },
+        { role: 'Milieu', roleDetail: 'CM', x: 150, y: 150 },
+        { role: 'Milieu', roleDetail: 'AM', x: 0, y: 80 },
+        { role: 'Attaquant', roleDetail: 'ST', x: -70, y: 20 },
+        { role: 'Attaquant', roleDetail: 'ST', x: 70, y: 20 }
+    ],
+    '4-3-2-1': [
+        { role: 'Gardien', roleDetail: 'GK', x: 0, y: 410 },
+        { role: 'Défenseur', roleDetail: 'RB', x: -200, y: 300 },
+        { role: 'Défenseur', roleDetail: 'CB', x: -70, y: 300 },
+        { role: 'Défenseur', roleDetail: 'CB', x: 70, y: 300 },
+        { role: 'Défenseur', roleDetail: 'LB', x: 200, y: 300 },
+        { role: 'Milieu', roleDetail: 'CM', x: -150, y: 150 },
+        { role: 'Milieu', roleDetail: 'CM', x: 0, y: 150 },
+        { role: 'Milieu', roleDetail: 'CM', x: 150, y: 150 },
+        { role: 'Attaquant', roleDetail: 'SS', x: -100, y: 80 },
+        { role: 'Attaquant', roleDetail: 'SS', x: 100, y: 80 },
+        { role: 'Attaquant', roleDetail: 'ST', x: 0, y: 20 }
+    ],
+    '4-4-1-1': [
+        { role: 'Gardien', roleDetail: 'GK', x: 0, y: 410 },
+        { role: 'Défenseur', roleDetail: 'RB', x: -200, y: 300 },
+        { role: 'Défenseur', roleDetail: 'CB', x: -70, y: 300 },
+        { role: 'Défenseur', roleDetail: 'CB', x: 70, y: 300 },
+        { role: 'Défenseur', roleDetail: 'LB', x: 200, y: 300 },
+        { role: 'Milieu', roleDetail: 'RM', x: -250, y: 120 },
+        { role: 'Milieu', roleDetail: 'CM', x: -100, y: 120 },
+        { role: 'Milieu', roleDetail: 'CM', x: 100, y: 120 },
+        { role: 'Milieu', roleDetail: 'LM', x: 250, y: 120 },
+        { role: 'Attaquant', roleDetail: 'SS', x: 0, y: 80 },
+        { role: 'Attaquant', roleDetail: 'ST', x: 0, y: 20 }
+    ],
+    '4-5-1': [
+        { role: 'Gardien', roleDetail: 'GK', x: 0, y: 410 },
+        { role: 'Défenseur', roleDetail: 'RB', x: -200, y: 300 },
+        { role: 'Défenseur', roleDetail: 'CB', x: -70, y: 300 },
+        { role: 'Défenseur', roleDetail: 'CB', x: 70, y: 300 },
+        { role: 'Défenseur', roleDetail: 'LB', x: 200, y: 300 },
+        { role: 'Milieu', roleDetail: 'RM', x: -250, y: 120 },
+        { role: 'Milieu', roleDetail: 'CM', x: -150, y: 120 },
+        { role: 'Milieu', roleDetail: 'CM', x: 0, y: 120 },
+        { role: 'Milieu', roleDetail: 'CM', x: 150, y: 120 },
+        { role: 'Milieu', roleDetail: 'LM', x: 250, y: 120 },
+        { role: 'Attaquant', roleDetail: 'ST', x: 0, y: 20 }
+    ],
+    '5-2-1-2': [
+        { role: 'Gardien', roleDetail: 'GK', x: 0, y: 410 },
+        { role: 'Défenseur', roleDetail: 'CB', x: -150, y: 300 },
+        { role: 'Défenseur', roleDetail: 'CB', x: -50, y: 300 },
+        { role: 'Défenseur', roleDetail: 'CB', x: 50, y: 300 },
+        { role: 'Défenseur', roleDetail: 'RWB', x: -250, y: 250 },
+        { role: 'Défenseur', roleDetail: 'LWB', x: 250, y: 250 },
+        { role: 'Milieu', roleDetail: 'CM', x: -100, y: 150 },
+        { role: 'Milieu', roleDetail: 'CM', x: 100, y: 150 },
+        { role: 'Milieu', roleDetail: 'AM', x: 0, y: 80 },
+        { role: 'Attaquant', roleDetail: 'ST', x: -70, y: 20 },
+        { role: 'Attaquant', roleDetail: 'ST', x: 70, y: 20 }
+    ],
+    '5-2-2-1': [
+        { role: 'Gardien', roleDetail: 'GK', x: 0, y: 410 },
+        { role: 'Défenseur', roleDetail: 'CB', x: -150, y: 300 },
+        { role: 'Défenseur', roleDetail: 'CB', x: -50, y: 300 },
+        { role: 'Défenseur', roleDetail: 'CB', x: 50, y: 300 },
+        { role: 'Défenseur', roleDetail: 'RWB', x: -250, y: 250 },
+        { role: 'Défenseur', roleDetail: 'LWB', x: 250, y: 250 },
+        { role: 'Milieu', roleDetail: 'CM', x: -100, y: 150 },
+        { role: 'Milieu', roleDetail: 'CM', x: 100, y: 150 },
+        { role: 'Attaquant', roleDetail: 'SS', x: -100, y: 80 },
+        { role: 'Attaquant', roleDetail: 'SS', x: 100, y: 80 },
+        { role: 'Attaquant', roleDetail: 'ST', x: 0, y: 20 }
+    ],
+    '5-2-3': [
+        { role: 'Gardien', roleDetail: 'GK', x: 0, y: 410 },
+        { role: 'Défenseur', roleDetail: 'CB', x: -150, y: 300 },
+        { role: 'Défenseur', roleDetail: 'CB', x: -50, y: 300 },
+        { role: 'Défenseur', roleDetail: 'CB', x: 50, y: 300 },
+        { role: 'Défenseur', roleDetail: 'RWB', x: -250, y: 250 },
+        { role: 'Défenseur', roleDetail: 'LWB', x: 250, y: 250 },
+        { role: 'Milieu', roleDetail: 'CM', x: -100, y: 150 },
+        { role: 'Milieu', roleDetail: 'CM', x: 100, y: 150 },
+        { role: 'Attaquant', roleDetail: 'LW', x: -200, y: 20 },
+        { role: 'Attaquant', roleDetail: 'ST', x: 0, y: 20 },
+        { role: 'Attaquant', roleDetail: 'RW', x: 200, y: 20 }
+    ],
+    '5-3-2': [
+        { role: 'Gardien', roleDetail: 'GK', x: 0, y: 410 },
+        { role: 'Défenseur', roleDetail: 'CB', x: -150, y: 300 },
+        { role: 'Défenseur', roleDetail: 'CB', x: -50, y: 300 },
+        { role: 'Défenseur', roleDetail: 'CB', x: 50, y: 300 },
+        { role: 'Défenseur', roleDetail: 'RWB', x: -250, y: 250 },
+        { role: 'Défenseur', roleDetail: 'LWB', x: 250, y: 250 },
+        { role: 'Milieu', roleDetail: 'CM', x: -150, y: 150 },
+        { role: 'Milieu', roleDetail: 'CM', x: 0, y: 150 },
+        { role: 'Milieu', roleDetail: 'CM', x: 150, y: 150 },
+        { role: 'Attaquant', roleDetail: 'ST', x: -70, y: 20 },
+        { role: 'Attaquant', roleDetail: 'ST', x: 70, y: 20 }
+    ],
+    '5-4-1': [
+        { role: 'Gardien', roleDetail: 'GK', x: 0, y: 410 },
+        { role: 'Défenseur', roleDetail: 'CB', x: -150, y: 300 },
+        { role: 'Défenseur', roleDetail: 'CB', x: -50, y: 300 },
+        { role: 'Défenseur', roleDetail: 'CB', x: 50, y: 300 },
+        { role: 'Défenseur', roleDetail: 'RWB', x: -250, y: 250 },
+        { role: 'Défenseur', roleDetail: 'LWB', x: 250, y: 250 },
+        { role: 'Milieu', roleDetail: 'RM', x: -250, y: 120 },
+        { role: 'Milieu', roleDetail: 'CM', x: -100, y: 120 },
+        { role: 'Milieu', roleDetail: 'CM', x: 100, y: 120 },
+        { role: 'Milieu', roleDetail: 'LM', x: 250, y: 120 },
+        { role: 'Attaquant', roleDetail: 'ST', x: 0, y: 20 }
     ]
 };
 
 const state = {
     selectedFormation: document.getElementById('formationSelect') ? document.getElementById('formationSelect').value : '4-4-2',
-    assignedPlayers: new Map(), // Tracks player assignments
+    assignedPlayers: new Map(),
+    home: true,
+    curSide: function() {
+        return this.home ? 'home' : 'away';
+    },
+    swapSides: function() {
+        this.home = !this.home;
+    }
 };
 
 const dom = {
@@ -76,31 +371,42 @@ const dom = {
     },
     displayNone: function($el) {
         $el.css('display', 'none');
+    },
+    updatePlayerListVisibility: function() {
+        $('.player-item').each(function() {
+            const $player = $(this);
+            const playerSide = $player.data('side');
+            if (playerSide === state.curSide()) {
+                $player.show();
+            } else {
+                $player.hide();
+            }
+        });
     }
 };
 
 const events = {
     attachAll: function() {
-        // Helper function to log raw bytes of a string
-        function logStringBytes(str, label) {
-            const encoder = new TextEncoder();
-            const bytes = encoder.encode(str);
-            console.log(`${label} bytes:`, Array.from(bytes).map(b => b.toString(16).padStart(2, '0')).join(' '));
-        }
+        const validPositions = {
+            'gk': ['gk'],
+            'rb': ['rb'],
+            'lb': ['lb'],
+            'cb': ['cb'],
+            'rwb': ['rwb'],
+            'lwb': ['lwb'],
+            'sw': ['sw'],
+            'dm': ['dm'],
+            'cm': ['cm'],
+            'am': ['am'],
+            'rm': ['rm'],
+            'lm': ['lm'],
+            'rw': ['rw'],
+            'lw': ['lw'],
+            'cf': ['cf'],
+            'st': ['st', 'cf', 'ss'],
+            'ss': ['ss']
+        };
 
-        // Initialize the toast
-        const toastElement = document.getElementById('invalidDropToast');
-        if (!toastElement) {
-            console.error('Toast element #invalidDropToast not found in the DOM');
-            return;
-        }
-        const toast = new bootstrap.Toast(toastElement, {
-            autohide: true,
-            delay: 5000 // Hide after 5 seconds
-        });
-        console.log('Toast initialized:', toast);
-
-        // Drag-and-drop setup
         $('.player-item').on('dragstart', function(e) {
             const playerId = $(this).data('player-id');
             e.originalEvent.dataTransfer.setData('text/plain', playerId);
@@ -120,62 +426,33 @@ const events = {
                 return;
             }
 
-            const targetRole = $target.data('role') || '';
             const targetRoleDetail = $target.data('role-detail') || '';
             const playerPosition = $playerItem.data('position') || '';
-            const playerCategory = $playerItem.data('category') || '';
+            const playerSide = $playerItem.data('side');
+
+            if (playerSide !== state.curSide()) {
+                $target.removeClass('drag-over');
+                e.originalEvent.dataTransfer.dropEffect = 'none';
+                return;
+            }
+
+            const normalizedTargetRoleDetail = targetRoleDetail.toLowerCase().trim();
+            const normalizedPlayerPosition = playerPosition.toLowerCase().trim();
+
+            const isValidPosition = validPositions[normalizedTargetRoleDetail] && 
+                                   validPositions[normalizedTargetRoleDetail].includes(normalizedPlayerPosition);
 
             console.log('Dragover:', {
                 playerId,
                 playerPosition,
-                playerCategory,
-                targetRole,
                 targetRoleDetail,
-                playerPositionLower: playerPosition.toLowerCase(),
-                targetRoleDetailLower: targetRoleDetail.toLowerCase(),
-                playerCategoryLower: playerCategory.toLowerCase(),
-                targetRoleLower: targetRole.toLowerCase()
-            });
-
-            logStringBytes(playerCategory, 'playerCategory');
-            logStringBytes(targetRole, 'targetRole');
-
-            const validPositions = {
-                'st': ['st', 'cf', 'ss'],
-                'lw': ['lw'],
-                'rw': ['rw'],
-                'gk': ['gk'],
-                'rb': ['rb'],
-                'lb': ['lb'],
-                'cb': ['cb'],
-                'rwb': ['rwb'],
-                'lwb': ['lwb'],
-                'sw': ['sw'],
-                'dm': ['dm'],
-                'cm': ['cm'],
-                'am': ['am'],
-                'rm': ['rm'],
-                'lm': ['lm']
-            };
-
-            const normalizedTargetRoleDetail = targetRoleDetail.toLowerCase().trim();
-            const normalizedPlayerPosition = playerPosition.toLowerCase().trim();
-            const normalizedPlayerCategory = playerCategory.toLowerCase().trim();
-            const normalizedTargetRole = targetRole.toLowerCase().trim();
-
-            const isValidPosition = validPositions[normalizedTargetRoleDetail] && 
-                                   validPositions[normalizedTargetRoleDetail].includes(normalizedPlayerPosition);
-            const isValidCategory = normalizedPlayerCategory === normalizedTargetRole;
-            const isValidDrop = isValidPosition && isValidCategory;
-
-            console.log('Dragover Validation:', {
                 isValidPosition,
-                isValidCategory,
-                isValidDrop,
-                validPositionsForTarget: validPositions[normalizedTargetRoleDetail]
+                validPositionsForTarget: validPositions[normalizedTargetRoleDetail],
+                normalizedPlayerPosition,
+                normalizedTargetRoleDetail
             });
 
-            if (isValidDrop) {
+            if (isValidPosition) {
                 $target.addClass('drag-over');
                 e.originalEvent.dataTransfer.dropEffect = 'move';
             } else {
@@ -190,6 +467,7 @@ const events = {
 
         $players.on('drop', function(e) {
             e.preventDefault();
+            console.log('Drop event triggered for target:', $(this).data('role-detail'));
             const $target = $(this);
             const playerId = e.originalEvent.dataTransfer.getData('text/plain');
             const $playerItem = $(`.player-item[data-player-id="${playerId}"]`);
@@ -203,60 +481,33 @@ const events = {
             const targetRole = $target.data('role') || '';
             const targetRoleDetail = $target.data('role-detail') || '';
             const playerPosition = $playerItem.data('position') || '';
-            const playerCategory = $playerItem.data('category') || '';
             const playerName = $playerItem.data('name') || 'Unknown Player';
+            const playerSide = $playerItem.data('side');
+
+            if (playerSide !== state.curSide()) {
+                console.warn('Invalid drop: Player side does not match current side');
+                $target.removeClass('drag-over');
+                return;
+            }
+
+            const normalizedTargetRoleDetail = targetRoleDetail.toLowerCase().trim();
+            const normalizedPlayerPosition = playerPosition.toLowerCase().trim();
+
+            const isValidPosition = validPositions[normalizedTargetRoleDetail] && 
+                                   validPositions[normalizedTargetRoleDetail].includes(normalizedPlayerPosition);
 
             console.log('Drop:', {
                 playerId,
                 playerPosition,
-                playerCategory,
                 targetRole,
                 targetRoleDetail,
-                playerPositionLower: playerPosition.toLowerCase(),
-                targetRoleDetailLower: targetRoleDetail.toLowerCase(),
-                playerCategoryLower: playerCategory.toLowerCase(),
-                targetRoleLower: targetRole.toLowerCase()
-            });
-
-            logStringBytes(playerCategory, 'playerCategory');
-            logStringBytes(targetRole, 'targetRole');
-
-            const validPositions = {
-                'st': ['st', 'cf', 'ss'],
-                'lw': ['lw'],
-                'rw': ['rw'],
-                'gk': ['gk'],
-                'rb': ['rb'],
-                'lb': ['lb'],
-                'cb': ['cb'],
-                'rwb': ['rwb'],
-                'lwb': ['lwb'],
-                'sw': ['sw'],
-                'dm': ['dm'],
-                'cm': ['cm'],
-                'am': ['am'],
-                'rm': ['rm'],
-                'lm': ['lm']
-            };
-
-            const normalizedTargetRoleDetail = targetRoleDetail.toLowerCase().trim();
-            const normalizedPlayerPosition = playerPosition.toLowerCase().trim();
-            const normalizedPlayerCategory = playerCategory.toLowerCase().trim();
-            const normalizedTargetRole = targetRole.toLowerCase().trim();
-
-            const isValidPosition = validPositions[normalizedTargetRoleDetail] && 
-                                   validPositions[normalizedTargetRoleDetail].includes(normalizedPlayerPosition);
-            const isValidCategory = normalizedPlayerCategory === normalizedTargetRole;
-            const isValidDrop = isValidPosition && isValidCategory;
-
-            console.log('Drop Validation:', {
                 isValidPosition,
-                isValidCategory,
-                isValidDrop,
-                validPositionsForTarget: validPositions[normalizedTargetRoleDetail]
+                validPositionsForTarget: validPositions[normalizedTargetRoleDetail],
+                normalizedPlayerPosition,
+                normalizedTargetRoleDetail
             });
 
-            if (isValidDrop) {
+            if (isValidPosition) {
                 const imgSrc = $playerItem.data('img');
                 const goals = $playerItem.data('goals');
                 const matches = $playerItem.data('matches');
@@ -289,18 +540,13 @@ const events = {
             } else {
                 console.warn('Invalid drop:', {
                     playerPosition,
-                    playerCategory,
                     targetRole,
-                    targetRoleDetail,
-                    normalizedPlayerPosition,
-                    normalizedTargetRoleDetail,
-                    normalizedPlayerCategory,
-                    normalizedTargetRole
+                    targetRoleDetail
                 });
                 const toastBody = document.querySelector('#invalidDropToast .toast-body');
                 const toastTimestamp = document.querySelector('#invalidDropToast .toast-header small');
-                toastBody.textContent = `Cannot assign ${playerName} (${playerPosition}, ${playerCategory}) to this position. It requires a ${targetRole} (${targetRoleDetail}).`;
-                toastTimestamp.textContent = 'Just now'; // Update timestamp
+                toastBody.textContent = `Cannot assign ${playerName} (${playerPosition}) to ${targetRoleDetail}. Expected one of: ${validPositions[normalizedTargetRoleDetail]?.join(', ') || 'N/A'}.`;
+                toastTimestamp.textContent = 'Just now';
                 toast.show();
                 $target.removeClass('drag-over');
             }
@@ -319,19 +565,42 @@ const events = {
             e.preventDefault();
             const $el = $(this);
             if ($el.hasClass('empty')) return;
-
+        
             const playerId = Array.from(state.assignedPlayers.entries()).find(([pId, slotIndex]) => slotIndex === $el.data('index'))?.[0];
             if (playerId) {
                 const $playerItem = $(`.player-item[data-player-id="${playerId}"]`);
                 $playerItem.removeClass('assigned');
                 state.assignedPlayers.delete(playerId);
-
+        
                 $el.addClass('empty');
                 $el.find('.player__img img').hide();
-                $el.find('.player__label span').text($el.data('role-detail') || $el.data('role'));
+                // Set label to role-detail or role, ensuring it’s never empty
+                const labelText = $el.data('role-detail') || $el.data('role') || 'Unknown';
+                $el.find('.player__label span').text(labelText);
                 $el.find('.player__card h3').text('');
                 $el.find('.player__card__list').html('');
                 $el.find('.player__card__list--last').html('');
+                // Ensure label is visible
+                anim.fadeInDir($el.find('.player__label'), 200, 0);
+            }
+        });
+
+        $switchBtn.on('click', function(e) {
+            e.preventDefault();
+            const $el = $(this);
+            if ($el.hasClass('disabled')) return;
+            scenes.switchSides();
+            $switchBtn.removeClass('disabled');
+            $el.addClass('disabled');
+        });
+
+        $saveBtn.on('click', function(e) {
+            e.preventDefault();
+            const format = $(this).data('format');
+            if (format === 'json') {
+                scenes.saveAsJson();
+            } else {
+                console.error('Unsupported save format:', format);
             }
         });
     },
@@ -348,18 +617,22 @@ const scenes = {
         $players.velocity({ opacity: 0 }, 0);
         $heading.velocity({ opacity: 0 }, 0);
         $subHeading.velocity({ opacity: 0 }, 0);
+        $switcher.velocity({ opacity: 0 }, 0);
         $world.velocity({ opacity: 0, translateZ: -200, translateY: -60 }, 0);
         $('main').velocity({ opacity: 1 }, 0);
+        $terrain.css('background', 'url(/path/to/field-image.jpg) no-repeat center/cover'); // Add a default field image
     },
     loadIn: function(delay = 0) {
         console.log('loadIn called with delay:', delay);
         $world.velocity({ opacity: 1, translateY: 0, translateZ: -200 }, { duration: 1000, delay: delay, easing: 'spring' });
         anim.fadeInDir($heading, 300, delay + 600, 0, 30);
         anim.fadeInDir($subHeading, 300, delay + 800, 0, 30);
+        anim.fadeInDir($switcher, 300, delay + 900, 0, 30);
 
         delay += 1200;
         const delayInc = 30;
         anim.dropPlayers($players, delay, delayInc);
+        dom.updatePlayerListVisibility();
     },
     startLoading: function() {
         console.log('startLoading called');
@@ -369,6 +642,7 @@ const scenes = {
             const imgSrc = $(this).find('img').attr('src');
             if (imgSrc) images.push(imgSrc);
         });
+        images.push('/path/to/field-image.jpg'); // Add field image to preload
         console.log('Images to preload:', images);
         dom.preloadImages(images);
     },
@@ -379,10 +653,12 @@ const scenes = {
     arrangePlayers: function() {
         $players.each(function() {
             const $el = $(this);
-            console.log('Arranging player:', $el.data('role'), 'at x:', $el.attr('data-x'), 'y:', $el.attr('data-y'));
-            $el.velocity({
+            const y = parseInt($el.attr('data-y'));
+            const adjustedZ = y < 0 ? y - 100 : y;
+            console.log('Arranging player:', $el.data('role'), 'at x:', $el.attr('data-x'), 'z:', adjustedZ);
+            $el.velocity("stop").velocity({
                 translateX: parseInt($el.attr('data-x')),
-                translateZ: parseInt($el.attr('data-y'))
+                translateZ: adjustedZ
             });
         });
     },
@@ -390,7 +666,7 @@ const scenes = {
         $team.empty();
         state.assignedPlayers.clear();
         $('.player-item').removeClass('assigned');
-
+    
         formations[formation].forEach((pos, index) => {
             const $playerDiv = $(`
                 <div class="js-player player empty" 
@@ -413,10 +689,11 @@ const scenes = {
             `);
             $team.append($playerDiv);
         });
-
+    
         $players = $('.js-player');
         scenes.arrangePlayers();
         events.attachAll();
+        dom.updatePlayerListVisibility();
     },
     focusPlayer: function($el) {
         const data = $el.data();
@@ -458,6 +735,19 @@ const scenes = {
         const $card = $el.find('.player__card');
         const $image = $el.find('.player__img');
         $image.velocity({ translateY: 0 }, 300);
+        // If the slot is empty, use role-detail or role; otherwise, use player name
+        const isEmpty = $el.hasClass('empty');
+        let labelText;
+        if (isEmpty) {
+            labelText = $el.data('role-detail') || $el.data('role') || 'Unknown';
+        } else {
+            const playerId = Array.from
+    
+    (state.assignedPlayers.entries()).find(([pId, slotIndex]) => slotIndex === $el.data('index'))?.[0];
+            const $playerItem = playerId ? $(`.player-item[data-player-id="${playerId}"]`) : null;
+            labelText = $playerItem ? $playerItem.data('name') : ($el.data('role-detail') || $el.data('role') || 'Unknown');
+        }
+        $el.find('.player__label span').text(labelText);
         anim.fadeInDir($el.find('.player__label'), 200, delay);
         anim.fadeOutDir($card, 300, 0, 0, -100);
     },
@@ -467,6 +757,170 @@ const scenes = {
         $image.velocity({ translateY: '-=150px' }, 300);
         anim.fadeOutDir($el.find('.player__label'), 200, delay);
         anim.fadeInDir($card, 300, 200, 0, 100);
+    },
+    switchSides: function() {
+        const delay = 0;
+        const delayInc = 20;
+
+        state.swapSides();
+        state.assignedPlayers.clear();
+        $('.player-item').removeClass('assigned');
+        $players.each(function() {
+            const $el = $(this);
+            $el.addClass('empty');
+            $el.find('.player__img img').hide();
+            $el.find('.player__label span').text($el.data('role-detail') || $el.data('role'));
+            $el.find('.player__card h3').text('');
+            $el.find('.player__card__list').html('');
+            $el.find('.player__card__list--last').html('');
+        });
+
+        $players.each(function() {
+            const $el = $(this);
+            anim.fadeOutDir($el, 200, delay, 0, -60, 0);
+            anim.fadeOutDir($el.find('.player__label'), 200, delay + 700);
+        });
+
+        $terrain.velocity({ rotateY: '+=180deg' }, { delay: 150, duration: 1200 });
+        $world.toggleClass('flipped');
+        dom.updatePlayerListVisibility();
+
+        setTimeout(() => {
+            anim.dropPlayers($players, 1500, 30);
+        }, 1500);
+    },
+    apply2DStyles: function() {
+        const originalStyles = {
+            stage: $stage.attr('style') || '',
+            world: $world.attr('style') || '',
+            terrain: $terrain.attr('style') || '',
+            field: $('.field').attr('style') || '',
+            players: []
+        };
+
+        $stage.css({
+            perspective: 'none',
+            'perspective-origin': '50% 50%',
+            width: '1008px',
+            height: '720px',
+            position: 'relative'
+        });
+
+        $world.css({
+            transform: 'none',
+            'transform-style': 'flat',
+            top: '0',
+            left: '0',
+            margin: '0',
+            width: '1008px',
+            height: '720px',
+            position: 'relative'
+        });
+
+        $terrain.css({
+            transform: 'none',
+            'transform-style': 'flat',
+            width: '1008px',
+            height: '720px',
+            position: 'absolute',
+            top: '0',
+            left: '0',
+            'background': 'url(/path/to/field-image.jpg) no-repeat center/cover'
+        });
+
+        $('.field').css({
+            transform: 'none',
+            'transform-origin': '50% 50%',
+            top: '0',
+            left: '0',
+            width: '1008px',
+            height: '720px',
+            position: 'absolute',
+            zIndex: 1
+        });
+
+        $players.each(function() {
+            const $player = $(this);
+            const x = parseFloat($player.data('x'));
+            const y = parseFloat($player.data('y'));
+            const left = (1008 / 2) + x;
+            const top = y;
+
+            $player.css({
+                transform: 'none',
+                left: `${left}px`,
+                top: `${top}px`,
+                bottom: 'auto',
+                'margin-left': '0',
+                'transform-style': 'flat',
+                position: 'absolute',
+                zIndex: 2
+            });
+        });
+
+        return originalStyles;
+    },
+    restore3DStyles: function(originalStyles) {
+        $stage.attr('style', originalStyles.stage);
+        $world.attr('style', originalStyles.world);
+        $terrain.attr('style', originalStyles.terrain);
+        $('.field').attr('style', originalStyles.field);
+
+        originalStyles.players.forEach(({ element, transform }) => {
+            const x = parseFloat(element.data('x'));
+            const y = parseFloat(element.data('y'));
+            element.css({
+                transform: `translateX(${x}px) translateZ(${y}px)`,
+                left: '',
+                top: '',
+                bottom: '',
+                'margin-left': ''
+            });
+        });
+
+        $world.velocity("stop").velocity({
+            translateX: 0,
+            translateY: 0,
+            translateZ: -200
+        }, { duration: 300 });
+    },
+    saveAsJson: function() {
+        const formationData = {
+            formation: state.selectedFormation,
+            teamSide: state.curSide(),
+            players: []
+        };
+
+        $players.each(function(index) {
+            const $player = $(this);
+            const playerId = Array.from(state.assignedPlayers.entries()).find(([pId, slotIndex]) => slotIndex === index)?.[0];
+            const $playerItem = playerId ? $(`.player-item[data-player-id="${playerId}"]`) : null;
+
+            formationData.players.push({
+                role: $player.data('role'),
+                roleDetail: $player.data('role-detail'),
+                x: $player.data('x'),
+                y: $player.data('y'),
+                player: $playerItem ? {
+                    id: $playerItem.data('player-id'),
+                    name: $playerItem.data('name'),
+                    position: $playerItem.data('position'),
+                    goals: $playerItem.data('goals'),
+                    matches: $playerItem.data('matches'),
+                    height: $playerItem.data('height'),
+                    side: $playerItem.data('side')
+                } : null
+            });
+        });
+
+        const jsonString = JSON.stringify(formationData, null, 2);
+        const blob = new Blob([jsonString], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `formation_${state.curSide()}_${state.selectedFormation}_${new Date().toISOString().split('T')[0]}.json`;
+        a.click();
+        URL.revokeObjectURL(url);
     }
 };
 
@@ -507,6 +961,7 @@ const anim = {
 };
 
 const init = function() {
+    console.log('Football layout script loaded');
     $stage = $('.js-stage');
     $world = $('.js-world');
     $heading = $('.js-heading');
@@ -514,26 +969,46 @@ const init = function() {
     $terrain = $('.js-terrain');
     $team = $('.js-team');
     $loading = $('.js-loading');
+    $switchBtn = $('.js-switch');
+    $switcher = $('.js-switcher');
     $players = $('.js-player');
+    $saveBtn = $('.js-save-btn');
+
+    if (!$terrain.length) {
+        console.error('Terrain element not found, creating fallback');
+        $world.append('<div class="js-terrain" style="position: absolute; width: 1008px; height: 720px; background: url(/path/to/field-image.jpg) no-repeat center/cover;"></div>');
+        $terrain = $('.js-terrain');
+    }
+
+    if (!$stage.length || !$world.length || !$terrain.length) {
+        console.error('Critical elements missing, forcing 2D fallback');
+        $('body').append(`
+            <div class="js-stage" style="position: relative; width: 1008px; height: 720px;">
+                <div class="js-world" style="position: relative; width: 1008px; height: 720px;">
+                    <div class="js-terrain field" style="position: absolute; width: 1008px; height: 720px; background: url(/path/to/field-image.jpg) no-repeat center/cover;"></div>
+                    <div class="js-team"></div>
+                </div>
+            </div>
+        `);
+        $stage = $('.js-stage');
+        $world = $('.js-world');
+        $terrain = $('.js-terrain');
+        $team = $('.js-team');
+    }
+
+    $('.player-item').each(function() {
+        const $player = $(this);
+        const playerId = $player.data('player-id');
+        $player.data('side', playerId % 2 === 0 ? 'home' : 'away');
+        $player.attr('data-side', playerId % 2 === 0 ? 'home' : 'away');
+    });
 
     scenes.preLoad();
     scenes.updateFormation(state.selectedFormation);
     scenes.startLoading();
-
-    // Attach toast color selector event
-    const toastElement = document.getElementById('invalidDropToast');
-    const toastColorSelect = document.getElementById('toastColorSelect');
-    if (toastColorSelect && toastElement) {
-        toastColorSelect.addEventListener('change', function() {
-            // Remove all bg-* classes
-            toastElement.classList.remove('bg-danger', 'bg-primary', 'bg-success', 'bg-warning', 'bg-info');
-            // Add the selected bg-* class
-            toastElement.classList.add(this.value);
-        });
-    }
 };
 
-$(document).ready(function() {
+$(document).ready(function() {  
     console.log('Document ready, initializing...');
     init();
 });

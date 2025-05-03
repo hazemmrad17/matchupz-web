@@ -67,13 +67,17 @@ class __TwigTemplate_58ae590540a7f56d699398bb5736fabb extends Template
         // line 13
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("football_analysis");
         yield "\" class=\"btn btn-sm btn-outline-primary\">Suivi des Joueurs</a>
+                        <a href=\"";
+        // line 14
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("football_layout");
+        yield "\" class=\"btn btn-sm btn-outline-primary\">Formations</a>
                     </div>
                 </div>
                 <div class=\"col-sm-5 text-center text-sm-left\">
                     <div class=\"card-body pb-0 px-0 px-md-4\">
                         <img
                             src=\"";
-        // line 19
+        // line 20
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("img/illustrations/man-with-laptop-light.png"), "html", null, true);
         yield "\"
                             height=\"140\"
@@ -81,8 +85,8 @@ class __TwigTemplate_58ae590540a7f56d699398bb5736fabb extends Template
                             data-app-dark-img=\"illustrations/man-with-laptop-dark.png\"
                             data-app-light-img=\"illustrations/man-with-laptop-light.png\"
                             onerror=\"this.onerror=null; this.src='";
-        // line 24
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("/uploads/photos/default_avatar.png"), "html", null, true);
+        // line 25
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("/Uploads/photos/default_avatar.png"), "html", null, true);
         yield "';\"
                         />
                     </div>
@@ -112,7 +116,7 @@ class __TwigTemplate_58ae590540a7f56d699398bb5736fabb extends Template
                                 </button>
                                 <div class=\"dropdown-menu dropdown-menu-end\" aria-labelledby=\"cardOpt3\">
                                     <a class=\"dropdown-item\" href=\"";
-        // line 52
+        // line 53
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("joueur_statistics");
         yield "\">Aller à la Page des Statistiques</a>
                                 </div>
@@ -120,8 +124,8 @@ class __TwigTemplate_58ae590540a7f56d699398bb5736fabb extends Template
                         </div>
                         <span class=\"fw-semibold d-block mb-1\">Statistiques</span>
                         <h3 class=\"card-title mb-2\">";
-        // line 57
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::length($this->env->getCharset(), (isset($context["joueurs"]) || array_key_exists("joueurs", $context) ? $context["joueurs"] : (function () { throw new RuntimeError('Variable "joueurs" does not exist.', 57, $this->source); })())), "html", null, true);
+        // line 58
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::length($this->env->getCharset(), (isset($context["joueurs"]) || array_key_exists("joueurs", $context) ? $context["joueurs"] : (function () { throw new RuntimeError('Variable "joueurs" does not exist.', 58, $this->source); })())), "html", null, true);
         yield " Joueurs</h3>
                         <small class=\"text-success fw-semibold\"><i class=\"bx bx-up-arrow-alt\"></i> Total Inscrits</small>
                     </div>
@@ -147,7 +151,7 @@ class __TwigTemplate_58ae590540a7f56d699398bb5736fabb extends Template
                                 </button>
                                 <div class=\"dropdown-menu dropdown-menu-end\" aria-labelledby=\"cardOpt6\">
                                     <a class=\"dropdown-item\" href=\"";
-        // line 81
+        // line 82
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("football_analysis");
         yield "\">Aller à la Page de Suivi</a>
                                 </div>
@@ -197,8 +201,8 @@ class __TwigTemplate_58ae590540a7f56d699398bb5736fabb extends Template
                                 <div class=\"d-flex flex-column\">
                                     <small>Total Joueurs</small>
                                     <h6 class=\"mb-0\">";
-        // line 128
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::length($this->env->getCharset(), (isset($context["joueurs"]) || array_key_exists("joueurs", $context) ? $context["joueurs"] : (function () { throw new RuntimeError('Variable "joueurs" does not exist.', 128, $this->source); })())), "html", null, true);
+        // line 129
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::length($this->env->getCharset(), (isset($context["joueurs"]) || array_key_exists("joueurs", $context) ? $context["joueurs"] : (function () { throw new RuntimeError('Variable "joueurs" does not exist.', 129, $this->source); })())), "html", null, true);
         yield "</h6>
                                 </div>
                             </div>
@@ -209,8 +213,8 @@ class __TwigTemplate_58ae590540a7f56d699398bb5736fabb extends Template
                                 <div class=\"d-flex flex-column\">
                                     <small>Actifs</small>
                                     <h6 class=\"mb-0\">";
-        // line 137
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["active_players"]) || array_key_exists("active_players", $context) ? $context["active_players"] : (function () { throw new RuntimeError('Variable "active_players" does not exist.', 137, $this->source); })()), "html", null, true);
+        // line 138
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["active_players"]) || array_key_exists("active_players", $context) ? $context["active_players"] : (function () { throw new RuntimeError('Variable "active_players" does not exist.', 138, $this->source); })()), "html", null, true);
         yield "</h6>
                                 </div>
                             </div>
@@ -245,28 +249,28 @@ class __TwigTemplate_58ae590540a7f56d699398bb5736fabb extends Template
             <div class=\"card-body\">
                 <ul class=\"p-0 m-0\">
                     ";
-        // line 170
+        // line 171
         $context['_parent'] = $context;
-        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["topPerformers"]) || array_key_exists("topPerformers", $context) ? $context["topPerformers"] : (function () { throw new RuntimeError('Variable "topPerformers" does not exist.', 170, $this->source); })()));
+        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["topPerformers"]) || array_key_exists("topPerformers", $context) ? $context["topPerformers"] : (function () { throw new RuntimeError('Variable "topPerformers" does not exist.', 171, $this->source); })()));
         $context['_iterated'] = false;
         foreach ($context['_seq'] as $context["_key"] => $context["performer"]) {
-            // line 171
+            // line 172
             yield "                        <li class=\"d-flex mb-4 pb-1\">
                             <div class=\"avatar flex-shrink-0 me-3\">
                                 <img
                                     src=\"";
-            // line 174
-            yield ((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["performer"], "joueur", [], "any", false, false, false, 174), "profilePicture", [], "any", false, false, false, 174)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("/uploads/profile_pictures/" . CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["performer"], "joueur", [], "any", false, false, false, 174), "profilePicture", [], "any", false, false, false, 174))), "html", null, true)) : ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("/uploads/photos/default_avatar.png"), "html", null, true)));
+            // line 175
+            yield ((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["performer"], "joueur", [], "any", false, false, false, 175), "profilePicture", [], "any", false, false, false, 175)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("/uploads/profile_pictures/" . CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["performer"], "joueur", [], "any", false, false, false, 175), "profilePicture", [], "any", false, false, false, 175))), "html", null, true)) : ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("/uploads/photos/default_avatar.png"), "html", null, true)));
             yield "\"
                                     alt=\"Photo de profil de ";
-            // line 175
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["performer"], "joueur", [], "any", false, false, false, 175), "prenom", [], "any", false, false, false, 175), "html", null, true);
+            // line 176
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["performer"], "joueur", [], "any", false, false, false, 176), "prenom", [], "any", false, false, false, 176), "html", null, true);
             yield " ";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["performer"], "joueur", [], "any", false, false, false, 175), "nom", [], "any", false, false, false, 175), "html", null, true);
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["performer"], "joueur", [], "any", false, false, false, 176), "nom", [], "any", false, false, false, 176), "html", null, true);
             yield "\"
                                     class=\"rounded\"
                                     onerror=\"this.onerror=null; this.src='";
-            // line 177
+            // line 178
             yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("/uploads/photos/default_avatar.png"), "html", null, true);
             yield "';\"
                                 />
@@ -274,16 +278,16 @@ class __TwigTemplate_58ae590540a7f56d699398bb5736fabb extends Template
                             <div class=\"d-flex w-100 flex-wrap align-items-center justify-content-between gap-2\">
                                 <div class=\"me-2\">
                                     <small class=\"text-muted d-block mb-1\">";
-            // line 182
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["performer"], "joueur", [], "any", false, false, false, 182), "prenom", [], "any", false, false, false, 182), "html", null, true);
+            // line 183
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["performer"], "joueur", [], "any", false, false, false, 183), "prenom", [], "any", false, false, false, 183), "html", null, true);
             yield " ";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["performer"], "joueur", [], "any", false, false, false, 182), "nom", [], "any", false, false, false, 182), "html", null, true);
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["performer"], "joueur", [], "any", false, false, false, 183), "nom", [], "any", false, false, false, 183), "html", null, true);
             yield "</small>
                                 </div>
                                 <div class=\"user-progress d-flex align-items-center gap-1\">
                                     <h6 class=\"mb-0\">";
-            // line 185
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["performer"], "score", [], "any", false, false, false, 185), "html", null, true);
+            // line 186
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["performer"], "score", [], "any", false, false, false, 186), "html", null, true);
             yield "/100</h6>
                                 </div>
                             </div>
@@ -291,16 +295,16 @@ class __TwigTemplate_58ae590540a7f56d699398bb5736fabb extends Template
                     ";
             $context['_iterated'] = true;
         }
-        // line 189
+        // line 190
         if (!$context['_iterated']) {
-            // line 190
+            // line 191
             yield "                        <li class=\"text-center text-muted\">Aucun joueur performant trouvé.</li>
                     ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_key'], $context['performer'], $context['_parent'], $context['_iterated']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 192
+        // line 193
         yield "                </ul>
             </div>
         </div>
@@ -316,12 +320,12 @@ class __TwigTemplate_58ae590540a7f56d699398bb5736fabb extends Template
         const totalRevenueChartEl = document.querySelector(\"#totalRevenueChart\");
         if (totalRevenueChartEl) {
             const sportData = ";
-        // line 206
-        yield Twig\Extension\CoreExtension::default(json_encode((isset($context["sport_distribution"]) || array_key_exists("sport_distribution", $context) ? $context["sport_distribution"] : (function () { throw new RuntimeError('Variable "sport_distribution" does not exist.', 206, $this->source); })())), "[]");
+        // line 207
+        yield Twig\Extension\CoreExtension::default(json_encode((isset($context["sport_distribution"]) || array_key_exists("sport_distribution", $context) ? $context["sport_distribution"] : (function () { throw new RuntimeError('Variable "sport_distribution" does not exist.', 207, $this->source); })())), "[]");
         yield ";
             const sportNames = ";
-        // line 207
-        yield Twig\Extension\CoreExtension::default(json_encode((isset($context["sport_names"]) || array_key_exists("sport_names", $context) ? $context["sport_names"] : (function () { throw new RuntimeError('Variable "sport_names" does not exist.', 207, $this->source); })())), "[]");
+        // line 208
+        yield Twig\Extension\CoreExtension::default(json_encode((isset($context["sport_names"]) || array_key_exists("sport_names", $context) ? $context["sport_names"] : (function () { throw new RuntimeError('Variable "sport_names" does not exist.', 208, $this->source); })())), "[]");
         yield ";
             if (sportData.length && sportNames.length) {
                 const distributionOptions = {
@@ -366,8 +370,8 @@ class __TwigTemplate_58ae590540a7f56d699398bb5736fabb extends Template
         const growthChartEl = document.querySelector(\"#growthChart\");
         if (growthChartEl) {
             const physicalData = ";
-        // line 250
-        yield Twig\Extension\CoreExtension::default(json_encode((isset($context["physical_data"]) || array_key_exists("physical_data", $context) ? $context["physical_data"] : (function () { throw new RuntimeError('Variable "physical_data" does not exist.', 250, $this->source); })())), "[0,0,0]");
+        // line 251
+        yield Twig\Extension\CoreExtension::default(json_encode((isset($context["physical_data"]) || array_key_exists("physical_data", $context) ? $context["physical_data"] : (function () { throw new RuntimeError('Variable "physical_data" does not exist.', 251, $this->source); })())), "[0,0,0]");
         yield ";
             if (physicalData.length && physicalData.some(val => val > 0)) {
                 const physicalOptions = {
@@ -436,7 +440,7 @@ class __TwigTemplate_58ae590540a7f56d699398bb5736fabb extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  370 => 250,  324 => 207,  320 => 206,  304 => 192,  297 => 190,  295 => 189,  286 => 185,  278 => 182,  270 => 177,  263 => 175,  259 => 174,  254 => 171,  249 => 170,  213 => 137,  201 => 128,  151 => 81,  124 => 57,  116 => 52,  85 => 24,  77 => 19,  68 => 13,  64 => 12,  58 => 9,  48 => 1,);
+        return array (  374 => 251,  328 => 208,  324 => 207,  308 => 193,  301 => 191,  299 => 190,  290 => 186,  282 => 183,  274 => 178,  267 => 176,  263 => 175,  258 => 172,  253 => 171,  217 => 138,  205 => 129,  155 => 82,  128 => 58,  120 => 53,  89 => 25,  81 => 20,  72 => 14,  68 => 13,  64 => 12,  58 => 9,  48 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -454,6 +458,7 @@ class __TwigTemplate_58ae590540a7f56d699398bb5736fabb extends Template
                         <a href=\"javascript:;\" class=\"btn btn-sm btn-outline-primary\">Voir le Profil</a>
                         <a href=\"{{ path('joueur_scouting') }}\" class=\"btn btn-sm btn-outline-primary\">Scouting</a>
                         <a href=\"{{ path('football_analysis') }}\" class=\"btn btn-sm btn-outline-primary\">Suivi des Joueurs</a>
+                        <a href=\"{{ path('football_layout') }}\" class=\"btn btn-sm btn-outline-primary\">Formations</a>
                     </div>
                 </div>
                 <div class=\"col-sm-5 text-center text-sm-left\">
@@ -464,7 +469,7 @@ class __TwigTemplate_58ae590540a7f56d699398bb5736fabb extends Template
                             alt=\"Voir l'utilisateur avec badge\"
                             data-app-dark-img=\"illustrations/man-with-laptop-dark.png\"
                             data-app-light-img=\"illustrations/man-with-laptop-light.png\"
-                            onerror=\"this.onerror=null; this.src='{{ asset('/uploads/photos/default_avatar.png') }}';\"
+                            onerror=\"this.onerror=null; this.src='{{ asset('/Uploads/photos/default_avatar.png') }}';\"
                         />
                     </div>
                 </div>

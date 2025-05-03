@@ -17,8 +17,8 @@
 
 /* Field dimensions */
 :root {
-    --stage-perspective: 1100px;
-    --field-y: 840px;
+    --stage-perspective: 1320px;
+    --field-y: 1008px;
     --field-x: calc(var(--field-y) * 0.8);
     --field-ratio: calc(var(--field-x) / var(--field-y));
     --field-side-y: 8px;
@@ -30,9 +30,9 @@
 
 /* Player dimensions */
 :root {
-    --player-x: 65px;
-    --card-x: 230px;
-    --card-y: 260px;
+    --player-x: 78px;
+    --card-x: 276px;
+    --card-y: 360px;
 }
 
 /* Asset mixin replacement */
@@ -103,55 +103,150 @@ main {
     color: #e0e7ff;
 }
 
-/* Toast Color Selector */
-.toast-color-selector {
-    margin-bottom: 20px;
-}
-
-.toast-color-selector label {
-    color: #fff;
-    font-size: 16px;
-    margin-right: 10px;
-}
-
-.toast-color-selector .form-select {
-    padding: 5px 10px;
-    font-size: 14px;
-    border-radius: 5px;
-    background-color: #e0e7ff;
-    color: var(--body-bg-color);
-    border: none;
-    cursor: pointer;
-    display: inline-block;
-    width: auto;
-}
-
-.toast-color-selector .form-select:focus {
-    outline: none;
-}
-
 .formation-selector {
     margin-bottom: 20px;
+    position: relative;
 }
 
 .formation-selector label {
     color: #fff;
     font-size: 16px;
-    margin-right: 10px;
+    margin-bottom: 10px;
+    display: block;
+    font-family: montserrat, sans-serif;
+    text-transform: uppercase;
 }
 
-.formation-selector select {
-    padding: 5px 10px;
+.formation-selector select#formationSelect {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color: var(--body-bg-color-2);
+    color: var(--colors-text-lt);
+    font-family: montserrat, sans-serif;
     font-size: 14px;
+    padding: 10px 30px 10px 15px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    width: 100%;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.formation-selector select#formationSelect:focus {
+    outline: none;
+    border-color: var(--colors-card-txt);
+    background-color: var(--body-bg-color);
+}
+
+.formation-selector select#formationSelect:hover {
+    background-color: var(--body-bg-color);
+}
+
+.formation-selector select#formationSelect::after {
+    content: '\25BC';
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--colors-text-lt);
+    font-size: 12px;
+    pointer-events: none;
+}
+
+.formation-selector select#formationSelect option {
+    background-color: var(--body-bg-color-2);
+    color: var(--colors-text-lt);
+    font-family: montserrat, sans-serif;
+    padding: 10px;
+}
+
+.switcher {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.switch-btn {
+    display: inline-block;
+    padding: 6px 15px;
+    border: solid 1px rgba(255, 255, 255, 0.5);
     border-radius: 5px;
-    background-color: #e0e7ff;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.5);
+    text-decoration: none;
+    font-size: 12px;
+    font-family: montserrat, sans-serif;
+    text-transform: uppercase;
+    transition: all 0.15s;
+}
+
+.switch-btn.disabled {
+    background: rgba(255, 255, 255, 0.5);
     color: var(--body-bg-color);
-    border: none;
+    cursor: default;
+}
+
+.switch-btn.disabled:hover {
+    color: var(--body-bg-color);
+}
+
+.switch-btn:hover {
+    color: #fff;
+}
+
+.switch-btn:first-child {
+    border-radius: 10px 0 0 10px;
+    border-right: none;
+}
+
+.switch-btn:last-child {
+    border-radius: 0 10px 10px 0;
+}
+
+.save-buttons {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.save-buttons h5 {
+    font-size: 18px;
+    margin-bottom: 15px;
+    color: #fff;
+}
+
+.save-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 20px;
+    margin: 5px;
+    border: solid 1px rgba(255, 255, 255, 0.5);
+    border-radius: 5px;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.5);
+    text-decoration: none;
+    font-size: 12px;
+    font-family: montserrat, sans-serif;
+    text-transform: uppercase;
+    transition: all 0.15s;
+    background: none;
     cursor: pointer;
 }
 
-.formation-selector select:focus {
-    outline: none;
+.save-btn:hover {
+    color: #fff;
+    border-color: #fff;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.save-btn .bx {
+    font-size: 14px;
+    margin-right: 5px;
+}
+
+.back-button {
+    margin: 20px 0;
+    text-align: center;
 }
 
 .player-list {
@@ -176,13 +271,14 @@ main {
 
 .player-item {
     cursor: move;
-    padding: 10px;
+    padding: 10px 20px 10px 10px;
     margin-bottom: 10px;
     background: rgba(255, 255, 255, 0.2);
     border-radius: 5px;
     display: flex;
     align-items: center;
     transition: opacity 0.3s;
+    position: relative;
 }
 
 .player-item img {
@@ -229,8 +325,8 @@ main {
 .stage {
     position: relative;
     width: 70%;
-    height: 600px;
-    perspective-origin: 50% -200px;
+    height: 720px;
+    perspective-origin: 50% -240px;
     perspective: var(--stage-perspective);
     z-index: 1;
     backface-visibility: hidden;
@@ -260,6 +356,7 @@ main {
     width: 100%;
     height: 100%;
     transform-style: preserve-3d;
+    z-index: 20;
 }
 
 .terrain {
@@ -269,6 +366,8 @@ main {
     width: 100%;
     height: 100%;
     transform-style: inherit;
+    z-index: 1;
+    pointer-events: none;
 }
 
 .field {
@@ -283,6 +382,7 @@ main {
     transform-origin: 50% 50%;
     box-sizing: content-box;
     backface-visibility: hidden;
+    pointer-events: none;
 }
 
 .field--alt {
@@ -293,6 +393,7 @@ main {
     background: black;
     opacity: 0.3;
     box-shadow: 0 0 40px 30px #000;
+    pointer-events: none;
 }
 
 .field__texture {
@@ -300,6 +401,7 @@ main {
     height: 100%;
     position: absolute;
     z-index: 3;
+    pointer-events: none;
 }
 
 .field__texture--gradient {
@@ -336,7 +438,8 @@ main {
     transform: rotateX(calc(var(--field-rot) * 2)) translateZ(calc(-1 * var(--field-y) / 2));
     transform-origin: 50% 50%;
     background-color: var(--field-side-color);
-    z-index: 9;
+    z-index: 0;
+    pointer-events: none;
 }
 
 .texture .field__side {
@@ -364,6 +467,7 @@ main {
     width: var(--field-side-y);
     transform-origin: 100% 50%;
     transform: rotateX(var(--field-rot)) rotateY(-90deg) translateZ(0);
+    pointer-events: none;
 }
 
 .field__side--right {
@@ -380,6 +484,7 @@ main {
     width: 100%;
     height: var(--line-x);
     z-index: 4;
+    pointer-events: none;
 }
 
 .field__line--goal {
@@ -398,6 +503,8 @@ main {
     bottom: auto;
     border: solid var(--line-x) var(--line-color);
     border-top: none;
+    pointer-events: none !important;
+    z-index: 99 !important;
 }
 
 .field__line--penalty-arc {
@@ -427,6 +534,8 @@ main {
 .field__line--penalty-arc--far {
     bottom: auto;
     top: calc(var(--field-buffer) + 16%);
+    pointer-events: none !important;
+    z-index: 99 !important;
 }
 
 .field__line--penalty-arc--far:after {
@@ -453,6 +562,8 @@ main {
     bottom: auto;
     border: solid var(--line-x) var(--line-color);
     border-top: none;
+    pointer-events: none !important;
+    z-index: 99 !important;
 }
 
 .field__line--outline {
@@ -487,16 +598,15 @@ main {
     height: calc(var(--player-x) + 23px);
     width: var(--player-x);
     padding-bottom: 23px;
-    z-index: 9;
+    z-index: 25;
     left: 50%;
     margin-left: calc(-1 * var(--player-x) / 2);
     bottom: 50%;
     transform-style: preserve-3d;
     backface-visibility: hidden;
-    transition: all 
-
- 0.2s;
+    transition: all 0.2s;
     cursor: pointer;
+    pointer-events: auto;
 }
 
 .player.empty .player__img {
@@ -534,11 +644,11 @@ main {
     background-color: var(--colors-card-bg1);
     opacity: 0;
     width: var(--card-x);
-    padding: 0;
+    padding: 10px 15px;
     font-size: 18px;
     color: #333;
     border-radius: 4px;
-    z-index: 2;
+    z-index: 3;
 }
 
 .player__card:after {
@@ -575,7 +685,6 @@ main {
     padding: 10px 0;
     font-size: 14px;
     color: var(--colors-text-med);
-    overflow: auto;
     text-align: center;
 }
 
@@ -587,6 +696,7 @@ main {
     font-size: 15px;
     padding-left: 20px;
     color: var(--colors-text-def);
+    margin-bottom: 10px;
 }
 
 .player__card__list li span {
@@ -600,27 +710,31 @@ main {
 }
 
 .player__card__list--last {
-    position: absolute;
+    display: flex;
+    justify-content: space-between;
     width: 100%;
-    bottom: 0;
     background-color: var(--colors-card-bg2);
-    margin: 0;
-    padding: 0;
+    margin: 10px 0 0;
+    padding: 10px 15px;
     border-top: solid 1px #ddd;
     border-radius: 0 0 6px 6px;
-    overflow: hidden;
+    text-align: center;
 }
 
 .player__card__list--last li {
-    width: 50%;
-    padding: 10px 0 20px 0;
+    flex: 1;
+    padding: 10px 0;
     color: var(--colors-card-txt);
-    font-size: 28px;
-    line-height: 22px;
+    font-size: 24px;
+    line-height: 1.2;
+}
+
+.player__card__list--last li:first-child {
+    border-right: solid 1px #ddd;
 }
 
 .player__card__list--last li:last-child {
-    border-left: solid 1px #ddd;
+    border-left: none;
 }
 
 .player * {
@@ -688,23 +802,22 @@ main {
 }
 
 .player-item .status-rectangle {
-    display: inline-block;
-    width: 15px;
-    height: 15px;
-    margin-left: 5px;
-    vertical-align: middle;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 10px;
+    height: 100%;
+    margin: 0;
 }
 
-/* Add visual feedback for drag-and-drop */
 .player.drag-over .player__img {
-    background-color: #28a745; /* Green to indicate valid drop */
+    background-color: #28a745;
     opacity: 0.8;
 }
 
-/* Toast Styles (Adapted from Sneat Template) */
 .bs-toast {
     background-clip: padding-box;
-    background-color: rgba(255, 255, 255, 0.85); /* Default background */
+    background-color: rgba(255, 255, 255, 0.85);
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 0.375rem;
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
@@ -745,91 +858,33 @@ main {
 .bs-toast .toast-header .btn-close {
     background: transparent url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23000'%3e%3cpath d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707A1 1 0 01.293.293z'/%3e%3c/svg%3e") center/1em auto no-repeat;
     border: 0;
+    border-radius: 0.375rem;
+    color: #697a8d;
+    cursor: pointer;
+    font-size: 1.25rem;
     opacity: 0.5;
+    padding: 0.25rem 0.5rem;
+    text-shadow: none;
+    transition: opacity 0.2s ease-in-out;
 }
 
-.bs-toast .toast-header .btn-close:hover {
-    opacity: 0.75;
+/* Media query for responsiveness */
+@media (max-width: 1200px) {
+    .stage {
+        width: 65%;
+        height: 600px;
+    }
+    .static {
+        width: 35%;
+    }
 }
 
-.bs-toast .toast-body {
-    padding: 1rem;
-    color: #333;
-    font-family: 'Open Sans', helvetica, arial, sans-serif;
-}
-
-/* Color Variants for Toasts */
-.bs-toast.bg-primary {
-    background-color: rgba(105, 108, 255, 0.85);
-    color: #fff;
-}
-
-.bs-toast.bg-primary .toast-header {
-    background-color: rgba(105, 108, 255, 0.85);
-    color: #fff;
-}
-
-.bs-toast.bg-primary .toast-header small {
-    color: rgba(255, 255, 255, 0.7);
-}
-
-.bs-toast.bg-danger {
-    background-color: rgba(255, 97, 85, 0.85);
-    color: #fff;
-}
-
-.bs-toast.bg-danger .toast-header {
-    background-color: rgba(255, 97, 85, 0.85);
-    color: #fff;
-}
-
-.bs-toast.bg-danger .toast-header small {
-    color: rgba(255, 255, 255, 0.7);
-}
-
-.bs-toast.bg-success {
-    background-color: rgba(40, 167, 69, 0.85);
-    color: #fff;
-}
-
-.bs-toast.bg-success .toast-header {
-    background-color: rgba(40, 167, 69, 0.85);
-    color: #fff;
-}
-
-.bs-toast.bg-success .toast-header small {
-    color: rgba(255, 255, 255, 0.7);
-}
-
-.bs-toast.bg-warning {
-    background-color: rgba(255, 193, 7, 0.85);
-    color: #fff;
-}
-
-.bs-toast.bg-warning .toast-header {
-    background-color: rgba(255, 193, 7, 0.85);
-    color: #fff;
-}
-
-.bs-toast.bg-warning .toast-header small {
-    color: rgba(255, 255, 255, 0.7);
-}
-
-.bs-toast.bg-info {
-    background-color: rgba(0, 188, 212, 0.85);
-    color: #fff;
-}
-
-.bs-toast.bg-info .toast-header {
-    background-color: rgba(0, 188, 212, 0.85);
-    color: #fff;
-}
-
-.bs-toast.bg-info .toast-header small {
-    color: rgba(255, 255, 255, 0.7);
-}
-
-/* Ensure the toast doesn't show unless triggered */
-.toast:not(.show) {
-    display: none;
+@media (max-width: 768px) {
+    .save-btn {
+        width: 100%;
+        justify-content: center;
+    }
+    .save-buttons, .back-button {
+        margin: 10px 0;
+    }
 }
