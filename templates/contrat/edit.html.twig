@@ -19,7 +19,7 @@
                         </div>
                     {% endfor %}
 
-                    {{ form_start(form, {'attr': {'class': 'form-horizontal', 'id': 'contratForm'}}) }}
+                    {{ form_start(form, {'attr': {'novalidate': 'novalidate', 'class': 'form-horizontal', 'id': 'contratForm'}}) }}
                         {% if form_errors(form) %}
                             <div class="alert alert-danger" role="alert">
                                 {{ form_errors(form) }}

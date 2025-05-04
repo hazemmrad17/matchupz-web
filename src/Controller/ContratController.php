@@ -28,6 +28,8 @@ class ContratController extends AbstractController
 {
     private $contratRepository;
     private $logger;
+    private $filesystem;
+    private $smsTrackingFile;
 
     public function __construct(ContratRepository $contratRepository, LoggerInterface $logger)
     {
@@ -36,77 +38,228 @@ class ContratController extends AbstractController
     }
 
     #[Route('/main', name: 'contrat_main', methods: ['GET'])]
-public function index(Request $request, PaginatorInterface $paginator, EntityManagerInterface $entityManager): Response
-{
-    $this->logger->info('Entering contrat_main', ['search' => $request->query->get('search', '')]);
+    public function index(Request $request, PaginatorInterface $paginator, EntityManagerInterface $entityManager): Response
+    {
+        $this->logger->info('Entering contrat_main', ['search' => $request->query->get('search', '')]);
 
-    $searchTerm = $request->query->get('search', '');
-    $filter = $request->query->get('filter', '');
+        $searchTerm = $request->query->get('search', '');
+        $filter = $request->query->get('filter', '');
 
-    $queryBuilder = $this->contratRepository->createQueryBuilder('c')
-        ->leftJoin('c.sponsor', 's');
+        $queryBuilder = $this->contratRepository->createQueryBuilder('c')
+            ->leftJoin('c.sponsor', 's');
 
-    if ($searchTerm) {
-        $queryBuilder->andWhere('c.Titre LIKE :search OR s.nom LIKE :search OR CAST(c.Montant AS STRING) LIKE :search OR c.article LIKE :search')
-            ->setParameter('search', '%' . $searchTerm . '%');
-    }
-
-    if ($filter) {
-        switch ($filter) {
-            case 'titre':
-                $queryBuilder->orderBy('c.Titre', 'ASC');
-                break;
-            case 'datedebut':
-                $queryBuilder->orderBy('c.DateDebut', 'ASC');
-                break;
-            case 'datefin':
-                $queryBuilder->orderBy('c.DateFin', 'ASC');
-                break;
-            case 'montant':
-                $queryBuilder->orderBy('c.Montant', 'ASC');
-                break;
-            case 'sponsor':
-                $queryBuilder->orderBy('s.nom', 'ASC');
-                break;
-            case 'article':
-                $queryBuilder->orderBy('c.article', 'ASC');
-                break;
+        if ($searchTerm) {
+            $queryBuilder->andWhere('c.Titre LIKE :search OR s.nom LIKE :search OR CAST(c.Montant AS STRING) LIKE :search OR c.article LIKE :search')
+                ->setParameter('search', '%' . $searchTerm . '%');
         }
-    }
 
-    if ($searchTerm) {
-        $contrats = $queryBuilder->getQuery()->getResult();
-        $this->logger->info('Search active, found ' . count($contrats) . ' contracts');
-    } else {
-        $contrats = $paginator->paginate(
-            $queryBuilder,
-            $request->query->getInt('page', 1),
-            5
-        );
-        $this->logger->info('Pagination active, page ' . $request->query->getInt('page', 1));
-    }
+        if ($filter) {
+            switch ($filter) {
+                case 'titre':
+                    $queryBuilder->orderBy('c.Titre', 'ASC');
+                    break;
+                case 'datedebut':
+                    $queryBuilder->orderBy('c.DateDebut', 'ASC');
+                    break;
+                case 'datefin':
+                    $queryBuilder->orderBy('c.DateFin', 'ASC');
+                    break;
+                case 'montant':
+                    $queryBuilder->orderBy('c.Montant', 'ASC');
+                    break;
+                case 'sponsor':
+                    $queryBuilder->orderBy('s.nom', 'ASC');
+                    break;
+                case 'article':
+                    $queryBuilder->orderBy('c.article', 'ASC');
+                    break;
+            }
+        }
 
-    // Fetch recent contracts
-    $recentContracts = $this->contratRepository->findRecentContracts(5);
+        if ($searchTerm) {
+            $contrats = $queryBuilder->getQuery()->getResult();
+            $this->logger->info('Search active, found ' . count($contrats) . ' contracts');
+        } else {
+            $contrats = $paginator->paginate(
+                $queryBuilder,
+                $request->query->getInt('page', 1),
+                5
+            );
+            $this->logger->info('Pagination active, page ' . $request->query->getInt('page', 1));
+        }
 
-    // Fetch all contracts for stats
-    $allContracts = $this->contratRepository->findAll();
-    $totalContracts = count($allContracts);
-    $sponsorDistribution = $this->getSponsorDistribution($allContracts);
+        // Fetch recent contracts
+        $recentContracts = $this->contratRepository->findRecentContracts(5);
 
-    // Calculate total montant for stats
-    $totalMontant = array_sum(array_map(fn($contract) => $contract->getMontant(), $allContracts));
+        // Fetch all contracts for stats
+        $allContracts = $this->contratRepository->findAll();
+        $totalContracts = count($allContracts);
+        $sponsorDistribution = $this->getSponsorDistribution($allContracts);
 
-    return $this->render('contrat/main.html.twig', [
-        'contrats' => $contrats,
-        'recentContracts' => $recentContracts,
-        'searchTerm' => $searchTerm,
-        'filter' => $filter,
-        'totalContracts' => $totalContracts,
-        'sponsorDistribution' => $sponsorDistribution,
-        'totalMontant' => $totalMontant,
+        // Calculate total montant for stats
+        $totalMontant = array_sum(array_map(fn($contract) => $contract->getMontant(), $allContracts));
+
+        // Check for expiring contracts and send SMS
+        $expiringContractIds = [];
+        $currentDate = new \DateTime('now');
+        $thresholdDate = (clone $currentDate)->modify('+3 days');
+        $smsResults = [];
+        $smsTracking = []; // In-memory tracking for this request
+
+        // Check Twilio parameters
+        try {
+            $accountSid = $this->getParameter('twilio_account_sid');
+            $authToken = $this->getParameter('twilio_auth_token');
+            $fromNumber = $this->getParameter('twilio_from_number');
+            $toNumber = $this->getParameter('twilio_to_number');
+        } catch (\Exception $e) {
+            $this->logger->error('Failed to load Twilio parameters: ' . $e->getMessage());
+            $this->addFlash('error', 'Twilio configuration is missing or invalid. Please contact the administrator.');
+            return $this->render('contrat/main.html.twig', [
+                'contrats' => $contrats,
+                'recentContracts' => $recentContracts,
+                'searchTerm' => $searchTerm,
+                'filter' => $filter,
+                'totalContracts' => $totalContracts,
+                'sponsorDistribution' => $sponsorDistribution,
+                'totalMontant' => $totalMontant,
+                'expiringContractIds' => $expiringContractIds,
+            ]);
+        }
+
+        foreach ($allContracts as $contract) {
+            $dateFin = $contract->getDateFin();
+            if (!$dateFin || $dateFin < $currentDate || $dateFin > $thresholdDate) {
+                continue;
+            }
+
+            $contractId = $contract->getIdContrat();
+            $expiringContractIds[] = $contractId;
+            $this->logger->info('Contract ID ' . $contractId . ' is expiring soon', [
+                'DateFin' => $dateFin->format('Y-m-d'),
+            ]);
+
+            // Check if SMS was already attempted in this request
+            if (isset($smsTracking[$contractId])) {
+                $this->logger->info('SMS already attempted for contract ID ' . $contractId . ' in this request');
+                $smsResults[] = [
+                    'contractId' => $contractId,
+                    'status' => 'skipped',
+                    'message' => 'SMS already attempted in this request',
+                ];
+                continue;
+            }
+
+            // Get sponsor details
+            $sponsor = $contract->getSponsor();
+            $sponsorNom = $sponsor ? substr($sponsor->getNom(), 0, 15) : 'Unknown Sponsor';
+
+            // Extract data for SMS
+            $titre = substr($contract->getTitre() ?? 'Untitled', 0, 20);
+            $dateDebut = $contract->getDateDebut() ? $contract->getDateDebut()->format('Y-m-d') : null;
+            $dateFin = $contract->getDateFin() ? $contract->getDateFin()->format('Y-m-d') : null;
+            $montant = $contract->getMontant() ?? 0.0;
+
+            // Format dates
+            try {
+                $dateDebutFormatted = $dateDebut ? \DateTime::createFromFormat('Y-m-d', $dateDebut)->format('d-m-y') : 'N/A';
+                $dateFinFormatted = $dateFin ? \DateTime::createFromFormat('Y-m-d', $dateFin)->format('d-m-y') : 'N/A';
+            } catch (\Exception $e) {
+                $this->logger->error('Date formatting error: ' . $e->getMessage());
+                $smsResults[] = [
+                    'contractId' => $contractId,
+                    'status' => 'error',
+                    'message' => 'Date formatting error: ' . $e->getMessage(),
+                ];
+                continue;
+            }
+
+            // Shortened message body
+            $body = "Alerte: Contrat #$contractId '$titre' avec $sponsorNom, du $dateDebutFormatted au $dateFinFormatted, montant $montant. Expire bientôt.";
+
+            // Log message length for debugging
+            $this->logger->info('SMS body length: ' . strlen($body), ['body' => $body]);
+
+            try {
+                $this->logger->info('Initializing Twilio with credentials for contract ID ' . $contractId);
+                $twilio = new Client($accountSid, $authToken);
+
+                $this->logger->info("Attempting to send message to $toNumber from $fromNumber for contract ID $contractId");
+
+                $message = $twilio->messages->create(
+                    $toNumber,
+                    [
+                        'from' => $fromNumber,
+                        'body' => $body,
+                    ]
+                );
+
+                $this->logger->info('Message sent successfully for contract ID ' . $contractId, [
+                    'sid' => $message->sid,
+                    'status' => $message->status,
+                    'dateCreated' => $message->dateCreated ? $message->dateCreated->format('Y-m-d H:i:s') : 'N/A',
+                    'to' => $toNumber,
+                    'from' => $fromNumber,
+                ]);
+                $smsResults[] = [
+                    'contractId' => $contractId,
+                    'status' => 'success',
+                    'message' => 'SMS sent successfully',
+                    'sid' => $message->sid,
+                ];
+
+                // Mark as attempted in this request
+                $smsTracking[$contractId] = $currentDate->format('c');
+            } catch (TwilioException $e) {
+                $this->logger->error('Twilio error sending SMS for contract ID ' . $contractId . ': ' . $e->getMessage(), [
+                    'code' => $e->getCode(),
+                    'details' => $e->getMoreInfo(),
+                ]);
+                $smsResults[] = [
+                    'contractId' => $contractId,
+                    'status' => 'error',
+                    'message' => 'Failed to send SMS: ' . $e->getMessage(),
+                ];
+            } catch (\Exception $e) {
+                $this->logger->error('Unexpected error sending SMS for contract ID ' . $contractId . ': ' . $e->getMessage());
+                $smsResults[] = [
+                    'contractId' => $contractId,
+                    'status' => 'error',
+                    'message' => 'Unexpected error: ' . $e->getMessage(),
+                ];
+            }
+        }
+
+        // Add flash messages for SMS results
+        $successCount = count(array_filter($smsResults, fn($r) => $r['status'] === 'success'));
+        $errorCount = count(array_filter($smsResults, fn($r) => $r['status'] === 'error'));
+
+        if ($successCount > 0) {
+            $this->addFlash('success', sprintf('%d SMS sent successfully for expiring contracts.', $successCount));
+        }
+        if ($errorCount > 0) {
+            $this->addFlash('warning', sprintf('%d errors encountered while sending SMS for expiring contracts.', $errorCount));
+        }
+
+        $this->logger->info('Finished checking expiring contracts', [
+            'expiringContractIds' => $expiringContractIds,
+            'success' => $successCount,
+            'errors' => $errorCount,
+            'smsResults' => $smsResults,
+        ]);
+
+        return $this->render('contrat/main.html.twig', [
+            'contrats' => $contrats,
+            'recentContracts' => $recentContracts,
+            'searchTerm' => $searchTerm,
+            'filter' => $filter,
+            'totalContracts' => $totalContracts,
+            'sponsorDistribution' => $sponsorDistribution,
+            'totalMontant' => $totalMontant,
+            'expiringContractIds' => $expiringContractIds,
         ]);
     }
+
 
     #[Route('/new', name: 'contrat_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
@@ -518,7 +671,7 @@ public function index(Request $request, PaginatorInterface $paginator, EntityMan
         $filesystem = new Filesystem();
         $signaturesDir = $this->getParameter('signatures_directory');
 
-        // Create signatures directory if it doesn’t exist
+        // Create signatures directory if it doesn't exist
         if (!$filesystem->exists($signaturesDir)) {
             $filesystem->mkdir($signaturesDir, 0775);
             $this->logger->info('Created signatures directory: ' . $signaturesDir);
@@ -559,39 +712,39 @@ public function index(Request $request, PaginatorInterface $paginator, EntityMan
     }
 
     private function getMontantDistribution(array $contracts): array
-{
-    $bins = [
-        '0-2500' => 0,
-        '2500-5000' => 0,
-        '5000-10000' => 0,
-        '10000-15000' => 0,
-        '15000-20000' => 0,
-        '20000+' => 0,
-    ];
+    {
+        $bins = [
+            '0-2500' => 0,
+            '2500-5000' => 0,
+            '5000-10000' => 0,
+            '10000-15000' => 0,
+            '15000-20000' => 0,
+            '20000+' => 0,
+        ];
 
-    foreach ($contracts as $contract) {
-        $montant = $contract->getMontant() ?? 0; 
-        if ($montant < 0) {
-            $this->logger->warning('Invalid montant value for contract ID ' . $contract->getIdContrat() . ': ' . $montant);
-            continue; // Skip negative values
+        foreach ($contracts as $contract) {
+            $montant = $contract->getMontant() ?? 0; 
+            if ($montant < 0) {
+                $this->logger->warning('Invalid montant value for contract ID ' . $contract->getIdContrat() . ': ' . $montant);
+                continue; // Skip negative values
+            }
+
+            if ($montant < 2500) {
+                $bins['0-2500']++;
+            } elseif ($montant < 5000) {
+                $bins['2500-5000']++;
+            } elseif ($montant < 10000) {
+                $bins['5000-10000']++;
+            } elseif ($montant < 15000) {
+                $bins['10000-15000']++;
+            } elseif ($montant < 20000) {
+                $bins['15000-20000']++;
+            } else {
+                $bins['20000+']++;
+            }
         }
 
-        if ($montant < 2500) {
-            $bins['0-2500']++;
-        } elseif ($montant < 5000) {
-            $bins['2500-5000']++;
-        } elseif ($montant < 10000) {
-            $bins['5000-10000']++;
-        } elseif ($montant < 15000) {
-            $bins['10000-15000']++;
-        } elseif ($montant < 20000) {
-            $bins['15000-20000']++;
-        } else {
-            $bins['20000+']++;
-        }
-    }
-
-    return $bins;
+        return $bins;
     }
 
     private function getSponsorDistribution(array $contracts): array
@@ -697,6 +850,16 @@ public function index(Request $request, PaginatorInterface $paginator, EntityMan
         $thresholdDate = (clone $currentDate)->modify('+3 days');
         $results = [];
 
+        // Load SMS tracking file
+        $smsTracking = [];
+        if ($this->filesystem->exists($this->smsTrackingFile)) {
+            $smsTracking = json_decode(file_get_contents($this->smsTrackingFile), true);
+            if (!is_array($smsTracking)) {
+                $this->logger->warning('Invalid SMS tracking file content, resetting to empty');
+                $smsTracking = [];
+            }
+        }
+
         // Fetch all contracts
         $contracts = $this->contratRepository->findAll();
         $this->logger->info('Found ' . count($contracts) . ' contracts to check');
@@ -719,12 +882,38 @@ public function index(Request $request, PaginatorInterface $paginator, EntityMan
                     'DateFin' => $dateFin->format('Y-m-d'),
                 ]);
 
+                // Check if SMS was already sent within 3 days
+                $contractId = $contract->getIdContrat();
+                $smsSentRecently = false;
+                if (isset($smsTracking[$contractId])) {
+                    try {
+                        $lastSent = new \DateTime($smsTracking[$contractId]);
+                        $threeDaysAgo = (clone $currentDate)->modify('-3 days');
+                        if ($lastSent >= $threeDaysAgo) {
+                            $smsSentRecently = true;
+                            $this->logger->info('SMS already sent for contract ID ' . $contractId . ' on ' . $lastSent->format('Y-m-d H:i:s'));
+                        }
+                    } catch (\Exception $e) {
+                        $this->logger->warning('Invalid timestamp in SMS tracking for contract ID ' . $contractId . ': ' . $smsTracking[$contractId]);
+                        unset($smsTracking[$contractId]); // Remove invalid entry
+                    }
+                }
+
+                if ($smsSentRecently) {
+                    $results[] = [
+                        'contractId' => $contractId,
+                        'status' => 'skipped',
+                        'message' => 'SMS already sent recently',
+                    ];
+                    continue;
+                }
+
                 // Get sponsor details
                 $sponsor = $contract->getSponsor();
                 if (!$sponsor) {
-                    $this->logger->warning('No sponsor found for contract ID ' . $contract->getIdContrat());
+                    $this->logger->warning('No sponsor found for contract ID ' . $contractId);
                     $results[] = [
-                        'contractId' => $contract->getIdContrat(),
+                        'contractId' => $contractId,
                         'status' => 'error',
                         'message' => 'No sponsor associated with contract',
                     ];
@@ -735,19 +924,19 @@ public function index(Request $request, PaginatorInterface $paginator, EntityMan
                 if (!$phoneNumber) {
                     $this->logger->warning('No contact number for sponsor ' . $sponsor->getNom());
                     $results[] = [
-                        'contractId' => $contract->getIdContrat(),
+                        'contractId' => $contractId,
                         'status' => 'error',
                         'message' => 'No contact number for sponsor',
                     ];
                     continue;
                 }
 
-                // Add country code if necessary (e.g., +216 for Tunisia)
+                // Add country code (e.g., +216 for Tunisia)
                 $formattedPhoneNumber = preg_match('/^\+/', $phoneNumber) ? $phoneNumber : '+216' . $phoneNumber;
                 $this->logger->info('Formatted phone number: ' . $formattedPhoneNumber);
 
                 // Prepare SMS details
-                $contratId = $contract->getIdContrat();
+                $contratId = $contractId;
                 $titre = $contract->getTitre();
                 $sponsorNom = $sponsor->getNom();
                 $dateDebut = $contract->getDateDebut() ? $contract->getDateDebut()->format('d/m/Y') : 'N/A';
@@ -761,7 +950,7 @@ public function index(Request $request, PaginatorInterface $paginator, EntityMan
                 $fromNumber = $this->getParameter('twilio_from_number');
 
                 // Message body
-                $body = "Alert: Contract #$contratId titled '$titre' with sponsor '$sponsorNom' from $dateDebut to $dateFinFormatted, amount " . number_format($montant, 2) . ", is expiring soon on $dateFinFormatted. Please review.";
+                $body = "Alerte : Contrat #$contratId intitulé '$titre' avec le sponsor '$sponsorNom' du $dateDebut jusqu'à $dateFinFormatted, montant " . number_format($montant, 2) . ", expire bientôt le $dateFinFormatted. Veuillez réviser.";
 
                 try {
                     $this->logger->info('Sending SMS to ' . $formattedPhoneNumber . ' for contract ID ' . $contratId);
@@ -779,6 +968,11 @@ public function index(Request $request, PaginatorInterface $paginator, EntityMan
                         'sid' => $message->sid,
                         'status' => $message->status,
                     ]);
+
+                    // Update SMS tracking
+                    $smsTracking[$contractId] = $currentDate->format('c');
+                    $this->filesystem->dumpFile($this->smsTrackingFile, json_encode($smsTracking, JSON_PRETTY_PRINT));
+                    $this->logger->info('Updated SMS tracking file for contract ID ' . $contractId);
 
                     $results[] = [
                         'contractId' => $contratId,
@@ -806,7 +1000,7 @@ public function index(Request $request, PaginatorInterface $paginator, EntityMan
 
         // Calculate summary
         $successCount = count(array_filter($results, fn($r) => $r['status'] === 'success'));
-        $errorCount = count($results) - $successCount;
+        $errorCount = count(array_filter($results, fn($r) => $r['status'] === 'error'));
 
         $this->logger->info('Finished checking expiring contracts', [
             'success' => $successCount,
@@ -816,10 +1010,10 @@ public function index(Request $request, PaginatorInterface $paginator, EntityMan
 
         // Add flash messages for user feedback
         if ($successCount > 0) {
-            $this->addFlash('success', sprintf('%d SMS sent successfully.', $successCount));
+            $this->addFlash('success', sprintf('%d SMS envoyés avec succès.', $successCount));
         }
         if ($errorCount > 0) {
-            $this->addFlash('warning', sprintf('%d errors encountered while sending SMS.', $errorCount));
+            $this->addFlash('warning', sprintf('%d erreurs rencontrées lors de l\'envoi des SMS.', $errorCount));
         }
 
         // Render a template with results or redirect

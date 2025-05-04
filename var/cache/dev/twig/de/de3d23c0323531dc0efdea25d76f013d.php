@@ -141,7 +141,7 @@ class __TwigTemplate_98be0b25f9f5350b8fddda5c178737ca extends Template
         yield "
                     ";
         // line 22
-        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 22, $this->source); })()), 'form_start', ["attr" => ["class" => "form-horizontal", "id" => "contratForm"]]);
+        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 22, $this->source); })()), 'form_start', ["attr" => ["novalidate" => "novalidate", "class" => "form-horizontal", "id" => "contratForm"]]);
         yield "
                         ";
         // line 23
@@ -559,7 +559,7 @@ class __TwigTemplate_98be0b25f9f5350b8fddda5c178737ca extends Template
                         </div>
                     {% endfor %}
 
-                    {{ form_start(form, {'attr': {'class': 'form-horizontal', 'id': 'contratForm'}}) }}
+                    {{ form_start(form, {'attr': {'novalidate': 'novalidate', 'class': 'form-horizontal', 'id': 'contratForm'}}) }}
                         {% if form_errors(form) %}
                             <div class=\"alert alert-danger\" role=\"alert\">
                                 {{ form_errors(form) }}

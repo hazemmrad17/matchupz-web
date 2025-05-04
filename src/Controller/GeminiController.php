@@ -16,14 +16,15 @@ final class GeminiController extends AbstractController
     private string $geminiApiKey;
 
     // Persistent context about Matchupz
-    private const MATCHUPZ_CONTEXT = "Matchupz est une application desktop innovante de gestion d'événements sportifs, d'équipes et des joueurs, ainsi que la gestion logistique du stade et des sponsors qui financent les transactions. Elle offre une interface utilisateur intuitive pour gérer les sponsors, les joueurs, les matchs, les espaces sportifs, la logistique, les statistiques, les contrats, les paiements via Stripe, et bien plus encore. L'objectif est de simplifier l'organisation des événements sportifs en centralisant toutes les fonctionnalités clés dans une seule plateforme.";
+    private const MATCHUPZ_CONTEXT = "Bienvenue à Matchupz est une application desktop innovante de gestion d'événements sportifs";
 
     // List of keywords related to Matchupz for prioritization
     private array $keywords = [
         'Matchupz', 'matchupz', 'matchupz desktop application', 'gestion des sponsors', 'gestion des joueurs',
         'gestion des espaces sportifs', 'gestion des matches', 'gestion du logistique', 'statistique',
         'gestion des fournisseurs', 'contrat', 'profil utilisateur', 'interface utilisateur', 'macth',
-        'stade', 'paiement', 'stripe', 'players tracker', 'crud'
+        'stade', 'paiement', 'stripe', 'players tracker', 'crud', 'api',
+        'Hazem Mrad', 'Amine Mokhtar', 'Ismail Ismail', 'Louay Tlili', 'Ibtissem Ben Amara', 'Feriel Khamlia'
     ];
 
     public function __construct(string $geminiApiKey)

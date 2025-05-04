@@ -9,6 +9,17 @@
 {% block content %}
     <div class="content-wrapper">
         <div class="container-xxl flex-grow-1 container-p-y">
+            {% for flashMessage in app.flashes('success') %}
+                <div class="alert alert-success" role="alert">
+                    {{ flashMessage }}
+                </div>
+            {% endfor %}
+            {% for flashMessage in app.flashes('warning') %}
+                <div class="alert alert-warning" role="alert">
+                    {{ flashMessage }}
+                </div>
+            {% endfor %}
+
             {% block widgets %}
                 {% include '/contrat/widgets.html.twig' with {'recentContracts': recentContracts} %}
             {% endblock %}
@@ -104,7 +115,10 @@
                         </thead>
                         <tbody class="table-border-bottom-0">
                             {% for contrat in contrats %}
-                                <tr class="table-default contrat-row">
+                                <tr class="table-default contrat-row{% if contrat.idContrat in expiringContractIds %} contrat-expiring low-stock blinking{% endif %}"
+                                    {% if contrat.idContrat in expiringContractIds %}
+                                        style="background-color: #ffb3b3 !important; color: #a30000 !important; animation: blink-pastel 1s linear infinite !important;"
+                                    {% endif %}>
                                     <td data-full-description="{{ contrat.Titre|default('N/A') }}">
                                         <i class="fab fa-sketch fa-lg text-warning me-3"></i>
                                         <strong>{{ contrat.Titre|default('N/A') }}</strong>
@@ -188,6 +202,24 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        /* Blinking animation for expiring contracts */
+        @keyframes blink-pastel {
+            0% { background-color: #ffb3b3; }
+            50% { background-color: #ffcccc; }
+            100% { background-color: #ffb3b3; }
+        }
+        .contrat-expiring {
+            font-weight: bold;
+        }
+        .low-stock.blinking {
+            animation: blink-pastel 1s linear infinite;
+        }
+    </style>
 {% endblock %}
 
 {% block javascripts %}
