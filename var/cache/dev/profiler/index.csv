@@ -132,3 +132,15 @@ f31e83,127.0.0.1,GET,https://127.0.0.1:8000/img/team-1.png,1745772337,,404,reque
 a0587d,127.0.0.1,GET,https://127.0.0.1:8000/img/team-6.jpg,1745772338,,404,request
 c352f8,127.0.0.1,GET,https://127.0.0.1:8000/img/team-5.jpeg,1745772338,ae89fd,404,request
 ae89fd,127.0.0.1,GET,https://127.0.0.1:8000/img/team-5.jpeg,1745772338,,404,request
+0a8d2e,127.0.0.1,GET,https://127.0.0.1:8000/,1746393000,,200,request
+e1e03d,127.0.0.1,GET,https://127.0.0.1:8000/img/team-6.jpg,1746393006,f53353,404,request
+f53353,127.0.0.1,GET,https://127.0.0.1:8000/img/team-6.jpg,1746393006,,404,request
+4fa4d0,127.0.0.1,GET,https://127.0.0.1:8000/img/team-5.jpeg,1746393007,0c6922,404,request
+0c6922,127.0.0.1,GET,https://127.0.0.1:8000/img/team-5.jpeg,1746393007,,404,request
+61fd80,127.0.0.1,GET,https://127.0.0.1:8000/img/team-1.png,1746393007,5ef4b8,404,request
+5ef4b8,127.0.0.1,GET,https://127.0.0.1:8000/img/team-1.png,1746393007,,404,request
+a036c5,127.0.0.1,GET,https://127.0.0.1:8000/favicon.ico,1746393011,82c4a7,404,request
+82c4a7,127.0.0.1,GET,https://127.0.0.1:8000/favicon.ico,1746393011,,404,request
+5469e0,127.0.0.1,GET,https://127.0.0.1:8000/blog.html,1746393012,b98de0,404,request
+b98de0,127.0.0.1,GET,https://127.0.0.1:8000/blog.html,1746393012,,404,request
+ffd518,127.0.0.1,GET,https://127.0.0.1:8000/espace/front,1746393091,,200,request
