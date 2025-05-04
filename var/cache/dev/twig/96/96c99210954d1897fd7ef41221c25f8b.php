@@ -312,6 +312,19 @@ class __TwigTemplate_216a97e24c0406dd91b4a16593843276 extends Template
         });
     });
 </script>
+
+<script async src=\"https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3786755132717331\"
+     crossorigin=\"anonymous\"></script>
+<!-- sponsor -->
+<ins class=\"adsbygoogle\"
+     style=\"display:block\"
+     data-ad-client=\"ca-pub-3786755132717331\"
+     data-ad-slot=\"4047180898\"
+     data-ad-format=\"auto\"
+     data-full-width-responsive=\"true\"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
 ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -538,6 +551,19 @@ class __TwigTemplate_216a97e24c0406dd91b4a16593843276 extends Template
             }
         });
     });
+</script>
+
+<script async src=\"https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3786755132717331\"
+     crossorigin=\"anonymous\"></script>
+<!-- sponsor -->
+<ins class=\"adsbygoogle\"
+     style=\"display:block\"
+     data-ad-client=\"ca-pub-3786755132717331\"
+     data-ad-slot=\"4047180898\"
+     data-ad-format=\"auto\"
+     data-full-width-responsive=\"true\"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
 {% endblock %}", "sponsor/gemini.html.twig", "C:\\Users\\amine\\Downloads\\matchupz-web-integration\\matchupz-web-integration\\templates\\sponsor\\gemini.html.twig");
     }
