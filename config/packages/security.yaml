@@ -1,0 +1,17 @@
+# Dans config/packages/security.yaml
+security:
+    providers:
+        custom_user_provider:
+            id: App\Security\CustomUserProvider
+        oauth:
+            id: knpu.oauth2.user_provider
+
+    firewalls:
+        main:
+            provider: custom_user_provider
+            custom_authenticators:
+                - App\Security\GoogleAuthenticator
+                - App\Security\FaceRecognitionAuthenticator
+
+    access_control:
+        - { path: ^/gemini, roles: PUBLIC_ACCESS }

@@ -1,0 +1,521 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un Contrat{% endblock %}
+
+{% block content %}
+    <div class="content-wrapper">
+        <div class="container-xxl flex-grow-1 container-p-y">
+            <div class="card">
+                <h5 class="card-header">Ajouter un Nouveau Contrat</h5>
+                <div class="card-body">
+                    {{ form_start(form, {'attr': {'novalidate': 'novalidate', 'class': 'form-horizontal', 'id': 'contratForm'}}) }}
+                        {% if form_errors(form) %}
+                            <div class="alert alert-danger" role="alert">
+                                {{ form_errors(form) }}
+                            </div>
+                        {% endif %}
+                        <div class="mb-3">
+                            {{ form_label(form.Titre) }}
+                            <div class="input-group w-50">
+                                {{ form_widget(form.Titre, {'attr': {'class': 'form-control'}}) }}
+                                <button type="button" class="btn btn-outline-primary" id="transcribeTitre">
+                                    <i class="bx bx-microphone"></i>
+                                </button>
+                            </div>
+                            {% if form_errors(form.Titre) %}
+                                <div class="text-danger small">{{ form_errors(form.Titre) }}</div>
+                            {% endif %}
+                        </div>
+                        <div class="mb-3">
+                            {{ form_label(form.DateDebut) }}
+                            <div class="input-group w-50">
+                                {{ form_widget(form.DateDebut, {'attr': {'class': 'form-control'}}) }}
+                                <button type="button" class="btn btn-outline-primary" id="transcribeDateDebut">
+                                    <i class="bx bx-microphone"></i>
+                                </button>
+                            </div>
+                            {% if form_errors(form.DateDebut) %}
+                                <div class="text-danger small">{{ form_errors(form.DateDebut) }}</div>
+                            {% endif %}
+                        </div>
+                        <div class="mb-3">
+                            {{ form_label(form.DateFin) }}
+                            <div class="input-group w-50">
+                                {{ form_widget(form.DateFin, {'attr': {'class': 'form-control'}}) }}
+                                <button type="button" class="btn btn-outline-primary" id="transcribeDateFin">
+                                    <i class="bx bx-microphone"></i>
+                                </button>
+                            </div>
+                            {% if form_errors(form.DateFin) %}
+                                <div class="text-danger small">{{ form_errors(form.DateFin) }}</div>
+                            {% endif %}
+                        </div>
+                        <div class="mb-3">
+                            {{ form_label(form.Montant) }}
+                            <div class="input-group w-50">
+                                {{ form_widget(form.Montant, {'attr': {'class': 'form-control'}}) }}
+                                <button type="button" class="btn btn-outline-primary" id="transcribeMontant">
+                                    <i class="bx bx-microphone"></i>
+                                </button>
+                            </div>
+                            {% if form_errors(form.Montant) %}
+                                <div class="text-danger small">{{ form_errors(form.Montant) }}</div>
+                            {% endif %}
+                        </div>
+                        <div class="mb-3">
+                            {{ form_label(form.sponsor) }}
+                            <div class="input-group w-50">
+                                {{ form_widget(form.sponsor, {'attr': {'class': 'form-control'}}) }}
+                                <button type="button" class="btn btn-outline-primary" id="transcribeSponsor">
+                                    <i class="bx bx-microphone"></i>
+                                </button>
+                            </div>
+                            {% if form_errors(form.sponsor) %}
+                                <div class="text-danger small">{{ form_errors(form.sponsor) }}</div>
+                            {% endif %}
+                        </div>
+                        <div class="mb-3">
+                            {{ form_label(form.article, 'Article du contrat') }}
+                            <div class="input-group w-50">
+                                {{ form_widget(form.article, {'attr': {'class': 'form-control', 'rows': '5'}}) }}
+                                <button type="button" class="btn btn-outline-primary" id="transcribeArticle">
+                                    <i class="bx bx-microphone"></i>
+                                </button>
+                            </div>
+                            {% if form_errors(form.article) %}
+                                <div class="text-danger small">{{ form_errors(form.article) }}</div>
+                            {% endif %}
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Signature</label>
+                            <canvas id="signatureCanvas" class="form-control" width="300" height="80" style="width: 300px; height: 80px; background-color: #ffffff;"></canvas>
+                            {{ form_widget(form.signature, {'attr': {'id': 'signatureInput', 'class': 'd-none'}}) }}
+                            <!-- Fallback hidden input in case form.signature doesn't render -->
+                            <input type="hidden" id="signatureInput" name="contrat[signature]" class="d-none" value="">
+                            {% if form_errors(form.signature) %}
+                                <div class="text-danger small">{{ form_errors(form.signature) }}</div>
+                            {% endif %}
+                            <button type="button" id="clearCanvas" class="btn btn-outline-secondary mt-2">Effacer</button>
+                        </div>
+                        <div class="mb-3">
+                            <button type="submit" class="btn btn-primary me-2">Créer</button>
+                            <a href="{{ path('contrat_main') }}" class="btn btn-secondary">Annuler</a>
+                        </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Speech Recognition Setup
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            if (!SpeechRecognition) {
+                console.error('SpeechRecognition API is not supported in this browser.');
+                alert('Speech recognition is not supported in your browser. Please use a modern browser like Chrome.');
+                return;
+            }
+
+            const recognition = new SpeechRecognition();
+            recognition.lang = 'fr-FR'; // Set language to French
+            recognition.interimResults = false; // Only get final results
+            recognition.maxAlternatives = 1;
+
+            // Elements for transcription
+            const titreInput = document.querySelector('#contrat_Titre');
+            const dateDebutInput = document.querySelector('#contrat_DateDebut');
+            const dateFinInput = document.querySelector('#contrat_DateFin');
+            const montantInput = document.querySelector('#contrat_Montant');
+            const sponsorInput = document.querySelector('#contrat_sponsor');
+            const articleInput = document.querySelector('#contrat_article');
+            const transcribeTitreBtn = document.querySelector('#transcribeTitre');
+            const transcribeDateDebutBtn = document.querySelector('#transcribeDateDebut');
+            const transcribeDateFinBtn = document.querySelector('#transcribeDateFin');
+            const transcribeMontantBtn = document.querySelector('#transcribeMontant');
+            const transcribeSponsorBtn = document.querySelector('#transcribeSponsor');
+            const transcribeArticleBtn = document.querySelector('#transcribeArticle');
+
+            // Log elements for debugging
+            console.log('Titre Input:', titreInput);
+            console.log('DateDebut Input:', dateDebutInput);
+            console.log('DateFin Input:', dateFinInput);
+            console.log('Montant Input:', montantInput);
+            console.log('Sponsor Input:', sponsorInput);
+            console.log('Article Input:', articleInput);
+            console.log('Transcribe Titre Button:', transcribeTitreBtn);
+            console.log('Transcribe DateDebut Button:', transcribeDateDebutBtn);
+            console.log('Transcribe DateFin Button:', transcribeDateFinBtn);
+            console.log('Transcribe Montant Button:', transcribeMontantBtn);
+            console.log('Transcribe Sponsor Button:', transcribeSponsorBtn);
+            console.log('Transcribe Article Button:', transcribeArticleBtn);
+
+            // Custom function to match spoken date to YYYY-MM-DD format
+            function matchDate(transcript) {
+                transcript = transcript.toLowerCase().trim();
+                console.log('Processing date transcript:', transcript);
+
+                // Map French month names to numbers
+                const months = {
+                    'janvier': '01', 'février': '02', 'mars': '03', 'avril': '04',
+                    'mai': '05', 'juin': '06', 'juillet': '07', 'août': '08',
+                    'septembre': '09', 'octobre': '10', 'novembre': '11', 'décembre': '12'
+                };
+
+                // Map French day words to numbers
+                const dayWords = {
+                    'premier': '01', '1er': '01', 'deux': '02', 'trois': '03', 'quatre': '04', 'cinq': '05',
+                    'six': '06', 'sept': '07', 'huit': '08', 'neuf': '09', 'dix': '10',
+                    'onze': '11', 'douze': '12', 'treize': '13', 'quatorze': '14', 'quinze': '15',
+                    'seize': '16', 'dix-sept': '17', 'dix-huit': '18', 'dix-neuf': '19', 'vingt': '20',
+                    'vingt-et-un': '21', 'vingt-deux': '22', 'vingt-trois': '23', 'vingt-quatre': '24',
+                    'vingt-cinq': '25', 'vingt-six': '26', 'vingt-sept': '27', 'vingt-huit': '28',
+                    'vingt-neuf': '29', 'trente': '30', 'trente-et-un': '31'
+                };
+
+                // Replace common prefixes like "le" or "la"
+                transcript = transcript.replace(/\ble\b|\bla\b/g, '').trim();
+
+                // Extract day, month, and year
+                let day = null, month = null, year = null;
+
+                // Look for day
+                for (const [word, num] of Object.entries(dayWords)) {
+                    if (transcript.includes(word)) {
+                        day = num;
+                        transcript = transcript.replace(word, '').trim();
+                        break;
+                    }
+                }
+                // If day not found in words, look for numeric day (e.g., "15")
+                if (!day) {
+                    const dayMatch = transcript.match(/\b(\d{1,2})\b/);
+                    if (dayMatch) {
+                        day = dayMatch[1].padStart(2, '0');
+                        transcript = transcript.replace(dayMatch[1], '').trim();
+                    }
+                }
+
+                // Look for month
+                for (const [word, num] of Object.entries(months)) {
+                    if (transcript.includes(word)) {
+                        month = num;
+                        transcript = transcript.replace(word, '').trim();
+                        break;
+                    }
+                }
+
+                // Look for year (e.g., "2025")
+                const yearMatch = transcript.match(/\b(20\d{2})\b/);
+                if (yearMatch) {
+                    year = yearMatch[1];
+                    transcript = transcript.replace(yearMatch[1], '').trim();
+                }
+
+                // Validate extracted parts
+                if (day && month && year) {
+                    // Ensure day is valid for the month
+                    const daysInMonth = new Date(parseInt(year), parseInt(month), 0).getDate();
+                    if (parseInt(day) > daysInMonth) {
+                        console.warn(`Invalid day ${day} for month ${month} in year ${year}`);
+                        return null;
+                    }
+                    const formattedDate = `${year}-${month}-${day}`;
+                    console.log('Matched date:', formattedDate);
+                    return formattedDate;
+                } else {
+                    console.warn('Could not parse date from transcript:', transcript);
+                    return null;
+                }
+            }
+
+            // Custom function to match spoken sponsor name to dropdown option
+            function matchSponsor(transcript, sponsorSelect) {
+                if (!sponsorSelect || sponsorSelect.tagName !== 'SELECT') {
+                    console.error('Sponsor input is not a <select> element:', sponsorSelect);
+                    return transcript;
+                }
+
+                const options = Array.from(sponsorSelect.options);
+                console.log('Available sponsor options:', options.map(opt => ({ text: opt.text, value: opt.value })));
+
+                const transcriptLower = transcript.toLowerCase().trim();
+
+                let matchedOption = options.find(option => option.text.toLowerCase() === transcriptLower);
+                if (matchedOption) {
+                    console.log('Exact match found for sponsor:', matchedOption.text);
+                    return matchedOption.value;
+                }
+
+                matchedOption = options.find(option => option.text.toLowerCase().includes(transcriptLower));
+                if (matchedOption) {
+                    console.log('Partial match found for sponsor:', matchedOption.text);
+                    return matchedOption.value;
+                }
+
+                const transcriptWords = transcriptLower.split(/\s+/);
+                matchedOption = options.find(option => {
+                    const optionWords = option.text.toLowerCase().split(/\s+/);
+                    return transcriptWords.some(word => optionWords.includes(word));
+                });
+                if (matchedOption) {
+                    console.log('Word-based match found for sponsor:', matchedOption.text);
+                    return matchedOption.value;
+                }
+
+                console.warn('No match found for sponsor:', transcript);
+                return null;
+            }
+
+            // Function to parse spoken numbers (e.g., "mille" to "1000")
+            function parseSpokenNumber(transcript) {
+                transcript = transcript.toLowerCase().trim();
+                const numberWords = {
+                    'zéro': '0', 'un': '1', 'deux': '2', 'trois': '3', 'quatre': '4',
+                    'cinq': '5', 'six': '6', 'sept': '7', 'huit': '8', 'neuf': '9',
+                    'dix': '10', 'onze': '11', 'douze': '12', 'treize': '13', 'quatorze': '14',
+                    'quinze': '15', 'seize': '16', 'dix-sept': '17', 'dix-huit': '18', 'dix-neuf': '19',
+                    'vingt': '20', 'trente': '30', 'quarante': '40', 'cinquante': '50',
+                    'soixante': '60', 'soixante-dix': '70', 'quatre-vingt': '80', 'quatre-vingt-dix': '90',
+                    'cent': '100', 'mille': '1000', 'million': '1000000'
+                };
+
+                let result = transcript;
+                for (const [word, num] of Object.entries(numberWords)) {
+                    result = result.replace(new RegExp(`\\b${word}\\b`, 'g'), num);
+                }
+                result = result.replace(/(\d+)\s+et\s+(\d+)/g, (match, p1, p2) => parseInt(p1) + parseInt(p2));
+
+                try {
+                    const num = eval(result);
+                    if (!isNaN(num)) {
+                        return num.toString();
+                    }
+                } catch (e) {
+                    console.warn('Could not parse number from transcript:', transcript);
+                }
+                return result;
+            }
+
+            // Function to start transcription
+            function startTranscription(inputField, isDateField = false, isSponsorField = false, parseFunction = null) {
+                if (!inputField) {
+                    console.error('Input field not found for transcription.');
+                    return;
+                }
+
+                recognition.start();
+                console.log('Speech recognition started for:', inputField.id);
+
+                recognition.onstart = function () {
+                    inputField.placeholder = 'Écoute en cours...';
+                    console.log('Recognition started');
+                };
+
+                recognition.onresult = function (event) {
+                    let transcript = event.results[0][0].transcript;
+                    console.log('Transcription result:', transcript);
+
+                    if (isDateField) {
+                        const matchedDate = matchDate(transcript);
+                        if (matchedDate) {
+                            inputField.value = matchedDate;
+                            console.log('Date field updated with:', matchedDate);
+                        } else {
+                            inputField.value = '';
+                            inputField.placeholder = 'Date non reconnue';
+                            alert('Impossible de reconnaître la date: ' + transcript);
+                        }
+                    } else if (isSponsorField) {
+                        const matchedValue = matchSponsor(transcript, inputField);
+                        if (matchedValue !== null) {
+                            inputField.value = matchedValue;
+                            console.log('Sponsor selected with value:', matchedValue);
+                        } else {
+                            inputField.value = '';
+                            inputField.placeholder = 'Sponsor non trouvé';
+                            alert('Aucun sponsor correspondant trouvé pour: ' + transcript);
+                        }
+                    } else {
+                        if (parseFunction) {
+                            transcript = parseFunction(transcript);
+                            console.log('Parsed result:', transcript);
+                        }
+                        inputField.value = transcript;
+                        inputField.placeholder = '';
+                    }
+                };
+
+                recognition.onerror = function (event) {
+                    console.error('Speech recognition error:', event.error);
+                    inputField.placeholder = 'Erreur: ' + event.error;
+                    alert('Erreur lors de la reconnaissance vocale: ' + event.error);
+                };
+
+                recognition.onend = function () {
+                    console.log('Speech recognition ended');
+                    if (inputField.placeholder !== 'Date non reconnue' && inputField.placeholder !== 'Sponsor non trouvé') {
+                        inputField.placeholder = '';
+                    }
+                };
+            }
+
+            // Event listeners for transcription buttons
+            transcribeTitreBtn.addEventListener('click', function () {
+                startTranscription(titreInput);
+            });
+
+            transcribeDateDebutBtn.addEventListener('click', function () {
+                startTranscription(dateDebutInput, true);
+            });
+
+            transcribeDateFinBtn.addEventListener('click', function () {
+                startTranscription(dateFinInput, true);
+            });
+
+            transcribeMontantBtn.addEventListener('click', function () {
+                startTranscription(montantInput, false, false, parseSpokenNumber);
+            });
+
+            transcribeSponsorBtn.addEventListener('click', function () {
+                startTranscription(sponsorInput, false, true);
+            });
+
+            transcribeArticleBtn.addEventListener('click', function () {
+                startTranscription(articleInput);
+            });
+
+            // Existing canvas signature code
+            const canvas = document.getElementById('signatureCanvas');
+            const ctx = canvas.getContext('2d');
+            const signatureInput = document.getElementById('signatureInput');
+            const clearButton = document.getElementById('clearCanvas');
+            const form = document.getElementById('contratForm');
+            let isDrawing = false;
+
+            // Log to verify elements are found
+            console.log('Canvas:', canvas);
+            console.log('Signature Input:', signatureInput);
+            console.log('Clear Button:', clearButton);
+            console.log('Form:', form);
+
+            // Check if signatureInput exists
+            if (!signatureInput) {
+                console.error('Signature input element not found! Check the form rendering.');
+                return;
+            }
+
+            // Initialize canvas
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.strokeStyle = '#000000';
+            ctx.lineWidth = 2;
+            ctx.lineCap = 'round';
+
+            // Drawing events
+            canvas.addEventListener('mousedown', startDrawing);
+            canvas.addEventListener('mousemove', draw);
+            canvas.addEventListener('mouseup', stopDrawing);
+            canvas.addEventListener('mouseout', stopDrawing);
+            canvas.addEventListener('touchstart', startTouch);
+            canvas.addEventListener('touchmove', drawTouch);
+            canvas.addEventListener('touchend', stopDrawing);
+
+            function startDrawing(e) {
+                isDrawing = true;
+                ctx.beginPath();
+                draw(e);
+                console.log('Started drawing');
+            }
+
+            function draw(e) {
+                if (!isDrawing) return;
+                e.preventDefault();
+                const rect = canvas.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                ctx.lineTo(x, y);
+                ctx.stroke();
+                console.log('Drawing at:', x, y);
+            }
+
+            function stopDrawing() {
+                if (isDrawing) {
+                    isDrawing = false;
+                    ctx.closePath();
+                    console.log('Stopped drawing');
+                }
+            }
+
+            function startTouch(e) {
+                e.preventDefault();
+                isDrawing = true;
+                ctx.beginPath();
+                drawTouch(e);
+                console.log('Started touch drawing');
+            }
+
+            function drawTouch(e) {
+                if (!isDrawing) return;
+                e.preventDefault();
+                const rect = canvas.getBoundingClientRect();
+                const touch = e.touches[0];
+                const x = touch.clientX - rect.left;
+                const y = touch.clientY - rect.top;
+                ctx.lineTo(x, y);
+                ctx.stroke();
+                console.log('Touch drawing at:', x, y);
+            }
+
+            // Clear canvas
+            clearButton.addEventListener('click', function () {
+                ctx.fillStyle = '#ffffff';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                if (signatureInput) {
+                    signatureInput.value = 'signatures/signature_contrat_1741119108385.png';
+                    console.log('Canvas cleared, signature input set to default:', signatureInput.value);
+                } else {
+                    console.error('Signature input not found when clearing canvas');
+                }
+            });
+
+            // Form submission
+            form.addEventListener('submit', function (e) {
+                console.log('Form submission triggered');
+                const isEmpty = isCanvasEmpty(canvas);
+                console.log('Is canvas empty?', isEmpty);
+                if (signatureInput) {
+                    if (isEmpty) {
+                        signatureInput.value = 'signatures/signature_contrat_1741119108385.png';
+                        console.log('Canvas is empty, signature input set to default:', signatureInput.value);
+                    } else {
+                        const dataUrl = canvas.toDataURL('image/png');
+                        signatureInput.value = dataUrl;
+                        console.log('Signature data URL:', dataUrl.substring(0, 50) + '...');
+                        console.log('Signature input value set to:', signatureInput.value.substring(0, 50) + '...');
+                    }
+                } else {
+                    console.error('Signature input not found during form submission');
+                    e.preventDefault();
+                }
+            });
+
+            // Check if canvas is empty
+            function isCanvasEmpty(canvas) {
+                const context = canvas.getContext('2d');
+                const pixelData = context.getImageData(0, 0, canvas.width, canvas.height).data;
+                for (let i = 0; i < pixelData.length; i += 4) {
+                    if (pixelData[i + 3] !== 0) { // Check alpha channel
+                        console.log('Non-transparent pixel found, canvas is not empty');
+                        return false;
+                    }
+                }
+                console.log('All pixels are transparent, canvas is empty');
+                return true;
+            }
+        });
+    </script>
+{% endblock %}

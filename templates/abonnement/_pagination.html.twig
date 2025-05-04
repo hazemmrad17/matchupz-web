@@ -1,0 +1,19 @@
+<nav aria-label="Page navigation">
+    <ul class="pagination justify-content-center">
+        <li class="page-item {{ abonnements.currentPageNumber == 1 ? 'disabled' : '' }}">
+            <a class="page-link" href="{{ path('abonnement_index', {'page': abonnements.currentPageNumber - 1, 'search': searchTerm|default('')}) }}" aria-label="Previous">
+                <span aria-hidden="true">«</span>
+            </a>
+        </li>
+        {% for i in 1..abonnements.pageCount %}
+            <li class="page-item {{ abonnements.currentPageNumber == i ? 'active' : '' }}">
+                <a class="page-link" href="{{ path('abonnement_index', {'page': i, 'search': searchTerm|default('')}) }}">{{ i }}</a>
+            </li>
+        {% endfor %}
+        <li class="page-item {{ abonnements.currentPageNumber == abonnements.pageCount ? 'disabled' : '' }}">
+            <a class="page-link" href="{{ path('abonnement_index', {'page': abonnements.currentPageNumber + 1, 'search': searchTerm|default('')}) }}" aria-label="Next">
+                <span aria-hidden="true">»</span>
+            </a>
+        </li>
+    </ul>
+</nav>

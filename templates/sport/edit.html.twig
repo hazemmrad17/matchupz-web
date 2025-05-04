@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+{% block searchbar %}
+    {% include 'searchbar.html.twig' %}
+{% endblock %}
+
+{% block title %}Modifier Sport{% endblock %}
+
+{% block content %}
+    <div class="content-wrapper">
+        <div class="container-xxl flex-grow-1 container-p-y">
+            <h4 class="fw-bold py-3 mb-4">
+                <span class="text-muted fw-light">Sports /</span> Modifier Sport
+            </h4>
+
+            <div class="col-xl">
+                <div class="card mb-4">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">Modifier Sport #{{ sport.idSport }}</h5>
+                        <small class="text-muted float-end">Mettre à jour les détails</small>
+                    </div>
+                    <div class="card-body">
+                        {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+                            <div class="mb-3">
+                                {{ form_label(form.nomSport, null, {'label_attr': {'class': 'form-label'}}) }}
+                                <div class="input-group input-group-merge {{ form.nomSport.vars.errors|length > 0 ? 'is-invalid' : '' }}">
+                                    <span class="input-group-text"><i class="bx bx-run"></i></span>
+                                    {{ form_widget(form.nomSport, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                                {% if form.nomSport.vars.errors|length > 0 %}
+                                    <div class="form-error-message invalid-feedback">
+                                        {{ form_errors(form.nomSport) }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <div class="mb-3">
+                                {{ form_label(form.description, null, {'label_attr': {'class': 'form-label'}}) }}
+                                <div class="input-group input-group-merge {{ form.description.vars.errors|length > 0 ? 'is-invalid' : '' }}">
+                                    <span class="input-group-text"><i class="bx bx-detail"></i></span>
+                                    {{ form_widget(form.description, {'attr': {'class': 'form-control', 'rows': '5'}}) }}
+                                </div>
+                                {% if form.description.vars.errors|length > 0 %}
+                                    <div class="form-error-message invalid-feedback">
+                                        {{ form_errors(form.description) }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <button type="submit" class="btn btn-primary">Enregistrer</button>
+                            <a href="{{ path('sport_show', {'idSport': sport.idSport}) }}" class="btn btn-secondary">Annuler</a>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

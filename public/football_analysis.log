@@ -1,0 +1,47 @@
+2025-04-28 16:22:24,146 - DEBUG - Input video: C:\Users\MSI\Desktop\matchupz-web-0/public/uploads/input_videos\video2-680f9d22f177c.mp4
+2025-04-28 16:22:24,146 - DEBUG - Output video: C:\Users\MSI\Desktop\matchupz-web-0/public/uploads/output_videos\output-video2-680f9d22f177c.mp4
+2025-04-28 16:22:24,146 - DEBUG - Output directory: C:\Users\MSI\Desktop\matchupz-web-0/public/uploads/output_videos
+2025-04-28 16:22:24,372 - DEBUG - Starting video processing
+2025-04-28 16:22:24,537 - DEBUG - Starting frame capture
+2025-04-28 16:22:24,537 - DEBUG - Starting frame processing
+2025-04-28 16:22:24,537 - DEBUG - Starting frame display
+2025-04-28 16:22:24,624 - DEBUG - Processing batch of 5 frames
+2025-04-28 16:22:37,422 - DEBUG - Processed 5 frames
+2025-04-28 16:22:37,424 - DEBUG - Processing batch of 5 frames
+2025-04-28 16:22:46,914 - DEBUG - Processed 5 frames
+2025-04-28 16:22:46,914 - DEBUG - Processing batch of 5 frames
+2025-04-28 16:22:56,184 - DEBUG - Processed 5 frames
+2025-04-28 16:22:56,184 - DEBUG - Processing batch of 5 frames
+2025-04-28 16:23:05,464 - DEBUG - Processed 5 frames
+2025-04-28 16:23:05,464 - DEBUG - Processing batch of 5 frames
+2025-04-28 16:23:14,388 - DEBUG - Processed 5 frames
+2025-04-28 16:23:14,388 - DEBUG - Processing batch of 5 frames
+2025-04-28 16:23:23,437 - DEBUG - Processed 5 frames
+2025-04-28 16:23:23,453 - DEBUG - Processing batch of 5 frames
+2025-04-28 16:23:32,499 - DEBUG - Processed 5 frames
+2025-04-28 16:23:32,499 - DEBUG - Processing batch of 5 frames
+2025-04-28 16:23:41,944 - DEBUG - Processed 5 frames
+2025-04-28 16:23:41,946 - DEBUG - Processing batch of 5 frames
+2025-04-28 16:23:51,715 - DEBUG - Processed 5 frames
+2025-04-28 16:23:51,717 - DEBUG - Processing batch of 5 frames
+2025-04-28 16:23:51,760 - INFO - 'q' pressed, initiating shutdown
+2025-04-28 16:23:51,772 - DEBUG - Frame display complete
+2025-04-28 16:23:51,826 - INFO - Stopping threads...
+2025-04-28 16:23:56,832 - WARNING - Thread Capture did not terminate gracefully
+2025-04-28 16:24:01,841 - WARNING - Thread Processing did not terminate gracefully
+2025-04-28 16:24:01,857 - DEBUG - Frame capture complete
+2025-04-28 16:24:01,939 - DEBUG - All threads have completed.
+2025-04-28 16:24:01,939 - WARNING - Object tracks file already exists: C:\Users\MSI\Desktop\matchupz-web-0/public/uploads/output_videos\object_tracks.json. Skipping overwrite.
+2025-04-28 16:24:01,939 - WARNING - Keypoint tracks file already exists: C:\Users\MSI\Desktop\matchupz-web-0/public/uploads/output_videos\keypoint_tracks.json. Skipping overwrite.
+2025-04-28 16:24:01,939 - DEBUG - Output directory for team data: C:\Users\MSI\Desktop\matchupz-web-0/public/uploads/output_videos
+2025-04-28 16:24:01,947 - DEBUG - Test file successfully written to C:\Users\MSI\Desktop\matchupz-web-0/public/uploads/output_videos\test_write.txt
+2025-04-28 16:24:01,947 - DEBUG - Test file removed: C:\Users\MSI\Desktop\matchupz-web-0/public/uploads/output_videos\test_write.txt
+2025-04-28 16:24:01,947 - DEBUG - Attempting to save team data to: C:\Users\MSI\Desktop\matchupz-web-0/public/uploads/output_videos\output-video2-680f9d22f177c_team_data.json
+2025-04-28 16:24:01,947 - DEBUG - Team data successfully saved to C:\Users\MSI\Desktop\matchupz-web-0/public/uploads/output_videos\output-video2-680f9d22f177c_team_data.json
+2025-04-28 16:24:01,947 - DEBUG - Converting frames to video...
+2025-04-28 16:24:03,301 - DEBUG - Processed 5 frames
+2025-04-28 16:24:03,301 - DEBUG - Frame processing complete
+2025-04-28 16:24:03,881 - DEBUG - Video saved as C:\Users\MSI\Desktop\matchupz-web-0/public/uploads/output_videos\output-video2-680f9d22f177c.mp4
+2025-04-28 16:24:03,881 - DEBUG - Re-encoding video with ffmpeg: C:\Users\MSI\Desktop\matchupz-web-0/public/uploads/output_videos\output-video2-680f9d22f177c.mp4.temp.mp4 -> C:\Users\MSI\Desktop\matchupz-web-0/public/uploads/output_videos\output-video2-680f9d22f177c.mp4
+2025-04-28 16:24:05,342 - DEBUG - Re-encoding completed successfully
+2025-04-28 16:24:05,342 - DEBUG - Video processing completed.

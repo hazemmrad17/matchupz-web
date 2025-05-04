@@ -1,0 +1,368 @@
+{% extends 'baseF.html.twig' %}
+
+{% block title %}Fitness - Home{% endblock %}
+
+{% block body %}
+    <!-- Carousel Start -->
+    <div class="header-carousel owl-carousel overflow-hidden bg-dark">
+        {% for slide in carousel_slides|default([
+            {
+                'welcome_text': 'Wellcome to our fitness Center',
+                'title': 'The best gym center is now in your city',
+                'description': 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy...',
+                'video_link': '',
+                'learn_more_link': ''
+            },
+            {
+                'welcome_text': 'Wellcome to our fitness Center',
+                'title': 'Stay healthy by exercising at the best gym center',
+                'description': 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy...',
+                'video_link': '',
+                'learn_more_link': ''
+            }
+        ]) %}
+            <div class="header-carousel-item hero-section">
+                <div class="hero-bg-half-{{ loop.index }}"></div>
+                <div class="carousel-caption">
+                    <div class="container">
+                        <div class="row g-4 align-items-center">
+                            <div class="col-lg-7 animated fadeInLeft">
+                                <div class="text-sm-center text-md-start">
+                                    <h4 class="text-primary text-uppercase fw-bold mb-4">{{ slide.welcome_text }}</h4>
+                                    <h1 class="display-{{ loop.index == 1 ? '1' : '2' }} text-white mb-4">{{ slide.title }}</h1>
+                                    <p class="mb-5 fs-5">{{ slide.description }}</p>
+                                    <div class="d-flex justify-content-center justify-content-md-start flex-shrink-0 mb-4">
+                                        <a class="btn btn-dark py-3 px-4 px-md-5 me-2" href="{{ slide.video_link }}"><i class="fas fa-play-circle me-2"></i> <span>Watch Video</span></a>
+                                        <a class="btn btn-primary py-3 px-4 px-md-5 ms-2" href="{{ slide.learn_more_link }}"><span>Learn More</span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <!-- Carousel End -->
+
+    <!-- About Start -->
+    <div class="container-fluid about pt-5">
+        <div class="container pt-5">
+            <div class="row g-5">
+                <div class="col-xl-6 wow fadeInLeft" data-wow-delay="0.2s">
+                    <div class="about-content h-100">
+                        <h4 class="text-primary">{{ about.section_title|default('About Fitness Center') }}</h4>
+                        <h1 class="display-4 text-white mb-4">{{ about.title|default('We are the best at fulfilling your potential and achieving your goals.') }}</h1>
+                        <p class="mb-4">{{ about.description|default('Lorem ipsum dolor, sit amet consectetur adipisicing elit. In impedit accusantium autem quaerat natus nesciunt veritatis fugiat dolor eaque fuga.') }}</p>
+                        <div class="tab-class pb-4">
+                            <ul class="nav d-flex mb-2">
+                                {% for tab in about.tabs|default([
+                                    {'id': 'tab-1', 'title': 'Our Mission', 'active': true},
+                                    {'id': 'tab-2', 'title': 'Our Vision'},
+                                    {'id': 'tab-3', 'title': 'Our Goal'}
+                                ]) %}
+                                    <li class="nav-item mb-3">
+                                        <a class="d-flex py-2 {{ tab.active ? 'active' : 'mx-3' }}" data-bs-toggle="pill" href="#{{ tab.id }}">
+                                            <span style="width: 150px;">{{ tab.title }}</span>
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                            <div class="tab-content">
+                                {% for tab in about.tabs|default([
+                                    {'id': 'tab-1', 'content': 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has', 'active': true},
+                                    {'id': 'tab-2', 'content': 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has'},
+                                    {'id': 'tab-3', 'content': 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has'}
+                                ]) %}
+                                    <div id="{{ tab.id }}" class="tab-pane fade show p-0 {{ tab.active ? 'active' : '' }}">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="d-flex align-items-center border-top border-bottom py-4">
+                                                    <span class="fas fa-rocket text-white fa-4x me-4"></span>
+                                                    <p class="mb-0">{{ tab.content }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="row g-4 align-items-center">
+                            <div class="col-sm-6">
+                                <a href="#" class="btn btn-primary py-3 px-5"> <span>Make Appointment</span></a>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="d-flex flex-shrink-0 ps-4">
+                                    <a href="#" class="btn btn-light btn-lg-square position-relative wow tada" data-wow-delay=".9s">
+                                        <i class="fa fa-phone-alt fa-2x"></i>
+                                        <div class="position-absolute" style="top: 5px; right: 5px;">
+                                            <span><i class="fa fa-comment-dots text-dark"></i></span>
+                                        </div>
+                                    </a>
+                                    <div class="d-flex flex-column ms-3">
+                                        <span>Call to Our Experts</span>
+                                        <a href="tel:{{ about.phone|default('+ 0123 456 7890') }}"><span class="text-white">Free: {{ about.phone|default('+ 0123 456 7890') }}</span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-6 wow fadeInUp" data-wow-delay="0.2s">
+                    <div class="about-img h-100">
+                        <div class="about-img-inner d-flex h-100">
+                            <img src="{{ asset('img/about-2.png') }}" class="img-fluid w-100" style="object-fit: cover;" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About End -->
+
+    <!-- Fitness Goal Start -->
+    <div class="container-fluid goal pt-5">
+        <div class="container pt-5">
+            <div class="row g-5">
+                <div class="col-lg-6 wow fadeInLeft" data-wow-delay="0.2s">
+                    <div class="goal-content">
+                        <h4 class="text-primary">{{ goals.section_title|default('Fitness Goal') }}</h4>
+                        <h1 class="display-4 mb-4">{{ goals.title|default('Complete your possibilities, Achieve Your Fitness Goals.') }}</h1>
+                        {% for item in goals.items|default([
+                            {'icon': 'icon-1.png', 'title': 'Free Fitness Training', 'description': 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempore est harum'},
+                            {'icon': 'icon-6.png', 'title': 'Cardio and Strength', 'description': 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempore est harum'}
+                        ]) %}
+                            <div class="goal-item d-flex p-4 {{ loop.last ? 'mb-4' : '' }}">
+                                <div class="d-flex me-4">
+                                    <div class="bg-primary d-inline p-3" style="width: 80px; height: 80px;">
+                                        <img src="{{ asset('img/' ~ item.icon) }}" class="img-fluid" alt="">
+                                    </div>
+                                </div>
+                                <div>
+                                    <h4>{{ item.title }}</h4>
+                                    <p class="text-white mb-0">{{ item.description }}</p>
+                                </div>
+                            </div>
+                        {% endfor %}
+                        <div class="ms-1">
+                            <a href="#" class="btn btn-primary py-3 px-5 ms-2"> <span>Read Details</span></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 wow fadeInRight" data-wow-delay="0.2s">
+                    <div class="h-100">
+                        <img src="{{ asset('img/fitness-goal-banner.png') }}" class="img-fluid h-100" style="object-fit: cover;" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Fitness Goal End -->
+
+    <!-- Features Start -->
+    <div class="container-fluid feature bg-light py-5">
+        <div class="container py-5">
+            <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
+                <h4 class="text-primary">{{ features.section_title|default('Why choose us?') }}</h4>
+                <h1 class="display-4 mb-4">{{ features.title|default('Out Our Highlights Below') }}</h1>
+                <p class="mb-0">{{ features.description|default('Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tenetur adipisci facilis cupiditate recusandae aperiam temporibus corporis itaque quis facere, numquam, ad culpa deserunt sint dolorem autem obcaecati, ipsam mollitia hic.') }}</p>
+            </div>
+            <div class="feature-carousel owl-carousel">
+                {% for feature in features.items|default([
+                    {'image': 'feature-1.jpg', 'title': 'Work Your Butt Off', 'description': 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur obcaecati voluptatum,', 'delay': '0.2s'},
+                    {'image': 'feature-2.jpg', 'title': 'Get In The groove', 'description': 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur obcaecati voluptatum,', 'delay': '0.4s'},
+                    {'image': 'feature-3.jpg', 'title': 'It\'s more Than A Game', 'description': 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur obcaecati voluptatum,', 'delay': '0.6s'},
+                    {'image': 'feature-4.jpg', 'title': 'Get Fit Don\'t Quit', 'description': 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur obcaecati voluptatum,', 'delay': '0.2s'}
+                ]) %}
+                    <div class="feature-item wow fadeInUp" data-wow-delay="{{ feature.delay }}">
+                        <div class="feature-img">
+                            <img src="{{ asset('img/' ~ feature.image) }}" class="img-fluid w-100" alt="">
+                        </div>
+                        <div class="feature-content p-4">
+                            <h4 class="mb-3">{{ feature.title }}</h4>
+                            <p class="mb-4">{{ feature.description }}</p>
+                            <a href="#" class="btn btn-primary py-2 px-4"> <span>Read More</span></a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="feature-shaps"></div>
+        </div>
+    </div>
+    <!-- Features End -->
+
+    <!-- Courses Start -->
+    <div class="container-fluid courses overflow-hidden py-5">
+        <div class="container py-5">
+            <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
+                <h4 class="text-primary">{{ courses.section_title|default('Our Courses') }}</h4>
+                <h1 class="display-4 text-white mb-4">{{ courses.title|default('Out Our Highlights Below') }}</h1>
+                <p class="text-white mb-0">{{ courses.description|default('Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tenetur adipisci facilis cupiditate recusandae aperiam temporibus corporis itaque quis facere, numquam, ad culpa deserunt sint dolorem autem obcaecati, ipsam mollitia hic.') }}</p>
+            </div>
+            <div class="row gy-4 gx-0 justify-content-center">
+                {% for course in courses.items|default([
+                    {'icon': 'icon-1.png', 'title': 'Gym Fitness Class', 'trainer': 'Paul Flavius', 'trainer_img': 'testimonial-3.jpg', 'date': 'Saturday', 'time': '06.00 - 07.00', 'description': 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Atque tempora illo placeat.', 'delay': '0.2s'},
+                    {'icon': 'icon-2.png', 'title': 'Power Lifting Class', 'trainer': 'Paul Flavius', 'trainer_img': 'testimonial-3.jpg', 'date': 'Saturday', 'time': '06.00 - 07.00', 'description': 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Atque tempora illo placeat.', 'delay': '0.4s'},
+                    {'icon': 'icon-3.png', 'title': 'Body Building Class', 'trainer': 'Paul Flavius', 'trainer_img': 'testimonial-3.jpg', 'date': 'Saturday', 'time': '06.00 - 07.00', 'description': 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Atque tempora illo placeat.', 'delay': '0.6s'},
+                    {'icon': 'icon-4.png', 'title': 'Aerobics & Skipping Class', 'trainer': 'Paul Flavius', 'trainer_img': 'testimonial-3.jpg', 'date': 'Saturday', 'time': '06.00 - 07.00', 'description': 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Atque tempora illo placeat.', 'delay': '0.2s'},
+                    {'icon': 'icon-5.png', 'title': 'Boxing Class', 'trainer': 'Paul Flavius', 'trainer_img': 'testimonial-3.jpg', 'date': 'Saturday', 'time': '06.00 - 07.00', 'description': 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Atque tempora illo placeat.', 'delay': '0.4s'},
+                    {'icon': 'icon-6.png', 'title': 'Cardio Class', 'trainer': 'Paul Flavius', 'trainer_img': 'testimonial-3.jpg', 'date': 'Saturday', 'time': '06.00 - 07.00', 'description': 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Atque tempora illo placeat.', 'delay': '0.6s'}
+                ]) %}
+                    <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="{{ course.delay }}">
+                        <div class="courses-item">
+                            <div class="courses-item-inner p-4">
+                                <div class="d-flex justify-content-between mb-4">
+                                    <div class="courses-icon-img p-3">
+                                        <img src="{{ asset('img/' ~ course.icon) }}" class="img-fluid" alt="">
+                                    </div>
+                                    <div class="data-info d-flex flex-column">
+                                        <div class="courses-trainer d-flex align-items-center mb-1">
+                                            <div class="me-2" style="width: 25px; height: 25px;">
+                                                <img src="{{ asset('img/' ~ course.trainer_img) }}" class="img-fluid" alt="">
+                                            </div>
+                                            <p class="mb-0">{{ course.trainer }}</p>
+                                        </div>
+                                        <div class="courses-date">
+                                            <p class="mb-1">Date: {{ course.date }}</p>
+                                            <p class="mb-0">Time: {{ course.time }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a href="#" class="d-inline-block h4 mb-3">{{ course.title }}</a>
+                                <p class="mb-4">{{ course.description }}</p>
+                                <a href="#" class="btn btn-primary py-2 px-4"> <span>Read More</span></a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                <div class="col-12 text-center wow fadeInUp" data-wow-delay="0.2s">
+                    <a href="#" class="btn btn-primary py-3 px-5"> <span>More Courses</span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Courses End -->
+
+    <!-- Blog Start -->
+    <div class="container-fluid blog py-5">
+        <div class="container py-5">
+            <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
+                <h4 class="text-primary">{{ blog.section_title|default('Our Blogs') }}</h4>
+                <h1 class="display-4 mb-4">{{ blog.title|default('Check out our latest stories') }}</h1>
+                <p class="mb-0">{{ blog.description|default('Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tenetur adipisci facilis cupiditate recusandae aperiam temporibus corporis itaque quis facere, numquam, ad culpa deserunt sint dolorem autem obcaecati, ipsam mollitia hic.') }}</p>
+            </div>
+            <div class="blog-carousel owl-carousel">
+                {% for post in blog.posts|default([
+                    {'image': 'feature-4.jpg', 'author': 'Martin.C', 'date': '30 Dec 2025', 'title': 'Full Body Home Workout', 'description': 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eius libero soluta impedit eligendi? Quibusdam, laudantium.', 'delay': '0.2s'},
+                    {'image': 'feature-3.jpg', 'author': 'Martin.C', 'date': '30 Dec 2025', 'title': '31-Day Fitness Calendar', 'description': 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eius libero soluta impedit eligendi? Quibusdam, laudantium.', 'delay': '0.4s'},
+                    {'image': 'feature-2.jpg', 'author': 'Martin.C', 'date': '30 Dec 2025', 'title': 'At Home Ab Workout', 'description': 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eius libero soluta impedit eligendi? Quibusdam, laudantium.', 'delay': '0.6s'},
+                    {'image': 'feature-1.jpg', 'author': 'Martin.C', 'date': '30 Dec 2025', 'title': 'Full Body Home Workout', 'description': 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eius libero soluta impedit eligendi? Quibusdam, laudantium.', 'delay': '0.2s'}
+                ]) %}
+                    <div class="blog-item wow fadeInUp" data-wow-delay="{{ post.delay }}">
+                        <div class="blog-img p-4 pb-0">
+                            <a href="#">
+                                <img src="{{ asset('img/' ~ post.image) }}" class="img-fluid w-100" alt="">
+                            </a>
+                        </div>
+                        <div class="blog-content p-4">
+                            <div class="blog-comment d-flex justify-content-between py-2 px-3 mb-4">
+                                <div class="small"><span class="fa fa-user text-primary me-2"></span>{{ post.author }}</div>
+                                <div class="small"><span class="fa fa-calendar text-primary me-2"></span>{{ post.date }}</div>
+                            </div>
+                            <a href="#" class="h4 d-inline-block mb-3">{{ post.title }}</a>
+                            <p class="mb-3">{{ post.description }}</p>
+                            <a href="#" class="btn btn-dark py-2 px-4 ms-2"> <span class="me-2">Read More</span> <i class="fa fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <!-- Blog End -->
+
+    <!-- Explore Fitness Start -->
+    <div class="container-fluid explore py-5 wow zoomIn" data-wow-delay="0.2s">
+        <div class="container py-5 text-center">
+            <h1 class="display-1 text-white mb-0">{{ explore.title|default('Explore Fitness Center') }}</h1>
+            <a class="btn btn-primary py-3 px-4 px-md-5 me-2" href="https://www.youtube.com/embed/DWRcNpR6Kdc"><i class="fas fa-play-circle me-2"></i> <span>Watch Video</span></a>
+        </div>
+    </div>
+    <!-- Explore Fitness End -->
+
+    <!-- Team Start -->
+    <div class="container-fluid team py-5">
+        <div class="container py-5">
+            <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
+                <h4 class="text-primary">{{ team.section_title|default('Our Trainer') }}</h4>
+                <h1 class="display-4 mb-4">{{ team.title|default('Meet Our Amazing Team') }}</h1>
+                <p class="mb-0">{{ team.description|default('Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tenetur adipisci facilis cupiditate recusandae aperiam temporibus corporis itaque quis facere, numquam, ad culpa deserunt sint dolorem autem obcaecati, ipsam mollitia hic.') }}</p>
+            </div>
+            <div class="row gy-5 gy-lg-4 gx-4">
+                {% for member in team.members|default([
+                    {'image': 'team-1.jpg', 'name': 'Trainer Name', 'profession': 'Profession', 'delay': '0.2s'},
+                    {'image': 'team-2.jpg', 'name': 'Trainer Name', 'profession': 'Profession', 'delay': '0.4s'},
+                    {'image': 'team-3.jpg', 'name': 'Trainer Name', 'profession': 'Profession', 'delay': '0.6s'},
+                    {'image': 'team-4.jpg', 'name': 'Trainer Name', 'profession': 'Profession', 'delay': '0.8s'}
+                ]) %}
+                    <div class="col-md-6 col-lg-3 wow fadeInUp" data-wow-delay="{{ member.delay }}">
+                        <div class="team-item">
+                            <div class="team-img">
+                                <img src="{{ asset('img/' ~ member.image) }}" class="img-fluid w-100" alt="Image">
+                                <div class="team-icon">
+                                    {% for social in member.social_links|default([
+                                        {'icon': 'fab fa-facebook-f', 'url': ''},
+                                        {'icon': 'fab fa-twitter', 'url': ''},
+                                        {'icon': 'fab fa-instagram', 'url': ''},
+                                        {'icon': 'fab fa-linkedin-in', 'url': ''}
+                                    ]) %}
+                                        <a href="{{ social.url }}" class="btn btn-primary btn-sm-square"><i class="{{ social.icon }}"></i></a>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="team-content">
+                                <h4>{{ member.name }}</h4>
+                                <p class="mb-0">{{ member.profession }}</p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <!-- Team End -->
+
+    <!-- Testimonial Start -->
+    <div class="container-fluid testimonial bg-dark py-5" style="margin-bottom: 90px;">
+        <div class="container py-5">
+            <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
+                <h4 class="text-primary">{{ testimonials.section_title|default('Testimonial') }}</h4>
+                <h1 class="display-4 text-white">{{ testimonials.title|default('What Our Customers Are Saying') }}</h1>
+            </div>
+            <div class="testimonial-carousel owl-carousel wow fadeInUp" data-wow-delay="0.2s">
+                {% for testimonial in testimonials.items|default([
+                    {'image': 'testimonial-1.jpg', 'name': 'Client Name', 'profession': 'Profession', 'quote': 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero quasi deleniti ratione similique eaque blanditiis fugit voluptas ex officiis expedita repellat doloribus veniam delectus tempore, laudantium, aliquam ad? Rem, accusantium?', 'rating': 4},
+                    {'image': 'testimonial-2.jpg', 'name': 'Client Name', 'profession': 'Profession', 'quote': 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero quasi deleniti ratione similique eaque blanditiis fugit voluptas ex officiis expedita repellat doloribus veniam delectus tempore, laudantium, aliquam ad? Rem, accusantium?', 'rating': 4},
+                    {'image': 'testimonial-3.jpg', 'name': 'Client Name', 'profession': 'Profession', 'quote': 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero quasi deleniti ratione similique eaque blanditiis fugit voluptas ex officiis expedita repellat doloribus veniam delectus tempore, laudantium, aliquam ad? Rem, accusantium?', 'rating': 4}
+                ]) %}
+                    <div class="testimonial-item mx-auto" style="max-width: 900px;">
+                        <span class="fa fa-quote-left fa-3x quote-icon"></span>
+                        <div class="testimonial-img mb-4">
+                            <img src="{{ asset('img/' ~ testimonial.image) }}" class="img-fluid" alt="Image">
+                        </div>
+                        <p class="fs-4 text-white mb-4">{{ testimonial.quote }}</p>
+                        <div class="d-block">
+                            <h4 class="text-white">{{ testimonial.name }}</h4>
+                            <p class="m-0 pb-3">{{ testimonial.profession }}</p>
+                            <div class="d-flex">
+                                {% for i in 1..5 %}
+                                    <i class="fas fa-star {{ i <= testimonial.rating ? 'text-primary' : 'text-white' }}"></i>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <!-- Testimonial End -->
+{% endblock %}

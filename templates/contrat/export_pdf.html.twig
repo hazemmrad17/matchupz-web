@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Contrat Export - MatchupZ</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        body {
+            background-color: #f8f8f8;
+            color: #1a1a1a;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .header img {
+            width: 200px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+        .header h1 {
+            font-size: 28px;
+            font-weight: bold;
+            color: #0f3849;
+            margin-bottom: 10px;
+        }
+        .content {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .contract-details {
+            margin-bottom: 20px;
+        }
+        .contract-details p {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        .contract-details strong {
+            color: #0f3849;
+        }
+        .contract-details .article {
+            margin-top: 20px;
+            white-space: pre-wrap; /* Preserve line breaks */
+        }
+        .signature {
+            text-align: right;
+            margin-top: 40px;
+        }
+        .signature img {
+            max-width: 150px;
+            max-height: 75px;
+        }
+        .signature p {
+            font-size: 14px;
+            color: #555;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-size: 13px;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #0f3849;
+            color: #ffffff;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .footer {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #0f3849;
+            color: #ccc;
+            text-align: center;
+            font-size: 12px;
+            border-radius: 10px;
+        }
+        .footer a {
+            color: #e0e0e0;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            color: #ffffff;
+        }
+        @page {
+            size: A4 portrait;
+            margin: 20mm;
+        }
+    </style>
+</head>
+<body>
+    {% if is_single %}
+        {# Single Contract Layout #}
+        {% set contrat = contrats[0] %}
+        <div class="header">
+            <img src="file:///{{ logo_path|url_encode }}" alt="MatchupZ Logo">
+            <h1>{{ contrat.titre }}</h1>
+        </div>
+        <div class="content">
+            <div class="contract-details">
+                <p><strong>Contrat du sponsor :</strong> {{ contrat.Sponsor ? contrat.Sponsor.nom : 'N/A' }}</p>
+                <p><strong>De :</strong> {{ contrat.DateDebut ? contrat.DateDebut|date('d/m/Y') : 'N/A' }}</p>
+                <p><strong>Jusqu'à :</strong> {{ contrat.DateFin ? contrat.DateFin|date('d/m/Y') : 'N/A' }}</p>
+                <p><strong>Montant du contrat :</strong> {{ contrat.Montant ? contrat.Montant|number_format(2, ',', ' ') ~ ' TND' : 'N/A' }}</p>
+                <p class="article"><strong>Articles :</strong><br>{{ contrat.article|default('N/A') }}</p>
+            </div>
+            <div class="signature">
+                {% if contrat.Signature and contrat.Signature != 'signatures/signature_contrat_1741119108385.png' %}
+                    <img src="{{ (app.request.server.get('DOCUMENT_ROOT') ~ '/' ~ contrat.Signature)|url_encode }}" alt="Signature">
+                {% else %}
+                    <p>Aucune signature</p>
+                {% endif %}
+            </div>
+        </div>
+    {% else %}
+        {# Bulk Contracts Layout #}
+        <div class="header">
+            <img src="file:///{{ logo_path|url_encode }}" alt="MatchupZ Logo">
+            <h1>Contrats Export</h1>
+            <div class="subtitle">Generated on {{ "now"|date("d/m/Y H:i") }}</div>
+        </div>
+        <div class="content">
+            <h2>Liste des Contrats</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Titre</th>
+                        <th>Date Debut</th>
+                        <th>Date fin</th>
+                        <th>Montant</th>
+                        <th>Sponsor</th>
+                        <th>Article</th>
+                        <th>Signature</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for contrat in contrats %}
+                        <tr>
+                            <td>{{ contrat.titre }}</td>
+                            <td>{{ contrat.DateDebut|date('Y-m-d') }}</td>
+                            <td>{{ contrat.DateFin|date('Y-m-d') }}</td>
+                            <td>{{ contrat.Montant }}</td>
+                            <td>{{ contrat.Sponsor ? contrat.Sponsor.nom : 'N/A' }}</td>
+                            <td>{{ contrat.article|slice(0, 100) ~ (contrat.article|length > 100 ? '...' : '') }}</td>
+                            <td>
+                                {% if contrat.Signature and contrat.Signature != 'signatures/signature_contrat_1741119108385.png' %}
+                                    <img src="{{ (app.request.server.get('DOCUMENT_ROOT') ~ '/' ~ contrat.Signature)|url_encode }}" alt="Signature" style="max-width: 100px; max-height: 50px;" />
+                                {% else %}
+                                    No Signature
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="7" style="text-align: center; color: #555;">Aucun contrat trouvé</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endif %}
+    <div class="footer">
+        <p>MatchupZ © {{ "now"|date("Y") }} | Contact: <a href="mailto:support@matchupz.com">support@matchupz.com</a></p>
+        <p>Powered by <span style="color: #eab700;">xAI Technology</span></p>
+    </div>
+</body>
+</html>

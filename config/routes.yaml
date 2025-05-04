@@ -1,0 +1,9 @@
+controllers:
+    resource:
+        path: ../src/Controller/
+        namespace: App\Controller
+    type: attribute
+gemini_chat:
+  path: /gemini
+  controller: App\Controller\GeminiController::index
+  methods: [GET, POST]

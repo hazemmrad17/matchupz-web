@@ -1,0 +1,277 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Football Analysis - Matchupz{% endblock %}
+
+{% block body %}
+<div class="card">
+    <h5 class="card-header">Football Video Analysis</h5>
+    <div class="card-body">
+        <p>Upload a football match video to analyze player movements, ball possession, and more.</p>
+
+        <!-- Video Upload Form -->
+        <form method="post" enctype="multipart/form-data" id="videoForm">
+            <div class="mb-3">
+                <label for="video" class="form-label">Select Video File</label>
+                <input type="file" class="form-control" id="video" name="video" accept="video/*" required>
+            </div>
+            <button type="submit" class="btn btn-primary" id="analyzeBtn">Analyze Video</button>
+            <button type="button" class="btn btn-danger" id="stopBtn" style="display: none;">Stop Processing</button>
+        </form>
+
+        <!-- Error Message -->
+        {% if error %}
+            <div class="alert alert-danger mt-3" role="alert">
+                {{ error }}
+            </div>
+        {% endif %}
+
+        <!-- Tracking Data Analysis -->
+        {% if tracking_data and tracking_data.frames is defined and tracking_data.frames|length > 0 %}
+            <div class="mt-4">
+                <h6>Tracking Analysis</h6>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5>Frame Statistics</h5>
+                        <p><strong>Total Frames Analyzed:</strong> {{ tracking_data.frames|length }}</p>
+                        <p><strong>Video FPS:</strong> {{ tracking_data.fps }}</p>
+                        <p><strong>Duration Analyzed:</strong> 
+                            {% set lastFrame = tracking_data.frames|last %}
+                            {{ lastFrame.timestamp|round(2) }} seconds
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Charts -->
+                <div class="mt-4">
+                    <h6>Visual Analysis</h6>
+                    <div class="row">
+                        <!-- Frame Count Over Time Line Chart -->
+                        <div class="col-md-6">
+                            <canvas id="frameTimeChart" height="200"></canvas>
+                        </div>
+                        <!-- Frame Processing Density Line Chart -->
+                        <div class="col-md-6">
+                            <canvas id="frameDensityChart" height="200"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="mt-4">
+                <p>No tracking data available. Please process a video to view analysis.</p>
+            </div>
+        {% endif %}
+
+        <!-- Output Video -->
+        <div class="mt-4" id="resultSection">
+            <h6>Analysis Result</h6>
+            <div id="videoContainer">
+                {% if output_video_url %}
+                    <video controls class="w-100" style="max-height: 500px;" autoplay>
+                        <source src="{{ output_video_url }}" type="video/mp4">
+                        Your browser does not support the video tag, or the video file is inaccessible. Check the URL: <a href="{{ output_video_url }}">{{ output_video_url }}</a>
+                    </video>
+                {% else %}
+                    <p>No video with supported format and MIME type found.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        .card-body {
+            padding: 1.5rem;
+        }
+        .form-control {
+            max-width: 500px;
+        }
+        #resultSection {
+            display: block;
+        }
+        .table {
+            margin-bottom: 1.5rem;
+        }
+        .table-sm th, .table-sm td {
+            padding: 0.5rem;
+            font-size: 0.9rem;
+        }
+        canvas {
+            max-width: 100%;
+        }
+    </style>
+{% endblock %}
+
+{% block javascripts %}
+    <!-- Include Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script>
+        document.getElementById('videoForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const form = this;
+            const formData = new FormData(form);
+            document.getElementById('analyzeBtn').style.display = 'none';
+            document.getElementById('stopBtn').style.display = 'inline-block';
+            document.getElementById('videoContainer').innerHTML = '<p>Processing...</p>';
+
+            fetch('{{ path('football_analysis') }}', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(html => {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                const newVideoContainer = doc.querySelector('#videoContainer').innerHTML;
+                document.getElementById('videoContainer').innerHTML = newVideoContainer;
+                const errorAlert = doc.querySelector('.alert-danger');
+                if (errorAlert) {
+                    document.querySelector('.card-body').insertBefore(errorAlert, document.getElementById('resultSection'));
+                }
+                document.getElementById('analyzeBtn').style.display = 'inline-block';
+                document.getElementById('stopBtn').style.display = 'none';
+                location.reload();
+            })
+            .catch(error => {
+                console.error('Error during processing:', error);
+                document.getElementById('videoContainer').innerHTML = '<p>Error occurred during processing.</p>';
+                document.getElementById('analyzeBtn').style.display = 'inline-block';
+                document.getElementById('stopBtn').style.display = 'none';
+            });
+        });
+
+        document.getElementById('stopBtn').addEventListener('click', function() {
+            fetch('{{ path('football_analysis') }}', {
+                method: 'POST',
+                body: new FormData(document.createElement('form')).append('action', 'stop')
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'stopped') {
+                    document.getElementById('analyzeBtn').style.display = 'inline-block';
+                    document.getElementById('stopBtn').style.display = 'none';
+                    const videoContainer = document.getElementById('videoContainer');
+                    if (data.output_video_url) {
+                        videoContainer.innerHTML = `
+                            <video controls class="w-100" style="max-height: 500px;" autoplay>
+                                <source src="${data.output_video_url}" type="video/mp4">
+                                Your browser does not support the video tag, or the video file is inaccessible. Check the URL: <a href="${data.output_video_url}">${data.output_video_url}</a>
+                            </video>
+                        `;
+                    } else {
+                        videoContainer.innerHTML = '<p>No video with supported format and MIME type found.</p>';
+                    }
+                }
+            })
+            .catch(error => {
+                console.error('Error stopping process:', error);
+                document.getElementById('videoContainer').innerHTML = '<p>Error occurred while stopping the process.</p>';
+                document.getElementById('analyzeBtn').style.display = 'inline-block';
+                document.getElementById('stopBtn').style.display = 'none';
+            });
+        });
+
+        // Chart.js initialization
+        {% if tracking_data and tracking_data.frames is defined and tracking_data.frames|length > 0 %}
+            // Frame Count Over Time Line Chart
+            const frameTimeCtx = document.getElementById('frameTimeChart').getContext('2d');
+            new Chart(frameTimeCtx, {
+                type: 'line',
+                data: {
+                    labels: [{% for frame in tracking_data.frames %}{{ frame.timestamp }}{% if not loop.last %},{% endif %}{% endfor %}],
+                    datasets: [{
+                        label: 'Frame Number',
+                        data: [{% for frame in tracking_data.frames %}{{ frame.frame_number }}{% if not loop.last %},{% endif %}{% endfor %}],
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        fill: false,
+                        tension: 0.1
+                    }]
+                },
+                options: {
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Frame Progression Over Time'
+                        }
+                    },
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Time (seconds)'
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Frame Number'
+                            },
+                            beginAtZero: false
+                        }
+                    }
+                }
+            });
+
+            // Frame Processing Density Line Chart
+            const frameDensityCtx = document.getElementById('frameDensityChart').getContext('2d');
+            // Calculate time bins (e.g., 0.5-second intervals)
+            const timestamps = [{% for frame in tracking_data.frames %}{{ frame.timestamp }}{% if not loop.last %},{% endif %}{% endfor %}];
+            const binSize = 0.5; // 0.5 seconds per bin
+            const maxTime = Math.max(...timestamps);
+            const bins = Array(Math.ceil(maxTime / binSize)).fill(0);
+            timestamps.forEach(ts => {
+                const binIndex = Math.floor(ts / binSize);
+                if (binIndex < bins.length) bins[binIndex]++;
+            });
+            new Chart(frameDensityCtx, {
+                type: 'line',
+                data: {
+                    labels: Array.from({length: bins.length}, (_, i) => (i * binSize).toFixed(1)),
+                    datasets: [{
+                        label: 'Frames Processed',
+                        data: bins,
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        fill: true,
+                        tension: 0.3
+                    }]
+                },
+                options: {
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Frame Processing Density Over Time'
+                        }
+                    },
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Time (seconds)'
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Number of Frames'
+                            },
+                            beginAtZero: true,
+                            ticks: {
+                                stepSize: 1
+                            }
+                        }
+                    }
+                }
+            });
+        {% else %}
+            // Display placeholder for no data
+            document.querySelectorAll('canvas').forEach(canvas => {
+                canvas.getContext('2d').font = '16px Arial';
+                canvas.getContext('2d').fillText('No data available', 50, 100);
+            });
+        {% endif %}
+    </script>
+{% endblock %}

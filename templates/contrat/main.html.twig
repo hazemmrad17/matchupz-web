@@ -1,0 +1,260 @@
+{% extends 'base.html.twig' %}
+
+{% block searchbar %}
+    {% include 'searchbar.html.twig' %}
+{% endblock %}
+
+{% block title %}Liste des Contrats{% endblock %}
+
+{% block content %}
+    <div class="content-wrapper">
+        <div class="container-xxl flex-grow-1 container-p-y">
+            {% for flashMessage in app.flashes('success') %}
+                <div class="alert alert-success" role="alert">
+                    {{ flashMessage }}
+                </div>
+            {% endfor %}
+            {% for flashMessage in app.flashes('warning') %}
+                <div class="alert alert-warning" role="alert">
+                    {{ flashMessage }}
+                </div>
+            {% endfor %}
+
+            {% block widgets %}
+                {% include '/contrat/widgets.html.twig' with {'recentContracts': recentContracts} %}
+            {% endblock %}
+
+            {# Main Contracts Table #}
+            <div class="card">
+                <h5 class="card-header d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center">
+                        <div class="navbar-nav align-items-center ms-3">
+                            <div class="nav-item d-flex align-items-center">
+                                <i class="bx bx-search fs-4 lh-0"></i>
+                                <input
+                                    type="text"
+                                    id="searchInput"
+                                    class="form-control border-0 shadow-none"
+                                    placeholder="Rechercher titre, sponsor ou montant..."
+                                    aria-label="Rechercher titre, sponsor ou montant..."
+                                    value="{{ searchTerm|default('') }}"
+                                />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex align-items-center">
+                        {# Filtrer Dropdown #}
+                        <div class="btn-group me-2">
+                            <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                Filtrer
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{{ path('contrat_main', {'filter': 'titre'}) }}">Par Titre</a></li>
+                                <li><a class="dropdown-item" href="{{ path('contrat_main', {'filter': 'datedebut'}) }}">Par Date de Début</a></li>
+                                <li><a class="dropdown-item" href="{{ path('contrat_main', {'filter': 'datefin'}) }}">Par Date de Fin</a></li>
+                                <li><a class="dropdown-item" href="{{ path('contrat_main', {'filter': 'montant'}) }}">Par Montant</a></li>
+                                <li><a class="dropdown-item" href="{{ path('contrat_main', {'filter': 'sponsor'}) }}">Par Sponsor</a></li>
+                                <li><a class="dropdown-item" href="{{ path('contrat_main', {'filter': 'article'}) }}">Par Article</a></li>
+                            </ul>
+                        </div>
+
+                        {# Statistiques Button #}
+                        <a href="{{ path('contrat_statistics') }}" class="btn btn-dark me-2">
+                            <i class="bx bx-bar-chart-alt-2 me-1"></i> Statistiques
+                        </a>
+
+                        {# Ajouter Contrat Button #}
+                        <a href="{{ path('contrat_new') }}" class="btn btn-success me-2">
+                            <i class="bx bx-plus me-1"></i> Ajouter Contrat
+                        </a>
+
+                        {# Exporter Dropdown #}
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bx bx-download me-1"></i> Exporter
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end" style="max-height: 200px; overflow-y: auto;">
+                                <li>
+                                    <a class="dropdown-item" href="{{ path('contrat_export', {'format': 'xlsx'}) }}">
+                                        <i class="bx bx-file me-1"></i> Excel (.xlsx)
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="{{ path('contrat_export', {'format': 'csv'}) }}">
+                                        <i class="bx bx-file me-1"></i> CSV (.csv)
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="{{ path('contrat_export', {'format': 'pdf'}) }}">
+                                        <i class="bx bx-file me-1"></i> PDF (.pdf)
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="{{ path('contrat_export', {'format': 'sql'}) }}">
+                                        <i class="bx bx-data me-1"></i> SQL (.sql)
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </h5>
+                <div class="table-responsive text-nowrap">
+                    <table class="table modern-table">
+                        <thead>
+                            <tr>
+                                <th>Titre</th>
+                                <th>Date de Début</th>
+                                <th>Date de Fin</th>
+                                <th>Montant</th>
+                                <th>Sponsor</th>
+                                <th>Signature</th>
+                                <th>Article</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-border-bottom-0">
+                            {% for contrat in contrats %}
+                                <tr class="table-default contrat-row{% if contrat.idContrat in expiringContractIds %} contrat-expiring low-stock blinking{% endif %}"
+                                    {% if contrat.idContrat in expiringContractIds %}
+                                        style="background-color: #ffb3b3 !important; color: #a30000 !important; animation: blink-pastel 1s linear infinite !important;"
+                                    {% endif %}>
+                                    <td data-full-description="{{ contrat.Titre|default('N/A') }}">
+                                        <i class="fab fa-sketch fa-lg text-warning me-3"></i>
+                                        <strong>{{ contrat.Titre|default('N/A') }}</strong>
+                                    </td>
+                                    <td data-full-description="{{ contrat.DateDebut ? contrat.DateDebut|date('Y-m-d') : 'N/A' }}">{{ contrat.DateDebut|date('Y-m-d') }}</td>
+                                    <td data-full-description="{{ contrat.DateFin ? contrat.DateFin|date('Y-m-d') : 'N/A' }}">{{ contrat.DateFin|date('Y-m-d') }}</td>
+                                    <td data-full-description="{{ contrat.Montant|default('N/A') }}">{{ contrat.Montant|default('N/A') }}</td>
+                                    <td data-full-description="{{ contrat.Sponsor ? contrat.Sponsor.nom : 'N/A' }}">{{ contrat.Sponsor ? contrat.Sponsor.nom : 'N/A' }}</td>
+                                    <td data-full-description="{{ contrat.Signature ? 'Signature disponible' : 'No Signature' }}">
+                                        {% if contrat.Signature %}
+                                            <img src="{{ asset(contrat.Signature) }}" alt="Signature" style="max-width: 100px; max-height: 50px;" />
+                                        {% else %}
+                                            No Signature
+                                        {% endif %}
+                                    </td>
+                                    <td data-full-description="{{ contrat.article|default('N/A') }}">{{ contrat.article|slice(0, 50) ~ (contrat.article|length > 50 ? '...' : '') }}</td>
+                                    <td>
+                                        {% if contrat.idContrat is not null %}
+                                            <div class="dropdown">
+                                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                                    <i class="bx bx-dots-vertical-rounded"></i>
+                                                </button>
+                                                <div class="dropdown-menu">
+                                                    <a class="dropdown-item" href="{{ path('contrat_show', {'idContrat': contrat.idContrat}) }}">
+                                                        <i class="bx bx-show me-1"></i> Voir
+                                                    </a>
+                                                    <a class="dropdown-item" href="{{ path('contrat_edit', {'idContrat': contrat.idContrat}) }}">
+                                                        <i class="bx bx-edit-alt me-1"></i> Modifier
+                                                    </a>
+                                                    <a class="dropdown-item" href="{{ path('contrat_export', {'format': 'pdf', 'idContrat': contrat.idContrat}) }}">
+                                                        <i class="bx bx-file me-1"></i> Exporter PDF
+                                                    </a>
+                                                    <form method="post" action="{{ path('contrat_delete', {'idContrat': contrat.idContrat}) }}" style="display:inline;" onsubmit="return confirm('Confirmer la suppression?');">
+                                                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ contrat.idContrat) }}">
+                                                        <button class="dropdown-item" type="submit">
+                                                            <i class="bx bx-trash me-1"></i> Supprimer
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        {% else %}
+                                            <span class="text-muted">Actions non disponibles</span>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="8" class="text-center">Aucun contrat trouvé</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                {# Conditionally hide pagination when searchTerm is not empty #}
+                {% if searchTerm is empty %}
+                    <div class="card-footer">
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination justify-content-center">
+                                <li class="page-item {% if contrats.currentPageNumber == 1 %}disabled{% endif %}">
+                                    <a class="page-link" href="{{ path('contrat_main', {'page': contrats.currentPageNumber - 1, 'search': searchTerm|default(''), 'filter': filter|default('')}) }}"><i class="bx bx-chevron-left"></i></a>
+                                </li>
+                                {% for page in 1..contrats.getPageCount() %}
+                                    <li class="page-item {% if page == contrats.currentPageNumber %}active{% endif %}">
+                                        <a class="page-link" href="{{ path('contrat_main', {'page': page, 'search': searchTerm|default(''), 'filter': filter|default('')}) }}">{{ page }}</a>
+                                    </li>
+                                {% endfor %}
+                                <li class="page-item {% if contrats.currentPageNumber == contrats.getPageCount() %}disabled{% endif %}">
+                                    <a class="page-link" href="{{ path('contrat_main', {'page': contrats.currentPageNumber + 1, 'search': searchTerm|default(''), 'filter': filter|default('')}) }}"><i class="bx bx-chevron-right"></i></a>
+                                </li>
+                            </ul>
+                        </nav>
+                        <div class="text-center">
+                            <small>
+                                Page {{ contrats.currentPageNumber }} sur {{ contrats.getPageCount() }} |
+                                Total Contrats : {{ contrats.totalItemCount }}
+                            </small>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        /* Blinking animation for expiring contracts */
+        @keyframes blink-pastel {
+            0% { background-color: #ffb3b3; }
+            50% { background-color: #ffcccc; }
+            100% { background-color: #ffb3b3; }
+        }
+        .contrat-expiring {
+            font-weight: bold;
+        }
+        .low-stock.blinking {
+            animation: blink-pastel 1s linear infinite;
+        }
+    </style>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3786755132717331"
+     crossorigin="anonymous"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Dynamic Search
+            const searchInput = document.getElementById('searchInput');
+            const table = document.querySelector('.modern-table');
+            const tbody = table ? table.querySelector('tbody') : null;
+            const rows = tbody ? tbody.querySelectorAll('tr.contrat-row') : [];
+
+            // Recherche dynamique
+            if (searchInput && rows.length) {
+                searchInput.addEventListener('input', () => {
+                    const searchTerm = searchInput.value.toLowerCase();
+
+                    rows.forEach(row => {
+                        const cells = row.querySelectorAll('td');
+                        let match = false;
+
+                        cells.forEach(cell => {
+                            const text = cell.getAttribute('data-full-description') || cell.textContent;
+                            if (text.toLowerCase().includes(searchTerm)) {
+                                match = true;
+                            }
+                        });
+
+                        row.style.display = match ? '' : 'none';
+                    });
+                });
+            }
+        });
+    </script>
+{% endblock %}

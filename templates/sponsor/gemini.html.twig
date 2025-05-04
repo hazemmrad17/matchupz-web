@@ -1,0 +1,192 @@
+{% extends 'baseM.html.twig' %}
+
+{% block title %}Gemini Chat{% endblock %}
+
+{% block body %}
+<style>
+    .chat-header {
+        background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                    url("{{ asset('assets/img/chat-bg.jpg') }}");
+        background-size: cover;
+        background-position: center;
+        padding: 6rem 0;
+        color: white;
+        text-align: center;
+    }
+
+    .chat-title {
+        font-size: 2.2rem;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 3rem;
+        font-family: 'Georgia', serif;
+        color: #333;
+        position: relative;
+    }
+
+    .chat-title::after {
+        content: '';
+        width: 60px;
+        height: 4px;
+        background-color: #007bff;
+        display: block;
+        margin: 0.5rem auto 0;
+        border-radius: 2px;
+    }
+
+    .chat-card {
+        border-radius: 15px;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+        padding: 1.5rem;
+        height: 100%;
+        overflow: hidden;
+        position: relative;
+        z-index: 2;
+    }
+
+    .chat-card:hover {
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .chat-area {
+        height: 400px;
+        overflow-y: auto;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        padding: 1rem;
+        background-color: #f7f7f7;
+        margin-bottom: 1.5rem;
+    }
+
+    .chat-area::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    .chat-area::-webkit-scrollbar-thumb {
+        background-color: #888;
+        border-radius: 4px;
+    }
+
+    .message {
+        margin-bottom: 1rem;
+        padding: 0.75rem;
+        border-radius: 10px;
+        font-size: 0.9rem;
+    }
+
+    .user-message {
+        background-color: #DCF8C6;
+        margin-left: 10%;
+    }
+
+    .gemini-message {
+        background-color: #E0E0E0;
+        margin-right: 10%;
+    }
+
+    .form-control {
+        font-size: 0.9rem;
+        padding: 8px;
+        border-radius: 8px;
+    }
+
+    .btn-primary {
+        width: 100%;
+        padding: 10px;
+        font-size: 0.9rem;
+        border-radius: 8px;
+    }
+
+    .input-group {
+        margin-top: 1rem;
+    }
+</style>
+
+<div class="container-fluid bg-breadcrumb">
+    <div class="container text-center py-5" style="max-width: 900px;">
+        <h4 class="text-white display-4 mb-4 wow fadeInDown" data-wow-delay="0.1s">Gemini Chat</h4>
+        <ol class="breadcrumb d-flex justify-content-center mb-0 wow fadeInDown" data-wow-delay="0.3s">
+            <li class="breadcrumb-item"><a href="{{ path('app_home') }}">Accueil</a></li>
+            <li class="breadcrumb-item active">Gemini Chat</li>
+        </ol>    
+    </div>
+</div>
+
+<div class="container py-5">
+    <h2 class="chat-title wow fadeInUp" data-wow-delay="0.2s">Posez vos questions sur Matchupz</h2>
+    <div class="row">
+        <div class="col-12 wow fadeInUp" data-wow-delay="0.4s">
+            <div class="chat-card">
+                <div id="chat-area" class="chat-area">
+                    {% for message in chat_history %}
+                        <div class="message {{ message.sender == 'Moi' ? 'user-message' : 'gemini-message' }}">
+                            <strong>{{ message.sender }}:</strong> {{ message.message|nl2br }}
+                        </div>
+                    {% endfor %}
+                </div>
+                <form id="chat-form" class="mt-3">
+                    <div class="input-group">
+                        <textarea id="user-input" name="message" class="form-control" rows="2" placeholder="Posez votre question sur Matchupz..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-2">Envoyer</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Initialize WOW.js for animations
+        new WOW().init();
+
+        document.getElementById('chat-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const userInput = document.getElementById('user-input').value;
+            if (!userInput.trim()) return;
+
+            // Add user message to chat area
+            const chatArea = document.getElementById('chat-area');
+            const userMessage = document.createElement('div');
+            userMessage.className = 'message user-message';
+            userMessage.innerHTML = `<strong>Moi:</strong> ${userInput.replace(/\n/g, '<br>')}`;
+            chatArea.appendChild(userMessage);
+
+            // Clear input
+            document.getElementById('user-input').value = '';
+
+            try {
+                const response = await fetch('{{ path('gemini_chat_ask') }}', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-Token': '{{ csrf_token('gemini_chat') }}'
+                    },
+                    body: JSON.stringify({ message: userInput })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                const geminiMessage = document.createElement('div');
+                geminiMessage.className = 'message gemini-message';
+                geminiMessage.innerHTML = `<strong>Gemini:</strong> ${data.response.replace(/\n/g, '<br>')}`;
+                chatArea.appendChild(geminiMessage);
+
+                // Scroll to bottom
+                chatArea.scrollTop = chatArea.scrollHeight;
+            } catch (error) {
+                console.error('Error:', error);
+                const errorMessage = document.createElement('div');
+                errorMessage.className = 'message gemini-message';
+                errorMessage.innerHTML = `<strong>Gemini:</strong> Erreur lors de la communication avec l'API : ${error.message}`;
+                chatArea.appendChild(errorMessage);
+            }
+        });
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,207 @@
+{# templates/user/profile.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon Profil{% endblock %}
+
+{% block body %}
+    <div class="container py-5">
+        <!-- Back Arrow -->
+        <div class="mb-4">
+            <a href="javascript:history.back()" class="btn btn-outline-secondary btn-sm shadow-sm">
+                <i class="bx bx-arrow-back bx-md"></i> Retour
+            </a>
+        </div>
+
+        <!-- User Profile Card -->
+        <div class="row justify-content-center">
+            <div class="col-lg-7 col-md-9">
+                <div class="card shadow-sm border-0 rounded-3">
+                    <!-- Header with Image and Name -->
+                    <div class="card-header bg-primary text-white text-center py-4 border-0">
+                        <div class="mb-3">
+                            {% if user.image %}
+                                <img src="{{ asset('Uploads/users/' ~ user.image) }}" 
+                                     class="img-fluid shadow-sm square-img" 
+                                     alt="{{ user.prenom }} {{ user.nom }}"
+                                     style="width: 150px; height: 150px; object-fit: cover;">
+                            {% else %}
+                                <div class="bg-light d-flex align-items-center justify-content-center shadow-sm square-img"
+                                     style="width: 150px; height: 150px;">
+                                    <i class="fas fa-user fa-3x text-muted"></i>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <h3 class="card-title fw-bold mb-1">{{ user.prenom }} {{ user.nom }}</h3>
+                        <p class="text-white-50 mb-0">{{ user.role|default('Utilisateur') }}</p>
+                    </div>
+
+                    <!-- User Details -->
+                    <div class="card-body p-4">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="d-flex align-items-center p-2 bg-light rounded-2">
+                                    <i class="bx bx-id-card me-3 text-primary"></i>
+                                    <div>
+                                        <small class="text-muted">ID</small>
+                                        <p class="mb-0">{{ user.id }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="d-flex align-items-center p-2 bg-light rounded-2">
+                                    <i class="bx bx-envelope me-3 text-primary"></i>
+                                    <div>
+                                        <small class="text-muted">Email</small>
+                                        <p class="mb-0">{{ user.email }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="d-flex align-items-center p-2 bg-light rounded-2">
+                                    <i class="bx bx-user me-3 text-primary"></i>
+                                    <div>
+                                        <small class="text-muted">Nom</small>
+                                        <p class="mb-0">{{ user.nom }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="d-flex align-items-center p-2 bg-light rounded-2">
+                                    <i class="bx bx-user me-3 text-primary"></i>
+                                    <div>
+                                        <small class="text-muted">Prénom</small>
+                                        <p class="mb-0">{{ user.prenom }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="d-flex align-items-center p-2 bg-light rounded-2">
+                                    <i class="bx bx-male-female me-3 text-primary"></i>
+                                    <div>
+                                        <small class="text-muted">Genre</small>
+                                        <p class="mb-0">{{ user.genre|default('Non défini') }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="d-flex align-items-center p-2 bg-light rounded-2">
+                                    <i class="bx bx-shield me-3 text-primary"></i>
+                                    <div>
+                                        <small class="text-muted">Rôle</small>
+                                        <p class="mb-0">{{ user.role|default('Utilisateur') }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="d-flex align-items-center p-2 bg-light rounded-2">
+                                    <i class="bx bx-calendar me-3 text-primary"></i>
+                                    <div>
+                                        <small class="text-muted">Date de Naissance</small>
+                                        <p class="mb-0">
+                                            {% if user.date_de_naissance is defined and user.date_de_naissance %}
+                                                {{ user.date_de_naissance|date('d/m/Y') }}
+                                            {% else %}
+                                                Non défini
+                                            {% endif %}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                               
+                            </div>
+                            <div class="col-md-6">
+                                <div class="d-flex align-items-center p-2 bg-light rounded-2">
+                                    <i class="bx bx-phone me-3 text-primary"></i>
+                                    <div>
+                                        <small class="text-muted">Téléphone</small>
+                                        <p class="mb-0">{{ user.num_telephone|default('Non défini') }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Modifier Button -->
+                    <div class="card-footer bg-white border-top-0 p-4 d-flex justify-content-end">
+                        <a href="{{ path('app_user_edit', {'id_user': user.id}) }}" 
+                           class="btn btn-primary px-4 py-2 shadow-sm">
+                            <i class="bx bx-edit-alt me-2"></i> Modifier
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        /* Card Styling */
+        .card {
+            border-radius: 8px;
+            transition: box-shadow 0.3s ease;
+        }
+        .card:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Header */
+        .bg-primary {
+            background-color: #00b7eb;
+            border-radius: 8px 8px 0 0;
+        }
+
+        /* Square Image */
+        .square-img {
+            border-radius: 8px; /* Slightly rounded corners */
+            margin: 0 auto;
+            display: block;
+        }
+
+        /* Details */
+        .bg-light {
+            background-color: #f8f9fa !important;
+        }
+        .text-primary {
+            color: #00b7eb !important;
+        }
+        .d-flex {
+            transition: background-color 0.2s ease;
+        }
+        .d-flex:hover {
+            background-color: #e9ecef;
+        }
+
+        /* Buttons */
+        .btn-primary {
+            background-color: #00b7eb;
+            border-color: #00b7eb;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .btn-primary:hover {
+            background-color: #0099cc;
+            border-color: #0099cc;
+            transform: scale(1.05);
+        }
+        .btn-outline-secondary {
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .btn-outline-secondary:hover {
+            background-color: #e0e0e0;
+            transform: scale(1.05);
+        }
+
+        /* Responsive */
+        @media (max-width: 767px) {
+            .square-img {
+                width: 120px !important;
+                height: 120px !important;
+            }
+            .card-body, .card-header {
+                padding: 2rem 1.5rem;
+            }
+            .col-md-6 {
+                margin-bottom: 0.5rem;
+            }
+        }
+    </style>
+{% endblock %}
