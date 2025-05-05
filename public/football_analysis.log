@@ -1,0 +1,36 @@
+2025-04-28 07:47:18,288 - DEBUG - Input video: C:\Users\Hazem Mrad\Desktop\integration\New folder\matchupz-web-0/public/uploads/input_videos\video2-680f246ba4d52.mp4
+2025-04-28 07:47:18,290 - DEBUG - Output video: C:\Users\Hazem Mrad\Desktop\integration\New folder\matchupz-web-0/public/uploads/output_videos\output-video2-680f246ba4d52.mp4
+2025-04-28 07:47:18,290 - DEBUG - Output directory: C:\Users\Hazem Mrad\Desktop\integration\New folder\matchupz-web-0/public/uploads/output_videos
+2025-04-28 07:47:19,948 - DEBUG - Starting video processing
+2025-04-28 07:47:19,995 - DEBUG - Starting frame capture
+2025-04-28 07:47:20,002 - DEBUG - Starting frame processing
+2025-04-28 07:47:20,003 - DEBUG - Starting frame display
+2025-04-28 07:47:20,142 - DEBUG - Processing batch of 5 frames
+2025-04-28 07:47:27,000 - DEBUG - Processed 5 frames
+2025-04-28 07:47:27,010 - DEBUG - Processing batch of 5 frames
+2025-04-28 07:47:29,915 - DEBUG - Processed 5 frames
+2025-04-28 07:47:29,922 - DEBUG - Processing batch of 5 frames
+2025-04-28 07:47:32,507 - DEBUG - Processed 5 frames
+2025-04-28 07:47:32,513 - DEBUG - Processing batch of 5 frames
+2025-04-28 07:47:34,767 - DEBUG - Processed 5 frames
+2025-04-28 07:47:34,777 - DEBUG - Processing batch of 5 frames
+2025-04-28 07:47:35,020 - INFO - 'q' pressed, initiating shutdown
+2025-04-28 07:47:35,039 - DEBUG - Frame display complete
+2025-04-28 07:47:35,048 - INFO - Stopping threads...
+2025-04-28 07:47:37,390 - DEBUG - Processed 5 frames
+2025-04-28 07:47:37,396 - DEBUG - Frame processing complete
+2025-04-28 07:47:40,050 - WARNING - Thread Capture did not terminate gracefully
+2025-04-28 07:47:40,130 - DEBUG - Frame capture complete
+2025-04-28 07:47:40,190 - DEBUG - All threads have completed.
+2025-04-28 07:47:40,190 - WARNING - Object tracks file already exists: C:\Users\Hazem Mrad\Desktop\integration\New folder\matchupz-web-0/public/uploads/output_videos\object_tracks.json. Skipping overwrite.
+2025-04-28 07:47:40,190 - WARNING - Keypoint tracks file already exists: C:\Users\Hazem Mrad\Desktop\integration\New folder\matchupz-web-0/public/uploads/output_videos\keypoint_tracks.json. Skipping overwrite.
+2025-04-28 07:47:40,190 - DEBUG - Output directory for team data: C:\Users\Hazem Mrad\Desktop\integration\New folder\matchupz-web-0/public/uploads/output_videos
+2025-04-28 07:47:40,193 - DEBUG - Test file successfully written to C:\Users\Hazem Mrad\Desktop\integration\New folder\matchupz-web-0/public/uploads/output_videos\test_write.txt
+2025-04-28 07:47:40,193 - DEBUG - Test file removed: C:\Users\Hazem Mrad\Desktop\integration\New folder\matchupz-web-0/public/uploads/output_videos\test_write.txt
+2025-04-28 07:47:40,193 - DEBUG - Attempting to save team data to: C:\Users\Hazem Mrad\Desktop\integration\New folder\matchupz-web-0/public/uploads/output_videos\output-video2-680f246ba4d52_team_data.json
+2025-04-28 07:47:40,193 - DEBUG - Team data successfully saved to C:\Users\Hazem Mrad\Desktop\integration\New folder\matchupz-web-0/public/uploads/output_videos\output-video2-680f246ba4d52_team_data.json
+2025-04-28 07:47:40,193 - DEBUG - Converting frames to video...
+2025-04-28 07:47:41,310 - DEBUG - Video saved as C:\Users\Hazem Mrad\Desktop\integration\New folder\matchupz-web-0/public/uploads/output_videos\output-video2-680f246ba4d52.mp4
+2025-04-28 07:47:41,310 - DEBUG - Re-encoding video with ffmpeg: C:\Users\Hazem Mrad\Desktop\integration\New folder\matchupz-web-0/public/uploads/output_videos\output-video2-680f246ba4d52.mp4.temp.mp4 -> C:\Users\Hazem Mrad\Desktop\integration\New folder\matchupz-web-0/public/uploads/output_videos\output-video2-680f246ba4d52.mp4
+2025-04-28 07:47:45,045 - DEBUG - Re-encoding completed successfully
+2025-04-28 07:47:45,054 - DEBUG - Video processing completed.

@@ -1,0 +1,766 @@
+{
+    "video_source": "C:\\Users\\Hazem Mrad\\Desktop\\matchupz-web-integration - Copy - Copy/public/uploads/input_videos\\video2-680da082709f7.mp4",
+    "fps": 25,
+    "frames": [
+        {
+            "frame_number": 5,
+            "timestamp": 0.2,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 6,
+            "timestamp": 0.24,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 7,
+            "timestamp": 0.28,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 8,
+            "timestamp": 0.32,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 9,
+            "timestamp": 0.36,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 10,
+            "timestamp": 0.4,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 11,
+            "timestamp": 0.44,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 12,
+            "timestamp": 0.48,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 13,
+            "timestamp": 0.52,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 14,
+            "timestamp": 0.56,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 15,
+            "timestamp": 0.6,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 16,
+            "timestamp": 0.64,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 17,
+            "timestamp": 0.68,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 18,
+            "timestamp": 0.72,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 19,
+            "timestamp": 0.76,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 20,
+            "timestamp": 0.8,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 21,
+            "timestamp": 0.84,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 22,
+            "timestamp": 0.88,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 23,
+            "timestamp": 0.92,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 24,
+            "timestamp": 0.96,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 25,
+            "timestamp": 1.0,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 26,
+            "timestamp": 1.04,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 27,
+            "timestamp": 1.08,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 28,
+            "timestamp": 1.12,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 29,
+            "timestamp": 1.16,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 30,
+            "timestamp": 1.2,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 31,
+            "timestamp": 1.24,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 32,
+            "timestamp": 1.28,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 33,
+            "timestamp": 1.32,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 34,
+            "timestamp": 1.36,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 35,
+            "timestamp": 1.4,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 36,
+            "timestamp": 1.44,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 37,
+            "timestamp": 1.48,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 38,
+            "timestamp": 1.52,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 39,
+            "timestamp": 1.56,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 40,
+            "timestamp": 1.6,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 41,
+            "timestamp": 1.64,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 42,
+            "timestamp": 1.68,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 43,
+            "timestamp": 1.72,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 44,
+            "timestamp": 1.76,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 45,
+            "timestamp": 1.8,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 46,
+            "timestamp": 1.84,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 47,
+            "timestamp": 1.88,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 48,
+            "timestamp": 1.92,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 49,
+            "timestamp": 1.96,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 50,
+            "timestamp": 2.0,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 51,
+            "timestamp": 2.04,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 52,
+            "timestamp": 2.08,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 53,
+            "timestamp": 2.12,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 54,
+            "timestamp": 2.16,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 55,
+            "timestamp": 2.2,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 56,
+            "timestamp": 2.24,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 57,
+            "timestamp": 2.28,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 58,
+            "timestamp": 2.32,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 59,
+            "timestamp": 2.36,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 60,
+            "timestamp": 2.4,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 61,
+            "timestamp": 2.44,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 62,
+            "timestamp": 2.48,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 63,
+            "timestamp": 2.52,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 64,
+            "timestamp": 2.56,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 65,
+            "timestamp": 2.6,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 66,
+            "timestamp": 2.64,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 67,
+            "timestamp": 2.68,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 68,
+            "timestamp": 2.72,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 69,
+            "timestamp": 2.76,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 70,
+            "timestamp": 2.8,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 71,
+            "timestamp": 2.84,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 72,
+            "timestamp": 2.88,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 73,
+            "timestamp": 2.92,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 74,
+            "timestamp": 2.96,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 75,
+            "timestamp": 3.0,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 76,
+            "timestamp": 3.04,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 77,
+            "timestamp": 3.08,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 78,
+            "timestamp": 3.12,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 79,
+            "timestamp": 3.16,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 80,
+            "timestamp": 3.2,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 81,
+            "timestamp": 3.24,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 82,
+            "timestamp": 3.28,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 83,
+            "timestamp": 3.32,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 84,
+            "timestamp": 3.36,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 85,
+            "timestamp": 3.4,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 86,
+            "timestamp": 3.44,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 87,
+            "timestamp": 3.48,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 88,
+            "timestamp": 3.52,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 89,
+            "timestamp": 3.56,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 90,
+            "timestamp": 3.6,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 91,
+            "timestamp": 3.64,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 92,
+            "timestamp": 3.68,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 93,
+            "timestamp": 3.72,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 94,
+            "timestamp": 3.76,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 95,
+            "timestamp": 3.8,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 96,
+            "timestamp": 3.84,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 97,
+            "timestamp": 3.88,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 98,
+            "timestamp": 3.92,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        },
+        {
+            "frame_number": 99,
+            "timestamp": 3.96,
+            "tracking": {
+                "players": [],
+                "ball": {}
+            }
+        }
+    ]
+}

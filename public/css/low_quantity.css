@@ -1,0 +1,9 @@
+css
+/* public/css/low_quantity.css */
+tr.low-stock, tr.low-stock td {
+    background-color: #ffdddd !important;
+    color: #a30000 !important;
+}
+tr.low-stock:hover {
+    background-color: #ffbbbb !important;
+}

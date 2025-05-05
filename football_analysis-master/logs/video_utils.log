@@ -1,0 +1,26 @@
+2025-04-25 00:24:08,562: Starting video processing
+2025-04-25 00:24:08,814: Starting frame capture
+2025-04-25 00:24:08,815: Starting frame processing
+2025-04-25 00:24:08,817: Starting frame writing
+2025-04-25 00:24:11,617: Error processing batch: list index out of range
+2025-04-25 00:24:13,839: Error processing batch: 'FootballVideoProcessor' object has no attribute 'results'
+2025-04-25 00:24:55,876: Error processing batch: 'FootballVideoProcessor' object has no attribute 'results'
+2025-04-25 00:24:55,877: Error in frame processing: [Errno 22] Invalid argument
+2025-04-25 00:25:00,143: No more frames to capture or end of video
+2025-04-25 00:25:00,174: Frame capture complete
+2025-04-25 00:25:00,174: No more frames to process
+2025-04-25 00:26:13,509: Error processing batch: CUDA out of memory. Tried to allocate 13.37 GiB. GPU 0 has a total capacity of 4.00 GiB of which 0 bytes is free. Of the allocated memory 3.42 GiB is allocated by PyTorch, and 25.17 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+2025-04-25 00:26:13,551: Error in frame processing: [Errno 22] Invalid argument
+2025-04-25 00:35:17,460: Starting video processing
+2025-04-25 00:35:18,502: Starting frame capture
+2025-04-25 00:35:18,503: Starting frame processing
+2025-04-25 00:35:18,504: Starting frame writing
+2025-04-25 00:35:22,206: Error processing batch: list index out of range
+2025-04-25 00:35:24,410: Error processing batch: 'FootballVideoProcessor' object has no attribute 'results'
+2025-04-25 00:43:35,431: Error processing batch: 'FootballVideoProcessor' object has no attribute 'results'
+2025-04-25 00:43:35,432: Error in frame processing: [Errno 22] Invalid argument
+2025-04-25 00:43:38,913: No more frames to capture or end of video
+2025-04-25 00:43:38,930: Frame capture complete
+2025-04-25 00:43:38,930: No more frames to process
+2025-04-25 00:44:37,694: Error processing batch: CUDA out of memory. Tried to allocate 13.37 GiB. GPU 0 has a total capacity of 4.00 GiB of which 0 bytes is free. Of the allocated memory 3.42 GiB is allocated by PyTorch, and 25.17 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+2025-04-25 00:44:37,791: Error in frame processing: [Errno 22] Invalid argument

@@ -1,0 +1,336 @@
+{% extends 'base.html.twig' %}
+
+{% block searchbar %}
+    {% include 'searchbar.html.twig' %}
+{% endblock %}
+
+{% block title %}Liste des Espaces Sportifs{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .card-footer .pagination {
+            margin: 0;
+        }
+        .card-footer .pagination .page-item {
+            margin: 0 8px;
+        }
+        .card-footer .pagination .page-link {
+            border-radius: 10px;
+            padding: 12px 18px;
+            color: #1a3c34;
+            background-color: #ffffff;
+            border: 1px solid #ced4da;
+            font-size: 16px;
+            font-weight: 500;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        .card-footer .pagination .page-item.active .page-link {
+            background-color: #1a3c34;
+            border-color: #1a3c34;
+            color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .card-footer .pagination .page-item .page-link:hover:not(.active) {
+            background-color: #f1f3f5;
+            color: #14532d;
+            border-color: #b0b8bf;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .card-footer .pagination .page-item.disabled .page-link {
+            color: #adb5bd;
+            background-color: #f8f9fa;
+            border-color: #ced4da;
+            box-shadow: none;
+            pointer-events: none;
+        }
+        .navbar-nav .nav-item {
+            display: flex;
+            align-items: center;
+        }
+        .navbar-nav .nav-item i {
+            font-size: 1.5rem;
+            color: #6c757d;
+            margin-right: 8px;
+        }
+        .navbar-nav .nav-item input[type="text"] {
+            border: 0;
+            box-shadow: none;
+            padding: 8px 12px;
+            font-size: 14px;
+            width: 200px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .navbar-nav .nav-item input[type="text"]:focus {
+            outline: none;
+            background-color: #ffffff;
+        }
+        .navbar-nav .nav-item input[type="text"]::placeholder {
+            color: #adb5bd;
+        }
+        .btn-yellow {
+            background-color: #eab700;
+            border-color: #eab700;
+            color: #1a1a1a;
+        }
+        .btn-yellow:hover {
+            background-color: #d4a600;
+            border-color: #d4a600;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="content-wrapper">
+        <div class="container-xxl flex-grow-1 container-p-y">
+            {% for message in app.flashes('success') %}
+                <div class="alert alert-success">{{ message }}</div>
+            {% endfor %}
+            {% for message in app.flashes('error') %}
+                <div class="alert alert-danger">{{ message }}</div>
+            {% endfor %}
+
+            {% include 'espace/espacesportif_widgets.html.twig' with {
+                'totalEspaces': totalEspaces,
+                'espacesWithReservations': espacesWithReservations
+            } %}
+
+            <div class="card">
+                <h5 class="card-header d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center">
+                        <span>Liste des Espaces Sportifs</span>
+                        <div class="navbar-nav align-items-center ms-3">
+                            <div class="nav-item d-flex align-items-center">
+                                <i class="bx bx-search fs-4 lh-0"></i>
+                                <input
+                                    type="text"
+                                    id="searchInput"
+                                    class="form-control border-0 shadow-none"
+                                    placeholder="Rechercher un espace..."
+                                    aria-label="Rechercher un espace..."
+                                    value="{{ searchTerm|default('') }}"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <a href="{{ path('espace_new') }}" class="btn btn-primary me-2">Ajouter un Espace</a>
+                        <div class="dropdown">
+                            <button type="button" class="btn dropdown-toggle btn-yellow" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bx bx-export me-1"></i> Exporter
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{{ path('espace_export_csv') }}">Exporter en CSV</a></li>
+                                <li><a class="dropdown-item" href="{{ path('espace_export_pdf') }}">Exporter en PDF</a></li>
+                                <li><a class="dropdown-item" href="{{ path('espace_export_excel') }}">Exporter en Excel</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </h5>
+                <div class="table-responsive text-nowrap">
+                    <table class="table" id="espacesTable">
+                        <thead>
+                            <tr>
+                                <th>Nom</th>
+                                <th>Adresse</th>
+                                <th>Catégorie</th>
+                                <th>Capacité</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-border-bottom-0" id="espacesTableBody">
+                            {% for espace in espaces %}
+                                <tr class="table-default">
+                                    <td>
+                                        <i class="fab fa-sketch fa-lg text-warning me-3"></i>
+                                        <strong>{{ espace.nom_espace }}</strong>
+                                    </td>
+                                    <td>{{ espace.adresse }}</td>
+                                    <td>{{ espace.categorie }}</td>
+                                    <td>{{ espace.capacite }}</td>
+                                    <td>
+                                        <div class="dropdown">
+                                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                                <i class="bx bx-dots-vertical-rounded"></i>
+                                            </button>
+                                            <div class="dropdown-menu">
+                                                <a class="dropdown-item" href="{{ path('espace_show', {'id_lieu': espace.idLieu}) }}">
+                                                    <i class="bx bx-show me-1"></i> Voir
+                                                </a>
+                                                <a class="dropdown-item" href="{{ path('espace_edit', {'id_lieu': espace.idLieu}) }}">
+                                                    <i class="bx bx-edit-alt me-1"></i> Modifier
+                                                </a>
+                                                <form method="post" action="{{ path('espace_delete', {'id_lieu': espace.idLieu}) }}" style="display:inline;" onsubmit="return confirm('Confirmer la suppression?');">
+                                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ espace.idLieu) }}">
+                                                    <button class="dropdown-item" type="submit">
+                                                        <i class="bx bx-trash me-1"></i> Supprimer
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="5" class="text-center">Aucun espace sportif trouvé</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer" id="paginationContainer">
+                    {% include 'espace/_pagination.html.twig' with {'espaces': espaces, 'searchTerm': searchTerm} %}
+                </div>
+            </div>
+
+            <h5 class="mt-4">Top Espaces par Capacité</h5>
+            <div class="card">
+                <div class="card-body">
+                    <ul class="p-0 m-0">
+                        {% for espace in top_capacite %}
+                            <li class="d-flex mb-4 pb-1">
+                                <div class="avatar flex-shrink-0 me-3">
+                                    <img src="{{ asset('img/icons/unicons/building.png') }}" alt="Espace" class="rounded" />
+                                </div>
+                                <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                                    <div class="me-2">
+                                        <h6 class="mb-0">{{ espace.nom_espace }}</h6>
+                                        <small class="text-muted">{{ espace.categorie }} - {{ espace.adresse }}</small>
+                                    </div>
+                                    <div class="user-progress">
+                                        <small class="fw-semibold">Capacité: {{ espace.capacite }}</small>
+                                    </div>
+                                </div>
+                            </li>
+                        {% else %}
+                            <li>Aucun espace sportif trouvé.</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const searchInput = document.getElementById('searchInput');
+            const espacesTableBody = document.getElementById('espacesTableBody');
+            const paginationContainer = document.getElementById('paginationContainer');
+
+            // Debounce function to limit how often AJAX requests are sent
+            function debounce(func, wait) {
+                let timeout;
+                return function (...args) {
+                    clearTimeout(timeout);
+                    timeout = setTimeout(() => func.apply(this, args), wait);
+                };
+            }
+
+            // Function to fetch and update table content
+            function updateTable(searchTerm = '', page = 1) {
+                fetch(`{{ path('espace_index') }}?search=${encodeURIComponent(searchTerm)}&page=${page}`, {
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Update table body
+                    espacesTableBody.innerHTML = '';
+                    if (data.espaces.length === 0) {
+                        espacesTableBody.innerHTML = `
+                            <tr>
+                                <td colspan="5" class="text-center">Aucun espace sportif trouvé</td>
+                            </tr>
+                        `;
+                    } else {
+                        data.espaces.forEach(espace => {
+                            const row = document.createElement('tr');
+                            row.className = 'table-default';
+                            row.innerHTML = `
+                                <td>
+                                    <i class="fab fa-sketch fa-lg text-warning me-3"></i>
+                                    <strong>${espace.nom_espace}</strong>
+                                </td>
+                                <td>${espace.adresse}</td>
+                                <td>${espace.categorie}</td>
+                                <td>${espace.capacite}</td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                            <i class="bx bx-dots-vertical-rounded"></i>
+                                        </button>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item" href="/espace/${espace.id_lieu}">
+                                                <i class="bx bx-show me-1"></i> Voir
+                                            </a>
+                                            <a class="dropdown-item" href="/espace/${espace.id_lieu}/edit">
+                                                <i class="bx bx-edit-alt me-1"></i> Modifier
+                                            </a>
+                                            <form method="post" action="/espace/${espace.id_lieu}" style="display:inline;" onsubmit="return confirm('Confirmer la suppression?');">
+                                                <input type="hidden" name="_token" value="${generateCsrfToken('delete' + espace.id_lieu)}">
+                                                <input type="hidden" name="_method" value="POST">
+                                                <button class="dropdown-item" type="submit">
+                                                    <i class="bx bx-trash me-1"></i> Supprimer
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </td>
+                            `;
+                            espacesTableBody.appendChild(row);
+                        });
+                    }
+
+                    // Update pagination
+                    paginationContainer.innerHTML = data.pagination;
+
+                    // Reattach event listeners to new pagination links
+                    attachPaginationListeners();
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                    espacesTableBody.innerHTML = `
+                        <tr>
+                            <td colspan="5" class="text-center">Erreur lors du chargement des données</td>
+                        </tr>
+                    `;
+                });
+            }
+
+            // Function to generate CSRF token (client-side placeholder)
+            function generateCsrfToken(id) {
+                // In a real application, this would need to be properly implemented
+                // For demo purposes, return a dummy token
+                return 'dummy-csrf-token-' + id;
+            }
+
+            // Function to handle pagination clicks
+            function attachPaginationListeners() {
+                const paginationLinks = document.querySelectorAll('#paginationContainer .page-link');
+                paginationLinks.forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        if (!this.parentElement.classList.contains('disabled') && !this.parentElement.classList.contains('active')) {
+                            const url = new URL(this.href);
+                            const page = url.searchParams.get('page') || 1;
+                            const search = url.searchParams.get('search') || '';
+                            updateTable(search, page);
+                        }
+                    });
+                });
+            }
+
+            // Initial attachment of pagination listeners
+            attachPaginationListeners();
+
+            // Search input handler (debounced)
+            searchInput.addEventListener('input', debounce(function() {
+                updateTable(this.value, 1);
+            }, 300));
+        });
+    </script>
+{% endblock %}

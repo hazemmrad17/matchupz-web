@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Réservations Export - MatchupZ</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        body {
+            background-color: #f8f8f8;
+            color: #1a1a1a;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .header {
+            background-color: #0f3849;
+            padding: 20px;
+            border-radius: 10px 10px 0 0;
+            text-align: center;
+            color: #ffffff;
+            box-shadow: 0 4px 8px rgba(5, 27, 53, 0.4);
+        }
+        .header h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+        .header img {
+            width: 160px;
+            height: auto;
+            vertical-align: middle;
+            margin-bottom: 10px;
+        }
+        .header .subtitle {
+            font-size: 18px;
+            color: #dcdcdc;
+        }
+        .content {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: -10px;
+        }
+        h2 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #aaa;
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-size: 13px;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #3a3a3a;
+            color: #f0f0f0;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #e0e0e0;
+            transition: background-color 0.3s ease-in-out;
+        }
+        .footer {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #0f3849;
+            color: #ccc;
+            text-align: center;
+            font-size: 12px;
+            border-radius: 10px;
+            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .footer a {
+            color: #e0e0e0;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            color: #ffffff;
+        }
+        @page {
+            size: A4 landscape;
+            margin: 20mm;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="{{ logo_path }}" alt="MatchupZ Logo">
+        <h1>Réservations Export</h1>
+        <div class="subtitle">Generated on {{ "now"|date("d/m/Y H:i") }}</div>
+    </div>
+    <div class="content">
+        <h2>Liste des Réservations</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Lieu Sportif</th>
+                    <th>Date Réservée</th>
+                    <th>Motif</th>
+                    <th>Statut</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for reservation in reservations %}
+                    <tr>
+                        <td>{{ reservation.espacesportif ? reservation.espacesportif.nom_espace : 'N/A' }}</td>
+                        <td>{{ reservation.dateReservee ? reservation.dateReservee|date('d/m/Y H:i') : 'N/A' }}</td>
+                        <td>{{ reservation.motif ?? 'N/A' }}</td>
+                        <td>{{ reservation.status ?? 'N/A' }}</td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="4" style="text-align: center; color: #555;">Aucune réservation trouvée</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="footer">
+        <p>MatchupZ © {{ "now"|date("Y") }} | Contact: <a href="mailto:support@matchupz.com">support@matchupz.com</a></p>
+        <p>Powered by <span style="color: #eab700;">xAI Technology</span></p>
+    </div>
+</body>
+</html>

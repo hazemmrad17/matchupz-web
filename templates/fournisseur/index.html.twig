@@ -1,0 +1,393 @@
+{# templates/fournisseur/index.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Fournisseurs{% endblock %}
+
+{% block content %}
+<div class="content-wrapper">
+    <div class="container-xxl flex-grow-1 container-p-y">
+
+        {% block widgets %}
+            <!-- Widgets Section -->
+            {% include 'fournisseur/widgets.html.twig' with {
+                'fournisseurs': fournisseurs,
+                'emailCoverage': emailCoverage,
+                'suppliersWithEmail': suppliersWithEmail,
+                'categoryDistribution': categoryDistribution,
+                'recentSuppliers': recentSuppliers
+            } %}
+        {% endblock %}
+
+        {# New Simple Widgets Above Table #}
+        <div class="row mt-4">
+            <!-- Total Suppliers Widget -->
+            <div class="col-md-4 col-lg-4 mb-4">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body">
+                        <div class="d-flex align-items-start justify-content-between mb-3">
+                            <div class="avatar flex-shrink-0">
+                                <img
+                                    src="{{ asset('img/icons/unicons/building.png') }}"
+                                    alt="Total Suppliers"
+                                    class="rounded"
+                                />
+                            </div>
+                        </div>
+                        <span class="fw-semibold d-block mb-1">Total Fournisseurs</span>
+                        <h3 class="card-title mb-2">{{ totalSuppliers }}</h3>
+                        <small class="text-muted">Nombre total de fournisseurs</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Suppliers Added This Month Widget -->
+            <div class="col-md-4 col-lg-4 mb-4">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body">
+                        <div class="d-flex align-items-start justify-content-between mb-3">
+                            <div class="avatar flex-shrink-0">
+                                <img
+                                    src="{{ asset('img/illustrations/girl-doing-yoga-light.png') }}"
+                                    alt="Suppliers This Month"
+                                    class="rounded"
+                                />
+                            </div>
+                        </div>
+                        <span class="fw-semibold d-block mb-1">Ajoutés Ce Mois</span>
+                        <h3 class="card-title mb-2">{{ suppliersThisMonth|default(0) }}</h3>
+                        <small class="text-muted">Fournisseurs ajoutés en {{ "now"|date("F") }}</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Average Suppliers per Category Widget -->
+            <div class="col-md-4 col-lg-4 mb-4">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body">
+                        <div class="d-flex align-items-start justify-content-between mb-3">
+                            <div class="avatar flex-shrink-0">
+                                <img
+                                    src="{{ asset('img/icons/unicons/chart.png') }}"
+                                    alt="Average per Category"
+                                    class="rounded"
+                                />
+                            </div>
+                        </div>
+                        <span class="fw-semibold d-block mb-1">Moyenne par Catégorie</span>
+                        <h3 class="card-title mb-2">{{ categoriesCount > 0 ? (totalSuppliers / categoriesCount)|round(1) : 0 }}</h3>
+                        <small class="text-muted">Fournisseurs par catégorie</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h5 class="card-header d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center">
+                    {# Search Bar Left-Aligned #}
+                    <form class="d-flex" method="get" action="{{ path('app_fournisseur_index') }}">
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="bx bx-search"></i></span>
+                            <input type="text" class="form-control" name="search" placeholder="Rechercher nom, email, adresse..." value="{{ searchTerm }}">
+                        </div>
+                    </form>
+                </div>
+
+                <div class="d-flex align-items-center">
+                    {# Filtrer Dropdown #}
+                    <div class="btn-group me-2">
+                        <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            Filtrer
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{{ path('app_fournisseur_index', {'filter': 'nom'}) }}">Par Nom</a></li>
+                            <li><a class="dropdown-item" href="{{ path('app_fournisseur_index', {'filter': 'email'}) }}">Par Email</a></li>
+                            <li><a class="dropdown-item" href="{{ path('app_fournisseur_index', {'filter': 'categorie_produit'}) }}">Par Catégorie</a></li>
+                        </ul>
+                    </div>
+
+                    {# Statistiques Button #}
+                    <a href="{{ path('app_fournisseur_stats') }}" class="btn btn-dark me-2">
+                        <i class="bx bx-bar-chart-alt-2 me-1"></i> Statistiques
+                    </a>
+
+                    {# Ajouter Fournisseur Button #}
+                    <a href="{{ path('app_fournisseur_new') }}" class="btn btn-success me-2">
+                        <i class="bx bx-plus me-1"></i> Ajouter Fournisseur
+                    </a>
+
+                    {# Exporter Button #}
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bx bx-download me-1"></i> Exporter
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end" style="max-height: 200px; overflow-y: auto;">
+                            <li>
+                                <a class="dropdown-item" href="{{ path('app_fournisseur_export', {'format': 'xlsx'}) }}">
+                                    <i class="bx bx-file me-1"></i> Excel (.xlsx)
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{ path('app_fournisseur_export', {'format': 'csv'}) }}">
+                                    <i class="bx bx-file me-1"></i> CSV (.csv)
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </h5>
+
+            <div class="table-responsive text-nowrap">
+                <table class="table" id="fournisseursTable">
+                    <thead>
+                        <tr>
+                            <th><a href="{{ path('app_fournisseur_index', {'sort': 'nom', 'order': sort == 'nom' and order == 'asc' ? 'desc' : 'asc'}) }}">Nom</a></th>
+                            <th><a href="{{ path('app_fournisseur_index', {'sort': 'email', 'order': sort == 'email' and order == 'asc' ? 'desc' : 'asc'}) }}">Email</a></th>
+                            <th><a href="{{ path('app_fournisseur_index', {'sort': 'adresse', 'order': sort == 'adresse' and order == 'asc' ? 'desc' : 'asc'}) }}">Adresse</a></th>
+                            <th><a href="{{ path('app_fournisseur_index', {'sort': 'categorie_produit', 'order': sort == 'categorie_produit' and order == 'asc' ? 'desc' : 'asc'}) }}">Catégorie Produit</a></th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-border-bottom-0">
+                        {% for fournisseur in pagination %}
+                            <tr class="table-default">
+                                <td>
+                                    <i class="bx bx-store fa-lg text-warning me-3"></i>
+                                    <strong>{{ fournisseur.nom }}</strong>
+                                </td>
+                                <td>{{ fournisseur.email ?: 'N/A' }}</td>
+                                <td>{{ fournisseur.adresse ?: 'N/A' }}</td>
+                                <td>{{ fournisseur.categorie_produit ?: 'N/A' }}</td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                            <i class="bx bx-dots-vertical-rounded"></i>
+                                        </button>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item" href="{{ path('app_fournisseur_show', {'id_fournisseur': fournisseur.id_fournisseur}) }}">
+                                                <i class="bx bx-show me-1"></i> Voir
+                                            </a>
+                                            <a class="dropdown-item" href="{{ path('app_fournisseur_edit', {'id_fournisseur': fournisseur.id_fournisseur}) }}">
+                                                <i class="bx bx-edit-alt me-1"></i> Modifier
+                                            </a>
+                                            <form method="post" action="{{ path('app_fournisseur_delete', {'id_fournisseur': fournisseur.id_fournisseur}) }}" style="display:inline;" onsubmit="return confirm('Confirmer la suppression ?');">
+                                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ fournisseur.id_fournisseur) }}">
+                                                <button class="dropdown-item" type="submit">
+                                                    <i class="bx bx-trash me-1"></i> Supprimer
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="5" class="text-center">Aucun fournisseur trouvé</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            {# Pagination #}
+            <div class="card-footer">
+                <nav aria-label="Page navigation">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item {% if pagination.currentPageNumber == 1 %}disabled{% endif %}">
+                            <a class="page-link" href="{{ path('app_fournisseur_index', {'page': pagination.currentPageNumber - 1, 'search': searchTerm, 'filter': filter, 'sort': sort, 'order': order}) }}">Previous</a>
+                        </li>
+                        {% for page in 1..pagination.getPageCount() %}
+                            <li class="page-item {% if page == pagination.currentPageNumber %}active{% endif %}">
+                                <a class="page-link" href="{{ path('app_fournisseur_index', {'page': page, 'search': searchTerm, 'filter': filter, 'sort': sort, 'order': order}) }}">{{ page }}</a>
+                            </li>
+                        {% endfor %}
+                        <li class="page-item {% if pagination.currentPageNumber == pagination.getPageCount() %}disabled{% endif %}">
+                            <a class="page-link" href="{{ path('app_fournisseur_index', {'page': pagination.currentPageNumber + 1, 'search': searchTerm, 'filter': filter, 'sort': sort, 'order': order}) }}">Next</a>
+                        </li>
+                    </ul>
+                </nav>
+                <div class="text-center">
+                    <small>
+                        Page {{ pagination.currentPageNumber }} sur {{ pagination.getPageCount() }} |
+                        Total Fournisseurs : {{ pagination.totalItemCount }}
+                    </small>
+                </div>
+            </div>
+        </div>
+
+        {# Statistics Section #}
+        <div class="row mt-4">
+            <!-- Summary Cards -->
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Total Fournisseurs</h5>
+                        <p class="card-text display-4">{{ totalSuppliers }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Catégories Uniques</h5>
+                        <p class="card-text display-4">{{ categoriesCount }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Couverture Email</h5>
+                        <p class="card-text display-4">{{ emailCoverage }}%</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts -->
+            <div class="col-md-6 mb-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Distribution des Catégories</h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="categoryDistributionChart"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Top 5 Localisations</h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="locationDistributionChart"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Fournisseur Growth Bar Chart (Widget)
+        var fournisseurGrowthOptions = {
+            chart: {
+                type: 'bar',
+                height: 300,
+                stacked: false
+            },
+            colors: ['#FF6B6B', '#4ECDC4'],
+            series: [
+                { name: '2024', data: [20, 15, 25, 30, 18, 22, 10] },
+                { name: '2023', data: [10, 8, 12, 15, 5, 7, 3] }
+            ],
+            xaxis: {
+                categories: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil']
+            },
+            plotOptions: {
+                bar: {
+                    columnWidth: '45%',
+                    endingShape: 'rounded'
+                }
+            },
+            legend: {
+                position: 'top'
+            },
+            tooltip: {
+                y: {
+                    formatter: function (val) {
+                        return val + " fournisseurs";
+                    }
+                }
+            }
+        };
+
+        var fournisseurGrowthChart = new ApexCharts(document.querySelector("#fournisseurGrowthChart"), fournisseurGrowthOptions);
+        fournisseurGrowthChart.render();
+
+        // Fournisseur Growth Radial Chart (Widget)
+        var radialGrowthOptions = {
+            series: [{{ emailCoverage }}],
+            chart: {
+                type: 'radialBar',
+                height: 120,
+                sparkline: { enabled: true }
+            },
+            plotOptions: {
+                radialBar: {
+                    hollow: { size: '60%' },
+                    dataLabels: {
+                        name: { show: false },
+                        value: {
+                            fontSize: '22px',
+                            fontWeight: 'bold',
+                            formatter: function (val) {
+                                return val + "%";
+                            }
+                        }
+                    }
+                }
+            },
+            colors: ['#FF6B6B']
+        };
+
+        var fournisseurRadialChart = new ApexCharts(document.querySelector("#fournisseurGrowthRadialChart"), radialGrowthOptions);
+        fournisseurRadialChart.render();
+
+        // Category Distribution Chart
+        var categoryOptions = {
+            chart: {
+                type: 'donut',
+                height: 350
+            },
+            series: [{% for count in categoryDistribution %}{{ count }},{% endfor %}],
+            labels: [{% for category in categoryDistribution|keys %}'{{ category }}',{% endfor %}],
+            colors: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40'],
+            legend: {
+                position: 'bottom'
+            },
+            responsive: [{
+                breakpoint: 480,
+                options: {
+                    chart: { height: 300 },
+                    legend: { position: 'bottom' }
+                }
+            }]
+        };
+
+        var categoryChart = new ApexCharts(document.querySelector("#categoryDistributionChart"), categoryOptions);
+        categoryChart.render();
+
+        // Location Distribution Chart
+        var locationOptions = {
+            chart: {
+                type: 'bar',
+                height: 350
+            },
+            series: [{
+                name: 'Fournisseurs',
+                data: [{% for count in locationDistribution %}{{ count }},{% endfor %}]
+            }],
+            xaxis: {
+                categories: [{% for location in locationDistribution|keys %}'{{ location }}',{% endfor %}],
+                title: { text: 'Ville' }
+            },
+            yaxis: {
+                title: { text: 'Nombre de Fournisseurs' }
+            },
+            colors: ['#36A2EB'],
+            plotOptions: {
+                bar: { columnWidth: '50%' }
+            }
+        };
+
+        var locationChart = new ApexCharts(document.querySelector("#locationDistributionChart"), locationOptions);
+        locationChart.render();
+    });
+</script>
+{% endblock %}

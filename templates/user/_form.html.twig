@@ -1,0 +1,166 @@
+{{ form_start(form, {'attr': {'id': 'userForm', 'novalidate': 'novalidate'}}) }}
+    {{ form_errors(form) }}
+
+    {# Section Informations de base #}
+    <div class="row">
+        <div class="col-md-6">
+            <div class="mb-3">
+                <label class="form-label">Nom*</label>
+                {{ form_widget(form.nom, {
+                    'attr': {
+                        'class': 'form-control',
+                        'placeholder': 'Entrez le nom'
+                    }
+                }) }}
+                {{ form_errors(form.nom) }}
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="mb-3">
+                <label class="form-label">Prénom*</label>
+                {{ form_widget(form.prenom, {
+                    'attr': {
+                        'class': 'form-control',
+                        'placeholder': 'Entrez le prénom'
+                    }
+                }) }}
+                {{ form_errors(form.prenom) }}
+            </div>
+        </div>
+    </div>
+
+    {# Section Contact #}
+    <div class="row">
+        <div class="col-md-6">
+            <div class="mb-3">
+                <label class="form-label">Email*</label>
+                {{ form_widget(form.email, {
+                    'attr': {
+                        'class': 'form-control',
+                        'placeholder': 'email@exemple.com'
+                    }
+                }) }}
+                {{ form_errors(form.email) }}
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="mb-3">
+                <label class="form-label">Téléphone</label>
+                {{ form_widget(form.num_telephone, {
+                    'attr': {
+                        'class': 'form-control',
+                        'placeholder': '00 00 00 00 00'
+                    }
+                }) }}
+                {{ form_errors(form.num_telephone) }}
+            </div>
+        </div>
+    </div>
+
+    {# Section Sécurité #}
+    <div class="row">
+        <div class="col-md-6">
+            <div class="mb-3">
+                <label class="form-label">Mot de passe</label>
+                {{ form_widget(form.password, {
+                    'attr': {
+                        'class': 'form-control',
+                        'placeholder': 'Laisser vide pour ne pas modifier',
+                        'autocomplete': 'new-password'
+                    }
+                }) }}
+                <small class="text-muted">Minimum 8 caractères</small>
+                {{ form_errors(form.password) }}
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="mb-3">
+                <label class="form-label">Rôle*</label>
+                {{ form_widget(form.role, {
+                    'attr': {
+                        'class': 'form-select'
+                    }
+                }) }}
+                {{ form_errors(form.role) }}
+            </div>
+        </div>
+    </div>
+
+    {# Section Informations supplémentaires #}
+    <div class="row">
+        <div class="col-md-6">
+            <div class="mb-3">
+                <label class="form-label">Date de naissance</label>
+                {{ form_widget(form.date_de_naissance, {
+                    'attr': {
+                        'class': 'form-control'
+                    }
+                }) }}
+                {{ form_errors(form.date_de_naissance) }}
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="mb-3">
+                <label class="form-label">Genre</label>
+                <div class="d-flex gap-4">
+                    {% for child in form.genre %}
+                        <div class="form-check">
+                            {{ form_widget(child, {
+                                'attr': {
+                                    'class': 'form-check-input'
+                                }
+                            }) }}
+                            {{ form_label(child, null, {
+                                'label_attr': {
+                                    'class': 'form-check-label'
+                                }
+                            }) }}
+                        </div>
+                    {% endfor %}
+                </div>
+                {{ form_errors(form.genre) }}
+            </div>
+        </div>
+    </div>
+
+    {# Section Photo de profil #}
+    <div class="mb-3">
+        <label class="form-label">Photo de profil</label>
+        {% if user.image %}
+            <div class="mb-2">
+                <img src="{{ asset('uploads/users/' ~ user.image) }}" 
+                     class="rounded-circle"
+                     width="100" 
+                     height="100"
+                     alt="Photo actuelle">
+                <p class="text-muted small mt-1">Photo actuelle</p>
+            </div>
+        {% endif %}
+        {{ form_widget(form.image, {
+            'attr': {
+                'class': 'form-control'
+            }
+        }) }}
+        <small class="text-muted">Formats acceptés: JPG, PNG (max 2MB)</small>
+        {{ form_errors(form.image) }}
+    </div>
+
+    {# Boutons de soumission #}
+    <div class="d-flex justify-content-between mt-4">
+        <button type="submit" class="btn btn-primary">
+            <i class="bx bx-save me-1"></i> {{ button_label|default('Enregistrer') }}
+        </button>
+        <div>
+            <a href="{{ path('app_user_index') }}" class="btn btn-secondary me-2">
+                <i class="bx bx-arrow-back me-1"></i> Annuler
+            </a>
+            {% if delete_form is defined %}
+                {{ form_start(delete_form, {'attr': {'class': 'd-inline'}}) }}
+                    <button class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur?')">
+                        <i class="bx bx-trash me-1"></i> Supprimer
+                    </button>
+                {{ form_end(delete_form) }}
+            {% endif %}
+        </div>
+    </div>
+{{ form_end(form) }}

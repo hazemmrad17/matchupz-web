@@ -1,0 +1,187 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Statistiques des Évaluations Physiques{% endblock %}
+
+{% block content %}
+<div class="content-wrapper">
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <h4 class="fw-bold py-3 mb-4">Statistiques des Évaluations Physiques</h4>
+        
+        <!-- Summary Cards -->
+        <div class="row mb-4">
+            <div class="col-md-3 mb-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <span class="badge bg-label-primary p-2 mb-2">
+                            <i class="bx bx-user-check fs-4"></i>
+                        </span>
+                        <h5>Joueurs Évalués</h5>
+                        <h3 class="mb-0">{{ evaluated_players }}/{{ total_players }}</h3>
+                        <small class="text-success">{{ evaluation_rate|round(1) }}% de couverture</small>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-3 mb-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <span class="badge bg-label-success p-2 mb-2">
+                            <i class="bx bx-timer fs-4"></i>
+                        </span>
+                        <h5>Endurance Moyenne</h5>
+                        <h3 class="mb-0">{{ average_scores.niveauEndurance|round(1) }}/10</h3>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-3 mb-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <span class="badge bg-label-danger p-2 mb-2">
+                            <i class="bx bx-dumbbell fs-4"></i>
+                        </span>
+                        <h5>Force Moyenne</h5>
+                        <h3 class="mb-0">{{ average_scores.forcePhysique|round(1) }}/10</h3>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-3 mb-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <span class="badge bg-label-info p-2 mb-2">
+                            <i class="bx bx-run fs-4"></i>
+                        </span>
+                        <h5>Vitesse Moyenne</h5>
+                        <h3 class="mb-0">{{ average_scores.vitesse|round(1) }}/10</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Performance Trends -->
+        <div class="row mb-4">
+            <div class="col-md-12">
+                <div class="card">
+                    <h5 class="card-header">Évolution des Performances (6 derniers mois)</h5>
+                    <div class="card-body">
+                        <canvas id="performanceTrendChart" height="120"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Player Rankings and Recent Evaluations -->
+        <div class="row">
+            <!-- Top Players -->
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <h5 class="card-header">Top 10 des Joueurs</h5>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Joueur</th>
+                                    <th>Score</th>
+                                    <th>Détail</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for player in top_players %}
+                                    <tr>
+                                        <td>
+                                            <strong>{{ player.nom }} {{ player.prenom }}</strong>
+                                        </td>
+                                        <td>{{ player.score|round(1) }}</td>
+                                        <td>
+                                            <a href="{{ path('app_evaluation_physique_by_joueur', {'joueurId': player.id}) }}"
+                                            class="btn btn-sm btn-outline-primary">
+                                                Voir
+                                            </a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Recent Evaluations -->
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <h5 class="card-header">Évaluations Récentes (30 derniers jours)</h5>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Joueur</th>
+                                    <th>Date</th>
+                                    <th>Score</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for eval in recent_evaluations %}
+                                <tr>
+                                    <td>{{ eval.joueur.nom }} {{ eval.joueur.prenom }}</td>
+                                    <td>{{ eval.dateEvaluation|date('d/m/Y') }}</td>
+                                    <td>
+                                        {% set score = (eval.niveauEndurance + eval.forcePhysique + eval.vitesse) / 3 %}
+                                        {{ score|round(1) }}
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Performance Trend Chart
+    const trendCtx = document.getElementById('performanceTrendChart').getContext('2d');
+    new Chart(trendCtx, {
+        type: 'line',
+        data: {
+            labels: {{ performance_trends.dates|json_encode|raw }},
+            datasets: [
+                {
+                    label: 'Endurance',
+                    data: {{ performance_trends.endurance|json_encode|raw }},
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    backgroundColor: 'rgba(54, 162, 235, 0.1)',
+                    tension: 0.3
+                },
+                {
+                    label: 'Force',
+                    data: {{ performance_trends.force|json_encode|raw }},
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    backgroundColor: 'rgba(255, 99, 132, 0.1)',
+                    tension: 0.3
+                },
+                {
+                    label: 'Vitesse',
+                    data: {{ performance_trends.vitesse|json_encode|raw }},
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    backgroundColor: 'rgba(75, 192, 192, 0.1)',
+                    tension: 0.3
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 10
+                }
+            }
+        }
+    });
+});
+</script>
+{% endblock %}
