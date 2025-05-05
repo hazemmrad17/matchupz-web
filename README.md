@@ -4,6 +4,8 @@ Guide détaillé pour rédiger un bon README sur GitHub pour le module projet te
 
 # Nom du Projet
 
+![Alt Text](logo_matchupz.svg)
+
 ## Matchupz
 
 ---
