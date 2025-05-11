@@ -111,30 +111,10 @@ class __TwigTemplate_ad0c86e6cc616f58e069a880dc4bd363 extends Template
         text-align: center;
     }
 
-    .sponsor-title {
-        font-size: 2.2rem;
-        font-weight: bold;
-        text-align: center;
-        margin-bottom: 3rem;
-        font-family: 'Georgia', serif;
-        color: #333;
-        position: relative;
-    }
-
-    .sponsor-title::after {
-        content: '';
-        width: 60px;
-        height: 4px;
-        background-color: #007bff;
-        display: block;
-        margin: 0.5rem auto 0;
-        border-radius: 2px;
-    }
-
     .flip-card {
         background-color: transparent;
         width: 100%;
-        height: 340px;
+        height: 180px; /* Further reduced height (from 220px) */
         perspective: 1000px;
         position: relative;
     }
@@ -155,7 +135,7 @@ class __TwigTemplate_ad0c86e6cc616f58e069a880dc4bd363 extends Template
         position: absolute;
         width: 100%;
         height: 100%;
-        border-radius: 15px;
+        border-radius: 8px; /* Reduced border radius (from 10px) */
         backface-visibility: hidden;
         top: 0;
         left: 0;
@@ -171,14 +151,14 @@ class __TwigTemplate_ad0c86e6cc616f58e069a880dc4bd363 extends Template
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 1rem;
-        font-size: 1rem;
+        padding: 0.5rem; /* Reduced padding (from 0.6rem) */
+        font-size: 0.8rem; /* Reduced font size (from 0.85rem) */
         text-align: center;
     }
 
     .sponsor-card {
-        border-radius: 15px;
-        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Slightly reduced shadow */
         background-color: #fff;
         height: 100%;
         overflow: hidden;
@@ -187,27 +167,28 @@ class __TwigTemplate_ad0c86e6cc616f58e069a880dc4bd363 extends Template
     }
 
     .sponsor-card:hover {
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
     }
 
     .sponsor-content {
-        padding: 1rem;
+        padding: 0.5rem; /* Reduced padding (from 0.6rem) */
     }
 
     .sponsor-content .h5 {
-        font-size: 1.05rem;
+        font-size: 0.85rem; /* Reduced font size (from 0.9rem) */
+        margin-bottom: 0.3rem; /* Tightened margin */
     }
 
     .sponsor-border-gold {
-        border: 3px solid #FFD700;
+        border: 1px solid #FFD700; /* Thinner border (from 1.5px) */
     }
 
     .sponsor-border-silver {
-        border: 3px solid #C0C0C0;
+        border: 1px solid #C0C0C0;
     }
 
     .sponsor-border-bronze {
-        border: 3px solid #CD7F32;
+        border: 1px solid #CD7F32;
     }
 
     .floating-stars {
@@ -223,9 +204,9 @@ class __TwigTemplate_ad0c86e6cc616f58e069a880dc4bd363 extends Template
     .floating-stars span {
         position: absolute;
         color: #FFD700;
-        font-size: 1.2rem;
+        font-size: 0.8rem; /* Reduced star size (from 0.9rem) */
         opacity: 0.9;
-        text-shadow: 0 0 8px rgba(255, 215, 0, 0.8);
+        text-shadow: 0 0 4px rgba(255, 215, 0, 0.8);
         animation: floatStar 6s infinite ease-in-out;
     }
 
@@ -236,14 +217,14 @@ class __TwigTemplate_ad0c86e6cc616f58e069a880dc4bd363 extends Template
 
     @keyframes floatStar {
         0%   { transform: translateY(0) scale(1);   opacity: 0.8; }
-        50%  { transform: translateY(-20px) scale(1.3); opacity: 1; }
+        50%  { transform: translateY(-10px) scale(1.1); opacity: 1; }
         100% { transform: translateY(0) scale(1);   opacity: 0.8; }
     }
 
     .btn-success {
         width: 100%;
-        padding: 10px;
-        font-size: 0.9rem;
+        padding: 5px; /* Reduced padding (from 6px) */
+        font-size: 0.75rem; /* Reduced font (from 0.8rem) */
     }
 
     .btn-success:disabled {
@@ -253,29 +234,29 @@ class __TwigTemplate_ad0c86e6cc616f58e069a880dc4bd363 extends Template
     }
 
     .mb-3 {
-        margin-bottom: 0.75rem !important;
+        margin-bottom: 0.5rem !important; /* Reduced margin (from 0.6rem) */
     }
 
     .form-label {
-        font-size: 0.9rem;
-        margin-bottom: 0.25rem;
+        font-size: 0.75rem; /* Reduced font (from 0.8rem) */
+        margin-bottom: 0.15rem; /* Tightened margin */
     }
 
     .form-control, .form-select {
-        font-size: 0.9rem;
-        padding: 8px;
+        font-size: 0.75rem; /* Reduced font (from 0.8rem) */
+        padding: 4px; /* Reduced padding (from 5px) */
     }
 
     .flip-btn {
         position: absolute;
-        top: 10px;
-        right: 10px;
+        top: 5px; /* Adjusted for smaller card */
+        right: 5px;
         background-color: rgba(0, 123, 255, 0.8);
         color: white;
         border: none;
         border-radius: 50%;
-        width: 30px;
-        height: 30px;
+        width: 18px; /* Reduced size (from 20px) */
+        height: 18px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -283,7 +264,7 @@ class __TwigTemplate_ad0c86e6cc616f58e069a880dc4bd363 extends Template
         opacity: 0;
         transition: opacity 0.3s ease;
         z-index: 3;
-        font-size: 0.9rem;
+        font-size: 0.65rem; /* Reduced font size (from 0.7rem) */
     }
 
     .flip-card:hover .flip-btn,
@@ -297,11 +278,11 @@ class __TwigTemplate_ad0c86e6cc616f58e069a880dc4bd363 extends Template
 
     /* Sponsor image carousel styles */
     .sponsor-image-carousel {
-        padding: 20px 0;
+        padding: 15px 0; /* Increased padding for larger images */
     }
 
     .sponsor-image-carousel .owl-item {
-        padding: 15px;
+        padding: 10px;
         display: flex;
         justify-content: center;
     }
@@ -309,18 +290,18 @@ class __TwigTemplate_ad0c86e6cc616f58e069a880dc4bd363 extends Template
     .sponsor-image-carousel .sponsor-img {
         text-align: center;
         width: 100%;
-        height: 200px;
+        height: 180px; /* Increased height (from 120px) */
         display: flex;
         align-items: center;
         justify-content: center;
     }
 
     .sponsor-image-carousel .sponsor-img img {
-        width: 250px;
-        height: 200px;
+        width: 240px; /* Increased width (from 160px) */
+        height: 180px;
         object-fit: contain;
-        border-radius: 12px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        border-radius: 10px; /* Adjusted for larger images */
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
         transition: transform 0.3s ease;
     }
 
@@ -752,6 +733,16 @@ class __TwigTemplate_ad0c86e6cc616f58e069a880dc4bd363 extends Template
         transform: translateX(-10px) rotate(45deg);
         pointer-events: none;
     }
+
+    /* Tighten spacing for card content */
+    .blog-comment {
+        padding: 0.3rem 0.5rem; /* Reduced padding */
+        margin-bottom: 0.2rem; /* Reduced margin */
+    }
+
+    .sponsor-content p {
+        margin-bottom: 0.2rem; /* Reduced margin */
+    }
 </style>
 
 <div class=\"container-fluid bg-breadcrumb\">
@@ -763,14 +754,14 @@ class __TwigTemplate_ad0c86e6cc616f58e069a880dc4bd363 extends Template
 </div>
 
 <div class=\"container py-5\">
-    <h2 class=\"sponsor-title wow fadeInUp\" data-wow-delay=\"0.2s\">Nos Partenaires</h2>
+    
 
     <!-- START: Sponsor Image Carousel Section -->
     <div class=\"sponsor-image-carousel owl-carousel mb-5 position-relative\" style=\"z-index: 2;\">
         ";
-        // line 673
+        // line 664
         $context['_parent'] = $context;
-        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["sponsors"]) || array_key_exists("sponsors", $context) ? $context["sponsors"] : (function () { throw new RuntimeError('Variable "sponsors" does not exist.', 673, $this->source); })()));
+        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["sponsors"]) || array_key_exists("sponsors", $context) ? $context["sponsors"] : (function () { throw new RuntimeError('Variable "sponsors" does not exist.', 664, $this->source); })()));
         $context['_iterated'] = false;
         $context['loop'] = [
           'parent' => $context['_parent'],
@@ -786,15 +777,15 @@ class __TwigTemplate_ad0c86e6cc616f58e069a880dc4bd363 extends Template
             $context['loop']['last'] = 1 === $length;
         }
         foreach ($context['_seq'] as $context["_key"] => $context["sponsor"]) {
-            // line 674
+            // line 665
             yield "            <div class=\"sponsor-img wow fadeInUp\" data-wow-delay=\"";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((0.2 + (CoreExtension::getAttribute($this->env, $this->source, $context["loop"], "index0", [], "any", false, false, false, 674) * 0.2)), "html", null, true);
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((0.2 + (CoreExtension::getAttribute($this->env, $this->source, $context["loop"], "index0", [], "any", false, false, false, 665) * 0.2)), "html", null, true);
             yield "s\">
                 <img src=\"";
-            // line 675
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("Uploads/sponsor_pictures/" . CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "sponsorPicture", [], "any", false, false, false, 675))), "html", null, true);
+            // line 666
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("Uploads/sponsor_pictures/" . CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "sponsorPicture", [], "any", false, false, false, 666))), "html", null, true);
             yield "\" class=\"img-fluid\" alt=\"";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "nom", [], "any", false, false, false, 675), "html", null, true);
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "nom", [], "any", false, false, false, 666), "html", null, true);
             yield "\">
             </div>
         ";
@@ -808,9 +799,9 @@ class __TwigTemplate_ad0c86e6cc616f58e069a880dc4bd363 extends Template
                 $context['loop']['last'] = 0 === $context['loop']['revindex0'];
             }
         }
-        // line 677
+        // line 668
         if (!$context['_iterated']) {
-            // line 678
+            // line 669
             yield "            <div class=\"col-12 text-center\">
                 <p class=\"text-muted\">Aucune image de sponsor trouvée.</p>
             </div>
@@ -819,16 +810,17 @@ class __TwigTemplate_ad0c86e6cc616f58e069a880dc4bd363 extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_key'], $context['sponsor'], $context['_parent'], $context['_iterated'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 682
+        // line 673
         yield "    </div>
     <!-- END: Sponsor Image Carousel Section -->
 
     <!-- START: Sponsor Cards Section -->
+    <center><h2 class=\"text-dark display-4 mb-4 wow fadeInDown\" data-wow-delay=\"0.2s\">Liste de nos Partenaires</h2></center>
     <div class=\"row\">
         ";
-        // line 687
+        // line 679
         $context['_parent'] = $context;
-        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["sponsors"]) || array_key_exists("sponsors", $context) ? $context["sponsors"] : (function () { throw new RuntimeError('Variable "sponsors" does not exist.', 687, $this->source); })()));
+        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["sponsors"]) || array_key_exists("sponsors", $context) ? $context["sponsors"] : (function () { throw new RuntimeError('Variable "sponsors" does not exist.', 679, $this->source); })()));
         $context['_iterated'] = false;
         $context['loop'] = [
           'parent' => $context['_parent'],
@@ -844,16 +836,16 @@ class __TwigTemplate_ad0c86e6cc616f58e069a880dc4bd363 extends Template
             $context['loop']['last'] = 1 === $length;
         }
         foreach ($context['_seq'] as $context["_key"] => $context["sponsor"]) {
-            // line 688
+            // line 680
             yield "            ";
-            $context["pack"] = Twig\Extension\CoreExtension::lower($this->env->getCharset(), CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "pack", [], "any", false, false, false, 688));
-            // line 689
+            $context["pack"] = Twig\Extension\CoreExtension::lower($this->env->getCharset(), CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "pack", [], "any", false, false, false, 680));
+            // line 681
             yield "            <div class=\"col-md-6 col-lg-4 mb-4 wow fadeInUp\" data-wow-delay=\"";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((0.2 + (CoreExtension::getAttribute($this->env, $this->source, $context["loop"], "index0", [], "any", false, false, false, 689) * 0.2)), "html", null, true);
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((0.2 + (CoreExtension::getAttribute($this->env, $this->source, $context["loop"], "index0", [], "any", false, false, false, 681) * 0.2)), "html", null, true);
             yield "s\">
                 <div class=\"flip-card\" data-id=\"flip-";
-            // line 690
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "Id_sponsor", [], "any", false, false, false, 690), "html", null, true);
+            // line 682
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "Id_sponsor", [], "any", false, false, false, 682), "html", null, true);
             yield "\">
                     <button class=\"flip-btn\" title=\"Flip Card\">
                         <i class=\"fa fa-sync-alt\"></i>
@@ -861,26 +853,26 @@ class __TwigTemplate_ad0c86e6cc616f58e069a880dc4bd363 extends Template
                     <div class=\"flip-card-inner\">
                         <div class=\"flip-card-front sponsor-card 
                             ";
-            // line 696
-            if (((isset($context["pack"]) || array_key_exists("pack", $context) ? $context["pack"] : (function () { throw new RuntimeError('Variable "pack" does not exist.', 696, $this->source); })()) == "gold")) {
+            // line 688
+            if (((isset($context["pack"]) || array_key_exists("pack", $context) ? $context["pack"] : (function () { throw new RuntimeError('Variable "pack" does not exist.', 688, $this->source); })()) == "gold")) {
                 yield "sponsor-border-gold
                             ";
-            } elseif ((            // line 697
-(isset($context["pack"]) || array_key_exists("pack", $context) ? $context["pack"] : (function () { throw new RuntimeError('Variable "pack" does not exist.', 697, $this->source); })()) == "silver")) {
+            } elseif ((            // line 689
+(isset($context["pack"]) || array_key_exists("pack", $context) ? $context["pack"] : (function () { throw new RuntimeError('Variable "pack" does not exist.', 689, $this->source); })()) == "silver")) {
                 yield "sponsor-border-silver
                             ";
-            } elseif ((            // line 698
-(isset($context["pack"]) || array_key_exists("pack", $context) ? $context["pack"] : (function () { throw new RuntimeError('Variable "pack" does not exist.', 698, $this->source); })()) == "bronze")) {
+            } elseif ((            // line 690
+(isset($context["pack"]) || array_key_exists("pack", $context) ? $context["pack"] : (function () { throw new RuntimeError('Variable "pack" does not exist.', 690, $this->source); })()) == "bronze")) {
                 yield "sponsor-border-bronze
                             ";
             }
-            // line 699
+            // line 691
             yield "\">
 
                             ";
-            // line 701
-            if (((isset($context["pack"]) || array_key_exists("pack", $context) ? $context["pack"] : (function () { throw new RuntimeError('Variable "pack" does not exist.', 701, $this->source); })()) == "gold")) {
-                // line 702
+            // line 693
+            if (((isset($context["pack"]) || array_key_exists("pack", $context) ? $context["pack"] : (function () { throw new RuntimeError('Variable "pack" does not exist.', 693, $this->source); })()) == "gold")) {
+                // line 694
                 yield "                                <div class=\"floating-stars\">
                                     <span>★</span>
                                     <span>★</span>
@@ -889,20 +881,21 @@ class __TwigTemplate_ad0c86e6cc616f58e069a880dc4bd363 extends Template
                                 </div>
                             ";
             }
-            // line 709
+            // line 701
             yield "
                             <div class=\"sponsor-content\">
-                                <div class=\"blog-comment d-flex justify-content-between py-1 px-2 mb-2\">
+                                <div class=\"blog-comment d-flex justify-content-between\">
                                     <div class=\"small\">
-                                        <span class=\"fa fa-user text-primary me-2\"></span> ";
-            // line 713
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "nom", [], "any", false, false, false, 713), "html", null, true);
+                                        <span class=\"fa fa-user text-primary me-2\"></span>
+                                        ";
+            // line 706
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "nom", [], "any", false, false, false, 706), "html", null, true);
             yield "
                                     </div>
                                     <div class=\"small\">
                                         <span class=\"fa fa-box text-primary me-2\"></span> ";
-            // line 716
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "pack", [], "any", false, false, false, 716), "html", null, true);
+            // line 709
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "pack", [], "any", false, false, false, 709), "html", null, true);
             yield "
                                     </div>
                                 </div>
@@ -910,118 +903,40 @@ class __TwigTemplate_ad0c86e6cc616f58e069a880dc4bd363 extends Template
                                 <div class=\"d-flex align-items-center mb-2\">
                                     <i class=\"fa fa-handshake fa-lg text-primary me-2\"></i>
                                     <a href=\"#\" class=\"h5 d-inline-block mb-0\">";
-            // line 722
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "nom", [], "any", false, false, false, 722), "html", null, true);
+            // line 715
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "nom", [], "any", false, false, false, 715), "html", null, true);
             yield "</a>
                                 </div>
 
-                                <p class=\"mb-2\" style=\"font-size: 0.9rem;\"><strong>Contact:</strong> ";
-            // line 725
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "contact", [], "any", false, false, false, 725), "html", null, true);
+                                <p style=\"font-size: 0.8rem;\"><strong>Contact:</strong> ";
+            // line 718
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "contact", [], "any", false, false, false, 718), "html", null, true);
             yield "</p>
-
-                                <!-- Payment Form -->
-                                <form id=\"checkout-form-";
-            // line 728
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "Id_sponsor", [], "any", false, false, false, 728), "html", null, true);
-            yield "\" method=\"post\" action=\"";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("sponsor_stripe_charge", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "Id_sponsor", [], "any", false, false, false, 728)]), "html", null, true);
-            yield "\">
-                                    <input type=\"hidden\" name=\"stripeToken\" id=\"stripe-token-id-";
-            // line 729
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "Id_sponsor", [], "any", false, false, false, 729), "html", null, true);
-            yield "\">
-                                    <input type=\"hidden\" name=\"_token\" value=\"";
-            // line 730
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderCsrfToken(("stripe_payment_" . CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "Id_sponsor", [], "any", false, false, false, 730))), "html", null, true);
-            yield "\">
-                                    <input type=\"hidden\" name=\"customerName\" id=\"customer-name-";
-            // line 731
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "Id_sponsor", [], "any", false, false, false, 731), "html", null, true);
-            yield "\" value=\"";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "nom", [], "any", false, false, false, 731), "html", null, true);
-            yield "\">
-
-                                    <!-- Contract Selection -->
-                                    <div class=\"mb-3\">
-                                        <label for=\"contract-";
-            // line 735
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "Id_sponsor", [], "any", false, false, false, 735), "html", null, true);
-            yield "\" class=\"form-label\">Sélectionner un Contrat</label>
-                                        <select id=\"contract-";
-            // line 736
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "Id_sponsor", [], "any", false, false, false, 736), "html", null, true);
-            yield "\" name=\"contractId\" class=\"form-select\" required>
-                                            <option value=\"\" disabled selected>Choisir un contrat</option>
-                                            ";
-            // line 738
-            $context['_parent'] = $context;
-            $context['_seq'] = CoreExtension::ensureTraversable(CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "contrats", [], "any", false, false, false, 738));
-            foreach ($context['_seq'] as $context["_key"] => $context["contract"]) {
-                // line 739
-                yield "                                                <option value=\"";
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["contract"], "Id_Contrat", [], "any", false, false, false, 739), "html", null, true);
-                yield "\">";
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["contract"], "Titre", [], "any", false, false, false, 739), "html", null, true);
-                yield " (";
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatNumber(CoreExtension::getAttribute($this->env, $this->source, $context["contract"], "Montant", [], "any", false, false, false, 739), 2, ".", ","), "html", null, true);
-                yield " \$)</option>
-                                            ";
-            }
-            $_parent = $context['_parent'];
-            unset($context['_seq'], $context['_key'], $context['contract'], $context['_parent']);
-            $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 741
-            yield "                                        </select>
-                                    </div>
-
-                                    <!-- Pay Button to Open Modal -->
-                                    <button 
-                                        type=\"button\"
-                                        class=\"btn btn-success mt-2\"
-                                        data-bs-toggle=\"modal\"
-                                        data-bs-target=\"#paymentModal\"
-                                        onclick=\"openPaymentModal(";
-            // line 750
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "Id_sponsor", [], "any", false, false, false, 750), "html", null, true);
-            yield ", '";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "nom", [], "any", false, false, false, 750), "html", null, true);
-            yield "')\"
-                                        ";
-            // line 751
-            if ( !Twig\Extension\CoreExtension::length($this->env->getCharset(), CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "contrats", [], "any", false, false, false, 751))) {
-                yield "disabled";
-            }
-            // line 752
-            yield "                                    >
-                                        <i class=\"fa fa-credit-card me-1\"></i> Payer
-                                    </button>
-                                </form>
                             </div>
                         </div>
 
                         <div class=\"flip-card-back 
                             ";
-            // line 760
-            if (((isset($context["pack"]) || array_key_exists("pack", $context) ? $context["pack"] : (function () { throw new RuntimeError('Variable "pack" does not exist.', 760, $this->source); })()) == "gold")) {
+            // line 723
+            if (((isset($context["pack"]) || array_key_exists("pack", $context) ? $context["pack"] : (function () { throw new RuntimeError('Variable "pack" does not exist.', 723, $this->source); })()) == "gold")) {
                 yield "sponsor-border-gold
                             ";
-            } elseif ((            // line 761
-(isset($context["pack"]) || array_key_exists("pack", $context) ? $context["pack"] : (function () { throw new RuntimeError('Variable "pack" does not exist.', 761, $this->source); })()) == "silver")) {
+            } elseif ((            // line 724
+(isset($context["pack"]) || array_key_exists("pack", $context) ? $context["pack"] : (function () { throw new RuntimeError('Variable "pack" does not exist.', 724, $this->source); })()) == "silver")) {
                 yield "sponsor-border-silver
                             ";
-            } elseif ((            // line 762
-(isset($context["pack"]) || array_key_exists("pack", $context) ? $context["pack"] : (function () { throw new RuntimeError('Variable "pack" does not exist.', 762, $this->source); })()) == "bronze")) {
+            } elseif ((            // line 725
+(isset($context["pack"]) || array_key_exists("pack", $context) ? $context["pack"] : (function () { throw new RuntimeError('Variable "pack" does not exist.', 725, $this->source); })()) == "bronze")) {
                 yield "sponsor-border-bronze
                             ";
             }
-            // line 763
+            // line 726
             yield "\">
-                            <p style=\"font-size: 0.95rem;\">Merci à ";
-            // line 764
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "nom", [], "any", false, false, false, 764), "html", null, true);
+                            <p style=\"font-size: 0.8rem;\">Merci à ";
+            // line 727
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "nom", [], "any", false, false, false, 727), "html", null, true);
             yield " pour leur soutien précieux en tant que sponsor ";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::capitalize($this->env->getCharset(), CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "pack", [], "any", false, false, false, 764)), "html", null, true);
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::capitalize($this->env->getCharset(), CoreExtension::getAttribute($this->env, $this->source, $context["sponsor"], "pack", [], "any", false, false, false, 727)), "html", null, true);
             yield " !</p>
                         </div>
                     </div>
@@ -1038,9 +953,9 @@ class __TwigTemplate_ad0c86e6cc616f58e069a880dc4bd363 extends Template
                 $context['loop']['last'] = 0 === $context['loop']['revindex0'];
             }
         }
-        // line 769
+        // line 732
         if (!$context['_iterated']) {
-            // line 770
+            // line 733
             yield "            <div class=\"text-center\">
                 <p>Aucun sponsor trouvé.</p>
             </div>
@@ -1049,9 +964,72 @@ class __TwigTemplate_ad0c86e6cc616f58e069a880dc4bd363 extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_key'], $context['sponsor'], $context['_parent'], $context['_iterated'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 774
+        // line 737
         yield "    </div>
     <!-- END: Sponsor Cards Section -->
+
+    <!-- START: Club Contribution Section -->
+    <div class=\"row mt-5\">
+        <div class=\"col-12\">
+            <center><h3 class=\"text-dark display-4 mb-4 wow fadeInDown\" data-wow-delay=\"0.2s\">Contribuer à un Club</h3></center>
+            <div class=\"card shadow-sm p-4\">
+                <form id=\"club-contribution-form\" method=\"post\" action=\"";
+        // line 745
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("club_contribution_charge");
+        yield "\">
+                    <input type=\"hidden\" name=\"stripeToken\" id=\"stripe-token-id\">
+                    <input type=\"hidden\" name=\"_token\" value=\"";
+        // line 747
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderCsrfToken("club_contribution"), "html", null, true);
+        yield "\">
+                    <input type=\"hidden\" name=\"customerName\" id=\"customer-name\">
+
+                    <!-- Club Selection -->
+                    <div class=\"mb-3\">
+                        <label for=\"club-select\" class=\"form-label\">Sélectionner un Club</label>
+                        <select id=\"club-select\" name=\"clubId\" class=\"form-select\" required>
+                            <option value=\"\" disabled selected>Choisir un club</option>
+                            ";
+        // line 755
+        $context['_parent'] = $context;
+        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["clubs"]) || array_key_exists("clubs", $context) ? $context["clubs"] : (function () { throw new RuntimeError('Variable "clubs" does not exist.', 755, $this->source); })()));
+        foreach ($context['_seq'] as $context["_key"] => $context["club"]) {
+            // line 756
+            yield "                                <option value=\"";
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["club"], "idClub", [], "any", false, false, false, 756), "html", null, true);
+            yield "\">";
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["club"], "nomClub", [], "any", false, false, false, 756), "html", null, true);
+            yield "</option>
+                            ";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_key'], $context['club'], $context['_parent']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 758
+        yield "                        </select>
+                    </div>
+
+                    <!-- Contribution Amount -->
+                    <div class=\"mb-3\">
+                        <label for=\"contribution-amount\" class=\"form-label\">Montant de la Contribution (\$)</label>
+                        <input type=\"number\" id=\"contribution-amount\" name=\"amount\" class=\"form-control\" min=\"1\" step=\"0.01\" required>
+                    </div>
+
+                    <!-- Pay Button to Open Modal -->
+                    <button 
+                        type=\"button\"
+                        class=\"btn btn-success mt-2\"
+                        data-bs-toggle=\"modal\"
+                        data-bs-target=\"#paymentModal\"
+                        onclick=\"openPaymentModal()\"
+                    >
+                        <i class=\"fa fa-credit-card me-1\"></i> Faire un Don
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- END: Club Contribution Section -->
 
     <!-- Payment Modal -->
     <div class=\"modal fade\" id=\"paymentModal\" tabindex=\"-1\" aria-labelledby=\"paymentModalLabel\" aria-hidden=\"true\">
@@ -1063,7 +1041,7 @@ class __TwigTemplate_ad0c86e6cc616f58e069a880dc4bd363 extends Template
                 </div>
                 <div class=\"modal-body\">
                     ";
-        // line 944
+        // line 950
         yield "
                     <div class=\"wrapper\" id=\"app\">
                         <div class=\"card-form\">
@@ -1241,13 +1219,10 @@ class __TwigTemplate_ad0c86e6cc616f58e069a880dc4bd363 extends Template
 <script>
     Vue.use(VueTheMask);
 
-    let currentSponsorId = null;
-    let currentSponsorName = '';
-
     // Initialize Stripe
     const stripe = Stripe(\"";
-        // line 966
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["stripe_public_key"]) || array_key_exists("stripe_public_key", $context) ? $context["stripe_public_key"] : (function () { throw new RuntimeError('Variable "stripe_public_key" does not exist.', 966, $this->source); })()), "html", null, true);
+        // line 969
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["stripe_public_key"]) || array_key_exists("stripe_public_key", $context) ? $context["stripe_public_key"] : (function () { throw new RuntimeError('Variable "stripe_public_key" does not exist.', 969, $this->source); })()), "html", null, true);
         yield "\");
     const elements = stripe.elements();
     const cardElement = elements.create('card', {
@@ -1340,14 +1315,14 @@ class __TwigTemplate_ad0c86e6cc616f58e069a880dc4bd363 extends Template
                 vm.isInputFocused = false;
             },
             async submitPayment() {
-                if (!currentSponsorId) {
-                    alert('No sponsor selected.');
+                const clubSelect = document.getElementById('club-select');
+                const amountInput = document.getElementById('contribution-amount');
+                if (!clubSelect || !clubSelect.value) {
+                    alert('Veuillez sélectionner un club.');
                     return;
                 }
-
-                const contractSelect = document.getElementById(`contract-\${currentSponsorId}`);
-                if (!contractSelect || !contractSelect.value) {
-                    alert('Veuillez sélectionner un contrat.');
+                if (!amountInput || !amountInput.value || amountInput.value <= 0) {
+                    alert('Veuillez entrer un montant valide.');
                     return;
                 }
 
@@ -1364,16 +1339,16 @@ class __TwigTemplate_ad0c86e6cc616f58e069a880dc4bd363 extends Template
                         return;
                     }
 
-                    const form = document.getElementById(`checkout-form-\${currentSponsorId}`);
-                    const tokenInput = document.getElementById(`stripe-token-id-\${currentSponsorId}`);
-                    const nameInput = document.getElementById(`customer-name-\${currentSponsorId}`);
+                    const form = document.getElementById('club-contribution-form');
+                    const tokenInput = document.getElementById('stripe-token-id');
+                    const nameInput = document.getElementById('customer-name');
 
                     if (!form || !tokenInput || !nameInput) {
                         throw new Error('Form elements not found.');
                     }
 
                     tokenInput.value = token.id;
-                    nameInput.value = this.cardName || currentSponsorName;
+                    nameInput.value = this.cardName || 'Anonymous';
                     form.submit();
                 } catch (error) {
                     console.error('Payment error:', error.message);
@@ -1384,10 +1359,8 @@ class __TwigTemplate_ad0c86e6cc616f58e069a880dc4bd363 extends Template
         },
     });
 
-    // Open payment modal and set sponsor data
-    function openPaymentModal(sponsorId, sponsorName) {
-        currentSponsorId = sponsorId;
-        currentSponsorName = sponsorName;
+    // Open payment modal
+    function openPaymentModal() {
         cardElement.clear();
     }
 
@@ -1413,9 +1386,6 @@ class __TwigTemplate_ad0c86e6cc616f58e069a880dc4bd363 extends Template
         // Handle card flipping and carousel pausing
         document.querySelectorAll('.flip-card').forEach(card => {
             const flipBtn = card.querySelector('.flip-btn');
-            const form = card.querySelector('form');
-            const select = card.querySelector('select');
-            const payBtn = card.querySelector('.btn-success');
 
             // Show flip button on hover
             card.addEventListener('mouseenter', () => {
@@ -1460,19 +1430,9 @@ class __TwigTemplate_ad0c86e6cc616f58e069a880dc4bd363 extends Template
                 pauseCarousel();
             });
 
-            // Pause on form element focus
-            if (select) {
-                select.addEventListener('focus', pauseCarousel);
-            }
-            if (payBtn) {
-                payBtn.addEventListener('click', pauseCarousel);
-            }
-
             // Resume on modal close
             document.getElementById('paymentModal').addEventListener('hidden.bs.modal', () => {
                 resumeCarousel();
-                currentSponsorId = null;
-                currentSponsorName = '';
             });
 
             // Resume when clicking outside
@@ -1481,19 +1441,6 @@ class __TwigTemplate_ad0c86e6cc616f58e069a880dc4bd363 extends Template
                     resumeCarousel();
                 }
             });
-
-            // Resume on form element blur
-            if (form) {
-                form.querySelectorAll('select').forEach(element => {
-                    element.addEventListener('blur', () => {
-                        setTimeout(() => {
-                            if (!form.contains(document.activeElement) && !document.getElementById('paymentModal').contains(document.activeElement)) {
-                                resumeCarousel();
-                            }
-                        }, 100);
-                    });
-                });
-            }
         });
 
         // Initialize WOW.js
@@ -1531,7 +1478,7 @@ class __TwigTemplate_ad0c86e6cc616f58e069a880dc4bd363 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  1250 => 966,  1067 => 944,  1053 => 774,  1044 => 770,  1042 => 769,  1022 => 764,  1019 => 763,  1014 => 762,  1010 => 761,  1006 => 760,  996 => 752,  992 => 751,  986 => 750,  975 => 741,  962 => 739,  958 => 738,  953 => 736,  949 => 735,  940 => 731,  936 => 730,  932 => 729,  926 => 728,  920 => 725,  914 => 722,  905 => 716,  899 => 713,  893 => 709,  884 => 702,  882 => 701,  878 => 699,  873 => 698,  869 => 697,  865 => 696,  856 => 690,  851 => 689,  848 => 688,  830 => 687,  823 => 682,  814 => 678,  812 => 677,  795 => 675,  790 => 674,  772 => 673,  105 => 9,  100 => 6,  87 => 5,  64 => 3,  41 => 1,);
+        return array (  1225 => 969,  1045 => 950,  1009 => 758,  998 => 756,  994 => 755,  983 => 747,  978 => 745,  968 => 737,  959 => 733,  957 => 732,  937 => 727,  934 => 726,  929 => 725,  925 => 724,  921 => 723,  913 => 718,  907 => 715,  898 => 709,  892 => 706,  885 => 701,  876 => 694,  874 => 693,  870 => 691,  865 => 690,  861 => 689,  857 => 688,  848 => 682,  843 => 681,  840 => 680,  822 => 679,  814 => 673,  805 => 669,  803 => 668,  786 => 666,  781 => 665,  763 => 664,  105 => 9,  100 => 6,  87 => 5,  64 => 3,  41 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -1552,30 +1499,10 @@ class __TwigTemplate_ad0c86e6cc616f58e069a880dc4bd363 extends Template
         text-align: center;
     }
 
-    .sponsor-title {
-        font-size: 2.2rem;
-        font-weight: bold;
-        text-align: center;
-        margin-bottom: 3rem;
-        font-family: 'Georgia', serif;
-        color: #333;
-        position: relative;
-    }
-
-    .sponsor-title::after {
-        content: '';
-        width: 60px;
-        height: 4px;
-        background-color: #007bff;
-        display: block;
-        margin: 0.5rem auto 0;
-        border-radius: 2px;
-    }
-
     .flip-card {
         background-color: transparent;
         width: 100%;
-        height: 340px;
+        height: 180px; /* Further reduced height (from 220px) */
         perspective: 1000px;
         position: relative;
     }
@@ -1596,7 +1523,7 @@ class __TwigTemplate_ad0c86e6cc616f58e069a880dc4bd363 extends Template
         position: absolute;
         width: 100%;
         height: 100%;
-        border-radius: 15px;
+        border-radius: 8px; /* Reduced border radius (from 10px) */
         backface-visibility: hidden;
         top: 0;
         left: 0;
@@ -1612,14 +1539,14 @@ class __TwigTemplate_ad0c86e6cc616f58e069a880dc4bd363 extends Template
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 1rem;
-        font-size: 1rem;
+        padding: 0.5rem; /* Reduced padding (from 0.6rem) */
+        font-size: 0.8rem; /* Reduced font size (from 0.85rem) */
         text-align: center;
     }
 
     .sponsor-card {
-        border-radius: 15px;
-        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Slightly reduced shadow */
         background-color: #fff;
         height: 100%;
         overflow: hidden;
@@ -1628,27 +1555,28 @@ class __TwigTemplate_ad0c86e6cc616f58e069a880dc4bd363 extends Template
     }
 
     .sponsor-card:hover {
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
     }
 
     .sponsor-content {
-        padding: 1rem;
+        padding: 0.5rem; /* Reduced padding (from 0.6rem) */
     }
 
     .sponsor-content .h5 {
-        font-size: 1.05rem;
+        font-size: 0.85rem; /* Reduced font size (from 0.9rem) */
+        margin-bottom: 0.3rem; /* Tightened margin */
     }
 
     .sponsor-border-gold {
-        border: 3px solid #FFD700;
+        border: 1px solid #FFD700; /* Thinner border (from 1.5px) */
     }
 
     .sponsor-border-silver {
-        border: 3px solid #C0C0C0;
+        border: 1px solid #C0C0C0;
     }
 
     .sponsor-border-bronze {
-        border: 3px solid #CD7F32;
+        border: 1px solid #CD7F32;
     }
 
     .floating-stars {
@@ -1664,9 +1592,9 @@ class __TwigTemplate_ad0c86e6cc616f58e069a880dc4bd363 extends Template
     .floating-stars span {
         position: absolute;
         color: #FFD700;
-        font-size: 1.2rem;
+        font-size: 0.8rem; /* Reduced star size (from 0.9rem) */
         opacity: 0.9;
-        text-shadow: 0 0 8px rgba(255, 215, 0, 0.8);
+        text-shadow: 0 0 4px rgba(255, 215, 0, 0.8);
         animation: floatStar 6s infinite ease-in-out;
     }
 
@@ -1677,14 +1605,14 @@ class __TwigTemplate_ad0c86e6cc616f58e069a880dc4bd363 extends Template
 
     @keyframes floatStar {
         0%   { transform: translateY(0) scale(1);   opacity: 0.8; }
-        50%  { transform: translateY(-20px) scale(1.3); opacity: 1; }
+        50%  { transform: translateY(-10px) scale(1.1); opacity: 1; }
         100% { transform: translateY(0) scale(1);   opacity: 0.8; }
     }
 
     .btn-success {
         width: 100%;
-        padding: 10px;
-        font-size: 0.9rem;
+        padding: 5px; /* Reduced padding (from 6px) */
+        font-size: 0.75rem; /* Reduced font (from 0.8rem) */
     }
 
     .btn-success:disabled {
@@ -1694,29 +1622,29 @@ class __TwigTemplate_ad0c86e6cc616f58e069a880dc4bd363 extends Template
     }
 
     .mb-3 {
-        margin-bottom: 0.75rem !important;
+        margin-bottom: 0.5rem !important; /* Reduced margin (from 0.6rem) */
     }
 
     .form-label {
-        font-size: 0.9rem;
-        margin-bottom: 0.25rem;
+        font-size: 0.75rem; /* Reduced font (from 0.8rem) */
+        margin-bottom: 0.15rem; /* Tightened margin */
     }
 
     .form-control, .form-select {
-        font-size: 0.9rem;
-        padding: 8px;
+        font-size: 0.75rem; /* Reduced font (from 0.8rem) */
+        padding: 4px; /* Reduced padding (from 5px) */
     }
 
     .flip-btn {
         position: absolute;
-        top: 10px;
-        right: 10px;
+        top: 5px; /* Adjusted for smaller card */
+        right: 5px;
         background-color: rgba(0, 123, 255, 0.8);
         color: white;
         border: none;
         border-radius: 50%;
-        width: 30px;
-        height: 30px;
+        width: 18px; /* Reduced size (from 20px) */
+        height: 18px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -1724,7 +1652,7 @@ class __TwigTemplate_ad0c86e6cc616f58e069a880dc4bd363 extends Template
         opacity: 0;
         transition: opacity 0.3s ease;
         z-index: 3;
-        font-size: 0.9rem;
+        font-size: 0.65rem; /* Reduced font size (from 0.7rem) */
     }
 
     .flip-card:hover .flip-btn,
@@ -1738,11 +1666,11 @@ class __TwigTemplate_ad0c86e6cc616f58e069a880dc4bd363 extends Template
 
     /* Sponsor image carousel styles */
     .sponsor-image-carousel {
-        padding: 20px 0;
+        padding: 15px 0; /* Increased padding for larger images */
     }
 
     .sponsor-image-carousel .owl-item {
-        padding: 15px;
+        padding: 10px;
         display: flex;
         justify-content: center;
     }
@@ -1750,18 +1678,18 @@ class __TwigTemplate_ad0c86e6cc616f58e069a880dc4bd363 extends Template
     .sponsor-image-carousel .sponsor-img {
         text-align: center;
         width: 100%;
-        height: 200px;
+        height: 180px; /* Increased height (from 120px) */
         display: flex;
         align-items: center;
         justify-content: center;
     }
 
     .sponsor-image-carousel .sponsor-img img {
-        width: 250px;
-        height: 200px;
+        width: 240px; /* Increased width (from 160px) */
+        height: 180px;
         object-fit: contain;
-        border-radius: 12px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        border-radius: 10px; /* Adjusted for larger images */
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
         transition: transform 0.3s ease;
     }
 
@@ -2193,6 +2121,16 @@ class __TwigTemplate_ad0c86e6cc616f58e069a880dc4bd363 extends Template
         transform: translateX(-10px) rotate(45deg);
         pointer-events: none;
     }
+
+    /* Tighten spacing for card content */
+    .blog-comment {
+        padding: 0.3rem 0.5rem; /* Reduced padding */
+        margin-bottom: 0.2rem; /* Reduced margin */
+    }
+
+    .sponsor-content p {
+        margin-bottom: 0.2rem; /* Reduced margin */
+    }
 </style>
 
 <div class=\"container-fluid bg-breadcrumb\">
@@ -2204,7 +2142,7 @@ class __TwigTemplate_ad0c86e6cc616f58e069a880dc4bd363 extends Template
 </div>
 
 <div class=\"container py-5\">
-    <h2 class=\"sponsor-title wow fadeInUp\" data-wow-delay=\"0.2s\">Nos Partenaires</h2>
+    
 
     <!-- START: Sponsor Image Carousel Section -->
     <div class=\"sponsor-image-carousel owl-carousel mb-5 position-relative\" style=\"z-index: 2;\">
@@ -2221,6 +2159,7 @@ class __TwigTemplate_ad0c86e6cc616f58e069a880dc4bd363 extends Template
     <!-- END: Sponsor Image Carousel Section -->
 
     <!-- START: Sponsor Cards Section -->
+    <center><h2 class=\"text-dark display-4 mb-4 wow fadeInDown\" data-wow-delay=\"0.2s\">Liste de nos Partenaires</h2></center>
     <div class=\"row\">
         {% for sponsor in sponsors %}
             {% set pack = sponsor.pack|lower %}
@@ -2246,9 +2185,10 @@ class __TwigTemplate_ad0c86e6cc616f58e069a880dc4bd363 extends Template
                             {% endif %}
 
                             <div class=\"sponsor-content\">
-                                <div class=\"blog-comment d-flex justify-content-between py-1 px-2 mb-2\">
+                                <div class=\"blog-comment d-flex justify-content-between\">
                                     <div class=\"small\">
-                                        <span class=\"fa fa-user text-primary me-2\"></span> {{ sponsor.nom }}
+                                        <span class=\"fa fa-user text-primary me-2\"></span>
+                                        {{ sponsor.nom }}
                                     </div>
                                     <div class=\"small\">
                                         <span class=\"fa fa-box text-primary me-2\"></span> {{ sponsor.pack }}
@@ -2260,37 +2200,7 @@ class __TwigTemplate_ad0c86e6cc616f58e069a880dc4bd363 extends Template
                                     <a href=\"#\" class=\"h5 d-inline-block mb-0\">{{ sponsor.nom }}</a>
                                 </div>
 
-                                <p class=\"mb-2\" style=\"font-size: 0.9rem;\"><strong>Contact:</strong> {{ sponsor.contact }}</p>
-
-                                <!-- Payment Form -->
-                                <form id=\"checkout-form-{{ sponsor.Id_sponsor }}\" method=\"post\" action=\"{{ path('sponsor_stripe_charge', {'id': sponsor.Id_sponsor}) }}\">
-                                    <input type=\"hidden\" name=\"stripeToken\" id=\"stripe-token-id-{{ sponsor.Id_sponsor }}\">
-                                    <input type=\"hidden\" name=\"_token\" value=\"{{ csrf_token('stripe_payment_' ~ sponsor.Id_sponsor) }}\">
-                                    <input type=\"hidden\" name=\"customerName\" id=\"customer-name-{{ sponsor.Id_sponsor }}\" value=\"{{ sponsor.nom }}\">
-
-                                    <!-- Contract Selection -->
-                                    <div class=\"mb-3\">
-                                        <label for=\"contract-{{ sponsor.Id_sponsor }}\" class=\"form-label\">Sélectionner un Contrat</label>
-                                        <select id=\"contract-{{ sponsor.Id_sponsor }}\" name=\"contractId\" class=\"form-select\" required>
-                                            <option value=\"\" disabled selected>Choisir un contrat</option>
-                                            {% for contract in sponsor.contrats %}
-                                                <option value=\"{{ contract.Id_Contrat }}\">{{ contract.Titre }} ({{ contract.Montant|number_format(2, '.', ',') }} \$)</option>
-                                            {% endfor %}
-                                        </select>
-                                    </div>
-
-                                    <!-- Pay Button to Open Modal -->
-                                    <button 
-                                        type=\"button\"
-                                        class=\"btn btn-success mt-2\"
-                                        data-bs-toggle=\"modal\"
-                                        data-bs-target=\"#paymentModal\"
-                                        onclick=\"openPaymentModal({{ sponsor.Id_sponsor }}, '{{ sponsor.nom }}')\"
-                                        {% if not sponsor.contrats|length %}disabled{% endif %}
-                                    >
-                                        <i class=\"fa fa-credit-card me-1\"></i> Payer
-                                    </button>
-                                </form>
+                                <p style=\"font-size: 0.8rem;\"><strong>Contact:</strong> {{ sponsor.contact }}</p>
                             </div>
                         </div>
 
@@ -2299,7 +2209,7 @@ class __TwigTemplate_ad0c86e6cc616f58e069a880dc4bd363 extends Template
                             {% elseif pack == 'silver' %}sponsor-border-silver
                             {% elseif pack == 'bronze' %}sponsor-border-bronze
                             {% endif %}\">
-                            <p style=\"font-size: 0.95rem;\">Merci à {{ sponsor.nom }} pour leur soutien précieux en tant que sponsor {{ sponsor.pack|capitalize }} !</p>
+                            <p style=\"font-size: 0.8rem;\">Merci à {{ sponsor.nom }} pour leur soutien précieux en tant que sponsor {{ sponsor.pack|capitalize }} !</p>
                         </div>
                     </div>
                 </div>
@@ -2311,6 +2221,49 @@ class __TwigTemplate_ad0c86e6cc616f58e069a880dc4bd363 extends Template
         {% endfor %}
     </div>
     <!-- END: Sponsor Cards Section -->
+
+    <!-- START: Club Contribution Section -->
+    <div class=\"row mt-5\">
+        <div class=\"col-12\">
+            <center><h3 class=\"text-dark display-4 mb-4 wow fadeInDown\" data-wow-delay=\"0.2s\">Contribuer à un Club</h3></center>
+            <div class=\"card shadow-sm p-4\">
+                <form id=\"club-contribution-form\" method=\"post\" action=\"{{ path('club_contribution_charge') }}\">
+                    <input type=\"hidden\" name=\"stripeToken\" id=\"stripe-token-id\">
+                    <input type=\"hidden\" name=\"_token\" value=\"{{ csrf_token('club_contribution') }}\">
+                    <input type=\"hidden\" name=\"customerName\" id=\"customer-name\">
+
+                    <!-- Club Selection -->
+                    <div class=\"mb-3\">
+                        <label for=\"club-select\" class=\"form-label\">Sélectionner un Club</label>
+                        <select id=\"club-select\" name=\"clubId\" class=\"form-select\" required>
+                            <option value=\"\" disabled selected>Choisir un club</option>
+                            {% for club in clubs %}
+                                <option value=\"{{ club.idClub }}\">{{ club.nomClub }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <!-- Contribution Amount -->
+                    <div class=\"mb-3\">
+                        <label for=\"contribution-amount\" class=\"form-label\">Montant de la Contribution (\$)</label>
+                        <input type=\"number\" id=\"contribution-amount\" name=\"amount\" class=\"form-control\" min=\"1\" step=\"0.01\" required>
+                    </div>
+
+                    <!-- Pay Button to Open Modal -->
+                    <button 
+                        type=\"button\"
+                        class=\"btn btn-success mt-2\"
+                        data-bs-toggle=\"modal\"
+                        data-bs-target=\"#paymentModal\"
+                        onclick=\"openPaymentModal()\"
+                    >
+                        <i class=\"fa fa-credit-card me-1\"></i> Faire un Don
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- END: Club Contribution Section -->
 
     <!-- Payment Modal -->
     <div class=\"modal fade\" id=\"paymentModal\" tabindex=\"-1\" aria-labelledby=\"paymentModalLabel\" aria-hidden=\"true\">
@@ -2497,9 +2450,6 @@ class __TwigTemplate_ad0c86e6cc616f58e069a880dc4bd363 extends Template
 <script>
     Vue.use(VueTheMask);
 
-    let currentSponsorId = null;
-    let currentSponsorName = '';
-
     // Initialize Stripe
     const stripe = Stripe(\"{{ stripe_public_key }}\");
     const elements = stripe.elements();
@@ -2593,14 +2543,14 @@ class __TwigTemplate_ad0c86e6cc616f58e069a880dc4bd363 extends Template
                 vm.isInputFocused = false;
             },
             async submitPayment() {
-                if (!currentSponsorId) {
-                    alert('No sponsor selected.');
+                const clubSelect = document.getElementById('club-select');
+                const amountInput = document.getElementById('contribution-amount');
+                if (!clubSelect || !clubSelect.value) {
+                    alert('Veuillez sélectionner un club.');
                     return;
                 }
-
-                const contractSelect = document.getElementById(`contract-\${currentSponsorId}`);
-                if (!contractSelect || !contractSelect.value) {
-                    alert('Veuillez sélectionner un contrat.');
+                if (!amountInput || !amountInput.value || amountInput.value <= 0) {
+                    alert('Veuillez entrer un montant valide.');
                     return;
                 }
 
@@ -2617,16 +2567,16 @@ class __TwigTemplate_ad0c86e6cc616f58e069a880dc4bd363 extends Template
                         return;
                     }
 
-                    const form = document.getElementById(`checkout-form-\${currentSponsorId}`);
-                    const tokenInput = document.getElementById(`stripe-token-id-\${currentSponsorId}`);
-                    const nameInput = document.getElementById(`customer-name-\${currentSponsorId}`);
+                    const form = document.getElementById('club-contribution-form');
+                    const tokenInput = document.getElementById('stripe-token-id');
+                    const nameInput = document.getElementById('customer-name');
 
                     if (!form || !tokenInput || !nameInput) {
                         throw new Error('Form elements not found.');
                     }
 
                     tokenInput.value = token.id;
-                    nameInput.value = this.cardName || currentSponsorName;
+                    nameInput.value = this.cardName || 'Anonymous';
                     form.submit();
                 } catch (error) {
                     console.error('Payment error:', error.message);
@@ -2637,10 +2587,8 @@ class __TwigTemplate_ad0c86e6cc616f58e069a880dc4bd363 extends Template
         },
     });
 
-    // Open payment modal and set sponsor data
-    function openPaymentModal(sponsorId, sponsorName) {
-        currentSponsorId = sponsorId;
-        currentSponsorName = sponsorName;
+    // Open payment modal
+    function openPaymentModal() {
         cardElement.clear();
     }
 
@@ -2666,9 +2614,6 @@ class __TwigTemplate_ad0c86e6cc616f58e069a880dc4bd363 extends Template
         // Handle card flipping and carousel pausing
         document.querySelectorAll('.flip-card').forEach(card => {
             const flipBtn = card.querySelector('.flip-btn');
-            const form = card.querySelector('form');
-            const select = card.querySelector('select');
-            const payBtn = card.querySelector('.btn-success');
 
             // Show flip button on hover
             card.addEventListener('mouseenter', () => {
@@ -2713,19 +2658,9 @@ class __TwigTemplate_ad0c86e6cc616f58e069a880dc4bd363 extends Template
                 pauseCarousel();
             });
 
-            // Pause on form element focus
-            if (select) {
-                select.addEventListener('focus', pauseCarousel);
-            }
-            if (payBtn) {
-                payBtn.addEventListener('click', pauseCarousel);
-            }
-
             // Resume on modal close
             document.getElementById('paymentModal').addEventListener('hidden.bs.modal', () => {
                 resumeCarousel();
-                currentSponsorId = null;
-                currentSponsorName = '';
             });
 
             // Resume when clicking outside
@@ -2734,19 +2669,6 @@ class __TwigTemplate_ad0c86e6cc616f58e069a880dc4bd363 extends Template
                     resumeCarousel();
                 }
             });
-
-            // Resume on form element blur
-            if (form) {
-                form.querySelectorAll('select').forEach(element => {
-                    element.addEventListener('blur', () => {
-                        setTimeout(() => {
-                            if (!form.contains(document.activeElement) && !document.getElementById('paymentModal').contains(document.activeElement)) {
-                                resumeCarousel();
-                            }
-                        }, 100);
-                    });
-                });
-            }
         });
 
         // Initialize WOW.js

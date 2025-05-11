@@ -5,11 +5,12 @@ namespace App\Controller;
 use App\Entity\Sponsor;
 use App\Form\SponsorType;
 use App\Repository\SponsorRepository;
-use App\Repository\ContratRepository;
+use App\Repository\ClubRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Attribute\Route;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
@@ -32,20 +33,21 @@ use Stripe;
 class SponsorController extends AbstractController
 {
     private $sponsorRepository;
+    private $clubRepository;
 
-    public function __construct(SponsorRepository $sponsorRepository)
+    public function __construct(SponsorRepository $sponsorRepository, ClubRepository $clubRepository)
     {
         $this->sponsorRepository = $sponsorRepository;
+        $this->clubRepository = $clubRepository;
     }
 
     #[Route('/main', name: 'sponsor_main', methods: ['GET'])]
     public function main(Request $request, PaginatorInterface $paginator, EntityManagerInterface $entityManager): Response
     {
         try {
-            error_log('Entering sponsor_main');
-
             $searchTerm = $request->query->get('search', '');
             $filter = $request->query->get('filter', '');
+            error_log("Entering sponsor_main with searchTerm: '$searchTerm', filter: '$filter'");
 
             $queryBuilder = $this->sponsorRepository->createQueryBuilder('s');
 
@@ -101,7 +103,6 @@ class SponsorController extends AbstractController
             throw $e;
         }
     }
-
 
     #[Route('/sponsor/search', name: 'sponsor_search', methods: ['GET'])]
     public function search(Request $request, CsrfTokenManagerInterface $csrfTokenManager): JsonResponse
@@ -160,7 +161,6 @@ class SponsorController extends AbstractController
         }
     }
 
-
     #[Route('/statistics', name: 'sponsor_statistics', methods: ['GET'])]
     public function statistics(): Response
     {
@@ -172,7 +172,6 @@ class SponsorController extends AbstractController
 
         // Compute pack distribution
         $packDistribution = $this->getPackDistribution($allSponsors);
-        
 
         return $this->render('sponsor/statistics.html.twig', [
             'totalSponsors' => $totalSponsors,
@@ -422,48 +421,30 @@ class SponsorController extends AbstractController
     }
 
     #[Route('/front', name: 'sponsor_front', methods: ['GET'])]
-    public function front(SponsorRepository $sponsorRepository): Response
+    public function front(SponsorRepository $sponsorRepository, ClubRepository $clubRepository): Response
     {
         $sponsors = $sponsorRepository->findAll();
+        $clubs = $clubRepository->findAll();
         return $this->render('sponsor/sponsor_front.html.twig', [
             'sponsors' => $sponsors,
+            'clubs' => $clubs,
             'stripe_public_key' => $_ENV["STRIPE_KEY"],
         ]);
     }
 
-    #[Route('/{id}/stripe-charge', name: 'sponsor_stripe_charge', methods: ['POST'], requirements: ['id' => '\d+'])]
-    public function createCharge(int $id, Request $request, SponsorRepository $sponsorRepository, ContratRepository $contratRepository): Response
+    #[Route('/club-contribution', name: 'club_contribution_charge', methods: ['POST'])]
+    public function createClubContribution(Request $request, ClubRepository $clubRepository): Response
     {
-        $sponsor = $sponsorRepository->find($id);
-        if (!$sponsor) {
-            $this->addFlash('error', 'Sponsor non trouvé.');
+        $clubId = $request->request->get('clubId');
+        $club = $clubRepository->find($clubId);
+        if (!$club) {
+            $this->addFlash('error', 'Club non trouvé.');
             return $this->redirectToRoute('sponsor_front', [], Response::HTTP_SEE_OTHER);
         }
 
         // Validate CSRF token
-        if (!$this->isCsrfTokenValid('stripe_payment_' . $sponsor->getIdSponsor(), $request->request->get('_token'))) {
+        if (!$this->isCsrfTokenValid('club_contribution', $request->request->get('_token'))) {
             $this->addFlash('error', 'Jeton CSRF invalide.');
-            return $this->redirectToRoute('sponsor_front', [], Response::HTTP_SEE_OTHER);
-        }
-
-        // Check if sponsor has at least one contract
-        $contracts = $sponsor->getContrats();
-        if ($contracts->isEmpty()) {
-            $this->addFlash('error', 'Aucun contrat associé à ce sponsor.');
-            return $this->redirectToRoute('sponsor_front', [], Response::HTTP_SEE_OTHER);
-        }
-
-        // Get selected contract ID
-        $contractId = $request->request->get('contractId');
-        if (!$contractId) {
-            $this->addFlash('error', 'Aucun contrat sélectionné.');
-            return $this->redirectToRoute('sponsor_front', [], Response::HTTP_SEE_OTHER);
-        }
-
-        // Fetch the selected contract
-        $contract = $contratRepository->find($contractId);
-        if (!$contract || $contract->getSponsor()->getIdSponsor() !== $sponsor->getIdSponsor()) {
-            $this->addFlash('error', 'Contrat invalide ou non associé à ce sponsor.');
             return $this->redirectToRoute('sponsor_front', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -471,6 +452,7 @@ class SponsorController extends AbstractController
 
         $customerName = $request->request->get('customerName');
         $token = $request->request->get('stripeToken');
+        $amount = $request->request->get('amount');
 
         if (!$token) {
             $this->addFlash('error', 'Paiement échoué : jeton manquant.');
@@ -482,37 +464,32 @@ class SponsorController extends AbstractController
             return $this->redirectToRoute('sponsor_front', [], Response::HTTP_SEE_OTHER);
         }
 
-        // Get the contract amount and convert to cents
-        $amount = $contract->getMontant();
-        if ($amount <= 0) {
-            $this->addFlash('error', 'Paiement échoué : montant du contrat invalide.');
+        // Convert amount to cents
+        $amountInCents = (int) ($amount * 100);
+        if ($amountInCents <= 0) {
+            $this->addFlash('error', 'Paiement échoué : montant invalide.');
             return $this->redirectToRoute('sponsor_front', [], Response::HTTP_SEE_OTHER);
         }
-        $amountInCents = (int) ($amount * 100); // Convert to cents
 
         try {
             Stripe\Charge::create([
                 "amount" => $amountInCents,
                 "currency" => "usd",
                 "source" => $token,
-                "description" => "Paiement pour le contrat #" . $contract->getIdContrat() . " (" . $contract->getTitre() . ") de " . $sponsor->getNom(),
+                "description" => "Contribution pour le club " . $club->getNomClub(),
                 "metadata" => [
                     'customer_name' => $customerName,
-                    'sponsor_id' => $sponsor->getIdSponsor(),
-                    'sponsor_name' => $sponsor->getNom(),
-                    'contract_id' => $contract->getIdContrat(),
-                    'contract_title' => $contract->getTitre(),
+                    'club_id' => $club->getIdClub(),
+                    'club_name' => $club->getNomClub(),
                     'amount' => $amount,
                 ],
             ]);
 
-            $this->addFlash('success', 'Paiement de $' . number_format($amount, 2) . ' effectué avec succès !');
+            $this->addFlash('success', 'Contribution de $' . number_format($amount, 2) . ' effectuée avec succès pour ' . $club->getNomClub() . ' !');
         } catch (\Exception $e) {
             $this->addFlash('error', 'Paiement échoué : ' . $e->getMessage());
         }
 
         return $this->redirectToRoute('sponsor_front', [], Response::HTTP_SEE_OTHER);
     }
-
-    
 }

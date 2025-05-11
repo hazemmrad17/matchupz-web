@@ -95,6 +95,7 @@ return [
         '/sponsor/statistics' => [[['_route' => 'sponsor_statistics', '_controller' => 'App\\Controller\\SponsorController::statistics'], null, ['GET' => 0], null, false, false, null]],
         '/sponsor/new' => [[['_route' => 'sponsor_new', '_controller' => 'App\\Controller\\SponsorController::new'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
         '/sponsor/front' => [[['_route' => 'sponsor_front', '_controller' => 'App\\Controller\\SponsorController::front'], null, ['GET' => 0], null, false, false, null]],
+        '/sponsor/club-contribution' => [[['_route' => 'club_contribution_charge', '_controller' => 'App\\Controller\\SponsorController::createClubContribution'], null, ['POST' => 0], null, false, false, null]],
         '/sport' => [[['_route' => 'sport_index', '_controller' => 'App\\Controller\\SportController::index'], null, ['GET' => 0], null, true, false, null]],
         '/sport/new' => [[['_route' => 'sport_new', '_controller' => 'App\\Controller\\SportController::new'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
         '/sport/statistics' => [[['_route' => 'sport_statistics', '_controller' => 'App\\Controller\\SportController::statistics'], null, ['GET' => 0], null, false, false, null]],
@@ -235,19 +236,18 @@ return [
                             .'|(\\d+)/edit(*:1276)'
                             .'|(\\d+)(*:1290)'
                             .'|export(?:/([^/]++))?(*:1319)'
-                            .'|(\\d+)/stripe\\-charge(*:1348)'
                         .')'
                         .'|rt/(?'
-                            .'|(\\d+)(*:1369)'
-                            .'|(\\d+)/edit(*:1388)'
-                            .'|(\\d+)(*:1402)'
+                            .'|(\\d+)(*:1340)'
+                            .'|(\\d+)/edit(*:1359)'
+                            .'|(\\d+)(*:1373)'
                         .')'
                     .')'
                 .')'
                 .'|/user/([^/]++)(?'
-                    .'|(*:1431)'
-                    .'|/edit(*:1445)'
-                    .'|(*:1454)'
+                    .'|(*:1402)'
+                    .'|/edit(*:1416)'
+                    .'|(*:1425)'
                 .')'
             .')/?$}sDu',
     ],
@@ -312,13 +312,12 @@ return [
         1276 => [[['_route' => 'sponsor_edit', '_controller' => 'App\\Controller\\SponsorController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
         1290 => [[['_route' => 'sponsor_delete', '_controller' => 'App\\Controller\\SponsorController::delete'], ['id'], ['POST' => 0], null, false, true, null]],
         1319 => [[['_route' => 'sponsor_export', 'format' => 'xlsx', '_controller' => 'App\\Controller\\SponsorController::export'], ['format'], null, null, false, true, null]],
-        1348 => [[['_route' => 'sponsor_stripe_charge', '_controller' => 'App\\Controller\\SponsorController::createCharge'], ['id'], ['POST' => 0], null, false, false, null]],
-        1369 => [[['_route' => 'sport_show', '_controller' => 'App\\Controller\\SportController::show'], ['idSport'], ['GET' => 0], null, false, true, null]],
-        1388 => [[['_route' => 'sport_edit', '_controller' => 'App\\Controller\\SportController::edit'], ['idSport'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        1402 => [[['_route' => 'sport_delete', '_controller' => 'App\\Controller\\SportController::delete'], ['idSport'], ['POST' => 0], null, false, true, null]],
-        1431 => [[['_route' => 'app_user_show', '_controller' => 'App\\Controller\\UserController::show'], ['id_user'], ['GET' => 0], null, false, true, null]],
-        1445 => [[['_route' => 'app_user_edit', '_controller' => 'App\\Controller\\UserController::edit'], ['id_user'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        1454 => [
+        1340 => [[['_route' => 'sport_show', '_controller' => 'App\\Controller\\SportController::show'], ['idSport'], ['GET' => 0], null, false, true, null]],
+        1359 => [[['_route' => 'sport_edit', '_controller' => 'App\\Controller\\SportController::edit'], ['idSport'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        1373 => [[['_route' => 'sport_delete', '_controller' => 'App\\Controller\\SportController::delete'], ['idSport'], ['POST' => 0], null, false, true, null]],
+        1402 => [[['_route' => 'app_user_show', '_controller' => 'App\\Controller\\UserController::show'], ['id_user'], ['GET' => 0], null, false, true, null]],
+        1416 => [[['_route' => 'app_user_edit', '_controller' => 'App\\Controller\\UserController::edit'], ['id_user'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        1425 => [
             [['_route' => 'app_user_delete', '_controller' => 'App\\Controller\\UserController::delete'], ['id_user'], ['POST' => 0], null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],
